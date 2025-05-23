@@ -21,8 +21,8 @@ export default defineConfig({
         name: 'Notifica - Registro de Tareas',
         short_name: 'Notifica',
         description: 'Aplicación para registrar tareas laborales de forma ágil.',
-        theme_color: '#4f46e5',     // Coincide con el meta tag en index.html
-        background_color: '#f3f4f6', // Color para la splash screen
+        theme_color: '#93c5fd',     // Nuevo color de acento principal
+        background_color: '#f5f7fa', // Nuevo color de fondo
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',

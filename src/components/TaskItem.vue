@@ -196,16 +196,24 @@ const formattedDuration = computed(() => {
     return null
   }
 
-  let endTimeMs = props.task.endTime.getTime()
-  const startTimeMs = props.task.startTime.getTime()
+  const startHours = props.task.startTime.getHours();
+  const startMinutes = props.task.startTime.getMinutes();
+  const endHours = props.task.endTime.getHours();
+  const endMinutes = props.task.endTime.getMinutes();
 
-  // Si la hora de fin es anterior a la de inicio, asumir que es del día siguiente
-  if (endTimeMs < startTimeMs) {
-    endTimeMs += 24 * 60 * 60 * 1000; // Añadir 24 horas en milisegundos
+  let startTotalMinutes = startHours * 60 + startMinutes;
+  let endTotalMinutes = endHours * 60 + endMinutes;
+
+  // Manejar el cruce de medianoche
+  // Si la hora de finalización (en minutos desde la medianoche) es menor que la hora de inicio,
+  // y las fechas son diferentes (o asumimos que si es menor, cruzó la medianoche si la fecha es la misma o posterior)
+  // Para simplificar y enfocarnos solo en la diferencia horaria como si fuera en un lapso de <24h o cruzando una medianoche:
+  if (endTotalMinutes < startTotalMinutes) {
+    endTotalMinutes += 24 * 60; // Añadir 24 horas en minutos
   }
 
-  const durationMs = endTimeMs - startTimeMs
-  const durationHours = durationMs / (1000 * 60 * 60)
+  const durationMinutes = endTotalMinutes - startTotalMinutes;
+  const durationHours = durationMinutes / 60;
 
   // Redondear por exceso al siguiente múltiplo de 0.5
   const roundedHours = Math.ceil(durationHours / 0.5) * 0.5
@@ -249,101 +257,115 @@ const handleDeleteTask = () => {
 </script>
 
 <template>
-  <li class="bg-white p-4 rounded-lg shadow-sm mb-3 flex items-start">
-    <!-- Columna de Descripción y Técnico (si no está finalizada) -->
-    <div class="flex-grow pr-4 min-w-0"> <!-- Añadido min-w-0 -->
-      <div class="mb-1">
-        <template v-if="isEditingDescription">
-          <input
-            ref="descriptionInputRef"
-            type="text"
-            v-model="editableDescription"
-            @keyup.enter="saveDescription"
-            @blur="saveDescription"
-            @keyup.esc="cancelEditDescription"
-            class="font-semibold text-lg text-gray-800 p-1 border border-gray-300 rounded-md w-full"
-          />
-        </template>
-        <template v-else>
-          <p @click="startEditDescription" class="font-semibold text-lg text-gray-800 cursor-pointer hover:bg-gray-100 p-1 -m-1 rounded-md break-words">
-            {{ task.description || '[Sin descripción]' }}
-          </p>
-        </template>
-      </div>
-    </div>
-
-    <!-- Columna de Tiempos, Duración, Técnico (si está finalizada) -->
-    <div class="flex-shrink-0 w-40 flex flex-col items-center space-y-1"> <!-- Centrado vertical y horizontal de los items de esta columna -->
-      <!-- Línea de Tiempo: HH:MM - HH:MM -->
-      <div class="flex justify-center items-center text-xs w-full"> <!-- w-full para que el justify-center funcione bien -->
-        <div class="min-w-0 text-center"> <!-- text-center para el contenido del span/input -->
-          <template v-if="isEditingStartTime">
-            <input ref="startTimeInputRef" type="time" v-model="editableStartTime" @keyup.enter="saveStartTime" @blur="saveStartTime" class="text-gray-500 p-0.5 border border-gray-300 rounded-md w-16"/> <!-- Ancho fijo para input time -->
+  <li class="py-1 px-3 flex flex-col text-sm"> <!-- Padding vertical aún más reducido -->
+    <!-- Fila 1: Descripción, Horas, Botón Acción Principal -->
+    <div class="flex items-center justify-between gap-x-2">
+      <!-- Descripción -->
+      <div class="flex-grow min-w-0">
+        <div class="py-0.5">
+          <template v-if="isEditingDescription">
+            <input
+              ref="descriptionInputRef"
+              type="text"
+              v-model="editableDescription"
+              @keyup.enter="saveDescription"
+              @blur="saveDescription"
+              @keyup.esc="cancelEditDescription"
+              class="font-semibold text-sm text-text-main p-1 border border-slate-300 rounded-md w-full focus:ring-1 focus:ring-accent-main focus:border-accent-main"
+            />
           </template>
           <template v-else>
-            <span @click="startEditStartTime" class="text-gray-500 cursor-pointer hover:bg-gray-100 p-1 -m-1 rounded-md">{{ task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</span>
+            <p @click="startEditDescription" class="font-medium text-sm text-text-main cursor-pointer hover:bg-slate-100 p-1 -m-1 rounded-md break-words leading-tight">
+              {{ task.description || '[Sin descripción]' }}
+            </p>
           </template>
         </div>
-        <span class="text-gray-500 mx-1"> - </span>
-        <div class="min-w-0 text-center"> <!-- text-center para el contenido del span/input -->
+      </div>
+
+      <!-- Horas -->
+      <div class="flex-shrink-0 grid grid-cols-[auto_min-content_auto] items-center gap-x-1 text-xs">
+        <div class="min-w-[32px] text-center"> <!-- Ancho mínimo aún más reducido -->
+          <template v-if="isEditingStartTime">
+            <input ref="startTimeInputRef" type="time" v-model="editableStartTime" @keyup.enter="saveStartTime" @blur="saveStartTime" class="text-text-main/90 p-0.5 border border-slate-300 rounded-md w-[68px] text-xs focus:ring-1 focus:ring-accent-main focus:border-accent-main"/>
+          </template>
+          <template v-else>
+            <span @click="startEditStartTime" class="text-text-main/90 cursor-pointer hover:bg-slate-100 p-1 -m-1 rounded-md">{{ task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</span>
+          </template>
+        </div>
+        <span class="text-text-main/80"> - </span> <!-- mx-0.5 eliminado ya que gap-x-1 lo maneja -->
+        <div class="min-w-[32px] text-center"> <!-- Ancho mínimo aún más reducido -->
           <template v-if="task.endTime">
             <template v-if="isEditingEndTime">
-              <input ref="endTimeInputRef" type="time" v-model="editableEndTime" @keyup.enter="saveEndTime" @blur="saveEndTime" class="text-green-600 p-0.5 border border-gray-300 rounded-md w-16"/> <!-- Ancho fijo para input time -->
+              <input ref="endTimeInputRef" type="time" v-model="editableEndTime" @keyup.enter="saveEndTime" @blur="saveEndTime" class="text-emerald-600 p-0.5 border border-slate-300 rounded-md w-[68px] text-xs focus:ring-1 focus:ring-accent-main focus:border-accent-main"/>
             </template>
             <template v-else>
-              <span @click="startEditEndTime" class="text-green-600 cursor-pointer hover:bg-gray-100 p-1 -m-1 rounded-md">{{ task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</span>
+              <span @click="startEditEndTime" class="text-emerald-600 cursor-pointer hover:bg-slate-100 p-1 -m-1 rounded-md">{{ task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</span>
             </template>
           </template>
           <template v-else>
-            <span @click="handleFinalizeAndEditEndTime" class="text-gray-400 cursor-pointer hover:bg-gray-100 p-1 -m-1 rounded-md">--:--</span>
+            <span @click="handleFinalizeAndEditEndTime" class="text-text-main/50 cursor-pointer hover:bg-slate-100 p-1 -m-1 rounded-md">--:--</span>
           </template>
         </div>
       </div>
 
-      <p v-if="formattedDuration" class="text-sm text-blue-600 font-semibold"> <!-- Aumentado a text-sm -->
-        {{ formattedDuration }}
-      </p>
-
-      <!-- Mostrar técnico siempre en esta columna -->
-      <div class="w-24 text-center"> <!-- Centrado el texto del técnico y quitado mb-1 ya que el checkbox se mueve -->
-        <template v-if="isEditingTechnician">
-          <input type="text" ref="technicianInputRef" v-model="editableTechnician" @keyup.enter="saveTechnician" @blur="saveTechnician" class="text-xs text-gray-600 p-1 border border-gray-300 rounded-md w-24"/> <!-- Ancho fijo para input text -->
-        </template>
-        <template v-else>
-          <p @click="startEditTechnician" class="text-xs cursor-pointer hover:bg-gray-100 p-1 -m-1 rounded-md">
-            <span v-if="task.technician" class="text-gray-700 break-words min-w-0">{{ task.technician }}</span>
-            <span v-else class="text-gray-400 italic">---</span> 
-          </p>
-        </template>
+      <!-- Botón Acción Principal -->
+      <div class="flex-shrink-0 w-[88px]"> <!-- Ancho fijo para el botón para consistencia -->
+        <button v-if="!task.endTime" @click="handleFinishTask" class="w-full px-2 py-0.5 bg-status-alert text-text-on-pastel text-xs font-semibold rounded-md hover:bg-red-400 focus:outline-none focus:ring-1 focus:ring-status-alert focus:ring-offset-1 flex items-center justify-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
+            <path d="M3.5 2.75a.75.75 0 00-1.5 0v14.5a.75.75 0 001.5 0v-4.392l1.657-.348a6.723 6.723 0 016.271 1.719 2.25 2.25 0 003.914 0 6.723 6.723 0 016.271-1.719l1.657.348A.75.75 0 0018 12.25v-2.5a.75.75 0 00-.501-.712l-1.657-.348a6.723 6.723 0 01-6.271-1.719A2.25 2.25 0 005.657 5.25a6.723 6.723 0 01-2.157-.442V2.75z" />
+          </svg>
+          <span>Finalizar</span>
+        </button>
+        <button v-else @click="handleReactivateTask" class="w-full px-2 py-0.5 bg-status-active text-text-on-pastel text-xs font-semibold rounded-md hover:bg-yellow-300 focus:outline-none focus:ring-1 focus:ring-status-active focus:ring-offset-1 flex items-center justify-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
+            <path fill-rule="evenodd" d="M7.793 2.232a.75.75 0 01-.025 1.06L3.622 7.25h6.128a5.5 5.5 0 110 11H5.75a.75.75 0 010-1.5h3.999a4 4 0 100-8H3.622l4.146 4.023a.75.75 0 11-1.036 1.085l-5.5-5.25a.75.75 0 010-1.085l5.5-5.25a.75.75 0 011.06.025z" clip-rule="evenodd" />
+          </svg>
+          <span>Reabrir</span>
+        </button>
       </div>
-
     </div>
 
-    <!-- Columna para Botones y Checkbox Notificado -->
-    <div class="ml-2 flex-shrink-0 w-20 flex flex-col items-center space-y-2">
-      <button v-if="!task.endTime" @click="handleFinishTask" class="w-full px-2 py-1 bg-red-500 text-white text-xs font-semibold rounded-md hover:bg-red-600 text-center">
-        Finalizar
-      </button>
-      <button v-else @click="handleReactivateTask" class="w-full px-2 py-1 bg-yellow-500 text-white text-xs font-semibold rounded-md hover:bg-yellow-600 text-center">
-        Reabrir
-      </button>
-      <!-- Contenedor para iconos de Notificado y Eliminar en la misma línea -->
-      <div class="flex justify-center space-x-2 mt-1"> <!-- mt-1 para separarlo del botón de arriba si space-y-2 no es suficiente -->
+    <!-- Fila 2: Técnico, Duración, Botones Secundarios -->
+    <div class="flex items-center justify-between gap-x-2 mt-1"> <!-- mt reducido -->
+      <!-- Técnico y Duración -->
+<!-- Técnico + Duración en misma fila con alineación opuesta -->
+<div class="flex-grow flex justify-between items-center min-w-0 text-xs">
+  <!-- Técnico -->
+  <div class="min-w-0">
+    <template v-if="isEditingTechnician">
+      <input type="text" ref="technicianInputRef" v-model="editableTechnician" @keyup.enter="saveTechnician" @blur="saveTechnician" class="text-xs text-text-main p-0.5 border border-slate-300 rounded-md w-full focus:ring-1 focus:ring-accent-main focus:border-accent-main"/>
+    </template>
+    <template v-else>
+      <p @click="startEditTechnician" class="cursor-pointer hover:bg-slate-100 p-0.5 -m-0.5 rounded-md truncate">
+        <span v-if="task.technician" class="text-text-main/80">{{ task.technician }}</span>
+        <span v-else class="text-gray-400 italic">Añadir técnico</span> 
+      </p>
+    </template>
+  </div>
+
+  <!-- Duración alineada derecha -->
+<p v-if="formattedDuration" class="text-xs font-semibold text-text-main/70 bg-slate-100 border border-slate-200 rounded px-2 py-0.5 ml-4 whitespace-nowrap mt-0.5">    {{ formattedDuration }}
+  </p>
+</div>
+
+
+      <!-- Botones Secundarios (Notificado y Eliminar) -->
+      <div class="ml-auto flex items-center gap-2 flex-shrink-0"> <!-- ml-auto para empujar a la derecha, gap-2 -->
         <!-- Icono Notificado -->
         <button 
           ref="notifiedIconBtnRef"
           @click="toggleNotifiedStatus" 
           :title="task.isNotified ? 'Marcar como No Notificado' : 'Marcar como Notificado'"
-          class="p-0.5 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500 active:ring-0 active:ring-offset-0"
+          class="p-0.5 rounded-full hover:bg-slate-100 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-accent-main active:bg-slate-200"
           aria-label="Estado de notificación"
         >
           <template v-if="task.isNotified">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-status-success" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
           </template>
           <template v-else>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-text-main/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </template>
@@ -352,10 +374,10 @@ const handleDeleteTask = () => {
         <button
           @click="handleDeleteTask"
           title="Eliminar Tarea"
-          class="p-0.5 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-500 active:ring-0 active:ring-offset-0"
+          class="p-0.5 rounded-full hover:bg-slate-100 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-status-alert active:bg-slate-200"
           aria-label="Eliminar tarea"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-status-alert" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
           </svg>
         </button>

@@ -35,8 +35,8 @@ const relayDeleteTask = (taskId: string) => {
 
 <template>
   <div v-if="tasks.length > 0" class="w-full max-w-lg">
-    <h2 v-if="props.title" class="text-2xl font-semibold text-gray-700 mb-4">{{ props.title }}</h2>
-    <ul>
+    <h2 v-if="props.title" class="text-lg font-semibold tracking-wide text-text-main mb-4 px-1">{{ props.title }}</h2> <!-- Título de la lista ajustado -->
+    <ul class="bg-white rounded-xl divide-y divide-gray-200 overflow-hidden shadow-sm border border-gray-200">
       <!-- Usar el componente TaskItem para cada tarea -->
       <TaskItem v-for="task in tasks" :key="task.id" :task="task" @finish-task="relayFinishTask" @update-task="relayUpdateTask" @reactivate-task="relayReactivateTask" @delete-task="relayDeleteTask" />
     </ul>
