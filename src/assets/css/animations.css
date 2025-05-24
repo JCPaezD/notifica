@@ -1,0 +1,18 @@
+@keyframes bounceOutLeft {
+  0%   { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+  20%  { 
+    transform: translateX(12px); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateX(-100%); 
+    opacity: 0; /* Opcional: para un desvanecimiento suave al final */
+  }
+}
+
+.animate-bounce-out-left {
+  animation: bounceOutLeft 0.4s ease-in-out forwards;
+}

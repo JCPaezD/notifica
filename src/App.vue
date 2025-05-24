@@ -464,7 +464,7 @@ const handleMenuAction = (actionName: string) => {
              focus:ring-2 focus:ring-accent-main"
       aria-label="Abrir menú"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-text-main">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-text-main">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
     </button>
@@ -474,7 +474,7 @@ const handleMenuAction = (actionName: string) => {
       <img src="/assets/logo-header.png" alt="Logo Notifica" class="h-8 w-auto"> <!-- Logo con extensión corregida -->
       <h1 class="text-4xl font-extrabold tracking-tight text-text-main">Notifica</h1> <!-- Título agrandado -->
     </div>
-    <div class="w-10"></div> <!-- Espaciador para equilibrar el botón de hamburguesa y centrar el título -->
+    <div class="w-[28px]"></div> <!-- Espaciador ajustado al nuevo tamaño del botón de hamburguesa (w-7 es 1.75rem = 28px) -->
   </header>
   
     <main class="min-h-screen bg-app-bg text-text-main flex flex-col items-center pt-4 px-4"> <!-- pt aún más reducido -->

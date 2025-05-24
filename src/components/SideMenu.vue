@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import {
   Dialog,
   DialogPanel,
@@ -18,14 +19,34 @@ const props = defineProps({
 // Emits
 const emit = defineEmits(['close', 'action'])
 
+const isAnimatingOut = ref(false)
+
 const closeMenu = () => {
-  emit('close')
-}
+  isAnimatingOut.value = true
+  // emit('close') se llamará en handleAnimationEnd
+  }
 
 const handleAction = (actionName: string) => {
   emit('action', actionName)
-  closeMenu() // Cerrar el menú después de una acción
+  closeMenu() // Iniciar animación de cierre después de una acción
 }
+
+const handleAnimationEnd = () => {
+  // Asegurarnos de que esto solo se ejecute para la animación de cierre
+  if (isAnimatingOut.value) {
+    // No resetear isAnimatingOut aquí.
+    // Esto mantiene la clase de animación aplicada mientras el diálogo se oculta.
+    emit('close') // Ahora emitimos close para que el v-if/show lo oculte
+  }
+}
+
+watch(() => props.isOpen, (newValue, oldValue) => {
+  if (newValue && !oldValue) {
+    // Si el menú se está abriendo (isOpen cambió de false a true)
+    isAnimatingOut.value = false // Reseteamos el estado de la animación de salida
+  }
+})
+
 </script>
 
 <template>
@@ -37,7 +58,7 @@ const handleAction = (actionName: string) => {
         enter="transition-opacity ease-out duration-300"
         enter-from="opacity-0"
         enter-to="opacity-100"
-        leave="transition-opacity ease-in duration-200"
+        leave="transition-opacity ease-in duration-400"
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
@@ -47,34 +68,33 @@ const handleAction = (actionName: string) => {
       <div class="fixed inset-0 overflow-y-auto">
         <div class="flex min-h-full items-start justify-start text-left">
           <TransitionChild
-            as="template"
-            enter="transition-transform ease-out duration-300"
+            as="template"            
+            
+            enter="transform transition ease-in-out duration-300"
             enter-from="-translate-x-full"
             enter-to="translate-x-0"
-            leave="transition-transform ease-in duration-200"
-            leave-from="translate-x-0"
-            leave-to="-translate-x-full"
           >
             <DialogPanel
               class="w-64 max-w-sm h-screen
-                     transform overflow-hidden bg-app-bg
-                     p-4 text-left align-middle shadow-xl
-                     transition-all flex flex-col"
+                     overflow-hidden bg-app-bg p-4
+                     text-left align-middle shadow-xl
+                     flex flex-col"
+              :class="{ 'animate-bounce-out-left': isAnimatingOut }"
+              @animationend="handleAnimationEnd"
             >
-              <DialogTitle
+            <DialogTitle
                 as="h3"
-                class="text-lg font-semibold tracking-wide leading-6 text-text-main
-                       flex justify-between items-center mb-4"
-              >
+                class="text-lg font-semibold tracking-wide
+                       leading-6 text-text-main flex
+                       justify-between items-center mb-4"              >
                 <span>Acciones</span>
                 <button
                   @click="closeMenu"
                   class="p-1 rounded-md hover:bg-slate-100
-                         focus:outline-none focus:ring-2
-                         focus:ring-accent-main"
+                         focus:outline-none"
                   aria-label="Cerrar menú"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-text-main">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -84,10 +104,11 @@ const handleAction = (actionName: string) => {
                 <!-- Aquí irán los botones de acción -->
                 <button
                   @click="handleAction('newShift')"
-                  class="w-full flex items-center gap-x-3 px-3 py-2 rounded-md                         
-                         text-sm font-medium
-                         bg-status-success text-text-on-pastel
-                         hover:bg-emerald-300
+                  class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md                         
+                         text-sm font-medium 
+                         bg-status-success text-green-700
+                         hover:bg-emerald-300 hover:brightness-95
+                         active:scale-95 transition-all duration-150 ease-in-out
                          focus:outline-none focus:bg-slate-100"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -100,10 +121,11 @@ const handleAction = (actionName: string) => {
 
                 <button
                  @click="handleAction('shareTasks')"
-                 class="w-full flex items-center gap-x-3 px-3 py-2 rounded-md
-                        text-sm font-medium
-                        bg-accent-main text-text-on-pastel
-                        hover:bg-accent-main/80
+                 class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
+                        text-sm font-medium 
+                        bg-accent-main text-blue-800 
+                        hover:bg-accent-main/80 hover:brightness-95
+                        active:scale-95 transition-all duration-150 ease-in-out
                         focus:outline-none focus:bg-accent-main/70"
                >
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -116,10 +138,11 @@ const handleAction = (actionName: string) => {
 
                 <button
                   @click="handleAction('importTasks')"
-                  class="w-full flex items-center gap-x-3 px-3 py-2 rounded-md
-                         text-sm font-medium
-                         bg-accent-main text-text-on-pastel
-                         hover:bg-accent-main/80
+                  class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
+                         text-sm font-medium 
+                         bg-accent-main text-blue-800 
+                         hover:bg-accent-main/80 hover:brightness-95
+                         active:scale-95 transition-all duration-150 ease-in-out
                          focus:outline-none focus:bg-accent-main/70"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -129,10 +152,11 @@ const handleAction = (actionName: string) => {
                 </button>
                 <button
                   @click="handleAction('exportTasks')"
-                  class="w-full flex items-center gap-x-3 px-3 py-2 rounded-md
-                         text-sm font-medium
-                         bg-accent-main text-text-on-pastel
-                         hover:bg-accent-main/80
+                  class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
+                         text-sm font-medium 
+                         bg-accent-main text-blue-800 
+                         hover:bg-accent-main/80 hover:brightness-95
+                         active:scale-95 transition-all duration-150 ease-in-out
                          focus:outline-none focus:bg-accent-main/70"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -148,10 +172,11 @@ const handleAction = (actionName: string) => {
 
                 <button
                   @click="handleAction('deleteAll')"
-                  class="w-full flex items-center gap-x-3 px-3 py-2 rounded-md
+                  class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
                          text-sm font-medium
-                         bg-red-100 text-red-700
-                         hover:bg-red-200
+                         bg-red-100 text-red-700 
+                         hover:bg-red-200 hover:brightness-95
+                         active:scale-95 transition-all duration-150 ease-in-out
                          focus:outline-none focus:bg-red-200 focus:ring-2 focus:ring-red-300 focus:ring-offset-1"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -162,8 +187,14 @@ const handleAction = (actionName: string) => {
               </div>
 
               <div class="mt-4"> <!-- mt-4 para espacio, quitado pt-4 y border-t -->
-                <hr class="my-2 border-slate-200 mx-3" /> <!-- Separador con margen vertical my-2 -->
-                <p class="text-[11px] text-slate-400/80 text-center">Notifica v0.1.0 - JCPD 2025</p>
+                <hr class="mt-6 mb-4 border-slate-200 mx-3" /> <!-- Ajustado margen inferior para centrar el texto del pie -->
+                <div class="flex items-center justify-center gap-1">
+                  <img 
+                    src="/assets/logo-header.png" 
+                    alt="Logo Notifica" 
+                    class="w-4 h-4" />
+                  <p class="text-[11px] text-slate-400/80">Notifica v0.1.0 - JCPD 2025</p>
+                </div>
               </div>
             </DialogPanel>
           </TransitionChild>
