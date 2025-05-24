@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import TaskItem from './TaskItem.vue' // Importar el nuevo componente TaskItem
+import TaskItem from './TaskItem.vue'
 import type { Task } from '../types/Task'
 
 const props = defineProps({
@@ -34,11 +34,35 @@ const relayDeleteTask = (taskId: string) => {
 </script>
 
 <template>
-  <div v-if="tasks.length > 0" class="w-full max-w-lg">
-    <h2 v-if="props.title" class="text-lg font-semibold tracking-wide text-text-main mb-4 px-1">{{ props.title }}</h2> <!-- Título de la lista ajustado -->
-    <ul class="bg-white rounded-xl divide-y divide-gray-200 overflow-hidden shadow-sm border border-gray-200">
-      <!-- Usar el componente TaskItem para cada tarea -->
-      <TaskItem v-for="task in tasks" :key="task.id" :task="task" @finish-task="relayFinishTask" @update-task="relayUpdateTask" @reactivate-task="relayReactivateTask" @delete-task="relayDeleteTask" />
-    </ul>
+  <div class="w-full max-w-lg">
+    <h2 
+      v-if="props.title && tasks.length > 0" 
+      class="text-lg font-semibold tracking-wide text-text-main mb-4 px-1"
+    >{{ props.title }}</h2>
+    <TransitionGroup 
+      tag="ul" 
+      name="task-list"
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 max-h-0" 
+      enter-to-class="opacity-100 max-h-32" 
+      leave-active-class="transition-all duration-300 ease-in-out"
+      move-class="transition-transform duration-500 ease-out" 
+      leave-from-class="opacity-100 max-h-32"  
+      leave-to-class="opacity-0 max-h-0"
+      class="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col overflow-hidden"
+    >
+      <TaskItem 
+        v-for="(task, index) in tasks" 
+        :key="task.id"  
+        :task="task"
+        :is-first="index === 0"
+        :is-last="index === tasks.length - 1"
+        @finish-task="relayFinishTask" 
+        @update-task="relayUpdateTask" 
+        @reactivate-task="relayReactivateTask" 
+        @delete-task="relayDeleteTask" />
+    </TransitionGroup>
   </div>
 </template>
+
+<!-- El bloque <style> con .task-list-item-move se elimina ya que move-class usa Tailwind directamente -->

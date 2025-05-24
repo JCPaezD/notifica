@@ -414,64 +414,97 @@ const shareShiftTasks = async () => {
     </div>
 
     <!-- Sección para añadir nueva tarea -->
-    <div v-if="!isViewingPastShift" class="bg-white rounded-xl p-3 shadow-sm w-full max-w-lg mb-4 border border-gray-200"> <!-- margen inferior unificado -->
-      <div class="flex space-x-4 items-start"> <!-- Eliminado mb-4 para padding simétrico con p-4 del padre -->
-        <div class="flex-grow">
-          <!-- La etiqueta de texto heredará text-text-main -->
-          <textarea
-            ref="descriptionTextareaRef"
-            id="task-description"
-            v-model="newTaskDescription"
-            @keyup.enter.prevent="startNewTask"
-            placeholder="Nuevo aviso"
-            rows="2"
-            class="p-3 bg-white border border-slate-300 rounded-md shadow-sm 
-                  focus:ring-2 focus:ring-accent-main focus:border-accent-main 
-                  w-full text-base resize-none placeholder-text-main/70">
-            </textarea>
-        </div>
-        <div class="w-1/3 flex flex-col gap-2"> <!-- Convertido a flex-col con gap para el botón -->
-          <!-- La etiqueta de texto heredará text-text-main -->
-          <input 
-            type="text" 
-            id="task-technician" 
-            v-model="newTaskTechnician"
-            @keyup.enter="startNewTask"
-            placeholder="Técnico(s)"
-            class="p-1 bg-white border border-slate-300 rounded-md shadow-sm 
-            focus:ring-2 focus:ring-accent-main focus:border-accent-main 
-            w-full text-sm placeholder-text-main/70" />
-          <button 
-            @click="startNewTask" 
-            class="w-full px-3 py-1.5 bg-accent-main text-text-on-pastel font-semibold 
-            rounded-md shadow-sm hover:bg-accent-main/80 
-            focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2 
-            flex items-center justify-center gap-2 text-sm"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-              <path stroke-linecap="round" stroke-linejoin="round" 
-                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07
-                a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 
-                0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-            </svg>
-            Iniciar
-          </button>
+    <Transition
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 max-h-0"
+      enter-to-class="opacity-100 max-h-[160px]" 
+      leave-active-class="transition-all duration-300 ease-in"
+      leave-from-class="opacity-100 max-h-[160px]"
+      leave-to-class="opacity-0 max-h-0"
+    >
+      <div 
+        v-if="!isViewingPastShift" 
+        class="bg-white rounded-xl p-3 shadow-sm w-full max-w-lg mb-4 border border-gray-200 overflow-hidden"
+      > 
+        <div class="flex space-x-4 items-start"> 
+          <div class="flex-grow">
+            <textarea
+              ref="descriptionTextareaRef"
+              id="task-description"
+              v-model="newTaskDescription"
+              @keyup.enter.prevent="startNewTask"
+              placeholder="Nuevo aviso"
+              rows="2"
+              class="p-3 bg-white border border-slate-300 rounded-md shadow-sm 
+                    focus:ring-2 focus:ring-accent-main focus:border-accent-main 
+                    w-full text-base resize-none placeholder-text-main/70
+                    transition-all duration-300 ease-in-out">
+              </textarea>
+          </div>
+          <div class="w-1/3 flex flex-col gap-2"> 
+            <input 
+              type="text" 
+              id="task-technician" 
+              v-model="newTaskTechnician"
+              @keyup.enter="startNewTask"
+              placeholder="Técnico(s)"            
+              class="p-1 
+                    bg-white border border-slate-300 rounded-md shadow-sm 
+                    focus:ring-2 focus:ring-accent-main focus:border-accent-main 
+                    transition-all duration-300 ease-in-out
+                    w-full text-sm placeholder-text-main/70"
+            />
+            <button 
+              @click="startNewTask" 
+              class="w-full px-3 py-1.5 
+                    bg-accent-main text-text-on-pastel font-semibold 
+                    rounded-md shadow-sm hover:bg-accent-main/80 
+                    focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2
+                    transition-all duration-300 ease-in-out 
+                    flex items-center justify-center gap-2 text-sm"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07
+                  a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 
+                  0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+              </svg>
+              Iniciar
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Transition>
 
     <!-- Botón para volver al turno actual si se está viendo uno pasado -->
-    <div v-if="isViewingPastShift" class="w-full max-w-lg mb-4"> <!-- margen inferior unificado -->
-      <button 
-        @click="returnToCurrentShift" 
-        class="w-full px-4 py-2 bg-status-active text-text-on-pastel text-sm font-semibold rounded-md shadow-sm hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-status-active focus:ring-offset-2 flex items-center justify-center gap-2"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-        </svg>
-        Volver al Turno Actual
-      </button>
-    </div>
+    <Transition
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 max-h-0"
+      enter-to-class="opacity-100 max-h-[80px]" 
+      leave-active-class="transition-all duration-300 ease-in"
+      leave-from-class="opacity-100 max-h-[80px]"
+      leave-to-class="opacity-0 max-h-0"
+    >
+      <div 
+        v-if="isViewingPastShift" 
+        class="w-full max-w-lg mb-4 overflow-hidden"
+      > 
+        <button 
+          @click="returnToCurrentShift" 
+          class="w-full min-h-[44px] px-4 py-2 
+                bg-status-active text-text-on-pastel text-sm font-semibold
+                rounded-md shadow-sm hover:bg-yellow-300
+                focus:outline-none focus:ring-2 focus:ring-status-active focus:ring-offset-2
+                transition-all duration-300 ease-in-out
+                flex items-center justify-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
+          Volver al Turno Actual
+        </button>
+      </div>
+    </Transition>
 
     <!-- Selector de Turno -->
     <!-- Este div se moverá debajo de TaskList -->
@@ -490,7 +523,9 @@ const shareShiftTasks = async () => {
           ref="shiftDropdownButtonRef"
           @click="toggleShiftDropdown"
           type="button"
-          class="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-2 py-2 text-xs font-medium text-text-main shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-1 w-[72px]"
+          class="inline-flex items-center justify-center w-[72px] 
+                rounded-md border border-slate-300 bg-white px-2 py-2 text-xs font-medium text-text-main shadow-sm hover:bg-slate-50 
+                focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-1 transition-all duration-300 ease-in-out"
           aria-haspopup="true"
           :aria-expanded="isShiftDropdownOpen"
         >
@@ -508,8 +543,18 @@ const shareShiftTasks = async () => {
           aria-labelledby="shift-selector-button" 
         >
           <div class="py-1" role="none">
-            <button @click="selectShift('current')" class="text-text-main block w-full text-left px-4 py-2 text-sm hover:bg-slate-100 hover:text-text-main" role="menuitem">Turno Actual</button>
-            <button v-for="shift in availableShifts" :key="shift.id" @click="selectShift(shift.id)" class="text-text-main block w-full text-left px-4 py-2 text-sm hover:bg-slate-100 hover:text-text-main" role="menuitem">
+            <button 
+              @click="selectShift('current')" 
+              class="text-text-main block w-full text-left min-h-[44px] px-4 py-2 text-sm 
+                    hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out" 
+              role="menuitem">Turno Actual</button>
+            <button 
+              v-for="shift in availableShifts" 
+              :key="shift.id" 
+              @click="selectShift(shift.id)" 
+              class="text-text-main block w-full text-left min-h-[44px] px-4 py-2 text-sm 
+                    hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out" 
+              role="menuitem">
               {{ shift.label }}
             </button>
           </div>
@@ -524,7 +569,8 @@ const shareShiftTasks = async () => {
           <button 
             @click="showOnlyActive = !showOnlyActive" 
             :class="{'bg-accent-main': showOnlyActive, 'bg-slate-300': !showOnlyActive}"
-            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2"
+            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent 
+                  transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2"
             role="switch" 
             :aria-checked="showOnlyActive"
           >
@@ -542,7 +588,8 @@ const shareShiftTasks = async () => {
           <button 
             @click="showOnlyNotNotified = !showOnlyNotNotified" 
             :class="{'bg-accent-main': showOnlyNotNotified, 'bg-slate-300': !showOnlyNotNotified}"
-            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2"
+            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent 
+                  transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2"
             role="switch" 
             :aria-checked="showOnlyNotNotified"
           >
@@ -562,7 +609,12 @@ const shareShiftTasks = async () => {
       <div class="flex justify-center gap-2 flex-wrap">
         <button 
           @click="() => startNewShift()" 
-          class="px-3 py-1.5 bg-status-success text-text-on-pastel text-sm font-semibold rounded-md shadow-sm hover:bg-emerald-300 focus:outline-none focus:ring-2 focus:ring-status-success focus:ring-offset-2 flex items-center justify-center gap-2 min-w-[96px]"
+          class="min-h-[44px] px-4 py-2 
+                 bg-status-success text-text-on-pastel text-sm font-semibold 
+                 rounded-md shadow-sm hover:bg-emerald-300 
+                 focus:outline-none focus:ring-2 focus:ring-status-success focus:ring-offset-2
+                 transition-all duration-300 ease-in-out 
+                 flex items-center justify-center gap-2 min-w-[96px]"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -571,7 +623,12 @@ const shareShiftTasks = async () => {
         </button>
         <button
           @click="shareShiftTasks"
-          class="px-3 py-1.5 bg-accent-main text-text-on-pastel text-sm font-semibold rounded-md shadow-sm hover:bg-accent-main/80 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2 flex items-center justify-center gap-2 min-w-[96px]"
+          class="min-h-[44px] px-4 py-2 
+                 bg-accent-main text-text-on-pastel text-sm font-semibold 
+                 rounded-md shadow-sm hover:bg-accent-main/80 
+                 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2
+                 transition-all duration-300 ease-in-out 
+                 flex items-center justify-center gap-2 min-w-[96px]"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
@@ -584,12 +641,12 @@ const shareShiftTasks = async () => {
         <button 
           @click="exportTasksToJson"
           title="Exportar Tareas"
-          class="p-2
+          class="p-2 min-w-[44px] min-h-[44px]
                  bg-accent-main text-text-on-pastel
                  text-sm font-semibold
                  rounded-md shadow-sm
                  hover:bg-accent-main/80
-                 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2
+                 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2 transition-all duration-300 ease-in-out
                  flex items-center justify-center"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -600,12 +657,12 @@ const shareShiftTasks = async () => {
         <button 
           @click="triggerFileImport"
           title="Importar Tareas"
-          class="p-2
+          class="p-2 min-w-[44px] min-h-[44px]
                  bg-accent-main text-text-on-pastel
                  text-sm font-semibold
                  rounded-md shadow-sm
                  hover:bg-accent-main/80
-                 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2
+                 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2 transition-all duration-300 ease-in-out
                  flex items-center justify-center"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -615,14 +672,13 @@ const shareShiftTasks = async () => {
         </button>
         <button 
           @click="deleteAllTasks"
-          class="px-3 py-1.5
+          class="min-h-[44px] px-4 py-2
                  bg-red-100 text-red-700
                  text-sm font-semibold
                  rounded-md shadow-sm
                  hover:bg-red-200
-                 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2
-                 flex items-center justify-center gap-2
-                 min-w-[96px]"
+                 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2 transition-all duration-300 ease-in-out
+                 flex items-center justify-center gap-2 min-w-[96px]"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12.56 0c1.153 0 2.242.078 3.324.214M15 5.79V4.5A2.25 2.25 0 0012.75 2.25h-1.5A2.25 2.25 0 009 4.5v1.29m0 0C9 7.529 9.21 8.25 9.45 9" />
