@@ -54,8 +54,12 @@ const startNewTask = () => {
   allTasks.value.push(newTask)
   newTaskDescription.value = '' // Limpiar el campo después de iniciar
   newTaskTechnician.value = '' // Limpiar el campo del técnico
-  descriptionTextareaRef.value?.focus() // Devolver el foco al campo de descripción
   notifySuccess('Tarea Iniciada', `"${newTask.description}" comenzada.`);
+
+  // Quitar el foco del elemento activo para cerrar el teclado en móviles
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur();
+  }
 }
 
 const finishTask = (taskId: string) => {
