@@ -1,67 +1,69 @@
-import { toast } from 'vue-sonner'
+import { toast, type ExternalToast } from 'vue-sonner' // Import ExternalToast
 
 // Definimos tipos para los mensajes de notificación para consistencia
-type NotificationType = 'success' | 'error' | 'info' | 'warning' | 'action' | 'normal'
+type NotificationType = 'success' | 'error' | 'info' | 'warning' | 'normal' // 'action' type removed, as any toast can have an action
 
-interface NotificationOptions {
-  description?: string
-  duration?: number // en milisegundos
-  // Aquí se pueden añadir más opciones de vue-sonner si se necesitan
-}
+// Estas son las opciones que nuestras funciones helper (notifySuccess, etc.) pueden tomar
+// además de 'title' y 'description'. Incluyen propiedades de ExternalToast como
+// 'action', 'duration', 'className', 'onDismiss', etc., excluyendo las que manejamos explícitamente.
+type HelperToastOptions = Omit<ExternalToast, 'title' | 'description' | 'type'>;
 
 export function useNotifications() {
   const showNotification = (
     type: NotificationType,
     title: string,
-    options?: NotificationOptions
-  ) => {
-    const toastOptions = {
-      description: options?.description,
-      duration: options?.duration || 3000, // Duración por defecto de 3 segundos
-      // Puedes añadir más opciones aquí, como un icono personalizado, etc.
+    // Las opciones para showNotification combinan nuestra 'description' con HelperToastOptions.
+    options?: HelperToastOptions & { description?: string }
+  ): string | number => { // Return the toastId
+    // Si options es undefined, currentDescription será undefined y restOptions será un objeto vacío.
+    const currentDescription = options?.description;
+    const { description: _ignoredDescription, ...restOptions } = options || {} as HelperToastOptions & { description?: string };
+
+    const toastProps: ExternalToast = {
+      description: currentDescription,
+      duration: restOptions.duration ?? 3000, // Default duration 3s para toasts informativos
+      ...restOptions, // Spread all other options like action, onDismiss, etc.
     }
+
+    let toastId: string | number
 
     switch (type) {
       case 'success':
-        toast.success(title, toastOptions)
+        toastId = toast.success(title, toastProps)
         break
       case 'error':
-        toast.error(title, toastOptions)
+        toastId = toast.error(title, toastProps)
         break
       case 'info':
-        toast.info(title, toastOptions)
+        toastId = toast.info(title, toastProps)
         break
       case 'warning':
-        toast.warning(title, toastOptions)
-        break
-      case 'action':
-        // Para toasts con acciones, vue-sonner tiene una sintaxis específica
-        // Ejemplo: toast(title, { action: { label: 'Undo', onClick: () => console.log('Undo') } })
-        // Por ahora, lo trataremos como un toast normal, pero se puede expandir
-        toast(title, toastOptions)
+        toastId = toast.warning(title, toastProps)
         break
       case 'normal':
       default:
-        toast(title, toastOptions)
+        toastId = toast(title, toastProps)
         break
     }
+    return toastId
   }
 
   // Funciones específicas para tipos comunes de notificaciones
-  const notifySuccess = (title: string, description?: string) => {
-    showNotification('success', title, { description })
+  // Now they can also accept additional options and will return the toastId
+  const notifySuccess = (title: string, description?: string, opts?: HelperToastOptions) => {
+    return showNotification('success', title, { description, ...opts })
   }
 
-  const notifyError = (title: string, description?: string) => {
-    showNotification('error', title, { description })
+  const notifyError = (title: string, description?: string, opts?: HelperToastOptions) => {
+    return showNotification('error', title, { description, ...opts })
   }
 
-  const notifyInfo = (title: string, description?: string) => {
-    showNotification('info', title, { description })
+  const notifyInfo = (title: string, description?: string, opts?: HelperToastOptions) => {
+    return showNotification('info', title, { description, ...opts })
   }
   
-  const notifyWarning = (title: string, description?: string) => {
-    showNotification('warning', title, { description })
+  const notifyWarning = (title: string, description?: string, opts?: HelperToastOptions) => {
+    return showNotification('warning', title, { description, ...opts })
   }
 
   return {
@@ -70,5 +72,6 @@ export function useNotifications() {
     notifyError,
     notifyInfo,
     notifyWarning,
+    dismissToast: toast.dismiss, // Expose dismiss function
   }
 }

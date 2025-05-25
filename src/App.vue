@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue' // Añadido onMounted y watch
+import { ref, computed, onMounted, watch, nextTick } from 'vue' // Añadido nextTick
 import TaskList from './components/TaskList.vue' // Importar el nuevo componente
 import SideMenu from './components/SideMenu.vue' // Importar el menú lateral
 import { Toaster } from 'vue-sonner'
@@ -28,9 +28,10 @@ const shiftDropdownButtonRef = ref<HTMLButtonElement | null>(null) // Ref para e
 
 // Estado para el menú lateral
 const isSideMenuOpen = ref(false)
+const taskListKey = ref(0); // Key para forzar la re-renderización de TaskList
 
 // Usar el composable de notificaciones
-const { notifySuccess, notifyError, notifyInfo, notifyWarning } = useNotifications()
+const { notifySuccess, notifyError, notifyInfo, notifyWarning, dismissToast } = useNotifications()
 
 const startNewTask = () => {
   if (newTaskDescription.value.trim() === '') {
@@ -102,15 +103,43 @@ const reactivateTask = (taskId: string) => {
 const deleteTask = (taskId: string) => {
   const taskIndex = allTasks.value.findIndex(t => t.id === taskId);
   if (taskIndex !== -1) {
-    const deletedTaskDescription = allTasks.value[taskIndex].description;
+    const taskToDelete = { ...allTasks.value[taskIndex] }; // Guardar una copia completa de la tarea
+
+    // Eliminar la tarea de la lista principal síncronamente
     allTasks.value.splice(taskIndex, 1);
-    notifyError('Tarea Eliminada', `"${deletedTaskDescription}" ha sido eliminada.`);
+
+    // Mostrar toast con opción de Deshacer usando nuestro composable
+    // Originalmente era notifyWarning, lo cambiamos a notifyError para el color rojo
+    // y añadimos className para el estilo del botón de deshacer.
+    const toastId = notifyError( // Cambiado de notifyWarning a notifyError
+      'Tarea Eliminada',
+      `"${taskToDelete.description}" ha sido eliminada.`,
+      {
+        action: {
+          label: 'Deshacer',
+          onClick: () => {
+            // Restaurar la tarea en su posición original
+            allTasks.value.splice(taskIndex, 0, taskToDelete);
+            notifyInfo('Tarea Restaurada', `"${taskToDelete.description}" ha sido restaurada.`);
+            dismissToast(toastId); // Cerrar el toast de "Deshacer"
+          },
+        },
+        // Se eliminan las props id, className y classNames ya que no se usará un icono SVG.
+        // id: 'undo-delete-task-toast', // Comentado o eliminado
+        // className: 'toast-with-undo-action', // Comentado o eliminado
+        duration: 7000, // Asegurar duración larga para el toast con "Deshacer"
+      }
+    );
   }
 }
 
 const startNewShift = (showAlert = true) => {
   const shiftStartTimeFormatted = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   
+  // Guardar estado anterior para posible Deshacer
+  const previousCurrentShiftId = currentShiftId.value;
+  const previousSelectedShiftToView = selectedShiftToView.value;
+
   if (showAlert) {
     const confirmed = window.confirm(
       `Iniciando nuevo turno a las ${shiftStartTimeFormatted}. \n\n` +
@@ -122,10 +151,33 @@ const startNewShift = (showAlert = true) => {
     }
   }
   const newShiftId = `shift-${Date.now()}`; 
+  
   currentShiftId.value = newShiftId;
   selectedShiftToView.value = 'current'; 
-  notifySuccess('Nuevo Turno Iniciado', `Turno comenzado a las ${shiftStartTimeFormatted}.`);
-}
+
+  const toastId = notifySuccess(
+    'Nuevo Turno Iniciado', 
+    `Turno comenzado a las ${shiftStartTimeFormatted}.`,
+    {
+      action: {
+        label: 'Deshacer',
+        onClick: async () => {
+          // Restaurar el estado anterior del turno
+          currentShiftId.value = previousCurrentShiftId;
+          selectedShiftToView.value = previousSelectedShiftToView;
+
+          // Eliminar tareas que se hayan podido crear en el newShiftId que se está deshaciendo
+          allTasks.value = allTasks.value.filter(task => task.shiftId !== newShiftId);
+
+          await nextTick(); // Esperar a que la UI se actualice
+          notifyInfo('Acción Deshecha', 'Se restauró el estado anterior al nuevo turno.');
+          dismissToast(toastId);
+        }
+      },
+      duration: 7000, // 7 segundos para reaccionar
+    }
+  );
+};
 
 // Propiedad calculada para las tareas filtradas y ordenadas
 const filteredAndSortedTasks = computed(() => {
@@ -285,13 +337,42 @@ const importTasksFromJson = (event: Event) => {
 
 const deleteAllTasks = () => {
   if (window.confirm('¿Estás seguro de que quieres borrar TODAS las tareas? Esta acción no se puede deshacer.')) {
+    const tasksBeforeDelete = JSON.parse(JSON.stringify(allTasks.value)); // Copia profunda de las tareas
+
     allTasks.value = []; // Limpia la lista de tareas en la aplicación
-    // localStorage.removeItem(LOCAL_STORAGE_KEY); // Esto también se manejará por el watch, pero podemos ser explícitos.
-    notifyError('Borrado Completo', 'Todas las tareas han sido eliminadas.');
+
+    const toastId = notifyError( // Puedes cambiar a notifyWarning si lo prefieres
+      'Borrado Completo',
+      'Todas las tareas han sido eliminadas.',
+      {
+        action: {
+          label: 'Deshacer',
+          onClick: async () => { // Hacer la función onClick asíncrona
+            allTasks.value = tasksBeforeDelete; // Restaurar las tareas (revertimos al método de reemplazo)
+            // Convertir cadenas de fecha de vuelta a objetos Date
+            allTasks.value = allTasks.value.map(task => ({
+              ...task,
+              startTime: new Date(task.startTime),
+              endTime: task.endTime ? new Date(task.endTime) : undefined,
+            }));            
+            await nextTick(); // Esperar al siguiente ciclo de actualización del DOM
+
+            // Mostrar notificación de restauración y recargar la página cuando esta se cierre.
+            notifyInfo('Tareas Restauradas', 'Todas las tareas han sido restauradas.', {
+              onDismiss: () => {
+                window.location.reload(); // Forzar la recarga de la página cuando el toast se cierre
+              }
+            });
+            dismissToast(toastId); // Cerrar el toast de "Deshacer"
+          },
+        },
+        duration: 7000, // 7 segundos para reaccionar
+      }
+    );
   } else {
     notifyInfo('Acción Cancelada', 'El borrado de tareas fue cancelado.');
   }
-}
+};
 
 // Cargar tareas desde localStorage al montar el componente
 onMounted(() => {
@@ -607,7 +688,14 @@ const handleMenuAction = (actionName: string) => {
     <!-- Este div se moverá debajo de TaskList -->
 
     <!-- Lista de Tareas (ahora filtrada y ordenada) -->
-    <TaskList :tasks="filteredAndSortedTasks" :title="listTitle" @finish-task="finishTask" @update-task="updateTask" @reactivate-task="reactivateTask" @delete-task="deleteTask" />
+    <TaskList 
+      :key="taskListKey" 
+      :tasks="filteredAndSortedTasks" 
+      :title="listTitle" 
+      @finish-task="finishTask" 
+      @update-task="updateTask" 
+      @reactivate-task="reactivateTask" 
+      @delete-task="deleteTask" />
 
     <!-- Separador Visual -->
     <hr class="w-5/6 max-w-md border-gray-200 my-6" /> <!-- Ancho porcentual para que sea más corta en móviles, centrada por items-center del main -->
@@ -710,7 +798,6 @@ const handleMenuAction = (actionName: string) => {
   <!-- Movido fuera de <main> para asegurar el posicionamiento fixed correcto -->
   <Toaster
     position="bottom-center"
-    richColors
     closeButton
   />
 </template>
