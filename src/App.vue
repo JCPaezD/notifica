@@ -2,6 +2,8 @@
 import { ref, computed, onMounted, watch } from 'vue' // Añadido onMounted y watch
 import TaskList from './components/TaskList.vue' // Importar el nuevo componente
 import SideMenu from './components/SideMenu.vue' // Importar el menú lateral
+import { Toaster } from 'vue-sonner'
+import { useNotifications } from './composables/useNotifications'
 import type { Task } from './types/Task' // Importar la interfaz Task compartida
 
 const newTaskDescription = ref('')
@@ -27,10 +29,12 @@ const shiftDropdownButtonRef = ref<HTMLButtonElement | null>(null) // Ref para e
 // Estado para el menú lateral
 const isSideMenuOpen = ref(false)
 
+// Usar el composable de notificaciones
+const { notifySuccess, notifyError, notifyInfo, notifyWarning } = useNotifications()
 
 const startNewTask = () => {
   if (newTaskDescription.value.trim() === '') {
-    alert('Por favor, introduce una descripción para la tarea.')
+    notifyWarning('Campo Requerido', 'Por favor, introduce una descripción para la tarea.')
     return
   }
 
@@ -51,25 +55,35 @@ const startNewTask = () => {
   newTaskDescription.value = '' // Limpiar el campo después de iniciar
   newTaskTechnician.value = '' // Limpiar el campo del técnico
   descriptionTextareaRef.value?.focus() // Devolver el foco al campo de descripción
-  console.log(`Tarea iniciada: ${newTask.description} por ${newTask.technician || 'N/A'} a las ${newTask.startTime.toLocaleTimeString()}`)
+  notifySuccess('Tarea Iniciada', `"${newTask.description}" comenzada.`);
 }
 
 const finishTask = (taskId: string) => {
   const task = allTasks.value.find(t => t.id === taskId)
   if (task) {
     task.endTime = new Date()
-    console.log(`Tarea finalizada: ${task.description} a las ${task.endTime.toLocaleTimeString()}`)
-    // Ahora se maneja con filtros
+    notifySuccess('Tarea Finalizada', `"${task.description}" completada a las ${task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`);
   }
 }
 
 const updateTask = (updatedTask: Task) => {
   const taskIndex = allTasks.value.findIndex(t => t.id === updatedTask.id)
   if (taskIndex !== -1) {
+    const oldIsNotifiedState = allTasks.value[taskIndex].isNotified; // Guardar el estado anterior
     allTasks.value[taskIndex] = updatedTask
-    console.log(`Tarea actualizada: ${updatedTask.description} - Notificado: ${updatedTask.isNotified}`)
+
+    // Comprobar si el estado de notificación cambió
+    if (oldIsNotifiedState !== updatedTask.isNotified) {
+      if (updatedTask.isNotified) {
+        notifySuccess('Tarea Notificada', `"${updatedTask.description}" marcada como notificada.`);
+      } else {
+        notifyInfo('Notificación Anulada', `"${updatedTask.description}" ya no está notificada.`);
+      }
+    } else if (oldIsNotifiedState === updatedTask.isNotified) { // Si no cambió el estado de notificación, pero otros campos sí
+      notifyInfo('Tarea Actualizada', `"${updatedTask.description}" ha sido actualizada.`);
+    }
   } else {
-    console.warn(`No se encontró la tarea con ID: ${updatedTask.id} para actualizar.`)
+    notifyError('Error al Actualizar', `No se encontró la tarea con ID: ${updatedTask.id}.`);
   }
 }
 
@@ -77,7 +91,7 @@ const reactivateTask = (taskId: string) => {
   const task = allTasks.value.find(t => t.id === taskId)
   if (task) {
     delete task.endTime
-    console.log(`Tarea reactivada: ${task.description}`)
+    notifyWarning('Tarea Reactivada', `"${task.description}" ha sido reabierta.`);
   }
 }
 
@@ -86,7 +100,7 @@ const deleteTask = (taskId: string) => {
   if (taskIndex !== -1) {
     const deletedTaskDescription = allTasks.value[taskIndex].description;
     allTasks.value.splice(taskIndex, 1);
-    console.log(`Tarea eliminada: ${deletedTaskDescription}`);
+    notifyError('Tarea Eliminada', `"${deletedTaskDescription}" ha sido eliminada.`);
   }
 }
 
@@ -99,14 +113,14 @@ const startNewShift = (showAlert = true) => {
       `Esto archivará las tareas actuales. ¿Desea continuar?`
     );
     if (!confirmed) {
-      console.log("Inicio de nuevo turno cancelado por el usuario.");
+      notifyInfo('Acción Cancelada', 'Inicio de nuevo turno cancelado por el usuario.');
       return; // El usuario canceló, no hacer nada más.
     }
   }
   const newShiftId = `shift-${Date.now()}`; 
   currentShiftId.value = newShiftId;
   selectedShiftToView.value = 'current'; 
-  console.log(`Nuevo turno iniciado con ID: ${newShiftId} a las ${shiftStartTimeFormatted}`);
+  notifySuccess('Nuevo Turno Iniciado', `Turno comenzado a las ${shiftStartTimeFormatted}.`);
 }
 
 // Propiedad calculada para las tareas filtradas y ordenadas
@@ -176,7 +190,7 @@ const listTitle = computed(() => {
 
 const exportTasksToJson = () => {
   if (allTasks.value.length === 0) {
-    alert('No hay tareas para exportar.');
+    notifyWarning('Exportación Vacía', 'No hay tareas para exportar.');
     return;
   }
 
@@ -189,6 +203,7 @@ const exportTasksToJson = () => {
   linkElement.setAttribute('href', dataUri);
   linkElement.setAttribute('download', exportFileDefaultName);
   linkElement.click();
+  notifyInfo('Tareas Exportadas', `Archivo "${exportFileDefaultName}" generado.`);
   // No es necesario revocar el objeto URL con data URIs de esta manera.
   // document.body.removeChild(linkElement); // Opcional si se añade al body
 }
@@ -200,7 +215,7 @@ const triggerFileImport = () => {
 const importTasksFromJson = (event: Event) => {
   const fileInput = event.target as HTMLInputElement;
   if (!fileInput.files || fileInput.files.length === 0) {
-    alert('No se seleccionó ningún archivo.');
+    notifyWarning('Importación Fallida', 'No se seleccionó ningún archivo.');
     return;
   }
 
@@ -247,10 +262,9 @@ const importTasksFromJson = (event: Event) => {
         currentShiftId.value = null;
         selectedShiftToView.value = 'current';
       }
-      alert(`${validatedTasks.length} tareas importadas correctamente.`);
+      notifyInfo('Importación Exitosa', `${validatedTasks.length} tareas importadas correctamente.`);
     } catch (error) {
-      console.error('Error al importar tareas:', error);
-      alert(`Error al importar el archivo: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+      notifyError('Error de Importación', `Al procesar el archivo: ${error instanceof Error ? error.message : 'Error desconocido'}`);
     } finally {
       // Resetear el input de archivo para permitir importar el mismo archivo de nuevo si es necesario
       if (fileInput) fileInput.value = '';
@@ -258,7 +272,7 @@ const importTasksFromJson = (event: Event) => {
   };
 
   reader.onerror = () => {
-    alert('Error al leer el archivo.');
+    notifyError('Error de Lectura', 'Ocurrió un problema al leer el archivo seleccionado.');
     if (fileInput) fileInput.value = '';
   };
 
@@ -269,8 +283,9 @@ const deleteAllTasks = () => {
   if (window.confirm('¿Estás seguro de que quieres borrar TODAS las tareas? Esta acción no se puede deshacer.')) {
     allTasks.value = []; // Limpia la lista de tareas en la aplicación
     // localStorage.removeItem(LOCAL_STORAGE_KEY); // Esto también se manejará por el watch, pero podemos ser explícitos.
-    // El watch de allTasks se encargará de actualizar localStorage a un array vacío.
-    alert('Todas las tareas han sido eliminadas.');
+    notifyError('Borrado Completo', 'Todas las tareas han sido eliminadas.');
+  } else {
+    notifyInfo('Acción Cancelada', 'El borrado de tareas fue cancelado.');
   }
 }
 
@@ -298,9 +313,8 @@ onMounted(() => {
         // shiftId ya es string, isNotified ya es boolean (o debería serlo desde la importación)
       }))
     } catch (error) {
-      console.error('Error al parsear tareas desde localStorage:', error)
-      // Opcional: limpiar localStorage si los datos están corruptos
-      // localStorage.removeItem(LOCAL_STORAGE_KEY);
+      notifyError('Error de Carga', 'No se pudieron cargar las tareas guardadas. Podrían estar corruptas.');
+      console.error('Error al parsear tareas desde localStorage:', error);
     }
   }
 })
@@ -336,24 +350,40 @@ const selectShift = (shiftId: string | 'current') => {
 };
 
 const formatTaskForPlainText = (task: Task): string => {
-  const startTime = `⏰ ${task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-  const endTime = task.endTime ? `🏁 ${task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : '⏳ --:--';
+  const taskEmoji = '📝'; // Emoji de tarea
+  const technicianEmoji = '👷';
+  const notifiedEmoji = '✅';
+
+  const description = task.description;
+  const startTimeStr = task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const endTimeStr = task.endTime ? task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--';
+  
   let durationStr = '';
   if (task.endTime) {
     let endTimeMs = task.endTime.getTime();
     const startTimeMs = task.startTime.getTime();
-    if (endTimeMs < startTimeMs) { // Manejar tareas que cruzan la medianoche
+    // Manejar tareas que cruzan la medianoche (si endTimeMs es menor, pero el día es el mismo o siguiente)
+    // Esta lógica asume que si endTime es anterior a startTime, es del día siguiente si la duración es positiva.
+    // Para simplificar, si la fecha de endTime es la misma que startTime pero la hora es menor, se asume día siguiente.
+    // O si la fecha de endTime es un día después.
+    if (task.endTime.getDate() > task.startTime.getDate() || (task.endTime.getDate() === task.startTime.getDate() && endTimeMs < startTimeMs)) {
       endTimeMs += 24 * 60 * 60 * 1000;
     }
     const durationMs = endTimeMs - startTimeMs;
     const durationHours = durationMs / (1000 * 60 * 60);
     const roundedHours = Math.ceil(durationHours / 0.5) * 0.5;
-    durationStr = ` ⏱️ (${roundedHours.toFixed(1)} h)`;
+    durationStr = `(${roundedHours.toFixed(1)} h)`;
   }
-  const technician = task.technician ? ` 👷 ${task.technician}` : '';
-  const notified = task.isNotified ? ' ✅ Notificado SAP' : '';
-  
-  return `📝 ${startTime} a ${endTime}${durationStr}: ${task.description}${technician}${notified}`;
+
+  let taskString = `${taskEmoji} ${description} ${startTimeStr} a ${endTimeStr}${durationStr ? ' ' + durationStr : ''}`;
+
+  if (task.isNotified) {
+    taskString += `\nNotificado SAP ${notifiedEmoji}`;
+  }
+  if (task.technician) {
+    taskString += `\n${task.technician} ${technicianEmoji}`;
+  }
+  return taskString;
 }
 
 const shareShiftTasks = async () => {
@@ -381,20 +411,19 @@ const shareShiftTasks = async () => {
   }
 
   if (!shiftIdToShare) {
-    alert('No hay un turno seleccionado o activo para compartir.');
+    notifyWarning('Error al Compartir', 'No hay un turno seleccionado o activo para compartir.');
     return;
   }
 
   const tasksOfShift = allTasks.value.filter(task => task.shiftId === shiftIdToShare)
                                    .sort((a,b) => a.startTime.getTime() - b.startTime.getTime());
-
   if (tasksOfShift.length === 0) {
-    alert(`No hay tareas en el ${shiftLabel} para compartir.`);
+    notifyWarning('Nada que Compartir', `No hay tareas en el ${shiftLabel} para compartir.`);
     return;
   }
 
-  const title = `_*📋 Notificaciones del ${shiftLabel}*:_\n----------------------------------------------------\n\n`; // Título con asteriscos y emoji
-  const tasksText = tasksOfShift.map(formatTaskForPlainText).join('\n\n'); // Añadido un \n extra para doble salto de línea
+  const title = `_*📋 Notificaciones del ${shiftLabel}*:_\n\n`; // Título sin guiones, con doble salto de línea
+  const tasksText = tasksOfShift.map(formatTaskForPlainText).join('\n\n'); // Doble salto de línea entre tareas
   const fullText = title + tasksText;
 
   try {
@@ -403,16 +432,15 @@ const shareShiftTasks = async () => {
         title: `Notificaciones del ${shiftLabel}`,
         text: fullText,
       });
-      console.log('Tareas compartidas exitosamente.');
+      notifyInfo('Tareas Compartidas', 'Contenido enviado a la aplicación de compartir.');
     } else if (navigator.clipboard) {
       await navigator.clipboard.writeText(fullText);
-      alert('Tareas copiadas al portapapeles.');
+      notifyInfo('Tareas Copiadas', 'Contenido copiado al portapapeles.');
     } else {
-      alert('No se pudo compartir ni copiar. Tu navegador podría no ser compatible.');
+      notifyError('Error al Compartir', 'Tu navegador no soporta la función de compartir o copiar.');
     }
   } catch (err) {
-    console.error('Error al compartir/copiar tareas:', err);
-    alert('Ocurrió un error al intentar compartir o copiar las tareas.');
+    notifyError('Error al Compartir', 'Ocurrió un error al intentar la acción.');
   }
 }
 
@@ -425,7 +453,6 @@ const closeSideMenu = () => {
 };
 
 const handleMenuAction = (actionName: string) => {
-  console.log('Acción del menú:', actionName);
   switch (actionName) {
     case 'newShift':
       startNewShift();
@@ -443,7 +470,7 @@ const handleMenuAction = (actionName: string) => {
       deleteAllTasks();
       break;
     default:
-      console.warn('Acción de menú desconocida:', actionName);
+      notifyWarning('Acción Desconocida', `La acción de menú "${actionName}" no está implementada.`);
   }
   closeSideMenu(); // Cerrar el menú después de ejecutar la acción
 };
@@ -674,4 +701,12 @@ const handleMenuAction = (actionName: string) => {
     <!-- Input de archivo oculto (se mantiene ya que es funcional y no visual) -->
     <input type="file" ref="fileImportInputRef" @change="importTasksFromJson" accept=".json" class="hidden" />
   </main>
+
+  <!-- Componente Toaster para las notificaciones -->
+  <!-- Movido fuera de <main> para asegurar el posicionamiento fixed correcto -->
+  <Toaster
+    position="bottom-center"
+    richColors
+    closeButton
+  />
 </template>

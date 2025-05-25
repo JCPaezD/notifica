@@ -16,3 +16,135 @@
 .animate-bounce-out-left {
   animation: bounceOutLeft 0.4s ease-in-out forwards;
 }
+
+
+/* Forzar posicionamiento del contenedor de toasts vue-sonner */
+ol[data-sonner-toaster] {
+  position: fixed !important;
+  bottom: var(--offset-bottom, 16px) !important; /* Reducir un poco el offset inferior si es necesario */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 10000 !important; /* Asegurar que esté por encima de otros elementos, incluso el SideMenu (z-50) */
+  width: var(--width, 356px) !important; /* Usa la variable CSS de sonner o un fallback */
+  margin: 0 !important; /* Resetear márgenes por si acaso */
+  padding: 0 !important; /* Resetear paddings por si acaso */
+  list-style: none !important;
+  display: flex !important; /* Convertir en flex container */
+  flex-direction: column-reverse !important; /* Apilar toasts de abajo hacia arriba */
+  align-items: center !important; /* Centrar los toasts horizontalmente dentro del <ol> */
+  gap: var(--gap, 10px) !important; /* Espacio entre toasts, usando la variable de sonner o un fallback */
+}
+
+/* Ajustes personalizados para vue-sonner toasts */
+
+/* Contenedor principal de cada toast (el elemento <li>) */
+[data-sonner-toast] {
+  display: flex !important; /* Organiza los hijos directos (botón cierre, icono, contenido) en una fila */
+  align-items: flex-start !important; /* Alinear al inicio para que el botón de cierre no estire el toast si el texto es corto */
+  padding: 12px 16px !important; /* Ajusta el padding interno del toast */
+  gap: 10px !important; /* Espacio entre el botón de cierre, icono y contenido */
+  font-size: 14px !important; /* Tamaño de fuente base para el toast */
+  line-height: 1.4 !important; /* Interlineado */
+  border-radius: 8px !important; /* Esquinas redondeadas (tipo globo) */
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.35) !important; /* Sombra estándar, un poco más definida */
+  /* Ajuste del ancho: usar max-width y permitir que el ancho se ajuste al contenido hasta ese máximo */
+  width: 320px !important; /* Ancho fijo para cada toast */
+  /* max-width: 320px !important; Ya no es necesario si width es fijo */
+  /* richColors debería manejar el fondo. Si no, podría ser un problema de especificidad o carga de CSS. */
+  /* Aplicar animación de entrada personalizada */
+  animation: fadeInScale 0.3s ease-out forwards; /* 'forwards' para mantener el estado final */
+  background-color: #f0f0f0 !important; /* Fondo gris claro por defecto para todos los toasts */
+}
+
+/* Fondos específicos por tipo de toast (simulando richColors) */
+[data-sonner-toast][data-type="success"] {
+  background-color: #D1FAE5 !important; /* Un verde pastel, similar a Tailwind bg-green-100 */
+  color: #065F46 !important; /* Texto verde oscuro, similar a Tailwind text-green-800 */
+  border: 1px solid #A7F3D0 !important; /* Borde verde más claro */
+}
+
+[data-sonner-toast][data-type="error"] {
+  background-color: #FEE2E2 !important; /* Un rojo pastel, similar a Tailwind bg-red-100 */
+  color: #991B1B !important; /* Texto rojo oscuro, similar a Tailwind text-red-800 */
+  border: 1px solid #FECACA !important; /* Borde rojo más claro */
+}
+
+[data-sonner-toast][data-type="warning"] {
+  background-color: #FEF3C7 !important; /* Un amarillo pastel, similar a Tailwind bg-yellow-100 */
+  color: #92400E !important; /* Texto amarillo/marrón oscuro, similar a Tailwind text-yellow-800 */
+  border: 1px solid #FDE68A !important; /* Borde amarillo más claro */
+}
+
+[data-sonner-toast][data-type="info"] {
+  background-color: #DBEAFE !important; /* Un azul pastel, similar a Tailwind bg-blue-100 */
+  color: #1E40AF !important; /* Texto azul oscuro, similar a Tailwind text-blue-800 */
+  border: 1px solid #BFDBFE !important; /* Borde azul más claro */
+}
+
+
+
+/* Botón de cierre */
+[data-sonner-toast] > button[data-close-button] {
+  order: 2; /* Mueve el botón de cierre al final si se prefiere */
+  margin-left: auto; /* Empuja el botón de cierre a la derecha */
+  flex-shrink: 0;
+}
+
+/* Icono dentro del toast */
+[data-sonner-toast] > div[data-icon] {
+  flex-shrink: 0; /* Evita que el icono se encoja */
+  display: flex;
+  align-items: flex-start; /* Alinear el icono con la parte superior del texto */
+  justify-content: center;
+  /* El tamaño del SVG interno ya está definido (width/height="20"), así que esto debería ser suficiente */
+}
+
+/* Contenedor del título y la descripción */
+[data-sonner-toast] > div[data-content] {
+  flex-grow: 1; /* Permite que esta sección ocupe el espacio restante */
+  text-align: left; /* Asegurar alineación a la izquierda para título y descripción */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrar verticalmente el título y la descripción si hay espacio extra */
+}
+
+/* Título del toast */
+[data-sonner-toast] div[data-title] {
+  font-weight: 600 !important;
+  font-size: 1em !important; /* Relativo al font-size del toast padre */
+  margin-bottom: 2px !important; /* Pequeño espacio entre título y descripción */
+}
+
+/* Descripción del toast */
+[data-sonner-toast] div[data-description] {
+  font-size: 0.9em !important; /* Un poco más pequeño que el título */
+  white-space: normal !important;
+  opacity: 0.9;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animación de entrada personalizada para los toasts */
+[data-sonner-toast] {
+  animation: fadeInScale 0.3s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(0); /* Asegurar que translateY(0) de la prueba anterior no interfiera */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0); /* Asegurar que translateY(0) de la prueba anterior no interfiera */
+  }
+}
