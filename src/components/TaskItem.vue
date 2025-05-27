@@ -381,10 +381,9 @@ const handleDeleteTask = () => {
                     class="w-full px-2 py-0.5 
                            bg-status-alert text-text-on-pastel text-xs font-semibold
                            rounded-md <!-- hover:bg-red-400 eliminado -->
-                           focus:outline-none focus:ring-1 focus:ring-status-alert focus:ring-offset-1 
-                           transition-all duration-300 ease-in-out
-                           active:scale-95 transform
-                           flex items-center justify-center gap-1">
+                           focus:outline-none <!-- Anillos de foco eliminados -->
+                           transition-all duration-300 ease-in-out active:scale-95 transform [-webkit-tap-highlight-color:transparent]
+                           flex items-center justify-center gap-1 ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
                 <path d="M3.5 2.75a.75.75 0 00-1.5 0v14.5a.75.75 0 001.5 0v-4.392l1.657-.348a6.723 6.723 0 016.271 1.719 2.25 2.25 0 003.914 0 6.723 6.723 0 016.271-1.719l1.657.348A.75.75 0 0018 12.25v-2.5a.75.75 0 00-.501-.712l-1.657-.348a6.723 6.723 0 01-6.271-1.719A2.25 2.25 0 005.657 5.25a6.723 6.723 0 01-2.157-.442V2.75z" />
               </svg>
@@ -395,8 +394,7 @@ const handleDeleteTask = () => {
                            bg-status-active text-text-on-pastel text-xs font-semibold
                            rounded-md <!-- hover:bg-yellow-300 eliminado -->
                            focus:outline-none focus:ring-1 focus:ring-status-active focus:ring-offset-1 
-                           transition-all duration-300 ease-in-out 
-                           active:scale-95 transform
+                           transition-all duration-300 ease-in-out active:scale-95 transform
                            flex items-center justify-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
                 <path fill-rule="evenodd" d="M7.793 2.232a.75.75 0 01-.025 1.06L3.622 7.25h6.128a5.5 5.5 0 110 11H5.75a.75.75 0 010-1.5h3.999a4 4 0 100-8H3.622l4.146 4.023a.75.75 0 11-1.036 1.085l-5.5-5.25a.75.75 0 010-1.085l5.5-5.25a.75.75 0 011.06.025z" clip-rule="evenodd" />
