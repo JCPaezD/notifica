@@ -1,4 +1,6 @@
 import { toast, type ExternalToast } from 'vue-sonner' // Import ExternalToast
+// src/composables/useNotifications.ts
+// Composable para gestionar la visualización de notificaciones (toasts) utilizando vue-sonner.
 
 // Definimos tipos para los mensajes de notificación para consistencia
 type NotificationType = 'success' | 'error' | 'info' | 'warning' | 'normal' // 'action' type removed, as any toast can have an action
@@ -8,7 +10,11 @@ type NotificationType = 'success' | 'error' | 'info' | 'warning' | 'normal' // '
 // 'action', 'duration', 'className', 'onDismiss', etc., excluyendo las que manejamos explícitamente.
 type HelperToastOptions = Omit<ExternalToast, 'title' | 'description' | 'type'>;
 
+/**
+ * Composable que proporciona funciones para mostrar diferentes tipos de notificaciones (toasts).
+ */
 export function useNotifications() {
+  // Función interna genérica para mostrar una notificación.
   const showNotification = (
     type: NotificationType,
     title: string,
@@ -48,20 +54,46 @@ export function useNotifications() {
     return toastId
   }
 
-  // Funciones específicas para tipos comunes de notificaciones
-  // Now they can also accept additional options and will return the toastId
+  /**
+   * Muestra una notificación de éxito.
+   * @param title - El título de la notificación.
+   * @param description - (Opcional) La descripción de la notificación.
+   * @param opts - (Opcional) Opciones adicionales de vue-sonner.
+   * @returns El ID del toast generado.
+   */
   const notifySuccess = (title: string, description?: string, opts?: HelperToastOptions) => {
     return showNotification('success', title, { description, ...opts })
   }
 
+  /**
+   * Muestra una notificación de error.
+   * @param title - El título de la notificación.
+   * @param description - (Opcional) La descripción de la notificación.
+   * @param opts - (Opcional) Opciones adicionales de vue-sonner.
+   * @returns El ID del toast generado.
+   */
   const notifyError = (title: string, description?: string, opts?: HelperToastOptions) => {
     return showNotification('error', title, { description, ...opts })
   }
 
+  /**
+   * Muestra una notificación informativa.
+   * @param title - El título de la notificación.
+   * @param description - (Opcional) La descripción de la notificación.
+   * @param opts - (Opcional) Opciones adicionales de vue-sonner.
+   * @returns El ID del toast generado.
+   */
   const notifyInfo = (title: string, description?: string, opts?: HelperToastOptions) => {
     return showNotification('info', title, { description, ...opts })
   }
   
+  /**
+   * Muestra una notificación de advertencia.
+   * @param title - El título de la notificación.
+   * @param description - (Opcional) La descripción de la notificación.
+   * @param opts - (Opcional) Opciones adicionales de vue-sonner.
+   * @returns El ID del toast generado.
+   */
   const notifyWarning = (title: string, description?: string, opts?: HelperToastOptions) => {
     return showNotification('warning', title, { description, ...opts })
   }

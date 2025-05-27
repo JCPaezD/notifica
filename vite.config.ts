@@ -1,3 +1,7 @@
+// vite.config.ts
+// Archivo de configuración para Vite. Gestiona la configuración general del proyecto,
+// la configuración de la Progressive Web App (PWA) incluyendo el manifest y el service worker,
+// y la configuración de plugins como Vue DevTools y alias de rutas.
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
@@ -36,31 +40,30 @@ export default defineConfig({
             src: 'icons/icon-512x512.png', // Ruta relativa a la carpeta public
             sizes: '512x512',
             type: 'image/png'
+          },
+          {
+            src: 'icons/icon-maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable'
           }
+
         ],
         screenshots: [
           {
             "src": "screenshots/screenshot-desktop-1.png", // Ruta relativa a la carpeta public
-            "sizes": "1280x720", // Tamaño de tu captura de escritorio
+            "sizes": "571x794", // Tamaño de tu captura de escritorio
             "type": "image/png",
             "form_factor": "wide",
             "label": "Vista de Notifica en Escritorio"
           },
           {
             "src": "screenshots/screenshot-mobile-1.png", // Ruta relativa a la carpeta public
-            "sizes": "400x800", // Tamaño de tu captura móvil (ejemplo)
+            "sizes": "357x738", // Tamaño de tu captura móvil (ejemplo)
             "type": "image/png",
             "form_factor": "narrow",
             "label": "Vista de Notifica en Móvil"
           }
-          // Puedes añadir más capturas de pantalla aquí si lo deseas
-          // {
-          //   "src": "screenshots/screenshot-desktop-2.png",
-          //   "sizes": "1280x720",
-          //   "type": "image/png",
-          //   "form_factor": "wide",
-          //   "label": "Otra vista en Escritorio"
-          // }
         ]
       },
       workbox: {

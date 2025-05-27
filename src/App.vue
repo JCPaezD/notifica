@@ -1,38 +1,46 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch, nextTick } from 'vue' // Añadido nextTick
+// src/App.vue
+// Componente principal de la aplicación Notifica. Gestiona el estado global, la lógica de negocio y la renderización de los componentes UI.
+import { ref, computed, onMounted, watch, nextTick, onUnmounted } from 'vue' // Añadido onUnmounted
 import TaskList from './components/TaskList.vue' // Importar el nuevo componente
 import SideMenu from './components/SideMenu.vue' // Importar el menú lateral
 import { Toaster } from 'vue-sonner'
 import { useNotifications } from './composables/useNotifications'
 import type { Task } from './types/Task' // Importar la interfaz Task compartida
 
+// --- Estado para la creación de nuevas tareas ---
 const newTaskDescription = ref('')
 const newTaskTechnician = ref('')
 const descriptionTextareaRef = ref<HTMLTextAreaElement | null>(null) // Ref para el textarea de descripción
 const fileImportInputRef = ref<HTMLInputElement | null>(null) // Ref para el input de importación de archivos
-const allTasks = ref<Task[]>([]) // Renombrado de activeTasks a allTasks
 
-// Estados para los filtros
+// --- Estado principal de las tareas ---
+const allTasks = ref<Task[]>([]) // Almacena todas las tareas de la aplicación.
+
+// --- Estados para los filtros de visualización de tareas ---
 const showOnlyActive = ref(false) // Toggle: Mostrar solo activas
 const showOnlyNotNotified = ref(false) // Toggle: Mostrar solo sin notificar
 
+// --- Claves para LocalStorage ---
 const LOCAL_STORAGE_KEY = 'notifica-tasks'
 const CURRENT_SHIFT_ID_KEY = 'notifica-current-shift-id'
 
-// Gestión de Turnos
-const currentShiftId = ref<string | null>(null)
-const selectedShiftToView = ref<string | 'current'>('current') // 'current' o un shiftId específico
-const isShiftDropdownOpen = ref(false)
+// --- Gestión de Turnos ---
+const currentShiftId = ref<string | null>(null) // ID del turno actualmente activo.
+const selectedShiftToView = ref<string | 'current'>('current') // Turno seleccionado para visualización ('current' o un shiftId).
+const isShiftDropdownOpen = ref(false) // Controla la visibilidad del dropdown de selección de turno.
 
-const shiftDropdownButtonRef = ref<HTMLButtonElement | null>(null) // Ref para el botón del dropdown
+const shiftDropdownButtonRef = ref<HTMLButtonElement | null>(null) // Ref para el botón del dropdown de turnos.
+const shiftDropdownMenuRef = ref<HTMLDivElement | null>(null) // Ref para el menú del dropdown de turnos.
 
-// Estado para el menú lateral
-const isSideMenuOpen = ref(false)
-const taskListKey = ref(0); // Key para forzar la re-renderización de TaskList
+// --- Estado para el menú lateral ---
+const isSideMenuOpen = ref(false) // Controla la visibilidad del menú lateral.
+const taskListKey = ref(0); // Key para forzar la re-renderización de TaskList, útil tras ciertas operaciones.
 
-// Usar el composable de notificaciones
+// --- Composables ---
 const { notifySuccess, notifyError, notifyInfo, notifyWarning, dismissToast } = useNotifications()
 
+// Crea y añade una nueva tarea a la lista.
 const startNewTask = () => {
   if (newTaskDescription.value.trim() === '') {
     notifyWarning('Campo Requerido', 'Por favor, introduce una descripción para la tarea.')
@@ -40,6 +48,7 @@ const startNewTask = () => {
   }
 
   if (!currentShiftId.value) {
+    // Inicia un nuevo turno automáticamente si no hay uno activo, sin alerta.
     startNewShift(false); // Iniciar un nuevo turno automáticamente si no hay uno activo, sin alerta
   }
 
@@ -63,6 +72,7 @@ const startNewTask = () => {
   }
 }
 
+// Marca una tarea como finalizada, estableciendo su hora de finalización.
 const finishTask = (taskId: string) => {
   const task = allTasks.value.find(t => t.id === taskId)
   if (task) {
@@ -71,6 +81,7 @@ const finishTask = (taskId: string) => {
   }
 }
 
+// Actualiza los datos de una tarea existente.
 const updateTask = (updatedTask: Task) => {
   const taskIndex = allTasks.value.findIndex(t => t.id === updatedTask.id)
   if (taskIndex !== -1) {
@@ -92,6 +103,7 @@ const updateTask = (updatedTask: Task) => {
   }
 }
 
+// Reactiva una tarea que había sido finalizada, eliminando su hora de finalización.
 const reactivateTask = (taskId: string) => {
   const task = allTasks.value.find(t => t.id === taskId)
   if (task) {
@@ -100,6 +112,7 @@ const reactivateTask = (taskId: string) => {
   }
 }
 
+// Elimina una tarea de la lista, con opción de deshacer la acción.
 const deleteTask = (taskId: string) => {
   const taskIndex = allTasks.value.findIndex(t => t.id === taskId);
   if (taskIndex !== -1) {
@@ -133,6 +146,7 @@ const deleteTask = (taskId: string) => {
   }
 }
 
+// Inicia un nuevo turno. Archiva las tareas del turno anterior y establece un nuevo ID de turno.
 const startNewShift = (showAlert = true) => {
   const shiftStartTimeFormatted = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   
@@ -147,7 +161,7 @@ const startNewShift = (showAlert = true) => {
     );
     if (!confirmed) {
       notifyInfo('Acción Cancelada', 'Inicio de nuevo turno cancelado por el usuario.');
-      return; // El usuario canceló, no hacer nada más.
+      return;
     }
   }
   const newShiftId = `shift-${Date.now()}`; 
@@ -179,7 +193,7 @@ const startNewShift = (showAlert = true) => {
   );
 };
 
-// Propiedad calculada para las tareas filtradas y ordenadas
+// Propiedad computada: Filtra y ordena las tareas a mostrar según el turno seleccionado y los filtros activos.
 const filteredAndSortedTasks = computed(() => {
   let tasksToDisplay = [...allTasks.value];
   let targetShiftId: string | null | undefined = undefined;
@@ -210,6 +224,7 @@ const filteredAndSortedTasks = computed(() => {
   return tasksToDisplay.sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
 });
 
+// Propiedad computada: Genera una lista de turnos disponibles basados en los `shiftId` de las tareas.
 const availableShifts = computed(() => {
   const shiftIds = new Set<string>();
   allTasks.value.forEach(task => {
@@ -232,18 +247,20 @@ const availableShifts = computed(() => {
     .sort((a, b) => b.date.getTime() - a.date.getTime()); // Turnos más nuevos primero en el dropdown
 });
 
+// Propiedad computada: Determina el título a mostrar encima de la lista de tareas.
 const listTitle = computed(() => {
   if (selectedShiftToView.value === 'current') {
     if (currentShiftId.value) {
-      return ''; // Sin título para el turno actual
+      return ''; // No se muestra título para el turno actual activo.
     }
-    return ''; // Sin título si no hay turno activo y se ve "actual"
+    return ''; // No se muestra título si no hay turno activo y se está viendo "actual".
   }
   const selectedShift = availableShifts.value.find(s => s.id === selectedShiftToView.value);
-  // Punto 3: Mostrar el título del turno anterior que se está viendo.
-  return selectedShift ? `Viendo Turno: ${selectedShift.label}` : ''; // Sin título si no se encuentra el turno seleccionado
+  // Muestra el título del turno anterior que se está viendo.
+  return selectedShift ? `Viendo Turno: ${selectedShift.label}` : '';
 });
 
+// Exporta todas las tareas actuales a un archivo JSON.
 const exportTasksToJson = () => {
   if (allTasks.value.length === 0) {
     notifyWarning('Exportación Vacía', 'No hay tareas para exportar.');
@@ -260,14 +277,15 @@ const exportTasksToJson = () => {
   linkElement.setAttribute('download', exportFileDefaultName);
   linkElement.click();
   notifyInfo('Tareas Exportadas', `Archivo "${exportFileDefaultName}" generado.`);
-  // No es necesario revocar el objeto URL con data URIs de esta manera.
-  // document.body.removeChild(linkElement); // Opcional si se añade al body
+  // No es necesario revocar el objeto URL con data URIs.
 }
 
+// Dispara el click en el input de tipo "file" (oculto) para la importación de tareas.
 const triggerFileImport = () => {
   fileImportInputRef.value?.click(); // Simula un clic en el input de archivo oculto
 }
 
+// Procesa el archivo JSON seleccionado para importar tareas.
 const importTasksFromJson = (event: Event) => {
   const fileInput = event.target as HTMLInputElement;
   if (!fileInput.files || fileInput.files.length === 0) {
@@ -335,13 +353,14 @@ const importTasksFromJson = (event: Event) => {
   reader.readAsText(file);
 }
 
+// Elimina todas las tareas de la aplicación, con opción de deshacer.
 const deleteAllTasks = () => {
   if (window.confirm('¿Estás seguro de que quieres borrar TODAS las tareas? Esta acción no se puede deshacer.')) {
     const tasksBeforeDelete = JSON.parse(JSON.stringify(allTasks.value)); // Copia profunda de las tareas
 
     allTasks.value = []; // Limpia la lista de tareas en la aplicación
 
-    const toastId = notifyError( // Puedes cambiar a notifyWarning si lo prefieres
+    const toastId = notifyError(
       'Borrado Completo',
       'Todas las tareas han sido eliminadas.',
       {
@@ -374,7 +393,7 @@ const deleteAllTasks = () => {
   }
 };
 
-// Cargar tareas desde localStorage al montar el componente
+// Hook onMounted: Carga el ID del turno actual y las tareas desde localStorage al iniciar la aplicación.
 onMounted(() => {
   // Cargar currentShiftId
   const storedShiftId = localStorage.getItem(CURRENT_SHIFT_ID_KEY);
@@ -404,29 +423,33 @@ onMounted(() => {
   }
 })
 
-// Guardar tareas en localStorage cada vez que allTasks cambie
+// Watcher: Guarda todas las tareas en localStorage cada vez que el array `allTasks` cambia.
 watch(allTasks, (newTasks) => {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks))
 }, { deep: true }) // deep: true es crucial para observar cambios dentro de los objetos del array
 
-// Guardar currentShiftId en localStorage cada vez que cambie
+// Watcher: Guarda el ID del turno actual en localStorage cada vez que `currentShiftId` cambia.
 watch(currentShiftId, (newShiftId) => {
   if (newShiftId) localStorage.setItem(CURRENT_SHIFT_ID_KEY, newShiftId);
   else localStorage.removeItem(CURRENT_SHIFT_ID_KEY); // Si no hay turno activo, quitarlo
 })
 
+// Cambia la vista para mostrar las tareas del turno actual.
 const returnToCurrentShift = () => {
   selectedShiftToView.value = 'current';
 }
 
+// Propiedad computada: Indica si el usuario está actualmente viendo un turno pasado.
 const isViewingPastShift = computed(() => {
   return selectedShiftToView.value !== 'current';
 });
 
+// Alterna la visibilidad del dropdown de selección de turno.
 const toggleShiftDropdown = () => {
   isShiftDropdownOpen.value = !isShiftDropdownOpen.value;
 };
 
+// Selecciona un turno para visualizar y cierra el dropdown.
 const selectShift = (shiftId: string | 'current') => {
   selectedShiftToView.value = shiftId;
   isShiftDropdownOpen.value = false;
@@ -434,6 +457,34 @@ const selectShift = (shiftId: string | 'current') => {
   // shiftDropdownButtonRef.value?.focus(); 
 };
 
+// Maneja los clics fuera del dropdown de turnos para cerrarlo.
+const handleClickOutsideShiftDropdown = (event: MouseEvent) => {
+  if (isShiftDropdownOpen.value) {
+    const target = event.target as Node;
+    const isClickOnButton = shiftDropdownButtonRef.value?.contains(target);
+    const isClickOnMenu = shiftDropdownMenuRef.value?.contains(target);
+
+    if (!isClickOnButton && !isClickOnMenu) {
+      isShiftDropdownOpen.value = false;
+    }
+  }
+};
+
+// Watcher: Añade o elimina el event listener para clics fuera del dropdown según su estado de apertura.
+watch(isShiftDropdownOpen, (isOpen) => {
+  if (isOpen) {
+    document.addEventListener('mousedown', handleClickOutsideShiftDropdown);
+  } else {
+    document.removeEventListener('mousedown', handleClickOutsideShiftDropdown);
+  }
+});
+
+// Hook onUnmounted: Limpia el event listener al desmontar el componente.
+onUnmounted(() => {
+  document.removeEventListener('mousedown', handleClickOutsideShiftDropdown);
+});
+
+// Formatea una tarea individual como una cadena de texto plano para compartir.
 const formatTaskForPlainText = (task: Task): string => {
   const taskEmoji = '📝'; // Emoji de tarea
   const technicianEmoji = '👷';
@@ -471,6 +522,7 @@ const formatTaskForPlainText = (task: Task): string => {
   return taskString;
 }
 
+// Prepara y comparte (vía API Web Share o portapapeles) las tareas del turno seleccionado.
 const shareShiftTasks = async () => {
   let shiftIdToShare: string | null | undefined = undefined;
   let shiftLabel = "Turno Actual";
@@ -529,14 +581,17 @@ const shareShiftTasks = async () => {
   }
 }
 
+// Abre el menú lateral.
 const openSideMenu = () => {
   isSideMenuOpen.value = true;
 };
 
+// Cierra el menú lateral.
 const closeSideMenu = () => {
   isSideMenuOpen.value = false;
 };
 
+// Maneja las acciones emitidas desde el SideMenu.
 const handleMenuAction = (actionName: string) => {
   switch (actionName) {
     case 'newShift':
@@ -635,7 +690,7 @@ const handleMenuAction = (actionName: string) => {
               class="w-full px-3 py-1.5 
                     bg-accent-main text-text-on-pastel font-semibold 
                     rounded-md shadow-sm hover:bg-accent-main/80 
-                    focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2
+                    focus:outline-none active:scale-95
                     transition-all duration-300 ease-in-out 
                     flex items-center justify-center gap-2 text-sm"
             >
@@ -707,8 +762,8 @@ const handleMenuAction = (actionName: string) => {
           @click="toggleShiftDropdown"
           type="button"
           class="inline-flex items-center justify-center w-[72px] 
-                rounded-md border border-slate-300 bg-white px-2 py-2 text-xs font-medium text-text-main shadow-sm hover:bg-slate-50 
-                focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-1 transition-all duration-300 ease-in-out"
+                rounded-md border border-slate-300 bg-white px-2 py-2 text-xs font-medium text-text-main shadow-sm hover:bg-slate-50
+                focus:outline-none transition-all duration-300 ease-in-out active:scale-95"
           aria-haspopup="true"
           :aria-expanded="isShiftDropdownOpen"
         >
@@ -720,6 +775,7 @@ const handleMenuAction = (actionName: string) => {
 
         <div
           v-if="isShiftDropdownOpen"
+          ref="shiftDropdownMenuRef"
           class="absolute left-0 z-10 mt-2 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-60 overflow-y-auto"
           role="menu"
           aria-orientation="vertical"
@@ -752,8 +808,8 @@ const handleMenuAction = (actionName: string) => {
           <button 
             @click="showOnlyActive = !showOnlyActive" 
             :class="{'bg-accent-main': showOnlyActive, 'bg-slate-300': !showOnlyActive}"
-            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent 
-                  transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2"
+            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent
+                  transition-colors ease-in-out duration-200 focus:outline-none"
             role="switch" 
             :aria-checked="showOnlyActive"
           >
@@ -771,8 +827,8 @@ const handleMenuAction = (actionName: string) => {
           <button 
             @click="showOnlyNotNotified = !showOnlyNotNotified" 
             :class="{'bg-accent-main': showOnlyNotNotified, 'bg-slate-300': !showOnlyNotNotified}"
-            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent 
-                  transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-accent-main focus:ring-offset-2"
+            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent
+                  transition-colors ease-in-out duration-200 focus:outline-none"
             role="switch" 
             :aria-checked="showOnlyNotNotified"
           >

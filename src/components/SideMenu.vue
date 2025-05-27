@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// src/components/SideMenu.vue
+// Componente del menú lateral deslizable que ofrece acciones rápidas para la aplicación.
 import { ref, watch } from 'vue'
 import {
   Dialog,
@@ -9,6 +11,7 @@ import {
 } from '@headlessui/vue'
 
 // Props
+// `isOpen`: Controla la visibilidad del menú lateral.
 const props = defineProps({
   isOpen: {
     type: Boolean,
@@ -16,37 +19,43 @@ const props = defineProps({
   },
 })
 
-// Emits
+// Emits:
+// `close`: Evento emitido para solicitar el cierre del menú.
+// `action`: Evento emitido cuando se selecciona una acción del menú, con el nombre de la acción como payload.
 const emit = defineEmits(['close', 'action'])
 
-const isAnimatingOut = ref(false)
+const isAnimatingOut = ref(false) // Estado para controlar la animación de salida del menú.
 
+// Inicia la animación de cierre del menú.
 const closeMenu = () => {
   isAnimatingOut.value = true
   // emit('close') se llamará en handleAnimationEnd
-  }
+}
 
+// Emite la acción seleccionada y luego inicia el cierre del menú.
 const handleAction = (actionName: string) => {
   emit('action', actionName)
   closeMenu() // Iniciar animación de cierre después de una acción
 }
 
+// Maneja el final de la animación CSS. Emite 'close' si la animación de salida ha terminado.
 const handleAnimationEnd = () => {
   // Asegurarnos de que esto solo se ejecute para la animación de cierre
   if (isAnimatingOut.value) {
     // No resetear isAnimatingOut aquí.
     // Esto mantiene la clase de animación aplicada mientras el diálogo se oculta.
-    emit('close') // Ahora emitimos close para que el v-if/show lo oculte
+    emit('close') // Emitir 'close' para que el componente padre oculte el menú.
   }
 }
 
+// Observa cambios en la prop `isOpen`.
+// Si el menú se abre, resetea el estado de la animación de salida.
 watch(() => props.isOpen, (newValue, oldValue) => {
   if (newValue && !oldValue) {
     // Si el menú se está abriendo (isOpen cambió de false a true)
     isAnimatingOut.value = false // Reseteamos el estado de la animación de salida
   }
 })
-
 </script>
 
 <template>
@@ -193,7 +202,7 @@ watch(() => props.isOpen, (newValue, oldValue) => {
                     src="/assets/logo-header.png" 
                     alt="Logo Notifica" 
                     class="w-4 h-4" />
-                  <p class="text-[11px] text-slate-400/80">Notifica v0.1.0 - JCPD 2025</p>
+                  <p class="text-[11px] text-slate-400/80">Notifica v1.0.0 - JCPD 2025</p>
                 </div>
               </div>
             </DialogPanel>

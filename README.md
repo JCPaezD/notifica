@@ -1,33 +1,88 @@
-# notifica
+<p align="center">
+  <img src="./docs/header-banner.png" alt="Notifica" />
+</p>
 
-This template should help get you started developing with Vue 3 in Vite.
+# Notifica
 
-## Recommended IDE Setup
+Aplicación web progresiva (PWA) para registrar tareas técnicas durante la jornada laboral, con uso optimizado desde el móvil, funcionamiento 100% offline, y diseño cuidado y accesible.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 📱 Características principales
 
-## Type Support for `.vue` Imports in TS
+* Registro ágil de avisos y tareas por turno
+* Sincronización offline con almacenamiento local
+* Filtros por turno, estado y notificación
+* Edición inline, eliminación y reactivación de tareas
+* Notificaciones tipo toast con opción de "Deshacer"
+* Exportación para compartir con compañeros
+* Modo PWA instalable (Android, iOS, escritorio)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## 🖼️ Vista previa
 
-## Customize configuration
+<p align="center">
+  <img src="./public/screenshots/screenshot-mobile-1.png" alt="Vista móvil" width="250"/>
+  <img src="./public/screenshots/screenshot-desktop-1.png" alt="Vista escritorio" width="450"/>
+</p> de avisos y tareas por turno
+- Sincronización offline con almacenamiento local
+- Filtros por turno, estado y notificación
+- Edición inline, eliminación y reactivación de tareas
+- Notificaciones tipo toast con opción de "Deshacer"
+- Exportación para compartir con compañeros
+- Modo PWA instalable (Android, iOS, escritorio)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## 🚀 Tecnologías utilizadas
 
-## Project Setup
+* [Vue 3](https://vuejs.org/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [Vite](https://vitejs.dev/)
+* [vue-sonner](https://github.com/emilkowal/vue-sonner) para notificaciones
 
-```sh
+## 📦 Instalación y uso
+
+```bash
 npm install
+npm run dev     # para desarrollo local
+npm run build   # para versión de producción
+npm run preview # para test de producción local
 ```
 
-### Compile and Hot-Reload for Development
+## 🌐 Uso como PWA
 
-```sh
-npm run dev
+* Instalación desde Chrome (Android o Escritorio)
+* Funciona offline tras primera carga
+* Guarda tareas localmente entre sesiones
+* Splash screen personalizado y soporte para icono maskable en Android
+
+## 🛠️ Estructura del código (para desarrolladores)
+
+```
+src/
+├─ components/         → Componentes visuales (SideMenu, TaskItem, etc.)
+├─ composables/        → Lógica reutilizable (useNotifications, etc.)
+├─ types/              → Definiciones TypeScript personalizadas
+├─ utils/              → Utilidades generales
+public/
+├─ icons/              → Iconos para manifest.json (maskable incluido)
+├─ screenshots/        → Capturas para documentación y manifest
+docs/
 ```
 
-### Type-Check, Compile and Minify for Production
+## 📊 Auditoría Lighthouse
 
-```sh
-npm run build
-```
+![Auditoría Lighthouse](./docs/lighthouse-scores.png)
+
+* Rendimiento: 99
+* Accesibilidad: 90
+* Prácticas recomendadas: 100
+* SEO: 83
+
+## 🧪 Pruebas en dispositivos
+
+* ✅ Chrome (Windows) — Instalación y funcionamiento offline
+* ✅ Android (Chrome) — Instalación y funcionamiento offline
+* ✅ iOS (Safari) — Instalación y funcionamiento offline
+
+## ⚖️ Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT.
+Consulta el archivo [LICENSE](./LICENSE) para más detalles.

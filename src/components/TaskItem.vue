@@ -1,8 +1,12 @@
 <script setup lang="ts">
+// src/components/TaskItem.vue
+// Componente que representa un único elemento de tarea en la lista.
+// Permite la visualización, edición y gestión de estados de una tarea individual.
 import type { PropType } from 'vue'
 import { computed, ref, nextTick, watch } from 'vue'
 import type { Task } from '../types/Task' // Importar la interfaz Task compartida
 
+// Props del componente.
 const props = defineProps({
   task: {
     type: Object as PropType<Task>,
@@ -18,30 +22,33 @@ const props = defineProps({
   },
 })
 
+// Emits para comunicar acciones al componente padre (TaskList.vue).
 const emit = defineEmits(['finish-task', 'update-task', 'reactivate-task', 'delete-task'])
 
 /**
  * Emite un evento para finalizar la tarea actual.
  */
 const handleFinishTask = () => {
-  emit('finish-task', props.task.id) // Emitir con el ID de la tarea
+  emit('finish-task', props.task.id)
 };
  
-// Estado y lógica para la edición de la descripción
+// --- Estados y refs para la edición en línea de los campos de la tarea ---
+// Descripción
 const isEditingDescription = ref(false)
 const editableDescription = ref('')
 const descriptionInputRef = ref<HTMLInputElement | null>(null)
 
-// Estado y lógica para la edición de la hora de inicio
+// Hora de inicio
 const isEditingStartTime = ref(false)
 const editableStartTime = ref('') // Formato HH:MM
 const startTimeInputRef = ref<HTMLInputElement | null>(null)
 
-// Estado y lógica para la edición de la hora de finalización
+// Hora de finalización
 const isEditingEndTime = ref(false)
 const editableEndTime = ref('') // Formato HH:MM
 const endTimeInputRef = ref<HTMLInputElement | null>(null)
-// Estado y lógica para la edición del técnico
+
+// Técnico
 const isEditingTechnician = ref(false)
 const editableTechnician = ref('')
 const technicianInputRef = ref<HTMLInputElement | null>(null) 
@@ -49,6 +56,8 @@ const notifiedIconBtnRef = ref<HTMLButtonElement | null>(null)
 const pendingEditEndTimeAfterFinalize = ref(false)
 
 /**
+ * --- Funciones de Edición (Continuación) ---
+ * --- Funciones de Edición ---
  * Inicia el modo de edición para la descripción de la tarea.
  */
 const startEditDescription = () => {
@@ -72,10 +81,10 @@ const saveDescription = () => {
   isEditingDescription.value = false
 }
 
-const cancelEditDescription = () => { // Para la tecla Escape
-  /**
-   * Cancela la edición de la descripción.
-   */
+/**
+ * Cancela la edición de la descripción (usado, por ejemplo, con la tecla Escape).
+ */
+const cancelEditDescription = () => {
   isEditingDescription.value = false
   // No es necesario revertir editableDescription, se reiniciará la próxima vez
 }
@@ -179,6 +188,7 @@ const saveEndTime = () => {
 }
 
 /**
+ * --- Otras Funciones de Tarea ---
  * Emite un evento para reactivar la tarea actual.
  */
 const handleReactivateTask = () => {
@@ -186,7 +196,8 @@ const handleReactivateTask = () => {
 }
 
 /**
- * Inicia el proceso de finalizar la tarea y luego editar la hora de finalización.
+ * Inicia el proceso de finalizar la tarea. Si la tarea se finaliza con éxito,
+ * se activará el modo de edición para la hora de finalización a través de un watcher.
  */
 const handleFinalizeAndEditEndTime = () => {
   if (!props.task.endTime) { // Solo si la tarea no está ya finalizada
@@ -196,6 +207,7 @@ const handleFinalizeAndEditEndTime = () => {
 }
 
 /**
+ * --- Propiedades Computadas ---
  * Calcula y formatea la duración de la tarea.
  * Considera tareas que cruzan la medianoche.
  */
@@ -232,6 +244,9 @@ const formattedDuration = computed(() => {
   return `${displayHours} h`
 });
 
+/**
+ * Determina la clase de color de fondo para la barra de estado según el estado de la tarea.
+ */
 const statusColorClass = computed(() => {
   if (props.task.isNotified) {
     return 'bg-emerald-300'; // Notificada
@@ -242,6 +257,10 @@ const statusColorClass = computed(() => {
   return 'bg-slate-300'; // En curso (ni finalizada ni notificada)
 });
 
+/**
+ * Genera las clases dinámicas para la barra de estado vertical,
+ * aplicando bordes redondeados si es el primer o último elemento de la lista.
+ */
 const statusBarDynamicClasses = computed(() => {
   const classes = [statusColorClass.value];
   if (props.isFirst) {
@@ -255,6 +274,11 @@ const statusBarDynamicClasses = computed(() => {
   return classes;
 });
 
+/**
+ * --- Watchers ---
+ * Observa cambios en `props.task.endTime`. Si la tarea se acaba de finalizar
+ * y se había indicado `pendingEditEndTimeAfterFinalize`, inicia la edición de la hora de finalización.
+ */
 watch(() => props.task.endTime, (newEndTime, oldEndTime) => {
   if (pendingEditEndTimeAfterFinalize.value && newEndTime && (oldEndTime === undefined || oldEndTime === null)) {
     // La tarea se acaba de finalizar (endTime pasó de nulo/undefined a tener valor)
@@ -265,6 +289,7 @@ watch(() => props.task.endTime, (newEndTime, oldEndTime) => {
 });
 
 /**
+ * --- Funciones de Interacción Adicionales ---
  * Cambia el estado de 'notificado' de la tarea.
  */
 const toggleNotifiedStatus = () => {
