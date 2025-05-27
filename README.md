@@ -27,13 +27,7 @@ Aplicación web progresiva (PWA) para registrar tareas técnicas durante la jorn
 <p align="center">
   <img src="./public/screenshots/screenshot-mobile-1.png" alt="Vista móvil" width="250"/>
   <img src="./public/screenshots/screenshot-desktop-1.png" alt="Vista escritorio" width="450"/>
-</p> de avisos y tareas por turno
-- Sincronización offline con almacenamiento local
-- Filtros por turno, estado y notificación
-- Edición inline, eliminación y reactivación de tareas
-- Notificaciones tipo toast con opción de "Deshacer"
-- Exportación para compartir con compañeros
-- Modo PWA instalable (Android, iOS, escritorio)
+</p>
 
 ## 🚀 Tecnologías utilizadas
 
