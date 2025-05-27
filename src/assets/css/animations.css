@@ -46,7 +46,7 @@ ol[data-sonner-toaster] {
   font-size: 14px !important; /* Tamaño de fuente base para el toast */
   line-height: 1.4 !important; /* Interlineado */
   border-radius: 8px !important; /* Esquinas redondeadas (tipo globo) */
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.35) !important; /* Sombra estándar, un poco más definida */
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25) !important; /* Sombra estándar, un poco más definida */
   /* Ajuste del ancho: usar max-width y permitir que el ancho se ajuste al contenido hasta ese máximo */
   width: 320px !important; /* Ancho fijo para cada toast */
   /* max-width: 320px !important; Ya no es necesario si width es fijo */

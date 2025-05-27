@@ -379,8 +379,8 @@ const handleDeleteTask = () => {
           >
             <button v-if="!task.endTime" @click="handleFinishTask" 
                     class="w-full px-2 py-0.5 
-                           bg-status-alert text-text-on-pastel text-xs font-semibold 
-                           rounded-md hover:bg-red-400 
+                           bg-status-alert text-text-on-pastel text-xs font-semibold
+                           rounded-md <!-- hover:bg-red-400 eliminado -->
                            focus:outline-none focus:ring-1 focus:ring-status-alert focus:ring-offset-1 
                            transition-all duration-300 ease-in-out
                            active:scale-95 transform
@@ -392,8 +392,8 @@ const handleDeleteTask = () => {
             </button>
             <button v-else @click="handleReactivateTask" 
                     class="w-full px-2 py-0.5 
-                           bg-status-active text-text-on-pastel text-xs font-semibold 
-                           rounded-md hover:bg-yellow-300 
+                           bg-status-active text-text-on-pastel text-xs font-semibold
+                           rounded-md <!-- hover:bg-yellow-300 eliminado -->
                            focus:outline-none focus:ring-1 focus:ring-status-active focus:ring-offset-1 
                            transition-all duration-300 ease-in-out 
                            active:scale-95 transform

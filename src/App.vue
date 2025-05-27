@@ -569,11 +569,10 @@ const handleMenuAction = (actionName: string) => {
     @close="closeSideMenu"
     @action="handleMenuAction" />
   
-    <header class="w-full max-w-lg mx-auto flex items-center justify-between pt-4 px-4 md:px-0">
+    <header class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0"> <!-- Añadido pb-4 -->
     <button
       @click="openSideMenu"
-      class="p-2 rounded-md hover:bg-slate-200 focus:outline-none 
-             focus:ring-2 focus:ring-accent-main"
+      class="absolute left-4 top-4.5 p-1 rounded-md border border-slate-300 hover:bg-slate-200 focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
       aria-label="Abrir menú"
     >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-text-main">
@@ -582,11 +581,10 @@ const handleMenuAction = (actionName: string) => {
     </button>
     
     <!-- Contenedor del título y logo, centrado -->
-    <div class="flex items-center gap-x-3">
+    <div class="flex items-center gap-x-2"> <!-- Reducido el gap de 3 a 2 -->
       <img src="/assets/logo-header.png" alt="Logo Notifica" class="h-8 w-auto"> <!-- Logo con extensión corregida -->
       <h1 class="text-4xl font-extrabold tracking-tight text-text-main">Notifica</h1> <!-- Título agrandado -->
     </div>
-    <div class="w-[28px]"></div> <!-- Espaciador ajustado al nuevo tamaño del botón de hamburguesa (w-7 es 1.75rem = 28px) -->
   </header>
   
     <main class="min-h-screen bg-app-bg text-text-main flex flex-col items-center pt-4 px-4"> <!-- pt aún más reducido -->

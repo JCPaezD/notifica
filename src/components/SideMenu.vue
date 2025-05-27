@@ -90,8 +90,8 @@ watch(() => props.isOpen, (newValue, oldValue) => {
                 <span>Acciones</span>
                 <button
                   @click="closeMenu"
-                  class="p-1 rounded-md hover:bg-slate-100
-                         focus:outline-none"
+                  class="p-1 rounded-md border border-slate-300 hover:bg-slate-200
+                         focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
                   aria-label="Cerrar menú"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-text-main">
