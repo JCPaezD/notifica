@@ -2,6 +2,12 @@
   <img src="./docs/header-banner.png" alt="Notifica" />
 </p>
 
+<p align="center">
+  <a href="https://notifica-kappa.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Demo%20en%20Vercel-Click%20para%20probar-blue?style=for-the-badge" alt="Demo en Vercel" />
+  </a>
+</p>
+
 # Notifica
 
 Aplicación web progresiva (PWA) para registrar tareas técnicas durante la jornada laboral, con uso optimizado desde el móvil, funcionamiento 100% offline, y diseño cuidado y accesible.
