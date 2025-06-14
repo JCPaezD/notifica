@@ -82,6 +82,18 @@ docs/
 * ✅ Android (Chrome) — Instalación y funcionamiento offline
 * ✅ iOS (Safari) — Instalación y funcionamiento offline
 
+## 📱 Versión Android (APK)
+
+Notifica también está disponible como aplicación Android, gracias a la integración con Capacitor.
+
+La versión APK es funcionalmente idéntica a la versión PWA, pero se comporta como una app nativa:
+* Se instala como aplicación completa desde archivo `.apk`
+* Incluye icono personalizado, splash screen y diseño adaptado a móviles
+* Integra barra de estado en color compatible con el diseño de la app
+* Es independiente de la versión PWA, permitiendo mantener ambas instaladas
+
+Todo el código fuente de la app, incluyendo la plataforma Android, está disponible en este repositorio.
+
 ## ⚖️ Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT.

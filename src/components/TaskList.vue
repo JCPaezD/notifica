@@ -1,29 +1,40 @@
 <script setup lang="ts">
+// src/components/TaskList.vue
+// Componente que muestra una lista de tareas.
+// Recibe un array de tareas y un título opcional, y renderiza cada tarea usando TaskItem.
 import type { PropType } from 'vue'
 import TaskItem from './TaskItem.vue'
 import type { Task } from '../types/Task'
 
+// Props del componente.
 const props = defineProps({
+  // Array de objetos Task a mostrar.
   tasks: {
     type: Array as PropType<Task[]>,
     required: true,
   },
+  // Título opcional a mostrar encima de la lista de tareas.
   title: {
     type: String,
     default: 'Lista de Tareas' // Título por defecto si no se proporciona
   }
 })
 
+// Emits para comunicar acciones al componente padre (App.vue).
+// Estos eventos son retransmitidos desde los componentes TaskItem.
 const emit = defineEmits(['finish-task', 'update-task', 'reactivate-task', 'delete-task'])
 
+// Retransmite el evento 'finish-task' desde TaskItem al padre.
 const relayFinishTask = (taskId: string) => {
   emit('finish-task', taskId)
 }
 
+// Retransmite el evento 'update-task' desde TaskItem al padre.
 const relayUpdateTask = (updatedTask: Task) => {
   emit('update-task', updatedTask)
 }
 
+// Retransmite el evento 'reactivate-task' desde TaskItem al padre.
 const relayReactivateTask = (taskId: string) => {
   emit('reactivate-task', taskId)
 }

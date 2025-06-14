@@ -141,3 +141,8 @@ coverage/
 dev-dist/
 .vscode/
 
+# Capacitor / Android
+android/.gradle/
+android/app/build/
+android/.idea/
+*.apk
