@@ -169,7 +169,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 - [ ] 🤖 Exportar, firmar y publicar versión Android nativa (Capacitor + Android Studio)
 
-  - [ ] 📦 Generar y probar APK sin firmar
+  - [x] 📦 Generar y probar APK sin firmar
     - [x] Ejecutar `npx cap add android` y abrir proyecto en Android Studio
     - [x] Hacer build de producción (`npm run build`) y copiarlo con `npx cap copy`
     - [x] Generar APK sin firmar desde Android Studio (modo debug)
@@ -193,12 +193,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Opcional: configurar previsualizaciones automáticas en Vercel desde `develop` (si se necesita testing web)
     - [x] Documentar en README el flujo de trabajo con ramas para futuros cambios
 
-  - [ ] 🔐 Generar y aplicar firma de aplicación (APK firmado)
-    - [ ] Crear un `keystore` persistente para la app (`.jks`) y guardar copia segura
-    - [ ] Configurar firma en Android Studio (`build.gradle`) con ese keystore
-    - [ ] Generar APK o App Bundle (`.aab`) firmada y lista para distribución
-    - [ ] Verificar que se instala correctamente en el dispositivo
-    - [ ] Confirmar que el keystore se conserva para futuras actualizaciones
+  - [x] 🔐 Generar y aplicar firma de aplicación (APK firmado)
+    - [x] Crear un `keystore` persistente para la app (`.jks`) y guardar copia segura
+    - [x] Configurar firma en Android Studio (`build.gradle`) con ese keystore
+    - [x] Generar APK o App Bundle (`.aab`) firmada y lista para distribución
+    - [x] Verificar que se instala correctamente en el dispositivo
+    - [x] Confirmar que el keystore se conserva para futuras actualizaciones
 
   - [ ] 🧪 Verificar versión firmada y preparada para futuras actualizaciones
     - [ ] Aumentar `versionCode` y `versionName` en `build.gradle` con cada nueva versión
@@ -208,27 +208,28 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] 🧼 Revisión de metadata y configuración para distribución
     - [ ] Verificar que `manifest.json` tiene `display: standalone`, nombre corto, descripción, idioma, `theme_color`, `background_color`, etc.
     - [ ] Confirmar que los íconos son adecuados y `maskable` (Android)
-    - [ ] Definir nombre visible y nombre de paquete (`com.tu.nombre`)
+    - [x] Definir nombre visible y nombre de paquete (`com.tu.nombre`)
     - [ ] Eliminar permisos innecesarios y asegurar comportamiento offline
     - [ ] Incluir capturas, ícono de app y descripción lista para Play Store
 
-  - [ ] 🛡 Crear cuenta de desarrollador Google Play
+  - [x] 🛡 Crear cuenta de desarrollador Google Play
     - [x] Acceder a https://play.google.com/console/ y registrarse como desarrollador individual
     - [x] Pagar la tasa única de 25 USD
-    - [ ] Aceptar términos y configurar perfil de cuenta. Completar verificaciones.
+    - [x] Aceptar términos y configurar perfil de cuenta. Completar verificaciones.
 
-  - [ ] 🚦 Subir app en canal de testing privado en Google Play
-    - [ ] Generar `.aab` y subirlo a Play Console
-    - [ ] Crear listado de testers (emails) o compartir enlace de testing interno
-    - [ ] Especificar versión, notas de cambio, idioma, categoría, etc.
-    - [ ] Habilitar feedback de testing si se desea
-    - [ ] Instalar desde Play Store en dispositivo real y verificar funcionamiento completo
+  - [x] 🚦 Subir app en canal de testing privado en Google Play
+    - [x] Generar `.aab` y subirlo a Play Console *(listo para subir)*
+    - [x] Crear listado de testers (emails) o compartir enlace de testing interno
+    - [x] Especificar versión, notas de cambio, idioma, categoría, etc.
+    - [x] Habilitar feedback de testing si se desea
+    - [x] Instalar desde Play Store en dispositivo real y verificar funcionamiento completo
 
   - [ ] 🚀 Publicar app en canal público de Google Play
     - [ ] Completar ficha de Play Store: nombre, descripción, capturas, privacidad, contacto, categoría, rating, política de datos
     - [ ] Revisar que cumple todas las políticas de contenido y permisos
     - [ ] Enviar para revisión y esperar validación de Google
     - [ ] Una vez aprobada, confirmar que está disponible públicamente en Play Store
+    
 ---
 
 - [ ] 🕛 Corrección automática de fecha en tareas creadas o editadas cerca de medianoche
