@@ -186,12 +186,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Botones e interacción general
       - [ ] Ajustes para safe areas, notch y barras flotantes (pendiente de revisión en detalle)
 
-  - [ ] 🪢 Separar ramas de desarrollo y producción en el repositorio
+  - [x] 🪢 Separar ramas de desarrollo y producción en el repositorio
     - [x] Crear rama `main` dedicada a versiones estables y producción (APK/Play Store)
     - [x] Crear rama `develop` para implementar nuevas características y mejoras sin afectar usuarios finales
-    - [ ] Configurar flujos de merge (PRs o manual) para que los cambios se validen antes de llegar a `main`
+    - [x] Configurar flujos de merge (PRs o manual) para que los cambios se validen antes de llegar a `main`
     - [x] Opcional: configurar previsualizaciones automáticas en Vercel desde `develop` (si se necesita testing web)
-    - [ ] Documentar en README el flujo de trabajo con ramas para futuros cambios
+    - [x] Documentar en README el flujo de trabajo con ramas para futuros cambios
 
   - [ ] 🔐 Generar y aplicar firma de aplicación (APK firmado)
     - [ ] Crear un `keystore` persistente para la app (`.jks`) y guardar copia segura
@@ -213,9 +213,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [ ] Incluir capturas, ícono de app y descripción lista para Play Store
 
   - [ ] 🛡 Crear cuenta de desarrollador Google Play
-    - [ ] Acceder a https://play.google.com/console/ y registrarse como desarrollador individual
-    - [ ] Pagar la tasa única de 25 USD
-    - [ ] Aceptar términos y configurar perfil de cuenta
+    - [x] Acceder a https://play.google.com/console/ y registrarse como desarrollador individual
+    - [x] Pagar la tasa única de 25 USD
+    - [ ] Aceptar términos y configurar perfil de cuenta. Completar verificaciones.
 
   - [ ] 🚦 Subir app en canal de testing privado en Google Play
     - [ ] Generar `.aab` y subirlo a Play Console
