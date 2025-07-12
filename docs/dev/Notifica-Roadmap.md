@@ -177,7 +177,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Probar que la app funciona correctamente en dispositivo real:
       - [x] Comprobada carga sin conexión
       - [x] Comprobado comportamiento como app (inputs, scroll, botones, navegación)
-      - [ ] Splash screen personalizado (actualmente con splash por defecto)
+      - [x] Validado splash screen por defecto
+      - [ ] Reemplazar splash screen por versión personalizada
+        - [ ] Diseñar imagen o animación para el splash adaptada a la app
+        - [ ] Configurar splash personalizado en `capacitor.config.ts` y `android/app/src/main/res`
+        - [ ] Verificar que la transición desde el splash a la app es fluida
       - [ ] Funciones de compartir, import/export (no implementadas aún)
       - [ ] Permisos (no aplican aún)
     - [x] Revisar diseño y UX en Android real:
@@ -200,15 +204,15 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Verificar que se instala correctamente en el dispositivo
     - [x] Confirmar que el keystore se conserva para futuras actualizaciones
 
-  - [ ] 🧪 Verificar versión firmada y preparada para futuras actualizaciones
+  - [x] 🧪 Verificar versión firmada y preparada para futuras actualizaciones
     - [x] Aumentar `versionCode` y `versionName` en `build.gradle` con cada nueva versión
     - [x] Comprobar que una instalación previa se puede actualizar sin problemas
-    - [ ] Validar comportamiento de splash screen, íconos, orientación, permisos, navegación, botón de retroceso y almacenamiento local en versión firmada
+    - [x] Validar comportamiento de splash screen, íconos, orientación, permisos, navegación, botón de retroceso y almacenamiento local en versión firmada
 
   - [ ] 🧼 Revisión de metadata y configuración para distribución
     - [ ] Verificar que `manifest.json` tiene `display: standalone`, nombre corto, descripción, idioma, `theme_color`, `background_color`, etc.
     - [ ] Confirmar que los íconos son adecuados y `maskable` (Android)
-    - [x] Definir nombre visible y nombre de paquete (`com.tu.nombre`)
+    - [x] Definir nombre visible y nombre de paquete (`com.jcpaezd.notifica`)
     - [ ] Eliminar permisos innecesarios y asegurar comportamiento offline
     - [ ] Incluir capturas, ícono de app y descripción lista para Play Store
 
@@ -229,7 +233,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [ ] Revisar que cumple todas las políticas de contenido y permisos
     - [ ] Enviar para revisión y esperar validación de Google
     - [ ] Una vez aprobada, confirmar que está disponible públicamente en Play Store
-    
+
 ---
 
 - [ ] 🕛 Corrección automática de fecha en tareas creadas o editadas cerca de medianoche
@@ -246,6 +250,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Mostrar confirmación de envío exitosa en la interfaz
 
 - [ ] 📜 Evitar scroll innecesario cuando no hay contenido largo
+  - [ ] Decidir si añadir más o menos scroll para evitar contenido tapado por toast
   - [ ] Revisar estructura de layout general (`App.vue`)
   - [ ] Asegurar que el `main` se ajusta correctamente al viewport y no desborda
 
@@ -261,6 +266,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Limitar uso de `hover:` solo a escritorio (`md:hover:`)
   - [ ] Asegurar limpieza de estilos en móviles (`focus-visible`, `active`, etc.)
 
+- [ ] ↖️ Mantener header fijo para acceso a menú siempre
+
 - [ ] 🛠 Mejoras UX/UI aplicando aprendizajes de Nocta
   - [ ] 📐 Revisar safe areas para pantallas con notch o barras flotantes
     - [ ] Asegurar que el contenido principal no queda oculto en dispositivos con notches, cámaras perforadas o barras de navegación
@@ -270,11 +277,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 - [ ] 📣 Aviso en PWA para migración a versión nativa (tras publicación en Google Play)
   - [ ] Añadir comprobación condicional para mostrar aviso solo en entornos `web` o PWA (`navigator.standalone`, `Capacitor.isNativePlatform()`, etc.)
   - [ ] Mostrar toast persistente o banner:  
-    `¡Ya está disponible la app oficial en Google Play! Instálala para disfrutar mejor experiencia.`
+        `¡Ya está disponible la app oficial en Google Play! Instálala para disfrutar mejor experiencia.`
   - [ ] Incluir botón con enlace a la app en Play Store (`market://details?id=com.jcpaezd.notifica` o URL de fallback)
   - [ ] Añadir lógica para ocultar el aviso tras instalar versión nativa (opcional, si se puede detectar)
   - [ ] Desactivar este aviso cuando se publique en abierto o pasado un tiempo
-
 
 ---
 
