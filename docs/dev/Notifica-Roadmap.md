@@ -201,8 +201,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Confirmar que el keystore se conserva para futuras actualizaciones
 
   - [ ] 🧪 Verificar versión firmada y preparada para futuras actualizaciones
-    - [ ] Aumentar `versionCode` y `versionName` en `build.gradle` con cada nueva versión
-    - [ ] Comprobar que una instalación previa se puede actualizar sin problemas
+    - [x] Aumentar `versionCode` y `versionName` en `build.gradle` con cada nueva versión
+    - [x] Comprobar que una instalación previa se puede actualizar sin problemas
     - [ ] Validar comportamiento de splash screen, íconos, orientación, permisos, navegación, botón de retroceso y almacenamiento local en versión firmada
 
   - [ ] 🧼 Revisión de metadata y configuración para distribución
@@ -251,7 +251,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 - [ ] 🗓️ Mejorar identificador de turnos en el selector
   - [ ] Añadir día de la semana al nombre del turno (`📅 Lunes · 03/06 · 23:00`)
-  - [ ] Aplicar formato más visual con emojis, abreviaturas y colores sutiles
+  - [ ] Aplicar formato más visual con emojis, abreviaturas y colores sutiles en selector y en títulos de las vistas cargadas de turnos
 
 - [ ] 🙅‍♂️ Desactivar selección de texto en elementos UI no editables
   - [ ] Aplicar clase `select-none` en botones, tarjetas, menús y demás UI
@@ -266,6 +266,52 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [ ] Asegurar que el contenido principal no queda oculto en dispositivos con notches, cámaras perforadas o barras de navegación
     - [ ] Ajustar paddings o usar `env(safe-area-inset-*)` en CSS/Tailwind si es necesario
     - [ ] Verificar en dispositivos reales y simuladores que la app se ve correctamente
+
+- [ ] 📣 Aviso en PWA para migración a versión nativa (tras publicación en Google Play)
+  - [ ] Añadir comprobación condicional para mostrar aviso solo en entornos `web` o PWA (`navigator.standalone`, `Capacitor.isNativePlatform()`, etc.)
+  - [ ] Mostrar toast persistente o banner:  
+    `¡Ya está disponible la app oficial en Google Play! Instálala para disfrutar mejor experiencia.`
+  - [ ] Incluir botón con enlace a la app en Play Store (`market://details?id=com.jcpaezd.notifica` o URL de fallback)
+  - [ ] Añadir lógica para ocultar el aviso tras instalar versión nativa (opcional, si se puede detectar)
+  - [ ] Desactivar este aviso cuando se publique en abierto o pasado un tiempo
+
+
+---
+
+## 🚀 Etapa 9: Publicación final y visibilidad pública
+
+- [ ] 🧭 Revisar, repensar y tomar decisiones sobre los puntos de este bloque
+  - [ ] Confirmar qué tareas de visibilidad y comunicación se llevarán a cabo
+  - [ ] Posponer o descartar aquellas que no se consideren útiles o prioritarias
+
+- [ ] 🌍 Publicar app en canal público de Google Play
+  - [ ] Completar ficha de Play Store: nombre, descripción, capturas, privacidad, contacto, categoría, rating, política de datos
+  - [ ] Revisar que cumple todas las políticas de contenido y permisos
+  - [ ] Enviar para revisión y esperar validación de Google
+  - [ ] Confirmar que está disponible públicamente en Play Store
+
+- [ ] 📢 Anunciar disponibilidad de versión nativa a usuarios actuales de la PWA
+  - [ ] Detectar si el usuario está accediendo desde la versión web/PWA
+  - [ ] Mostrar banner o alerta informativa: “Disponible versión nativa en Play Store”
+  - [ ] Incluir enlace directo a la ficha de la app en Google Play
+  - [ ] Opcional: detectar si ya tiene la app nativa instalada y ocultar banner
+
+- [ ] 📬 Preparar mensaje de presentación para redes o comunidades
+  - [ ] Escribir un texto breve y claro explicando:
+    - Qué problema resuelve la app
+    - Para quién está pensada
+    - Por qué se ha creado
+  - [ ] Incluir capturas atractivas o enlace a la ficha de Play Store
+  - [ ] Incluir enlace a GitHub, página informativa o demo si se considera útil
+
+- [ ] 📌 Compartir la app en plataformas relevantes
+  - [ ] `/r/androidapps` (si se presenta como app útil, sin spam)
+  - [ ] `/r/SideProject` (enfocado a proyectos personales)
+  - [ ] `/r/AndroidDev` (enfocado a desarrollo, si se cuenta parte del proceso técnico)
+  - [ ] Foros o grupos relacionados con mantenimiento técnico, trabajo en fábricas, etc.
+  - [ ] Círculos personales o profesionales cercanos (Telegram, WhatsApp, email)
+  - [ ] (Opcional) Crear mini landing page o entrada en Notion con más detalles
+
 
 ---
 
