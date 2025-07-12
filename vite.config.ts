@@ -24,7 +24,7 @@ export default defineConfig({
       manifest: {
         name: 'Notifica - Registro de Tareas',
         short_name: 'Notifica',
-        description: 'Aplicación para registrar tareas laborales de forma ágil.',
+        description: 'App para registrar tareas técnicas por turnos, de forma ágil y sin conexión.',
         theme_color: '#93c5fd',     // Nuevo color de acento principal
         background_color: '#f5f7fa', // Nuevo color de fondo
         display: 'standalone',
@@ -45,9 +45,8 @@ export default defineConfig({
             src: 'icons/icon-maskable.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'maskable'
+            purpose: 'any maskable'
           }
-
         ],
         screenshots: [
           {

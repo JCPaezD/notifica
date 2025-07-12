@@ -178,10 +178,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Comprobada carga sin conexión
       - [x] Comprobado comportamiento como app (inputs, scroll, botones, navegación)
       - [x] Validado splash screen por defecto
-      - [ ] Reemplazar splash screen por versión personalizada
-        - [ ] Diseñar imagen o animación para el splash adaptada a la app
-        - [ ] Configurar splash personalizado en `capacitor.config.ts` y `android/app/src/main/res`
-        - [ ] Verificar que la transición desde el splash a la app es fluida
+      - [x] Reemplazar splash screen por versión personalizada
+        - [x] Diseñar imagen o animación para el splash adaptada a la app
+        - [x] Configurar splash personalizado en `capacitor.config.ts` y `android/app/src/main/res`
+        - [x] Verificar que la transición desde el splash a la app es fluida
       - [ ] Funciones de compartir, import/export (no implementadas aún)
       - [ ] Permisos (no aplican aún)
     - [x] Revisar diseño y UX en Android real:
@@ -210,7 +210,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Validar comportamiento de splash screen, íconos, orientación, permisos, navegación, botón de retroceso y almacenamiento local en versión firmada
 
   - [ ] 🧼 Revisión de metadata y configuración para distribución
-    - [ ] Verificar que `manifest.json` tiene `display: standalone`, nombre corto, descripción, idioma, `theme_color`, `background_color`, etc.
+    - [x] Verificar que `manifest.json` tiene `display: standalone`, nombre corto, descripción, idioma, `theme_color`, `background_color`, etc.
     - [ ] Confirmar que los íconos son adecuados y `maskable` (Android)
     - [x] Definir nombre visible y nombre de paquete (`com.jcpaezd.notifica`)
     - [ ] Eliminar permisos innecesarios y asegurar comportamiento offline
@@ -228,11 +228,21 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Habilitar feedback de testing si se desea
     - [x] Instalar desde Play Store en dispositivo real y verificar funcionamiento completo
 
-  - [ ] 🚀 Publicar app en canal público de Google Play
+  - [ ] 🚀 Publicar app en canal público de Google Play  
+    > **Nota:** Este paso no implica aún publicación visible para todo el mundo. Solo se subirá como versión pública “no listada” para pasar la verificación de Google. La visibilidad real se activará manualmente al finalizar la Etapa 9.
+
     - [ ] Completar ficha de Play Store: nombre, descripción, capturas, privacidad, contacto, categoría, rating, política de datos
     - [ ] Revisar que cumple todas las políticas de contenido y permisos
     - [ ] Enviar para revisión y esperar validación de Google
-    - [ ] Una vez aprobada, confirmar que está disponible públicamente en Play Store
+    - [ ] Una vez aprobada, dejarla en modo "no listada" sin habilitar visibilidad pública
+
+  - [ ] ✅ Validar funciones clave en versión nativa Android  
+    - [ ] Confirmar que las siguientes acciones funcionan correctamente como app instalada:
+      - Compartir tareas (botón compartir, clipboard, navigator.share)
+      - Exportar e importar archivos (JSON o texto)
+      - Borrar todos los datos (y mostrar toast de confirmación)
+    - [ ] Comparar con la experiencia en la PWA
+    - [ ] Ajustar si es necesario para que se comporten igual o mejor que en versión web
 
 ---
 
@@ -268,6 +278,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 - [ ] ↖️ Mantener header fijo para acceso a menú siempre
 
+- [ ] 🎞️ Añadir animación sutil y esporádica al icono del header  
+  - [ ] Decidir qué tipo de animación usar (rotación, pulso, desplazamiento…)
+  - [ ] Ejecutar animación suave cada 30–60 segundos sin ser invasiva
+  - [ ] Asegurar que no interfiere con la experiencia o distrae
+  - [ ] Evaluar si aporta valor real o se descarta tras probar
+
 - [ ] 🛠 Mejoras UX/UI aplicando aprendizajes de Nocta
   - [ ] 📐 Revisar safe areas para pantallas con notch o barras flotantes
     - [ ] Asegurar que el contenido principal no queda oculto en dispositivos con notches, cámaras perforadas o barras de navegación
@@ -281,6 +297,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Incluir botón con enlace a la app en Play Store (`market://details?id=com.jcpaezd.notifica` o URL de fallback)
   - [ ] Añadir lógica para ocultar el aviso tras instalar versión nativa (opcional, si se puede detectar)
   - [ ] Desactivar este aviso cuando se publique en abierto o pasado un tiempo
+  - [ ] Informar de que para usuarios de iOS, se puede instalar en link-a-vercel o link-personalizado-con-acortador
 
 ---
 
@@ -290,11 +307,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Confirmar qué tareas de visibilidad y comunicación se llevarán a cabo
   - [ ] Posponer o descartar aquellas que no se consideren útiles o prioritarias
 
-- [ ] 🌍 Publicar app en canal público de Google Play
-  - [ ] Completar ficha de Play Store: nombre, descripción, capturas, privacidad, contacto, categoría, rating, política de datos
-  - [ ] Revisar que cumple todas las políticas de contenido y permisos
-  - [ ] Enviar para revisión y esperar validación de Google
-  - [ ] Confirmar que está disponible públicamente en Play Store
+- [ ] 🌍 Publicar app en canal público de Google Play  
+  > **Nota:** Este será el lanzamiento real y abierto al público general. Se activará la visibilidad pública desde la consola de Google Play, una vez completadas las tareas de visibilidad, comunicación y validación final.
+
+  - [ ] Revisar ficha de Play Store (nombre, descripción, capturas, política de datos…)
+  - [ ] Confirmar que todo está actualizado y listo para ser visible públicamente
+  - [ ] Activar visibilidad pública en Play Console
+  - [ ] Confirmar que está disponible en búsquedas y accesible desde la Play Store
 
 - [ ] 📢 Anunciar disponibilidad de versión nativa a usuarios actuales de la PWA
   - [ ] Detectar si el usuario está accediendo desde la versión web/PWA

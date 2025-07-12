@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tema base de tu app (opcional si ya está definido en otro archivo) -->
+    <style name="Theme.Notifica" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/splash_background</item>
+    </style>
+
+    <!-- Tema específico para el splash screen moderno (API 31+) -->
+    <style name="Theme.Notifica.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground">@color/splash_background</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@null</item>
+        <item name="postSplashScreenTheme">@style/AppTheme.NoActionBar</item>
+    </style>
+
+</resources>
