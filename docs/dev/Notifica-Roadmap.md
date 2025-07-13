@@ -211,7 +211,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Eliminar permisos innecesarios
           > La app solo solicita INTERNET, necesario para el WebView de Capacitor. No hay permisos adicionales en PWA ni nativos.
     - [x] Incluir capturas para ficha de Play Store (realistas y variadas)
-    - [ ] Redactar descripción detallada para ficha de Play Store
+    - [x] Redactar descripción detallada para ficha de Play Store
+    - [x] Crear borrador de ficha en Google Play Console  
+      - [x] Subido icono principal (512x512)  
+      - [x] Subidas 5 capturas desde emulador Pixel 7 (pantallas clave de la app)  
+      - [x] Redactada y guardada descripción larga en estilo claro y profesional  
+      - [x] Definida descripción breve para la ficha (PWA-style)  
+      - [x] Guardado todo como borrador (sin enviar a revisión aún)
 
   - [x] 🛡 Cuenta de desarrollador Google Play
     - [x] Registro, verificación y pago completado

@@ -247,3 +247,27 @@ Antes de hacer merge a main para publicar una nueva versión PWA:
 - [ ] (Opcional) Crear un tag git:
       git tag v1.X.Y -m "Descripción del release"
       git push origin v1.X.Y
+
+
+---
+
+## 📝 Descripción para ficha de Play Store
+(Actualizada: [13/07/2025])
+
+Registra tus tareas técnicas de forma rápida, clara y sin conexión.
+
+Notifica es una app diseñada para técnicos y trabajadores por turnos que necesitan llevar un control ágil de sus tareas diarias. Anota avisos y trabajos durante el día, marca su hora de inicio y fin (automática o manual), y notifícalos fácilmente al final del turno.
+
+Características principales:
+• Registro de tareas por turno con hora de inicio/fin.
+• Tiempos calculados automáticamente por tramos.
+• Filtros por estado: activas, finalizadas, notificadas.
+• Histórico completo de turnos anteriores.
+• Envío del listado por WhatsApp o apps compatibles.
+• Funciona 100% offline: sin conexión, sin registro, sin permisos extra.
+
+Al final del día, marca las tareas notificadas y borra las completadas. Puedes compartir tu turno si necesitas que un compañero cierre tus avisos por ti.
+
+Una interfaz simple, rápida y sin distracciones. Ideal para usar a lo largo de la jornada sin complicaciones.
+
+Diseñada desde dentro, para quienes necesitan agilidad en el trabajo técnico.
