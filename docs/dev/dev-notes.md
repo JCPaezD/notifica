@@ -221,6 +221,29 @@ Verificaciones:
 - ✅ En Pixel 7 y Medium Phone (API 31+): el halo desaparece, se muestra el icono limpio y centrado.
 - ✅ En Pixel 4 (Android 10): sin cambios, se sigue mostrando la splash legacy correctamente.
 
+### 🟦 Intento de evitar pantalla blanca post-splash (revertido)  
+🕒 Fecha y hora: [13/07/2025-11:13]
+
+Se intentó evitar el parpadeo blanco que ocurre brevemente después de la splash screen en dispositivos Android antiguos (como el Huawei P Smart 2019 con Android 10).  
+Este parpadeo se debía al cierre automático de la splash antes de que se montara completamente el DOM de la app.
+
+El intento incluyó:
+
+- Instalación del plugin `@capacitor/splash-screen`
+- Configuración de `launchAutoHide: false` en capacitor.config.ts
+- Llamada manual a `SplashScreen.hide()` en main.ts, usando `nextTick` y `requestAnimationFrame`
+
+🔴 Resultado:
+- En Android 12+ la splash se quedaba visible de forma indefinida (no se cerraba).
+- En Android 10 aparecía una splash secundaria deformada que bloqueaba la app.
+- Ningún intento de secuenciar la llamada (`hide()`) solucionó el problema en ambas versiones.
+
+✅ Decisión:
+- Revertido completamente el código al último commit funcional.
+- Eliminado el paquete del proyecto.
+- Documentado como intento fallido, sin impacto en producción.
+
+El parpadeo blanco se considera menor, aceptable, y no justifica el riesgo de romper compatibilidad o bloquear la app.
 
 
 

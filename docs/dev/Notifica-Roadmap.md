@@ -188,17 +188,16 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Evaluar uso de ícono alternativo plano o con fondo opaco
           - [x] Comprobar si iconBackgroundColor = null es suficiente (no fue)
           - [x] Verificar resultado visual y decidir si vale la pena cambiarlo (sí)
-      - [ ] (Mejora) Evitar pantalla blanca tras splash en dispositivos lentos
-            - [ ] Desactivar autocierre de splash en `capacitor.config.ts`
-            - [ ] Llamar manualmente a `SplashScreen.hide()` desde JS una vez montado el DOM
-            - [ ] Asegurar que el color de fondo inicial de la app es idéntico al de la splash
-            - [ ] Verificar que la app carga sin flash blanco perceptible
-            - [ ] Confirmar que no hay efectos colaterales (como splash persistente o pantalla bloqueada)
+    - [x] (Mejora descartada) Evitar pantalla blanca tras splash en dispositivos lentos
+          - [x] Se intentó desactivar el autocierre de splash y llamar manualmente a SplashScreen.hide()
+          - [x] En Android 10 causó una splash secundaria deformada que bloqueaba la app
+          - [x] En Android 12+ la splash no se cerraba y quedaba congelada
+          - [x] Se revertió el intento, se eliminó el plugin y se descartó la mejora por ahora
       - [x] (Limpieza) Eliminar recursos no utilizados relacionados con splash
-            - [x] Confirmado que `icon.png` en drawable-xxxhdpi era redundante
-            - [x] Eliminado sin afectar splash ni icono de app
-            - [x] Confirmado funcionamiento correcto tras limpieza
-            - [ ] Anotado comportamiento menor: icono genérico en Pixel 4 al abrir desde homescreen por primera vez (posible bug de emulador)
+          - [x] Confirmado que `icon.png` en drawable-xxxhdpi era redundante
+          - [x] Eliminado sin afectar splash ni icono de app
+          - [x] Confirmado funcionamiento correcto tras limpieza
+          - [ ] Anotado comportamiento menor: icono genérico en Pixel 4 al abrir desde homescreen por primera vez (posible bug de emulador)
       - [ ] Funciones de compartir, import/export (no implementadas aún)
       - [ ] Permisos (no aplican aún)
     - [x] Revisar diseño y UX en Android real:
