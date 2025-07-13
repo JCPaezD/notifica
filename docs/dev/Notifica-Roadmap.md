@@ -226,6 +226,18 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [ ] Comparar con experiencia en PWA
     - [ ] Ajustar si es necesario para equiparar comportamiento
 
+  - [x] 🔃 Reorganización de tareas en etapa 8 y 9  
+      - [x] Pospuesto el cambio de visibilidad pública hasta después del aviso en PWA  
+      - [x] Ajustado orden de pasos para que reflejen la secuencia real de publicación  
+      - [x] Añadido recordatorio para actualizar README tras publicación
+
+  - [x] Documentar proceso completo de splash screen en Android  
+      - [x] Registrar solución bifurcada Android 10 / Android 12+  
+      - [x] Incluir causas del bug, pruebas realizadas, fallos y revertidos  
+      - [x] Confirmar validez del sistema actual y observaciones secundarias  
+      - [x] Marcar como reutilizable en futuros proyectos similares
+
+
 ---
 
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
@@ -279,10 +291,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 ## 🚀 Etapa 9: Publicación final y visibilidad pública
 
-- [x] 🔃 Reorganización de tareas en etapa 9  
-    - [x] Pospuesto el cambio de visibilidad pública hasta después del aviso en PWA  
-    - [x] Ajustado orden de pasos para que reflejen la secuencia real de publicación  
-    - [x] Añadido recordatorio para actualizar README tras publicación
 - [ ] 📤 Publicar versión PWA como estable  
   - [ ] Confirmar que la rama `main` está actualizada con la última versión  
   - [ ] Subir cambios a Vercel y verificar despliegue correcto  
