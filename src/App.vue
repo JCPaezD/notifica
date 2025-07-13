@@ -680,23 +680,25 @@ const handleMenuAction = (actionName: string) => {
     @close="closeSideMenu"
     @action="handleMenuAction" />
   
-    <header class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none"> <!-- Añadido pb-4 -->
-    <button
-      @click="openSideMenu"
-      class="absolute left-4 top-4.5 p-1 rounded-md border border-slate-300 hover:bg-slate-200 focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
-      aria-label="Abrir menú"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-text-main">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-      </svg>
-    </button>
-    
-    <!-- Contenedor del título y logo, centrado -->
-    <div class="flex items-center gap-x-2"> <!-- Reducido el gap de 3 a 2 -->
-      <img src="/assets/logo-header.png" alt="Logo Notifica" class="h-8 w-auto"> <!-- Logo con extensión corregida -->
-      <h1 class="text-4xl font-extrabold tracking-tight text-text-main">Notifica</h1> <!-- Título agrandado -->
-    </div>
-  </header>
+    <header class="sticky top-0 z-50 bg-white shadow-sm w-full">
+      <div class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none">
+        <button
+          @click="openSideMenu"
+          class="absolute left-4 top-4.5 p-1 rounded-md border border-slate-300 hover:bg-slate-200 focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
+          aria-label="Abrir menú"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-text-main">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+
+        <!-- Contenedor del título y logo, centrado -->
+        <div class="flex items-center gap-x-2">
+          <img src="/assets/logo-header.png" alt="Logo Notifica" class="h-8 w-auto">
+          <h1 class="text-4xl font-extrabold tracking-tight text-text-main">Notifica</h1>
+        </div>
+      </div>
+    </header>
   
     <main class="min-h-screen bg-app-bg text-text-main flex flex-col items-center pt-4 px-4 select-none"> <!-- pt aún más reducido -->
 
