@@ -178,10 +178,27 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Comprobada carga sin conexión
       - [x] Comprobado comportamiento como app (inputs, scroll, botones, navegación)
       - [x] Validado splash screen por defecto
-      - [x] Reemplazar splash screen por versión personalizada
-        - [x] Diseñar imagen o animación para el splash adaptada a la app
-        - [x] Configurar splash personalizado en `capacitor.config.ts` y `android/app/src/main/res`
-        - [x] Verificar que la transición desde el splash a la app es fluida
+    - [x] Reemplazar splash screen por versión personalizada
+      - [x] Diseñar imagen o animación para el splash adaptada a la app
+      - [x] Configurar splash personalizada en `capacitor.config.ts` y en `android/app/src/main/res` para Android 10 y Android 12+ (estrategia bifurcada con Theme.SplashScreen y splash_background_legacy.xml)
+      - [x] Confirmar funcionamiento correcto en emuladores Android 10 y Android 12+
+      - [x] Confirmar funcionamiento correcto en dispositivo físico real (Huawei Android 10)
+      - [x] Verificar que la transición desde la splash a la app es fluida en Android 12+
+    - [x] (Mejora) Evitar halo oscuro alrededor del icono en splash de Android 12+
+          - [x] Evaluar uso de ícono alternativo plano o con fondo opaco
+          - [x] Comprobar si iconBackgroundColor = null es suficiente (no fue)
+          - [x] Verificar resultado visual y decidir si vale la pena cambiarlo (sí)
+      - [ ] (Mejora) Evitar pantalla blanca tras splash en dispositivos lentos
+            - [ ] Desactivar autocierre de splash en `capacitor.config.ts`
+            - [ ] Llamar manualmente a `SplashScreen.hide()` desde JS una vez montado el DOM
+            - [ ] Asegurar que el color de fondo inicial de la app es idéntico al de la splash
+            - [ ] Verificar que la app carga sin flash blanco perceptible
+            - [ ] Confirmar que no hay efectos colaterales (como splash persistente o pantalla bloqueada)
+      - [x] (Limpieza) Eliminar recursos no utilizados relacionados con splash
+            - [x] Confirmado que `icon.png` en drawable-xxxhdpi era redundante
+            - [x] Eliminado sin afectar splash ni icono de app
+            - [x] Confirmado funcionamiento correcto tras limpieza
+            - [ ] Anotado comportamiento menor: icono genérico en Pixel 4 al abrir desde homescreen por primera vez (posible bug de emulador)
       - [ ] Funciones de compartir, import/export (no implementadas aún)
       - [ ] Permisos (no aplican aún)
     - [x] Revisar diseño y UX en Android real:

@@ -169,6 +169,67 @@ Verificaciones realizadas:
 
 Este punto marca el retorno a una configuración estable, desde la cual se pueden hacer pruebas controladas o limpiezas con total seguridad.
 
+### 🟦 Confirmación en dispositivo físico (Huawei Android 10)  
+🕒 Fecha y hora: [13/07/2025-10:03]
+
+Se generó un .aab (app-release-2025-07-13-09-41.aab) y se instaló en el dispositivo físico Huawei P Smart 2019 (Android 10) desde Google Play Console (canal de pruebas internas).  
+
+Verificación:
+- Splash se muestra correctamente, sin deformaciones ni parpadeos, durante aproximadamente 1 segundo.
+- Luego aparece una pantalla blanca durante ~1 segundo adicional antes de cargar la app.
+
+Este parpadeo no es un bug, sino el comportamiento por defecto de Capacitor cuando se cierra automáticamente la splash antes de que el WebView haya terminado de renderizar el contenido.
+
+Este punto marca la validación real del comportamiento observado en emuladores.
+
+📌 Se abre como punto de mejora opcional pendiente:
+- Evitar pantalla blanca post-splash usando SplashScreen.hide() desde JS
+- Requiere desactivar autocierre en capacitor.config.ts y controlar el cierre manual
+- Solo se abordará si puede hacerse de forma aislada, documentada y reversible
+
+### 🟦 Limpieza de recurso redundante: icon.png  
+🕒 Fecha y hora: [13/07/2025-10:19]
+
+Se eliminó el archivo res/drawable-xxxhdpi/icon.png, que contenía la misma imagen que el ícono de la app (192x192) pero no estaba referenciado en ningún archivo del proyecto.  
+
+Confirmaciones:
+- icon.png no aparecía en styles.xml, themes.xml, AndroidManifest.xml ni capacitor.config.ts
+- No se utilizaba como ícono de splash ni como recurso de interfaz
+
+Verificado tras eliminar:
+- ✅ Splash y app funcionan correctamente en Pixel 4, Medium y Pixel 7
+- ✅ Icono de la app se mantiene intacto
+
+📌 Observación detectada (sin relación directa con esta limpieza):
+En el emulador Pixel 4, al lanzar la app desde el acceso directo en el home, aparece momentáneamente un icono genérico en la vista general (overview).  
+Tras abrirla desde el menú de aplicaciones, el icono correcto se muestra.  
+No se ha reproducido en otros dispositivos ni se considera prioritario, pero se anotará como punto a revisar si reaparece o afecta visualmente en la versión publicada.
+
+### 🟦 Eliminación del halo oscuro en splash de Android 12+  
+🕒 Fecha y hora: [13/07/2025-10:25]
+
+En dispositivos Android 12+ se mostraba un halo circular tenue detrás del icono durante la splash screen. Esto era causado por el uso de un ícono con transparencia como windowSplashScreenAnimatedIcon.
+
+🔧 Se resolvió cambiando el recurso:
+
+  De: @mipmap/ic_launcher  
+  A:  @mipmap/ic_launcher_foreground
+
+Este ícono vectorial no presenta fondo transparente excesivo y es más compatible visualmente con el sistema de splash de Android 12+.
+
+Verificaciones:
+- ✅ En Pixel 7 y Medium Phone (API 31+): el halo desaparece, se muestra el icono limpio y centrado.
+- ✅ En Pixel 4 (Android 10): sin cambios, se sigue mostrando la splash legacy correctamente.
+
+
+
+
+
+
+
+
+
+
 
 
 
