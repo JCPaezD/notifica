@@ -167,7 +167,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 ## 🔔 Etapa 8: Mejoras opcionales y consolidación previa a publicación
 
-- [ ] 🤖 Consolidar versión Android nativa (Capacitor + Android Studio)
+- [x] 🤖 Consolidar versión Android nativa (Capacitor + Android Studio)
 
   - [x] 📦 Generar y probar APK sin firmar
     - [x] Ejecutar `npx cap add android` y abrir proyecto en Android Studio
@@ -227,7 +227,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Compartido con testers
     - [x] Confirmada instalación desde Play Store y funcionamiento completo
 
-  - [ ] ✅ Validar funciones clave en versión nativa Android  
+  - [x] ✅ Validar funciones clave en versión nativa Android  
     - [x] Compartir tareas (botón compartir, clipboard, navigator.share y Capacitor Share)
     - [x] Exportar e importar archivos (JSON o texto)  
         - ✅ Exportar archivo `.json` en Android nativo usando `Filesystem` + `Share`.  
@@ -235,9 +235,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - ℹ️ En Android, el archivo se comparte mediante el diálogo del sistema.  
         - 📌 Limitación aceptada: Android no siempre ofrece una opción de "Guardar en Archivos"; dependerá de las apps instaladas.  
         - ✅ Importar `.json` desde archivo funciona correctamente en todas las plataformas.
-    - [ ] Borrar todos los datos (y mostrar toast de confirmación)
-    - [ ] Comparar con experiencia en PWA
-    - [ ] Ajustar si es necesario para equiparar comportamiento
+    - [x] Borrar todos los datos (y mostrar toast de confirmación)
+    - [x] Comparar con experiencia en PWA
+    - [x] Ajustar si es necesario para equiparar comportamiento  
+        - No se han detectado diferencias relevantes entre Android nativo y PWA.  
+        - Comportamiento validado como equivalente tras pruebas completas en ambas plataformas.
 
   - [x] 🔃 Reorganización de tareas en etapa 8 y 9  
     - [x] Pospuesto el cambio de visibilidad pública hasta después del aviso en PWA  
