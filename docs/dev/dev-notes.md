@@ -271,3 +271,31 @@ Al final del día, marca las tareas notificadas y borra las completadas. Puedes 
 Una interfaz simple, rápida y sin distracciones. Ideal para usar a lo largo de la jornada sin complicaciones.
 
 Diseñada desde dentro, para quienes necesitan agilidad en el trabajo técnico.
+
+
+---
+
+## 🐞 Capacitor Share: problema con compartir en Android nativo
+
+### 🔍 Síntoma
+El botón "Compartir" funcionaba correctamente en PWA, pero no mostraba el diálogo nativo en la app Android instalada. En algunos casos mostraba solo el toast de "copiado al portapapeles", y en otros lanzaba errores.
+
+### 🧪 Diagnóstico
+- El botón usaba `@capacitor/share`, correctamente instalado y sincronizado.
+- El código estaba bien estructurado, pero el comportamiento en Android no reflejaba los cambios del frontend (ni el botón de test se mostraba).
+- Se detectó que no se estaba ejecutando `npm run build` tras los cambios en el frontend, por lo que la app nativa no incluía los cambios.
+
+### ✅ Solución
+1. Ejecutar `npm run build` para compilar el frontend.
+2. Ejecutar `npx cap copy android` para copiar los archivos a `/android/app/src/main/assets/public`.
+3. Recompilar la app desde Android Studio.
+
+Esto permitió que la versión instalada mostrara correctamente el botón y ejecutara el diálogo nativo de compartir.
+
+### 💡 Conclusión
+Cada vez que se hagan cambios en la interfaz o lógica del frontend:
+- Ejecutar `npm run build`
+- Luego `npx cap copy android`
+- Y recompilar desde Android Studio.
+
+Así se asegura que la app nativa use los archivos más recientes.

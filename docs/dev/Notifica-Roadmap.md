@@ -228,7 +228,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Confirmada instalación desde Play Store y funcionamiento completo
 
   - [ ] ✅ Validar funciones clave en versión nativa Android  
-    - [ ] Compartir tareas (botón compartir, clipboard, navigator.share)
+    - [x] Compartir tareas (botón compartir, clipboard, navigator.share y Capacitor Share)
     - [ ] Exportar e importar archivos (JSON o texto)
     - [ ] Borrar todos los datos (y mostrar toast de confirmación)
     - [ ] Comparar con experiencia en PWA

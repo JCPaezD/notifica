@@ -522,7 +522,7 @@ const formatTaskForPlainText = (task: Task): string => {
   return taskString;
 }
 
-// Prepara y comparte (vía API Web Share o portapapeles) las tareas del turno seleccionado.
+// Prepara y comparte (vía plugin nativo, API Web Share o portapapeles) las tareas del turno seleccionado.
 const shareShiftTasks = async () => {
   let shiftIdToShare: string | null | undefined = undefined;
   let shiftLabel = "Turno Actual";
@@ -533,12 +533,12 @@ const shareShiftTasks = async () => {
       const ts = parseInt(currentShiftId.value.replace('shift-', ''));
       const date = new Date(ts);
       shiftLabel = `Turno del ${date.toLocaleDateString([], {
-        day: '2-digit', 
-        month: '2-digit', 
+        day: '2-digit',
+        month: '2-digit',
         year: '2-digit'
-      })} ${date.toLocaleTimeString([], { 
-        hour: '2-digit', 
-        minute: '2-digit' 
+      })} ${date.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
       })}`;
     }
   } else {
@@ -552,16 +552,35 @@ const shareShiftTasks = async () => {
     return;
   }
 
-  const tasksOfShift = allTasks.value.filter(task => task.shiftId === shiftIdToShare)
-                                   .sort((a,b) => a.startTime.getTime() - b.startTime.getTime());
+  const tasksOfShift = allTasks.value
+    .filter(task => task.shiftId === shiftIdToShare)
+    .sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
+
   if (tasksOfShift.length === 0) {
     notifyWarning('Nada que Compartir', `No hay tareas en el ${shiftLabel} para compartir.`);
     return;
   }
 
-  const title = `_*📋 Notificaciones del ${shiftLabel}*:_\n\n`; // Título sin guiones, con doble salto de línea
-  const tasksText = tasksOfShift.map(formatTaskForPlainText).join('\n\n'); // Doble salto de línea entre tareas
+  const title = `_*📋 Notificaciones del ${shiftLabel}*:_\n\n`;
+  const tasksText = tasksOfShift.map(formatTaskForPlainText).join('\n\n');
   const fullText = title + tasksText;
+
+  try {
+    const { Share } = await import('@capacitor/share');
+    const canShare = await Share.canShare();
+
+    if (canShare.value) {
+      await Share.share({
+        title: `Notificaciones del ${shiftLabel}`,
+        text: fullText,
+        dialogTitle: 'Compartir Tareas'
+      });
+      notifyInfo('Tareas Compartidas', 'Contenido enviado mediante sistema nativo.');
+      return;
+    }
+  } catch (e) {
+    console.warn('Capacitor Share no disponible o falló, se usará fallback web.');
+  }
 
   try {
     if (navigator.share) {
@@ -579,7 +598,8 @@ const shareShiftTasks = async () => {
   } catch (err) {
     notifyError('Error al Compartir', 'Ocurrió un error al intentar la acción.');
   }
-}
+};
+
 
 // Abre el menú lateral.
 const openSideMenu = () => {
