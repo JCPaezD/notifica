@@ -207,9 +207,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] 🧼 Preparación para publicación en Play Store
     - [x] `manifest.json` correcto (`standalone`, idioma, nombre, colores…)
     - [x] Nombre visible y nombre de paquete (`com.jcpaezd.notifica`)
-    - [ ] Confirmar que los íconos son adecuados y `maskable` (Android)
-    - [ ] Eliminar permisos innecesarios
-    - [ ] Incluir capturas y descripción lista para Play Store
+    - [x] Confirmar que los íconos son adecuados y `maskable` (Android)
+    - [x] Eliminar permisos innecesarios
+          > La app solo solicita INTERNET, necesario para el WebView de Capacitor. No hay permisos adicionales en PWA ni nativos.
+    - [x] Incluir capturas para ficha de Play Store (realistas y variadas)
+    - [ ] Redactar descripción detallada para ficha de Play Store
 
   - [x] 🛡 Cuenta de desarrollador Google Play
     - [x] Registro, verificación y pago completado
@@ -227,15 +229,15 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [ ] Ajustar si es necesario para equiparar comportamiento
 
   - [x] 🔃 Reorganización de tareas en etapa 8 y 9  
-      - [x] Pospuesto el cambio de visibilidad pública hasta después del aviso en PWA  
-      - [x] Ajustado orden de pasos para que reflejen la secuencia real de publicación  
-      - [x] Añadido recordatorio para actualizar README tras publicación
+    - [x] Pospuesto el cambio de visibilidad pública hasta después del aviso en PWA  
+    - [x] Ajustado orden de pasos para que reflejen la secuencia real de publicación  
+    - [x] Añadido recordatorio para actualizar README tras publicación
 
   - [x] Documentar proceso completo de splash screen en Android  
-      - [x] Registrar solución bifurcada Android 10 / Android 12+  
-      - [x] Incluir causas del bug, pruebas realizadas, fallos y revertidos  
-      - [x] Confirmar validez del sistema actual y observaciones secundarias  
-      - [x] Marcar como reutilizable en futuros proyectos similares
+    - [x] Registrar solución bifurcada Android 10 / Android 12+  
+    - [x] Incluir causas del bug, pruebas realizadas, fallos y revertidos  
+    - [x] Confirmar validez del sistema actual y observaciones secundarias  
+    - [x] Marcar como reutilizable en futuros proyectos similares
 
   - [x] Documentar proceso de publicación PWA y sincronización de versiones  
     > Incluye actualización manual de package.json y SideMenu.vue, recomendaciones para Android y opción futura de automatización con Vite.
