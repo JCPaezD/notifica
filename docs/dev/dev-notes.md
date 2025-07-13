@@ -79,6 +79,103 @@ Con esto, retomamos el desarrollo de Notifica con contexto limpio y toda la docu
 - En `MainActivity.java` se añadió `SplashScreen.installSplashScreen(this);` antes de `super.onCreate(...)`.
 - Resultado: splash sin icono sobrepuesto, con imagen y color exacto.
 
+
+### 🟦 Arreglo completo del bug de splash screen en Android 10 y 12+  
+🕒 Fecha y hora: [13/07/2025-08:14]
+
+Este bloque documenta la resolución del bug donde la splash se veía deformada en dispositivos modernos (Pixel 7, Android 12+) tras intentar usar una imagen completa (2732×2732) como icono en Theme.SplashScreen.
+
+#### 🔍 Situación de partida
+- La app mostraba correctamente la splash en dispositivos con Android 10 (Huawei, Pixel 4) usando una imagen grande (splash.png) en carpetas drawable-*dpi.
+- Esa misma imagen se veía deformada o achatada en Android 12+ (Pixel 7, Medium Phone API 36).
+- Se habían realizado múltiples pruebas incluyendo:
+  - Copiar carpetas generadas por APE Tools (drawable-*, drawable-land-*)
+  - Añadir temas duplicados, drawables modernos y legacy
+  - Revertir configuraciones para evitar el parpadeo blanco tras la splash
+  - Usar @drawable/splash directamente como windowSplashScreenAnimatedIcon
+
+#### ✅ Decisión clave
+- No se debe usar una imagen de fondo completa (tipo 2732×2732) como icono en Android 12+. Esa imagen debe reservarse solo para versiones anteriores a Android 12.
+- En Android 12+ se debe usar un icono cuadrado (como el de la app) y un color de fondo limpio, sin intentar usar imágenes de fondo.
+
+#### ✅ Primer paso realizado
+- Se hizo un commit de respaldo con todos los cambios rotos del sistema actual de splash screen:  
+  chore(wip): respaldo de cambios intermedios en splash screen (bug aún presente)
+- Se eliminaron archivos binarios y temporales innecesarios antes del commit (spec.json, app-release.apks).
+- Se hizo un análisis exhaustivo de los archivos XML actuales, incluyendo:  
+  - styles.xml y themes.xml  
+  - splash_background_legacy.xml, splash_background_modern.xml, splash_background.xml
+- Se identificó que splash_background.xml y splash_background_modern.xml no están siendo usados actualmente y pueden ser eliminados.
+- Se determinó una estrategia bifurcada robusta:  
+  - Android 10: splash_background_legacy.xml con imagen centrada.  
+  - Android 12+: Theme.SplashScreen con icono estándar y color de fondo.
+
+
+### 🟦 Ajuste de splash en Android 12+ con icono oficial  
+🕒 Fecha y hora: [13/07/2025-08:33]
+
+Se modificó el archivo res/values-v31/themes.xml para eliminar el uso incorrecto de una imagen completa (splash.png) como icono en Theme.SplashScreen.
+
+En su lugar se configuró:
+
+- android:windowSplashScreenAnimatedIcon → @mipmap/ic_launcher  
+- android:windowSplashScreenBackground → @color/splash_background  
+- android:windowSplashScreenIconBackgroundColor → @null  
+- postSplashScreenTheme → @style/AppTheme.NoActionBar
+
+Resultado tras pruebas:
+
+- ✅ En Pixel 4 (Android 10): splash legacy se ve perfecta.  
+- ✅ En Medium Phone y Pixel 7 (Android 12+): se muestra el icono centrado correctamente, sin deformaciones.  
+- 🔍 Se observa un leve halo circular más oscuro detrás del icono en Android 12+. Es el fondo por defecto del icono con transparencia y puede ajustarse si se desea, pero no afecta negativamente al diseño actual.  
+- ✅ Transición hacia la app fluida y sin parpadeos blancos.
+
+Este paso resolvió el bug de forma estable en todas las versiones objetivo.
+
+### 🟦 Limpieza de drawables no utilizados (parte 1)  
+🕒 Fecha y hora: [13/07/2025-08:41]
+
+Se eliminaron los archivos splash_background.xml y splash_background_modern.xml del directorio res/drawable, ya que no estaban siendo usados por ningún theme actual ni en versiones modernas ni legacy.
+
+Estos archivos provenían de pruebas anteriores y su presencia era redundante y potencialmente conflictiva.  
+Se confirmó que tras su eliminación la app sigue compilando correctamente y que la splash screen funciona bien tanto en Android 10 (Pixel 4) como en Android 12+ (Pixel 7, Medium Phone).
+
+### 🟦 Fallo al renombrar splash legacy – restaurado  
+🕒 Fecha y hora: [13/07/2025-08:41]
+
+Tras renombrar splash.png a splash_legacy.png para mejorar la claridad del código, la splash dejó de escalar correctamente en dispositivos Android 10 (Pixel 4), apareciendo muy agrandada.
+
+Se intentó forzar el centrado y escalado correcto añadiendo android:tileMode="disabled" al bitmap del XML splash_background_legacy.xml, pero no tuvo efecto.
+
+Se concluye que:
+- Android 10 resuelve mejor el recurso splash.png tal como estaba originalmente.
+- El uso de un nombre genérico como splash.png en drawable/ no presenta problemas si se documenta correctamente.
+
+✅ Se restaurará el nombre original splash.png y se revertirá el cambio en splash_background_legacy.xml.
+
+### 🟦 Restauración del splash legacy al estado funcional  
+🕒 Fecha y hora: [13/07/2025-09:36]
+
+Tras el intento de renombrar splash.png a splash_legacy.png, la splash dejó de escalar correctamente en Android 10 (Pixel 4), apareciendo muy grande.  
+
+Aunque se revirtió el nombre del archivo y la referencia en splash_background_legacy.xml, el problema persistía. Se identificó que la causa era la ausencia de la imagen splash.png en una carpeta de densidad específica.  
+
+✅ Se restauró splash.png en res/drawable-xxxhdpi con una versión rectangular generada con APE tools (1280x1920) que funcionaba correctamente antes.
+
+Verificaciones realizadas:
+- Pixel 4 (Android 10): splash vuelve a escalarse y centrarse correctamente.
+- Pixel 7 y Medium (Android 12+): splash moderna sigue funcionando sin cambios.
+- Confirmado que esta estructura funciona de forma robusta y sin parches.
+
+Este punto marca el retorno a una configuración estable, desde la cual se pueden hacer pruebas controladas o limpiezas con total seguridad.
+
+
+
+
+
+
+
+
 ---
 
 ## 🔄 Publicar una actualización de Android (.aab)

@@ -3,6 +3,7 @@
     <item>
         <bitmap
             android:gravity="center"
+            android:tileMode="disabled"
             android:src="@drawable/splash" />
     </item>
 </layer-list>
