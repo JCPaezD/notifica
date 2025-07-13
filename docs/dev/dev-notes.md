@@ -299,3 +299,19 @@ Cada vez que se hagan cambios en la interfaz o lógica del frontend:
 - Y recompilar desde Android Studio.
 
 Así se asegura que la app nativa use los archivos más recientes.
+
+---
+
+## 📤 Exportar archivo JSON en Android
+
+Problema: en Android nativo, la exportación por <a download> no generaba ningún archivo visible.
+
+Solución: se combinó @capacitor/filesystem (para guardar en Directory.Cache) con @capacitor/share para permitir compartir el archivo .json generado.
+
+Resultado:
+- En PWA/navegador, se mantiene la descarga directa como antes.
+- En Android, se lanza un diálogo para compartir el archivo con apps compatibles (Drive, Gmail, etc.).
+
+Limitación aceptada: no siempre aparece una opción de "Guardar en Archivos"; depende del dispositivo y apps instaladas.
+
+Función validada como completa y estable.

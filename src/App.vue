@@ -8,6 +8,11 @@ import { Toaster } from 'vue-sonner'
 import { useNotifications } from './composables/useNotifications'
 import type { Task } from './types/Task' // Importar la interfaz Task compartida
 
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
+import { Capacitor } from '@capacitor/core';
+
+
 // --- Estado para la creación de nuevas tareas ---
 const newTaskDescription = ref('')
 const newTaskTechnician = ref('')
@@ -261,24 +266,55 @@ const listTitle = computed(() => {
 });
 
 // Exporta todas las tareas actuales a un archivo JSON.
-const exportTasksToJson = () => {
+const exportTasksToJson = async () => {
   if (allTasks.value.length === 0) {
     notifyWarning('Exportación Vacía', 'No hay tareas para exportar.');
     return;
   }
 
-  const dataStr = JSON.stringify(allTasks.value, null, 2); // null, 2 para formatear el JSON con indentación
-  const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+  const fileName = `notifica-tareas-${new Date().toISOString().slice(0, 10)}.json`;
+  const dataStr = JSON.stringify(allTasks.value, null, 2);
 
-  const exportFileDefaultName = `notifica-tareas-${new Date().toISOString().slice(0,10)}.json`;
+  if (Capacitor.isNativePlatform()) {
+    try {
+      // 1. Guardar archivo en caché
+      const writeResult = await Filesystem.writeFile({
+        path: fileName,
+        data: dataStr,
+        directory: Directory.Cache,
+        encoding: Encoding.UTF8,
+      });
 
-  const linkElement = document.createElement('a');
-  linkElement.setAttribute('href', dataUri);
-  linkElement.setAttribute('download', exportFileDefaultName);
-  linkElement.click();
-  notifyInfo('Tareas Exportadas', `Archivo "${exportFileDefaultName}" generado.`);
-  // No es necesario revocar el objeto URL con data URIs.
-}
+      // 2. Obtener URI accesible al sistema
+      const fileUri = await Filesystem.getUri({
+        path: fileName,
+        directory: Directory.Cache,
+      });
+
+      // 3. Lanzar diálogo de compartir archivo
+      await Share.share({
+        title: 'Exportar tareas',
+        text: 'Archivo de tareas exportado desde Notifica.',
+        files: [fileUri.uri],
+        dialogTitle: `Compartir archivo ${fileName}`,
+      });
+
+      notifySuccess('Tareas exportadas', `Archivo "${fileName}" listo para compartir.`);
+    } catch (err) {
+      console.error('Error al exportar archivo JSON:', err);
+      notifyError('Error al exportar', 'No se pudo generar el archivo.');
+    }
+  } else {
+    // Web / PWA: descarga directa
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', fileName);
+    linkElement.click();
+    notifyInfo('Tareas Exportadas', `Archivo "${fileName}" generado.`);
+  }
+};
+
 
 // Dispara el click en el input de tipo "file" (oculto) para la importación de tareas.
 const triggerFileImport = () => {

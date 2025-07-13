@@ -229,7 +229,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
   - [ ] ✅ Validar funciones clave en versión nativa Android  
     - [x] Compartir tareas (botón compartir, clipboard, navigator.share y Capacitor Share)
-    - [ ] Exportar e importar archivos (JSON o texto)
+    - [x] Exportar e importar archivos (JSON o texto)  
+        - ✅ Exportar archivo `.json` en Android nativo usando `Filesystem` + `Share`.  
+        - ✅ En PWA/navegador, se mantiene la descarga directa del archivo.  
+        - ℹ️ En Android, el archivo se comparte mediante el diálogo del sistema.  
+        - 📌 Limitación aceptada: Android no siempre ofrece una opción de "Guardar en Archivos"; dependerá de las apps instaladas.  
+        - ✅ Importar `.json` desde archivo funciona correctamente en todas las plataformas.
     - [ ] Borrar todos los datos (y mostrar toast de confirmación)
     - [ ] Comparar con experiencia en PWA
     - [ ] Ajustar si es necesario para equiparar comportamiento
