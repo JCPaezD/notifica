@@ -286,6 +286,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 - [ ] 🍔 Corregir hover persistente en botón hamburguesa
   - [ ] Limitar hover a escritorio (`md:hover:`)
   - [ ] Asegurar estilos limpios en móvil (`focus-visible`, `active`)
+  - 📝 Intentado con clases `btn-interactive`, pero generaba efectos inconsistentes. Se pospone.
 
 - [ ] ↖️ Fijar header para acceso constante al menú
 
