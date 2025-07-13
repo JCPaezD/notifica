@@ -237,6 +237,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Confirmar validez del sistema actual y observaciones secundarias  
       - [x] Marcar como reutilizable en futuros proyectos similares
 
+  - [x] Documentar proceso de publicación PWA y sincronización de versiones  
+    > Incluye actualización manual de package.json y SideMenu.vue, recomendaciones para Android y opción futura de automatización con Vite.
+
 
 ---
 

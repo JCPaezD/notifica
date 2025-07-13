@@ -155,19 +155,6 @@ Confirmado que no afectaban al funcionamiento ni al aspecto en ningún dispositi
 ✅ **Estado final**: Splash completamente funcional, documentada y validada para Android 10 y 12+. Sin flickers ni conflictos. Preparado para reutilización en otros proyectos.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
 ## 🔄 Publicar una actualización de Android (.aab)
@@ -206,3 +193,57 @@ Pasos para crear y subir una nueva versión firmada a Google Play:
      ```
 
 4. Instalar en dispositivo real desde el enlace de test interno o Play Store
+
+---
+
+## 🌐 Publicación de versión PWA y gestión de versiones
+
+La versión web (PWA) de Notifica se despliega automáticamente cada vez que se hace `merge` a la rama `main`. Este proceso está configurado en Vercel y no requiere pasos adicionales manuales.
+
+### 🧩 Estructura y flujo de despliegue
+
+- La rama `develop` se usa para el desarrollo diario.
+- La rama `main` contiene la versión estable que se publica automáticamente en Vercel como PWA.
+- Cada vez que se desea actualizar la PWA:
+  1. Se completan los cambios en `develop`.
+  2. Se realiza un Pull Request de `develop` → `main`.
+  3. Al hacer merge, Vercel despliega la nueva versión automáticamente.
+  4. Opcionalmente, puede añadirse un tag git (`vX.Y.Z`) para marcar el release.
+
+### 🔢 Gestión de versiones
+
+La versión de la app se muestra actualmente en dos lugares:
+
+1. package.json
+   - Campo "version": "1.0.0" refleja la versión del proyecto.
+   - Esta es la fuente de verdad y debería actualizarse manualmente antes de cada publicación.
+
+2. SideMenu.vue
+   - La versión aparece en el pie del menú lateral como texto hardcodeado (ej. Notifica v1.0.0 - JCPD 2025).
+   - Debe actualizarse manualmente para que coincida con package.json.
+
+3. Android (si aplica)
+   - En android/app/build.gradle, se gestiona por separado mediante:
+     - versionCode (entero creciente para updates)
+     - versionName (cadena visible en Play Store, recomendable sincronizarla con package.json y SideMenu.vue).
+
+### 🛠 Mejora opcional futura
+
+Puede automatizarse la sincronización entre package.json y la versión mostrada en el footer de SideMenu.vue usando Vite.  
+Esto permitiría importar la versión con:
+
+   import { version } from '../package.json'
+
+Y usarla como variable reactiva.  
+Por ahora se mantiene la edición manual para simplicidad y control total.
+
+### 🚀 Actualización recomendada
+
+Antes de hacer merge a main para publicar una nueva versión PWA:
+
+- [ ] Aumentar versión en package.json ("version": "1.X.Y")
+- [ ] Actualizar texto en SideMenu.vue
+- [ ] (Opcional) Sincronizar versionName en Android (build.gradle)
+- [ ] (Opcional) Crear un tag git:
+      git tag v1.X.Y -m "Descripción del release"
+      git push origin v1.X.Y
