@@ -165,194 +165,173 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 ---
 
-## 🔔 Etapa 8: Mejoras opcionales
+## 🔔 Etapa 8: Mejoras opcionales y consolidación previa a publicación
 
-- [ ] 🤖 Exportar, firmar y publicar versión Android nativa (Capacitor + Android Studio)
+- [ ] 🤖 Consolidar versión Android nativa (Capacitor + Android Studio)
 
   - [x] 📦 Generar y probar APK sin firmar
     - [x] Ejecutar `npx cap add android` y abrir proyecto en Android Studio
     - [x] Hacer build de producción (`npm run build`) y copiarlo con `npx cap copy`
     - [x] Generar APK sin firmar desde Android Studio (modo debug)
-    - [x] Instalar manualmente en dispositivo de prueba (USB, enlace o almacenamiento interno)
-    - [x] Probar que la app funciona correctamente en dispositivo real:
-      - [x] Comprobada carga sin conexión
-      - [x] Comprobado comportamiento como app (inputs, scroll, botones, navegación)
-      - [x] Validado splash screen por defecto
-    - [x] Reemplazar splash screen por versión personalizada
-      - [x] Diseñar imagen o animación para el splash adaptada a la app
-      - [x] Configurar splash personalizada en `capacitor.config.ts` y en `android/app/src/main/res` para Android 10 y Android 12+ (estrategia bifurcada con Theme.SplashScreen y splash_background_legacy.xml)
-      - [x] Confirmar funcionamiento correcto en emuladores Android 10 y Android 12+
-      - [x] Confirmar funcionamiento correcto en dispositivo físico real (Huawei Android 10)
-      - [x] Verificar que la transición desde la splash a la app es fluida en Android 12+
-    - [x] (Mejora) Evitar halo oscuro alrededor del icono en splash de Android 12+
-          - [x] Evaluar uso de ícono alternativo plano o con fondo opaco
-          - [x] Comprobar si iconBackgroundColor = null es suficiente (no fue)
-          - [x] Verificar resultado visual y decidir si vale la pena cambiarlo (sí)
-    - [x] (Mejora descartada) Evitar pantalla blanca tras splash en dispositivos lentos
-          - [x] Se intentó desactivar el autocierre de splash y llamar manualmente a SplashScreen.hide()
-          - [x] En Android 10 causó una splash secundaria deformada que bloqueaba la app
-          - [x] En Android 12+ la splash no se cerraba y quedaba congelada
-          - [x] Se revertió el intento, se eliminó el plugin y se descartó la mejora por ahora
-      - [x] (Limpieza) Eliminar recursos no utilizados relacionados con splash
-          - [x] Confirmado que `icon.png` en drawable-xxxhdpi era redundante
-          - [x] Eliminado sin afectar splash ni icono de app
-          - [x] Confirmado funcionamiento correcto tras limpieza
-          - [ ] Anotado comportamiento menor: icono genérico en Pixel 4 al abrir desde homescreen por primera vez (posible bug de emulador)
-      - [ ] Funciones de compartir, import/export (no implementadas aún)
-      - [ ] Permisos (no aplican aún)
-    - [x] Revisar diseño y UX en Android real:
-      - [x] Inputs y teclado
-      - [x] Scroll y navegación
-      - [x] Botones e interacción general
-      - [ ] Ajustes para safe areas, notch y barras flotantes (pendiente de revisión en detalle)
+    - [x] Instalar manualmente en dispositivo de prueba
+    - [x] Confirmar funcionamiento completo en dispositivo real:
+      - [x] Carga sin conexión
+      - [x] Inputs, scroll, botones, navegación
+      - [x] Splash personalizada con Theme.SplashScreen (Android 12+) y background_legacy (Android 10)
+      - [x] Transición fluida a la app
+      - [x] Confirmado en emuladores y dispositivo Huawei físico
+      - [x] Evitado halo oscuro (cambio de icono)
+      - [x] Intento de evitar parpadeo blanco descartado y revertido
+      - [x] Limpieza de recursos no usados (icon.png)
+      - [x] Confirmado funcionamiento tras limpieza
+      - [ ] Anotado comportamiento menor: icono genérico en Pixel 4 al abrir desde homescreen (posible bug del emulador)
 
-  - [x] 🪢 Separar ramas de desarrollo y producción en el repositorio
-    - [x] Crear rama `main` dedicada a versiones estables y producción (APK/Play Store)
-    - [x] Crear rama `develop` para implementar nuevas características y mejoras sin afectar usuarios finales
-    - [x] Configurar flujos de merge (PRs o manual) para que los cambios se validen antes de llegar a `main`
-    - [x] Opcional: configurar previsualizaciones automáticas en Vercel desde `develop` (si se necesita testing web)
-    - [x] Documentar en README el flujo de trabajo con ramas para futuros cambios
+  - [x] 🪢 Flujo de ramas y despliegue
+    - [x] Rama `main`: producción estable
+    - [x] Rama `develop`: trabajo diario
+    - [x] Merge validado antes de llegar a `main`
+    - [x] Previsualizaciones automáticas en Vercel desde `develop` (opcional)
+    - [x] Documentado en README
 
-  - [x] 🔐 Generar y aplicar firma de aplicación (APK firmado)
-    - [x] Crear un `keystore` persistente para la app (`.jks`) y guardar copia segura
-    - [x] Configurar firma en Android Studio (`build.gradle`) con ese keystore
-    - [x] Generar APK o App Bundle (`.aab`) firmada y lista para distribución
-    - [x] Verificar que se instala correctamente en el dispositivo
-    - [x] Confirmar que el keystore se conserva para futuras actualizaciones
+  - [x] 🔐 Firma y preparación para distribución
+    - [x] Keystore `.jks` creado y guardado
+    - [x] Configuración en `build.gradle`
+    - [x] Generación de `.aab` firmada
+    - [x] Confirmado que se instala y actualiza correctamente
 
-  - [x] 🧪 Verificar versión firmada y preparada para futuras actualizaciones
-    - [x] Aumentar `versionCode` y `versionName` en `build.gradle` con cada nueva versión
-    - [x] Comprobar que una instalación previa se puede actualizar sin problemas
-    - [x] Validar comportamiento de splash screen, íconos, orientación, permisos, navegación, botón de retroceso y almacenamiento local en versión firmada
+  - [x] 🧪 Verificación de release firmada
+    - [x] Aumento de `versionCode` y `versionName` en `build.gradle`
+    - [x] Confirmado que se puede actualizar desde una instalación previa
+    - [x] Validado splash, navegación, retroceso, permisos y almacenamiento local
 
-  - [ ] 🧼 Revisión de metadata y configuración para distribución
-    - [x] Verificar que `manifest.json` tiene `display: standalone`, nombre corto, descripción, idioma, `theme_color`, `background_color`, etc.
+  - [ ] 🧼 Preparación para publicación en Play Store
+    - [x] `manifest.json` correcto (`standalone`, idioma, nombre, colores…)
+    - [x] Nombre visible y nombre de paquete (`com.jcpaezd.notifica`)
     - [ ] Confirmar que los íconos son adecuados y `maskable` (Android)
-    - [x] Definir nombre visible y nombre de paquete (`com.jcpaezd.notifica`)
-    - [ ] Eliminar permisos innecesarios y asegurar comportamiento offline
-    - [ ] Incluir capturas, ícono de app y descripción lista para Play Store
+    - [ ] Eliminar permisos innecesarios
+    - [ ] Incluir capturas y descripción lista para Play Store
 
-  - [x] 🛡 Crear cuenta de desarrollador Google Play
-    - [x] Acceder a https://play.google.com/console/ y registrarse como desarrollador individual
-    - [x] Pagar la tasa única de 25 USD
-    - [x] Aceptar términos y configurar perfil de cuenta. Completar verificaciones.
+  - [x] 🛡 Cuenta de desarrollador Google Play
+    - [x] Registro, verificación y pago completado
 
-  - [x] 🚦 Subir app en canal de testing privado en Google Play
-    - [x] Generar `.aab` y subirlo a Play Console *(listo para subir)*
-    - [x] Crear listado de testers (emails) o compartir enlace de testing interno
-    - [x] Especificar versión, notas de cambio, idioma, categoría, etc.
-    - [x] Habilitar feedback de testing si se desea
-    - [x] Instalar desde Play Store en dispositivo real y verificar funcionamiento completo
-
-  - [ ] 🚀 Publicar app en canal público de Google Play  
-    > **Nota:** Este paso no implica aún publicación visible para todo el mundo. Solo se subirá como versión pública “no listada” para pasar la verificación de Google. La visibilidad real se activará manualmente al finalizar la Etapa 9.
-
-    - [ ] Completar ficha de Play Store: nombre, descripción, capturas, privacidad, contacto, categoría, rating, política de datos
-    - [ ] Revisar que cumple todas las políticas de contenido y permisos
-    - [ ] Enviar para revisión y esperar validación de Google
-    - [ ] Una vez aprobada, dejarla en modo "no listada" sin habilitar visibilidad pública
+  - [x] 🚦 Testing interno en Play Console
+    - [x] Subida de `.aab` al canal de pruebas internas
+    - [x] Compartido con testers
+    - [x] Confirmada instalación desde Play Store y funcionamiento completo
 
   - [ ] ✅ Validar funciones clave en versión nativa Android  
-    - [ ] Confirmar que las siguientes acciones funcionan correctamente como app instalada:
-      - Compartir tareas (botón compartir, clipboard, navigator.share)
-      - Exportar e importar archivos (JSON o texto)
-      - Borrar todos los datos (y mostrar toast de confirmación)
-    - [ ] Comparar con la experiencia en la PWA
-    - [ ] Ajustar si es necesario para que se comporten igual o mejor que en versión web
+    - [ ] Compartir tareas (botón compartir, clipboard, navigator.share)
+    - [ ] Exportar e importar archivos (JSON o texto)
+    - [ ] Borrar todos los datos (y mostrar toast de confirmación)
+    - [ ] Comparar con experiencia en PWA
+    - [ ] Ajustar si es necesario para equiparar comportamiento
 
 ---
 
-- [ ] 🕛 Corrección automática de fecha en tareas creadas o editadas cerca de medianoche
-  - [ ] Detectar si la hora introducida corresponde al día anterior (e.g. 23:00 introducida después de medianoche)
-  - [ ] Ajustar fecha automáticamente si es coherente
-  - [ ] Mostrar toast informativo con opción de deshacer
+- [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
+  - [ ] Detectar si hora introducida corresponde al día anterior
+  - [ ] Ajustar fecha si es coherente
+  - [ ] Mostrar toast con opción de deshacer
 
-- [ ] ✉️ Formulario de feedback con envío automático por email
-  - [ ] Añadir botón "Enviar feedback" en el menú lateral
-  - [ ] Crear formulario visual con campos: tipo de mensaje (bug, sugerencia...), descripción, email opcional
-  - [ ] Al enviar, guardar el feedback en Firestore en la colección `feedback`
-  - [ ] Crear una función en Firebase (`functions.firestore.onCreate`) que escuche nuevos documentos y envíe un correo con su contenido
-  - [ ] Usar `nodemailer` o servicio externo (Resend, SendGrid...) para el envío
-  - [ ] Mostrar confirmación de envío exitosa en la interfaz
+- [ ] ✉️ Formulario de feedback por email
+  - [ ] Botón "Enviar feedback" en menú lateral
+  - [ ] Formulario con tipo de mensaje, descripción y email opcional
+  - [ ] Guardar en Firestore (colección `feedback`)
+  - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
+  - [ ] Confirmación visual tras enviar
 
-- [ ] 📜 Evitar scroll innecesario cuando no hay contenido largo
-  - [ ] Decidir si añadir más o menos scroll para evitar contenido tapado por toast
-  - [ ] Revisar estructura de layout general (`App.vue`)
-  - [ ] Asegurar que el `main` se ajusta correctamente al viewport y no desborda
+- [ ] 📜 Scroll innecesario en pantallas cortas
+  - [ ] Revisar layout y paddings
+  - [ ] Ajustar para evitar toasts tapados y mejorar adaptación al viewport
 
-- [ ] 🗓️ Mejorar identificador de turnos en el selector
-  - [ ] Añadir día de la semana al nombre del turno (`📅 Lunes · 03/06 · 23:00`)
-  - [ ] Aplicar formato más visual con emojis, abreviaturas y colores sutiles en selector y en títulos de las vistas cargadas de turnos
+- [ ] 🗓️ Mejora en identificador visual de turnos
+  - [ ] Añadir día de la semana al selector
+  - [ ] Usar emojis o colores sutiles para diferenciar turnos
 
-- [ ] 🙅‍♂️ Desactivar selección de texto en elementos UI no editables
-  - [ ] Aplicar clase `select-none` en botones, tarjetas, menús y demás UI
-  - [ ] Permitir `select-text` solo en campos de entrada y texto editable
+- [ ] 🙅‍♂️ Desactivar selección de texto innecesaria
+  - [ ] `select-none` en botones, tarjetas y menús
+  - [ ] `select-text` solo en campos de entrada
 
-- [ ] 🍔 Corregir comportamiento de hover persistente en botón hamburguesa
-  - [ ] Limitar uso de `hover:` solo a escritorio (`md:hover:`)
-  - [ ] Asegurar limpieza de estilos en móviles (`focus-visible`, `active`, etc.)
+- [ ] 🍔 Corregir hover persistente en botón hamburguesa
+  - [ ] Limitar hover a escritorio (`md:hover:`)
+  - [ ] Asegurar estilos limpios en móvil (`focus-visible`, `active`)
 
-- [ ] ↖️ Mantener header fijo para acceso a menú siempre
+- [ ] ↖️ Fijar header para acceso constante al menú
 
-- [ ] 🎞️ Añadir animación sutil y esporádica al icono del header  
-  - [ ] Decidir qué tipo de animación usar (rotación, pulso, desplazamiento…)
-  - [ ] Ejecutar animación suave cada 30–60 segundos sin ser invasiva
-  - [ ] Asegurar que no interfiere con la experiencia o distrae
-  - [ ] Evaluar si aporta valor real o se descarta tras probar
+- [ ] 🎞️ Animación sutil del icono del header
+  - [ ] Decidir tipo de animación (rotación, pulso…)
+  - [ ] Activarla esporádicamente sin molestar
+  - [ ] Evaluar si se mantiene o descarta
 
-- [ ] 🛠 Mejoras UX/UI aplicando aprendizajes de Nocta
-  - [ ] 📐 Revisar safe areas para pantallas con notch o barras flotantes
-    - [ ] Asegurar que el contenido principal no queda oculto en dispositivos con notches, cámaras perforadas o barras de navegación
-    - [ ] Ajustar paddings o usar `env(safe-area-inset-*)` en CSS/Tailwind si es necesario
-    - [ ] Verificar en dispositivos reales y simuladores que la app se ve correctamente
+- [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
+  - [ ] 📐 Revisar safe areas para notches y barras flotantes
+    - [ ] Asegurar que ningún contenido queda oculto
+    - [ ] Ajustar paddings con `env(safe-area-inset-*)`
+    - [ ] Verificar en dispositivos reales y emuladores
 
-- [ ] 📣 Aviso en PWA para migración a versión nativa (tras publicación en Google Play)
-  - [ ] Añadir comprobación condicional para mostrar aviso solo en entornos `web` o PWA (`navigator.standalone`, `Capacitor.isNativePlatform()`, etc.)
-  - [ ] Mostrar toast persistente o banner:  
-        `¡Ya está disponible la app oficial en Google Play! Instálala para disfrutar mejor experiencia.`
-  - [ ] Incluir botón con enlace a la app en Play Store (`market://details?id=com.jcpaezd.notifica` o URL de fallback)
-  - [ ] Añadir lógica para ocultar el aviso tras instalar versión nativa (opcional, si se puede detectar)
-  - [ ] Desactivar este aviso cuando se publique en abierto o pasado un tiempo
-  - [ ] Informar de que para usuarios de iOS, se puede instalar en link-a-vercel o link-personalizado-con-acortador
+- [ ] 📣 Aviso en PWA para migración a app nativa
+  - [ ] Detectar si es entorno web o PWA
+  - [ ] Mostrar toast persistente con enlace a Play Store
+  - [ ] Ocultar aviso si ya está instalada la versión nativa (opcional)
+  - [ ] Añadir fallback para iOS con link personalizado
 
 ---
 
 ## 🚀 Etapa 9: Publicación final y visibilidad pública
 
-- [ ] 🧭 Revisar, repensar y tomar decisiones sobre los puntos de este bloque
-  - [ ] Confirmar qué tareas de visibilidad y comunicación se llevarán a cabo
-  - [ ] Posponer o descartar aquellas que no se consideren útiles o prioritarias
+- [x] 🔃 Reorganización de tareas en etapa 9  
+    - [x] Pospuesto el cambio de visibilidad pública hasta después del aviso en PWA  
+    - [x] Ajustado orden de pasos para que reflejen la secuencia real de publicación  
+    - [x] Añadido recordatorio para actualizar README tras publicación
+- [ ] 📤 Publicar versión PWA como estable  
+  - [ ] Confirmar que la rama `main` está actualizada con la última versión  
+  - [ ] Subir cambios a Vercel y verificar despliegue correcto  
+  - [ ] Actualizar `versionName` en UI y archivos visibles para usuarios  
+  - [ ] Confirmar correcto funcionamiento como app instalada desde navegador  
 
-- [ ] 🌍 Publicar app en canal público de Google Play  
-  > **Nota:** Este será el lanzamiento real y abierto al público general. Se activará la visibilidad pública desde la consola de Google Play, una vez completadas las tareas de visibilidad, comunicación y validación final.
+- [ ] 🧭 Revisar, repensar y tomar decisiones sobre los puntos de este bloque  
+  - [ ] Confirmar qué tareas de visibilidad y comunicación se llevarán a cabo  
+  - [ ] Posponer o descartar aquellas que no se consideren útiles o prioritarias  
 
-  - [ ] Revisar ficha de Play Store (nombre, descripción, capturas, política de datos…)
-  - [ ] Confirmar que todo está actualizado y listo para ser visible públicamente
-  - [ ] Activar visibilidad pública en Play Console
-  - [ ] Confirmar que está disponible en búsquedas y accesible desde la Play Store
+- [ ] 🌍 Subir app al canal público como "no listada"  
+  > Este paso sube la app a producción en Google Play para revisión, pero sin visibilidad pública.  
+  - [ ] Revisar ficha de Play Store (nombre, descripción, capturas, política de datos…)  
+  - [ ] Confirmar que todo está actualizado y listo para revisión  
+  - [ ] Enviar para revisión de Google y esperar aprobación  
+  - [ ] No activar aún la visibilidad pública  
 
-- [ ] 📢 Anunciar disponibilidad de versión nativa a usuarios actuales de la PWA
-  - [ ] Detectar si el usuario está accediendo desde la versión web/PWA
-  - [ ] Mostrar banner o alerta informativa: “Disponible versión nativa en Play Store”
-  - [ ] Incluir enlace directo a la ficha de la app en Google Play
-  - [ ] Opcional: detectar si ya tiene la app nativa instalada y ocultar banner
+- [ ] 📢 Aviso en PWA para migración a versión nativa (tras publicación en abierto)  
+  - [ ] Añadir comprobación condicional para mostrar aviso solo en entornos `web` o PWA (`navigator.standalone`, `Capacitor.isNativePlatform()`, etc.)  
+  - [ ] Mostrar toast persistente o banner:  
+        `¡Ya está disponible la app oficial en Google Play! Instálala para disfrutar mejor experiencia.`  
+  - [ ] Incluir botón con enlace a la app en Play Store (`market://details?id=com.jcpaezd.notifica` o URL de fallback)  
+  - [ ] Añadir lógica para ocultar el aviso tras instalar versión nativa (opcional, si se puede detectar)  
+  - [ ] Desactivar este aviso cuando se publique en abierto o pasado un tiempo  
+  - [ ] Informar de que para usuarios de iOS, se puede instalar desde el link de Vercel o un acortador personalizado  
 
-- [ ] 📬 Preparar mensaje de presentación para redes o comunidades
-  - [ ] Escribir un texto breve y claro explicando:
-    - Qué problema resuelve la app
-    - Para quién está pensada
-    - Por qué se ha creado
-  - [ ] Incluir capturas atractivas o enlace a la ficha de Play Store
-  - [ ] Incluir enlace a GitHub, página informativa o demo si se considera útil
+- [ ] 📬 Preparar mensaje de presentación para redes o comunidades  
+  - [ ] Escribir un texto breve y claro explicando:  
+    - Qué problema resuelve la app  
+    - Para quién está pensada  
+    - Por qué se ha creado  
+  - [ ] Incluir capturas atractivas o enlace a la ficha de Play Store  
+  - [ ] Incluir enlace a GitHub, página informativa o demo si se considera útil  
+  - [ ] Actualizar `README.md` del repositorio con info final (versión nativa, enlaces, capturas...)  
 
-- [ ] 📌 Compartir la app en plataformas relevantes
-  - [ ] `/r/androidapps` (si se presenta como app útil, sin spam)
-  - [ ] `/r/SideProject` (enfocado a proyectos personales)
-  - [ ] `/r/AndroidDev` (enfocado a desarrollo, si se cuenta parte del proceso técnico)
-  - [ ] Foros o grupos relacionados con mantenimiento técnico, trabajo en fábricas, etc.
-  - [ ] Círculos personales o profesionales cercanos (Telegram, WhatsApp, email)
+- [ ] ✅ Activar visibilidad pública desde Play Console  
+  > Este será el lanzamiento real y abierto al público general. Se activará la visibilidad pública desde la consola de Google Play, una vez completadas las tareas anteriores.  
+  - [ ] Confirmar que la app ha sido aprobada y está funcional  
+  - [ ] Activar visibilidad pública desde Play Console  
+  - [ ] Confirmar que está disponible en búsquedas y accesible desde la Play Store  
+  - [ ] Activar el aviso en la PWA (tarea pendiente del punto anterior)  
+
+- [ ] 📌 Compartir la app en plataformas relevantes  
+  - [ ] `/r/androidapps` (si se presenta como app útil, sin spam)  
+  - [ ] `/r/SideProject` (enfocado a proyectos personales)  
+  - [ ] `/r/AndroidDev` (enfocado a desarrollo, si se cuenta parte del proceso técnico)  
+  - [ ] Foros o grupos relacionados con mantenimiento técnico, trabajo en fábricas, etc.  
+  - [ ] Círculos personales o profesionales cercanos (Telegram, WhatsApp, email)  
   - [ ] (Opcional) Crear mini landing page o entrada en Notion con más detalles
-
 
 ---
 
