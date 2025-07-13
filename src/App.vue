@@ -680,7 +680,7 @@ const handleMenuAction = (actionName: string) => {
     @close="closeSideMenu"
     @action="handleMenuAction" />
   
-    <header class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0"> <!-- Añadido pb-4 -->
+    <header class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none"> <!-- Añadido pb-4 -->
     <button
       @click="openSideMenu"
       class="absolute left-4 top-4.5 p-1 rounded-md border border-slate-300 hover:bg-slate-200 focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
@@ -698,7 +698,7 @@ const handleMenuAction = (actionName: string) => {
     </div>
   </header>
   
-    <main class="min-h-screen bg-app-bg text-text-main flex flex-col items-center pt-4 px-4"> <!-- pt aún más reducido -->
+    <main class="min-h-screen bg-app-bg text-text-main flex flex-col items-center pt-4 px-4 select-none"> <!-- pt aún más reducido -->
 
     <!-- Sección para añadir nueva tarea -->
     <Transition

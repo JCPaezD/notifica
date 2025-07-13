@@ -278,9 +278,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Añadir día de la semana al selector
   - [ ] Usar emojis o colores sutiles para diferenciar turnos
 
-- [ ] 🙅‍♂️ Desactivar selección de texto innecesaria
-  - [ ] `select-none` en botones, tarjetas y menús
-  - [ ] `select-text` solo en campos de entrada
+- [x] 🙅‍♂️ Desactivar selección de texto innecesaria  
+  - [x] Aplicado `select-none` global en `<main>`, `<header>` y contenedor de menú lateral  
+  - [x] `select-text` se mantiene solo en campos de entrada por defecto (inputs, textareas)  
+  - [x] Validado en navegador y dispositivos: no se puede seleccionar texto accidentalmente en ningún elemento de la UI
 
 - [ ] 🍔 Corregir hover persistente en botón hamburguesa
   - [ ] Limitar hover a escritorio (`md:hover:`)
@@ -313,7 +314,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Confirmar que la rama `main` está actualizada con la última versión  
   - [ ] Subir cambios a Vercel y verificar despliegue correcto  
   - [ ] Actualizar `versionName` en UI y archivos visibles para usuarios  
-  - [ ] Confirmar correcto funcionamiento como app instalada desde navegador  
+  - [ ] Confirmar correcto funcionamiento como app instalada desde navegador
+  - [ ] (Opcional) Crear un tag git:
+      git tag v1.X.Y -m "Descripción del release"
+      git push origin v1.X.Y  
 
 - [ ] 🧭 Revisar, repensar y tomar decisiones sobre los puntos de este bloque  
   - [ ] Confirmar qué tareas de visibilidad y comunicación se llevarán a cabo  
