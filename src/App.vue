@@ -4,8 +4,6 @@
 import { ref, computed, onMounted, watch, nextTick, onUnmounted } from 'vue' // Añadido onUnmounted
 import TaskList from './components/TaskList.vue' // Importar el nuevo componente
 import SideMenu from './components/SideMenu.vue' // Importar el menú lateral
-import { Toaster } from 'vue-sonner'
-import { useNotifications } from './composables/useNotifications'
 import Toast from './components/Toast.vue'
 import { useToast } from './composables/useToast'
 import type { Task } from './types/Task' // Importar la interfaz Task compartida
@@ -51,7 +49,11 @@ const taskListKey = ref(0); // Key para forzar la re-renderización de TaskList,
 // Crea y añade una nueva tarea a la lista.
 const startNewTask = () => {
   if (newTaskDescription.value.trim() === '') {
-    notifyWarning('Campo Requerido', 'Por favor, introduce una descripción para la tarea.')
+    add({
+      title: 'Campo Requerido',
+      description: 'Por favor, introduce una descripción para la tarea.',
+      type: 'warning'
+    });
     return
   }
 
@@ -135,7 +137,11 @@ const reactivateTask = (taskId: string) => {
   const task = allTasks.value.find(t => t.id === taskId)
   if (task) {
     delete task.endTime
-    notifyWarning('Tarea Reactivada', `"${task.description}" ha sido reabierta.`);
+    add({
+      title: 'Tarea Reactivada',
+      description: `"${task.description}" ha sido reabierta.`,
+      type: 'warning'
+    });
   }
 }
 
@@ -148,27 +154,27 @@ const deleteTask = (taskId: string) => {
     // Eliminar la tarea de la lista principal síncronamente
     allTasks.value.splice(taskIndex, 1);
 
-    // Mostrar toast con opción de Deshacer usando nuestro composable
-    // Originalmente era notifyWarning, lo cambiamos a notifyError para el color rojo
-    // y añadimos className para el estilo del botón de deshacer.
-    const toastId = notifyError( // Cambiado de notifyWarning a notifyError
-      'Tarea Eliminada',
-      `"${taskToDelete.description}" ha sido eliminada.`,
+    // Mostrar toast con opción de Deshacer usando el sistema de notificaciones propio
+    // Se usa type: 'error' para mostrar el toast en rojo
+    // El botón de deshacer se define mediante la propiedad action del objeto toast
+    add(
       {
+        title: 'Tarea Eliminada',
+        description: `"${taskToDelete.description}" ha sido eliminada.`,
+        type: 'error',
         action: {
           label: 'Deshacer',
           onClick: () => {
             // Restaurar la tarea en su posición original
             allTasks.value.splice(taskIndex, 0, taskToDelete);
-            notifyInfo('Tarea Restaurada', `"${taskToDelete.description}" ha sido restaurada.`);
-            dismissToast(toastId); // Cerrar el toast de "Deshacer"
-          },
-        },
-        // Se eliminan las props id, className y classNames ya que no se usará un icono SVG.
-        // id: 'undo-delete-task-toast', // Comentado o eliminado
-        // className: 'toast-with-undo-action', // Comentado o eliminado
-        duration: 7000, // Asegurar duración larga para el toast con "Deshacer"
-      }
+            add({
+              title: 'Tarea Restaurada',
+              description: `"${taskToDelete.description}" ha sido restaurada.`
+            });
+          }
+        }
+      },
+      7000 // Asegurar duración larga para el toast con "Deshacer"
     );
   }
 }
@@ -187,7 +193,11 @@ const startNewShift = (showAlert = true) => {
       `Esto archivará las tareas actuales. ¿Desea continuar?`
     );
     if (!confirmed) {
-      notifyInfo('Acción Cancelada', 'Inicio de nuevo turno cancelado por el usuario.');
+      add({
+        title: 'Acción Cancelada',
+        description: 'Inicio de nuevo turno cancelado por el usuario.',
+        type: 'info'
+      });
       return;
     }
   }
@@ -303,7 +313,11 @@ const listTitle = computed(() => {
 // Exporta todas las tareas actuales a un archivo JSON.
 const exportTasksToJson = async () => {
   if (allTasks.value.length === 0) {
-    notifyWarning('Exportación Vacía', 'No hay tareas para exportar.');
+    add({
+      title: 'Exportación Vacía',
+      description: 'No hay tareas para exportar.',
+      type: 'warning'
+    });
     return;
   }
 
@@ -357,7 +371,7 @@ const exportTasksToJson = async () => {
       description: `Archivo "${fileName}" generado.`,
     })
   }
-
+};
 
   // Dispara el click en el input de tipo "file" (oculto) para la importación de tareas.
   const triggerFileImport = () => {
@@ -368,7 +382,11 @@ const exportTasksToJson = async () => {
   const importTasksFromJson = (event: Event) => {
     const fileInput = event.target as HTMLInputElement;
     if (!fileInput.files || fileInput.files.length === 0) {
-      notifyWarning('Importación Fallida', 'No se seleccionó ningún archivo.');
+      add({
+        title: 'Importación Fallida',
+        description: 'No se seleccionó ningún archivo.',
+        type: 'warning'
+      });
       return;
     }
 
@@ -415,9 +433,17 @@ const exportTasksToJson = async () => {
           currentShiftId.value = null;
           selectedShiftToView.value = 'current';
         }
-        notifyInfo('Importación Exitosa', `${validatedTasks.length} tareas importadas correctamente.`);
+        add({
+          title: 'Importación Exitosa',
+          description: `${validatedTasks.length} tareas importadas correctamente.`,
+          type: 'info'
+        });
       } catch (error) {
-        notifyError('Error de Importación', `Al procesar el archivo: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+        add({
+          title: 'Error de Importación',
+          description: `Al procesar el archivo: ${error instanceof Error ? error.message : 'Error desconocido'}`,
+          type: 'error'
+        });
       } finally {
         // Resetear el input de archivo para permitir importar el mismo archivo de nuevo si es necesario
         if (fileInput) fileInput.value = '';
@@ -425,7 +451,11 @@ const exportTasksToJson = async () => {
     };
 
     reader.onerror = () => {
-      notifyError('Error de Lectura', 'Ocurrió un problema al leer el archivo seleccionado.');
+      add({
+        title: 'Error de Lectura',
+        description: 'Ocurrió un problema al leer el archivo seleccionado.',
+        type: 'error'
+      });
       if (fileInput) fileInput.value = '';
     };
 
@@ -439,10 +469,11 @@ const exportTasksToJson = async () => {
 
       allTasks.value = []; // Limpia la lista de tareas en la aplicación
 
-      const toastId = notifyError(
-        'Borrado Completo',
-        'Todas las tareas han sido eliminadas.',
+      add(
         {
+          title: 'Borrado Completo',
+          description: 'Todas las tareas han sido eliminadas.',
+          type: 'error',
           action: {
             label: 'Deshacer',
             onClick: async () => { // Hacer la función onClick asíncrona
@@ -456,19 +487,25 @@ const exportTasksToJson = async () => {
               await nextTick(); // Esperar al siguiente ciclo de actualización del DOM
 
               // Mostrar notificación de restauración y recargar la página cuando esta se cierre.
-              notifyInfo('Tareas Restauradas', 'Todas las tareas han sido restauradas.', {
+              add({
+                title: 'Tareas Restauradas',
+                description: 'Todas las tareas han sido restauradas.',
+                type: 'info',
                 onDismiss: () => {
                   window.location.reload(); // Forzar la recarga de la página cuando el toast se cierre
                 }
               });
-              dismissToast(toastId); // Cerrar el toast de "Deshacer"
-            },
-          },
-          duration: 7000, // 7 segundos para reaccionar
-        }
+            }
+          }
+        },
+        7000 // 7 segundos para reaccionar
       );
     } else {
-      notifyInfo('Acción Cancelada', 'El borrado de tareas fue cancelado.');
+      add({
+        title: 'Acción Cancelada',
+        description: 'El borrado de tareas fue cancelado.',
+        type: 'info'
+      });
     }
   };
 
@@ -496,7 +533,11 @@ const exportTasksToJson = async () => {
           // shiftId ya es string, isNotified ya es boolean (o debería serlo desde la importación)
         }))
       } catch (error) {
-        notifyError('Error de Carga', 'No se pudieron cargar las tareas guardadas. Podrían estar corruptas.');
+        add({
+          title: 'Error de Carga',
+          description: 'No se pudieron cargar las tareas guardadas. Podrían estar corruptas.',
+          type: 'error'
+        });
         console.error('Error al parsear tareas desde localStorage:', error);
       }
     }
@@ -639,7 +680,11 @@ const exportTasksToJson = async () => {
     }
 
     if (!shiftIdToShare) {
-      notifyWarning('Error al Compartir', 'No hay un turno seleccionado o activo para compartir.');
+      add({
+        title: 'Error al Compartir',
+        description: 'No hay un turno seleccionado o activo para compartir.',
+        type: 'warning'
+      });
       return;
     }
 
@@ -648,7 +693,11 @@ const exportTasksToJson = async () => {
       .sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
 
     if (tasksOfShift.length === 0) {
-      notifyWarning('Nada que Compartir', `No hay tareas en el ${shiftLabel} para compartir.`);
+      add({
+        title: 'Nada que Compartir',
+        description: `No hay tareas en el ${shiftLabel} para compartir.`,
+        type: 'warning'
+      });
       return;
     }
 
@@ -666,7 +715,11 @@ const exportTasksToJson = async () => {
           text: fullText,
           dialogTitle: 'Compartir Tareas'
         });
-        notifyInfo('Tareas Compartidas', 'Contenido enviado mediante sistema nativo.');
+        add({
+          title: 'Tareas Compartidas',
+          description: 'Contenido enviado mediante sistema nativo.',
+          type: 'info'
+        });
         return;
       }
     } catch (e) {
@@ -679,15 +732,31 @@ const exportTasksToJson = async () => {
           title: `Notificaciones del ${shiftLabel}`,
           text: fullText,
         });
-        notifyInfo('Tareas Compartidas', 'Contenido enviado a la aplicación de compartir.');
+        add({
+          title: 'Tareas Compartidas',
+          description: 'Contenido enviado a la aplicación de compartir.',
+          type: 'info'
+        });
       } else if (navigator.clipboard) {
         await navigator.clipboard.writeText(fullText);
-        notifyInfo('Tareas Copiadas', 'Contenido copiado al portapapeles.');
+        add({
+          title: 'Tareas Copiadas',
+          description: 'Contenido copiado al portapapeles.',
+          type: 'info'
+        });
       } else {
-        notifyError('Error al Compartir', 'Tu navegador no soporta la función de compartir o copiar.');
+        add({
+          title: 'Error al Compartir',
+          description: 'Tu navegador no soporta la función de compartir o copiar.',
+          type: 'error'
+        });
       }
     } catch (err) {
-      notifyError('Error al Compartir', 'Ocurrió un error al intentar la acción.');
+      add({
+        title: 'Error al Compartir',
+        description: 'Ocurrió un error al intentar la acción.',
+        type: 'error'
+      });
     }
   };
 
@@ -721,9 +790,12 @@ const exportTasksToJson = async () => {
         deleteAllTasks();
         break;
       default:
-        notifyWarning('Acción Desconocida', `La acción de menú "${actionName}" no está implementada.`);
+        add({
+          title: 'Acción Desconocida',
+          description: `La acción de menú "${actionName}" no está implementada.`,
+          type: 'warning'
+        });
     }
-    closeSideMenu(); // Cerrar el menú después de ejecutar la acción
   };
 
 
@@ -919,8 +991,9 @@ const exportTasksToJson = async () => {
 
   <!-- Sistema propio de notificaciones -->
   <Teleport to="body">
-    <TransitionGroup tag="div" name="toast" class="fixed bottom-24 right-4 flex flex-col items-end space-y-2 z-[9999]">
+    <TransitionGroup tag="div" name="toast" class="fixed bottom-4 right-4 flex flex-col items-end space-y-2 z-[9999]">
       <Toast v-for="toast in toasts" :key="toast.id" v-bind="toast" @onClose="remove(toast.id)" />
     </TransitionGroup>
   </Teleport>
+
 </template>
