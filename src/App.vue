@@ -715,7 +715,7 @@ const handleMenuAction = (actionName: string) => {
       </div>
     </header>
   
-    <main class="min-h-screen bg-app-bg text-text-main flex flex-col items-center pt-4 px-4 select-none"> <!-- pt aún más reducido -->
+    <main class="min-h-[calc(100vh-72px)] bg-app-bg text-text-main flex flex-col items-center pt-4 px-4 select-none"> <!-- pt aún más reducido -->
 
     <!-- Sección para añadir nueva tarea -->
     <Transition

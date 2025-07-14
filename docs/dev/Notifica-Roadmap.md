@@ -307,6 +307,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [ ] Ajustar paddings con `env(safe-area-inset-*)`
     - [ ] Verificar en dispositivos reales y emuladores
 
+- [ ] 🪧 Toast no desaparecen a veces al volver si la app ha salido del primer plano
+
 - [ ] 📣 Aviso en PWA para migración a app nativa
   - [ ] Detectar si es entorno web o PWA
   - [ ] Mostrar toast persistente con enlace a Play Store
