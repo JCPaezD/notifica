@@ -6,11 +6,15 @@ import TaskList from './components/TaskList.vue' // Importar el nuevo componente
 import SideMenu from './components/SideMenu.vue' // Importar el menú lateral
 import { Toaster } from 'vue-sonner'
 import { useNotifications } from './composables/useNotifications'
+import Toast from './components/Toast.vue'
+import { useToast } from './composables/useToast'
 import type { Task } from './types/Task' // Importar la interfaz Task compartida
-
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { Capacitor } from '@capacitor/core';
+
+// Ref para la lista reactiva de toasts y la función de eliminación
+const { toasts, remove, add } = useToast()
 
 // --- Animacion del logo y titulo ---
 const logoBlockRef = ref<HTMLElement | null>(null);
@@ -469,6 +473,16 @@ onMounted(() => {
       console.error('Error al parsear tareas desde localStorage:', error);
     }
   }
+  add({
+    title: 'Notificación de prueba',
+    description: 'Esto es una prueba del sistema de toasts propio.',
+    action: {
+      label: 'Cerrar Todo',
+      onClick: () => {
+        toasts.value = []
+      }
+    }
+  }, 6000)
 })
 
 // Watcher: Guarda todas las tareas en localStorage cada vez que el array `allTasks` cambia.
@@ -921,10 +935,20 @@ const handleMenuAction = (actionName: string) => {
     <input type="file" ref="fileImportInputRef" @change="importTasksFromJson" accept=".json" class="hidden" />
   </main>
 
-  <!-- Componente Toaster para las notificaciones -->
-  <!-- Movido fuera de <main> para asegurar el posicionamiento fixed correcto -->
-  <Toaster
-    position="bottom-center"
-    closeButton
-  />
+  <!-- Sistema propio de notificaciones -->
+  <Teleport to="body">
+    <TransitionGroup
+      tag="div"
+      name="toast"
+      class="fixed bottom-24 right-4 flex flex-col items-end space-y-2 z-[9999]"
+    >
+      <Toast
+        v-for="toast in toasts"
+        :key="toast.id"
+        v-bind="toast"
+        @onClose="remove(toast.id)"
+      />
+    </TransitionGroup>
+  </Teleport>
 </template>
+

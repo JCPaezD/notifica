@@ -271,8 +271,24 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Confirmación visual tras enviar
 
 - [ ] 📜 Scroll innecesario en pantallas cortas
-  - [ ] Revisar layout y paddings
+  - [x] Revisar layout y paddings
   - [ ] Ajustar para evitar toasts tapados y mejorar adaptación al viewport
+    - [x] Revisar sistema de notificaciones usado en Nocta
+    - [x] Decidir estructura de archivos y rutas para Notifica
+    - [x] Copiar/adaptar componentes y composables necesarios
+    - [x] Integrar sistema en App.vue con <Teleport> si aplica
+    - [ ] Añadir soporte para botón de acción en el sistema de toasts
+      - [ ] Definir API esperada (label + onClick)
+      - [ ] Modificar <Toast.vue> para mostrar botón si hay acción
+      - [ ] Emitir evento o ejecutar función asociada al click
+      - [ ] Estilizar el botón para que sea compacto y accesible
+      - [ ] Probar en móvil y escritorio con caso "Deshacer"
+    - [ ] Añadir animación o retroalimentación visual al botón de acción
+    - [ ] Reemplazar llamadas a vue-sonner por sistema propio
+    - [ ] Eliminar vue-sonner y sus rastros del proyecto
+    - [ ] Ajustar diseño visual: tamaño, posición, animación, stacking
+    - [ ] Verificar funcionamiento real (móvil y escritorio)
+    - [ ] Documentar en dev-notes la decisión y estructura
 
 - [ ] 🗓️ Mejora en identificador visual de turnos
   - [ ] Añadir día de la semana al selector
