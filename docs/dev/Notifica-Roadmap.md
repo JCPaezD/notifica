@@ -298,9 +298,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Añadir soporte para onDismiss (ejecutar al cerrarse automáticamente)
       - [x] Añadir soporte para tipo visual de toast (success, error, info, warning)
       - [x] Hacer que add(...) devuelva el id del toast
-      - [ ] Revisar todas las llamadas a toast para adaptar estos nuevos campos si aplica
-      - [ ] Continuar la sustitución de notifySuccess, notifyInfo, notifyError, notifyWarning
-    - [ ] Eliminar vue-sonner y sus rastros del proyecto
+      - [x] Revisar todas las llamadas a toast para adaptar estos nuevos campos si aplica
+      - [x] Continuar la sustitución de notifySuccess, notifyInfo, notifyError, notifyWarning
+    - [x] Eliminar vue-sonner y sus rastros del proyecto
+    - [x] El botón deshacer no cerraba el toast de "Tarea eliminada"
+      > Se ajustaron los tiempos de cierre y aparición para permitir la animación completa del botón y una experiencia visual fluida.
     - [ ] Ajustar diseño visual: tamaño, posición, animación, stacking
     - [ ] Verificar funcionamiento real (móvil y escritorio)
     - [ ] Documentar en dev-notes la decisión y estructura

@@ -151,13 +151,10 @@ const deleteTask = (taskId: string) => {
   if (taskIndex !== -1) {
     const taskToDelete = { ...allTasks.value[taskIndex] }; // Guardar una copia completa de la tarea
 
-    // Eliminar la tarea de la lista principal síncronamente
-    allTasks.value.splice(taskIndex, 1);
-
     // Mostrar toast con opción de Deshacer usando el sistema de notificaciones propio
     // Se usa type: 'error' para mostrar el toast en rojo
     // El botón de deshacer se define mediante la propiedad action del objeto toast
-    add(
+    const toastId = add(
       {
         title: 'Tarea Eliminada',
         description: `"${taskToDelete.description}" ha sido eliminada.`,
@@ -165,19 +162,37 @@ const deleteTask = (taskId: string) => {
         action: {
           label: 'Deshacer',
           onClick: () => {
-            // Restaurar la tarea en su posición original
-            allTasks.value.splice(taskIndex, 0, taskToDelete);
-            add({
-              title: 'Tarea Restaurada',
-              description: `"${taskToDelete.description}" ha sido restaurada.`
-            });
+            // Restaurar la tarea en su posición original tras un leve retardo
+            setTimeout(() => {
+              allTasks.value.splice(taskIndex, 0, taskToDelete);
+            }, 300);
+
+            // Cerrar el toast original con pequeño retardo para permitir animación
+            setTimeout(() => {
+              remove(toastId);
+            }, 500);
+
+            // Mostrar el toast de restauración ligeramente después
+            setTimeout(() => {
+              add({
+                title: 'Tarea Restaurada',
+                description: `"${taskToDelete.description}" ha sido restaurada.`
+              });
+            }, 550);
           }
         }
       },
       7000 // Asegurar duración larga para el toast con "Deshacer"
     );
+
+    // Eliminar la tarea tras un breve retardo para suavizar la interacción
+    setTimeout(() => {
+      allTasks.value.splice(taskIndex, 1);
+    }, 300);
   }
 }
+
+
 
 // Inicia un nuevo turno. Archiva las tareas del turno anterior y establece un nuevo ID de turno.
 const startNewShift = (showAlert = true) => {
