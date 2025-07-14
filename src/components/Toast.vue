@@ -14,11 +14,9 @@
             </p>
         </div>
 
-        <button v-if="action" @click="action.onClick" :class="[
-            'ml-auto text-sm font-medium text-accent-main hover:underline transition-transform duration-150 ease-in-out',
-            animateOnMount ? 'animate-pop' : '',
-            'active:scale-95'
-        ]">
+        <button v-if="action" @click="action.onClick" class="ml-auto px-2 py-1 text-sm font-medium text-accent-main 
+            bg-accent-main/10 rounded-md hover:bg-accent-main/20 
+            active:scale-95 transition-all duration-200 ease-in-out">
             {{ action.label }}
         </button>
 
