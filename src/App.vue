@@ -12,6 +12,8 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { Capacitor } from '@capacitor/core';
 
+// --- Animacion del logo y titulo ---
+const logoBlockRef = ref<HTMLElement | null>(null);
 
 // --- Estado para la creación de nuevas tareas ---
 const newTaskDescription = ref('')
@@ -173,6 +175,16 @@ const startNewShift = (showAlert = true) => {
   
   currentShiftId.value = newShiftId;
   selectedShiftToView.value = 'current'; 
+  
+  if (logoBlockRef.value) {
+    setTimeout(() => {
+      logoBlockRef.value?.classList.add('scale-105', 'drop-shadow-md');
+      setTimeout(() => {
+        logoBlockRef.value?.classList.remove('scale-105', 'drop-shadow-md');
+      }, 300); // duración de la animación
+    }, 400); // retardo antes de empezar (ajustable)
+  }
+
 
   const toastId = notifySuccess(
     'Nuevo Turno Iniciado', 
@@ -692,8 +704,11 @@ const handleMenuAction = (actionName: string) => {
           </svg>
         </button>
 
-        <!-- Contenedor del título y logo, centrado -->
-        <div class="flex items-center gap-x-2">
+        <!-- Contenedor animado conjunto -->
+        <div
+          ref="logoBlockRef"
+          class="flex items-center gap-x-2 transition-all duration-300 ease-in-out md:hover:scale-105 md:hover:drop-shadow-md"
+        >
           <img src="/assets/logo-header.png" alt="Logo Notifica" class="h-8 w-auto">
           <h1 class="text-4xl font-extrabold tracking-tight text-text-main">Notifica</h1>
         </div>

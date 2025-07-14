@@ -288,12 +288,18 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Asegurar estilos limpios en móvil (`focus-visible`, `active`)
   - 📝 Intentado con clases `btn-interactive`, pero generaba efectos inconsistentes. Se pospone.
 
-- [ ] ↖️ Fijar header para acceso constante al menú
+- [x] ↖️ Fijar header para acceso constante al menú  
+  > Implementado con `sticky top-0` y fondo blanco en todo el ancho.  
+  > Probado en dispositivo real (PWA en iPhone 16 Pro): sin fallos visuales.  
+  > En DevTools móvil (Chrome), puede verse un "temblor al hacer scroll", considerado bug de simulación. No se reproduce en dispositivos físicos.
 
-- [ ] 🎞️ Animación sutil del icono del header
-  - [ ] Decidir tipo de animación (rotación, pulso…)
-  - [ ] Activarla esporádicamente sin molestar
-  - [ ] Evaluar si se mantiene o descarta
+- [x] 🎞️ Animación sutil del icono del header
+  - [x] Decidir tipo de animación (escala + sombra sutil)
+  - [x] Activarla al hacer hover en escritorio (`md:hover`) sobre logo + título
+  - [x] Activarla al crear nuevo turno con efecto breve y retraso de inicio
+  > Se ha implementado una animación suave compartida entre logo y título (scale-105 + drop-shadow-md), que se activa en escritorio al hacer hover, y también de forma programada cuando se crea un nuevo turno.
+  > El comportamiento es fluido, no invasivo y aporta feedback visual sin distraer.
+  > En móvil, la animación se dispara tras confirmar la creación del turno, con un retardo para asegurar visibilidad.
 
 - [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
