@@ -277,13 +277,23 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Decidir estructura de archivos y rutas para Notifica
     - [x] Copiar/adaptar componentes y composables necesarios
     - [x] Integrar sistema en App.vue con <Teleport> si aplica
-    - [ ] Añadir soporte para botón de acción en el sistema de toasts
-      - [ ] Definir API esperada (label + onClick)
-      - [ ] Modificar <Toast.vue> para mostrar botón si hay acción
-      - [ ] Emitir evento o ejecutar función asociada al click
-      - [ ] Estilizar el botón para que sea compacto y accesible
-      - [ ] Probar en móvil y escritorio con caso "Deshacer"
-    - [ ] Añadir animación o retroalimentación visual al botón de acción
+    - [x] Añadir soporte para botón de acción en el sistema de toasts
+      - [x] Definir API esperada (label + onClick)
+      - [x] Modificar <Toast.vue> para mostrar botón si hay acción
+      - [x] Emitir evento o ejecutar función asociada al click
+      - [x] Estilizar el botón para que sea compacto y accesible
+      - [x] Probar en móvil y escritorio con caso "Deshacer"
+    - [x] Añadir animación o retroalimentación visual al botón de acción al pulsar
+    - [ ] Añadir animación sutil al montar el toast (una sola vez)
+      - [ ] Activar clase como animate-pop o animate-scale tras delay breve
+      - [ ] Usar onMounted o watch en Toast.vue
+      - [ ] Retirar clase para evitar loops
+      - [ ] Comprobar en móvil y escritorio sin interferir con el cierre
+    - [ ] Añadir animación de entrada y salida al toast completo
+      - [ ] Usar <TransitionGroup name="toast"> como en Nocta
+      - [ ] Definir clases .toast-enter-from, .toast-leave-to... en main.css
+      - [ ] Validar que funciona con v-for y Teleport
+      - [ ] Probar fluidez en móvil y escritorio
     - [ ] Reemplazar llamadas a vue-sonner por sistema propio
     - [ ] Eliminar vue-sonner y sus rastros del proyecto
     - [ ] Ajustar diseño visual: tamaño, posición, animación, stacking

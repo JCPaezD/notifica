@@ -479,7 +479,9 @@ onMounted(() => {
     action: {
       label: 'Cerrar Todo',
       onClick: () => {
-        toasts.value = []
+        setTimeout(() => {
+          toasts.value = []
+        }, 500)
       }
     }
   }, 6000)

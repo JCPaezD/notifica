@@ -315,3 +315,34 @@ Resultado:
 Limitación aceptada: no siempre aparece una opción de "Guardar en Archivos"; depende del dispositivo y apps instaladas.
 
 Función validada como completa y estable.
+
+
+---
+
+### Sistema de Toasts (Notifica)
+
+Se reemplazó la librería externa `vue-sonner` por un sistema de notificaciones propio inspirado en Nocta.  
+Motivos:
+- Mayor control visual y de interacción
+- Mejor integración con el diseño y lógica de Notifica
+- Eliminación de dependencias innecesarias
+
+El sistema se basa en:
+- `Toast.vue`: componente individual de notificación
+- `useToast.ts`: composable para gestionar estado reactivo de los toasts
+- `toast.ts`: función `add(...)` para mostrar toasts desde cualquier lugar
+- `<Teleport>` y `<TransitionGroup>` en `App.vue` para renderizar toasts fuera del flujo principal
+
+Mejoras aplicadas respecto a Nocta:
+- Soporte para botón de acción con `label` y `onClick`
+- Estilo animado en el botón de acción (`scale-95` al pulsar)
+- Cierre diferido del toast para permitir ver la animación de pulsación
+- Separación clara entre ejecución de acción y cierre visual
+
+Tareas pendientes o ideas futuras:
+- Añadir animación puntual al aparecer (pulse, pop...)
+- Animación de entrada/salida completa para el toast (como en Nocta)
+- (Opcional) Resaltar brevemente el contenido afectado por la acción (e.g. Deshacer)
+
+Este sistema puede reutilizarse o retroportarse a Nocta con pequeñas adaptaciones, manteniendo una base común de diseño y lógica.
+
