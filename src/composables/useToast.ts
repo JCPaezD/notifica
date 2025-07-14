@@ -4,14 +4,17 @@ import type { Toast } from './toast'
 const toasts = ref<Toast[]>([])
 
 export function useToast() {
-  const add = (toast: Omit<Toast, 'id'>, duration = 3000) => {
+  const add = (toast: Omit<Toast, 'id'>, duration = 3000): string => {
     const id = Date.now().toString()
     const newToast: Toast = { id, ...toast }
     toasts.value.push(newToast)
 
     setTimeout(() => {
+      toast.onDismiss?.()
       remove(id)
     }, duration)
+
+    return id
   }
 
   const remove = (id: string) => {

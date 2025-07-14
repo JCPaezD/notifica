@@ -295,6 +295,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Validar que funciona con v-for y Teleport
       - [x] Probar fluidez en móvil y escritorio
     - [ ] Reemplazar llamadas a vue-sonner por sistema propio
+      - [x] Añadir soporte para onDismiss (ejecutar al cerrarse automáticamente)
+      - [x] Añadir soporte para tipo visual de toast (success, error, info, warning)
+      - [x] Hacer que add(...) devuelva el id del toast
+      - [ ] Revisar todas las llamadas a toast para adaptar estos nuevos campos si aplica
+      - [ ] Continuar la sustitución de notifySuccess, notifyInfo, notifyError, notifyWarning
     - [ ] Eliminar vue-sonner y sus rastros del proyecto
     - [ ] Ajustar diseño visual: tamaño, posición, animación, stacking
     - [ ] Verificar funcionamiento real (móvil y escritorio)

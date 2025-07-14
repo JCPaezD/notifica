@@ -52,17 +52,37 @@ Esta conversación servirá para:
 - `dev-notes.md`  
 (para proporcionar el contexto actual y mantener trazabilidad del progreso)
 
-🔄 **Contexto:**  
-- Esta conversación se inicia tras cerrar la anterior por saturación y lentitud, tras un bloque largo de tareas relacionadas con la firma de la app, subida a Google Play y pruebas internas.  
-- El último paso completado fue la subida e instalación de la versión 1.0.1 firmada, y validación completa de su funcionamiento en entorno real.  
-- El siguiente paso es avanzar con los puntos restantes de la **Etapa 8** (mejoras opcionales antes de publicación pública), según el roadmap actualizado, y preparar la app para su versión pública estable.
+🔄 **Contexto general:**  
+- Esta conversación sustituye a la anterior tras llegar al límite técnico de longitud: se ralentizó por exceso de bloques de código, archivos y validaciones encadenadas.  
+- El proyecto está en la Etapa 8 (mejoras opcionales antes de la publicación pública), siguiendo un roadmap claro y riguroso.  
+- Ya se ha completado todo el sistema base, la app está firmada y desplegada como PWA y APK funcional.
 
-📖 **Notas sobre la forma de trabajo:**  
-- Se usa un flujo basado en roadmap detallado en Markdown, con tareas divididas en subtareas.  
-- Cada paso se valida antes de avanzar al siguiente.  
-- Se aplican convenciones de commits tipo Conventional Commits.  
-- Se prioriza claridad en la comunicación y precisión en las instrucciones para evitar errores o malentendidos.  
-- Las builds se validan localmente y en dispositivos reales.
+🛠️ **Contexto actual de trabajo (última tarea activa):**  
+Estamos en mitad del reemplazo del sistema `vue-sonner` por un sistema de notificaciones propio basado en el desarrollado para Nocta.  
+Ya están completadas:  
+- Integración del componente `<Toast>` y `useToast()`  
+- Soporte para botón de acción (`label` + `onClick`)  
+- Animaciones personalizadas al pulsar botón y al montar  
+- Animación de entrada/salida de los toasts mediante `<TransitionGroup>`  
+- Ajustes visuales preliminares y comportamiento refinado en móvil y escritorio  
+- Documentación de este sistema en `dev-notes.md`  
+Ahora estamos reemplazando todas las llamadas antiguas (`notifySuccess`, etc.) por llamadas al nuevo sistema (`add({...})`), una a una para evitar errores.  
+El último bloque actualizado fue el de exportación de tareas (incluyendo `notifySuccess`, `notifyError`, `notifyInfo`).  
+
+🔍 **Flujo para esta migración:**  
+1. Buscar llamadas a funciones antiguas (notifySuccess, notifyInfo, etc.)  
+2. Sustituirlas por llamadas al nuevo sistema  
+3. Eliminar `useNotifications.ts` y `vue-sonner` del proyecto  
+4. Ajustar visualmente los toasts  
+5. Verificar en dispositivo real  
+6. Documentar cierre de la migración
+
+📖 **Notas y aprendizajes no documentados en archivos:**  
+- Se ha detectado que vue-sonner no permite personalización visual precisa sin `!important` y presenta limitaciones en stacking, posición y diseño.  
+- Se ha decidido que el nuevo sistema será más robusto, mantenible y reutilizable (también se llevará a Nocta).  
+- Se prioriza el feedback visual en móvil sobre hover en escritorio.  
+- Las animaciones se ajustan con `animate-pop` personalizado y transición global con `<TransitionGroup>`.  
+- Se ha incluido control total del sistema desde `useToast.ts`, permitiendo acciones (ej. Deshacer), duración personalizada y cierre programado.
 
 Con esto, retomamos el desarrollo de Notifica con contexto limpio y toda la documentación necesaria cargada desde el inicio. ¡Listos para seguir!
 
