@@ -567,7 +567,7 @@ const exportTasksToJson = async () => {
           }, 500)
         }
       }
-    }, 6000)
+    }, 6000) 
   })
 
   // Watcher: Guarda todas las tareas en localStorage cada vez que el array `allTasks` cambia.
@@ -1006,7 +1006,7 @@ const exportTasksToJson = async () => {
 
   <!-- Sistema propio de notificaciones -->
   <Teleport to="body">
-    <TransitionGroup tag="div" name="toast" class="fixed bottom-4 right-4 flex flex-col items-end space-y-2 z-[9999]">
+    <TransitionGroup tag="div" name="toast" class="fixed bottom-4 inset-x-0 flex flex-col items-center space-y-2 z-[9999]">
       <Toast v-for="toast in toasts" :key="toast.id" v-bind="toast" @onClose="remove(toast.id)" />
     </TransitionGroup>
   </Teleport>

@@ -294,7 +294,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Definir clases .toast-enter-from, .toast-leave-to... en main.css
       - [x] Validar que funciona con v-for y Teleport
       - [x] Probar fluidez en móvil y escritorio
-    - [ ] Reemplazar llamadas a vue-sonner por sistema propio
+    - [x] Reemplazar llamadas a vue-sonner por sistema propio
       - [x] Añadir soporte para onDismiss (ejecutar al cerrarse automáticamente)
       - [x] Añadir soporte para tipo visual de toast (success, error, info, warning)
       - [x] Hacer que add(...) devuelva el id del toast
@@ -303,7 +303,27 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Eliminar vue-sonner y sus rastros del proyecto
     - [x] El botón deshacer no cerraba el toast de "Tarea eliminada"
       > Se ajustaron los tiempos de cierre y aparición para permitir la animación completa del botón y una experiencia visual fluida.
-    - [ ] Ajustar diseño visual: tamaño, posición, animación, stacking
+    - [ ] Ajustar diseño visual: tamaño, posición, animación, stacking. 
+      > Objetivo general: estética profesional y agradable.
+      > Objetivo original y principal: compactar y molestar menos al usuatio tapando contenido.
+      - [x] Analizar estética actual del sistema migrado (fondos blancos, full width, stacking sin animación)
+      - [x] Revisar ejemplos anteriores (vue-sonner, Tailwind UI, cute-toast, etc.) y evaluar ideas aplicables
+      - [x] Tomar decisiones de estilo:
+        - Fondos suaves por tipo (no blancos)
+        - Icono a la izquierda, botón de cerrar a la derecha
+        - Botón de acción opcional con icono de deshacer incluido
+        - Compactar paddings y espacio entre toasts
+        - Limitar ancho y centrar (máx. `max-w-xs`)
+        - Borde redondeado uniforme (como tareas)
+      - [x] Validar tipos de toast e iconografía adecuada (error, success, info, warning)
+      - [x] Diseñar un mock en HTML con Tailwind Play
+      - [x] Iterar con ajustes hasta obtener versión final
+      - [x] Aplicar diseño final a `<Toast.vue>` (estructura, estilos, colores, iconos)
+      - [ ] Ajustar layout de `<TransitionGroup>` para respetar ancho, spacing y posición
+      - [ ] Añadir animación suave a reordenamiento de toasts (apilado dinámico)
+      - [x] Validar consistencia visual con otros elementos de la app (como tareas, botones, colores)
+    - [ ] Botón deshacer en toas "Borrar todo" y "Nuevo turno", al pulsar no se cierra el toast
+      > Copiar comportamiento de eliminar tarea 
     - [ ] Verificar funcionamiento real (móvil y escritorio)
     - [ ] Documentar en dev-notes la decisión y estructura
 

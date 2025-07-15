@@ -339,30 +339,36 @@ Función validada como completa y estable.
 
 ---
 
-### Sistema de Toasts (Notifica)
+## Sistema de Toasts (Notifica)
 
 Se reemplazó la librería externa `vue-sonner` por un sistema de notificaciones propio inspirado en Nocta.  
 Motivos:
-- Mayor control visual y de interacción
-- Mejor integración con el diseño y lógica de Notifica
-- Eliminación de dependencias innecesarias
+- Mayor control visual y de interacción  
+- Mejor integración con el diseño y lógica de Notifica  
+- Eliminación de dependencias innecesarias  
 
 El sistema se basa en:
-- `Toast.vue`: componente individual de notificación
-- `useToast.ts`: composable para gestionar estado reactivo de los toasts
-- `toast.ts`: función `add(...)` para mostrar toasts desde cualquier lugar
-- `<Teleport>` y `<TransitionGroup>` en `App.vue` para renderizar toasts fuera del flujo principal
+- `Toast.vue`: componente individual de notificación  
+- `useToast.ts`: composable para gestionar estado reactivo de los toasts  
+- `toast.ts`: función `add(...)` para mostrar toasts desde cualquier lugar  
+- `<Teleport>` y `<TransitionGroup>` en `App.vue` para renderizar toasts fuera del flujo principal  
 
 Mejoras aplicadas respecto a Nocta:
-- Soporte para botón de acción con `label` y `onClick`
-- Estilo animado en el botón de acción (`scale-95` al pulsar)
-- Cierre diferido del toast para permitir ver la animación de pulsación
-- Separación clara entre ejecución de acción y cierre visual
+- Soporte para botón de acción con `label` y `onClick`  
+- Estilo animado en el botón de acción (`scale-95` al pulsar)  
+- Animación al montar el botón de acción (`animate-pop` tras 300ms)  
+- Cierre diferido del toast para permitir ver la animación de pulsación  
+- Separación clara entre ejecución de acción y cierre visual  
+- Estilos personalizados por tipo (`success`, `info`, `error`, `warning`) con icono, fondo suave y bordes redondeados  
+- Layout compacto y centrado (`max-w-xs`), menos invasivo visualmente  
+- Integración visual coherente con el resto de la interfaz (colores, botones, tipografía, etc.)  
 
 Tareas pendientes o ideas futuras:
-- Añadir animación puntual al aparecer (pulse, pop...)
-- Animación de entrada/salida completa para el toast (como en Nocta)
-- (Opcional) Resaltar brevemente el contenido afectado por la acción (e.g. Deshacer)
+- Ajustar layout de `<TransitionGroup>` para stacking y espaciado precisos  
+- Añadir animación suave al reordenamiento de toasts (apilado dinámico)  
+- Verificar funcionamiento completo en dispositivos reales (PWA, APK)  
+- Documentar ejemplo de uso avanzado con múltiples acciones o `onDismiss`  
+- (Opcional) Resaltar brevemente el contenido afectado por la acción (e.g. Deshacer)  
+- (Opcional) Añadir variantes visuales para toast persistente o informativo largo (banner)  
 
 Este sistema puede reutilizarse o retroportarse a Nocta con pequeñas adaptaciones, manteniendo una base común de diseño y lógica.
-
