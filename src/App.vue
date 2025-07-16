@@ -832,6 +832,11 @@ const exportTasksToJson = async () => {
     }
   };
 
+  function handleKeyboardClose() {
+    setTimeout(() => {
+      window.scrollTo(0, 0); // fuerza recálculo del viewport en iOS
+    }, 100);
+  }
 
 </script>
 
@@ -871,16 +876,29 @@ const exportTasksToJson = async () => {
         class="bg-white rounded-xl p-3 shadow-sm w-full max-w-lg mb-4 border border-gray-200 overflow-hidden">
         <div class="flex space-x-4 items-start">
           <div class="flex-grow">
-            <textarea ref="descriptionTextareaRef" id="task-description" v-model="newTaskDescription"
-              @keyup.enter.prevent="startNewTask" placeholder="Nuevo aviso" rows="2" class="p-3 bg-white border border-slate-300 rounded-md shadow-sm 
+            <textarea
+              ref="descriptionTextareaRef"
+              id="task-description"
+              v-model="newTaskDescription"
+              @keyup.enter.prevent="startNewTask"
+              @blur="handleKeyboardClose"
+              placeholder="Nuevo aviso"
+              rows="2"
+              class="p-3 bg-white border border-slate-300 rounded-md shadow-sm 
                     focus:ring-2 focus:ring-accent-main focus:border-accent-main 
                     w-full text-base resize-none placeholder-text-main/70
                     transition-all duration-300 ease-in-out">
-              </textarea>
+            </textarea>
           </div>
           <div class="w-1/3 flex flex-col gap-2">
-            <input type="text" id="task-technician" v-model="newTaskTechnician" @keyup.enter="startNewTask"
-              placeholder="Técnico(s)" class="p-1 
+            <input
+              type="text"
+              id="task-technician"
+              v-model="newTaskTechnician"
+              @keyup.enter="startNewTask"
+              @blur="handleKeyboardClose"
+              placeholder="Técnico(s)"
+              class="p-1 
                     bg-white border border-slate-300 rounded-md shadow-sm 
                     focus:ring-2 focus:ring-accent-main focus:border-accent-main 
                     transition-all duration-300 ease-in-out
