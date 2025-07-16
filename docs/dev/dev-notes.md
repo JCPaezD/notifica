@@ -356,22 +356,27 @@ El sistema se basa en:
 Mejoras aplicadas respecto a Nocta:
 - Soporte para botón de acción con `label` y `onClick`  
 - Estilo animado en el botón de acción (`scale-95` al pulsar)  
-- Animación al montar el botón de acción (`animate-pop` tras 300ms)  
+- Animación al montar el botón de acción (`animate-pop` tras 300 ms)  
 - Cierre diferido del toast para permitir ver la animación de pulsación  
 - Separación clara entre ejecución de acción y cierre visual  
-- Estilos personalizados por tipo (`success`, `info`, `error`, `warning`) con icono, fondo suave y bordes redondeados  
-- Layout compacto y centrado (`max-w-xs`), menos invasivo visualmente  
-- Integración visual coherente con el resto de la interfaz (colores, botones, tipografía, etc.)  
+- Estilos personalizados por tipo (`success`, `info`, `error`, `warning`) con icono SVG, fondo suave y bordes redondeados  
+- Layout compacto y centrado (`max-w-xs`), con margen inferior ajustado para evitar conflicto con barras de sistema  
+- Apilamiento dinámico con animación de transición (`translate-y` y `opacity`) al reordenarse  
+- Integración visual coherente con el resto de la interfaz (colores, botones, tipografía)  
+- Comportamiento corregido en PWA iOS: el botón de acción ya reacciona correctamente al tacto (`@touchstart`)  
+- Bloqueo de selección de texto en todo el toast (`select-none`) para evitar comportamiento inesperado en móviles  
 
-Tareas pendientes o ideas futuras:
-- Ajustar layout de `<TransitionGroup>` para stacking y espaciado precisos  
-- Añadir animación suave al reordenamiento de toasts (apilado dinámico)  
-- Verificar funcionamiento completo en dispositivos reales (PWA, APK)  
-- Documentar ejemplo de uso avanzado con múltiples acciones o `onDismiss`  
-- (Opcional) Resaltar brevemente el contenido afectado por la acción (e.g. Deshacer)  
-- (Opcional) Añadir variantes visuales para toast persistente o informativo largo (banner)  
+Estado de validación:
+- Comprobado y validado en escritorio, Android nativo, PWA Android y PWA iOS  
+- Todos los toasts funcionales y visualmente consistentes  
+- Errores anteriores (como botón que no cerraba el toast o scroll fantasma tras teclado) han sido corregidos o descartados tras investigación
 
 Este sistema puede reutilizarse o retroportarse a Nocta con pequeñas adaptaciones, manteniendo una base común de diseño y lógica.
+
+Tareas pendientes o ideas futuras:
+- (Opcional) Añadir variantes visuales para toast persistente o informativo largo (banner)  
+- (Opcional) Resaltar brevemente el contenido afectado por la acción (e.g. Deshacer)  
+- (Opcional) Documentar ejemplo de uso avanzado con múltiples acciones o `onDismiss`
 
 ---
 

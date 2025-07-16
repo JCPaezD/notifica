@@ -270,7 +270,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
   - [ ] Confirmación visual tras enviar
 
-- [ ] 📜 Scroll innecesario en pantallas cortas
+- [x] 📜 Scroll innecesario en pantallas cortas
   - [x] Revisar layout y paddings
   - [ ] Ajustar para evitar toasts tapados y mejorar adaptación al viewport
     - [x] Revisar sistema de notificaciones usado en Nocta
@@ -322,7 +322,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Ajustes visuales menores en el sistema de toasts
         > Tipos corregidos, margen inferior ajustado y limpieza de toasts de prueba tras validación en iOS.
       - [x] Ajustar layout de `<TransitionGroup>` para respetar ancho, spacing y posición
-      - [ ] Añadir animación suave a reordenamiento de toasts (apilado dinámico)
+      - [x] Añadir animación suave a reordenamiento de toasts (apilado dinámico)
       - [x] Validar consistencia visual con otros elementos de la app (como tareas, botones, colores)
       - [x] Botón deshacer en toast "Borrar todo" y "Nuevo turno", al pulsar no se cierra el toast
         > Copiar comportamiento de eliminar tarea 
@@ -335,8 +335,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       > Bug visual de iOS PWA confirmado como fallo de WebKit. Se descarta tras probar soluciones estándar: scrollTo, bloqueo de touchmove, min-h-[100svh], safe areas, etc. No afecta a usabilidad y solo se produce si se fuerza. Se documenta en dev-notes.
     - [x] Scroll innecesario en el menú lateral (PWA iOS)
       > Solucionado limitando altura del <DialogPanel> con min-h-[100svh] y overflow-hidden. El scroll extra desaparece y el footer con la versión se mantiene visible.
-    - [ ] Verificar funcionamiento real (móvil y escritorio)
-    - [ ] Documentar en dev-notes la decisión y estructura
+    - [x] Verificar funcionamiento real (móvil y escritorio)
+    - [x] Documentar en dev-notes la decisión y estructura
 
 - [ ] 🗓️ Mejora en identificador visual de turnos
   - [ ] Corregir visibilidad del desplegable de turnos en Android
@@ -368,6 +368,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   > En móvil, la animación se dispara tras confirmar la creación del turno, con un retardo para asegurar visibilidad.
 
 - [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
+  - [ ] Corregir zoom con doble tap en chrome/safari de ios 
   - [ ] Añadir splash para pa PWA ios y arreglar la de android (si es posible y fácil) 
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
