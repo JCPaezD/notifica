@@ -303,7 +303,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Eliminar vue-sonner y sus rastros del proyecto
     - [x] El botón deshacer no cerraba el toast de "Tarea eliminada"
       > Se ajustaron los tiempos de cierre y aparición para permitir la animación completa del botón y una experiencia visual fluida.
-    - [ ] Ajustar diseño visual: tamaño, posición, animación, stacking. 
+    - [x] Ajustar diseño visual: tamaño, posición, animación, stacking. 
       > Objetivo general: estética profesional y agradable.
       > Objetivo original y principal: compactar y molestar menos al usuatio tapando contenido.
       - [x] Analizar estética actual del sistema migrado (fondos blancos, full width, stacking sin animación)
@@ -326,9 +326,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Validar consistencia visual con otros elementos de la app (como tareas, botones, colores)
       - [x] Botón deshacer en toast "Borrar todo" y "Nuevo turno", al pulsar no se cierra el toast
         > Copiar comportamiento de eliminar tarea 
-      - [ ] Animación de pulsado no funciona en PWA iPhone
-        > El botón de acción de los toast no muestra el efecto `scale-95` al pulsarse en dispositivos iOS. Puede deberse a limitaciones de WebKit con `active:*`, problemas de foco o uso de elementos no interactivos. Requiere pruebas específicas y posiblemente ajustar estructura o eventos.
-      - [ ] Animación de pulsado de botón de acción: hacer escala 100-.95-100 en vez de solo 100.95 como ahora.
+      - [x] Animación de pulsado en PWA iPhone
+        > Corregido el efecto `scale-95` al pulsar el botón de acción del toast en iOS añadiendo `@touchstart="() => {}"` para forzar la activación de `:active` sin interferir con `onClick`.
+      - [x] No permitir seleccionar textos en toasts
     - [ ] Scroll inesperado al hacer doble tap en área vacía
       > En iPhone como PWA, a veces un doble toque en parte vacía centra el contenido verticalmente, mostrando una franja azul inferior. Podría deberse a scroll automático por Safari o falta de control en el alto/overflow de la app. No es fácil de reproducir, pero conviene investigarlo para evitarlo en producción.
     - [ ] Verificar funcionamiento real (móvil y escritorio)
