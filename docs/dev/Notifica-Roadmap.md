@@ -324,10 +324,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Ajustar layout de `<TransitionGroup>` para respetar ancho, spacing y posición
       - [ ] Añadir animación suave a reordenamiento de toasts (apilado dinámico)
       - [x] Validar consistencia visual con otros elementos de la app (como tareas, botones, colores)
+      - [x] Botón deshacer en toast "Borrar todo" y "Nuevo turno", al pulsar no se cierra el toast
+        > Copiar comportamiento de eliminar tarea 
       - [ ] Animación de pulsado no funciona en PWA iPhone
         > El botón de acción de los toast no muestra el efecto `scale-95` al pulsarse en dispositivos iOS. Puede deberse a limitaciones de WebKit con `active:*`, problemas de foco o uso de elementos no interactivos. Requiere pruebas específicas y posiblemente ajustar estructura o eventos.
-      - [ ] Botón deshacer en toast "Borrar todo" y "Nuevo turno", al pulsar no se cierra el toast
-        > Copiar comportamiento de eliminar tarea 
     - [ ] Scroll inesperado al hacer doble tap en área vacía
       > En iPhone como PWA, a veces un doble toque en parte vacía centra el contenido verticalmente, mostrando una franja azul inferior. Podría deberse a scroll automático por Safari o falta de control en el alto/overflow de la app. No es fácil de reproducir, pero conviene investigarlo para evitarlo en producción.
     - [ ] Verificar funcionamiento real (móvil y escritorio)

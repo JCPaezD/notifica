@@ -233,8 +233,7 @@ const startNewShift = (showAlert = true) => {
     }, 400); // retardo antes de empezar (ajustable)
   }
 
-
-  add(
+  const toastId = add(
     {
       title: 'Nuevo Turno Iniciado',
       description: `Turno comenzado a las ${shiftStartTimeFormatted}.`,
@@ -250,11 +249,18 @@ const startNewShift = (showAlert = true) => {
           allTasks.value = allTasks.value.filter(task => task.shiftId !== newShiftId);
 
           await nextTick(); // Esperar a que la UI se actualice
-          add({
-            title: 'Acción Deshecha',
-            description: 'Se restauró el estado anterior al nuevo turno.',
-            type: 'info'
-          });
+
+          setTimeout(() => {
+            remove(toastId);
+          }, 500);
+
+          setTimeout(() => {
+            add({
+              title: 'Acción Deshecha',
+              description: 'Se restauró el estado anterior al nuevo turno.',
+              type: 'info'
+            });
+          }, 550);
         }
       }
     },
@@ -489,7 +495,7 @@ const exportTasksToJson = async () => {
 
       allTasks.value = []; // Limpia la lista de tareas en la aplicación
 
-      add(
+      const toastId = add(
         {
           title: 'Borrado Completo',
           description: 'Todas las tareas han sido eliminadas.',
@@ -506,15 +512,21 @@ const exportTasksToJson = async () => {
               }));
               await nextTick(); // Esperar al siguiente ciclo de actualización del DOM
 
+              setTimeout(() => {
+                remove(toastId);
+              }, 500);
+
               // Mostrar notificación de restauración y recargar la página cuando esta se cierre.
-              add({
-                title: 'Tareas Restauradas',
-                description: 'Todas las tareas han sido restauradas.',
-                type: 'info',
-                onDismiss: () => {
-                  window.location.reload(); // Forzar la recarga de la página cuando el toast se cierre
-                }
-              });
+              setTimeout(() => {
+                add({
+                  title: 'Tareas Restauradas',
+                  description: 'Todas las tareas han sido restauradas.',
+                  type: 'info',
+                  onDismiss: () => {
+                    window.location.reload(); // Forzar la recarga de la página cuando el toast se cierre
+                  }
+                });
+              }, 550);
             }
           }
         },
@@ -528,6 +540,7 @@ const exportTasksToJson = async () => {
       });
     }
   };
+
 
   // Hook onMounted: Carga el ID del turno actual y las tareas desde localStorage al iniciar la aplicación.
   onMounted(() => {
