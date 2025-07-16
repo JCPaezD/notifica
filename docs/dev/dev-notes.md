@@ -372,3 +372,29 @@ Tareas pendientes o ideas futuras:
 - (Opcional) Añadir variantes visuales para toast persistente o informativo largo (banner)  
 
 Este sistema puede reutilizarse o retroportarse a Nocta con pequeñas adaptaciones, manteniendo una base común de diseño y lógica.
+
+---
+
+## 🐛 Bug no resuelto: doble tap muestra scroll azul en PWA iOS
+
+Descripción:  
+En PWA instalada en iPhone, tras cerrar el teclado virtual de un `<input>` o `<textarea>`, si el usuario hace doble tap en el fondo de la app, aparece una franja vacía azul en la parte inferior. Su altura coincide con el layout visible (header, tareas, etc.).
+
+Estado actual:
+- No ocurre al abrir la app, solo tras mostrar/ocultar el teclado.
+- El scroll aparece aunque el contenido no exceda el viewport.
+- Solo ocurre en modo PWA standalone de iOS (no en Safari o Chrome).
+
+Intentos de solución:
+- `scrollTo(0, 0)` tras blur → no resuelve
+- `overflow-hidden`, `min-h-[100svh]` y ajustes de layout → no resuelve
+- Añadir `viewport-fit=cover` en meta viewport → no resuelve
+- Bloquear `touchmove` durante focus de inputs → no resuelve
+- Detectar y resetear scroll manualmente tras teclado → tampoco efectivo
+
+Conclusión:
+- Bug confirmado como fallo persistente de WebKit iOS.
+- No tiene workaround robusto ni solución fiable sin introducir efectos secundarios.
+- Dado que no rompe el uso normal y solo es visible si se fuerza, se descarta temporalmente.
+
+Puede reintentarse en el futuro si hay avances en iOS o mejores soluciones conocidas.

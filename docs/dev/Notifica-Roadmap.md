@@ -331,10 +331,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] No permitir seleccionar textos en toasts
     - [x] Scroll inesperado al hacer doble tap en área vacía
       > Corregido ajustando el alto del `<main>` con `min-h-[100svh]` y añadiendo `overflow-hidden`, además de activar `viewport-fit=cover` en el meta viewport para soporte completo en PWA iOS.
-    - [x] Reaparecido scroll vertical leve tras cambio a min-h-[100svh]
-      > Tras actualizar el layout para evitar scroll por doble tap en iOS, ha vuelto el pequeño desplazamiento vertical incluso con pocas tareas. Requiere revisión fina de altura, padding y overflow en todas las plataformas.
-    - [ ] Scroll innecesario en el menú lateral (PWA iOS)
-      > En dispositivos iOS, el menú lateral permite hacer scroll aunque su contenido no lo necesita. Puede deberse a altura mal definida o clases de overflow no controladas. Revisar y fijar altura máxima sin perder visibilidad del footer.
+    - [x] Scroll inesperado al hacer doble tap en área vacía
+      > Bug visual de iOS PWA confirmado como fallo de WebKit. Se descarta tras probar soluciones estándar: scrollTo, bloqueo de touchmove, min-h-[100svh], safe areas, etc. No afecta a usabilidad y solo se produce si se fuerza. Se documenta en dev-notes.
+    - [x] Scroll innecesario en el menú lateral (PWA iOS)
+      > Solucionado limitando altura del <DialogPanel> con min-h-[100svh] y overflow-hidden. El scroll extra desaparece y el footer con la versión se mantiene visible.
     - [ ] Verificar funcionamiento real (móvil y escritorio)
     - [ ] Documentar en dev-notes la decisión y estructura
 

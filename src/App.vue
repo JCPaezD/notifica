@@ -590,39 +590,6 @@ const exportTasksToJson = async () => {
     }, 6000) */
   })
 
-  onMounted(() => {
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-
-    if (!isIOS || !isStandalone) return;
-
-    const preventTouchMove = (e: TouchEvent) => e.preventDefault();
-
-    const enableBlockScroll = () => {
-      document.addEventListener('touchmove', preventTouchMove, { passive: false });
-    };
-
-    const disableBlockScroll = () => {
-      document.removeEventListener('touchmove', preventTouchMove);
-      setTimeout(() => window.scrollTo(0, 0), 100);
-    };
-
-    const inputs = Array.from(document.querySelectorAll('input, textarea'));
-
-    inputs.forEach((el) => {
-      el.addEventListener('focus', enableBlockScroll);
-      el.addEventListener('blur', disableBlockScroll);
-    });
-
-    onBeforeUnmount(() => {
-      inputs.forEach((el) => {
-        el.removeEventListener('focus', enableBlockScroll);
-        el.removeEventListener('blur', disableBlockScroll);
-      });
-      disableBlockScroll();
-    });
-  });
-
 
   // Watcher: Guarda todas las tareas en localStorage cada vez que el array `allTasks` cambia.
   watch(allTasks, (newTasks) => {
@@ -867,12 +834,6 @@ const exportTasksToJson = async () => {
     }
   };
 
-  function handleKeyboardClose() {
-    setTimeout(() => {
-      window.scrollTo(0, 0); // fuerza recálculo del viewport en iOS
-    }, 100);
-  }
-
 </script>
 
 <template>
@@ -916,7 +877,6 @@ const exportTasksToJson = async () => {
               id="task-description"
               v-model="newTaskDescription"
               @keyup.enter.prevent="startNewTask"
-              @blur="handleKeyboardClose"
               placeholder="Nuevo aviso"
               rows="2"
               class="p-3 bg-white border border-slate-300 rounded-md shadow-sm 
@@ -931,7 +891,6 @@ const exportTasksToJson = async () => {
               id="task-technician"
               v-model="newTaskTechnician"
               @keyup.enter="startNewTask"
-              @blur="handleKeyboardClose"
               placeholder="Técnico(s)"
               class="p-1 
                     bg-white border border-slate-300 rounded-md shadow-sm 
