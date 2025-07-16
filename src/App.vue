@@ -1012,7 +1012,7 @@ const exportTasksToJson = async () => {
 
   <!-- Sistema propio de notificaciones -->
   <Teleport to="body">
-    <TransitionGroup tag="div" name="toast" class="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] inset-x-0 flex flex-col items-center space-y-2 z-[9999]">
+    <TransitionGroup tag="div" name="toast" class="fixed bottom-8 inset-x-0 flex flex-col items-center space-y-2 z-[9999]">
       <Toast v-for="toast in toasts" :key="toast.id" v-bind="toast" @onClose="remove(toast.id)" />
     </TransitionGroup>
   </Teleport>

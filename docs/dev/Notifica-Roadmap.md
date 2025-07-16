@@ -328,6 +328,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       > En iPhone como PWA, a veces un doble toque en parte vacía centra el contenido verticalmente, mostrando una franja azul inferior. Podría deberse a scroll automático por Safari o falta de control en el alto/overflow de la app. No es fácil de reproducir, pero conviene investigarlo para evitarlo en producción.
     - [ ] Botón deshacer en toast "Borrar todo" y "Nuevo turno", al pulsar no se cierra el toast
       > Copiar comportamiento de eliminar tarea 
+    - [ ] Ajustar separación inferior de toasts con soporte real de safe area
+      > Actualmente se usa `bottom-8` fijo para asegurar visibilidad correcta en iPhone PWA. Esta solución funciona en todos los dispositivos, pero desplaza los toasts más arriba de lo deseado en Android y escritorio. 
+      > La tarea consiste en restaurar el `bottom-4` original para plataformas sin notch, y aplicar `env(safe-area-inset-bottom)` solo si está soportado. 
+      > Requiere validar que el viewport incluya `viewport-fit=cover` y que los estilos de `html`, `body` y contenedores permitan el uso correcto de `env(...)`.
     - [ ] Verificar funcionamiento real (móvil y escritorio)
     - [ ] Documentar en dev-notes la decisión y estructura
 
@@ -359,6 +363,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   > En móvil, la animación se dispara tras confirmar la creación del turno, con un retardo para asegurar visibilidad.
 
 - [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
+  - [ ] Añadir splash para pa PWA ios y arreglar la de android (si es posible y fácil) 
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
     - [ ] Ajustar paddings con `env(safe-area-inset-*)`
