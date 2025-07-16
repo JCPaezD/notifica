@@ -319,19 +319,17 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Diseñar un mock en HTML con Tailwind Play
       - [x] Iterar con ajustes hasta obtener versión final
       - [x] Aplicar diseño final a `<Toast.vue>` (estructura, estilos, colores, iconos)
-      - [ ] Ajustar layout de `<TransitionGroup>` para respetar ancho, spacing y posición
+      - [x] Ajustes visuales menores en el sistema de toasts
+        > Tipos corregidos, margen inferior ajustado y limpieza de toasts de prueba tras validación en iOS.
+      - [x] Ajustar layout de `<TransitionGroup>` para respetar ancho, spacing y posición
       - [ ] Añadir animación suave a reordenamiento de toasts (apilado dinámico)
       - [x] Validar consistencia visual con otros elementos de la app (como tareas, botones, colores)
-    - [ ] Animación de pulsado no funciona en PWA iPhone
-      > El botón de acción de los toast no muestra el efecto `scale-95` al pulsarse en dispositivos iOS. Puede deberse a limitaciones de WebKit con `active:*`, problemas de foco o uso de elementos no interactivos. Requiere pruebas específicas y posiblemente ajustar estructura o eventos.
+      - [ ] Animación de pulsado no funciona en PWA iPhone
+        > El botón de acción de los toast no muestra el efecto `scale-95` al pulsarse en dispositivos iOS. Puede deberse a limitaciones de WebKit con `active:*`, problemas de foco o uso de elementos no interactivos. Requiere pruebas específicas y posiblemente ajustar estructura o eventos.
+      - [ ] Botón deshacer en toast "Borrar todo" y "Nuevo turno", al pulsar no se cierra el toast
+        > Copiar comportamiento de eliminar tarea 
     - [ ] Scroll inesperado al hacer doble tap en área vacía
       > En iPhone como PWA, a veces un doble toque en parte vacía centra el contenido verticalmente, mostrando una franja azul inferior. Podría deberse a scroll automático por Safari o falta de control en el alto/overflow de la app. No es fácil de reproducir, pero conviene investigarlo para evitarlo en producción.
-    - [ ] Botón deshacer en toast "Borrar todo" y "Nuevo turno", al pulsar no se cierra el toast
-      > Copiar comportamiento de eliminar tarea 
-    - [ ] Ajustar separación inferior de toasts con soporte real de safe area
-      > Actualmente se usa `bottom-8` fijo para asegurar visibilidad correcta en iPhone PWA. Esta solución funciona en todos los dispositivos, pero desplaza los toasts más arriba de lo deseado en Android y escritorio. 
-      > La tarea consiste en restaurar el `bottom-4` original para plataformas sin notch, y aplicar `env(safe-area-inset-bottom)` solo si está soportado. 
-      > Requiere validar que el viewport incluya `viewport-fit=cover` y que los estilos de `html`, `body` y contenedores permitan el uso correcto de `env(...)`.
     - [ ] Verificar funcionamiento real (móvil y escritorio)
     - [ ] Documentar en dev-notes la decisión y estructura
 
