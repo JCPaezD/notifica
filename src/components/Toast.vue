@@ -14,7 +14,7 @@
           <button
             v-if="action"
             @click="action.onClick"
-            @touchstart.prevent=""
+            @touchstart="() => {}"
             type="button"
             class="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md"
             :class="[actionButtonClasses, { 'animate-pop': animateOnMount }, 'active:scale-95 transition-transform duration-150']"
