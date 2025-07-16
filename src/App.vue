@@ -77,6 +77,7 @@ const startNewTask = () => {
   add({
     title: 'Tarea Iniciada',
     description: `"${newTask.description}" comenzada.`,
+    type: 'success'
   })
 
   // Quitar el foco del elemento activo para cerrar el teclado en móviles
@@ -93,6 +94,7 @@ const finishTask = (taskId: string) => {
     add({
       title: 'Tarea Finalizada',
       description: `"${task.description}" completada a las ${task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`,
+      type: 'success'
     })
   }
 }
@@ -110,6 +112,7 @@ const updateTask = (updatedTask: Task) => {
         add({
           title: 'Tarea Notificada',
           description: `"${updatedTask.description}" marcada como notificada.`,
+          type: 'success'
         })
       } else {
         add({
@@ -211,7 +214,7 @@ const startNewShift = (showAlert = true) => {
       add({
         title: 'Acción Cancelada',
         description: 'Inicio de nuevo turno cancelado por el usuario.',
-        type: 'info'
+        type: 'error'
       });
       return;
     }
@@ -235,6 +238,7 @@ const startNewShift = (showAlert = true) => {
     {
       title: 'Nuevo Turno Iniciado',
       description: `Turno comenzado a las ${shiftStartTimeFormatted}.`,
+      type: 'success',
       action: {
         label: 'Deshacer',
         onClick: async () => {
@@ -248,7 +252,8 @@ const startNewShift = (showAlert = true) => {
           await nextTick(); // Esperar a que la UI se actualice
           add({
             title: 'Acción Deshecha',
-            description: 'Se restauró el estado anterior al nuevo turno.'
+            description: 'Se restauró el estado anterior al nuevo turno.',
+            type: 'info'
           });
         }
       }
@@ -556,7 +561,8 @@ const exportTasksToJson = async () => {
         console.error('Error al parsear tareas desde localStorage:', error);
       }
     }
-    add({
+    // Toast de prueba al cargar la app para tests
+    /* add({
       title: 'Notificación de prueba',
       description: 'Esto es una prueba del sistema de toasts propio.',
       action: {
@@ -567,7 +573,7 @@ const exportTasksToJson = async () => {
           }, 500)
         }
       }
-    }, 6000) 
+    }, 6000) */
   })
 
   // Watcher: Guarda todas las tareas en localStorage cada vez que el array `allTasks` cambia.
@@ -1006,7 +1012,7 @@ const exportTasksToJson = async () => {
 
   <!-- Sistema propio de notificaciones -->
   <Teleport to="body">
-    <TransitionGroup tag="div" name="toast" class="fixed bottom-4 inset-x-0 flex flex-col items-center space-y-2 z-[9999]">
+    <TransitionGroup tag="div" name="toast" class="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] inset-x-0 flex flex-col items-center space-y-2 z-[9999]">
       <Toast v-for="toast in toasts" :key="toast.id" v-bind="toast" @onClose="remove(toast.id)" />
     </TransitionGroup>
   </Teleport>
