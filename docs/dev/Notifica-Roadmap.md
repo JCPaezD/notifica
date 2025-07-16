@@ -329,12 +329,14 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Animación de pulsado en PWA iPhone
         > Corregido el efecto `scale-95` al pulsar el botón de acción del toast en iOS añadiendo `@touchstart="() => {}"` para forzar la activación de `:active` sin interferir con `onClick`.
       - [x] No permitir seleccionar textos en toasts
-    - [ ] Scroll inesperado al hacer doble tap en área vacía
-      > En iPhone como PWA, a veces un doble toque en parte vacía centra el contenido verticalmente, mostrando una franja azul inferior. Podría deberse a scroll automático por Safari o falta de control en el alto/overflow de la app. No es fácil de reproducir, pero conviene investigarlo para evitarlo en producción.
+    - [x] Scroll inesperado al hacer doble tap en área vacía
+      > Corregido ajustando el alto del `<main>` con `min-h-[100svh]` y añadiendo `overflow-hidden`, además de activar `viewport-fit=cover` en el meta viewport para soporte completo en PWA iOS.
     - [ ] Verificar funcionamiento real (móvil y escritorio)
     - [ ] Documentar en dev-notes la decisión y estructura
 
 - [ ] 🗓️ Mejora en identificador visual de turnos
+  - [ ] Corregir visibilidad del desplegable de turnos en Android
+    > El menú se corta si no hay espacio suficiente hacia abajo. Detectar si debe abrirse hacia arriba o abajo dinámicamente. Añadir altura máxima y scroll interno para evitar cortes visuales.
   - [ ] Añadir día de la semana al selector
   - [ ] Usar emojis o colores sutiles para diferenciar turnos
 

@@ -860,7 +860,7 @@ const exportTasksToJson = async () => {
 
   
 
-  <main class="min-h-[100svh] bg-app-bg text-text-main flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
+  <main class="min-h-[calc(100svh-72px)] bg-app-bg text-text-main flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
     <!-- pt aún más reducido -->
 
     <!-- Sección para añadir nueva tarea -->

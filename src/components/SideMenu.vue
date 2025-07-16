@@ -202,7 +202,7 @@ watch(() => props.isOpen, (newValue, oldValue) => {
                     src="/assets/logo-header.png" 
                     alt="Logo Notifica" 
                     class="w-4 h-4" />
-                  <p class="text-[11px] text-slate-400/80">Notifica v1.0.0 - JCPD 2025</p>
+                  <p class="text-[11px] text-slate-400/80">Notifica v1.0.5 - JCPD 2025</p>
                 </div>
               </div>
             </DialogPanel>
