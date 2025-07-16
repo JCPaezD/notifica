@@ -1,7 +1,7 @@
 <template>
   <div
     ref="toastRef"
-    class="flex items-start gap-3 px-4 py-2 rounded-lg shadow-md w-[92vw] max-w-xs border text-sm leading-snug animate-toast-enter select-none"
+    class="flex items-start gap-3 px-4 py-2 rounded-lg shadow-md w-[92vw] max-w-xs border text-sm leading-snug animate-toast-enter select-none pointer-events-auto"
     :class="toastClasses"
   >
     <!-- Icono por tipo -->
