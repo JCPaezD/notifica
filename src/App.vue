@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // src/App.vue
 // Componente principal de la aplicación Notifica. Gestiona el estado global, la lógica de negocio y la renderización de los componentes UI.
-import { ref, computed, onMounted, watch, nextTick, onUnmounted } from 'vue' // Añadido onUnmounted
+import { ref, computed, onMounted, watch, nextTick, onUnmounted, onBeforeUnmount } from 'vue' // Añadido onUnmounted
 import TaskList from './components/TaskList.vue' // Importar el nuevo componente
 import SideMenu from './components/SideMenu.vue' // Importar el menú lateral
 import Toast from './components/Toast.vue'
@@ -10,6 +10,7 @@ import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { Capacitor } from '@capacitor/core';
+
 
 // Ref para la lista reactiva de toasts y la función de eliminación
 const { toasts, remove, add } = useToast()
@@ -588,6 +589,40 @@ const exportTasksToJson = async () => {
       }
     }, 6000) */
   })
+
+  onMounted(() => {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+
+    if (!isIOS || !isStandalone) return;
+
+    const preventTouchMove = (e: TouchEvent) => e.preventDefault();
+
+    const enableBlockScroll = () => {
+      document.addEventListener('touchmove', preventTouchMove, { passive: false });
+    };
+
+    const disableBlockScroll = () => {
+      document.removeEventListener('touchmove', preventTouchMove);
+      setTimeout(() => window.scrollTo(0, 0), 100);
+    };
+
+    const inputs = Array.from(document.querySelectorAll('input, textarea'));
+
+    inputs.forEach((el) => {
+      el.addEventListener('focus', enableBlockScroll);
+      el.addEventListener('blur', disableBlockScroll);
+    });
+
+    onBeforeUnmount(() => {
+      inputs.forEach((el) => {
+        el.removeEventListener('focus', enableBlockScroll);
+        el.removeEventListener('blur', disableBlockScroll);
+      });
+      disableBlockScroll();
+    });
+  });
+
 
   // Watcher: Guarda todas las tareas en localStorage cada vez que el array `allTasks` cambia.
   watch(allTasks, (newTasks) => {
