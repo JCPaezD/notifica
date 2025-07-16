@@ -85,9 +85,9 @@ watch(() => props.isOpen, (newValue, oldValue) => {
           >
             <DialogPanel
               class="w-64 max-w-sm h-screen
-                     overflow-hidden bg-app-bg p-4
-                     text-left align-middle shadow-xl
-                     flex flex-col select-none"
+                    overflow-y-auto bg-app-bg p-4
+                    text-left align-middle shadow-xl
+                    flex flex-col select-none"
               :class="{ 'animate-bounce-out-left': isAnimatingOut }"
               @animationend="handleAnimationEnd"
             >
