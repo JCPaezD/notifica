@@ -465,3 +465,37 @@ Tras una revisión del estado real del proyecto y de su uso actual, se tomó la 
 - Se reafirmó que la app se está desarrollando como un producto potencialmente útil para un público más amplio, más allá del entorno inmediato, apostando por la calidad y manteniendo la sencillez.
 
 Esta decisión permitió devolver el control del ritmo de desarrollo al criterio interno, evitando decisiones precipitadas basadas en plazos externos.
+
+---
+
+## 📉 Problemas comunes en emuladores Android
+
+### 🕳️ Pantalla blanca tras splash o dispositivo desconectado (API 29)
+
+#### Síntomas
+- La app se instala pero queda en blanco tras la splash.
+- No se muestran errores en Logcat.
+- A veces el emulador aparece como “offline” (`adb devices → device offline`).
+- La app no responde o el sistema no la lanza tras la instalación.
+
+#### Diagnóstico
+- El sistema WebView está roto o no instalado, especialmente tras hacer `Wipe Data` en emuladores con Android 9–10.
+- También puede deberse a errores internos del emulador tras actualizaciones o limpiezas de proyecto.
+
+#### Soluciones
+- **Actualizar WebView desde Play Store** dentro del emulador:
+  - Abrir Play Store > "Mis apps > Actualizaciones pendientes".
+  - Actualizar **Android System WebView** manualmente.
+- **Hacer `Wipe Data` al emulador** si:
+  - Está en estado `offline` persistente.
+  - No lanza la app aunque la build se haya completado sin errores.
+  - Se ha producido un fallo visual o de sistema sin causa clara.
+
+#### Recomendación
+- Tras un `Wipe Data` en emuladores Android 9–10:
+  - Verificar conexión ADB (`adb devices` debe decir `device`).
+  - Abrir Play Store y **actualizar WebView antes de lanzar la app**.
+- Si el error persiste:
+  - Cerrar el emulador, repetir `Wipe Data`, o recrearlo desde AVD Manager.
+
+---
