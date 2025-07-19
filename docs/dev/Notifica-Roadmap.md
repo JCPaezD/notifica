@@ -344,6 +344,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   > El comportamiento es fluido, no invasivo y aporta feedback visual sin distraer.
   > En móvil, la animación se dispara tras confirmar la creación del turno, con un retardo para asegurar visibilidad.
 
+- [x] 🗓️ Mejora en identificador visual de turnos
+  - [x] Corregir visibilidad del desplegable de turnos en Android
+    > El menú se corta si no hay espacio suficiente hacia abajo. Detectar si debe abrirse hacia arriba o abajo dinámicamente. Añadir altura máxima y scroll interno para evitar cortes visuales.
+  - [x] Añadir día de la semana al selector
+  - [x] Usar emojis o colores sutiles (finalmente svg heroicons con colores) para diferenciar turnos (mañana/tarde/noche)
+  - [x] Revisión y ajuste fino del diseño del selector y del titulo del turno
+
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
   - [ ] Ajustar fecha si es coherente
@@ -380,11 +387,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [ ] 🔁 Revertir cambio(s) de layout para evitar el bug (aunque se pierda alguna mejora)
         - [ ] 📌 Aceptar el bug como limitación documentada de iOS PWA, si no hay alternativa razonable
 
-- [ ] 🗓️ Mejora en identificador visual de turnos
-  - [x] Corregir visibilidad del desplegable de turnos en Android
-    > El menú se corta si no hay espacio suficiente hacia abajo. Detectar si debe abrirse hacia arriba o abajo dinámicamente. Añadir altura máxima y scroll interno para evitar cortes visuales.
-  - [x] Añadir día de la semana al selector
-  - [x] Usar emojis o colores sutiles (finalmente svg heroicons con colores) para diferenciar turnos (mañana/tarde/noche)
+
 
 - [ ] 🔧 Refactor: separación de responsabilidades en App.vue
   📝 Esta tarea puede realizarse de forma aislada en una conversación separada o como bloque independiente del roadmap. No requiere rediseño ni nuevas funcionalidades.

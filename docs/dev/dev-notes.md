@@ -41,40 +41,47 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
 📌 **Uso de la conversación:**  
 Esta conversación servirá para:  
 - Tomar decisiones de diseño, UX y arquitectura.  
-- Ejecutar tareas de desarrollo.  
-- Resolver dudas técnicas.  
+- Ejecutar tareas de desarrollo en bloques claros y validados.  
+- Resolver dudas técnicas sin suposiciones.  
 - Documentar avances y acuerdos.  
-- Mantener un hilo único de trabajo con contexto limpio y actualizado.
+- Mantener un hilo único de trabajo con contexto limpio, enfocado y actualizado.
 
 📂 **Archivos que se subirán al iniciar esta conversación:**  
 - `Notifica-Roadmap.md`  
 - `README.md`  
 - `dev-notes.md`  
-(para proporcionar el contexto actual y mantener trazabilidad del progreso)
+(para cargar el estado actual y asegurar trazabilidad completa del proyecto)
 
-🔄 **Contexto general:**  
-- Esta conversación sustituye a la anterior tras llegar al límite técnico de longitud: se ralentizó por exceso de bloques de código, archivos y validaciones encadenadas.  
-- El proyecto está en la Etapa 8 (mejoras opcionales antes de la publicación pública), siguiendo un roadmap claro y riguroso.  
-- Ya se ha completado todo el sistema base, la app está firmada y desplegada como PWA y APK funcional.
+📐 **Normas de trabajo para esta conversación:**  
+- Todo código o documentación debe entregarse en un bloque `.txt` o `.md` sin interpretar, para permitir copiar de un clic.  
+- Antes de escribir código, se debe pedir siempre el fragmento actual necesario. No se permite suponer estructura o lógica.  
+- Las tareas se abordan en bloques secuenciales. Cada bloque debe quedar cerrado (validado + commit) antes de pasar al siguiente.  
+- Se recuerda validar todos los cambios en entorno real (PWA y APK) antes de considerarlos completados.
 
-🛠️ **Contexto actual de trabajo (última tarea activa):**  
-Acabamos de finalizar el bloque completo de rediseño del sistema de toasts.  
-Se ha eliminado `vue-sonner` e integrado un sistema propio basado en Nocta, con diseño compacto, soporte para acciones (Deshacer), animaciones de entrada y apilado, comportamiento corregido en iOS y validación en todas las plataformas.  
-También se han cerrado bugs visuales importantes (scroll innecesario en main, scroll en menú lateral, intento fallido de corregir scroll fantasma en iOS tras cerrar teclado). Todo ha sido validado, documentado y está desplegado.
+🔄 **Contexto general del proyecto:**  
+- El sistema base está finalizado y validado. La app funciona como PWA offline y también como APK Android firmada.  
+- El proyecto se encuentra en la **Etapa 8 del Roadmap**, enfocada en mejoras opcionales y consolidación previa a la publicación pública.  
+- El desarrollo sigue un roadmap riguroso con commits estructurados y pruebas cruzadas en móvil, emulador y navegador.
 
-🔍 **Flujo a partir de ahora:**  
-- Comenzar nuevos bloques opcionales del Roadmap  
-- Resolver tareas agrupadas bajo "Identificador visual de turnos" y otros refinamientos de interfaz  
-- Añadir tareas de estabilidad si aparecen regresiones  
-- Preparar lanzamientos públicos tras validaciones cruzadas
+🛠️ **Último bloque completado:**  
+- Se ha completado el bloque de **Mejora en identificador visual de turnos**, que incluía:
+  - Revisión completa del selector de turno.
+  - Sustitución de emojis por iconos SVG inline con colores dinámicos.
+  - Mejora de comportamiento de apertura (desplegar hacia arriba o abajo según espacio).
+  - Ajuste visual del punto verde, compactación vertical y corrección del icono en encabezado.
+- Todos los ajustes han sido validados en PWA iOS y APK Android. Se ha hecho commit final tras validación completa.
 
-📖 **Notas y aprendizajes no documentados en archivos:**  
-- El sistema de toasts propio es ahora estable, adaptado visualmente y funcionalmente a iOS, Android y escritorio.  
-- Se ha confirmado que usar `min-h-[100svh]` con `overflow-hidden` resuelve mejor los problemas de scroll en pantallas cortas que usar `100vh` o workarounds.  
-- Las limitaciones del teclado en PWA iOS son difíciles de sortear con total robustez. El intento de bloquear scroll post-teclado fue descartado tras validación real.  
-- La app ha sido desplegada en la Play Store (canal privado), Vercel (preview) y es completamente funcional sin conexión.
+🎯 **Siguiente paso a decidir:**  
+Seleccionar el próximo bloque del roadmap a ejecutar. Y después tomar decisiones, planear y ejecutar.
 
-Con esto, retomamos el desarrollo de Notifica con contexto limpio y toda la documentación necesaria cargada desde el inicio. ¡Listos para seguir!
+📖 **Notas y aprendizajes estructurales del proyecto:**  
+- Cambiar de conversación en el momento adecuado ayuda a evitar errores por saturación de contexto.  
+- Cada bloque complejo debe cerrarse con su commit propio antes de continuar.  
+- Las validaciones cruzadas (PWA, Android, móvil real) son parte integral del flujo.  
+- Se prioriza la calidad, claridad y mantenimiento futuro del proyecto frente a lanzamientos apresurados.  
+- Las decisiones estratégicas (como el enfoque de producto o orden del roadmap) deben documentarse explícitamente en `dev-notes.md` cuando cambian el rumbo del desarrollo.
+
+Con esto, retomamos el desarrollo de Notifica desde una conversación nueva, clara y lista para ejecutar el siguiente bloque con contexto real y actualizado.
 
 ---
 
@@ -306,6 +313,7 @@ Esto permitió que la versión instalada mostrara correctamente el botón y ejec
 Cada vez que se hagan cambios en la interfaz o lógica del frontend:
 - Ejecutar `npm run build`
 - Luego `npx cap copy android`
+- Luego `npx cap open android`
 - Y recompilar desde Android Studio.
 
 Así se asegura que la app nativa use los archivos más recientes.

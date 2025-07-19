@@ -13,8 +13,8 @@ import { Capacitor } from '@capacitor/core';
 import dayjs from 'dayjs'
 import 'dayjs/locale/es' // si usas español
 dayjs.locale('es')
-import { defineComponent, h, type Component } from 'vue'
 import { shiftIcons as icons } from './icons/shifts'
+import ShiftSelector from './components/ShiftSelector.vue'
 
 // Ref para la lista reactiva de toasts y la función de eliminación
 const { toasts, remove, add } = useToast()
@@ -49,7 +49,6 @@ const isShiftDropdownOpen = ref(false) // Controla la visibilidad del dropdown d
 
 const shiftDropdownButtonRef = ref<HTMLElement | null>(null)
 const shiftDropdownMenuRef = ref<HTMLDivElement | null>(null) // Ref para el menú del dropdown de turnos.  
-const openUpward = ref(false)
 
 interface Shift {
   id: string
@@ -629,58 +628,10 @@ const exportTasksToJson = async () => {
     return selectedShiftToView.value !== 'current';
   });
 
-  // Alterna la visibilidad del dropdown de selección de turno.
-  const toggleShiftDropdown = () => {
-    isShiftDropdownOpen.value = !isShiftDropdownOpen.value;
-
-    if (isShiftDropdownOpen.value && shiftDropdownButtonRef.value) {
-      const rect = shiftDropdownButtonRef.value.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const dropdownHeight = 240; // Altura estimada en px (max-h-60)
-      const margin = 16; // Margen de seguridad visual
-
-      const spaceBelow = viewportHeight - rect.bottom;
-      const spaceAbove = rect.top;
-
-      // Abrir hacia arriba si no hay suficiente espacio debajo pero sí hay arriba
-      openUpward.value = spaceBelow < dropdownHeight + margin && spaceAbove > dropdownHeight + margin;
-    }
-  };
-
   // Selecciona un turno para visualizar y cierra el dropdown.
   const selectShift = (shiftId: string | 'current') => {
-    selectedShiftToView.value = shiftId;
-    isShiftDropdownOpen.value = false;
-    // Opcional: devolver el foco al botón si es necesario para la accesibilidad
-    // shiftDropdownButtonRef.value?.focus(); 
-  };
-
-  // Maneja los clics fuera del dropdown de turnos para cerrarlo.
-  const handleClickOutsideShiftDropdown = (event: MouseEvent) => {
-    if (isShiftDropdownOpen.value) {
-      const target = event.target as Node;
-      const isClickOnButton = shiftDropdownButtonRef.value?.contains(target);
-      const isClickOnMenu = shiftDropdownMenuRef.value?.contains(target);
-
-      if (!isClickOnButton && !isClickOnMenu) {
-        isShiftDropdownOpen.value = false;
-      }
-    }
-  };
-
-  // Watcher: Añade o elimina el event listener para clics fuera del dropdown según su estado de apertura.
-  watch(isShiftDropdownOpen, (isOpen) => {
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutsideShiftDropdown);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutsideShiftDropdown);
-    }
-  });
-
-  // Hook onUnmounted: Limpia el event listener al desmontar el componente.
-  onUnmounted(() => {
-    document.removeEventListener('mousedown', handleClickOutsideShiftDropdown);
-  });
+    selectedShiftToView.value = shiftId
+  }
 
   // Formatea una tarea individual como una cadena de texto plano para compartir.
   const formatTaskForPlainText = (task: Task): string => {
@@ -990,62 +941,12 @@ const exportTasksToJson = async () => {
     <div
       class="bg-white rounded-xl p-4 shadow-sm w-full max-w-lg mb-4 border border-gray-200 flex flex-wrap items-center justify-between gap-x-1 gap-y-3">
       <!-- Selector de Turno -->
-      <div class="relative flex-shrink-0"> <!-- Contenedor relativo para el dropdown -->
-        <button ref="shiftDropdownButtonRef" @click="toggleShiftDropdown" type="button" class="inline-flex items-center justify-center w-[72px] 
-                rounded-md border border-slate-300 bg-white px-2 py-2 text-xs font-medium text-text-main shadow-sm hover:bg-slate-50
-                focus:outline-none transition-all duration-300 ease-in-out active:scale-95" aria-haspopup="true"
-          :aria-expanded="isShiftDropdownOpen">
-          Turno
-          <svg class="ml-0.5 h-3 w-3 text-text-main/70" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-            fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd"
-              d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z"
-              clip-rule="evenodd" />
-          </svg>
-        </button>
-
-        <div
-          v-if="isShiftDropdownOpen"
-          ref="shiftDropdownMenuRef"
-          class="absolute left-0 z-10 w-56 origin-top-left rounded-md bg-white shadow-lg border border-slate-200 focus:outline-none max-h-60 overflow-y-auto"
-          :class="openUpward
-            ? 'bottom-full mb-2 origin-bottom-left'
-            : 'mt-2 origin-top-left'"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="shift-selector-button"
-        >
-          <div class="py-0.5" role="none">
-            <button
-              @click="selectShift('current')"
-              class="text-text-main w-full text-left min-h-[44px] px-4 py-2 text-sm hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out flex items-center gap-2"
-              role="menuitem"
-            >
-              <component 
-                :is="icons[getShiftIcon(currentShiftId || '')]"
-                :class="['w-4 h-4 shrink-0', getShiftColor(currentShiftId || '')]"
-              />
-              <span>{{ getShiftLabel(currentShiftId || '') }}</span>
-              <span class="ml-auto w-3 h-3 rounded-full bg-emerald-300 self-center"></span>
-            </button>
-
-            <template v-for="shift in availableShifts" :key="shift.id">
-              <button
-                v-if="shift.id !== currentShiftId"
-                @click="selectShift(shift.id)"
-                class="text-text-main w-full text-left min-h-[44px] px-4 py-2 text-sm hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out flex items-center gap-2"
-                role="menuitem"
-              >
-                <component
-                  :is="icons[getShiftIcon(shift.id)]"
-                  :class="['w-4 h-4 shrink-0', getShiftColor(shift.id)]"
-                />
-                <span>{{ getShiftLabel(shift.id) }}</span>
-              </button>
-            </template>
-          </div>
-        </div>
-      </div>
+      <ShiftSelector
+        :availableShifts="availableShifts"
+        :currentShiftId="currentShiftId"
+        :selectedShiftToView="selectedShiftToView"
+        @select="selectShift"
+      />
 
       <!-- Filtros -->
       <div class="flex items-center space-x-2"> <!-- Grupo de filtros, space-x-2 para separar los dos filtros -->
