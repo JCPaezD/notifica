@@ -442,3 +442,17 @@ Puede reintentarse en el futuro si hay avances en iOS o mejores soluciones conoc
 
 ---
 
+## 🧭 Decisión de enfoque en etapa 8: producto, no prisa
+
+Durante la etapa 8 del roadmap, centrada en preparar la publicación de la app en Google Play, se identificó un requisito no previsto: el sistema exige un periodo mínimo de pruebas internas o cerradas con al menos 12 testers activos durante 14 días para habilitar el lanzamiento abierto.
+
+Este descubrimiento generó una aceleración artificial del flujo de trabajo, con prioridad inmediata sobre la validación de la APK y la PWA. Como consecuencia, se acumularon tareas técnicas, revisiones visuales y mejoras funcionales menores que empezaron a percibirse como urgentes.
+
+Tras una revisión del estado real del proyecto y de su uso actual, se tomó la decisión de priorizar la estabilidad, la claridad y la orientación a producto a largo plazo. Se reorganizó la etapa 8 del roadmap en consecuencia:
+
+- Se pospuso el testing real de la APK al final del bloque.
+- Se incorporaron mejoras estructurales opcionales con visión de producto (modo oscuro, multidioma, ayuda al usuario…).
+- Se confirmó que la versión actual es funcional y estable, y que los usuarios activos ya la utilizan con normalidad desde hace semanas.
+- Se reafirmó que la app se está desarrollando como un producto potencialmente útil para un público más amplio, más allá del entorno inmediato, apostando por la calidad y manteniendo la sencillez.
+
+Esta decisión permitió devolver el control del ritmo de desarrollo al criterio interno, evitando decisiones precipitadas basadas en plazos externos.
