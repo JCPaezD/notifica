@@ -822,7 +822,7 @@ const exportTasksToJson = async () => {
   <header class="sticky top-0 z-50 bg-white shadow-sm w-full">
     <div class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none">
       <button @click="openSideMenu"
-        class="absolute left-4 top-4.5 p-1 rounded-md border border-slate-300 hover:bg-slate-200 focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
+        class="absolute left-4 top-4.5 p-1 rounded-md border border-slate-300 md:hover:bg-slate-200 focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
         aria-label="Abrir menú">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-7 h-7 text-text-main">

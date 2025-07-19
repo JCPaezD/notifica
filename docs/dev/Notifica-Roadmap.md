@@ -351,6 +351,34 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Usar emojis o colores sutiles (finalmente svg heroicons con colores) para diferenciar turnos (mañana/tarde/noche)
   - [x] Revisión y ajuste fino del diseño del selector y del titulo del turno
 
+- [x] 🔧 Refactor: separación de responsabilidades en App.vue
+  📝 Esta tarea puede realizarse de forma aislada en una conversación separada o como bloque independiente del roadmap. No requiere rediseño ni nuevas funcionalidades.
+  - [x] Crear archivo `src/composables/useShifts.ts`
+    - [x] Mover `getShiftIcon`, `getShiftLabel`, `getShiftColor` a este archivo
+    - [x] Exportarlos con tipos correctos
+    - [x] Importarlos de nuevo en `App.vue`
+
+  - [x] Crear archivo `src/icons/shifts.ts`
+    - [x] Mover la constante `icons` con los 3 iconos (`sun`, `clock`, `moon`)
+    - [x] Exportar como `export const shiftIcons = { ... }`
+    - [x] Importar en `App.vue` y renombrar si es necesario
+
+  - [x] Crear componente `ShiftSelector.vue`
+    - [x] Mover el bloque del selector de turno al nuevo componente
+    - [x] Recibir las props necesarias (`availableShifts`, `currentShiftId`, `selectShift`)
+    - [x] Emitir eventos (`@select`) o usar `v-model` si procede
+    - [x] Estilizar igual que ahora (no rediseñar)
+
+  - [x] Verificar que `App.vue` queda reducido y más legible
+    - [x] Comprobar que todo funciona igual
+    - [x] No cambiar lógica ni estilos
+
+
+- [ ] 🍔 Corregir hover persistente en botón hamburguesa
+  - [ ] Limitar hover a escritorio (`md:hover:`)
+  - [ ] Asegurar estilos limpios en móvil (`focus-visible`, `active`)
+  - 📝 Intentado con clases `btn-interactive`, pero generaba efectos inconsistentes. Se pospone.
+
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
   - [ ] Ajustar fecha si es coherente
@@ -387,34 +415,33 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [ ] 🔁 Revertir cambio(s) de layout para evitar el bug (aunque se pierda alguna mejora)
         - [ ] 📌 Aceptar el bug como limitación documentada de iOS PWA, si no hay alternativa razonable
 
+- [ ] 🔧 Refactor: extraer formulario de nueva tarea como componente  
+  📝 Esta tarea puede realizarse de forma segura tras el refactor de turnos. Mejora la claridad de App.vue y permite aislar la lógica de inputs y validaciones.  
+  - [ ] Crear componente `NewTaskForm.vue`  
+    - [ ] Incluir `textarea` y `input` para técnico  
+    - [ ] Botón “Iniciar” con icono  
+  - [ ] Definir props si fueran necesarias (`currentShiftId`, etc.)  
+  - [ ] Emitir evento `@create` con la nueva tarea (o solo su descripción y técnico)  
+  - [ ] Gestionar foco, limpieza y validación internamente  
+  - [ ] Reemplazar bloque de formulario en App.vue por el nuevo componente  
+  - [ ] Verificar que todo funciona igual (móviles, teclado, toasts)
 
+- [ ] 🔧 Refactor: extraer los filtros de tareas como componente  
+  📝 Los toggles de filtros (`Activas` y `Sin Notificar`) pueden aislarse como un componente compacto y reutilizable.  
+  - [ ] Crear componente `TaskFilters.vue`  
+  - [ ] Recibir `showOnlyActive` y `showOnlyNotNotified` como props o usar `v-model`  
+  - [ ] Emitir eventos de cambio o usar `update:modelValue`  
+  - [ ] Estilizar igual que ahora, sin rediseñar  
+  - [ ] Sustituir el bloque de filtros actual por el nuevo componente  
+  - [ ] Verificar comportamiento en móviles y navegación rápida
 
-- [ ] 🔧 Refactor: separación de responsabilidades en App.vue
-  📝 Esta tarea puede realizarse de forma aislada en una conversación separada o como bloque independiente del roadmap. No requiere rediseño ni nuevas funcionalidades.
-  - [ ] Crear archivo `src/composables/useShifts.ts`
-    - [ ] Mover `getShiftIcon`, `getShiftLabel`, `getShiftColor` a este archivo
-    - [ ] Exportarlos con tipos correctos
-    - [ ] Importarlos de nuevo en `App.vue`
+- [ ] 🔧 Refactor: animación del logo en un componente o composable  
+  📝 La lógica de animación del título puede separarse para claridad o reutilización futura.  
+  - [ ] Crear composable `useLogoAnimation.ts` o componente `LogoBlock.vue`  
+  - [ ] Mover `ref` y `setTimeout` actuales  
+  - [ ] Importar y usar en App.vue sin cambiar diseño  
+  - [ ] Validar que la animación se aplica como antes (hover y tras nuevo turno)
 
-  - [ ] Crear archivo `src/icons/shifts.ts`
-    - [ ] Mover la constante `icons` con los 3 iconos (`sun`, `clock`, `moon`)
-    - [ ] Exportar como `export const shiftIcons = { ... }`
-    - [ ] Importar en `App.vue` y renombrar si es necesario
-
-  - [ ] Crear componente `ShiftSelector.vue`
-    - [ ] Mover el bloque del selector de turno al nuevo componente
-    - [ ] Recibir las props necesarias (`availableShifts`, `currentShiftId`, `selectShift`)
-    - [ ] Emitir eventos (`@select`) o usar `v-model` si procede
-    - [ ] Estilizar igual que ahora (no rediseñar)
-
-  - [ ] Verificar que `App.vue` queda reducido y más legible
-    - [ ] Comprobar que todo funciona igual
-    - [ ] No cambiar lógica ni estilos
-
-- [ ] 🍔 Corregir hover persistente en botón hamburguesa
-  - [ ] Limitar hover a escritorio (`md:hover:`)
-  - [ ] Asegurar estilos limpios en móvil (`focus-visible`, `active`)
-  - 📝 Intentado con clases `btn-interactive`, pero generaba efectos inconsistentes. Se pospone.
 
 - [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
   - [ ] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
