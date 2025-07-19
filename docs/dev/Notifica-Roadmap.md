@@ -165,9 +165,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 ---
 
-## 🔔 Etapa 8: Mejoras opcionales y consolidación previa a publicación
+## 🔔 Etapa 8: Mejoras y consolidación previa a publicación
 
-- [x] 🤖 Consolidar versión Android nativa (Capacitor + Android Studio)
+- [x] 🤖 Consolidar versión Android nativa (Capacitor + Android Studio) y PWA par iOS.
 
   - [x] 📦 Generar y probar APK sin firmar
     - [x] Ejecutar `npx cap add android` y abrir proyecto en Android Studio
@@ -204,7 +204,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Confirmado que se puede actualizar desde una instalación previa
     - [x] Validado splash, navegación, retroceso, permisos y almacenamiento local
 
-  - [ ] 🧼 Preparación para publicación en Play Store
+  - [x] 🧼 Preparación *parcial* para publicación en Play Store
     - [x] `manifest.json` correcto (`standalone`, idioma, nombre, colores…)
     - [x] Nombre visible y nombre de paquete (`com.jcpaezd.notifica`)
     - [x] Confirmar que los íconos son adecuados y `maskable` (Android)
@@ -257,18 +257,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 
 ---
-
-- [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
-  - [ ] Detectar si hora introducida corresponde al día anterior
-  - [ ] Ajustar fecha si es coherente
-  - [ ] Mostrar toast con opción de deshacer
-
-- [ ] ✉️ Formulario de feedback por email
-  - [ ] Botón "Enviar feedback" en menú lateral
-  - [ ] Formulario con tipo de mensaje, descripción y email opcional
-  - [ ] Guardar en Firestore (colección `feedback`)
-  - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
-  - [ ] Confirmación visual tras enviar
 
 - [x] 📜 Scroll innecesario en pantallas cortas
   - [x] Revisar layout y paddings
@@ -338,21 +326,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Verificar funcionamiento real (móvil y escritorio)
     - [x] Documentar en dev-notes la decisión y estructura
 
-- [ ] 🗓️ Mejora en identificador visual de turnos
-  - [ ] Corregir visibilidad del desplegable de turnos en Android
-    > El menú se corta si no hay espacio suficiente hacia abajo. Detectar si debe abrirse hacia arriba o abajo dinámicamente. Añadir altura máxima y scroll interno para evitar cortes visuales.
-  - [ ] Añadir día de la semana al selector
-  - [ ] Usar emojis o colores sutiles para diferenciar turnos
-
 - [x] 🙅‍♂️ Desactivar selección de texto innecesaria  
   - [x] Aplicado `select-none` global en `<main>`, `<header>` y contenedor de menú lateral  
   - [x] `select-text` se mantiene solo en campos de entrada por defecto (inputs, textareas)  
   - [x] Validado en navegador y dispositivos: no se puede seleccionar texto accidentalmente en ningún elemento de la UI
-
-- [ ] 🍔 Corregir hover persistente en botón hamburguesa
-  - [ ] Limitar hover a escritorio (`md:hover:`)
-  - [ ] Asegurar estilos limpios en móvil (`focus-visible`, `active`)
-  - 📝 Intentado con clases `btn-interactive`, pero generaba efectos inconsistentes. Se pospone.
 
 - [x] ↖️ Fijar header para acceso constante al menú  
   > Implementado con `sticky top-0` y fondo blanco en todo el ancho.  
@@ -367,21 +344,152 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   > El comportamiento es fluido, no invasivo y aporta feedback visual sin distraer.
   > En móvil, la animación se dispara tras confirmar la creación del turno, con un retardo para asegurar visibilidad.
 
+- [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
+  - [ ] Detectar si hora introducida corresponde al día anterior
+  - [ ] Ajustar fecha si es coherente
+  - [ ] Mostrar toast con opción de deshacer
+
+- [ ] ✉️ Formulario de feedback por email
+  - [ ] Botón "Enviar feedback" en menú lateral
+  - [ ] Formulario con tipo de mensaje, descripción y email opcional
+  - [ ] Guardar en Firestore (colección `feedback`)
+  - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
+  - [ ] Confirmación visual tras enviar
+
+- [ ] 🌀 Revisar bug crítico: “Scroll inesperado al hacer doble tap en área vacía (iOS PWA)”  
+  - [ ] Confirmar que:
+        - El bug solo aparece en iOS cuando la app está instalada como PWA (standalone)
+        - No ocurre en Android (PWA ni APK)
+        - No ocurre en la versión PWA estable publicada hace ~35 días
+  - [ ] Estudiar en qué momento se reintrodujo:
+        - [ ] Comparar con commit de la última versión pública
+        - [ ] Identificar los cambios que pueden haberlo activado:
+              - Implementación del header `sticky top-0`
+              - Eliminación del scroll extra del `<main>`
+  - [ ] Volver a revisar soluciones previamente descartadas:
+        - `min-h-[100svh]` en `<main>`
+        - `overflow-hidden` en `html`, `body` o `main`
+        - `viewport-fit=cover` en el meta viewport
+        - Añadir `scrollTo(0, 0)` tras `blur`
+        - Bloqueo de `touchmove` en áreas vacías
+        - Ajustes con `safe-area-inset-*`
+  - [ ] Hacer pruebas controladas activando y desactivando los cambios de layout, uno por uno
+  - [ ] Documentar resultados, incluyendo efectos secundarios no deseados
+  - [ ] Tomar decisión antes de liberar públicamente la app:
+        - [ ] ✅ Aplicar solución si funciona sin efectos secundarios
+        - [ ] 🔁 Revertir cambio(s) de layout para evitar el bug (aunque se pierda alguna mejora)
+        - [ ] 📌 Aceptar el bug como limitación documentada de iOS PWA, si no hay alternativa razonable
+
+- [ ] 🗓️ Mejora en identificador visual de turnos
+  - [x] Corregir visibilidad del desplegable de turnos en Android
+    > El menú se corta si no hay espacio suficiente hacia abajo. Detectar si debe abrirse hacia arriba o abajo dinámicamente. Añadir altura máxima y scroll interno para evitar cortes visuales.
+  - [ ] Añadir día de la semana al selector
+  - [ ] Usar emojis o colores sutiles para diferenciar turnos (mañana/tarde/noche)
+
+- [ ] 🔧 Refactor: separación de responsabilidades en App.vue
+  📝 Esta tarea puede realizarse de forma aislada en una conversación separada o como bloque independiente del roadmap. No requiere rediseño ni nuevas funcionalidades.
+  - [ ] Crear archivo `src/composables/useShifts.ts`
+    - [ ] Mover `getShiftIcon`, `getShiftLabel`, `getShiftColor` a este archivo
+    - [ ] Exportarlos con tipos correctos
+    - [ ] Importarlos de nuevo en `App.vue`
+
+  - [ ] Crear archivo `src/icons/shifts.ts`
+    - [ ] Mover la constante `icons` con los 3 iconos (`sun`, `clock`, `moon`)
+    - [ ] Exportar como `export const shiftIcons = { ... }`
+    - [ ] Importar en `App.vue` y renombrar si es necesario
+
+  - [ ] Crear componente `ShiftSelector.vue`
+    - [ ] Mover el bloque del selector de turno al nuevo componente
+    - [ ] Recibir las props necesarias (`availableShifts`, `currentShiftId`, `selectShift`)
+    - [ ] Emitir eventos (`@select`) o usar `v-model` si procede
+    - [ ] Estilizar igual que ahora (no rediseñar)
+
+  - [ ] Verificar que `App.vue` queda reducido y más legible
+    - [ ] Comprobar que todo funciona igual
+    - [ ] No cambiar lógica ni estilos
+
+- [ ] 🍔 Corregir hover persistente en botón hamburguesa
+  - [ ] Limitar hover a escritorio (`md:hover:`)
+  - [ ] Asegurar estilos limpios en móvil (`focus-visible`, `active`)
+  - 📝 Intentado con clases `btn-interactive`, pero generaba efectos inconsistentes. Se pospone.
+
 - [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
+  - [ ] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
+  > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
   - [ ] Corregir zoom con doble tap en chrome/safari de ios 
-  - [ ] Añadir splash para pa PWA ios y arreglar la de android (si es posible y fácil) 
+  - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
     - [ ] Ajustar paddings con `env(safe-area-inset-*)`
     - [ ] Verificar en dispositivos reales y emuladores
-
-- [ ] 🪧 Toast no desaparecen a veces al volver si la app ha salido del primer plano
 
 - [ ] 📣 Aviso en PWA para migración a app nativa
   - [ ] Detectar si es entorno web o PWA
   - [ ] Mostrar toast persistente con enlace a Play Store
   - [ ] Ocultar aviso si ya está instalada la versión nativa (opcional)
   - [ ] Añadir fallback para iOS con link personalizado
+
+- [ ] 🌓 Añadir soporte para modo oscuro (tema `dark` en Tailwind)
+  - [ ] Definir paleta de colores pastel adaptada a modo oscuro
+  - [ ] Configurar `darkMode` en `tailwind.config.js` (modo `class`)
+  - [ ] Añadir un toggle (opcional) o usar modo del sistema (selector claro/oscuro/sistema)
+  - [ ] Aplicar clases condicionales en los componentes clave
+  - [ ] Validar apariencia en Android nativo y PWA (modo oscuro activado en el sistema)
+  - [ ] Asegurar legibilidad, contraste y coherencia con modo claro
+
+- [ ] 📘 Añadir ayuda o tutorial para usuarios nuevos
+  - [ ] Definir qué funciones deben explicarse (crear turno, añadir tarea, filtros, exportar, etc.)
+  - [ ] Elegir el formato: modal scrollable, vista “Ayuda”, o guía paso a paso (más complejo)
+  - [ ] Diseñar estructura clara, con texto corto y ejemplos visuales
+  - [ ] Añadir acceso desde el menú lateral u otro lugar visible
+  - [ ] Asegurar que se puede consultar en cualquier momento
+  - [ ] Validar legibilidad en móvil y dispositivos pequeños
+
+- [ ] 🌍 Añadir soporte multidioma (español e inglés)
+  - [ ] Elegir estrategia: vue-i18n, objeto propio, o solución mínima
+  - [ ] Extraer todos los textos visibles a sistema de traducción
+  - [ ] Traducir todos los textos actuales al inglés
+  - [ ] Añadir un selector de idioma manual (o usar idioma del sistema)
+  - [ ] Validar comportamiento en Android e iOS
+  - [ ] Ajustar diseño si hay textos más largos o distintos por idioma
+
+- [ ] ✏️ Revisar wording para ampliar público potencial
+  - [ ] Evaluar si etiquetas como “Aviso” y “Técnicos” deben ser más genéricas
+  - [ ] Proponer variantes como “Descripción”, “Responsables”, etc.
+  - [ ] Verificar que el nuevo wording sigue siendo claro para los usuarios actuales
+  - [ ] Aplicar los cambios en todos los lugares visibles (inputs, botones, filtros, exportación)
+  - [ ] Validar comprensión en contexto (sin necesidad de ayuda externa)
+
+- [ ] 📄 Actualizar `README.md` con información final  
+  - [ ] Eliminar referencias a `vue-sonner` (ya reemplazado)  
+  - [ ] Añadir nota sobre el sistema de toasts propio  
+  - [ ] Confirmar que la lista de tecnologías y estructura de carpetas está actualizada  
+  - [ ] Incluir enlace a la versión de Play Store si ya está publicada  
+  - [ ] Añadir o reemplazar capturas si han cambiado tras el rediseño
+
+- [ ] 📣 Preparación para fase de testing real con usuarios externos 
+  - [ ] Revisar si la app (actual `.aab`) está ya en estado adecuado para compartir públicamente  
+        ↪ [Checklist en dev-notes.md](dev-notes.md#-revisión-del-aab-antes-de-lanzar-testing-externo)
+          - [ ] Confirmar si el bug del scroll innecesario en listas cortas ha sido resuelto sin introducir nuevas regresiones
+          - [ ] Asegurar que el selector de turno es visible en listas largas y no queda fuera de pantalla
+          - [ ] Finalizar revisión y posible solución del bug visual en PWA iOS (doble tap en área vacía)
+          - [ ] Implementar soporte para modo oscuro o decidir posponerlo con documentación adecuada
+    - [ ] Si no lo está, priorizar tareas mínimas necesarias para dejarla lista cuanto antes  
+    - [ ] Confirmar el canal de publicación para testing:
+          - ¿Seguir en prueba interna con invitaciones?
+          - ¿O mover a canal de prueba cerrada?
+    - [ ] Asegurar que cumple requisitos de Google Play:
+          - Al menos 12 testers activos
+          - Durante un periodo de 14 días
+    - [ ] Revisar ficha de app en Google Play Console:
+          - Nombre, descripción, capturas, icono, política de privacidad
+    - [ ] Preparar mensaje atractivo para captar testers externos voluntarios
+    - [ ] Publicar el mensaje en canales adecuados:
+          - Reddit (ej. /r/androidapps, /r/SideProject)
+          - Foros sobre productividad, técnicos, mantenimiento, apps nuevas
+          - Grupos de Discord o Telegram si procede
+    - [ ] Medir respuesta de testers externos y ajustar si es necesario
+    - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
 
 ---
 
@@ -391,20 +499,23 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Confirmar que la rama `main` está actualizada con la última versión  
   - [ ] Subir cambios a Vercel y verificar despliegue correcto  
   - [ ] Actualizar `versionName` en UI y archivos visibles para usuarios  
-  - [ ] Confirmar correcto funcionamiento como app instalada desde navegador
+  - [ ] Recordatorio: actualizar también el `README.md` si se han hecho cambios relevantes (tecnologías, capturas, enlaces, instrucciones, etc.)
+  - [ ] Confirmar correcto funcionamiento como app instalada desde navegador (probar en iPhone 16 Pro, iPhone X y iPhone 5S)
   - [ ] (Opcional) Crear un tag git:
       git tag v1.X.Y -m "Descripción del release"
       git push origin v1.X.Y  
 
 - [ ] 🧭 Revisar, repensar y tomar decisiones sobre los puntos de este bloque  
   - [ ] Confirmar qué tareas de visibilidad y comunicación se llevarán a cabo  
-  - [ ] Posponer o descartar aquellas que no se consideren útiles o prioritarias  
+  - [ ] Posponer o descartar aquellas que no se consideren útiles o prioritarias
+  - [ ] Recordatorio: actualizar también el `README.md` si se han hecho cambios relevantes (tecnologías, capturas, enlaces, instrucciones, etc.)
 
 - [ ] 🌍 Subir app al canal público como "no listada"  
   > Este paso sube la app a producción en Google Play para revisión, pero sin visibilidad pública.  
   - [ ] Revisar ficha de Play Store (nombre, descripción, capturas, política de datos…)  
   - [ ] Confirmar que todo está actualizado y listo para revisión  
   - [ ] Enviar para revisión de Google y esperar aprobación  
+  - [ ] Recordatorio: actualizar también el `README.md` si se han hecho cambios relevantes (tecnologías, capturas, enlaces, instrucciones, etc.)
   - [ ] No activar aún la visibilidad pública  
 
 - [ ] 📢 Aviso en PWA para migración a versión nativa (tras publicación en abierto)  
@@ -451,7 +562,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 * Si un diff no aplica bien, cierra y vuelve a abrir el archivo.
 * Reinicia la conversación si ves bloqueos o lentitud persistente.
 
-#### 📄 Prompt recomendado para nuevas conversaciones con Gemini:
+#### 📄 Prompt recomendado para nuevas conversaciones con Gemini: -- Fuera de uso actualmente
 
 Vamos a continuar el desarrollo de mi app llamada Notifica. Ya tengo avanzado el proyecto y vamos a continuar siguiendo el roadmap. Puedes revisar el archivo Notifica-Roadmap.md para ver el estado actual.
 

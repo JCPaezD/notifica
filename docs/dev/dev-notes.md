@@ -48,7 +48,7 @@ Esta conversación servirá para:
 
 📂 **Archivos que se subirán al iniciar esta conversación:**  
 - `Notifica-Roadmap.md`  
-- `README.md`
+- `README.md`  
 - `dev-notes.md`  
 (para proporcionar el contexto actual y mantener trazabilidad del progreso)
 
@@ -58,31 +58,21 @@ Esta conversación servirá para:
 - Ya se ha completado todo el sistema base, la app está firmada y desplegada como PWA y APK funcional.
 
 🛠️ **Contexto actual de trabajo (última tarea activa):**  
-Estamos en mitad del reemplazo del sistema `vue-sonner` por un sistema de notificaciones propio basado en el desarrollado para Nocta.  
-Ya están completadas:  
-- Integración del componente `<Toast>` y `useToast()`  
-- Soporte para botón de acción (`label` + `onClick`)  
-- Animaciones personalizadas al pulsar botón y al montar  
-- Animación de entrada/salida de los toasts mediante `<TransitionGroup>`  
-- Ajustes visuales preliminares y comportamiento refinado en móvil y escritorio  
-- Documentación de este sistema en `dev-notes.md`  
-Ahora estamos reemplazando todas las llamadas antiguas (`notifySuccess`, etc.) por llamadas al nuevo sistema (`add({...})`), una a una para evitar errores.  
-El último bloque actualizado fue el de exportación de tareas (incluyendo `notifySuccess`, `notifyError`, `notifyInfo`).  
+Acabamos de finalizar el bloque completo de rediseño del sistema de toasts.  
+Se ha eliminado `vue-sonner` e integrado un sistema propio basado en Nocta, con diseño compacto, soporte para acciones (Deshacer), animaciones de entrada y apilado, comportamiento corregido en iOS y validación en todas las plataformas.  
+También se han cerrado bugs visuales importantes (scroll innecesario en main, scroll en menú lateral, intento fallido de corregir scroll fantasma en iOS tras cerrar teclado). Todo ha sido validado, documentado y está desplegado.
 
-🔍 **Flujo para esta migración:**  
-1. Buscar llamadas a funciones antiguas (notifySuccess, notifyInfo, etc.)  
-2. Sustituirlas por llamadas al nuevo sistema  
-3. Eliminar `useNotifications.ts` y `vue-sonner` del proyecto  
-4. Ajustar visualmente los toasts  
-5. Verificar en dispositivo real  
-6. Documentar cierre de la migración
+🔍 **Flujo a partir de ahora:**  
+- Comenzar nuevos bloques opcionales del Roadmap  
+- Resolver tareas agrupadas bajo "Identificador visual de turnos" y otros refinamientos de interfaz  
+- Añadir tareas de estabilidad si aparecen regresiones  
+- Preparar lanzamientos públicos tras validaciones cruzadas
 
 📖 **Notas y aprendizajes no documentados en archivos:**  
-- Se ha detectado que vue-sonner no permite personalización visual precisa sin `!important` y presenta limitaciones en stacking, posición y diseño.  
-- Se ha decidido que el nuevo sistema será más robusto, mantenible y reutilizable (también se llevará a Nocta).  
-- Se prioriza el feedback visual en móvil sobre hover en escritorio.  
-- Las animaciones se ajustan con `animate-pop` personalizado y transición global con `<TransitionGroup>`.  
-- Se ha incluido control total del sistema desde `useToast.ts`, permitiendo acciones (ej. Deshacer), duración personalizada y cierre programado.
+- El sistema de toasts propio es ahora estable, adaptado visualmente y funcionalmente a iOS, Android y escritorio.  
+- Se ha confirmado que usar `min-h-[100svh]` con `overflow-hidden` resuelve mejor los problemas de scroll en pantallas cortas que usar `100vh` o workarounds.  
+- Las limitaciones del teclado en PWA iOS son difíciles de sortear con total robustez. El intento de bloquear scroll post-teclado fue descartado tras validación real.  
+- La app ha sido desplegada en la Play Store (canal privado), Vercel (preview) y es completamente funcional sin conexión.
 
 Con esto, retomamos el desarrollo de Notifica con contexto limpio y toda la documentación necesaria cargada desde el inicio. ¡Listos para seguir!
 
@@ -324,7 +314,7 @@ Así se asegura que la app nativa use los archivos más recientes.
 
 ## 📤 Exportar archivo JSON en Android
 
-Problema: en Android nativo, la exportación por <a download> no generaba ningún archivo visible.
+Problema: en Android nativo, la exportación por "a download" no generaba ningún archivo visible.
 
 Solución: se combinó @capacitor/filesystem (para guardar en Directory.Cache) con @capacitor/share para permitir compartir el archivo .json generado.
 
@@ -403,3 +393,52 @@ Conclusión:
 - Dado que no rompe el uso normal y solo es visible si se fuerza, se descarta temporalmente.
 
 Puede reintentarse en el futuro si hay avances en iOS o mejores soluciones conocidas.
+
+---
+
+## ✅ Revisión del `.aab` antes de lanzar testing externo
+(ver roadmap Etapa 8: “Lanzar fase de testing real con usuarios externos”)
+
+### 📦 Revisión del .aab antes de lanzar testing real (fase externa)
+
+**Funcionamiento general**
+- ✅ Lanzamiento rápido y sin errores
+- ✅ Splash personalizada aparece correctamente (Android 12+ y 10)
+- ✅ Navegación fluida entre acciones (crear, cerrar, exportar, borrar)
+- ❌ Scroll correcto en listas largas de tareas - En listas cortas mantiene bug scroll extra en main. En listas largas, selector de turno no se ve (abajo fuera de pantalla)
+- ✅ Sin cierres, cuelgues ni errores visibles
+
+**Persistencia y datos**
+- ✅ Tareas se guardan correctamente entre sesiones
+- ✅ Exportación en texto plano funciona y copia al portapapeles o usa share
+- ✅ Exportación como `.json` se ofrece para compartir (Capacitor Share)
+- ✅ Importación de `.json` funciona
+- ✅ "Borrar todo" borra efectivamente y muestra feedback
+
+**Interfaz**
+- ✅ Header fijo visible correctamente
+- ✅ Toasts aparecen bien (posición, stacking, botones funcionales)
+- ✅ Formulario “Iniciar tarea” funciona sin glitches
+- ✅ Lista de tareas y botones responden correctamente
+- ✅ El menú lateral abre y cierra sin problemas
+
+**Experiencia visual**
+- ❌ No hay scroll fantasma ni glitches al abrir teclado - si lo hay con poco contenido
+- ✅ Tipografía, colores, espaciado coherentes
+- ✅ Iconos visibles y en su sitio
+- ✅ Animaciones presentes donde corresponde
+
+**Integración Android**
+- ✅ Splash screen limpia sin halo ni deformación
+- ✅ Icono visible correctamente (maskable, sin fondo gris)
+- ✅ No hay permisos extra solicitados
+- ❌ Compatible con modo oscuro si está activado - No existe modo oscuro. ¿costaría mucho de integrar?
+
+**Otros detalles**
+- ✅ Número de versión correcto (`versionName` y `versionCode`)
+- ✅ Pie de menú muestra versión actual
+- ✅ No hay regresiones respecto a versión anterior
+- ✅ Confirmado que está firmada y se instala desde Play Store (canal de test)
+
+---
+

@@ -17,6 +17,15 @@ const props = defineProps({
   title: {
     type: String,
     default: 'Lista de Tareas' // Título por defecto si no se proporciona
+  },
+  // ID del turno al que corresponde el título (para mostrar icono).
+  titleId: {
+    type: String,
+    default: ''
+  },
+  titleIcon: {
+    type: Object,
+    default: null
   }
 })
 
@@ -46,10 +55,20 @@ const relayDeleteTask = (taskId: string) => {
 
 <template>
   <div class="w-full max-w-lg">
-    <h2 
+    <div 
       v-if="props.title && tasks.length > 0" 
-      class="text-lg font-semibold tracking-wide text-text-main mb-4 px-1"
-    >{{ props.title }}</h2>
+      class="mb-4 px-1"
+    >
+      <p class="text-s text-gray-500 mb-1">Viendo Turno</p>
+      <div class="flex items-center gap-2 text-xl font-semibold text-text-main">
+        <component
+          v-if="props.titleIcon"
+          :is="props.titleIcon"
+          class="w-4 h-4 text-yellow-500 shrink-0"
+        />
+        <span>{{ props.title }}</span>
+      </div>
+    </div>
     <TransitionGroup 
       tag="ul" 
       name="task-list"

@@ -10,7 +10,10 @@ import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { Capacitor } from '@capacitor/core';
-
+import dayjs from 'dayjs'
+import 'dayjs/locale/es' // si usas español
+dayjs.locale('es')
+import { defineComponent, h, type Component } from 'vue'
 
 // Ref para la lista reactiva de toasts y la función de eliminación
 const { toasts, remove, add } = useToast()
@@ -38,10 +41,78 @@ const CURRENT_SHIFT_ID_KEY = 'notifica-current-shift-id'
 // --- Gestión de Turnos ---
 const currentShiftId = ref<string | null>(null) // ID del turno actualmente activo.
 const selectedShiftToView = ref<string | 'current'>('current') // Turno seleccionado para visualización ('current' o un shiftId).
+const shiftTitleId = computed(() =>
+  selectedShiftToView.value !== 'current' ? selectedShiftToView.value : ''
+)
 const isShiftDropdownOpen = ref(false) // Controla la visibilidad del dropdown de selección de turno.
 
-const shiftDropdownButtonRef = ref<HTMLButtonElement | null>(null) // Ref para el botón del dropdown de turnos.
-const shiftDropdownMenuRef = ref<HTMLDivElement | null>(null) // Ref para el menú del dropdown de turnos.
+const shiftDropdownButtonRef = ref<HTMLElement | null>(null)
+const shiftDropdownMenuRef = ref<HTMLDivElement | null>(null) // Ref para el menú del dropdown de turnos.  
+const openUpward = ref(false)
+
+interface Shift {
+  id: string
+  label: string
+  date: Date
+}
+
+// --- Íconos ---
+const icons: Record<'sun' | 'clock' | 'moon', Component> = {
+  sun: defineComponent({
+    render() {
+      return h('svg', {
+        xmlns: 'http://www.w3.org/2000/svg',
+        fill: 'none',
+        viewBox: '0 0 24 24',
+        strokeWidth: 1.5,
+        stroke: 'currentColor',
+        class: 'w-5 h-5'
+      }, [
+        h('path', {
+          strokeLinecap: 'round',
+          strokeLinejoin: 'round',
+          d: 'M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z'
+        })
+      ])
+    }
+  }),
+  clock: defineComponent({
+    render() {
+      return h('svg', {
+        xmlns: 'http://www.w3.org/2000/svg',
+        fill: 'none',
+        viewBox: '0 0 24 24',
+        strokeWidth: 1.5,
+        stroke: 'currentColor',
+        class: 'w-5 h-5'
+      }, [
+        h('path', {
+          strokeLinecap: 'round',
+          strokeLinejoin: 'round',
+          d: 'M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
+        })
+      ])
+    }
+  }),
+  moon: defineComponent({
+    render() {
+      return h('svg', {
+        xmlns: 'http://www.w3.org/2000/svg',
+        fill: 'none',
+        viewBox: '0 0 24 24',
+        strokeWidth: 1.5,
+        stroke: 'currentColor',
+        class: 'w-5 h-5'
+      }, [
+        h('path', {
+          strokeLinecap: 'round',
+          strokeLinejoin: 'round',
+          d: 'M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z'
+        })
+      ])
+    }
+  })
+}
 
 // --- Estado para el menú lateral ---
 const isSideMenuOpen = ref(false) // Controla la visibilidad del menú lateral.
@@ -134,7 +205,6 @@ const updateTask = (updatedTask: Task) => {
     })
   }
 }
-
 
 // Reactiva una tarea que había sido finalizada, eliminando su hora de finalización.
 const reactivateTask = (taskId: string) => {
@@ -302,7 +372,7 @@ const filteredAndSortedTasks = computed(() => {
 });
 
 // Propiedad computada: Genera una lista de turnos disponibles basados en los `shiftId` de las tareas.
-const availableShifts = computed(() => {
+const availableShifts = computed<Shift[]>(() => {
   const shiftIds = new Set<string>();
   allTasks.value.forEach(task => {
     if (task.shiftId) {
@@ -313,15 +383,19 @@ const availableShifts = computed(() => {
   return Array.from(shiftIds)
     .map(id => {
       const timestamp = parseInt(id.replace('shift-', ''));
-      if (isNaN(timestamp)) return { id, label: id, date: new Date(0) }; // Fallback
+      if (isNaN(timestamp)) return { id, label: id, date: new Date(0) };
       const date = new Date(timestamp);
       return {
         id,
-        label: `${date.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: '2-digit' })} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
-        date: date
+        label: `${date.toLocaleDateString([], {
+          day: '2-digit',
+          month: '2-digit',
+          year: '2-digit'
+        })} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+        date
       };
     })
-    .sort((a, b) => b.date.getTime() - a.date.getTime()); // Turnos más nuevos primero en el dropdown
+    .sort((a, b) => b.date.getTime() - a.date.getTime());
 });
 
 // Propiedad computada: Determina el título a mostrar encima de la lista de tareas.
@@ -334,8 +408,44 @@ const listTitle = computed(() => {
   }
   const selectedShift = availableShifts.value.find(s => s.id === selectedShiftToView.value);
   // Muestra el título del turno anterior que se está viendo.
-  return selectedShift ? `Viendo Turno: ${selectedShift.label}` : '';
+  return selectedShift ? getShiftLabel(selectedShift.id) : '';
 });
+
+// Funcion que capitaliza la primera letra de una cadena.
+function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+// Devuelve el texto formateado de un turno dado su ID.
+// Incluye tramo horario y fecha abreviada, usado como parte del título y el selector.
+function getShiftLabel(shiftId: string): string {
+  const timestamp = Number(shiftId.replace('shift-', ''))
+  const date = dayjs(timestamp)
+  const dayName = capitalize(date.format('ddd').replace('.', '')) // sin punto final
+  const dateStr = date.format('DD/MM')
+  const hourStr = date.format('HH:mm')
+  return `${dayName} · ${dateStr} · ${hourStr}`
+}
+
+
+
+// Devuelve el icono correspondiente a un turno dado su ID.
+function getShiftIcon(shiftId: string): 'sun' | 'clock' | 'moon' {
+  const timestamp = Number(shiftId.replace('shift-', ''))
+  const hour = dayjs(timestamp).hour()
+
+  if (hour < 12) return 'sun'
+  else if (hour < 20) return 'clock'
+  else return 'moon'
+}
+
+// Devuelve el color de texto correspondiente a un turno dado su ID.
+function getShiftColor(shiftId: string): string {
+  const icon = getShiftIcon(shiftId)
+  if (icon === 'sun') return 'text-yellow-400'
+  if (icon === 'clock') return 'text-amber-500'
+  return 'text-indigo-500' // moon
+}
 
 // Exporta todas las tareas actuales a un archivo JSON.
 const exportTasksToJson = async () => {
@@ -542,7 +652,6 @@ const exportTasksToJson = async () => {
     }
   };
 
-
   // Hook onMounted: Carga el ID del turno actual y las tareas desde localStorage al iniciar la aplicación.
   onMounted(() => {
     // Cargar currentShiftId
@@ -590,7 +699,6 @@ const exportTasksToJson = async () => {
     }, 6000) */
   })
 
-
   // Watcher: Guarda todas las tareas en localStorage cada vez que el array `allTasks` cambia.
   watch(allTasks, (newTasks) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks))
@@ -615,6 +723,15 @@ const exportTasksToJson = async () => {
   // Alterna la visibilidad del dropdown de selección de turno.
   const toggleShiftDropdown = () => {
     isShiftDropdownOpen.value = !isShiftDropdownOpen.value;
+
+    if (isShiftDropdownOpen.value && shiftDropdownButtonRef.value) {
+      const rect = shiftDropdownButtonRef.value.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const spaceBelow = viewportHeight - rect.bottom;
+      const spaceAbove = rect.top;
+
+      openUpward.value = spaceBelow < 200 && spaceAbove > 200;
+    }
   };
 
   // Selecciona un turno para visualizar y cierra el dropdown.
@@ -796,7 +913,6 @@ const exportTasksToJson = async () => {
     }
   };
 
-
   // Abre el menú lateral.
   const openSideMenu = () => {
     isSideMenuOpen.value = true;
@@ -941,8 +1057,17 @@ const exportTasksToJson = async () => {
     <!-- Este div se moverá debajo de TaskList -->
 
     <!-- Lista de Tareas (ahora filtrada y ordenada) -->
-    <TaskList :key="taskListKey" :tasks="filteredAndSortedTasks" :title="listTitle" @finish-task="finishTask"
-      @update-task="updateTask" @reactivate-task="reactivateTask" @delete-task="deleteTask" />
+    <TaskList
+      :key="taskListKey"
+      :tasks="filteredAndSortedTasks"
+      :title="listTitle"
+      :title-id="shiftTitleId"
+      :title-icon="icons[getShiftIcon(shiftTitleId)]"
+      @finish-task="finishTask"
+      @update-task="updateTask"
+      @reactivate-task="reactivateTask"
+      @delete-task="deleteTask"
+    />
 
     <!-- Separador Visual -->
     <hr class="w-5/6 max-w-md border-gray-200 my-6" />
@@ -951,7 +1076,6 @@ const exportTasksToJson = async () => {
     <!-- Contenedor para Selector de Turno y Filtros -->
     <div
       class="bg-white rounded-xl p-4 shadow-sm w-full max-w-lg mb-4 border border-gray-200 flex flex-wrap items-center justify-between gap-x-1 gap-y-3">
-      <!-- mt-4 eliminado, mb-4 mantenido -->
       <!-- Selector de Turno -->
       <div class="relative flex-shrink-0"> <!-- Contenedor relativo para el dropdown -->
         <button ref="shiftDropdownButtonRef" @click="toggleShiftDropdown" type="button" class="inline-flex items-center justify-center w-[72px] 
@@ -967,18 +1091,45 @@ const exportTasksToJson = async () => {
           </svg>
         </button>
 
-        <div v-if="isShiftDropdownOpen" ref="shiftDropdownMenuRef"
-          class="absolute left-0 z-10 mt-2 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-60 overflow-y-auto"
-          role="menu" aria-orientation="vertical" aria-labelledby="shift-selector-button">
+        <div
+          v-if="isShiftDropdownOpen"
+          ref="shiftDropdownMenuRef"
+          class="absolute left-0 z-10 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-60 overflow-y-auto"
+          :class="openUpward
+            ? 'bottom-full mb-2 origin-bottom-left'
+            : 'mt-2 origin-top-left'"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="shift-selector-button"
+        >
           <div class="py-1" role="none">
-            <button @click="selectShift('current')" class="text-text-main block w-full text-left min-h-[44px] px-4 py-2 text-sm 
-                    hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out"
-              role="menuitem">Turno Actual</button>
-            <button v-for="shift in availableShifts" :key="shift.id" @click="selectShift(shift.id)" class="text-text-main block w-full text-left min-h-[44px] px-4 py-2 text-sm 
-                    hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out"
-              role="menuitem">
-              {{ shift.label }}
+            <button
+              @click="selectShift('current')"
+              class="text-text-main w-full text-left min-h-[44px] px-4 py-2 text-sm hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out flex items-center gap-2"
+              role="menuitem"
+            >
+              <component 
+                :is="icons[getShiftIcon(currentShiftId || '')]"
+                :class="['w-4 h-4 shrink-0', getShiftColor(currentShiftId || '')]"
+              />
+              <span>{{ getShiftLabel(currentShiftId || '') }}</span>
+              <span class="ml-auto w-3 h-3 rounded-full bg-emerald-300 self-center"></span>
             </button>
+
+            <template v-for="shift in availableShifts" :key="shift.id">
+              <button
+                v-if="shift.id !== currentShiftId"
+                @click="selectShift(shift.id)"
+                class="text-text-main w-full text-left min-h-[44px] px-4 py-2 text-sm hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out flex items-center gap-2"
+                role="menuitem"
+              >
+                <component
+                  :is="icons[getShiftIcon(shift.id)]"
+                  :class="['w-4 h-4 shrink-0', getShiftColor(shift.id)]"
+                />
+                <span>{{ getShiftLabel(shift.id) }}</span>
+              </button>
+            </template>
           </div>
         </div>
       </div>
