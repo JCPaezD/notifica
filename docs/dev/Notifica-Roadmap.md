@@ -383,8 +383,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 - [ ] 🗓️ Mejora en identificador visual de turnos
   - [x] Corregir visibilidad del desplegable de turnos en Android
     > El menú se corta si no hay espacio suficiente hacia abajo. Detectar si debe abrirse hacia arriba o abajo dinámicamente. Añadir altura máxima y scroll interno para evitar cortes visuales.
-  - [ ] Añadir día de la semana al selector
-  - [ ] Usar emojis o colores sutiles para diferenciar turnos (mañana/tarde/noche)
+  - [x] Añadir día de la semana al selector
+  - [x] Usar emojis o colores sutiles (finalmente svg heroicons con colores) para diferenciar turnos (mañana/tarde/noche)
 
 - [ ] 🔧 Refactor: separación de responsabilidades en App.vue
   📝 Esta tarea puede realizarse de forma aislada en una conversación separada o como bloque independiente del roadmap. No requiere rediseño ni nuevas funcionalidades.

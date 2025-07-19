@@ -51,6 +51,16 @@ const relayReactivateTask = (taskId: string) => {
 const relayDeleteTask = (taskId: string) => {
   emit('delete-task', taskId)
 }
+
+function getShiftColor(shiftId: string): string {
+  const hour = Number(shiftId.replace('shift-', '')) || 0
+  const h = new Date(hour).getHours()
+
+  if (h < 12) return 'text-yellow-400'
+  if (h < 20) return 'text-amber-500'
+  return 'text-indigo-500'
+}
+
 </script>
 
 <template>
@@ -64,7 +74,7 @@ const relayDeleteTask = (taskId: string) => {
         <component
           v-if="props.titleIcon"
           :is="props.titleIcon"
-          class="w-4 h-4 text-yellow-500 shrink-0"
+          :class="['w-4 h-4 shrink-0', getShiftColor(props.titleId)]"
         />
         <span>{{ props.title }}</span>
       </div>

@@ -727,10 +727,14 @@ const exportTasksToJson = async () => {
     if (isShiftDropdownOpen.value && shiftDropdownButtonRef.value) {
       const rect = shiftDropdownButtonRef.value.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
+      const dropdownHeight = 240; // Altura estimada en px (max-h-60)
+      const margin = 16; // Margen de seguridad visual
+
       const spaceBelow = viewportHeight - rect.bottom;
       const spaceAbove = rect.top;
 
-      openUpward.value = spaceBelow < 200 && spaceAbove > 200;
+      // Abrir hacia arriba si no hay suficiente espacio debajo pero sí hay arriba
+      openUpward.value = spaceBelow < dropdownHeight + margin && spaceAbove > dropdownHeight + margin;
     }
   };
 
@@ -1044,7 +1048,7 @@ const exportTasksToJson = async () => {
                 transition-all duration-300 ease-in-out
                 flex items-center justify-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" class="w-4 h-4">
+            stroke="currentColor" class="w-5 h-4">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
           </svg>
@@ -1094,7 +1098,7 @@ const exportTasksToJson = async () => {
         <div
           v-if="isShiftDropdownOpen"
           ref="shiftDropdownMenuRef"
-          class="absolute left-0 z-10 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-60 overflow-y-auto"
+          class="absolute left-0 z-10 w-56 origin-top-left rounded-md bg-white shadow-lg border border-slate-200 focus:outline-none max-h-60 overflow-y-auto"
           :class="openUpward
             ? 'bottom-full mb-2 origin-bottom-left'
             : 'mt-2 origin-top-left'"
@@ -1102,7 +1106,7 @@ const exportTasksToJson = async () => {
           aria-orientation="vertical"
           aria-labelledby="shift-selector-button"
         >
-          <div class="py-1" role="none">
+          <div class="py-0.5" role="none">
             <button
               @click="selectShift('current')"
               class="text-text-main w-full text-left min-h-[44px] px-4 py-2 text-sm hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out flex items-center gap-2"
