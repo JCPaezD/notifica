@@ -2,6 +2,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 export default {
+  darkMode: 'class', // Activar soporte para modo oscuro con clase .dark en <html> o <body>
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",

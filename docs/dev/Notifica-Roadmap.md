@@ -432,6 +432,43 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] 🔁 Revertir cambio(s) de layout para evitar el bug (aunque se pierda alguna mejora)
         - [x] 📌 Aceptar el bug como limitación documentada de iOS PWA, si no hay alternativa razonable
 
+- [ ] 🌓 Añadir soporte para modo oscuro (tema `dark` en Tailwind)
+  - [x] Activar modo `class` en Tailwind
+    - [x] Modificar `tailwind.config.js` para usar `darkMode: 'class'`
+  - [x] Preparar toggle global (modo manual)
+    - [x] Crear composable `useDarkMode.ts` con:
+      - [x] Estado reactivo (`isDark`)
+      - [x] Persistencia en `localStorage`
+      - [x] Funciones `enableDark()`, `disableDark()`, `toggleDark()`
+      - [x] Detección inicial del modo por defecto del sistema (`matchMedia`)
+    - [x] Aplicar o remover clase `dark` en `<html>` o `<body>` según estado
+    - [x] Añadir botón en el menú lateral (`SideMenu.vue`) para alternar modo claro/oscuro (con colapsable visual integrado)
+  - [ ] Definir paleta pastel oscura
+    - [ ] Añadir colores oscuros personalizados en `tailwind.config.js`
+    - [ ] Mantener estética suave y legible (no negros puros)
+    - [ ] Asegurar contraste suficiente con texto e iconos
+  - [ ] Aplicar clases `dark:` en componentes clave
+    - [ ] `App.vue`: fondo y texto base
+    - [ ] `TaskList.vue`: títulos y fondo contenedor
+    - [ ] `TaskItem.vue`: tarjeta, inputs, botones
+    - [ ] `SideMenu.vue`: fondo, texto, botón de modo oscuro
+    - [ ] `NewTaskForm.vue`: fondo, inputs, botón de iniciar
+    - [ ] `Toast.vue`: fondo y tipos de toast oscuros
+  - [ ] Validar integración visual
+    - [ ] Validar en PWA Android (modo oscuro del sistema activado)
+    - [ ] Validar en APK Android nativo
+    - [ ] Validar en iOS (Safari y PWA)
+    - [ ] Validar en navegador de escritorio (modo oscuro forzado)
+    - [ ] Confirmar legibilidad, contraste y coherencia con el modo claro
+  - [ ] Integración con sistema operativo (opcional)
+    - [ ] Detectar modo del sistema en primera carga
+    - [ ] (Opcional) Añadir selector con tres opciones: claro / oscuro / seguir sistema
+    - [ ] No sobrescribir la preferencia manual tras cambio de usuario
+  - [ ] Documentar implementación
+    - [ ] Explicar lógica en `dev-notes.md`: modo `class`, paleta usada, persistencia
+    - [ ] Registrar si hay limitaciones conocidas
+
+
 
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
@@ -458,7 +495,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Despues de "Borrar todo" + deshacer, al irse el toast hay recarga de la app. Revisar si es necesaria y quitar si no. No ocurre si no deshaces. [20/07/25]
   - [x] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
   > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
-  - [ ] Corregir zoom con doble tap en chrome/safari de ios 
+  - [x] Corregir zoom con doble tap en chrome/safari de ios 
   - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
@@ -470,14 +507,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Mostrar toast persistente con enlace a Play Store
   - [ ] Ocultar aviso si ya está instalada la versión nativa (opcional)
   - [ ] Añadir fallback para iOS con link personalizado
-
-- [ ] 🌓 Añadir soporte para modo oscuro (tema `dark` en Tailwind)
-  - [ ] Definir paleta de colores pastel adaptada a modo oscuro
-  - [ ] Configurar `darkMode` en `tailwind.config.js` (modo `class`)
-  - [ ] Añadir un toggle (opcional) o usar modo del sistema (selector claro/oscuro/sistema)
-  - [ ] Aplicar clases condicionales en los componentes clave
-  - [ ] Validar apariencia en Android nativo y PWA (modo oscuro activado en el sistema)
-  - [ ] Asegurar legibilidad, contraste y coherencia con modo claro
 
 - [ ] 📘 Añadir ayuda o tutorial para usuarios nuevos
   - [ ] Definir qué funciones deben explicarse (crear turno, añadir tarea, filtros, exportar, etc.)

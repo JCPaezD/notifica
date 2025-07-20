@@ -419,7 +419,6 @@ Se considera solucionado de forma estable y no regresiva.
 No se aplicaron cambios adicionales de layout ni soluciones agresivas.  
 El bug queda cerrado y documentado.
 
-
 ### Problemas comunes en emuladores Android
 
 **Pantalla blanca tras splash o dispositivo desconectado (API 29):**
@@ -593,18 +592,24 @@ Esta conversación servirá para:
 
 🔄 **Contexto general del proyecto:**  
 - El sistema base está finalizado y validado. La app funciona como PWA offline y también como APK Android firmada.  
-- El proyecto se encuentra en la **Etapa 8 del Roadmap**, enfocada en mejoras opcionales y consolidación previa a la publicación pública.  
-- El desarrollo sigue un roadmap riguroso con commits estructurados y pruebas cruzadas en móvil, emulador y navegador.
+- El proyecto se encuentra en la **Etapa 8 del Roadmap**, enfocada en mejoras estructurales, pulido visual y consolidación previa a la publicación pública.  
+- El desarrollo sigue un roadmap riguroso con commits estructurados, pruebas cruzadas en móvil, emulador y navegador, y documentación exhaustiva.
 
 🛠️ **Últimos bloques completados:**  
-- Refactor de `ShiftSelector.vue` + limpieza de App.vue.  
-- Refactor de `TaskFilters.vue` con separación del sistema de filtros.  
-- Corrección de hover persistente no deseado en botón del menú lateral.  
-- Validación completa en PWA iOS, Android API 29–36, navegador, y revisión del bug de WebView roto tras wipe.  
-- Reestructuración integral de `dev-notes.md`, con índice navegable y buenas prácticas de versionado documentadas.
+- Validación y cierre del bug de scroll innecesario en listas cortas.  
+- Solución completa al zoom por doble tap en Safari/Chrome iOS.  
+- Validación de animación del botón “Deshacer” en toast.  
+- Corrección definitiva del bug crítico del scroll azul en PWA iOS tras cerrar teclado (WebKit).  
+- Documentación completa en `dev-notes.md` de todos los bugs resueltos y causas.  
+- Commits limpios y trazados para validaciones sin cambios funcionales.
 
 🎯 **Siguiente tarea prevista:**  
-Seleccionar y ejecutar uno de los bloques restantes de refactor: `NewTaskForm.vue` o `LogoBlock.vue`, en función de complejidad y duración estimada.
+Iniciar el bloque de **modo oscuro (`darkMode`)**:
+- Activar soporte en Tailwind.
+- Definir paleta de colores pastel oscura.
+- Aplicar clases condicionales `dark:` a componentes clave.
+- Validar integración automática con el sistema operativo y/o selector manual.
+- Asegurar consistencia visual y legibilidad.
 
 📖 **Notas y aprendizajes estructurales del proyecto:**  
 - Cambiar de conversación en el momento adecuado ayuda a evitar errores por saturación de contexto.  
@@ -614,5 +619,26 @@ Seleccionar y ejecutar uno de los bloques restantes de refactor: `NewTaskForm.vu
 - Las decisiones estratégicas (como el enfoque de producto o cambios en la estructura) deben documentarse explícitamente en `dev-notes.md` o el roadmap.  
 - Encapsular UI interactiva en componentes ayuda a reducir el tamaño de App.vue sin perder control funcional.  
 - El uso de `Notifica` como tracker de sesiones de desarrollo ha comenzado, lo que permite un registro cruzado con commits para revisión y mejora de productividad.  
+- Confirmado que `touch-action: manipulation` y `-webkit-text-size-adjust: 100%` aplicados globalmente corrigen el bug crítico de scroll en iOS PWA. Este conocimiento es reutilizable en proyectos como Nocta.
+- Validaciones completas y rápidas en entorno real permiten cerrar tareas menores con agilidad y seguridad.
 
-Con esto, retomamos el desarrollo de Notifica desde una conversación nueva, clara y lista para ejecutar el siguiente bloque con contexto real y actualizado.
+---
+
+### Notas para generar mensaje para nueva conversacion de desarrollo
+
+Cuando se genere una nueva conversación de desarrollo para Notifica:
+
+- Mantener el encabezado “¡Hola! Esta conversación es la nueva conversación principal para el desarrollo continuo de Notifica…”
+- Incluir:  
+  - Uso previsto de la conversación  
+  - Archivos que se subirán  
+  - Normas de trabajo (código en `.txt`, bloques secuenciales, validación real)  
+  - Contexto general actualizado del proyecto  
+  - Últimos bloques completados  
+  - Siguiente tarea prevista  
+  - Notas y aprendizajes estructurales (nunca eliminar los anteriores si siguen vigentes; añadir los nuevos)
+- No usar markdown interpretado. Entregar como bloque `.txt` o `.md` simple para poder copiar fácilmente.
+- Usar frases claras, sintéticas y orientadas a acción.
+- Solo incluir tareas validadas y documentadas. Nunca asumir el estado de una tarea no confirmada.
+- Incluir en “aprendizajes estructurales” cualquier conclusión útil no reflejada aún en los documentos del proyecto.
+

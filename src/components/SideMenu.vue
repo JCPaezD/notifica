@@ -9,6 +9,10 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
+import { useDarkMode } from '@/composables/useDarkMode'
+
+const isOptionsOpen = ref(false)
+const { isDark, toggleDark } = useDarkMode()
 
 // Props
 // `isOpen`: Controla la visibilidad del menú lateral.
@@ -56,6 +60,27 @@ watch(() => props.isOpen, (newValue, oldValue) => {
     isAnimatingOut.value = false // Reseteamos el estado de la animación de salida
   }
 })
+
+// --- Lógica para la animación del colapsable ---
+const onEnter = (el: Element) => {
+  const htmlEl = el as HTMLElement;
+  htmlEl.style.maxHeight = `${htmlEl.scrollHeight}px`;
+};
+
+const onAfterEnter = (el: Element) => {
+  const htmlEl = el as HTMLElement;
+  htmlEl.style.maxHeight = 'auto';
+};
+
+const onBeforeLeave = (el: Element) => {
+  const htmlEl = el as HTMLElement;
+  htmlEl.style.maxHeight = `${htmlEl.scrollHeight}px`;
+};
+
+const onLeave = (el: Element) => {
+  const htmlEl = el as HTMLElement;
+  htmlEl.style.maxHeight = '0px';
+};
 </script>
 
 <template>
@@ -173,8 +198,62 @@ watch(() => props.isOpen, (newValue, oldValue) => {
                   </svg>
                   <span>Exportar</span>
                 </button>
-              </div>
 
+                <hr class="my-6 border-slate-200 mx-3" /> <!-- Margen vertical aumentado -->
+
+
+                <!-- 🔧 Bloque de Opciones -->
+                <div class="space-y-1">
+                  <button
+                    @click="isOptionsOpen = !isOptionsOpen"
+                    class="w-full flex items-center justify-between gap-x-3 px-3 py-3 rounded-md
+                          text-sm font-medium
+                          bg-purple-200 text-purple-900
+                          dark:bg-purple-400 dark:text-white
+                          hover:bg-purple-300 dark:hover:bg-purple-500
+                          active:scale-95 transition-all duration-150 ease-in-out"
+                    :aria-expanded="isOptionsOpen"
+                    aria-controls="options-content"
+                  >
+                    <span class="flex items-center gap-x-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.75h15m-15 5.25h15m-15 5.25h15" />
+                      </svg>
+                      Opciones
+                    </span>
+                    <svg class="w-5 h-5 text-purple-800 dark:text-white/80 transition-transform duration-300"
+                         :class="{ 'rotate-90': isOptionsOpen }"
+                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </button>
+
+                  <Transition
+                    name="collapse"
+                    @enter="onEnter"
+                    @after-enter="onAfterEnter"
+                    @before-leave="onBeforeLeave"
+                    @leave="onLeave"
+                  >
+                    <div v-show="isOptionsOpen" id="options-content" class="pl-6 pr-4 space-y-2">
+                      <button
+                        @click="toggleDark()"
+                        class="w-full flex items-center justify-between px-3 py-2 rounded-md
+                               bg-indigo-200 text-indigo-900
+                               dark:bg-indigo-400 dark:text-white
+                               hover:bg-indigo-300 dark:hover:bg-indigo-500
+                               active:scale-95 transition-all duration-150 ease-in-out"
+                      >
+                        <span>Modo oscuro</span>
+                        <span>{{ isDark ? 'Oscuro' : 'Claro' }}</span>
+                      </button>
+                    </div>
+                  </Transition>
+                </div>
+
+              </div>
               
               <!-- Sección para Borrar Todo, separada y más abajo -->
               <div class="mt-auto"> <!-- mt-auto empuja esto hacia abajo -->
