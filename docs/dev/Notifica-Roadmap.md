@@ -415,6 +415,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 - [ ] ✉️ Formulario de feedback por email
   - [ ] Botón "Enviar feedback" en menú lateral
   - [ ] Formulario con tipo de mensaje, descripción y email opcional
+    - [ ] Permitir rellenar el formulario sin conexión
+    - [ ] Guardar los datos localmente si no hay conexión al enviar
+    - [ ] Mostrar toast o mensaje: "Guardado para enviar cuando haya conexión"
+    - [ ] Intentar reenvío automático al recuperar conexión (si es viable)
+    - [ ] Ofrecer reintento manual si falla
+    - [ ] Eliminar de la cola solo si se confirma el envío exitoso
+    - [ ] Confirmar que no bloquea el uso normal de la app
   - [ ] Guardar en Firestore (colección `feedback`)
   - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
   - [ ] Confirmación visual tras enviar
@@ -445,10 +452,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 
 - [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
-  - [ ] Vuelve a aparece bug: boton deshacer no hace animacion al pulsar (móvil devtools). En escritorio funciona bien.
+  - [x] Vuelve a aparece bug: boton deshacer no hace animacion al pulsar (móvil devtools). En escritorio funciona bien.
     > Acción sugerida (futura): revisar que todos los botones de acción en toasts tengan ese @touchstart.
-  - [ ] Despues de "Borrar todo" + deshacer, al irse el toast hay recarga de la app. Revisar si es necesaria y quitar si no. No ocurre si no deshaces.
-  - [ ] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
+  - [x] Despues de "Borrar todo" + deshacer, al irse el toast hay recarga de la app. Revisar si es necesaria y quitar si no. No ocurre si no deshaces. [20/07/25]
+  - [x] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
   > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
   - [ ] Corregir zoom con doble tap en chrome/safari de ios 
   - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 

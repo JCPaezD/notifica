@@ -20,6 +20,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
 - [Errores y problemas documentados](#errores-y-problemas-documentados)
   - [Bug en iOS PWA: scroll azul tras cerrar teclado](#bug-en-ios-pwa-scroll-azul-tras-cerrar-teclado)
   - [Problemas comunes en emuladores Android](#problemas-comunes-en-emuladores-android)
+  - [Validación de bugs: scroll y animación toast](#validación-de-bugs-scroll-y-animación-toast)
 - [UI, diseño y publicación](#ui-diseño-y-publicación)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -432,6 +433,21 @@ Puede reintentarse en el futuro si hay avances en iOS o mejores soluciones conoc
   - Abrir Play Store y actualizar WebView antes de lanzar la app.
 - Si el error persiste:
   - Cerrar el emulador, repetir `Wipe Data`, o recrearlo desde AVD Manager.
+
+### Validación de bugs: scroll y animación toast
+
+[20/07/2025]  
+Se validaron dos bugs registrados previamente en la sección de mejoras UX/UI y se confirmó que ya no se reproducen en la versión actual:
+
+- **Scroll innecesario en listas cortas**  
+  No se observa scroll vertical extra en vistas con 1–2 tareas. Verificado en navegador (modo móvil), PWA iOS, Android nativo y emulador.  
+  Se considera corregido por los ajustes de layout ya aplicados en bloques anteriores.
+
+- **Botón “Deshacer” sin animación al pulsar**  
+  La animación `scale-95` funciona correctamente al pulsar “Deshacer” en los toasts. Verificado en todos los entornos.  
+  No ha sido necesario aplicar cambios adicionales. Se considera resuelto.
+
+No se ha modificado código funcional. Se registra como validación de cierre.
 
 ---
 
