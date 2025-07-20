@@ -407,6 +407,32 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Importar y usar en App.vue sin cambiar diseño  
   - [x] Validar que la animación se aplica como antes (hover y tras nuevo turno)
 
+- [x] 🌀 Revisar bug crítico: “Scroll inesperado al hacer doble tap en área vacía (iOS PWA)”
+  [Resuelto 20/07/25: la solución fue aplicar touch-action: manipulation y text-size-adjust globalmente. +Info dev-notes.md]
+  - [x] Confirmar que:
+        - El bug solo aparece en iOS cuando la app está instalada como PWA (standalone)
+        - No ocurre en Android (PWA ni APK)
+        - No ocurre en la versión PWA estable publicada hace ~35 días
+  - [x] Estudiar en qué momento se reintrodujo:
+        - [x] Comparar con commit de la última versión pública
+        - [x] Identificar los cambios que pueden haberlo activado:
+              - Implementación del header `sticky top-0`
+              - Eliminación del scroll extra del `<main>`
+  - [x] Volver a revisar soluciones previamente descartadas:
+        - `min-h-[100svh]` en `<main>`
+        - `overflow-hidden` en `html`, `body` o `main`
+        - `viewport-fit=cover` en el meta viewport
+        - Añadir `scrollTo(0, 0)` tras `blur`
+        - Bloqueo de `touchmove` en áreas vacías
+        - Ajustes con `safe-area-inset-*`
+  - [x] Hacer pruebas controladas activando y desactivando los cambios de layout, uno por uno
+  - [x] Documentar resultados, incluyendo efectos secundarios no deseados
+  - [x] Tomar decisión antes de liberar públicamente la app:
+        - [x] ✅ Aplicar solución si funciona sin efectos secundarios
+        - [x] 🔁 Revertir cambio(s) de layout para evitar el bug (aunque se pierda alguna mejora)
+        - [x] 📌 Aceptar el bug como limitación documentada de iOS PWA, si no hay alternativa razonable
+
+
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
   - [ ] Ajustar fecha si es coherente
@@ -425,31 +451,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Guardar en Firestore (colección `feedback`)
   - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
   - [ ] Confirmación visual tras enviar
-
-- [ ] 🌀 Revisar bug crítico: “Scroll inesperado al hacer doble tap en área vacía (iOS PWA)”  
-  - [ ] Confirmar que:
-        - El bug solo aparece en iOS cuando la app está instalada como PWA (standalone)
-        - No ocurre en Android (PWA ni APK)
-        - No ocurre en la versión PWA estable publicada hace ~35 días
-  - [ ] Estudiar en qué momento se reintrodujo:
-        - [ ] Comparar con commit de la última versión pública
-        - [ ] Identificar los cambios que pueden haberlo activado:
-              - Implementación del header `sticky top-0`
-              - Eliminación del scroll extra del `<main>`
-  - [ ] Volver a revisar soluciones previamente descartadas:
-        - `min-h-[100svh]` en `<main>`
-        - `overflow-hidden` en `html`, `body` o `main`
-        - `viewport-fit=cover` en el meta viewport
-        - Añadir `scrollTo(0, 0)` tras `blur`
-        - Bloqueo de `touchmove` en áreas vacías
-        - Ajustes con `safe-area-inset-*`
-  - [ ] Hacer pruebas controladas activando y desactivando los cambios de layout, uno por uno
-  - [ ] Documentar resultados, incluyendo efectos secundarios no deseados
-  - [ ] Tomar decisión antes de liberar públicamente la app:
-        - [ ] ✅ Aplicar solución si funciona sin efectos secundarios
-        - [ ] 🔁 Revertir cambio(s) de layout para evitar el bug (aunque se pierda alguna mejora)
-        - [ ] 📌 Aceptar el bug como limitación documentada de iOS PWA, si no hay alternativa razonable
-
 
 - [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
   - [x] Vuelve a aparece bug: boton deshacer no hace animacion al pulsar (móvil devtools). En escritorio funciona bien.

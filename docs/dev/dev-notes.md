@@ -381,6 +381,7 @@ Este cambio debe mantenerse salvo que una futura regresión demuestre necesidad 
 ## Errores y problemas documentados
 
 ### Bug en iOS PWA: scroll azul tras cerrar teclado
+[Resuelto 20/07/25]
 
 Descripción:  
 En PWA instalada en iPhone, tras cerrar el teclado virtual de un `<input>` o `<textarea>`, si el usuario hace doble tap en el fondo de la app, aparece una franja vacía azul en la parte inferior. Su altura coincide con el layout visible (header, tareas, etc.).
@@ -403,6 +404,21 @@ Conclusión:
 - Dado que no rompe el uso normal y solo es visible si se fuerza, se descarta temporalmente.
 
 Puede reintentarse en el futuro si hay avances en iOS o mejores soluciones conocidas.
+
+[20/07/2025]  
+Tras aplicar estilos globales (`touch-action: manipulation` y `-webkit-text-size-adjust: 100%`) al `<html>` y `<body>` desde `main.css`, el bug ya no se reproduce.
+
+Verificado en:
+- PWA iOS (instalada desde Safari)
+- Chrome iOS
+- App abierta tras cerrar teclado y realizar múltiples interacciones
+
+**El hueco azul al hacer doble tap en área vacía ha desaparecido completamente.**  
+Se considera solucionado de forma estable y no regresiva.
+
+No se aplicaron cambios adicionales de layout ni soluciones agresivas.  
+El bug queda cerrado y documentado.
+
 
 ### Problemas comunes en emuladores Android
 
