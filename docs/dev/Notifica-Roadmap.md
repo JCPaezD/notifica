@@ -379,6 +379,16 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Asegurar estilos limpios en móvil (`focus-visible`, `active`)
   - 📝 Intentado con clases `btn-interactive`, pero generaba efectos inconsistentes. Se pospone.
 
+- [x] 🔧 Refactor: extraer los filtros de tareas como componente  
+  📝 Los toggles de filtros (`Activas` y `Sin Notificar`) pueden aislarse como un componente compacto y reutilizable.  
+  - [x] Crear componente `TaskFilters.vue`  
+  - [x] Recibir `showOnlyActive` y `showOnlyNotNotified` como props o usar `v-model`  
+  - [x] Emitir eventos de cambio o usar `update:modelValue`  
+  - [x] Estilizar igual que ahora, sin rediseñar  
+  - [x] Sustituir el bloque de filtros actual por el nuevo componente  
+  - [x] Verificar comportamiento en móviles y navegación rápida
+
+
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
   - [ ] Ajustar fecha si es coherente
@@ -426,14 +436,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Reemplazar bloque de formulario en App.vue por el nuevo componente  
   - [ ] Verificar que todo funciona igual (móviles, teclado, toasts)
 
-- [ ] 🔧 Refactor: extraer los filtros de tareas como componente  
-  📝 Los toggles de filtros (`Activas` y `Sin Notificar`) pueden aislarse como un componente compacto y reutilizable.  
-  - [ ] Crear componente `TaskFilters.vue`  
-  - [ ] Recibir `showOnlyActive` y `showOnlyNotNotified` como props o usar `v-model`  
-  - [ ] Emitir eventos de cambio o usar `update:modelValue`  
-  - [ ] Estilizar igual que ahora, sin rediseñar  
-  - [ ] Sustituir el bloque de filtros actual por el nuevo componente  
-  - [ ] Verificar comportamiento en móviles y navegación rápida
 
 - [ ] 🔧 Refactor: animación del logo en un componente o composable  
   📝 La lógica de animación del título puede separarse para claridad o reutilización futura.  

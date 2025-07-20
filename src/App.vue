@@ -15,6 +15,7 @@ import 'dayjs/locale/es' // si usas español
 dayjs.locale('es')
 import { shiftIcons as icons } from './icons/shifts'
 import ShiftSelector from './components/ShiftSelector.vue'
+import TaskFilters from './components/TaskFilters.vue'
 
 // Ref para la lista reactiva de toasts y la función de eliminación
 const { toasts, remove, add } = useToast()
@@ -949,51 +950,10 @@ const exportTasksToJson = async () => {
       />
 
       <!-- Filtros -->
-      <div class="flex items-center space-x-2"> <!-- Grupo de filtros, space-x-2 para separar los dos filtros -->
-        <!-- Toggle Mostrar solo activas -->
-        <div class="flex items-center space-x-1"> <!-- space-x-1 entre texto y toggle -->
-          <span class="text-xs font-medium text-text-main">Activas</span>
-          <button @click="showOnlyActive = !showOnlyActive"
-            :class="{ 'bg-accent-main': showOnlyActive, 'bg-slate-300': !showOnlyActive }" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent
-                  transition-colors ease-in-out duration-200 focus:outline-none" role="switch"
-            :aria-checked="showOnlyActive">
-            <span class="sr-only">Mostrar solo tareas activas</span>
-            <span :class="{ 'translate-x-5': showOnlyActive, 'translate-x-0': !showOnlyActive }"
-              class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition ease-in-out duration-200">
-              <span
-                :class="{ 'opacity-0 ease-out duration-100': showOnlyActive, 'opacity-100 ease-in duration-200': !showOnlyActive }"
-                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
-                aria-hidden="true"></span>
-              <span
-                :class="{ 'opacity-100 ease-in duration-200': showOnlyActive, 'opacity-0 ease-out duration-100': !showOnlyActive }"
-                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
-                aria-hidden="true"></span>
-            </span>
-          </button>
-        </div>
-
-        <!-- Toggle Mostrar solo sin notificar -->
-        <div class="flex items-center space-x-1"> <!-- space-x-1 entre texto y toggle -->
-          <span class="text-xs font-medium text-text-main">Sin Notificar</span>
-          <button @click="showOnlyNotNotified = !showOnlyNotNotified"
-            :class="{ 'bg-accent-main': showOnlyNotNotified, 'bg-slate-300': !showOnlyNotNotified }" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent
-                  transition-colors ease-in-out duration-200 focus:outline-none" role="switch"
-            :aria-checked="showOnlyNotNotified">
-            <span class="sr-only">Mostrar solo tareas sin notificar</span>
-            <span :class="{ 'translate-x-5': showOnlyNotNotified, 'translate-x-0': !showOnlyNotNotified }"
-              class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition ease-in-out duration-200">
-              <span
-                :class="{ 'opacity-0 ease-out duration-100': showOnlyNotNotified, 'opacity-100 ease-in duration-200': !showOnlyNotNotified }"
-                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
-                aria-hidden="true"></span>
-              <span
-                :class="{ 'opacity-100 ease-in duration-200': showOnlyNotNotified, 'opacity-0 ease-out duration-100': !showOnlyNotNotified }"
-                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
-                aria-hidden="true"></span>
-            </span>
-          </button>
-        </div>
-      </div>
+      <TaskFilters
+        v-model:showOnlyActive="showOnlyActive"
+        v-model:showOnlyNotNotified="showOnlyNotNotified"
+      />
     </div>
 
     <!-- Los botones de acción ahora están en el SideMenu -->
