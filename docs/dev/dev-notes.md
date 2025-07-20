@@ -16,6 +16,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Exportar archivo JSON en Android](#exportar-archivo-json-en-android)
   - [Capacitor Share: problema con compartir en Android](#capacitor-share-problema-con-compartir-en-android)
   - [Enfoque estratégico de publicación (etapa 8)](#enfoque-estratégico-de-publicación-etapa-8)
+  - [Eliminación del reload tras deshacer "Borrar todo"](#eliminación-del-reload-tras-deshacer-borrar-todo)
 - [Errores y problemas documentados](#errores-y-problemas-documentados)
   - [Bug en iOS PWA: scroll azul tras cerrar teclado](#bug-en-ios-pwa-scroll-azul-tras-cerrar-teclado)
   - [Problemas comunes en emuladores Android](#problemas-comunes-en-emuladores-android)
@@ -352,6 +353,27 @@ Tras una revisión del estado real del proyecto y de su uso actual, se tomó la 
 - Se reafirmó que la app se está desarrollando como un producto potencialmente útil para un público más amplio, más allá del entorno inmediato, apostando por la calidad y manteniendo la sencillez.
 
 Esta decisión permitió devolver el control del ritmo de desarrollo al criterio interno, evitando decisiones precipitadas basadas en plazos externos.
+
+### Eliminación del reload tras deshacer "Borrar todo"
+
+[20/07/2025]  
+Se eliminó la llamada a `window.location.reload()` que se ejecutaba al cerrar el toast de “Tareas Restauradas” tras usar el botón de deshacer en la operación de “Borrar todo”.
+
+**Motivo del cambio:**  
+En el flujo actual, si el usuario borra todas las tareas, luego pulsa “Deshacer”, y posteriormente vuelve a pulsar “Borrar todo” antes de que el primer toast se cierre automáticamente, la app se recarga al cerrar ese primer toast.  
+Esto provoca que el segundo toast desaparezca de forma inmediata e irreversible, lo que impide restaurar las tareas, causando una **pérdida de datos no recuperable**.
+
+**Justificación técnica:**  
+- `allTasks.value = [...]` ya es completamente reactivo.
+- Se usa `nextTick()` correctamente para asegurar reactividad antes de cerrar el toast anterior.
+- La recarga ya no es necesaria para limpiar el estado ni corregir glitches visuales.
+- El comportamiento actual rompe la UX y anula el botón "Deshacer" si el usuario actúa rápidamente.
+
+**Decisión:**  
+Se elimina por completo la propiedad `onDismiss` del toast de restauración. No se deja función vacía.  
+La restauración ahora es fluida, reactiva y sin recarga forzada.
+
+Este cambio debe mantenerse salvo que una futura regresión demuestre necesidad real de una recarga manual (lo cual no es el caso actual).
 
 ---
 

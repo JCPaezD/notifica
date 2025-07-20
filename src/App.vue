@@ -537,10 +537,7 @@ const exportTasksToJson = async () => {
                 add({
                   title: 'Tareas Restauradas',
                   description: 'Todas las tareas han sido restauradas.',
-                  type: 'info',
-                  onDismiss: () => {
-                    window.location.reload(); // Forzar la recarga de la página cuando el toast se cierre
-                  }
+                  type: 'info'
                 });
               }, 550);
             }

@@ -388,6 +388,24 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Sustituir el bloque de filtros actual por el nuevo componente  
   - [x] Verificar comportamiento en móviles y navegación rápida
 
+- [x] 🔧 Refactor: extraer formulario de nueva tarea como componente  
+  📝 Esta tarea puede realizarse de forma segura tras el refactor de turnos. Mejora la claridad de App.vue y permite aislar la lógica de inputs y validaciones.  
+  - [x] Crear componente `NewTaskForm.vue`  
+    - [x] Incluir `textarea` y `input` para técnico  
+    - [x] Botón “Iniciar” con icono  
+  - [x] Definir props si fueran necesarias (`currentShiftId`, etc.)  
+  - [x] Emitir evento `@create` con la nueva tarea (o solo su descripción y técnico)  
+  - [x] Gestionar foco, limpieza y validación internamente  
+  - [x] Reemplazar bloque de formulario en App.vue por el nuevo componente  
+  - [x] Verificar que todo funciona igual (móviles, teclado, toasts)
+
+
+- [ ] 🔧 Refactor: animación del logo en un componente o composable  
+  📝 La lógica de animación del título puede separarse para claridad o reutilización futura.  
+  - [ ] Crear composable `useLogoAnimation.ts` o componente `LogoBlock.vue`  
+  - [ ] Mover `ref` y `setTimeout` actuales  
+  - [ ] Importar y usar en App.vue sin cambiar diseño  
+  - [ ] Validar que la animación se aplica como antes (hover y tras nuevo turno)
 
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
@@ -425,28 +443,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [ ] 🔁 Revertir cambio(s) de layout para evitar el bug (aunque se pierda alguna mejora)
         - [ ] 📌 Aceptar el bug como limitación documentada de iOS PWA, si no hay alternativa razonable
 
-- [ ] 🔧 Refactor: extraer formulario de nueva tarea como componente  
-  📝 Esta tarea puede realizarse de forma segura tras el refactor de turnos. Mejora la claridad de App.vue y permite aislar la lógica de inputs y validaciones.  
-  - [ ] Crear componente `NewTaskForm.vue`  
-    - [ ] Incluir `textarea` y `input` para técnico  
-    - [ ] Botón “Iniciar” con icono  
-  - [ ] Definir props si fueran necesarias (`currentShiftId`, etc.)  
-  - [ ] Emitir evento `@create` con la nueva tarea (o solo su descripción y técnico)  
-  - [ ] Gestionar foco, limpieza y validación internamente  
-  - [ ] Reemplazar bloque de formulario en App.vue por el nuevo componente  
-  - [ ] Verificar que todo funciona igual (móviles, teclado, toasts)
-
-
-- [ ] 🔧 Refactor: animación del logo en un componente o composable  
-  📝 La lógica de animación del título puede separarse para claridad o reutilización futura.  
-  - [ ] Crear composable `useLogoAnimation.ts` o componente `LogoBlock.vue`  
-  - [ ] Mover `ref` y `setTimeout` actuales  
-  - [ ] Importar y usar en App.vue sin cambiar diseño  
-  - [ ] Validar que la animación se aplica como antes (hover y tras nuevo turno)
-
 
 - [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
   - [ ] Vuelve a aparece bug: boton deshacer no hace animacion al pulsar (móvil devtools). En escritorio funciona bien.
+    > Acción sugerida (futura): revisar que todos los botones de acción en toasts tengan ese @touchstart.
   - [ ] Despues de "Borrar todo" + deshacer, al irse el toast hay recarga de la app. Revisar si es necesaria y quitar si no. No ocurre si no deshaces.
   - [ ] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
   > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
