@@ -446,6 +446,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 
 - [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
+  - [ ] Vuelve a aparece bug: boton deshacer no hace animacion al pulsar (móvil devtools). En escritorio funciona bien.
+  - [ ] Despues de "Borrar todo" + deshacer, al irse el toast hay recarga de la app. Revisar si es necesaria y quitar si no. No ocurre si no deshaces.
   - [ ] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
   > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
   - [ ] Corregir zoom con doble tap en chrome/safari de ios 

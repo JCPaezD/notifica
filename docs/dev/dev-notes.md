@@ -542,16 +542,15 @@ Esta conversación servirá para:
 - El proyecto se encuentra en la **Etapa 8 del Roadmap**, enfocada en mejoras opcionales y consolidación previa a la publicación pública.  
 - El desarrollo sigue un roadmap riguroso con commits estructurados y pruebas cruzadas en móvil, emulador y navegador.
 
-🛠️ **Último bloque completado:**  
-- Se ha completado el bloque de **Refactor: separación de responsabilidades en App.vue**, que incluía:
-  - Extracción completa del selector de turno a un nuevo componente `ShiftSelector.vue`.
-  - Externalización de funciones de formato e iconos de turno (`useShifts.ts`, `shifts.ts`).
-  - Limpieza de App.vue: eliminación de lógica duplicada, refs y listeners.
-  - Validación completa del comportamiento en PWA iOS, Android y escritorio.
-  - Documentación de tres nuevos refactors futuros en el roadmap (`NewTaskForm`, `TaskFilters`, `LogoBlock`).
+🛠️ **Últimos bloques completados:**  
+- Refactor de `ShiftSelector.vue` + limpieza de App.vue.  
+- Refactor de `TaskFilters.vue` con separación del sistema de filtros.  
+- Corrección de hover persistente no deseado en botón del menú lateral.  
+- Validación completa en PWA iOS, Android API 29–36, navegador, y revisión del bug de WebView roto tras wipe.  
+- Reestructuración integral de `dev-notes.md`, con índice navegable y buenas prácticas de versionado documentadas.
 
-🎯 **Siguiente paso a decidir:**  
-Seleccionar el próximo bloque del roadmap a ejecutar, en base a complejidad, duración estimada, y beneficio esperado.
+🎯 **Siguiente tarea prevista:**  
+Seleccionar y ejecutar uno de los bloques restantes de refactor: `NewTaskForm.vue` o `LogoBlock.vue`, en función de complejidad y duración estimada.
 
 📖 **Notas y aprendizajes estructurales del proyecto:**  
 - Cambiar de conversación en el momento adecuado ayuda a evitar errores por saturación de contexto.  
@@ -559,6 +558,7 @@ Seleccionar el próximo bloque del roadmap a ejecutar, en base a complejidad, du
 - Las validaciones cruzadas (PWA, Android, móvil real) son parte integral del flujo.  
 - Se prioriza la calidad, claridad y mantenimiento futuro del proyecto frente a lanzamientos apresurados.  
 - Las decisiones estratégicas (como el enfoque de producto o cambios en la estructura) deben documentarse explícitamente en `dev-notes.md` o el roadmap.  
-- Encapsular UI interactiva en componentes ayuda a reducir el tamaño de App.vue sin perder control funcional.
+- Encapsular UI interactiva en componentes ayuda a reducir el tamaño de App.vue sin perder control funcional.  
+- El uso de `Notifica` como tracker de sesiones de desarrollo ha comenzado, lo que permite un registro cruzado con commits para revisión y mejora de productividad.  
 
 Con esto, retomamos el desarrollo de Notifica desde una conversación nueva, clara y lista para ejecutar el siguiente bloque con contexto real y actualizado.
