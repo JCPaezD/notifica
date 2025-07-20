@@ -400,12 +400,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Verificar que todo funciona igual (móviles, teclado, toasts)
 
 
-- [ ] 🔧 Refactor: animación del logo en un componente o composable  
+- [x] 🔧 Refactor: animación del logo en un componente o composable  
   📝 La lógica de animación del título puede separarse para claridad o reutilización futura.  
-  - [ ] Crear composable `useLogoAnimation.ts` o componente `LogoBlock.vue`  
-  - [ ] Mover `ref` y `setTimeout` actuales  
-  - [ ] Importar y usar en App.vue sin cambiar diseño  
-  - [ ] Validar que la animación se aplica como antes (hover y tras nuevo turno)
+  - [x] Crear composable `useLogoAnimation.ts` o componente `LogoBlock.vue`  
+  - [x] Mover `ref` y `setTimeout` actuales  
+  - [x] Importar y usar en App.vue sin cambiar diseño  
+  - [x] Validar que la animación se aplica como antes (hover y tras nuevo turno)
 
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior

@@ -17,12 +17,13 @@ import 'dayjs/locale/es' // si usas español
 dayjs.locale('es')
 import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { shiftIcons as icons } from './icons/shifts'
+import { useLogoAnimation } from './composables/useLogoAnimation'
+
+// --- Composable para la animación del logo ---
+const { logoBlockRef, animateLogo } = useLogoAnimation()
 
 // Ref para la lista reactiva de toasts y la función de eliminación
 const { toasts, remove, add } = useToast()
-
-// --- Animacion del logo y titulo ---
-const logoBlockRef = ref<HTMLElement | null>(null);
 
 // --- Estado para la creación de nuevas tareas ---
 const newTaskDescription = ref('')
@@ -234,14 +235,7 @@ const startNewShift = (showAlert = true) => {
   currentShiftId.value = newShiftId;
   selectedShiftToView.value = 'current';
 
-  if (logoBlockRef.value) {
-    setTimeout(() => {
-      logoBlockRef.value?.classList.add('scale-105', 'drop-shadow-md');
-      setTimeout(() => {
-        logoBlockRef.value?.classList.remove('scale-105', 'drop-shadow-md');
-      }, 300); // duración de la animación
-    }, 400); // retardo antes de empezar (ajustable)
-  }
+  animateLogo()
 
   const toastId = add(
     {
@@ -836,7 +830,6 @@ const exportTasksToJson = async () => {
   
 
   <main class="min-h-[calc(100svh-72px)] bg-app-bg text-text-main flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
-    <!-- pt aún más reducido -->
 
     <!-- Sección para añadir nueva tarea -->
     <NewTaskForm
