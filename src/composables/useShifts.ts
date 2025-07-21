@@ -24,10 +24,16 @@ export function getShiftIcon(shiftId: string): 'sun' | 'clock' | 'moon' {
   else return 'moon'
 }
 
+import { useDarkMode } from './useDarkMode'
+
+const { isDark } = useDarkMode()
+
 // Devuelve el color de texto correspondiente a un turno dado su ID.
 export function getShiftColor(shiftId: string): string {
   const icon = getShiftIcon(shiftId)
-  if (icon === 'sun') return 'text-yellow-400'
-  if (icon === 'clock') return 'text-amber-500'
-  return 'text-indigo-500' // moon
+
+  if (icon === 'sun') return isDark.value ? 'text-yellow-300' : 'text-yellow-400'
+  if (icon === 'clock') return isDark.value ? 'text-amber-300' : 'text-amber-500'
+  return isDark.value ? 'text-indigo-300' : 'text-indigo-500'
 }
+

@@ -124,7 +124,7 @@ const onLeave = (el: Element) => {
                 <span>Acciones</span>
                 <button
                   @click="closeMenu"
-                  class="p-1 rounded-md border border-slate-300 hover:bg-slate-200
+                  class="p-1 rounded-md border border-divider hover:bg-surface-hover
                          focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
                   aria-label="Cerrar menú"
                 >
@@ -140,10 +140,10 @@ const onLeave = (el: Element) => {
                   @click="handleAction('newShift')"
                   class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md                         
                          text-sm font-medium 
-                         bg-status-success text-green-700
+                         bg-status-success text-success-strong
                          hover:bg-emerald-300 hover:brightness-95
                          active:scale-95 transition-all duration-150 ease-in-out
-                         focus:outline-none focus:bg-slate-100"
+                         focus:outline-none focus:bg-surface-hover"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -151,13 +151,13 @@ const onLeave = (el: Element) => {
                   <span>Nuevo Turno</span>
                 </button>
 
-                <hr class="my-6 border-slate-200 mx-3" /> <!-- Margen vertical aumentado -->
+                <hr class="my-6 border-divider mx-3" /> <!-- Margen vertical aumentado -->
 
                 <button
                  @click="handleAction('shareTasks')"
                  class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
                         text-sm font-medium 
-                        bg-accent-main text-blue-800 
+                        bg-accent-main text-accent-strong 
                         hover:bg-accent-main/80 hover:brightness-95
                         active:scale-95 transition-all duration-150 ease-in-out
                         focus:outline-none focus:bg-accent-main/70"
@@ -168,13 +168,13 @@ const onLeave = (el: Element) => {
                  <span>Compartir</span>
                </button>
 
-               <hr class="my-6 border-slate-200 mx-3" /> <!-- Margen vertical aumentado -->
+               <hr class="my-6 border-divider mx-3" /> <!-- Margen vertical aumentado -->
 
                 <button
                   @click="handleAction('importTasks')"
                   class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
                          text-sm font-medium 
-                         bg-accent-main text-blue-800 
+                         bg-accent-main text-accent-strong
                          hover:bg-accent-main/80 hover:brightness-95
                          active:scale-95 transition-all duration-150 ease-in-out
                          focus:outline-none focus:bg-accent-main/70"
@@ -188,7 +188,7 @@ const onLeave = (el: Element) => {
                   @click="handleAction('exportTasks')"
                   class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
                          text-sm font-medium 
-                         bg-accent-main text-blue-800 
+                         bg-accent-main text-accent-strong
                          hover:bg-accent-main/80 hover:brightness-95
                          active:scale-95 transition-all duration-150 ease-in-out
                          focus:outline-none focus:bg-accent-main/70"
@@ -199,7 +199,7 @@ const onLeave = (el: Element) => {
                   <span>Exportar</span>
                 </button>
 
-                <hr class="my-6 border-slate-200 mx-3" /> <!-- Margen vertical aumentado -->
+                <hr class="my-6 border-divider mx-3" /> <!-- Margen vertical aumentado -->
 
 
                 <!-- 🔧 Bloque de Opciones -->
@@ -208,9 +208,9 @@ const onLeave = (el: Element) => {
                     @click="isOptionsOpen = !isOptionsOpen"
                     class="w-full flex items-center justify-between gap-x-3 px-3 py-3 rounded-md
                           text-sm font-medium
-                          bg-purple-200 text-purple-900
-                          dark:bg-purple-400 dark:text-white
-                          hover:bg-purple-300 dark:hover:bg-purple-500
+                          bg-status-purple text-purple-strong
+                          dark:bg-status-purple-dark dark:text-purple-strong
+                          hover:bg-status-purple-hover dark:hover:bg-status-purple-dark-hover
                           active:scale-95 transition-all duration-150 ease-in-out"
                     :aria-expanded="isOptionsOpen"
                     aria-controls="options-content"
@@ -221,7 +221,7 @@ const onLeave = (el: Element) => {
                       </svg>
                       Opciones
                     </span>
-                    <svg class="w-5 h-5 text-purple-800 dark:text-white/80 transition-transform duration-300"
+                    <svg class="w-5 h-5 text-purple-strong dark:text-purple-strong/80 transition-transform duration-300"
                          :class="{ 'rotate-90': isOptionsOpen }"
                          fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
@@ -229,6 +229,7 @@ const onLeave = (el: Element) => {
                             d="M9 5l7 7-7 7"></path>
                     </svg>
                   </button>
+
 
                   <Transition
                     name="collapse"
@@ -241,9 +242,9 @@ const onLeave = (el: Element) => {
                       <button
                         @click="toggleDark()"
                         class="w-full flex items-center justify-between px-3 py-2 rounded-md
-                               bg-indigo-200 text-indigo-900
-                               dark:bg-indigo-400 dark:text-white
-                               hover:bg-indigo-300 dark:hover:bg-indigo-500
+                               bg-status-purple text-purple-strong
+                               dark:bg-status-purple-dark dark:text-purple-strong
+                               hover:bg-status-purple-hover dark:hover:bg-status-purple-dark-hover
                                active:scale-95 transition-all duration-150 ease-in-out"
                       >
                         <span>Modo oscuro</span>
@@ -262,10 +263,10 @@ const onLeave = (el: Element) => {
                   @click="handleAction('deleteAll')"
                   class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
                          text-sm font-medium
-                         bg-red-100 text-red-700 
-                         hover:bg-red-200 hover:brightness-95
+                         bg-status-alert text-alert-strong
+                         hover:bg-status-alert/80 hover:brightness-95
                          active:scale-95 transition-all duration-150 ease-in-out
-                         focus:outline-none focus:bg-red-200 focus:ring-2 focus:ring-red-300 focus:ring-offset-1"
+                         focus:outline-none focus:bg-status-alert/80 focus:ring-2 focus:ring-red-300 focus:ring-offset-1"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12.56 0c1.153 0 2.242.078 3.324.214M15 5.79V4.5A2.25 2.25 0 0012.75 2.25h-1.5A2.25 2.25 0 009 4.5v1.29m0 0C9 7.529 9.21 8.25 9.45 9" />
@@ -275,13 +276,13 @@ const onLeave = (el: Element) => {
               </div>
 
               <div class="mt-4"> <!-- mt-4 para espacio, quitado pt-4 y border-t -->
-                <hr class="mt-6 mb-4 border-slate-200 mx-3" /> <!-- Ajustado margen inferior para centrar el texto del pie -->
+                <hr class="mt-6 mb-4 border-divider mx-3" /> <!-- Ajustado margen inferior para centrar el texto del pie -->
                 <div class="flex items-center justify-center gap-1">
                   <img 
                     src="/assets/logo-header.png" 
                     alt="Logo Notifica" 
                     class="w-4 h-4" />
-                  <p class="text-[11px] text-slate-400/80">Notifica v1.0.5 - JCPD 2025</p>
+                  <p class="text-[11px] text-text-muted">Notifica v1.0.5 - JCPD 2025</p>
                 </div>
               </div>
             </DialogPanel>

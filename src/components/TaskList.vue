@@ -5,6 +5,7 @@
 import type { PropType } from 'vue'
 import TaskItem from './TaskItem.vue'
 import type { Task } from '../types/Task'
+import { getShiftColor } from '@/composables/useShifts'
 
 // Props del componente.
 const props = defineProps({
@@ -52,15 +53,6 @@ const relayDeleteTask = (taskId: string) => {
   emit('delete-task', taskId)
 }
 
-function getShiftColor(shiftId: string): string {
-  const hour = Number(shiftId.replace('shift-', '')) || 0
-  const h = new Date(hour).getHours()
-
-  if (h < 12) return 'text-yellow-400'
-  if (h < 20) return 'text-amber-500'
-  return 'text-indigo-500'
-}
-
 </script>
 
 <template>
@@ -69,7 +61,7 @@ function getShiftColor(shiftId: string): string {
       v-if="props.title && tasks.length > 0" 
       class="mb-4 px-1"
     >
-      <p class="text-s text-gray-500 mb-1">Viendo Turno</p>
+      <p class="text-s text-text-subtle mb-1">Viendo Turno</p>
       <div class="flex items-center gap-2 text-xl font-semibold text-text-main">
         <component
           v-if="props.titleIcon"
@@ -89,7 +81,7 @@ function getShiftColor(shiftId: string): string {
       move-class="transition-transform duration-500 ease-out" 
       leave-from-class="opacity-100 max-h-32"  
       leave-to-class="opacity-0 max-h-0"
-      class="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col overflow-hidden"
+      class="bg-surface-1 rounded-xl shadow-sm border border-divider flex flex-col overflow-hidden"
     >
       <TaskItem 
         v-for="(task, index) in tasks" 

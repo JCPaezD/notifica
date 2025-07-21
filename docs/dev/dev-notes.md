@@ -21,6 +21,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Bug en iOS PWA: scroll azul tras cerrar teclado](#bug-en-ios-pwa-scroll-azul-tras-cerrar-teclado)
   - [Problemas comunes en emuladores Android](#problemas-comunes-en-emuladores-android)
   - [Validación de bugs: scroll y animación toast](#validación-de-bugs-scroll-y-animación-toast)
+  - [Limitación: clases dinámicas de color en SVG con funciones personalizadas](#limitación-clases-dinámicas-de-color-en-svg-con-funciones-personalizadas)
 - [UI, diseño y publicación](#ui-diseño-y-publicación)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -463,6 +464,25 @@ Se validaron dos bugs registrados previamente en la sección de mejoras UX/UI y 
   No ha sido necesario aplicar cambios adicionales. Se considera resuelto.
 
 No se ha modificado código funcional. Se registra como validación de cierre.
+
+### Limitación: clases dinámicas de color en SVG con funciones personalizadas
+
+[21/07/2025]
+
+Los iconos SVG del selector de turno no mostraban color al aplicar clases personalizadas como `text-shift-morning`, aunque estas aparecían correctamente en el DOM y el CSS generado era válido.
+
+Se descartaron múltiples causas: safelist, uso de `textColor`, `stroke-current`, herencia de clase desde `defineComponent`, etc. El color solo se aplicaba si se usaban clases estáticas como `text-yellow-400`.
+
+Se concluye que Tailwind no aplica correctamente clases `text-*` generadas desde funciones dinámicas si no están referenciadas literalmente en el código fuente.
+
+**Solución aplicada:**
+  - Reescribir `getShiftColor()` para devolver directamente clases estándar (`text-yellow-400`, etc.).
+  - Incluir lógica por modo claro/oscuro usando `isDark.value`.
+
+Ejemplo:
+  if (icon === 'sun') return isDark.value ? 'text-yellow-300' : 'text-yellow-400'
+
+Esta solución funciona correctamente, permite personalización dual y se considera definitiva.
 
 ---
 

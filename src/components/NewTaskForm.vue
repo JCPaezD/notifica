@@ -9,7 +9,7 @@
   >
     <div
       v-if="!isHidden"
-      class="bg-white rounded-xl p-3 shadow-sm w-full max-w-lg mb-4 border border-gray-200 overflow-hidden"
+      class="bg-surface-1 rounded-xl p-3 shadow-sm w-full max-w-lg mb-4 border border-divider overflow-hidden"
     >
       <div class="flex space-x-4 items-start">
         <div class="flex-grow">
@@ -20,7 +20,7 @@
             @keyup.enter.prevent="$emit('submit')"
             placeholder="Nuevo aviso"
             rows="2"
-            class="p-3 bg-white border border-slate-300 rounded-md shadow-sm 
+            class="p-3 bg-surface-1 border border-divider rounded-md shadow-sm 
                    focus:ring-2 focus:ring-accent-main focus:border-accent-main 
                    w-full text-base resize-none placeholder-text-main/70
                    transition-all duration-300 ease-in-out"
@@ -35,7 +35,7 @@
             @keyup.enter="$emit('submit')"
             placeholder="Técnico(s)"
             class="p-1 
-                   bg-white border border-slate-300 rounded-md shadow-sm 
+                   bg-surface-1 border border-divider rounded-md shadow-sm 
                    focus:ring-2 focus:ring-accent-main focus:border-accent-main 
                    transition-all duration-300 ease-in-out
                    w-full text-sm placeholder-text-main/70"
@@ -43,7 +43,7 @@
           <button
             @click="$emit('submit')"
             class="w-full px-3 py-1.5 
-                   bg-accent-main text-text-on-pastel font-semibold 
+                   bg-accent-main text-accent-strong font-semibold 
                    rounded-md shadow-sm hover:bg-accent-main/80 
                    focus:outline-none active:scale-95
                    transition-all duration-300 ease-in-out 

@@ -109,39 +109,39 @@ const iconSvg = computed(() => {
 const toastClasses = computed(() => {
   switch (props.type) {
     case 'success':
-      return 'bg-green-50 border-green-200 text-green-700'
+      return 'bg-status-success border-status-success text-success-strong'
     case 'error':
-      return 'bg-red-50 border-red-200 text-red-700'
+      return 'bg-status-alert border-status-alert text-alert-strong'
     case 'warning':
-      return 'bg-yellow-50 border-yellow-200 text-yellow-700'
+      return 'bg-status-active border-status-active text-active-strong'
     default:
-      return 'bg-blue-50 border-blue-200 text-blue-700'
+      return 'bg-accent-main border-accent-main text-accent-strong'
   }
 })
 
 const actionButtonClasses = computed(() => {
   switch (props.type) {
     case 'success':
-      return 'text-green-600 bg-green-100 hover:bg-green-200'
+      return 'text-success-strong bg-status-success hover:bg-status-success/80'
     case 'error':
-      return 'text-red-600 bg-red-100 hover:bg-red-200'
+      return 'text-alert-strong bg-status-alert hover:bg-status-alert/80'
     case 'warning':
-      return 'text-yellow-600 bg-yellow-100 hover:bg-yellow-200'
+      return 'text-active-strong bg-status-active hover:bg-status-active/80'
     default:
-      return 'text-blue-600 bg-blue-100 hover:bg-blue-200'
+      return 'text-accent-strong bg-accent-main hover:bg-accent-main/80'
   }
 })
 
 const closeButtonClasses = computed(() => {
   switch (props.type) {
     case 'success':
-      return 'text-green-400 hover:text-green-600'
+      return 'text-success-strong hover:brightness-110'
     case 'error':
-      return 'text-red-400 hover:text-red-600'
+      return 'text-alert-strong hover:brightness-110'
     case 'warning':
-      return 'text-yellow-400 hover:text-yellow-600'
+      return 'text-active-strong hover:brightness-110'
     default:
-      return 'text-blue-400 hover:text-blue-600'
+      return 'text-accent-strong hover:brightness-110'
   }
 })
 </script>

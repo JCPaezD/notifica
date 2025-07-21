@@ -807,10 +807,10 @@ const exportTasksToJson = async () => {
 <template>
   <SideMenu :is-open="isSideMenuOpen" @close="closeSideMenu" @action="handleMenuAction" />
 
-  <header class="sticky top-0 z-50 bg-white shadow-sm w-full">
+  <header class="sticky top-0 z-50 bg-surface-1 shadow-sm w-full">
     <div class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none">
       <button @click="openSideMenu"
-        class="absolute left-4 top-4.5 p-1 rounded-md border border-slate-300 md:hover:bg-slate-200 focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
+        class="absolute left-4 top-4.5 p-1 rounded-md border border-divider md:hover:bg-surface-hover focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
         aria-label="Abrir menú">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-7 h-7 text-text-main">
@@ -826,8 +826,6 @@ const exportTasksToJson = async () => {
       </div>
     </div>
   </header>
-
-  
 
   <main class="min-h-[calc(100svh-72px)] bg-app-bg text-text-main flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
 
@@ -847,8 +845,8 @@ const exportTasksToJson = async () => {
       leave-from-class="opacity-100 max-h-[80px]" leave-to-class="opacity-0 max-h-0">
       <div v-if="isViewingPastShift" class="w-full max-w-lg mb-4 overflow-hidden">
         <button @click="returnToCurrentShift" class="w-full min-h-[44px] px-4 py-2 
-                bg-status-active text-text-on-pastel text-sm font-semibold
-                rounded-md shadow-sm hover:bg-yellow-300
+                bg-status-active text-active-strong text-sm font-semibold
+                rounded-md shadow-sm hover:bg-status-active/80
                 focus:outline-none focus:ring-2 focus:ring-status-active focus:ring-offset-2
                 transition-all duration-300 ease-in-out
                 flex items-center justify-center gap-2">
@@ -879,12 +877,12 @@ const exportTasksToJson = async () => {
     />
 
     <!-- Separador Visual -->
-    <hr class="w-5/6 max-w-md border-gray-200 my-6" />
+    <hr class="w-5/6 max-w-md border-divider my-6" />
     <!-- Ancho porcentual para que sea más corta en móviles, centrada por items-center del main -->
 
     <!-- Contenedor para Selector de Turno y Filtros -->
     <div
-      class="bg-white rounded-xl p-4 shadow-sm w-full max-w-lg mb-4 border border-gray-200 flex flex-wrap items-center justify-between gap-x-1 gap-y-3">
+      class="bg-surface-1 rounded-xl p-4 shadow-sm w-full max-w-lg mb-4 border border-divider flex flex-wrap items-center justify-between gap-x-1 gap-y-3">
       <!-- Selector de Turno -->
       <ShiftSelector
         :availableShifts="availableShifts"
@@ -904,6 +902,10 @@ const exportTasksToJson = async () => {
 
     <!-- Input de archivo oculto (se mantiene ya que es funcional y no visual) -->
     <input type="file" ref="fileImportInputRef" @change="importTasksFromJson" accept=".json" class="hidden" />
+
+    <!-- Oculto: fuerza a Tailwind a incluir clases dinámicas -->
+    <span class="hidden text-shift-morning text-shift-afternoon text-shift-night"></span>
+
   </main>
 
   <!-- Sistema propio de notificaciones -->

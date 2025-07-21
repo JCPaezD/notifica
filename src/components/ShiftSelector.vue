@@ -6,7 +6,7 @@
       @click="toggleShiftDropdown"
       type="button"
       class="inline-flex items-center justify-center w-[72px] 
-        rounded-md border border-slate-300 bg-white px-2 py-2 text-xs font-medium text-text-main shadow-sm hover:bg-slate-50
+        rounded-md border border-divider bg-surface-1 px-2 py-2 text-xs font-medium text-text-main shadow-sm hover:bg-surface-hover
         focus:outline-none transition-all duration-300 ease-in-out active:scale-95"
       aria-haspopup="true"
       :aria-expanded="isShiftDropdownOpen"
@@ -31,7 +31,7 @@
     <div
       v-if="isShiftDropdownOpen"
       ref="shiftDropdownMenuRef"
-      class="absolute left-0 z-50 w-56 origin-top-left rounded-md bg-white shadow-lg border border-slate-200 focus:outline-none max-h-60 overflow-y-auto"
+      class="absolute left-0 z-50 w-56 origin-top-left rounded-md bg-surface-1 shadow-lg border border-divider focus:outline-none max-h-60 overflow-y-auto"
       :class="openUpward
         ? 'bottom-full mb-2 origin-bottom-left'
         : 'mt-2 origin-top-left'"
@@ -41,7 +41,7 @@
       <div class="py-0.5" role="none">
         <button
           @click="emitSelect('current')"
-          class="text-text-main w-full text-left min-h-[44px] px-4 py-2 text-sm hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out flex items-center gap-2"
+          class="text-text-main w-full text-left min-h-[44px] px-4 py-2 text-sm hover:bg-surface-hover hover:text-text-main transition-colors duration-150 ease-in-out flex items-center gap-2"
           role="menuitem"
         >
           <component
@@ -49,14 +49,14 @@
             :class="['w-4 h-4 shrink-0', getShiftColor(currentShiftId || '')]"
           />
           <span>{{ getShiftLabel(currentShiftId || '') }}</span>
-          <span class="ml-auto w-3 h-3 rounded-full bg-emerald-300 self-center"></span>
+          <span class="ml-auto w-3 h-3 rounded-full bg-status-success self-center"></span>
         </button>
 
         <template v-for="shift in availableShifts" :key="shift.id">
           <button
             v-if="shift.id !== currentShiftId"
             @click="emitSelect(shift.id)"
-            class="text-text-main w-full text-left min-h-[44px] px-4 py-2 text-sm hover:bg-slate-100 hover:text-text-main transition-colors duration-150 ease-in-out flex items-center gap-2"
+            class="text-text-main w-full text-left min-h-[44px] px-4 py-2 text-sm hover:bg-surface-hover hover:text-text-main transition-colors duration-150 ease-in-out flex items-center gap-2"
             role="menuitem"
           >
             <component

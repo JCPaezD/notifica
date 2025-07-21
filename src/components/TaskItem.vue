@@ -249,13 +249,13 @@ const formattedDuration = computed(() => {
  */
 const statusColorClass = computed(() => {
   if (props.task.isNotified) {
-    return 'bg-emerald-300'; // Notificada
+    return 'bg-status-success' // Notificada
   }
   if (props.task.endTime) {
-    return 'bg-yellow-300'; // Finalizada (y no notificada)
+    return 'bg-status-active' // Finalizada (no notificada)
   }
-  return 'bg-slate-300'; // En curso (ni finalizada ni notificada)
-});
+  return 'bg-status-inprogress' // En curso
+})
 
 /**
  * Genera las clases dinámicas para la barra de estado vertical,
@@ -332,12 +332,12 @@ const handleDeleteTask = () => {
                 @keyup.enter="saveDescription"
                 @blur="saveDescription"
                 @keyup.esc="cancelEditDescription"
-                class="font-semibold text-sm text-text-main p-1 border border-slate-300 rounded-md w-full 
+                class="font-semibold text-sm text-text-main p-1 border border-divider rounded-md w-full 
                        focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"
               />
             </template>
             <template v-else>
-              <p @click="startEditDescription" class="font-medium text-sm text-text-main cursor-pointer hover:bg-slate-100 p-1 -m-1 rounded-md break-words leading-tight">
+              <p @click="startEditDescription" class="font-medium text-sm text-text-main cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md break-words leading-tight">
                 {{ task.description || '[Sin descripción]' }}
               </p>
             </template>
@@ -346,17 +346,17 @@ const handleDeleteTask = () => {
 
         <!-- Horas -->
         <div class="flex-shrink-0 grid grid-cols-[auto_min-content_auto] items-center gap-x-1 text-xs">
-          <div class="min-w-[32px] text-center"> <!-- Ancho mínimo aún más reducido -->
+          <div class="min-w-[32px] text-center">
             <template v-if="isEditingStartTime">
               <input ref="startTimeInputRef" type="time" v-model="editableStartTime" @keyup.enter="saveStartTime" @blur="saveStartTime" 
-                     class="text-text-main/90 p-0.5 border border-slate-300 rounded-md w-[68px] text-xs 
+                     class="text-text-main/90 p-0.5 border border-divider rounded-md w-[68px] text-xs 
                             focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
             </template>
             <template v-else>
-              <span @click="startEditStartTime" class="text-text-main/90 cursor-pointer hover:bg-slate-100 p-1 -m-1 rounded-md">{{ task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</span>
+              <span @click="startEditStartTime" class="text-text-main/90 cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md">{{ task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</span>
             </template>
           </div>
-          <span class="text-text-main/80"> - </span> <!-- mx-0.5 eliminado ya que gap-x-1 lo maneja -->
+          <span class="text-text-subtle"> - </span> <!-- mx-0.5 eliminado ya que gap-x-1 lo maneja -->
           <div class="min-w-[32px] text-center"> <!-- Ancho mínimo aún más reducido -->
             <Transition
               name="endtime-display-swap"
@@ -372,18 +372,18 @@ const handleDeleteTask = () => {
                 <template v-if="task.endTime">
                   <template v-if="isEditingEndTime">
                     <input ref="endTimeInputRef" type="time" v-model="editableEndTime" @keyup.enter="saveEndTime" @blur="saveEndTime" 
-                           class="text-emerald-600 p-0.5 border border-slate-300 rounded-md w-[68px] text-xs 
+                           class="text-status-success p-0.5 border border-divider rounded-md w-[68px] text-xs 
                                   focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
                   </template>
                   <template v-else>
                     <span @click="startEditEndTime" 
-                          class="text-emerald-600 cursor-pointer hover:bg-slate-100 p-1 -m-1 rounded-md">
+                          class="text-status-success cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md">
                       {{ task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
                     </span>
                   </template>
                 </template>
                 <template v-else>
-                  <span @click="handleFinalizeAndEditEndTime" class="text-text-main/50 cursor-pointer hover:bg-slate-100 p-1 -m-1 rounded-md">--:--</span>
+                  <span @click="handleFinalizeAndEditEndTime" class="text-placeholder cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md">--:--</span>
                 </template>
               </div>
             </Transition>
@@ -404,9 +404,9 @@ const handleDeleteTask = () => {
           >
             <button v-if="!task.endTime" @click="handleFinishTask" 
                     class="w-full px-2 py-0.5 
-                           bg-status-alert text-text-on-pastel text-xs font-semibold
-                           rounded-md <!-- hover:bg-red-400 eliminado -->
-                           focus:outline-none <!-- Anillos de foco eliminados -->
+                           bg-status-alert text-alert-strong text-xs font-semibold
+                           rounded-md
+                           focus:outline-none
                            transition-all duration-300 ease-in-out active:scale-95 transform [-webkit-tap-highlight-color:transparent]
                            flex items-center justify-center gap-1 ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
@@ -416,8 +416,8 @@ const handleDeleteTask = () => {
             </button>
             <button v-else @click="handleReactivateTask" 
                     class="w-full px-2 py-0.5 
-                           bg-status-active text-text-on-pastel text-xs font-semibold
-                           rounded-md <!-- hover:bg-yellow-300 eliminado -->
+                           bg-status-active text-active-strong text-xs font-semibold
+                           rounded-md
                            focus:outline-none focus:ring-1 focus:ring-status-active focus:ring-offset-1 
                            transition-all duration-300 ease-in-out active:scale-95 transform
                            flex items-center justify-center gap-1">
@@ -439,13 +439,13 @@ const handleDeleteTask = () => {
           <div class="min-w-0">
             <template v-if="isEditingTechnician">
               <input type="text" ref="technicianInputRef" v-model="editableTechnician" @keyup.enter="saveTechnician" @blur="saveTechnician" 
-                     class="text-xs text-text-main p-0.5 border border-slate-300 rounded-md w-full 
+                     class="text-xs text-text-main p-0.5 border border-divider rounded-md w-full 
                             focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
             </template>
             <template v-else>
-              <p @click="startEditTechnician" class="cursor-pointer hover:bg-slate-100 p-0.5 -m-0.5 rounded-md truncate">
-                <span v-if="task.technician" class="text-text-main/80">{{ task.technician }}</span>
-                <span v-else class="text-gray-400 italic">Añadir técnico</span> 
+              <p @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover p-0.5 -m-0.5 rounded-md truncate">
+                <span v-if="task.technician" class="text-text-subtle">{{ task.technician }}</span>
+                <span v-else class="text-placeholder italic">Añadir técnico</span> 
               </p>
             </template>
           </div>
@@ -462,7 +462,7 @@ const handleDeleteTask = () => {
           >
             <p v-if="formattedDuration" 
                class="text-xs font-semibold text-text-main/70 
-                      bg-slate-100 border border-slate-200 rounded 
+                      bg-surface-hover border border-divider rounded 
                       px-2 py-0.5 ml-4 whitespace-nowrap mt-0.5">
               {{ formattedDuration }}
             </p>
@@ -477,8 +477,8 @@ const handleDeleteTask = () => {
             ref="notifiedIconBtnRef"
             @click="toggleNotifiedStatus" 
             :title="task.isNotified ? 'Marcar como No Notificado' : 'Marcar como Notificado'"
-            class="p-0.5 rounded-full hover:bg-slate-100 
-                   focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-accent-main active:bg-slate-200 
+            class="p-0.5 rounded-full hover:bg-surface-hover 
+                   focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-accent-main active:bg-surface-pressed 
                    transition-all duration-300 ease-in-out active:scale-95 transform"
             aria-label="Estado de notificación"
           >
@@ -501,7 +501,7 @@ const handleDeleteTask = () => {
               <svg v-else 
                    key="unnotified-icon" 
                    xmlns="http://www.w3.org/2000/svg" 
-                   class="h-5 w-5 text-text-main/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                   class="h-5 w-5 text-placeholder" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </Transition>
@@ -510,8 +510,8 @@ const handleDeleteTask = () => {
           <button
             @click="handleDeleteTask"
             title="Eliminar Tarea"
-            class="p-0.5 rounded-full hover:bg-slate-100 
-                   focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-status-alert active:bg-slate-200 
+            class="p-0.5 rounded-full hover:bg-surface-hover 
+                   focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-status-alert active:bg-surface-pressed 
                    transition-all duration-300 ease-in-out active:scale-95 transform"
             aria-label="Eliminar tarea"
           >
