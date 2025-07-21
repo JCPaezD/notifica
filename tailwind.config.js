@@ -29,6 +29,9 @@ export default {
 
         // 🌈 Estados visuales (semánticos)
         'status-success': '#a7f3d0',     // Verde pastel (tarea notificada)
+        'status-success-hover': '#6ee7b7',     // Hover en claro (emerald-300)
+        'status-success-dark': '#34d399',      // Verde medio (emerald-400)
+        'status-success-dark-hover': '#10b981',// Hover en oscuro (emerald-500)
         'status-alert': '#fecaca',      // Rojo pastel (tarea eliminada)
         'status-active': '#fef08a',     // Amarillo pastel (tarea finalizada)
         'status-inprogress': '#cbd5e1', // Gris pastel (tarea en curso)
