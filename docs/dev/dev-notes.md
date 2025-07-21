@@ -24,6 +24,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Limitación: clases dinámicas de color en SVG con funciones personalizadas](#limitación-clases-dinámicas-de-color-en-svg-con-funciones-personalizadas)
   - [Limitación: clases dinámicas de Tailwind no aplicadas](#limitación-clases-dinámicas-de-tailwind-no-aplicadas)
   - [Bug con getShiftColor: diagnóstico y solución definitiva](#bug-con-getshiftcolor-diagnóstico-y-solución-definitiva)
+  - [Bug con colores en toasts: diagnóstico y solución](#bug-con-colores-en-toasts-diagnóstico-y-solución)
 - [UI, diseño y publicación](#ui-diseño-y-publicación)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -592,6 +593,39 @@ Esto garantiza que las clases estén presentes en el bundle final, evitando que 
 **Tareas futuras relacionadas:**  
 - Convertir estas clases base (`text-yellow-400`, etc.) a tokens personalizados pastel.  
 - Eliminar de `tailwind.config.js` las clases `text-shift-*` si no están en uso.
+
+### Bug con colores en toasts: diagnóstico y solución
+
+[21/07/2025]
+
+Tras eliminar las clases hardcodeadas del sistema de toasts, los tipos `success`, `error`, `info` y `warning` no aplicaban correctamente sus colores.  
+El uso de clases construidas dinámicamente (`bg-${type}-100`, ternarios en templates) fue descartado por no ser reconocido por Tailwind.
+
+**Solución:**  
+Se creó `toastColors.ts` con un mapa estático de clases por tipo y modo (`light` / `dark`).  
+Las clases están escritas como strings literales para asegurar su inclusión tras el purgado.
+
+    export const toastColorMap = {
+      success: {
+        light: 'bg-status-success text-success-strong',
+        dark: 'bg-status-success-dark text-success-strong',
+      },
+      error: {
+        light: 'bg-status-alert text-alert-strong',
+        dark: 'bg-status-alert text-alert-strong',
+      },
+      info: {
+        light: 'bg-status-accent text-accent-strong',
+        dark: 'bg-status-accent text-accent-strong',
+      },
+      warning: {
+        light: 'bg-status-active text-active-strong',
+        dark: 'bg-status-active text-active-strong',
+      },
+    }
+
+El componente `Toast.vue` usa este mapa importado según el tipo y el modo actual (`isDark.value`).  
+Se validó visualmente en todos los modos y dispositivos. Bug cerrado.
 
 
 ---
