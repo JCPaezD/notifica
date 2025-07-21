@@ -28,16 +28,24 @@ export default {
         'text-text-muted': '#94a3b8',  // Pie de página, info secundaria (alias de placeholder)
 
         // 🌈 Estados visuales (semánticos)
-        'status-success': '#a7f3d0',     // Verde pastel (tarea notificada)
-        'status-success-hover': '#6ee7b7',     // Hover en claro (emerald-300)
+        'status-success': '#d1fae5',         // Verde claro real (green-100)
+        'status-success-hover': '#a7f3d0',   // Hover (green-200)
         'status-success-dark': '#34d399',      // Verde medio (emerald-400)
         'status-success-dark-hover': '#10b981',// Hover en oscuro (emerald-500)
-        'status-alert': '#fecaca',      // Rojo pastel (tarea eliminada)
-        'status-active': '#fef08a',     // Amarillo pastel (tarea finalizada)
-        'status-inprogress': '#cbd5e1', // Gris pastel (tarea en curso)
+        'status-alert': '#fecaca',           // Rojo pastel (tarea eliminada)
+        'status-active': '#fef08a',          // Amarillo pastel (tarea finalizada)
+        'status-inprogress': '#cbd5e1',      // Gris pastel (tarea en curso)
+
+        // 🟦 Azul pastel (botones de importar/exportar)
+        'status-accent': '#bfdbfe',          // Fondo claro (blue-200)
+        'status-accent-hover': '#93c5fd',    // Hover (blue-300)
+
+        // 🔴 Rojo pastel (borrar todo)
+        'status-danger': '#fecaca',          // Fondo claro (red-200)
+        'status-danger-hover': '#fca5a5',    // Hover rojo medio (red-300)
 
         // 🟡 Acentos y botones principales
-        'accent-main': '#93c5fd',       // Azul pastel principal
+        'accent-main': '#93c5fd',            // Azul pastel principal
 
         // 🌓 Turnos (texto icónico)
         'text-shift-morning': '#facc15',     // Amarillo claro
@@ -59,11 +67,12 @@ export default {
       },
       textColor: {
         // 🎨 Colores personalizados de texto
-        'success-strong': '#047857',   // emerald-700
-        'alert-strong': '#b91c1c',     // red-700
-        'active-strong': '#b45309',    // amber-700
-        'accent-strong': '#1d4ed8',    // blue-700
-        'purple-strong': '#6d28d9',    // violet-700
+        'success-strong': '#047857',          // Texto fuerte verde (green-700)
+        'alert-strong': '#b91c1c',            // red-700
+        'active-strong': '#b45309',           // amber-700
+        'accent-strong': '#2563eb',           // Azul fuerte (blue-600)
+        'danger-strong': '#b91c1c',           // Rojo fuerte (red-700)
+        'purple-strong': '#6d28d9',           // violet-700
       },
     },
   },

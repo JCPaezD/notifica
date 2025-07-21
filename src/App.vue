@@ -903,9 +903,6 @@ const exportTasksToJson = async () => {
     <!-- Input de archivo oculto (se mantiene ya que es funcional y no visual) -->
     <input type="file" ref="fileImportInputRef" @change="importTasksFromJson" accept=".json" class="hidden" />
 
-    <!-- Oculto: fuerza a Tailwind a incluir clases dinámicas -->
-    <span class="hidden text-shift-morning text-shift-afternoon text-shift-night"></span>
-
   </main>
 
   <!-- Sistema propio de notificaciones -->

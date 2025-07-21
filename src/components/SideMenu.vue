@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // src/components/SideMenu.vue
 // Componente del menú lateral deslizable que ofrece acciones rápidas para la aplicación.
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import {
   Dialog,
   DialogPanel,
@@ -10,9 +10,21 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import { useDarkMode } from '@/composables/useDarkMode'
+import { menuButtonStyles } from '../constants/menuButtonStyles'
+
 
 const isOptionsOpen = ref(false)
 const { isDark, toggleDark } = useDarkMode()
+
+const mode = ref<'light' | 'dark'>(isDark.value ? 'dark' : 'light')
+
+function getButtonStyle(key: keyof typeof menuButtonStyles, theme: 'light' | 'dark') {
+  return menuButtonStyles[key][theme]
+}
+
+watch(isDark, () => {
+  mode.value = isDark.value ? 'dark' : 'light'
+})
 
 // Props
 // `isOpen`: Controla la visibilidad del menú lateral.
@@ -136,15 +148,15 @@ const onLeave = (el: Element) => {
 
               <div class="mt-2 flex-grow flex flex-col space-y-4"> 
                 <!-- Aquí irán los botones de acción -->
+                <!-- Nuevo Turno -->
                 <button
                   @click="handleAction('newShift')"
-                  class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md                         
-                        text-sm font-medium 
-                        bg-status-success text-success-strong
-                        dark:bg-status-success-dark dark:text-success-strong
-                        hover:bg-status-success-hover dark:hover:bg-status-success-dark-hover
-                        active:scale-95 transition-all duration-150 ease-in-out
-                        focus:outline-none focus:bg-surface-hover"                >
+                  :class="[
+                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+                    getButtonStyle('newShift', mode),
+                    'active:scale-95 transition-all duration-150 ease-in-out'
+                  ]"
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -153,15 +165,15 @@ const onLeave = (el: Element) => {
 
                 <hr class="my-6 border-divider mx-3" /> <!-- Margen vertical aumentado -->
 
+                <!-- Compartir -->
                 <button
-                 @click="handleAction('shareTasks')"
-                 class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
-                        text-sm font-medium 
-                        bg-accent-main text-accent-strong 
-                        hover:bg-accent-main/80 hover:brightness-95
-                        active:scale-95 transition-all duration-150 ease-in-out
-                        focus:outline-none focus:bg-accent-main/70"
-               >
+                  @click="handleAction('shareTasks')"
+                  :class="[
+                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+                    getButtonStyle('share', mode),
+                    'active:scale-95 transition-all duration-150 ease-in-out'
+                  ]"
+                >
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
                  </svg>
@@ -170,28 +182,28 @@ const onLeave = (el: Element) => {
 
                <hr class="my-6 border-divider mx-3" /> <!-- Margen vertical aumentado -->
 
+                <!-- Importar -->
                 <button
                   @click="handleAction('importTasks')"
-                  class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
-                         text-sm font-medium 
-                         bg-accent-main text-accent-strong
-                         hover:bg-accent-main/80 hover:brightness-95
-                         active:scale-95 transition-all duration-150 ease-in-out
-                         focus:outline-none focus:bg-accent-main/70"
+                  :class="[
+                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+                    getButtonStyle('import', mode),
+                    'active:scale-95 transition-all duration-150 ease-in-out'
+                  ]"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                   </svg>
                   <span>Importar</span>
                 </button>
+                <!-- Exportar -->
                 <button
                   @click="handleAction('exportTasks')"
-                  class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
-                         text-sm font-medium 
-                         bg-accent-main text-accent-strong
-                         hover:bg-accent-main/80 hover:brightness-95
-                         active:scale-95 transition-all duration-150 ease-in-out
-                         focus:outline-none focus:bg-accent-main/70"
+                  :class="[
+                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+                    getButtonStyle('export', mode),
+                    'active:scale-95 transition-all duration-150 ease-in-out'
+                  ]"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
@@ -204,14 +216,14 @@ const onLeave = (el: Element) => {
 
                 <!-- 🔧 Bloque de Opciones -->
                 <div class="space-y-1">
+                  <!-- Opciones (botón superior) -->
                   <button
                     @click="isOptionsOpen = !isOptionsOpen"
-                    class="w-full flex items-center justify-between gap-x-3 px-3 py-3 rounded-md
-                          text-sm font-medium
-                          bg-status-purple text-purple-strong
-                          dark:bg-status-purple-dark dark:text-purple-strong
-                          hover:bg-status-purple-hover dark:hover:bg-status-purple-dark-hover
-                          active:scale-95 transition-all duration-150 ease-in-out"
+                    :class="[
+                      'w-full flex items-center justify-between gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+                      getButtonStyle('options', mode),
+                      'active:scale-95 transition-all duration-150 ease-in-out'
+                    ]"
                     :aria-expanded="isOptionsOpen"
                     aria-controls="options-content"
                   >
@@ -221,12 +233,15 @@ const onLeave = (el: Element) => {
                       </svg>
                       Opciones
                     </span>
-                    <svg class="w-5 h-5 text-purple-strong dark:text-purple-strong/80 transition-transform duration-300"
-                         :class="{ 'rotate-90': isOptionsOpen }"
-                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5l7 7-7 7"></path>
+                    <svg
+                      class="w-5 h-5 text-purple-strong dark:text-purple-strong/80 transition-transform duration-300"
+                      :class="{ 'rotate-90': isOptionsOpen }"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
 
@@ -239,13 +254,14 @@ const onLeave = (el: Element) => {
                     @leave="onLeave"
                   >
                     <div v-show="isOptionsOpen" id="options-content" class="pl-6 pr-4 space-y-2">
+                      <!-- Botón modo oscuro -->
                       <button
                         @click="toggleDark()"
-                        class="w-full flex items-center justify-between px-3 py-2 rounded-md
-                               bg-status-purple text-purple-strong
-                               dark:bg-status-purple-dark dark:text-purple-strong
-                               hover:bg-status-purple-hover dark:hover:bg-status-purple-dark-hover
-                               active:scale-95 transition-all duration-150 ease-in-out"
+                        :class="[
+                          'w-full flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium',
+                          getButtonStyle('toggle', mode),
+                          'active:scale-95 transition-all duration-150 ease-in-out'
+                        ]"
                       >
                         <span>Modo oscuro</span>
                         <span>{{ isDark ? 'Oscuro' : 'Claro' }}</span>
@@ -259,14 +275,14 @@ const onLeave = (el: Element) => {
               <!-- Sección para Borrar Todo, separada y más abajo -->
               <div class="mt-auto"> <!-- mt-auto empuja esto hacia abajo -->
 
+                <!-- Botón Borrar todo -->
                 <button
-                  @click="handleAction('deleteAll')"
-                  class="w-full flex items-center gap-x-3 px-3 py-3 rounded-md
-                         text-sm font-medium
-                         bg-status-alert text-alert-strong
-                         hover:bg-status-alert/80 hover:brightness-95
-                         active:scale-95 transition-all duration-150 ease-in-out
-                         focus:outline-none focus:bg-status-alert/80 focus:ring-2 focus:ring-red-300 focus:ring-offset-1"
+                  @click="handleAction('delete')"
+                  :class="[
+                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+                    getButtonStyle('delete', mode),
+                    'active:scale-95 transition-all duration-150 ease-in-out focus:outline-none'
+                  ]"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12.56 0c1.153 0 2.242.078 3.324.214M15 5.79V4.5A2.25 2.25 0 0012.75 2.25h-1.5A2.25 2.25 0 009 4.5v1.29m0 0C9 7.529 9.21 8.25 9.45 9" />

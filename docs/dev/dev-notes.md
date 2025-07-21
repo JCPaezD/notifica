@@ -22,6 +22,8 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Problemas comunes en emuladores Android](#problemas-comunes-en-emuladores-android)
   - [Validación de bugs: scroll y animación toast](#validación-de-bugs-scroll-y-animación-toast)
   - [Limitación: clases dinámicas de color en SVG con funciones personalizadas](#limitación-clases-dinámicas-de-color-en-svg-con-funciones-personalizadas)
+  - [Limitación: clases dinámicas de Tailwind no aplicadas](#limitación-clases-dinámicas-de-tailwind-no-aplicadas)
+  - [Bug con getShiftColor: diagnóstico y solución definitiva](#bug-con-getshiftcolor-diagnóstico-y-solución-definitiva)
 - [UI, diseño y publicación](#ui-diseño-y-publicación)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -483,6 +485,114 @@ Ejemplo:
   if (icon === 'sun') return isDark.value ? 'text-yellow-300' : 'text-yellow-400'
 
 Esta solución funciona correctamente, permite personalización dual y se considera definitiva.
+
+### Limitación: clases dinámicas de Tailwind no aplicadas
+
+[21/07/2025]
+
+**Síntomas detectados:**  
+Las clases como `text-shift-*` no se aplicaban correctamente a los iconos SVG del selector de turno, aunque aparecían correctamente en el DOM. Los iconos aparecían en color gris por defecto (sin aplicar `fill` ni `text-*`).
+
+**Diagnóstico:**  
+Tailwind no interpreta clases generadas dinámicamente en tiempo de ejecución (como `'text-' + color`) porque su sistema de purgado elimina todas las clases no mencionadas literalmente en el código fuente.  
+Esto impide usar funciones como `getShiftColor()` que devuelven una clase basada en lógica condicional si no hay una referencia literal a cada clase implicada.
+
+**Hipótesis descartadas:**  
+- Conflictos con clases `bg-white`, `fill-current` o `stroke-current`: sin efecto.  
+- Error de lógica en `getShiftIcon` o `shiftId`: descartado tras depuración.  
+- Bug de WebKit o renderizado de SVG: no aplicaba.  
+- Uso de `safelist` o constante dummy con nombres de clase: probado y descartado (Tailwind no detecta clases en arrays si no se usan en el template o estilos inyectados).
+
+**Solución aplicada:**  
+Se creó un archivo centralizado `shiftColors.ts` con todas las combinaciones posibles de clases, referenciadas **de forma estática y literal**:
+
+    // src/constants/shiftColors.ts
+    export const shiftColors = {
+      sun: {
+        light: 'text-yellow-400',
+        dark: 'text-yellow-300',
+      },
+      clock: {
+        light: 'text-amber-400',
+        dark: 'text-amber-300',
+      },
+      moon: {
+        light: 'text-indigo-400',
+        dark: 'text-indigo-300',
+      },
+    }
+
+En el composable `useShifts.ts`, se usa `getShiftIcon()` para mapear el turno a `sun | clock | moon`, y `isDark.value` para decidir el modo. La clase se obtiene así:
+
+    import { shiftColors } from '../constants/shiftColors'
+    import { useDarkMode } from './useDarkMode'
+
+    const { isDark } = useDarkMode()
+
+    export function getShiftColor(shiftId: string): string {
+      const icon = getShiftIcon(shiftId)
+      return shiftColors[icon][isDark.value ? 'dark' : 'light']
+    }
+
+Esta estructura garantiza que todas las clases estén en el código fuente como strings literales, lo que permite que Tailwind las compile correctamente incluso tras purgado.
+
+**Estado actual:**  
+Validado en todos los entornos (PWA iOS, Android, navegador).  
+Los iconos SVG del selector de turno muestran el color correcto tanto en modo claro como oscuro.  
+La solución es clara, mantenible y extensible a cualquier sistema de clases condicionadas.
+
+### Bug con getShiftColor: diagnóstico y solución definitiva
+
+[21/07/2025]
+
+**Síntomas observados:**  
+Los iconos del selector de turno (sol, reloj, luna) y los textos asociados aparecían sin color o con estilos incorrectos tras refactorar el sistema de turnos.  
+El DOM mostraba clases `text-*` en los `svg`, pero visualmente no se aplicaban los colores esperados.
+
+**Diagnóstico:**  
+La función `getShiftColor()` devolvía clases de forma dinámica, lo que provocaba que Tailwind no incluyera esas clases en el CSS generado si no estaban escritas de forma literal.  
+El problema era que el nombre de la clase (`text-color`) se construía condicionalmente a partir del tipo de turno y del modo claro/oscuro.
+
+**Solución aplicada:**  
+Se creó un archivo `shiftColors.ts` con un objeto estático que mapea todas las combinaciones posibles de turno y modo a clases `text-*` literales de Tailwind.  
+Esto garantiza que las clases estén presentes en el bundle final, evitando que el purgado de Tailwind las elimine.
+
+    // src/constants/shiftColors.ts
+    export const shiftColors = {
+      sun: {
+        light: 'text-yellow-400',
+        dark: 'text-yellow-300',
+      },
+      clock: {
+        light: 'text-amber-500',
+        dark: 'text-amber-300',
+      },
+      moon: {
+        light: 'text-indigo-500',
+        dark: 'text-indigo-300',
+      },
+    }
+
+    // src/composables/useShifts.ts
+    import { shiftColors } from '@/constants/shiftColors'
+    import { useDarkMode } from './useDarkMode'
+
+    const { isDark } = useDarkMode()
+
+    export function getShiftColor(shiftId: string): string {
+      const icon = getShiftIcon(shiftId)
+      return shiftColors[icon][isDark.value ? 'dark' : 'light']
+    }
+
+**Resultado actual:**  
+- Confirmado que los iconos muestran el color correcto en modo claro y oscuro.  
+- Las clases se aplican correctamente (`text-amber-500`, etc.) y se ven reflejadas en el DOM.  
+- El sistema es limpio, escalable y preparado para migrar a una paleta personalizada cuando se finalice el modo oscuro.
+
+**Tareas futuras relacionadas:**  
+- Convertir estas clases base (`text-yellow-400`, etc.) a tokens personalizados pastel.  
+- Eliminar de `tailwind.config.js` las clases `text-shift-*` si no están en uso.
+
 
 ---
 
