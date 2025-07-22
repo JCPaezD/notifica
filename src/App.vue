@@ -805,6 +805,7 @@ const exportTasksToJson = async () => {
 </script>
 
 <template>
+  
   <SideMenu :is-open="isSideMenuOpen" @close="closeSideMenu" @action="handleMenuAction" />
 
   <header class="sticky top-0 z-50 bg-surface-1 shadow-sm w-full">

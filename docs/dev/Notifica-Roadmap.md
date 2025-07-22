@@ -468,12 +468,20 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
   🟠 Subbloque 3: Revisión y cierre de la paleta clara
   - [ ] 🎨 Revisar y cerrar la paleta de colores clara
-    - [ ] Revisar todos los tokens usados en el config actual
-    - [ ] Eliminar los que no se usan
-    - [ ] Agrupar y nombrar con consistencia (`status-*`, `accent-*`, etc.)
+    - [ ] Unificar criterios de colores para botones (hover, tono pastel)
+      - [x] Ajustar colores de botones verde, morado y rojo para suavizarlos
+      - [x] Validar visualmente la armonía con los botones azules
+    - [ ] Revisar duplicados y claves sospechosas
+      - [ ] Detectar claves redundantes o sospechosas en `colors`, `textColor`, `backgroundColor`, `borderColor`
+      - [ ] Comprobar si se usan realmente en la app
+      - [ ] Decidir si eliminar o mantener
+    - [ ] Revisión estructural del `tailwind.config.js`
+      - [ ] Reordenar bloques por tipo y propósito (`surface-*`, `status-*`, `toast-*`, etc.)
+      - [ ] Unificar estilo de comentarios y limpieza estética
+    - [ ] Eliminar claves no utilizadas
     - [ ] Probar armonía general de la paleta (suavidad, contraste, redundancia)
-    - [ ] Validar la paleta desde la propia app (no en Tailwind Play)
-    - [ ] Documentar como paleta base oficial antes de crear la versión oscura
+    - [ ] Validar la paleta desde la propia app (no Tailwind Play)
+    - [ ] Documentar la paleta clara como base oficial antes de crear la versión oscura
 
   🔵 Subbloque 4: Definición de la paleta oscura
   - [ ] Añadir colores oscuros personalizados en `tailwind.config.js`

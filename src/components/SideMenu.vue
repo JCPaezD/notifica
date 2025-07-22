@@ -298,7 +298,7 @@ const onLeave = (el: Element) => {
                     src="/assets/logo-header.png" 
                     alt="Logo Notifica" 
                     class="w-4 h-4" />
-                  <p class="text-[11px] text-text-muted">Notifica v1.0.5 - JCPD 2025</p>
+                  <p class="text-muted-80 text-[11px]">Notifica v1.0.5 - JCPD 2025</p>
                 </div>
               </div>
             </DialogPanel>
