@@ -460,10 +460,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Eliminar definiciones anteriores de extend.colors
     - [x] Documentar el uso obligatorio de extend.textColor para clases text-*
 
-  - [ ] 🎯 Convertir `toastColors.ts` a clases personalizadas
-    - [ ] Definir en `tailwind.config.js` tokens como `bg-toast-success`, `text-toast-error`, etc.
-    - [ ] Reemplazar las clases base (`bg-amber-500`, etc.) en `toastColors.ts`
-    - [ ] Confirmar equivalencia visual con la versión actual
+  - [x] 🧩 Refactor completo de toastColors.ts con clases personalizadas
+    - [x] Definir tokens personalizados en tailwind.config.js
+    - [x] Sustituir clases base por personalizadas en toastColors.ts
+    - [x] Validar visualmente en ambos modos
+    - [x] Confirmar funcionamiento de todos los tipos de toast
 
   🟠 Subbloque 3: Revisión y cierre de la paleta clara
   - [ ] 🎨 Revisar y cerrar la paleta de colores clara

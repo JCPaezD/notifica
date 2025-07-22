@@ -1,22 +1,22 @@
 export const toastColors = {
   success: {
-    base: 'bg-green-50 border-green-200 text-green-700',
-    action: 'bg-green-100 hover:bg-green-200 text-green-600',
-    close: 'text-green-400 hover:text-green-600',
+    base: 'bg-toast-success border-toast-success-border text-toast-success-text',
+    action: 'bg-toast-success-action hover:bg-toast-success-action-hover text-toast-success-action-text',
+    close: 'text-toast-success-close hover:text-toast-success-close-hover',
   },
   error: {
-    base: 'bg-red-50 border-red-200 text-red-700',
-    action: 'bg-red-100 hover:bg-red-200 text-red-600',
-    close: 'text-red-400 hover:text-red-600',
+    base: 'bg-toast-error border-toast-error-border text-toast-error-text',
+    action: 'bg-toast-error-action hover:bg-toast-error-action-hover text-toast-error-action-text',
+    close: 'text-toast-error-close hover:text-toast-error-close-hover',
   },
   warning: {
-    base: 'bg-yellow-50 border-yellow-200 text-yellow-700',
-    action: 'bg-yellow-100 hover:bg-yellow-200 text-yellow-600',
-    close: 'text-yellow-400 hover:text-yellow-600',
+    base: 'bg-toast-warning border-toast-warning-border text-toast-warning-text',
+    action: 'bg-toast-warning-action hover:bg-toast-warning-action-hover text-toast-warning-action-text',
+    close: 'text-toast-warning-close hover:text-toast-warning-close-hover',
   },
   info: {
-    base: 'bg-blue-50 border-blue-200 text-blue-700',
-    action: 'bg-blue-100 hover:bg-blue-200 text-blue-600',
-    close: 'text-blue-400 hover:text-blue-600',
+    base: 'bg-toast-info border-toast-info-border text-toast-info-text',
+    action: 'bg-toast-info-action hover:bg-toast-info-action-hover text-toast-info-action-text',
+    close: 'text-toast-info-close hover:text-toast-info-close-hover',
   },
 }

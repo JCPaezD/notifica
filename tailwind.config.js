@@ -60,6 +60,31 @@ export default {
         'status-purple-dark-hover': '#8b5cf6',// Hover en oscuro (violet-500)
         'text-purple-strong': '#5b21b6',      // Texto fuerte morado (violet-800)
       },
+      backgroundColor: {
+        // ✅ Fondos toast personalizados
+        'toast-success': '#ecfdf5',             // green-50
+        'toast-success-action': '#d1fae5',      // green-100
+        'toast-success-action-hover': '#bbf7d0',// green-200
+
+        'toast-error': '#fef2f2',               // red-50
+        'toast-error-action': '#fee2e2',        // red-100
+        'toast-error-action-hover': '#fecaca',  // red-200
+
+        'toast-warning': '#fefce8',             // yellow-50
+        'toast-warning-action': '#fef9c3',      // yellow-100
+        'toast-warning-action-hover': '#fef08a',// yellow-200
+
+        'toast-info': '#eff6ff',                // blue-50
+        'toast-info-action': '#dbeafe',         // blue-100
+        'toast-info-action-hover': '#bfdbfe',   // blue-200
+      },
+      borderColor: {
+        // ✅ Bordes toast personalizados
+        'toast-success-border': '#a7f3d0',       // green-200
+        'toast-error-border': '#fecaca',         // red-200
+        'toast-warning-border': '#fde68a',       // yellow-200
+        'toast-info-border': '#bfdbfe',          // blue-200
+      },
       textColor: {
         // 🎨 Colores personalizados de texto
         'success-strong': '#047857',          // Texto fuerte verde (green-700)
@@ -76,6 +101,26 @@ export default {
         'shift-morning-dark': '#fde68a',    // Amarillo pastel oscuro
         'shift-afternoon-dark': '#fcd34d',  // Naranja pastel oscuro
         'shift-night-dark': '#a5b4fc',      // Azul pastel más suave
+        // ✅ Textos toast personalizados
+        'toast-success-text': '#15803d',              // green-700
+        'toast-success-action-text': '#16a34a',       // green-600
+        'toast-success-close': '#22c55e',             // green-400
+        'toast-success-close-hover': '#166534',       // green-600
+
+        'toast-error-text': '#b91c1c',                // red-700
+        'toast-error-action-text': '#dc2626',         // red-600
+        'toast-error-close': '#f87171',               // red-400
+        'toast-error-close-hover': '#991b1b',         // red-600
+
+        'toast-warning-text': '#a16207',              // yellow-700
+        'toast-warning-action-text': '#ca8a04',       // yellow-600
+        'toast-warning-close': '#eab308',             // yellow-400
+        'toast-warning-close-hover': '#92400e',       // yellow-600
+
+        'toast-info-text': '#1d4ed8',                 // blue-700
+        'toast-info-action-text': '#2563eb',          // blue-600
+        'toast-info-close': '#60a5fa',                // blue-400
+        'toast-info-close-hover': '#1e40af',          // blue-600
       },
     },
   },
