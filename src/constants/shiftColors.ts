@@ -1,14 +1,14 @@
 export const shiftColors = {
   sun: {
-    light: 'text-yellow-400',
-    dark: 'text-yellow-300',
+    light: 'text-shift-morning',
+    dark: 'text-shift-morning-dark',
   },
   clock: {
-    light: 'text-amber-500',
-    dark: 'text-amber-300',
+    light: 'text-shift-afternoon',
+    dark: 'text-shift-afternoon-dark',
   },
   moon: {
-    light: 'text-indigo-500',
-    dark: 'text-indigo-300',
+    light: 'text-shift-night',
+    dark: 'text-shift-night-dark',
   },
 }

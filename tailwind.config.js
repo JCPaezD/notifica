@@ -47,11 +47,6 @@ export default {
         // 🟡 Acentos y botones principales
         'accent-main': '#93c5fd',            // Azul pastel principal
 
-        // 🌓 Turnos (texto icónico)
-        'text-shift-morning': '#facc15',     // Amarillo claro
-        'text-shift-afternoon': '#f59e0b',   // Naranja ámbar
-        'text-shift-night': '#6366f1',       // Azul índigo
-
         // 🎛️ Controles interactivos
         'toggle-inactive': '#cbd5e1',        // Fondo del switch inactivo
 
@@ -73,6 +68,14 @@ export default {
         'accent-strong': '#2563eb',           // Azul fuerte (blue-600)
         'danger-strong': '#b91c1c',           // Rojo fuerte (red-700)
         'purple-strong': '#6d28d9',           // violet-700
+        // 🌓 Turnos
+        'shift-morning': '#facc15',
+        'shift-afternoon': '#f59e0b',
+        'shift-night': '#6366f1',
+        // 🌓 Turnos-dark
+        'shift-morning-dark': '#fde68a',    // Amarillo pastel oscuro
+        'shift-afternoon-dark': '#fcd34d',  // Naranja pastel oscuro
+        'shift-night-dark': '#a5b4fc',      // Azul pastel más suave
       },
     },
   },

@@ -433,6 +433,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] 📌 Aceptar el bug como limitación documentada de iOS PWA, si no hay alternativa razonable
 
 - [ ] 🌓 Añadir soporte para modo oscuro (tema `dark` en Tailwind)
+
+  ✅ Subbloque 1: Activación y toggle global
   - [x] Activar modo `class` en Tailwind
     - [x] Modificar `tailwind.config.js` para usar `darkMode: 'class'`
   - [x] Preparar toggle global (modo manual)
@@ -443,30 +445,55 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Detección inicial del modo por defecto del sistema (`matchMedia`)
     - [x] Aplicar o remover clase `dark` en `<html>` o `<body>` según estado
     - [x] Añadir botón en el menú lateral (`SideMenu.vue`) para alternar modo claro/oscuro (con colapsable visual integrado)
-  - [ ] Definir paleta pastel oscura
-    - [ ] Añadir colores oscuros personalizados en `tailwind.config.js`
-    - [ ] Mantener estética suave y legible (no negros puros)
-    - [ ] Asegurar contraste suficiente con texto e iconos
-  - [ ] Aplicar clases `dark:` en componentes clave
-    - [ ] `App.vue`: fondo y texto base
-    - [ ] `TaskList.vue`: títulos y fondo contenedor
-    - [ ] `TaskItem.vue`: tarjeta, inputs, botones
-    - [ ] `SideMenu.vue`: fondo, texto, botón de modo oscuro
-    - [ ] `NewTaskForm.vue`: fondo, inputs, botón de iniciar
-    - [ ] `Toast.vue`: fondo y tipos de toast oscuros
-  - [ ] Validar integración visual
-    - [ ] Validar en PWA Android (modo oscuro del sistema activado)
-    - [ ] Validar en APK Android nativo
-    - [ ] Validar en iOS (Safari y PWA)
-    - [ ] Validar en navegador de escritorio (modo oscuro forzado)
-    - [ ] Confirmar legibilidad, contraste y coherencia con el modo claro
-  - [ ] Integración con sistema operativo (opcional)
-    - [ ] Detectar modo del sistema en primera carga
-    - [ ] (Opcional) Añadir selector con tres opciones: claro / oscuro / seguir sistema
-    - [ ] No sobrescribir la preferencia manual tras cambio de usuario
-  - [ ] Documentar implementación
-    - [ ] Explicar lógica en `dev-notes.md`: modo `class`, paleta usada, persistencia
-    - [ ] Registrar si hay limitaciones conocidas
+
+  🟡 Subbloque 2: Revisión completa de migración a clases personalizadas
+  - [x] 🧼 Revisión completa de clases de color en la app
+    - [x] Inspeccionar todos los elementos clave (SideMenu, botones, tareas, toasts, inputs…)
+    - [x] Detectar y eliminar clases hardcodeadas (`bg-red-500`, `text-white`, etc.)
+    - [x] Sustituirlas por clases personalizadas ya definidas en `tailwind.config.js`
+    - [x] Confirmar que todas las clases de color visibles provienen del sistema centralizado
+
+  - [x] 🧩 Unificar shiftColors.ts usando clases personalizadas text-shift-*
+    - [x] Añadir clases text-shift-* en theme.extend.textColor
+    - [x] Sustituir en shiftColors.ts los valores light y dark
+    - [x] Confirmar aplicación real en modo claro y oscuro
+    - [x] Eliminar definiciones anteriores de extend.colors
+    - [x] Documentar el uso obligatorio de extend.textColor para clases text-*
+
+  - [ ] 🎯 Convertir `toastColors.ts` a clases personalizadas
+    - [ ] Definir en `tailwind.config.js` tokens como `bg-toast-success`, `text-toast-error`, etc.
+    - [ ] Reemplazar las clases base (`bg-amber-500`, etc.) en `toastColors.ts`
+    - [ ] Confirmar equivalencia visual con la versión actual
+
+  🟠 Subbloque 3: Revisión y cierre de la paleta clara
+  - [ ] 🎨 Revisar y cerrar la paleta de colores clara
+    - [ ] Revisar todos los tokens usados en el config actual
+    - [ ] Eliminar los que no se usan
+    - [ ] Agrupar y nombrar con consistencia (`status-*`, `accent-*`, etc.)
+    - [ ] Probar armonía general de la paleta (suavidad, contraste, redundancia)
+    - [ ] Validar la paleta desde la propia app (no en Tailwind Play)
+    - [ ] Documentar como paleta base oficial antes de crear la versión oscura
+
+  🔵 Subbloque 4: Definición de la paleta oscura
+  - [ ] Añadir colores oscuros personalizados en `tailwind.config.js`
+  - [ ] Mantener estética suave y legible (no negros puros)
+  - [ ] Asegurar contraste suficiente con texto e iconos
+
+  🧪 Subbloque 5: Validación visual del modo oscuro
+  - [ ] Validar en PWA Android (modo oscuro del sistema activado)
+  - [ ] Validar en APK Android nativo
+  - [ ] Validar en iOS (Safari y PWA)
+  - [ ] Validar en navegador de escritorio (modo oscuro forzado)
+  - [ ] Confirmar legibilidad, contraste y coherencia con el modo claro
+
+  ⚙️ Subbloque 6: Integración opcional con el sistema operativo
+  - [ ] Detectar modo del sistema en primera carga
+  - [ ] (Opcional) Añadir selector con tres opciones: claro / oscuro / seguir sistema
+  - [ ] No sobrescribir la preferencia manual tras cambio de usuario
+
+  📄 Subbloque 7: Documentación
+  - [ ] Explicar lógica en `dev-notes.md`: modo `class`, paleta usada, persistencia
+  - [ ] Registrar si hay limitaciones conocidas
 
 
 
@@ -496,6 +523,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
   > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
   - [x] Corregir zoom con doble tap en chrome/safari de ios 
+  - [ ] Probar iconos rellenos para turnos m/t/n
   - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto

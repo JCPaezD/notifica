@@ -24,6 +24,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Limitación: clases dinámicas de color en SVG con funciones personalizadas](#limitación-clases-dinámicas-de-color-en-svg-con-funciones-personalizadas)
   - [Limitación: clases dinámicas de Tailwind no aplicadas](#limitación-clases-dinámicas-de-tailwind-no-aplicadas)
   - [Bug con getShiftColor: diagnóstico y solución definitiva](#bug-con-getshiftcolor-diagnóstico-y-solución-definitiva)
+  - [Bug con clases `text-*` no aplicadas por Tailwind](#bug-con-clases-text--no-aplicadas-por-tailwind-extendcolors-vs-extendtextcolor)
   - [Bug con colores en toasts: diagnóstico y solución](#bug-con-colores-en-toasts-diagnóstico-y-solución)
 - [UI, diseño y publicación](#ui-diseño-y-publicación)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
@@ -593,6 +594,32 @@ Esto garantiza que las clases estén presentes en el bundle final, evitando que 
 **Tareas futuras relacionadas:**  
 - Convertir estas clases base (`text-yellow-400`, etc.) a tokens personalizados pastel.  
 - Eliminar de `tailwind.config.js` las clases `text-shift-*` si no están en uso.
+
+### Bug con clases `text-*` no aplicadas por Tailwind (extend.colors vs extend.textColor)
+
+**Síntoma observado**
+
+- Las clases como `text-shift-morning`, `text-success-strong`, etc., no se aplicaban correctamente en SVGs o textos, aunque estaban definidas en `extend.colors`.
+- Los elementos aparecían con color negro o sin estilo.
+
+**Diagnóstico**
+
+- Tailwind purga todas las clases no literales.
+- Las clases `text-*` no se generan si están solo en `extend.colors` y se usan de forma indirecta (desde funciones, objetos, o en SVGs).
+- Este problema afectó tanto a `getShiftColor` como a los textos coloreados en `toastColors`.
+
+**Solución**
+
+- Mover estos colores a `theme.extend.textColor` (en lugar de `extend.colors`).
+- Al hacer esto, Tailwind sí genera las clases correctamente.
+
+**Validación**
+
+- Aplicado y validado en dos contextos:
+  - Iconos de turno (`shiftColors.ts`)
+  - Textos de toast y botones (`toastColors.ts`)
+- Las clases se aplican correctamente sin usar `safelist` ni otros hacks.
+
 
 ### Bug con colores en toasts: diagnóstico y solución
 
