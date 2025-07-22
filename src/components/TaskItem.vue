@@ -372,12 +372,12 @@ const handleDeleteTask = () => {
                 <template v-if="task.endTime">
                   <template v-if="isEditingEndTime">
                     <input ref="endTimeInputRef" type="time" v-model="editableEndTime" @keyup.enter="saveEndTime" @blur="saveEndTime" 
-                           class="text-status-success p-0.5 border border-divider rounded-md w-[68px] text-xs 
+                           class="text-success-strong p-0.5 border border-divider rounded-md w-[68px] text-xs 
                                   focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
                   </template>
                   <template v-else>
                     <span @click="startEditEndTime" 
-                          class="text-status-success cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md">
+                          class="text-success-strong cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md">
                       {{ task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
                     </span>
                   </template>

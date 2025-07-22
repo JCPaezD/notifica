@@ -468,16 +468,16 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
   🟠 Subbloque 3: Revisión y cierre de la paleta clara
   - [ ] 🎨 Revisar y cerrar la paleta de colores clara
-    - [ ] Unificar criterios de colores para botones (hover, tono pastel)
+    - [x] Unificar criterios de colores para botones (hover, tono pastel)
       - [x] Ajustar colores de botones verde, morado y rojo para suavizarlos
       - [x] Validar visualmente la armonía con los botones azules
-    - [ ] Revisar duplicados y claves sospechosas
-      - [ ] Detectar claves redundantes o sospechosas en `colors`, `textColor`, `backgroundColor`, `borderColor`
-      - [ ] Comprobar si se usan realmente en la app
-      - [ ] Decidir si eliminar o mantener
-    - [ ] Revisión estructural del `tailwind.config.js`
-      - [ ] Reordenar bloques por tipo y propósito (`surface-*`, `status-*`, `toast-*`, etc.)
-      - [ ] Unificar estilo de comentarios y limpieza estética
+    - [x] Revisar duplicados y claves sospechosas
+      - [x] Detectar claves redundantes o sospechosas en `colors`, `textColor`, `backgroundColor`, `borderColor`
+      - [x] Comprobar si se usan realmente en la app
+      - [x] Decidir si eliminar o mantener
+    - [x] Revisión estructural del `tailwind.config.js`
+      - [x] Reordenar bloques por tipo y propósito (`surface-*`, `status-*`, `toast-*`, etc.)
+      - [x] Unificar estilo de comentarios y limpieza estética
     - [ ] Eliminar claves no utilizadas
     - [ ] Probar armonía general de la paleta (suavidad, contraste, redundancia)
     - [ ] Validar la paleta desde la propia app (no Tailwind Play)
