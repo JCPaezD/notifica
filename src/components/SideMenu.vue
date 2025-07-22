@@ -277,7 +277,7 @@ const onLeave = (el: Element) => {
 
                 <!-- Botón Borrar todo -->
                 <button
-                  @click="handleAction('delete')"
+                  @click="handleAction('deleteAll')"
                   :class="[
                     'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
                     getButtonStyle('delete', mode),
