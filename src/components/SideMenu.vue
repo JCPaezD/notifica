@@ -108,7 +108,7 @@ const onLeave = (el: Element) => {
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-black/30" />
+        <div class="fixed inset-0 bg-black/30 dark:bg-black/50" />
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
@@ -122,7 +122,7 @@ const onLeave = (el: Element) => {
           >
             <DialogPanel
               class="w-64 max-w-sm min-h-[100svh]
-                    overflow-hidden bg-app-bg p-4
+                    overflow-hidden bg-app-bg dark:bg-surface-1-dark p-4
                     text-left align-middle shadow-xl
                     flex flex-col select-none"
               :class="{ 'animate-bounce-out-left': isAnimatingOut }"
@@ -131,16 +131,16 @@ const onLeave = (el: Element) => {
             <DialogTitle
                 as="h3"
                 class="text-lg font-semibold tracking-wide
-                       leading-6 text-text-main flex
+                       leading-6 text-text-main dark:text-main-dark flex
                        justify-between items-center mb-4"              >
                 <span>Acciones</span>
                 <button
                   @click="closeMenu"
-                  class="p-1 rounded-md border border-divider hover:bg-surface-hover
+                  class="p-1 rounded-md border border-divider dark:border-divider-dark hover:bg-surface-hover dark:hover:bg-surface-hover-dark
                          focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
                   aria-label="Cerrar menú"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-text-main">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-text-main dark:text-main-dark">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -163,7 +163,7 @@ const onLeave = (el: Element) => {
                   <span>Nuevo Turno</span>
                 </button>
 
-                <hr class="my-6 border-divider mx-3" /> <!-- Margen vertical aumentado -->
+                <hr class="my-6 border-divider dark:border-divider-dark mx-3" /> <!-- Margen vertical aumentado -->
 
                 <!-- Compartir -->
                 <button
@@ -180,7 +180,7 @@ const onLeave = (el: Element) => {
                  <span>Compartir</span>
                </button>
 
-               <hr class="my-6 border-divider mx-3" /> <!-- Margen vertical aumentado -->
+               <hr class="my-6 border-divider dark:border-divider-dark mx-3" /> <!-- Margen vertical aumentado -->
 
                 <!-- Importar -->
                 <button
@@ -211,8 +211,7 @@ const onLeave = (el: Element) => {
                   <span>Exportar</span>
                 </button>
 
-                <hr class="my-6 border-divider mx-3" /> <!-- Margen vertical aumentado -->
-
+                <hr class="my-6 border-divider dark:border-divider-dark mx-3" /> <!-- Margen vertical aumentado -->
 
                 <!-- 🔧 Bloque de Opciones -->
                 <div class="space-y-1">
@@ -234,7 +233,7 @@ const onLeave = (el: Element) => {
                       Opciones
                     </span>
                     <svg
-                      class="w-5 h-5 text-purple-strong dark:text-purple-strong/80 transition-transform duration-300"
+                      class="w-5 h-5 text-purple-strong dark:text-purple-strong-dark/80 transition-transform duration-300"
                       :class="{ 'rotate-90': isOptionsOpen }"
                       fill="none"
                       stroke="currentColor"
@@ -244,7 +243,6 @@ const onLeave = (el: Element) => {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
-
 
                   <Transition
                     name="collapse"
@@ -292,13 +290,13 @@ const onLeave = (el: Element) => {
               </div>
 
               <div class="mt-4"> <!-- mt-4 para espacio, quitado pt-4 y border-t -->
-                <hr class="mt-6 mb-4 border-divider mx-3" /> <!-- Ajustado margen inferior para centrar el texto del pie -->
+                <hr class="mt-6 mb-4 border-divider dark:border-divider-dark mx-3" /> <!-- Ajustado margen inferior para centrar el texto del pie -->
                 <div class="flex items-center justify-center gap-1">
                   <img 
                     src="/assets/logo-header.png" 
                     alt="Logo Notifica" 
                     class="w-4 h-4" />
-                  <p class="text-muted-80 text-[11px]">Notifica v1.0.5 - JCPD 2025</p>
+                  <p class="text-muted-80 dark:text-muted-80-dark text-[11px]">Notifica v1.0.5 - JCPD 2025</p>
                 </div>
               </div>
             </DialogPanel>

@@ -489,6 +489,18 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Asegurar contraste suficiente con texto e iconos
 
   🧪 Subbloque 5: Validación visual del modo oscuro
+
+  - [ ] Aplicar clases dark:* en todos los puntos relevantes:
+    - [x] Menú lateral (`SideMenu.vue`) – fondos, botones, texto e icono de acordeón validados
+    - [ ] Fondo principal de la app (`App.vue` y layout general)
+    - [ ] Lista de tareas y `TaskItem.vue`
+    - [ ] Toasts personalizados
+    - [ ] Inputs, modales, headers, texto general y subtítulos
+    - [ ] Logo en header y menú lateral:
+        - [ ] Actualmente es un archivo SVG externo (`<img src="/assets/logo-header.png" />`)
+        - [ ] No cambia de color en modo oscuro
+        - [ ] Decidir si usar SVG inline, swap por versión `-dark.svg`, o aplicar `mask-image`
+
   - [ ] Validar en PWA Android (modo oscuro del sistema activado)
   - [ ] Validar en APK Android nativo
   - [ ] Validar en iOS (Safari y PWA)
