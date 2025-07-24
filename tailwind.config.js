@@ -20,17 +20,28 @@ export default {
         'surface-hover': '#e2e8f0',
         'surface-pressed': '#e5e7eb',
         'surface-thumb': '#ffffff',
+        
+        'divider': '#cbd5e1',
+
+        // 🌑 Superficies en modo oscuro
+        'surface-1-dark': '#1e293b',
+        'surface-hover-dark': '#334155',
+        'surface-pressed-dark': '#475569',
+        'surface-thumb-dark': '#0f172a',
+
+        'divider-dark': '#475569',
 
         // 🎛️ Controles e interactividad
         'accent-main': '#93c5fd',
         'toggle-inactive': '#cbd5e1',
-        'divider': '#cbd5e1',
+
+        // 🎛️ Acento y controles modo oscuro
+        'accent-main-dark': '#60a5fa',
+        'toggle-inactive-dark': '#64748b',
 
         // 🌈 Estados visuales
         'status-success': '#d1fae5',
         'status-success-hover': '#a7f3d0',
-        'status-success-dark': '#a7f3d0',           // antes: #34d399
-        'status-success-dark-hover': '#6ee7b7',     // antes: #10b981
 
         'status-alert': '#fecaca',
         'status-active': '#fef08a',
@@ -42,11 +53,25 @@ export default {
         'status-danger': '#fecaca',
         'status-danger-hover': '#fca5a5',
 
-        // 🎨 Opciones adicionales
         'status-purple': '#ddd6fe',
         'status-purple-hover': '#c4b5fd',
-        'status-purple-dark': '#c4b5fd',           // antes: #a78bfa
-        'status-purple-dark-hover': '#a78bfa',     // antes: #8b5cf6
+
+        // 🌈 Estados visuales oscuros
+        'status-success-dark': '#064e3b',
+        'status-success-dark-hover': '#047857',
+
+        'status-alert-dark': '#7f1d1d',
+        'status-danger-dark': '#991b1b',
+        'status-danger-dark-hover': '#b91c1c',
+
+        'status-active-dark': '#78350f',
+        'status-inprogress-dark': '#475569',
+
+        'status-accent-dark': '#2563eb',
+        'status-accent-hover-dark': '#3b82f6',
+
+        'status-purple-dark': '#5b21b6',
+        'status-purple-dark-hover': '#7c3aed',
       },
 
       backgroundColor: {
@@ -66,6 +91,23 @@ export default {
         'toast-info': '#eff6ff',
         'toast-info-action': '#dbeafe',
         'toast-info-action-hover': '#bfdbfe',
+
+        // 🌑 Toasts – modo oscuro
+        'toast-success-dark': '#052e16',
+        'toast-success-action-dark': '#166534',
+        'toast-success-action-hover-dark': '#15803d',
+
+        'toast-error-dark': '#431407',
+        'toast-error-action-dark': '#7f1d1d',
+        'toast-error-action-hover-dark': '#b91c1c',
+
+        'toast-warning-dark': '#78350f',
+        'toast-warning-action-dark': '#854d0e',
+        'toast-warning-action-hover-dark': '#f59e0b',
+
+        'toast-info-dark': '#1e3a8a',
+        'toast-info-action-dark': '#1e40af',
+        'toast-info-action-hover-dark': '#3b82f6',
       },
 
       borderColor: {
@@ -74,6 +116,12 @@ export default {
         'toast-error-border': '#fecaca',
         'toast-warning-border': '#fde68a',
         'toast-info-border': '#bfdbfe',
+
+        // ✅ Toast – bordes en modo oscuro
+        'toast-success-border-dark': '#22c55e',
+        'toast-error-border-dark': '#f87171',
+        'toast-warning-border-dark': '#facc15',
+        'toast-info-border-dark': '#60a5fa',
       },
 
       textColor: {
@@ -84,6 +132,13 @@ export default {
         'placeholder': '#94a3b8',
         'muted-80': 'rgba(148, 163, 184, 0.8)',
 
+        // 📚 Texto base y etiquetas (modo oscuro)
+        'main-dark': '#f1f5f9',
+        'on-pastel-dark': '#e2e8f0',
+        'subtle-dark': '#cbd5e1',
+        'placeholder-dark': '#94a3b8',
+        'muted-80-dark': 'rgba(203, 213, 225, 0.8)',
+
         // ✅ Texto – semántico fuerte
         'success-strong': '#047857',
         'alert-strong': '#b91c1c',
@@ -91,6 +146,14 @@ export default {
         'active-strong': '#b45309',
         'accent-strong': '#2563eb',
         'purple-strong': '#6d28d9',
+
+        // ✅ Texto – semántico fuerte (modo oscuro)
+        'success-strong-dark': '#22c55e',
+        'alert-strong-dark': '#f87171',
+        'danger-strong-dark': '#f87171',
+        'active-strong-dark': '#fbbf24',
+        'accent-strong-dark': '#60a5fa',
+        'purple-strong-dark': '#a78bfa',
 
         // 🌓 Turnos
         'shift-morning': '#facc15',
@@ -122,6 +185,27 @@ export default {
         'toast-info-action-text': '#2563eb',
         'toast-info-close': '#60a5fa',
         'toast-info-close-hover': '#1e40af',
+        
+        // ✅ Toast – texto en modo oscuro
+        'toast-success-text-dark': '#22c55e',
+        'toast-success-action-text-dark': '#4ade80',
+        'toast-success-close-dark': '#86efac',
+        'toast-success-close-hover-dark': '#16a34a',
+
+        'toast-error-text-dark': '#f87171',
+        'toast-error-action-text-dark': '#fca5a5',
+        'toast-error-close-dark': '#fecaca',
+        'toast-error-close-hover-dark': '#dc2626',
+
+        'toast-warning-text-dark': '#facc15',
+        'toast-warning-action-text-dark': '#fde047',
+        'toast-warning-close-dark': '#fef08a',
+        'toast-warning-close-hover-dark': '#ca8a04',
+
+        'toast-info-text-dark': '#60a5fa',
+        'toast-info-action-text-dark': '#93c5fd',
+        'toast-info-close-dark': '#bfdbfe',
+        'toast-info-close-hover-dark': '#3b82f6',
       },
     },
   },

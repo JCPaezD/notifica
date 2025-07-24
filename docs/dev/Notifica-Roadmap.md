@@ -484,9 +484,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Documentar la paleta clara como base oficial antes de crear la versión oscura
 
   🔵 Subbloque 4: Definición de la paleta oscura
-  - [ ] Añadir colores oscuros personalizados en `tailwind.config.js`
-  - [ ] Mantener estética suave y legible (no negros puros)
-  - [ ] Asegurar contraste suficiente con texto e iconos
+  - [x] Añadir colores oscuros personalizados en `tailwind.config.js`
+  - [x] Mantener estética suave y legible (no negros puros)
+  - [x] Asegurar contraste suficiente con texto e iconos
 
   🧪 Subbloque 5: Validación visual del modo oscuro
   - [ ] Validar en PWA Android (modo oscuro del sistema activado)
