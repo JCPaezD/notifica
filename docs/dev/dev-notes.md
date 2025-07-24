@@ -13,6 +13,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Convenciones y buenas prácticas de control de versiones](#convenciones-y-buenas-prácticas-de-control-de-versiones)
 - [Funcionalidades y decisiones técnicas](#funcionalidades-y-decisiones-técnicas)
   - [Sistema de toasts](#sistema-de-toasts)
+  - [Paleta clara validada para modo light](#paleta-clara-validada-para-modo-light)
   - [Exportar archivo JSON en Android](#exportar-archivo-json-en-android)
   - [Capacitor Share: problema con compartir en Android](#capacitor-share-problema-con-compartir-en-android)
   - [Enfoque estratégico de publicación (etapa 8)](#enfoque-estratégico-de-publicación-etapa-8)
@@ -304,6 +305,126 @@ Tareas pendientes o ideas futuras:
 - (Opcional) Añadir variantes visuales para toast persistente o informativo largo (banner)  
 - (Opcional) Resaltar brevemente el contenido afectado por la acción (e.g. Deshacer)  
 - (Opcional) Documentar ejemplo de uso avanzado con múltiples acciones o `onDismiss`
+
+### Paleta clara validada para modo light
+
+[24/07/2025]  
+Esta es la versión final validada de la paleta clara de Notifica.  
+Se considera estable y es la base oficial sobre la que se definirá el modo oscuro.  
+Incluye tokens personalizados organizados por propósito, con semántica clara y coherencia visual validada en app real.
+
+**Superficies y contornos:**
+
+- `app-bg`: fondo general de la app → `#f5f7fa`
+- `surface-1`: tarjetas, contenedores, etc. → `#ffffff`
+- `surface-hover`: hover sobre elementos claros → `#e2e8f0`
+- `surface-pressed`: al pulsar botones claros → `#e5e7eb`
+- `surface-thumb`: fondo del pulgar en toggles → `#ffffff`
+- `divider`: líneas divisorias, contornos suaves → `#cbd5e1`
+
+**Controles y acción principal:**
+
+- `accent-main`: botones principales y elementos destacados → `#93c5fd`
+- `toggle-inactive`: fondo de switches desactivados → `#cbd5e1`
+
+**Estados visuales (semánticos):**
+
+- `status-success`: fondo verde claro para tareas finalizadas → `#d1fae5`
+- `status-success-hover`: hover sobre botones de éxito → `#a7f3d0`
+- `status-success-dark`: placeholder para modo oscuro → `#a7f3d0`
+- `status-success-dark-hover`: idem → `#6ee7b7`
+
+- `status-alert`: estado de advertencia → `#fecaca`
+- `status-active`: amarillo activo (ej. tarea pendiente) → `#fef08a`
+- `status-inprogress`: gris azulado (estado intermedio) → `#cbd5e1`
+
+- `status-accent`: fondo azul pastel para acciones → `#bfdbfe`
+- `status-accent-hover`: hover sobre botones azules → `#93c5fd`
+
+- `status-danger`: acciones destructivas → `#fecaca`
+- `status-danger-hover`: hover para confirmar eliminación → `#fca5a5`
+
+- `status-purple`: morado pastel para botones secundarios → `#ddd6fe`
+- `status-purple-hover`: hover morado claro → `#c4b5fd`
+- `status-purple-dark`: placeholder dark → `#c4b5fd`
+- `status-purple-dark-hover`: placeholder dark → `#a78bfa`
+
+*Nota:* Algunos colores coinciden entre `alert`, `danger`, `error`, etc. por decisión semántica. Se mantienen como tokens separados para permitir diferenciación futura.
+
+**Texto:**
+
+- `main`: texto primario → `#334155`
+- `on-pastel`: texto oscuro sobre fondo pastel → `#1e293b`
+- `subtle`: texto secundario o complementario → `#64748b`
+- `placeholder`: inputs y texto gris tenue → `#94a3b8`
+- `muted-80`: texto desactivado con opacidad → `rgba(148, 163, 184, 0.8)`
+
+**Texto fuerte por tipo:**
+
+- `success-strong`: `#047857`
+- `alert-strong`: `#b91c1c`
+- `danger-strong`: `#b91c1c`
+- `active-strong`: `#b45309`
+- `accent-strong`: `#2563eb`
+- `purple-strong`: `#6d28d9`
+
+**Turnos:**
+
+- `shift-morning`: amarillo → `#facc15`
+- `shift-afternoon`: naranja → `#f59e0b`
+- `shift-night`: azul oscuro → `#6366f1`
+
+**Turnos en modo oscuro (placeholder):**
+
+- `shift-morning-dark`: `#fde68a`
+- `shift-afternoon-dark`: `#fcd34d`
+- `shift-night-dark`: `#a5b4fc`
+
+**Toasts:**
+
+- `toast-success`: fondo → `#ecfdf5`
+- `toast-success-action`: botón → `#d1fae5`
+- `toast-success-action-hover`: hover → `#bbf7d0`
+- `toast-success-border`: borde → `#a7f3d0`
+- `toast-success-text`: texto principal → `#15803d`
+- `toast-success-action-text`: botón → `#16a34a`
+- `toast-success-close`: icono cerrar → `#22c55e`
+- `toast-success-close-hover`: hover cerrar → `#166534`
+
+- `toast-error`: fondo → `#fef2f2`
+- `toast-error-action`: botón → `#fee2e2`
+- `toast-error-action-hover`: hover → `#fecaca`
+- `toast-error-border`: borde → `#fecaca`
+- `toast-error-text`: texto principal → `#b91c1c`
+- `toast-error-action-text`: botón → `#dc2626`
+- `toast-error-close`: icono cerrar → `#f87171`
+- `toast-error-close-hover`: hover cerrar → `#991b1b`
+
+- `toast-warning`: fondo → `#fefce8`
+- `toast-warning-action`: botón → `#fef9c3`
+- `toast-warning-action-hover`: hover → `#fef08a`
+- `toast-warning-border`: borde → `#fde68a`
+- `toast-warning-text`: texto → `#a16207`
+- `toast-warning-action-text`: botón → `#ca8a04`
+- `toast-warning-close`: cerrar → `#eab308`
+- `toast-warning-close-hover`: hover cerrar → `#92400e`
+
+- `toast-info`: fondo → `#eff6ff`
+- `toast-info-action`: botón → `#dbeafe`
+- `toast-info-action-hover`: hover → `#bfdbfe`
+- `toast-info-border`: borde → `#bfdbfe`
+- `toast-info-text`: texto → `#1d4ed8`
+- `toast-info-action-text`: botón → `#2563eb`
+- `toast-info-close`: cerrar → `#60a5fa`
+- `toast-info-close-hover`: hover cerrar → `#1e40af`
+
+**Notas:**
+
+- Todos los tokens están definidos como `textColor`, `backgroundColor` o `borderColor` para asegurar que Tailwind genere las clases correspondientes.
+- Validado en app real (móvil y escritorio).
+- Estilo pastel deliberado, sin redundancias técnicas.
+- Listo para derivar la versión `dark`. Los `*-dark` actuales son marcadores provisionales.
+
 
 ### Exportar archivo JSON en Android
 

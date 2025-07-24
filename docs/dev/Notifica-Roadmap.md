@@ -478,10 +478,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Revisión estructural del `tailwind.config.js`
       - [x] Reordenar bloques por tipo y propósito (`surface-*`, `status-*`, `toast-*`, etc.)
       - [x] Unificar estilo de comentarios y limpieza estética
-    - [ ] Eliminar claves no utilizadas
-    - [ ] Probar armonía general de la paleta (suavidad, contraste, redundancia)
-    - [ ] Validar la paleta desde la propia app (no Tailwind Play)
-    - [ ] Documentar la paleta clara como base oficial antes de crear la versión oscura
+    - [x] Eliminar claves no utilizadas
+    - [x] Probar armonía general de la paleta (suavidad, contraste, redundancia)
+    - [x] Validar la paleta desde la propia app (no Tailwind Play)
+    - [x] Documentar la paleta clara como base oficial antes de crear la versión oscura
 
   🔵 Subbloque 4: Definición de la paleta oscura
   - [ ] Añadir colores oscuros personalizados en `tailwind.config.js`
