@@ -808,13 +808,13 @@ const exportTasksToJson = async () => {
   
   <SideMenu :is-open="isSideMenuOpen" @close="closeSideMenu" @action="handleMenuAction" />
 
-  <header class="sticky top-0 z-50 bg-surface-1 shadow-sm w-full">
+  <header class="sticky top-0 z-50 bg-surface-1 dark:bg-surface-1-dark shadow-sm w-full">
     <div class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none">
       <button @click="openSideMenu"
-        class="absolute left-4 top-4.5 p-1 rounded-md border border-divider md:hover:bg-surface-hover focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
+        class="absolute left-4 top-4.5 p-1 rounded-md border border-divider dark:border-divider-dark md:hover:bg-surface-hover dark:md:hover:bg-surface-hover-dark focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
         aria-label="Abrir menú">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-7 h-7 text-text-main">
+          class="w-7 h-7 text-text-main dark:text-main-dark">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
@@ -823,12 +823,12 @@ const exportTasksToJson = async () => {
       <div ref="logoBlockRef"
         class="flex items-center gap-x-2 transition-all duration-300 ease-in-out md:hover:scale-105 md:hover:drop-shadow-md">
         <img src="/assets/logo-header.png" alt="Logo Notifica" class="h-8 w-auto">
-        <h1 class="text-4xl font-extrabold tracking-tight text-text-main">Notifica</h1>
+        <h1 class="text-4xl font-extrabold tracking-tight text-text-main dark:text-main-dark">Notifica</h1>
       </div>
     </div>
   </header>
 
-  <main class="min-h-[calc(100svh-72px)] bg-app-bg text-text-main flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
+  <main class="min-h-[calc(100svh-72px)] bg-app-bg dark:bg-app-bg text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
 
     <!-- Sección para añadir nueva tarea -->
     <NewTaskForm
@@ -846,9 +846,10 @@ const exportTasksToJson = async () => {
       leave-from-class="opacity-100 max-h-[80px]" leave-to-class="opacity-0 max-h-0">
       <div v-if="isViewingPastShift" class="w-full max-w-lg mb-4 overflow-hidden">
         <button @click="returnToCurrentShift" class="w-full min-h-[44px] px-4 py-2 
-                bg-status-active text-active-strong text-sm font-semibold
-                rounded-md shadow-sm hover:bg-status-active/80
-                focus:outline-none focus:ring-2 focus:ring-status-active focus:ring-offset-2
+                bg-status-active dark:bg-status-active-dark
+                text-active-strong dark:text-active-strong-dark text-sm font-semibold
+                rounded-md shadow-sm hover:bg-status-active/80 dark:hover:bg-status-active/70
+                focus:outline-none focus:ring-2 focus:ring-status-active dark:focus:ring-status-active-dark focus:ring-offset-2
                 transition-all duration-300 ease-in-out
                 flex items-center justify-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -878,12 +879,12 @@ const exportTasksToJson = async () => {
     />
 
     <!-- Separador Visual -->
-    <hr class="w-5/6 max-w-md border-divider my-6" />
+    <hr class="w-5/6 max-w-md border-divider dark:border-divider-dark my-6" />
     <!-- Ancho porcentual para que sea más corta en móviles, centrada por items-center del main -->
 
     <!-- Contenedor para Selector de Turno y Filtros -->
     <div
-      class="bg-surface-1 rounded-xl p-4 shadow-sm w-full max-w-lg mb-4 border border-divider flex flex-wrap items-center justify-between gap-x-1 gap-y-3">
+      class="bg-surface-1 dark:bg-surface-1-dark rounded-xl p-4 shadow-sm w-full max-w-lg mb-4 border border-divider dark:border-divider-dark flex flex-wrap items-center justify-between gap-x-1 gap-y-3">
       <!-- Selector de Turno -->
       <ShiftSelector
         :availableShifts="availableShifts"

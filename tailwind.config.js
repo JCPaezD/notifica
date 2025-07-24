@@ -24,6 +24,7 @@ export default {
         'divider': '#cbd5e1',
 
         // 🌑 Superficies en modo oscuro
+        'app-bg-dark': '#0f172a',
         'surface-1-dark': '#1e293b',
         'surface-hover-dark': '#334155',
         'surface-pressed-dark': '#475569',

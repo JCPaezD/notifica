@@ -491,11 +491,16 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   🧪 Subbloque 5: Validación visual del modo oscuro
 
   - [ ] Aplicar clases dark:* en todos los puntos relevantes:
-    - [x] Menú lateral (`SideMenu.vue`) – fondos, botones, texto e icono de acordeón validados
-    - [ ] Fondo principal de la app (`App.vue` y layout general)
-    - [ ] Lista de tareas y `TaskItem.vue`
-    - [ ] Toasts personalizados
-    - [ ] Inputs, modales, headers, texto general y subtítulos
+    - [x] `SideMenu.vue` – fondos, botones, texto e icono de acordeón validados
+    - [x] `App.vue` – header, main, y comportamiento global
+        - [x] Añadido `app-bg-dark` a `tailwind.config.js`
+        - [ ] Validar visibilidad del fondo real tras adaptar `TaskList.vue`
+    - [ ] `TaskList.vue` – fondo visible real, estructura de lista
+    - [ ] `TaskItem.vue` – contenedor de tareas individuales
+    - [ ] `NewTaskForm.vue` – inputs y comportamiento en cabecera
+    - [ ] `TaskFilters.vue` – botones y switches de filtros activos
+    - [ ] `ShiftSelector.vue` – controles de turno, estilo y contraste
+    - [ ] `Toast.vue` – estilos visuales de notificaciones flotantes
     - [ ] Logo en header y menú lateral:
         - [ ] Actualmente es un archivo SVG externo (`<img src="/assets/logo-header.png" />`)
         - [ ] No cambia de color en modo oscuro
