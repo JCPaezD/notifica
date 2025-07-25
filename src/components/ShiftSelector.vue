@@ -32,7 +32,7 @@
     <div
       v-if="isShiftDropdownOpen"
       ref="shiftDropdownMenuRef"
-      class="absolute left-0 z-50 w-56 origin-top-left rounded-md 
+      class="absolute left-0 z-50 w-60 origin-top-left rounded-md 
              bg-surface-1 dark:bg-surface-1-dark shadow-lg border border-divider
              focus:outline-none max-h-60 overflow-y-auto"
       :class="openUpward
@@ -54,7 +54,12 @@
             :class="['w-4 h-4 shrink-0', getShiftColor(currentShiftId || '')]"
           />
           <span>{{ getShiftLabel(currentShiftId || '') }}</span>
-          <span class="ml-auto w-3 h-3 rounded-full bg-status-success"></span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 4 24 22" stroke-width="1.5" stroke="currentColor"
+              class="ml-auto w-5 h-5 text-status-success dark:text-status-success-dark shrink-0">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
         </button>
 
         <template v-for="shift in availableShifts" :key="shift.id">
