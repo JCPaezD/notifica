@@ -504,15 +504,24 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] toastColors.ts – colores por tipo de notificación
 
   - [ ] Revisar y refinar detalles visuales:
-    - [ ] Botones "Finalizar" / "Reabrir" no cambian de tema
-    - [ ] Borde izquierdo (status) permanece igual
-    - [ ] Iconos de notificado y eliminar sin cambios entre temas
-    - [ ] Texto de hora de fin con mal contraste
-    - [ ] Validar visibilidad del fondo tras adaptación de TaskList.vue
-    - [ ] Decidir si el logo se adapta con SVG inline, swap por -dark.svg, o mask-image
-    - [ ] Añadir transición `transition-colors duration-500` al contenedor principal
-    - [ ] Bloquear doble click durante el cambio con flag temporal (`isSwitching`)
-    - [ ] Validar que la animación de modo oscuro no introduce parpadeo
+    - [x] Fondo general de la app no cambia en modo oscuro
+    - [ ] Borde izquierdo de estado en tareas (TaskItem.vue)
+    - [ ] Botones en tareas individuales:
+        - [ ] Botón "Finalizar" / "Reabrir" no cambia de tema
+        - [ ] Botón de notificación no adaptado
+        - [ ] Botón de eliminación no adaptado
+        - [ ] Texto de hora de fin con mal contraste
+    - [ ] Botón "Iniciar" del formulario (NewTaskForm.vue)
+    - [ ] Indicador de turno actual en selector (punto verde svg)
+    - [ ] Logo (header y menú lateral):
+        - [ ] Actualmente es un archivo SVG externo (`<img src="/assets/logo-header.png" />`)
+        - [ ] No cambia de color en modo oscuro
+        - [ ] Decidir si usar SVG inline, swap por versión `-dark.svg`, o aplicar `mask-image`
+    - [ ] Validar visibilidad real del fondo tras adaptación de TaskList.vue
+    - [ ] Transición de modo oscuro:
+        - [ ] Añadir clase `transition-colors duration-500` al contenedor principal
+        - [ ] Bloquear doble click durante el cambio con flag temporal (`isSwitching`)
+        - [ ] Validar que la animación no introduce parpadeo en PWA
 
   - [ ] Validar en PWA Android (modo oscuro del sistema activado)
   - [ ] Validar en APK Android nativo

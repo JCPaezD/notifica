@@ -828,7 +828,7 @@ const exportTasksToJson = async () => {
     </div>
   </header>
 
-  <main class="min-h-[calc(100svh-72px)] bg-app-bg dark:bg-app-bg text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
+  <main class="min-h-[calc(100svh-72px)] bg-app-bg dark:bg-app-bg-dark text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
 
     <!-- Sección para añadir nueva tarea -->
     <NewTaskForm
