@@ -505,7 +505,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
   - [ ] Revisar y refinar detalles visuales:
     - [x] Fondo general de la app no cambia en modo oscuro
-    - [ ] Borde izquierdo de estado en tareas (TaskItem.vue)
+    - [x] Borde izquierdo de estado en tareas (TaskItem.vue)
     - [ ] Botones en tareas individuales:
         - [ ] Botón "Finalizar" / "Reabrir" no cambia de tema
         - [ ] Botón de notificación no adaptado

@@ -249,12 +249,12 @@ const formattedDuration = computed(() => {
  */
 const statusColorClass = computed(() => {
   if (props.task.isNotified) {
-    return 'bg-status-success' // Notificada
+    return 'bg-status-success dark:bg-status-success-dark'
   }
   if (props.task.endTime) {
-    return 'bg-status-active' // Finalizada (no notificada)
+    return 'bg-status-active dark:bg-status-active-dark'
   }
-  return 'bg-status-inprogress' // En curso
+  return 'bg-status-inprogress dark:bg-status-inprogress-dark'
 })
 
 /**
