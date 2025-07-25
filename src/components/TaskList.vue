@@ -61,8 +61,8 @@ const relayDeleteTask = (taskId: string) => {
       v-if="props.title && tasks.length > 0" 
       class="mb-4 px-1"
     >
-      <p class="text-s text-text-subtle mb-1">Viendo Turno</p>
-      <div class="flex items-center gap-2 text-xl font-semibold text-text-main">
+      <p class="text-s text-text-subtle dark:text-subtle-dark mb-1">Viendo Turno</p>
+      <div class="flex items-center gap-2 text-xl font-semibold text-text-main dark:text-main-dark">
         <component
           v-if="props.titleIcon"
           :is="props.titleIcon"
@@ -81,7 +81,7 @@ const relayDeleteTask = (taskId: string) => {
       move-class="transition-transform duration-500 ease-out" 
       leave-from-class="opacity-100 max-h-32"  
       leave-to-class="opacity-0 max-h-0"
-      class="bg-surface-1 rounded-xl shadow-sm border border-divider flex flex-col overflow-hidden"
+      class="bg-surface-1 dark:bg-surface-1-dark rounded-xl shadow-sm border border-divider dark:border-divider-dark flex flex-col overflow-hidden"
     >
       <TaskItem 
         v-for="(task, index) in tasks" 
@@ -96,5 +96,3 @@ const relayDeleteTask = (taskId: string) => {
     </TransitionGroup>
   </div>
 </template>
-
-<!-- El bloque <style> con .task-list-item-move se elimina ya que move-class usa Tailwind directamente -->

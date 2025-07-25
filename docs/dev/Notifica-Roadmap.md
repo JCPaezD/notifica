@@ -467,7 +467,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Confirmar funcionamiento de todos los tipos de toast
 
   🟠 Subbloque 3: Revisión y cierre de la paleta clara
-  - [ ] 🎨 Revisar y cerrar la paleta de colores clara
+  - [x] 🎨 Revisar y cerrar la paleta de colores clara
     - [x] Unificar criterios de colores para botones (hover, tono pastel)
       - [x] Ajustar colores de botones verde, morado y rojo para suavizarlos
       - [x] Validar visualmente la armonía con los botones azules
@@ -494,17 +494,31 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] `SideMenu.vue` – fondos, botones, texto e icono de acordeón validados
     - [x] `App.vue` – header, main, y comportamiento global
         - [x] Añadido `app-bg-dark` a `tailwind.config.js`
-        - [ ] Validar visibilidad del fondo real tras adaptar `TaskList.vue`
-    - [ ] `TaskList.vue` – fondo visible real, estructura de lista
-    - [ ] `TaskItem.vue` – contenedor de tareas individuales
+        - [x] Validado en App.vue
+        - [ ] Validar visibilidad del fondo
+    - [x] `TaskList.vue` – fondo visible real, estructura de lista
+    - [x] `TaskItem.vue` – estructura general, inputs, textos y transiciones
+        - [ ] Refinar detalles visuales:
+        - [ ] `Finalizar` / `Reabrir` no cambian de tema
+        - [ ] Borde izquierdo (status) permanece igual
+        - [ ] Iconos de notificado y eliminar sin cambios entre temas
+        - [ ] Texto de hora de fin tiene mal contraste
     - [ ] `NewTaskForm.vue` – inputs y comportamiento en cabecera
     - [ ] `TaskFilters.vue` – botones y switches de filtros activos
     - [ ] `ShiftSelector.vue` – controles de turno, estilo y contraste
     - [ ] `Toast.vue` – estilos visuales de notificaciones flotantes
+    - [ ] Revisar archivos con clases dinámicas por tipo:
+        - [ ] `menuButtonStyle.ts`
+        - [ ] `shiftColors.ts`
+        - [ ] `toastColors.ts`
     - [ ] Logo en header y menú lateral:
         - [ ] Actualmente es un archivo SVG externo (`<img src="/assets/logo-header.png" />`)
         - [ ] No cambia de color en modo oscuro
         - [ ] Decidir si usar SVG inline, swap por versión `-dark.svg`, o aplicar `mask-image`
+    - [ ] Transición visual al alternar modo oscuro:
+        - [ ] Añadir transición `transition-colors duration-500` al contenedor principal
+        - [ ] Bloquear doble click durante el cambio con una flag temporal (`isSwitching`)
+        - [ ] Validar que la animación es fluida en PWA y no introduce parpadeo
 
   - [ ] Validar en PWA Android (modo oscuro del sistema activado)
   - [ ] Validar en APK Android nativo
@@ -550,6 +564,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
   - [x] Corregir zoom con doble tap en chrome/safari de ios 
   - [ ] Probar iconos rellenos para turnos m/t/n
+  - [ ] Quitar active de botones al soltar (movil) [opciones se queda active]
+  - [ ] Cuando no haya tareas que mostrar -> mensaje placeholder "ninguna tarea" o similar
   - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto

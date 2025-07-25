@@ -332,12 +332,12 @@ const handleDeleteTask = () => {
                 @keyup.enter="saveDescription"
                 @blur="saveDescription"
                 @keyup.esc="cancelEditDescription"
-                class="font-semibold text-sm text-text-main p-1 border border-divider rounded-md w-full 
+                class="font-semibold text-sm text-text-main dark:text-main-dark p-1 border border-divider dark:border-divider-dark rounded-md w-full 
                        focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"
               />
             </template>
             <template v-else>
-              <p @click="startEditDescription" class="font-medium text-sm text-text-main cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md break-words leading-tight">
+              <p @click="startEditDescription" class="font-medium text-sm text-text-main dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md break-words leading-tight">
                 {{ task.description || '[Sin descripción]' }}
               </p>
             </template>
@@ -349,15 +349,17 @@ const handleDeleteTask = () => {
           <div class="min-w-[32px] text-center">
             <template v-if="isEditingStartTime">
               <input ref="startTimeInputRef" type="time" v-model="editableStartTime" @keyup.enter="saveStartTime" @blur="saveStartTime" 
-                     class="text-text-main/90 p-0.5 border border-divider rounded-md w-[68px] text-xs 
+                     class="text-text-main/90 dark:text-main-dark p-0.5 border border-divider dark:border-divider-dark rounded-md w-[68px] text-xs 
                             focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
             </template>
             <template v-else>
-              <span @click="startEditStartTime" class="text-text-main/90 cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md">{{ task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</span>
+              <span @click="startEditStartTime" class="text-text-main/90 dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
+                {{ task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+              </span>
             </template>
           </div>
-          <span class="text-text-subtle"> - </span> <!-- mx-0.5 eliminado ya que gap-x-1 lo maneja -->
-          <div class="min-w-[32px] text-center"> <!-- Ancho mínimo aún más reducido -->
+          <span class="text-text-subtle dark:text-subtle-dark"> - </span>
+          <div class="min-w-[32px] text-center">
             <Transition
               name="endtime-display-swap"
               mode="out-in"
@@ -372,18 +374,18 @@ const handleDeleteTask = () => {
                 <template v-if="task.endTime">
                   <template v-if="isEditingEndTime">
                     <input ref="endTimeInputRef" type="time" v-model="editableEndTime" @keyup.enter="saveEndTime" @blur="saveEndTime" 
-                           class="text-success-strong p-0.5 border border-divider rounded-md w-[68px] text-xs 
+                           class="text-success-strong p-0.5 border border-divider dark:border-divider-dark rounded-md w-[68px] text-xs 
                                   focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
                   </template>
                   <template v-else>
                     <span @click="startEditEndTime" 
-                          class="text-success-strong cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md">
+                          class="text-success-strong cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
                       {{ task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
                     </span>
                   </template>
                 </template>
                 <template v-else>
-                  <span @click="handleFinalizeAndEditEndTime" class="text-placeholder cursor-pointer hover:bg-surface-hover p-1 -m-1 rounded-md">--:--</span>
+                  <span @click="handleFinalizeAndEditEndTime" class="text-placeholder dark:text-placeholder-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">--:--</span>
                 </template>
               </div>
             </Transition>
@@ -439,13 +441,13 @@ const handleDeleteTask = () => {
           <div class="min-w-0">
             <template v-if="isEditingTechnician">
               <input type="text" ref="technicianInputRef" v-model="editableTechnician" @keyup.enter="saveTechnician" @blur="saveTechnician" 
-                     class="text-xs text-text-main p-0.5 border border-divider rounded-md w-full 
+                     class="text-xs text-text-main dark:text-main-dark p-0.5 border border-divider dark:border-divider-dark rounded-md w-full 
                             focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
             </template>
             <template v-else>
-              <p @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover p-0.5 -m-0.5 rounded-md truncate">
-                <span v-if="task.technician" class="text-text-subtle">{{ task.technician }}</span>
-                <span v-else class="text-placeholder italic">Añadir técnico</span> 
+              <p @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-0.5 -m-0.5 rounded-md truncate">
+                <span v-if="task.technician" class="text-text-subtle dark:text-subtle-dark">{{ task.technician }}</span>
+                <span v-else class="text-placeholder dark:text-placeholder-dark italic">Añadir técnico</span> 
               </p>
             </template>
           </div>
@@ -461,14 +463,13 @@ const handleDeleteTask = () => {
             leave-to-class="opacity-0 scale-95"
           >
             <p v-if="formattedDuration" 
-               class="text-xs font-semibold text-text-main/70 
-                      bg-surface-hover border border-divider rounded 
+               class="text-xs font-semibold text-text-main/70 dark:text-main-dark/70
+                      bg-surface-hover dark:bg-surface-hover-dark border border-divider dark:border-divider-dark rounded 
                       px-2 py-0.5 ml-4 whitespace-nowrap mt-0.5">
               {{ formattedDuration }}
             </p>
           </Transition>
         </div>
-
 
         <!-- Botones Secundarios (Notificado y Eliminar) -->
         <div class="ml-auto flex items-center gap-2 flex-shrink-0"> <!-- ml-auto para empujar a la derecha, gap-2 -->
@@ -477,8 +478,8 @@ const handleDeleteTask = () => {
             ref="notifiedIconBtnRef"
             @click="toggleNotifiedStatus" 
             :title="task.isNotified ? 'Marcar como No Notificado' : 'Marcar como Notificado'"
-            class="p-0.5 rounded-full hover:bg-surface-hover 
-                   focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-accent-main active:bg-surface-pressed 
+            class="p-0.5 rounded-full hover:bg-surface-hover dark:hover:bg-surface-hover-dark
+                   focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-accent-main active:bg-surface-pressed dark:active:bg-surface-pressed-dark
                    transition-all duration-300 ease-in-out active:scale-95 transform"
             aria-label="Estado de notificación"
           >
@@ -501,7 +502,7 @@ const handleDeleteTask = () => {
               <svg v-else 
                    key="unnotified-icon" 
                    xmlns="http://www.w3.org/2000/svg" 
-                   class="h-5 w-5 text-placeholder" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                   class="h-5 w-5 text-placeholder dark:text-placeholder-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </Transition>
@@ -510,8 +511,8 @@ const handleDeleteTask = () => {
           <button
             @click="handleDeleteTask"
             title="Eliminar Tarea"
-            class="p-0.5 rounded-full hover:bg-surface-hover 
-                   focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-status-alert active:bg-surface-pressed 
+            class="p-0.5 rounded-full hover:bg-surface-hover dark:hover:bg-surface-hover-dark
+                   focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-status-alert active:bg-surface-pressed dark:active:bg-surface-pressed-dark
                    transition-all duration-300 ease-in-out active:scale-95 transform"
             aria-label="Eliminar tarea"
           >
