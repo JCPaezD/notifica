@@ -499,11 +499,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] TaskFilters.vue – botones y switches de filtros activos
     - [x] ShiftSelector.vue – controles de turno, estilo y contraste
     - [x] Toast.vue – estilos visuales de notificaciones flotantes
-    - [ ] menuButtonStyle.ts – colores por tipo de acción
-    - [ ] shiftColors.ts – colores por turno
-    - [ ] toastColors.ts – colores por tipo de notificación
-    - [ ] Logo en header y menú lateral (SVG externo)
-    - [ ] Transición visual al alternar modo oscuro
+    - [x] menuButtonStyle.ts – colores por tipo de acción
+    - [x] shiftColors.ts – colores por turno
+    - [x] toastColors.ts – colores por tipo de notificación
 
   - [ ] Revisar y refinar detalles visuales:
     - [ ] Botones "Finalizar" / "Reabrir" no cambian de tema
