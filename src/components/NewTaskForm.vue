@@ -44,12 +44,11 @@
           />
           <button
             @click="$emit('submit')"
-            class="w-full px-3 py-1.5 
-                   bg-accent-main text-accent-strong font-semibold 
-                   rounded-md shadow-sm hover:bg-accent-main/80 
-                   focus:outline-none active:scale-95
-                   transition-all duration-300 ease-in-out 
-                   flex items-center justify-center gap-2 text-sm"
+            :class="[
+              'w-full px-3 py-1.5 font-semibold rounded-md shadow-sm',
+              'active:scale-95 transition-all duration-300 ease-in-out flex items-center justify-center gap-2 text-sm',
+              getButtonStyle('primary', mode)
+            ]"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -67,8 +66,22 @@
   </Transition>
 </template>
 
-
 <script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useDarkMode } from '@/composables/useDarkMode'
+import { menuButtonStyles } from '@/constants/menuButtonStyles'
+
+const { isDark } = useDarkMode()
+const mode = ref<'light' | 'dark'>(isDark.value ? 'dark' : 'light')
+
+watch(isDark, () => {
+  mode.value = isDark.value ? 'dark' : 'light'
+})
+
+function getButtonStyle(key: keyof typeof menuButtonStyles, theme: 'light' | 'dark') {
+  return menuButtonStyles[key][theme]
+}
+
 defineProps<{
   modelValueDescription: string
   modelValueTechnician: string

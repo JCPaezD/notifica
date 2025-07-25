@@ -511,7 +511,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Botón de notificación no adaptado
         - [x] Botón de eliminación no adaptado
         - [x] Texto de hora de fin con mal contraste
-    - [ ] Botón "Iniciar" del formulario (NewTaskForm.vue)
+    - [x] Botón "Iniciar" del formulario (NewTaskForm.vue)
     - [ ] Indicador de turno actual en selector (punto verde svg)
     - [ ] Logo (header y menú lateral):
         - [ ] Actualmente es un archivo SVG externo (`<img src="/assets/logo-header.png" />`)

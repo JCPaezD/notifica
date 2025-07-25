@@ -5,6 +5,7 @@ type ButtonStyleSet = {
 }
 
 export const menuButtonStyles: {
+  primary: ButtonStyleSet
   newShift: ButtonStyleSet
   share: ButtonStyleSet
   import: ButtonStyleSet
@@ -13,6 +14,10 @@ export const menuButtonStyles: {
   options: ButtonStyleSet
   toggle: ButtonStyleSet
 } = {
+  primary: {
+    light: 'bg-status-accent text-accent-strong hover:bg-status-accent-hover',
+    dark:  'bg-status-accent-dark text-accent-strong-dark hover:bg-status-accent-hover-dark',
+  },
   newShift: {
     light: 'bg-status-success text-success-strong hover:bg-status-success-hover',
     dark:  'bg-status-success-dark text-success-strong-dark hover:bg-status-success-dark-hover',
