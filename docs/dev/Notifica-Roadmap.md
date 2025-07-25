@@ -491,34 +491,30 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   🧪 Subbloque 5: Validación visual del modo oscuro
 
   - [ ] Aplicar clases dark:* en todos los puntos relevantes:
-    - [x] `SideMenu.vue` – fondos, botones, texto e icono de acordeón validados
-    - [x] `App.vue` – header, main, y comportamiento global
-        - [x] Añadido `app-bg-dark` a `tailwind.config.js`
-        - [x] Validado en App.vue
-        - [ ] Validar visibilidad del fondo
-    - [x] `TaskList.vue` – fondo visible real, estructura de lista
-    - [x] `TaskItem.vue` – estructura general, inputs, textos y transiciones
-        - [ ] Refinar detalles visuales:
-        - [ ] `Finalizar` / `Reabrir` no cambian de tema
-        - [ ] Borde izquierdo (status) permanece igual
-        - [ ] Iconos de notificado y eliminar sin cambios entre temas
-        - [ ] Texto de hora de fin tiene mal contraste
-    - [ ] `NewTaskForm.vue` – inputs y comportamiento en cabecera
-    - [ ] `TaskFilters.vue` – botones y switches de filtros activos
-    - [ ] `ShiftSelector.vue` – controles de turno, estilo y contraste
-    - [ ] `Toast.vue` – estilos visuales de notificaciones flotantes
-    - [ ] Revisar archivos con clases dinámicas por tipo:
-        - [ ] `menuButtonStyle.ts`
-        - [ ] `shiftColors.ts`
-        - [ ] `toastColors.ts`
-    - [ ] Logo en header y menú lateral:
-        - [ ] Actualmente es un archivo SVG externo (`<img src="/assets/logo-header.png" />`)
-        - [ ] No cambia de color en modo oscuro
-        - [ ] Decidir si usar SVG inline, swap por versión `-dark.svg`, o aplicar `mask-image`
-    - [ ] Transición visual al alternar modo oscuro:
-        - [ ] Añadir transición `transition-colors duration-500` al contenedor principal
-        - [ ] Bloquear doble click durante el cambio con una flag temporal (`isSwitching`)
-        - [ ] Validar que la animación es fluida en PWA y no introduce parpadeo
+    - [x] SideMenu.vue – fondos, botones, texto e icono de acordeón validados
+    - [x] App.vue – header, main, y comportamiento global
+    - [x] TaskList.vue – fondo visible real, estructura de lista
+    - [x] TaskItem.vue – estructura general, inputs, textos y transiciones
+    - [x] NewTaskForm.vue – inputs y comportamiento en cabecera
+    - [x] TaskFilters.vue – botones y switches de filtros activos
+    - [x] ShiftSelector.vue – controles de turno, estilo y contraste
+    - [x] Toast.vue – estilos visuales de notificaciones flotantes
+    - [ ] menuButtonStyle.ts – colores por tipo de acción
+    - [ ] shiftColors.ts – colores por turno
+    - [ ] toastColors.ts – colores por tipo de notificación
+    - [ ] Logo en header y menú lateral (SVG externo)
+    - [ ] Transición visual al alternar modo oscuro
+
+  - [ ] Revisar y refinar detalles visuales:
+    - [ ] Botones "Finalizar" / "Reabrir" no cambian de tema
+    - [ ] Borde izquierdo (status) permanece igual
+    - [ ] Iconos de notificado y eliminar sin cambios entre temas
+    - [ ] Texto de hora de fin con mal contraste
+    - [ ] Validar visibilidad del fondo tras adaptación de TaskList.vue
+    - [ ] Decidir si el logo se adapta con SVG inline, swap por -dark.svg, o mask-image
+    - [ ] Añadir transición `transition-colors duration-500` al contenedor principal
+    - [ ] Bloquear doble click durante el cambio con flag temporal (`isSwitching`)
+    - [ ] Validar que la animación de modo oscuro no introduce parpadeo
 
   - [ ] Validar en PWA Android (modo oscuro del sistema activado)
   - [ ] Validar en APK Android nativo

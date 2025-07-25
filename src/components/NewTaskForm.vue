@@ -9,7 +9,7 @@
   >
     <div
       v-if="!isHidden"
-      class="bg-surface-1 rounded-xl p-3 shadow-sm w-full max-w-lg mb-4 border border-divider overflow-hidden"
+      class="bg-surface-1 dark:bg-surface-1-dark rounded-xl p-3 shadow-sm w-full max-w-lg mb-4 border border-divider overflow-hidden"
     >
       <div class="flex space-x-4 items-start">
         <div class="flex-grow">
@@ -20,9 +20,10 @@
             @keyup.enter.prevent="$emit('submit')"
             placeholder="Nuevo aviso"
             rows="2"
-            class="p-3 bg-surface-1 border border-divider rounded-md shadow-sm 
+            class="p-3 bg-surface-1 dark:bg-surface-1-dark border border-divider rounded-md shadow-sm 
                    focus:ring-2 focus:ring-accent-main focus:border-accent-main 
-                   w-full text-base resize-none placeholder-text-main/70
+                   w-full text-base resize-none placeholder-text-main/70 dark:placeholder-text-main-dark/70
+                   text-text-main dark:text-main-dark
                    transition-all duration-300 ease-in-out"
           ></textarea>
         </div>
@@ -35,10 +36,11 @@
             @keyup.enter="$emit('submit')"
             placeholder="Técnico(s)"
             class="p-1 
-                   bg-surface-1 border border-divider rounded-md shadow-sm 
+                   bg-surface-1 dark:bg-surface-1-dark border border-divider rounded-md shadow-sm 
                    focus:ring-2 focus:ring-accent-main focus:border-accent-main 
                    transition-all duration-300 ease-in-out
-                   w-full text-sm placeholder-text-main/70"
+                   w-full text-sm placeholder-text-main/70 dark:placeholder-text-main-dark/70
+                   text-text-main dark:text-main-dark"
           />
           <button
             @click="$emit('submit')"
@@ -64,6 +66,7 @@
     </div>
   </Transition>
 </template>
+
 
 <script setup lang="ts">
 defineProps<{
