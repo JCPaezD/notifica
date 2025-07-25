@@ -378,8 +378,8 @@ const handleDeleteTask = () => {
                                   focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
                   </template>
                   <template v-else>
-                    <span @click="startEditEndTime" 
-                          class="text-success-strong cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
+                    <span @click="startEditEndTime"
+                          class="text-success-strong dark:text-success-strong-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
                       {{ task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
                     </span>
                   </template>
@@ -406,11 +406,12 @@ const handleDeleteTask = () => {
           >
             <button v-if="!task.endTime" @click="handleFinishTask" 
                     class="w-full px-2 py-0.5 
-                           bg-status-alert text-alert-strong text-xs font-semibold
-                           rounded-md
-                           focus:outline-none
-                           transition-all duration-300 ease-in-out active:scale-95 transform [-webkit-tap-highlight-color:transparent]
-                           flex items-center justify-center gap-1 ">
+                          bg-status-alert dark:bg-status-alert-dark 
+                          text-alert-strong dark:text-alert-strong-dark text-xs font-semibold
+                          rounded-md
+                          focus:outline-none
+                          transition-all duration-300 ease-in-out active:scale-95 transform [-webkit-tap-highlight-color:transparent]
+                          flex items-center justify-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
                 <path d="M3.5 2.75a.75.75 0 00-1.5 0v14.5a.75.75 0 001.5 0v-4.392l1.657-.348a6.723 6.723 0 016.271 1.719 2.25 2.25 0 003.914 0 6.723 6.723 0 016.271-1.719l1.657.348A.75.75 0 0018 12.25v-2.5a.75.75 0 00-.501-.712l-1.657-.348a6.723 6.723 0 01-6.271-1.719A2.25 2.25 0 005.657 5.25a6.723 6.723 0 01-2.157-.442V2.75z" />
               </svg>
@@ -418,11 +419,13 @@ const handleDeleteTask = () => {
             </button>
             <button v-else @click="handleReactivateTask" 
                     class="w-full px-2 py-0.5 
-                           bg-status-active text-active-strong text-xs font-semibold
-                           rounded-md
-                           focus:outline-none focus:ring-1 focus:ring-status-active focus:ring-offset-1 
-                           transition-all duration-300 ease-in-out active:scale-95 transform
-                           flex items-center justify-center gap-1">
+                          bg-status-active dark:bg-status-active-dark 
+                          text-active-strong dark:text-active-strong-dark text-xs font-semibold
+                          rounded-md
+                          focus:outline-none focus:ring-1 
+                          focus:ring-status-active dark:focus:ring-status-active-dark focus:ring-offset-1 
+                          transition-all duration-300 ease-in-out active:scale-95 transform
+                          flex items-center justify-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
                 <path fill-rule="evenodd" d="M7.793 2.232a.75.75 0 01-.025 1.06L3.622 7.25h6.128a5.5 5.5 0 110 11H5.75a.75.75 0 010-1.5h3.999a4 4 0 100-8H3.622l4.146 4.023a.75.75 0 11-1.036 1.085l-5.5-5.25a.75.75 0 010-1.085l5.5-5.25a.75.75 0 011.06.025z" clip-rule="evenodd" />
               </svg>
@@ -496,7 +499,7 @@ const handleDeleteTask = () => {
               <svg v-if="task.isNotified" 
                    key="notified-icon" 
                    xmlns="http://www.w3.org/2000/svg" 
-                   class="h-5 w-5 text-status-success" viewBox="0 0 20 20" fill="currentColor">
+                   class="h-5 w-5 text-status-success dark:text-status-success-dark" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
               </svg>
               <svg v-else 
@@ -516,7 +519,7 @@ const handleDeleteTask = () => {
                    transition-all duration-300 ease-in-out active:scale-95 transform"
             aria-label="Eliminar tarea"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-status-alert" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-status-alert dark:text-status-alert-dark" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
             </svg>
           </button>

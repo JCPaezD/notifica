@@ -506,11 +506,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Revisar y refinar detalles visuales:
     - [x] Fondo general de la app no cambia en modo oscuro
     - [x] Borde izquierdo de estado en tareas (TaskItem.vue)
-    - [ ] Botones en tareas individuales:
-        - [ ] Botón "Finalizar" / "Reabrir" no cambia de tema
-        - [ ] Botón de notificación no adaptado
-        - [ ] Botón de eliminación no adaptado
-        - [ ] Texto de hora de fin con mal contraste
+    - [x] Botones en tareas individuales:
+        - [x] Botón "Finalizar" / "Reabrir" no cambia de tema
+        - [x] Botón de notificación no adaptado
+        - [x] Botón de eliminación no adaptado
+        - [x] Texto de hora de fin con mal contraste
     - [ ] Botón "Iniciar" del formulario (NewTaskForm.vue)
     - [ ] Indicador de turno actual en selector (punto verde svg)
     - [ ] Logo (header y menú lateral):
