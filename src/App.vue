@@ -895,12 +895,13 @@ const exportTasksToJson = async () => {
 
       <!-- Filtros -->
       <TaskFilters
-        v-model:showOnlyActive="showOnlyActive"
-        v-model:showOnlyNotNotified="showOnlyNotNotified"
+      v-model:showOnlyActive="showOnlyActive"
+      v-model:showOnlyNotNotified="showOnlyNotNotified"
       />
     </div>
-
-    <!-- Los botones de acción ahora están en el SideMenu -->
+    
+    <!-- Espacio final para evitar elementos del SO -->
+    <div class="h-6 md:h-8" />
 
     <!-- Input de archivo oculto (se mantiene ya que es funcional y no visual) -->
     <input type="file" ref="fileImportInputRef" @change="importTasksFromJson" accept=".json" class="hidden" />

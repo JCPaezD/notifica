@@ -513,7 +513,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Texto de hora de fin con mal contraste
     - [x] Botón "Iniciar" del formulario (NewTaskForm.vue)
     - [x] Indicador de turno actual en selector (punto verde -> svg reloj)
-    - [ ] Borde blanco inferior todas las plataformas
+    - [x] Borde blanco inferior todas las plataformas
+    - [ ] Añadir bajo filtros un espacio en blanco, para librar con scroll la barra de ios
     - [ ] Fondo aplicacion (barra superior PWA ios (status bar)) dinamico dark/light?
     - [ ] Logo (header y menú lateral):
         - [ ] Actualmente es un archivo SVG externo (`<img src="/assets/logo-header.png" />`)
