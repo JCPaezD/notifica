@@ -828,7 +828,7 @@ const exportTasksToJson = async () => {
     </div>
   </header>
 
-  <main class="min-h-[calc(100svh-72px)] bg-app-bg dark:bg-app-bg-dark text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
+  <main class="min-h-[calc(100svh-68px)] bg-app-bg dark:bg-app-bg-dark text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
 
     <!-- Sección para añadir nueva tarea -->
     <NewTaskForm
@@ -838,7 +838,7 @@ const exportTasksToJson = async () => {
   @update:model-value-description="newTaskDescription = $event"
   @update:model-value-technician="newTaskTechnician = $event"
   @submit="startNewTask"
-/>
+  />
 
     <!-- Botón para volver al turno actual si se está viendo uno pasado -->
     <Transition enter-active-class="transition-all duration-300 ease-out" enter-from-class="opacity-0 max-h-0"

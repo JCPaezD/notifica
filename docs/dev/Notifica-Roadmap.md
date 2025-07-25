@@ -490,7 +490,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
   🧪 Subbloque 5: Validación visual del modo oscuro
 
-  - [ ] Aplicar clases dark:* en todos los puntos relevantes:
+  - [x] Aplicar clases dark:* en todos los puntos relevantes:
     - [x] SideMenu.vue – fondos, botones, texto e icono de acordeón validados
     - [x] App.vue – header, main, y comportamiento global
     - [x] TaskList.vue – fondo visible real, estructura de lista
@@ -513,15 +513,17 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Texto de hora de fin con mal contraste
     - [x] Botón "Iniciar" del formulario (NewTaskForm.vue)
     - [x] Indicador de turno actual en selector (punto verde -> svg reloj)
+    - [ ] Borde blanco inferior todas las plataformas
+    - [ ] Fondo aplicacion (barra superior PWA ios (status bar)) dinamico dark/light?
     - [ ] Logo (header y menú lateral):
         - [ ] Actualmente es un archivo SVG externo (`<img src="/assets/logo-header.png" />`)
         - [ ] No cambia de color en modo oscuro
         - [ ] Decidir si usar SVG inline, swap por versión `-dark.svg`, o aplicar `mask-image`
-    - [ ] Validar visibilidad real del fondo tras adaptación de TaskList.vue
     - [ ] Transición de modo oscuro:
         - [ ] Añadir clase `transition-colors duration-500` al contenedor principal
         - [ ] Bloquear doble click durante el cambio con flag temporal (`isSwitching`)
         - [ ] Validar que la animación no introduce parpadeo en PWA
+    - [ ] Colores modo oscuro muy vibrantes?
 
   - [ ] Validar en PWA Android (modo oscuro del sistema activado)
   - [ ] Validar en APK Android nativo
