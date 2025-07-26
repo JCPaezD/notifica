@@ -315,10 +315,10 @@ const handleDeleteTask = () => {
 <template>
   <li class="flex flex-row text-sm relative overflow-hidden">
     <!-- Barra de estado vertical -->
-    <div :class="['w-1', ...statusBarDynamicClasses]"></div>
+    <div :class="['w-1 shrink-0 z-10', ...statusBarDynamicClasses]"></div>
 
     <!-- Contenido de la tarea -->
-    <div class="flex-grow py-1 px-3 flex flex-col">
+    <div class="flex-grow py-1 px-3 flex flex-col relative z-0">
       <!-- Fila 1: Descripción, Horas, Botón Acción Principal -->
       <div class="flex items-center justify-between gap-x-2">
         <!-- Descripción -->

@@ -549,8 +549,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Validar en navegador de escritorio (modo oscuro forzado)
       - [x] Confirmar legibilidad, contraste y coherencia con el modo claro en todos los casos
       - [ ] Corregir bugs visuales detectados en validación multiplataforma
-          - [ ] Icono de notificar aparece negro en modo claro (debe ser verde)
-          - [ ] Borde izquierdo de estado se estrecha en tareas con texto largo
+          - [x] Icono de notificar aparece negro en modo claro (debe ser verde)
+          - [x] Borde izquierdo de estado se estrecha en tareas con texto largo
           - [ ] Botones de primera línea se centran verticalmente con texto largo (deben anclarse abajo)
           - [ ] Transición de oscuro → claro muy lenta en textos e iconos en iOS PWA (pantalla queda "en blanco" durante varios segundos)
 
