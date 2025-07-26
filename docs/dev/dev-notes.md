@@ -27,6 +27,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Bug con getShiftColor: diagnóstico y solución definitiva](#bug-con-getshiftcolor-diagnóstico-y-solución-definitiva)
   - [Bug con clases `text-*` no aplicadas por Tailwind](#bug-con-clases-text--no-aplicadas-por-tailwind-extendcolors-vs-extendtextcolor)
   - [Bug con colores en toasts: diagnóstico y solución](#bug-con-colores-en-toasts-diagnóstico-y-solución)
+  - [Logo dinámico en modo claro/oscuro](#logo-dinámico-en-modo-clarooscuro)
 - [UI, diseño y publicación](#ui-diseño-y-publicación)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -774,6 +775,30 @@ Las clases están escritas como strings literales para asegurar su inclusión tr
 
 El componente `Toast.vue` usa este mapa importado según el tipo y el modo actual (`isDark.value`).  
 Se validó visualmente en todos los modos y dispositivos. Bug cerrado.
+
+### Logo dinámico en modo claro/oscuro
+
+**Objetivo:** Permitir que el logo se vea correctamente en modo claro y oscuro sin usar múltiples versiones de archivo ni swaps manuales.
+
+**Errores detectados y pruebas descartadas:**
+- Uso de `mask-image` con `.mask-logo` fallaba en todos los navegadores (incluyendo Safari, Chrome y Firefox), no se renderizaba nada o aparecía una caja invisible.
+- Forzar color con `bg-*` funcionaba pero no permitía personalización futura ni integración con `text-*`.
+- Usar SVG original inline sin limpiar mostraba el logo completamente relleno, sin huecos internos (las manecillas del reloj desaparecían).
+
+**Solución aplicada:**
+- Se limpió y optimizó el SVG con `fill="currentColor"`, `fill-rule="evenodd"` y `clip-rule="evenodd"` para respetar contornos huecos.
+- El logo se insertó **inline** en `App.vue` y `SideMenu.vue`, con clases de tamaño (`h-8`, `h-4`) y color dinámico (`text-text-main dark:text-main-dark`).
+- Las manecillas del reloj y demás detalles se conservaron al eliminar `fill="#000000"` y definir el color solo en el `<svg>`.
+
+**Limpieza final:**
+- Se eliminó el archivo `logoColors.ts` (ya no necesario).
+- Se borró la clase `.mask-logo` de `main.css`.
+- Se eliminaron `mode`, `getLogoColor`, y otros restos si solo se usaban para el logo.
+
+**Nota útil:** Para futuros SVG dinámicos usar siempre:
+- `fill="currentColor"`
+- `fill-rule="evenodd"` y `clip-rule="evenodd"`
+- Evitar `fill` directo en los `<path>`, limpiar con herramientas como [SVGOMG](https://jakearchibald.github.io/svgomg/) si viene de PNG.
 
 
 ---

@@ -514,12 +514,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Botón "Iniciar" del formulario (NewTaskForm.vue)
     - [x] Indicador de turno actual en selector (punto verde -> svg reloj)
     - [x] Borde blanco inferior todas las plataformas
-    - [ ] Añadir bajo filtros un espacio en blanco, para librar con scroll la barra de ios
-    - [ ] Fondo aplicacion (barra superior PWA ios (status bar)) dinamico dark/light?
-    - [ ] Logo (header y menú lateral):
-        - [ ] Actualmente es un archivo SVG externo (`<img src="/assets/logo-header.png" />`)
-        - [ ] No cambia de color en modo oscuro
-        - [ ] Decidir si usar SVG inline, swap por versión `-dark.svg`, o aplicar `mask-image`
+    - [x] Añadir bajo filtros un espacio en blanco, para librar con scroll la barra de ios
+    - [x] Fondo aplicación (barra superior PWA iOS – status bar) dinámico dark/light – revisado y descartado por limitación de plataforma
+    - [x] Logo (header y menú lateral):
+        - [x] Reemplazado `<img>` por SVG inline
+        - [x] Color dinámico aplicado con `currentColor` y clases `text-*`
+        - [x] SVG limpiado y optimizado para mantener huecos y detalles
     - [ ] Transición de modo oscuro:
         - [ ] Añadir clase `transition-colors duration-500` al contenedor principal
         - [ ] Bloquear doble click durante el cambio con flag temporal (`isSwitching`)
