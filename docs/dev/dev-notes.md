@@ -522,21 +522,46 @@ Permitir una transición visual suave cuando el usuario activa o desactiva el mo
 - Se confirmó que Tailwind aplica estilos base específicos a botones e inputs que podían anular reglas genéricas.
 - Se detectó que con `transition-duration: 2500ms` también se veían afectadas animaciones de pulsación (por ejemplo, el feedback visual al hacer clic en un botón), que se volvieron lentas e imprecisas.
 
-**Solución final aplicada:**
+**Solución intermedia aplicada:**
 - Se definieron dos bloques CSS explícitos:  
   1. Uno para `*` que define la transición global con `transition-property: background-color, border-color, color, fill, stroke;`.
   2. Otro para `button, input, textarea` que replica la misma transición (para asegurar aplicación uniforme).
 
-- Se bajó la duración global de transición a `300ms`, lo que permite:
+- Se bajó la duración global de transición a `300ms`, lo que permitía:
   - Una transición clara y fluida al cambiar de modo claro ↔ oscuro.
   - Mantener animaciones rápidas e intuitivas para interacción con botones.
 
-**Resultado:**
+**Resultado intermedio:**
 - Transición global de color coherente, incluida en botones e inputs.
 - Compatible con pulsaciones y otras interacciones rápidas.
 - Validado en navegadores de escritorio, Android y PWA iOS.
 
-**Aplicable a otros proyectos como Nocta.** Recomendable reutilizar el patrón completo con ajustes mínimos.
+**Actualización 26/07/2025 – Eliminación de la transición global `*`**
+
+**Problema detectado:**  
+En PWA iOS (Safari y Chrome instaladas como standalone), al pasar de modo oscuro a claro, los textos (como la descripción y horas) quedaban durante varios segundos en color blanco, generando una pantalla aparentemente vacía sobre fondo claro.
+
+**Causa confirmada:**  
+La regla global `* { transition: background-color, border-color, color, fill, stroke; }` en `animations.css` era la responsable.  
+iOS WebKit presenta problemas de repintado cuando se combinan:
+- Cambios de color heredados por la clase `.dark` en `<html>`.
+- `transition: color` heredado globalmente por todos los nodos.
+- Reestructuración visual con `Transition` o `TransitionGroup`.
+
+**Solución final aplicada:**  
+- Se eliminó por completo la regla global `*` de `animations.css`.
+- El cambio fue validado en entorno real: el bug desapareció y el cambio de tema es ahora inmediato, sin flashes ni retardos.
+- Se comprobó que eliminar la transición global no afecta negativamente a la UX.  
+  De hecho, el cambio de tema se percibe ahora como más natural y directo.
+
+**Decisión final:**  
+No se volverá a introducir transición global para colores.  
+Si se desea animación en puntos específicos (botones, contenedores), se usará `transition-colors` de forma localizada.
+
+**Estado actual:**  
+- Solución robusta y sin efectos secundarios.
+- Cierre validado del subbloque 5 del modo oscuro en el roadmap.
+
 
 ---
 

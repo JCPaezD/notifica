@@ -561,7 +561,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                 → Se eliminó `grid-rows-2` para permitir altura automática de filas y evitar espacio vacío innecesario. Funciona correctamente con tareas de una o varias líneas.
           - [x] Validar en tareas con pocas y muchas líneas
                 → Probado visualmente en tareas con diferentes longitudes de descripción y presencia o ausencia de técnico y duración.
-      - [ ] Transición de oscuro → claro muy lenta en textos e iconos en iOS PWA (pantalla queda "en blanco" durante varios segundos)
+      - [x] Transición de oscuro → claro muy lenta en textos e iconos en iOS PWA (pantalla queda "en blanco" durante varios segundos)
+          - [x] Confirmado que el bug solo ocurre al pasar de dark → light, y solo en PWA iOS (Safari y Chrome standalone)
+          - [x] Eliminadas transiciones locales (`transition-all`) en algunos textos sin mejora visible
+          - [x] Descubierto que la causa era la regla global `* { transition: color, background-color, ... }` en `animations.css`
+          - [x] Eliminada la regla global `*` para transición de colores
+          - [x] Validado el resultado: el cambio de tema es ahora inmediato, sin flashes ni retardos, y visualmente fluido
+          - [x] Se descarta volver a introducir transición global para el cambio de tema; UX más natural sin retardo forzado
 
 
   ⚙️ Subbloque 6: Integración opcional con el sistema operativo
