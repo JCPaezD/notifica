@@ -551,7 +551,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [ ] Corregir bugs visuales detectados en validación multiplataforma
           - [x] Icono de notificar aparece negro en modo claro (debe ser verde)
           - [x] Borde izquierdo de estado se estrecha en tareas con texto largo
-          - [ ] Botones de primera línea se centran verticalmente con texto largo (deben anclarse abajo)
+          - [x] Botones de primera línea se centran verticalmente con texto largo (deben anclarse abajo)
+          - [ ] Mejorar alineación vertical de fila 2 en tareas:
+              - [ ] Alinear botón principal con botones secundarios (notificar y eliminar)
+              - [ ] Alinear el bloque de duración ("0.5h") con el bloque de horas (inicio–fin)
+              - [ ] Mantener consistencia visual en tareas con y sin duración
+              - [ ] Validar en tareas con pocas y muchas líneas
           - [ ] Transición de oscuro → claro muy lenta en textos e iconos en iOS PWA (pantalla queda "en blanco" durante varios segundos)
 
 

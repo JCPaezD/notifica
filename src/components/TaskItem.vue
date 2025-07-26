@@ -320,7 +320,7 @@ const handleDeleteTask = () => {
     <!-- Contenido de la tarea -->
     <div class="flex-grow py-1 px-3 flex flex-col relative z-0">
       <!-- Fila 1: Descripción, Horas, Botón Acción Principal -->
-      <div class="flex items-center justify-between gap-x-2">
+      <div class="flex items-end justify-between gap-x-2">
         <!-- Descripción -->
         <div class="flex-grow min-w-0">
           <div class="py-0.5">
