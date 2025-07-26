@@ -542,11 +542,18 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Validar todos los botones en conjunto, asegurando consistencia e impacto visual
         - [x] Unificar grosor y color de bordes del formulario con los de tareas y filtros en modo oscuro
 
-  - [ ] Validar en PWA Android (modo oscuro del sistema activado)
-  - [ ] Validar en APK Android nativo
-  - [ ] Validar en iOS (Safari y PWA)
-  - [ ] Validar en navegador de escritorio (modo oscuro forzado)
-  - [ ] Confirmar legibilidad, contraste y coherencia con el modo claro
+  - [x] Validar paleta modo oscuro en plataformas
+      - [x] Validar en PWA Android (modo oscuro del sistema activado)
+      - [x] Validar en APK Android nativo (nueva versión desde bundle)
+      - [x] Validar en iOS (Safari y PWA)
+      - [x] Validar en navegador de escritorio (modo oscuro forzado)
+      - [x] Confirmar legibilidad, contraste y coherencia con el modo claro en todos los casos
+      - [ ] Corregir bugs visuales detectados en validación multiplataforma
+          - [ ] Icono de notificar aparece negro en modo claro (debe ser verde)
+          - [ ] Borde izquierdo de estado se estrecha en tareas con texto largo
+          - [ ] Botones de primera línea se centran verticalmente con texto largo (deben anclarse abajo)
+          - [ ] Transición de oscuro → claro muy lenta en textos e iconos en iOS PWA (pantalla queda "en blanco" durante varios segundos)
+
 
   ⚙️ Subbloque 6: Integración opcional con el sistema operativo
   - [ ] Detectar modo del sistema en primera carga
