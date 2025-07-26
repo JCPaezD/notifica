@@ -46,10 +46,4 @@
   transition-timing-function: ease;
 }
 
-button,
-input,
-textarea {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-duration: 300ms !important;
-  transition-timing-function: ease;
-}
+
