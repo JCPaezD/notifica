@@ -37,7 +37,7 @@ export default {
         'toggle-inactive': '#cbd5e1',
 
         // 🎛️ Acento y controles modo oscuro
-        'accent-main-dark': '#60a5fa',
+        'accent-main-dark': '#4f8ce8',
         'toggle-inactive-dark': '#64748b',
 
         // 🌈 Estados visuales
@@ -58,21 +58,21 @@ export default {
         'status-purple-hover': '#c4b5fd',
 
         // 🌈 Estados visuales oscuros
-        'status-success-dark': '#064e3b',
+        'status-success-dark': '#166534',
         'status-success-dark-hover': '#047857',
 
         'status-alert-dark': '#7f1d1d',
-        'status-danger-dark': '#991b1b',
-        'status-danger-dark-hover': '#b91c1c',
+        'status-danger-dark': '#b91c1c',
+        'status-danger-dark-hover': '#dc2626',
 
         'status-active-dark': '#78350f',
         'status-inprogress-dark': '#475569',
 
-        'status-accent-dark': '#2563eb',
+        'status-accent-dark': '#1d4ed8',
         'status-accent-hover-dark': '#3b82f6',
 
-        'status-purple-dark': '#5b21b6',
-        'status-purple-dark-hover': '#7c3aed',
+        'status-purple-dark': '#6b21a8',
+        'status-purple-dark-hover': '#8b5cf6',
       },
 
       backgroundColor: {
@@ -94,21 +94,21 @@ export default {
         'toast-info-action-hover': '#bfdbfe',
 
         // 🌑 Toasts – modo oscuro
-        'toast-success-dark': '#052e16',
-        'toast-success-action-dark': '#166534',
-        'toast-success-action-hover-dark': '#15803d',
+        'toast-success-dark': '#0c3a24',
+        'toast-success-action-dark': '#19834f',
+        'toast-success-action-hover-dark': '#22a36c',
 
-        'toast-error-dark': '#431407',
-        'toast-error-action-dark': '#7f1d1d',
-        'toast-error-action-hover-dark': '#b91c1c',
+        'toast-error-dark': '#5a1b11',
+        'toast-error-action-dark': '#b91c1c',
+        'toast-error-action-hover-dark': '#dc2626',
 
-        'toast-warning-dark': '#78350f',
-        'toast-warning-action-dark': '#854d0e',
-        'toast-warning-action-hover-dark': '#f59e0b',
+        'toast-warning-dark': '#9a580d',
+        'toast-warning-action-dark': '#b1730d',
+        'toast-warning-action-hover-dark': '#facc15',
 
-        'toast-info-dark': '#1e3a8a',
-        'toast-info-action-dark': '#1e40af',
-        'toast-info-action-hover-dark': '#3b82f6',
+        'toast-info-dark': '#223d75',
+        'toast-info-action-dark': '#3262b8',
+        'toast-info-action-hover-dark': '#60a5fa',
       },
 
       borderColor: {
@@ -207,6 +207,12 @@ export default {
         'toast-info-action-text-dark': '#93c5fd',
         'toast-info-close-dark': '#bfdbfe',
         'toast-info-close-hover-dark': '#3b82f6',
+
+        // 🎯 Iconos – modo oscuro (para botones de acción)
+        'icon-alert-dark': '#f87171',
+        'icon-active-dark': '#fbbf24',
+        'icon-muted-dark': '#94a3b8',
+        'icon-success-dark': '#4ade80',
       },
     },
   },

@@ -385,7 +385,7 @@ const handleDeleteTask = () => {
                   </template>
                 </template>
                 <template v-else>
-                  <span @click="handleFinalizeAndEditEndTime" class="text-placeholder dark:text-placeholder-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">--:--</span>
+                  <span @click="handleFinalizeAndEditEndTime" class="text-icon-muted dark:text-icon-muted-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">--:--</span>
                 </template>
               </div>
             </Transition>
@@ -407,7 +407,7 @@ const handleDeleteTask = () => {
             <button v-if="!task.endTime" @click="handleFinishTask" 
                     class="w-full px-2 py-0.5 
                           bg-status-alert dark:bg-status-alert-dark 
-                          text-alert-strong dark:text-alert-strong-dark text-xs font-semibold
+                          text-icon-alert dark:text-icon-alert-dark text-xs font-semibold
                           rounded-md
                           focus:outline-none
                           transition-all duration-300 ease-in-out active:scale-95 transform [-webkit-tap-highlight-color:transparent]
@@ -420,7 +420,7 @@ const handleDeleteTask = () => {
             <button v-else @click="handleReactivateTask" 
                     class="w-full px-2 py-0.5 
                           bg-status-active dark:bg-status-active-dark 
-                          text-active-strong dark:text-active-strong-dark text-xs font-semibold
+                          text-icon-active dark:text-icon-active-dark text-xs font-semibold
                           rounded-md
                           focus:outline-none focus:ring-1 
                           focus:ring-status-active dark:focus:ring-status-active-dark focus:ring-offset-1 
@@ -450,7 +450,7 @@ const handleDeleteTask = () => {
             <template v-else>
               <p @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-0.5 -m-0.5 rounded-md truncate">
                 <span v-if="task.technician" class="text-text-subtle dark:text-subtle-dark">{{ task.technician }}</span>
-                <span v-else class="text-placeholder dark:text-placeholder-dark italic">Añadir técnico</span> 
+                <span v-else class="text-icon-muted dark:text-icon-muted-dark italic">Añadir técnico</span> 
               </p>
             </template>
           </div>
@@ -499,13 +499,13 @@ const handleDeleteTask = () => {
               <svg v-if="task.isNotified" 
                    key="notified-icon" 
                    xmlns="http://www.w3.org/2000/svg" 
-                   class="h-5 w-5 text-status-success dark:text-status-success-dark" viewBox="0 0 20 20" fill="currentColor">
+                   class="h-5 w-5 text-icon-success dark:text-icon-success-dark" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
               </svg>
               <svg v-else 
                    key="unnotified-icon" 
                    xmlns="http://www.w3.org/2000/svg" 
-                   class="h-5 w-5 text-placeholder dark:text-placeholder-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                   class="h-5 w-5 text-icon-muted dark:text-icon-muted-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </Transition>

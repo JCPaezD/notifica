@@ -524,8 +524,23 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Implementar transición global de colores con CSS (`animations.css`)
         - [x] Añadir regla específica para `button`, `input` y `textarea` con `!important` para asegurar aplicación
         - [x] Ajustar duración a 300ms como compromiso entre fluidez de tema y respuesta de interacción
-        - [ ] Validar que la animación es coherente en PWA, Android y escritorio
-    - [ ] Colores modo oscuro muy vibrantes?
+        - [x] Validar que la animación es coherente en PWA, Android y escritorio
+  - [ ] Colores modo oscuro muy vibrantes?
+      - [x] Ajustar conjunto de botones del menú lateral (modo oscuro):
+        - [x] Reducir saturación del verde de "Nuevo Turno" sin perder su semántica positiva
+        - [x] Unificar tonos de azules en "Compartir", "Importar", "Exportar" con menor luminosidad
+        - [x] Desaturar morado de "Opciones" para integrarlo con el resto
+        - [x] Validar visualmente todos los botones juntos en contexto real (contraste, jerarquía, armonía)
+  - [x] Revisar y unificar paleta de toast en modo oscuro:
+        - [x] Aumentado contraste en el toast de advertencia (amarillo), ajustando fondo y asegurando legibilidad sin perder función
+        - [x] Aclarado ligeramente el fondo del toast de error para evitar tono marrón poco agradable
+        - [x] Unificada jerarquía visual entre texto, borde, acción e icono en todos los toast
+        - [x] Eliminadas clases `text-*` específicas de los iconos para heredar automáticamente el color del texto principal del toast, logrando coherencia visual total
+  - [ ] Validar legibilidad de iconos sobre botones en modo oscuro:
+        - [x] Comprobar si hay pérdida de visibilidad en iconos de "Reabrir", "Finalizar", "Eliminar", etc.
+        - [x] Aplicar ajustes mínimos al color o luminosidad solo donde haya confusión real
+        - [x] Validar todos los botones en conjunto, asegurando consistencia e impacto visual
+        - [x] Unificar grosor y color de bordes del formulario con los de tareas y filtros en modo oscuro
 
   - [ ] Validar en PWA Android (modo oscuro del sistema activado)
   - [ ] Validar en APK Android nativo
