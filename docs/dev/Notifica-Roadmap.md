@@ -503,7 +503,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] shiftColors.ts – colores por turno
     - [x] toastColors.ts – colores por tipo de notificación
 
-  - [ ] Revisar y refinar detalles visuales:
+  - [x] Revisar y refinar detalles visuales:
     - [x] Fondo general de la app no cambia en modo oscuro
     - [x] Borde izquierdo de estado en tareas (TaskItem.vue)
     - [x] Botones en tareas individuales:
@@ -525,7 +525,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Añadir regla específica para `button`, `input` y `textarea` con `!important` para asegurar aplicación
         - [x] Ajustar duración a 300ms como compromiso entre fluidez de tema y respuesta de interacción
         - [x] Validar que la animación es coherente en PWA, Android y escritorio
-  - [ ] Colores modo oscuro muy vibrantes?
+  - [x] Colores modo oscuro muy vibrantes?
       - [x] Ajustar conjunto de botones del menú lateral (modo oscuro):
         - [x] Reducir saturación del verde de "Nuevo Turno" sin perder su semántica positiva
         - [x] Unificar tonos de azules en "Compartir", "Importar", "Exportar" con menor luminosidad
@@ -536,7 +536,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Aclarado ligeramente el fondo del toast de error para evitar tono marrón poco agradable
         - [x] Unificada jerarquía visual entre texto, borde, acción e icono en todos los toast
         - [x] Eliminadas clases `text-*` específicas de los iconos para heredar automáticamente el color del texto principal del toast, logrando coherencia visual total
-  - [ ] Validar legibilidad de iconos sobre botones en modo oscuro:
+  - [x] Validar legibilidad de iconos sobre botones en modo oscuro:
         - [x] Comprobar si hay pérdida de visibilidad en iconos de "Reabrir", "Finalizar", "Eliminar", etc.
         - [x] Aplicar ajustes mínimos al color o luminosidad solo donde haya confusión real
         - [x] Validar todos los botones en conjunto, asegurando consistencia e impacto visual

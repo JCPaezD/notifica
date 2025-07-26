@@ -208,11 +208,15 @@ export default {
         'toast-info-close-dark': '#bfdbfe',
         'toast-info-close-hover-dark': '#3b82f6',
 
+        // 🎯 Iconos – modo claro (para botones de acción)
+        'icon-success': '#4ade80',
+        'icon-muted': '#64748b',
+
         // 🎯 Iconos – modo oscuro (para botones de acción)
         'icon-alert-dark': '#f87171',
         'icon-active-dark': '#fbbf24',
         'icon-muted-dark': '#94a3b8',
-        'icon-success-dark': '#4ade80',
+        'icon-success-dark': '#22c55e',
       },
     },
   },
