@@ -38,3 +38,18 @@
     transform: scale(1) translateY(0); /* Asegurar que translateY(0) de la prueba anterior no interfiera */
   }
 }
+
+/* Transición global para cambios de color (modo oscuro incluido) */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 300ms;
+  transition-timing-function: ease;
+}
+
+button,
+input,
+textarea {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 300ms !important;
+  transition-timing-function: ease;
+}

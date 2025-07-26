@@ -18,6 +18,8 @@ dayjs.locale('es')
 import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { shiftIcons as icons } from './icons/shifts'
 import { useLogoAnimation } from './composables/useLogoAnimation'
+import { useDarkMode } from './composables/useDarkMode'
+const { isDark } = useDarkMode()
 
 
 // --- Composable para la animación del logo ---
@@ -806,125 +808,126 @@ const exportTasksToJson = async () => {
 </script>
 
 <template>
-  
-  <SideMenu :is-open="isSideMenuOpen" @close="closeSideMenu" @action="handleMenuAction" />
+  <div class="bg-app-bg text-main min-h-[100svh] overflow-x-hidden">    
 
-  <header class="sticky top-0 z-50 bg-surface-1 dark:bg-surface-1-dark shadow-sm w-full">
-    <div class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none">
-      <button @click="openSideMenu"
-        class="absolute left-4 top-4.5 p-1 rounded-md border border-divider dark:border-divider-dark md:hover:bg-surface-hover dark:md:hover:bg-surface-hover-dark focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
-        aria-label="Abrir menú">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-7 h-7 text-text-main dark:text-main-dark">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button>
+    <SideMenu :is-open="isSideMenuOpen" @close="closeSideMenu" @action="handleMenuAction" />
 
-      <!-- Contenedor animado conjunto -->
-      <div ref="logoBlockRef"
-        class="flex items-center gap-x-2 transition-all duration-300 ease-in-out md:hover:scale-105 md:hover:drop-shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 256 256"
-            class="h-8 w-8 text-text-main dark:text-main-dark"
-            fill="currentColor"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            aria-hidden="true">
-          <g id="#000000ff">
-            <path d="M122.92 32.93C130.66 26.93 140.09 22.98 149.9 22.28C157.33 21.75 164.86 22.26 172.11 24.01C175.34 24.9 179.27 26.37 180.1 30.03C180.92 33.08 178.62 35.64 176.65 37.63C169.95 44.27 163.35 51.02 156.55 57.55C155.03 58.96 153.56 60.7 154.1 62.93C154.76 67.83 154.75 73.69 158.86 77.15C161.28 79.49 164.76 79.94 167.97 80.04C170.48 80.12 173.41 80.28 175.33 78.34C183.54 70.56 191.13 62.14 199.23 54.26C202.14 51 207.89 53.16 208.76 57.2C213.07 71.97 212.77 88.61 205.46 102.41C202.79 107.97 198.53 112.52 194.11 116.73C206.17 124.6 215.98 136.34 219.88 150.36C223.69 163.57 222.55 178.21 216.63 190.65C208.98 206.98 193.35 219.56 175.47 222.66C160.05 226.02 143.45 221.43 131.03 211.92C116.5 201.06 108.17 182.94 108.47 164.9C106.82 165.69 105.23 166.64 103.94 167.95C94.06 177.72 84.36 187.69 74.43 197.42C65.68 205.83 51.03 206.85 41.14 199.86C30.98 192.76 26.5 178.51 30.84 166.89C32.39 161.69 36.14 157.63 39.96 153.96C59.91 133.91 79.92 113.92 99.88 93.89C101.65 91.93 103.73 89.76 103.71 86.94C103.76 82.62 103.08 78.32 103.2 74C102.95 58.26 110.36 42.48 122.92 32.93ZM120.36 51.36C115.25 59.19 113.27 68.79 113.97 78.04C114.26 82.29 115.09 86.56 114.49 90.82C113.94 94.21 111.74 97.01 109.4 99.41C88.95 119.95 68.75 140.75 48.02 161.03C44.56 164.25 41.13 168.07 40.7 173.01C39.24 180.47 42.88 188.8 49.98 191.95C56.09 194.79 63.67 193.11 68.36 188.37C82.52 174.19 96.62 159.94 110.65 145.64C112.53 143.79 114.04 141.61 115.25 139.29C122.54 125.53 135.62 114.84 150.72 110.88C161.6 107.88 173.23 108.72 183.94 112.04C189.37 107.03 194.67 101.51 197.52 94.58C201.06 86.52 201.27 77.49 200.53 68.86C195.66 71.7 192.39 76.52 188.27 80.27C184.03 84.18 180.29 89.87 174.02 90.35C169.35 90.61 164.64 90.47 159.97 90.26C157.28 90.25 155.51 87.96 153.67 86.34C150.06 82.61 145.18 79.21 144.55 73.63C143.99 68.27 142.78 62.81 143.6 57.43C145.69 52.61 150.29 49.54 153.72 45.72C157.17 41.9 161.54 38.77 164.01 34.16C147.83 29.33 129.22 37.2 120.36 51.36ZM157.32 122.19C144.36 124.41 132.71 132.85 126.37 144.34C120.79 154.42 119.27 166.63 122.09 177.79C124.93 189.74 133.13 200.27 143.98 206.01C152.93 210.94 163.63 212.37 173.64 210.54C188.42 207.69 201.55 197.01 206.88 182.87C209.85 175.46 210.41 167.28 209.42 159.41C207.14 143.42 195.38 129.25 180.15 123.93C172.86 121.35 164.91 120.92 157.32 122.19Z"/>
-            <path d="M162.41 135.41C165.51 133.66 169.94 135.68 170.64 139.16C171.47 146.94 170.04 154.89 171.31 162.6C175.78 166.25 181.34 168.48 185.41 172.62C188.51 176.22 184.93 182.58 180.24 181.64C176.73 180.57 173.92 178.03 170.8 176.2C167.14 173.56 162.63 171.86 159.74 168.31C158.4 161.34 159.53 154.09 159.14 147.01C159.36 143.07 157.99 137.54 162.41 135.41Z"/>
-          </g>
-        </svg>
-        <h1 class="text-4xl font-extrabold tracking-tight text-text-main dark:text-main-dark">Notifica</h1>
-      </div>
-    </div>
-  </header>
-
-  <main class="min-h-[calc(100svh-68px)] bg-app-bg dark:bg-app-bg-dark text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
-
-    <!-- Sección para añadir nueva tarea -->
-    <NewTaskForm
-  v-if="!isViewingPastShift"
-  :model-value-description="newTaskDescription"
-  :model-value-technician="newTaskTechnician"
-  @update:model-value-description="newTaskDescription = $event"
-  @update:model-value-technician="newTaskTechnician = $event"
-  @submit="startNewTask"
-  />
-
-    <!-- Botón para volver al turno actual si se está viendo uno pasado -->
-    <Transition enter-active-class="transition-all duration-300 ease-out" enter-from-class="opacity-0 max-h-0"
-      enter-to-class="opacity-100 max-h-[80px]" leave-active-class="transition-all duration-300 ease-in"
-      leave-from-class="opacity-100 max-h-[80px]" leave-to-class="opacity-0 max-h-0">
-      <div v-if="isViewingPastShift" class="w-full max-w-lg mb-4 overflow-hidden">
-        <button @click="returnToCurrentShift" class="w-full min-h-[44px] px-4 py-2 
-                bg-status-active dark:bg-status-active-dark
-                text-active-strong dark:text-active-strong-dark text-sm font-semibold
-                rounded-md shadow-sm hover:bg-status-active/80 dark:hover:bg-status-active/70
-                focus:outline-none focus:ring-2 focus:ring-status-active dark:focus:ring-status-active-dark focus:ring-offset-2
-                transition-all duration-300 ease-in-out
-                flex items-center justify-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" class="w-5 h-4">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+    <header class="sticky top-0 z-50 bg-surface-1 dark:bg-surface-1-dark shadow-sm w-full">
+      <div class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none">
+        <button @click="openSideMenu"
+          class="absolute left-4 top-4.5 p-1 rounded-md border border-divider dark:border-divider-dark md:hover:bg-surface-hover dark:md:hover:bg-surface-hover-dark focus:outline-none transition-all duration-150 ease-in-out active:scale-95"
+          aria-label="Abrir menú">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="w-7 h-7 text-text-main dark:text-main-dark">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          Volver al Turno Actual
         </button>
+
+        <!-- Contenedor animado conjunto -->
+        <div ref="logoBlockRef"
+          class="flex items-center gap-x-2 transition-all duration-300 ease-in-out md:hover:scale-105 md:hover:drop-shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 256 256"
+              class="h-8 w-8 text-text-main dark:text-main-dark"
+              fill="currentColor"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              aria-hidden="true">
+            <g id="#000000ff">
+              <path d="M122.92 32.93C130.66 26.93 140.09 22.98 149.9 22.28C157.33 21.75 164.86 22.26 172.11 24.01C175.34 24.9 179.27 26.37 180.1 30.03C180.92 33.08 178.62 35.64 176.65 37.63C169.95 44.27 163.35 51.02 156.55 57.55C155.03 58.96 153.56 60.7 154.1 62.93C154.76 67.83 154.75 73.69 158.86 77.15C161.28 79.49 164.76 79.94 167.97 80.04C170.48 80.12 173.41 80.28 175.33 78.34C183.54 70.56 191.13 62.14 199.23 54.26C202.14 51 207.89 53.16 208.76 57.2C213.07 71.97 212.77 88.61 205.46 102.41C202.79 107.97 198.53 112.52 194.11 116.73C206.17 124.6 215.98 136.34 219.88 150.36C223.69 163.57 222.55 178.21 216.63 190.65C208.98 206.98 193.35 219.56 175.47 222.66C160.05 226.02 143.45 221.43 131.03 211.92C116.5 201.06 108.17 182.94 108.47 164.9C106.82 165.69 105.23 166.64 103.94 167.95C94.06 177.72 84.36 187.69 74.43 197.42C65.68 205.83 51.03 206.85 41.14 199.86C30.98 192.76 26.5 178.51 30.84 166.89C32.39 161.69 36.14 157.63 39.96 153.96C59.91 133.91 79.92 113.92 99.88 93.89C101.65 91.93 103.73 89.76 103.71 86.94C103.76 82.62 103.08 78.32 103.2 74C102.95 58.26 110.36 42.48 122.92 32.93ZM120.36 51.36C115.25 59.19 113.27 68.79 113.97 78.04C114.26 82.29 115.09 86.56 114.49 90.82C113.94 94.21 111.74 97.01 109.4 99.41C88.95 119.95 68.75 140.75 48.02 161.03C44.56 164.25 41.13 168.07 40.7 173.01C39.24 180.47 42.88 188.8 49.98 191.95C56.09 194.79 63.67 193.11 68.36 188.37C82.52 174.19 96.62 159.94 110.65 145.64C112.53 143.79 114.04 141.61 115.25 139.29C122.54 125.53 135.62 114.84 150.72 110.88C161.6 107.88 173.23 108.72 183.94 112.04C189.37 107.03 194.67 101.51 197.52 94.58C201.06 86.52 201.27 77.49 200.53 68.86C195.66 71.7 192.39 76.52 188.27 80.27C184.03 84.18 180.29 89.87 174.02 90.35C169.35 90.61 164.64 90.47 159.97 90.26C157.28 90.25 155.51 87.96 153.67 86.34C150.06 82.61 145.18 79.21 144.55 73.63C143.99 68.27 142.78 62.81 143.6 57.43C145.69 52.61 150.29 49.54 153.72 45.72C157.17 41.9 161.54 38.77 164.01 34.16C147.83 29.33 129.22 37.2 120.36 51.36ZM157.32 122.19C144.36 124.41 132.71 132.85 126.37 144.34C120.79 154.42 119.27 166.63 122.09 177.79C124.93 189.74 133.13 200.27 143.98 206.01C152.93 210.94 163.63 212.37 173.64 210.54C188.42 207.69 201.55 197.01 206.88 182.87C209.85 175.46 210.41 167.28 209.42 159.41C207.14 143.42 195.38 129.25 180.15 123.93C172.86 121.35 164.91 120.92 157.32 122.19Z"/>
+              <path d="M162.41 135.41C165.51 133.66 169.94 135.68 170.64 139.16C171.47 146.94 170.04 154.89 171.31 162.6C175.78 166.25 181.34 168.48 185.41 172.62C188.51 176.22 184.93 182.58 180.24 181.64C176.73 180.57 173.92 178.03 170.8 176.2C167.14 173.56 162.63 171.86 159.74 168.31C158.4 161.34 159.53 154.09 159.14 147.01C159.36 143.07 157.99 137.54 162.41 135.41Z"/>
+            </g>
+          </svg>
+          <h1 class="text-4xl font-extrabold tracking-tight text-text-main dark:text-main-dark">Notifica</h1>
+        </div>
       </div>
-    </Transition>
+    </header>
 
-    <!-- Selector de Turno -->
-    <!-- Este div se moverá debajo de TaskList -->
+    <main class="min-h-[calc(100svh-68px)] bg-app-bg dark:bg-app-bg-dark text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden">
 
-    <!-- Lista de Tareas (ahora filtrada y ordenada) -->
-    <TaskList
-      :key="taskListKey"
-      :tasks="filteredAndSortedTasks"
-      :title="listTitle"
-      :title-id="shiftTitleId"
-      :title-icon="icons[getShiftIcon(shiftTitleId)]"
-      @finish-task="finishTask"
-      @update-task="updateTask"
-      @reactivate-task="reactivateTask"
-      @delete-task="deleteTask"
+      <!-- Sección para añadir nueva tarea -->
+      <NewTaskForm
+    v-if="!isViewingPastShift"
+    :model-value-description="newTaskDescription"
+    :model-value-technician="newTaskTechnician"
+    @update:model-value-description="newTaskDescription = $event"
+    @update:model-value-technician="newTaskTechnician = $event"
+    @submit="startNewTask"
     />
 
-    <!-- Separador Visual -->
-    <hr class="w-5/6 max-w-md border-divider dark:border-divider-dark my-6" />
-    <!-- Ancho porcentual para que sea más corta en móviles, centrada por items-center del main -->
+      <!-- Botón para volver al turno actual si se está viendo uno pasado -->
+      <Transition enter-active-class="transition-all duration-300 ease-out" enter-from-class="opacity-0 max-h-0"
+        enter-to-class="opacity-100 max-h-[80px]" leave-active-class="transition-all duration-300 ease-in"
+        leave-from-class="opacity-100 max-h-[80px]" leave-to-class="opacity-0 max-h-0">
+        <div v-if="isViewingPastShift" class="w-full max-w-lg mb-4 overflow-hidden">
+          <button @click="returnToCurrentShift" class="w-full min-h-[44px] px-4 py-2 
+                  bg-status-active dark:bg-status-active-dark
+                  text-active-strong dark:text-active-strong-dark text-sm font-semibold
+                  rounded-md shadow-sm hover:bg-status-active/80 dark:hover:bg-status-active/70
+                  focus:outline-none focus:ring-2 focus:ring-status-active dark:focus:ring-status-active-dark focus:ring-offset-2
+                  transition-all duration-300 ease-in-out
+                  flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-5 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+            Volver al Turno Actual
+          </button>
+        </div>
+      </Transition>
 
-    <!-- Contenedor para Selector de Turno y Filtros -->
-    <div
-      class="bg-surface-1 dark:bg-surface-1-dark rounded-xl p-4 shadow-sm w-full max-w-lg mb-4 border border-divider dark:border-divider-dark flex flex-wrap items-center justify-between gap-x-1 gap-y-3">
       <!-- Selector de Turno -->
-      <ShiftSelector
-        :availableShifts="availableShifts"
-        :currentShiftId="currentShiftId"
-        :selectedShiftToView="selectedShiftToView"
-        @select="selectShift"
+      <!-- Este div se moverá debajo de TaskList -->
+
+      <!-- Lista de Tareas (ahora filtrada y ordenada) -->
+      <TaskList
+        :key="taskListKey"
+        :tasks="filteredAndSortedTasks"
+        :title="listTitle"
+        :title-id="shiftTitleId"
+        :title-icon="icons[getShiftIcon(shiftTitleId)]"
+        @finish-task="finishTask"
+        @update-task="updateTask"
+        @reactivate-task="reactivateTask"
+        @delete-task="deleteTask"
       />
 
-      <!-- Filtros -->
-      <TaskFilters
-      v-model:showOnlyActive="showOnlyActive"
-      v-model:showOnlyNotNotified="showOnlyNotNotified"
-      />
-    </div>
-    
-    <!-- Espacio final para evitar elementos del SO -->
-    <div class="h-6 md:h-8" />
+      <!-- Separador Visual -->
+      <hr class="w-5/6 max-w-md border-divider dark:border-divider-dark my-6" />
+      <!-- Ancho porcentual para que sea más corta en móviles, centrada por items-center del main -->
 
-    <!-- Input de archivo oculto (se mantiene ya que es funcional y no visual) -->
-    <input type="file" ref="fileImportInputRef" @change="importTasksFromJson" accept=".json" class="hidden" />
+      <!-- Contenedor para Selector de Turno y Filtros -->
+      <div
+        class="bg-surface-1 dark:bg-surface-1-dark rounded-xl p-4 shadow-sm w-full max-w-lg mb-4 border border-divider dark:border-divider-dark flex flex-wrap items-center justify-between gap-x-1 gap-y-3">
+        <!-- Selector de Turno -->
+        <ShiftSelector
+          :availableShifts="availableShifts"
+          :currentShiftId="currentShiftId"
+          :selectedShiftToView="selectedShiftToView"
+          @select="selectShift"
+        />
 
-  </main>
+        <!-- Filtros -->
+        <TaskFilters
+        v-model:showOnlyActive="showOnlyActive"
+        v-model:showOnlyNotNotified="showOnlyNotNotified"
+        />
+      </div>
+      
+      <!-- Espacio final para evitar elementos del SO -->
+      <div class="h-6 md:h-8" />
 
-  <!-- Sistema propio de notificaciones -->
-  <Teleport to="body">
-    <TransitionGroup tag="div" name="toast" class="fixed bottom-8 inset-x-0 flex flex-col items-center space-y-2 z-[9999] overflow-hidden pointer-events-none">
-      <Toast v-for="toast in toasts" :key="toast.id" v-bind="toast" @onClose="remove(toast.id)" />
-    </TransitionGroup>
-  </Teleport>
+      <!-- Input de archivo oculto (se mantiene ya que es funcional y no visual) -->
+      <input type="file" ref="fileImportInputRef" @change="importTasksFromJson" accept=".json" class="hidden" />
 
+    </main>
+
+    <!-- Sistema propio de notificaciones -->
+    <Teleport to="body">
+      <TransitionGroup tag="div" name="toast" class="fixed bottom-8 inset-x-0 flex flex-col items-center space-y-2 z-[9999] overflow-hidden pointer-events-none">
+        <Toast v-for="toast in toasts" :key="toast.id" v-bind="toast" @onClose="remove(toast.id)" />
+      </TransitionGroup>
+    </Teleport>
+  </div>
 </template>

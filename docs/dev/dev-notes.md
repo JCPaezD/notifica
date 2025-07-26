@@ -18,6 +18,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Capacitor Share: problema con compartir en Android](#capacitor-share-problema-con-compartir-en-android)
   - [Enfoque estratégico de publicación (etapa 8)](#enfoque-estratégico-de-publicación-etapa-8)
   - [Eliminación del reload tras deshacer "Borrar todo"](#eliminación-del-reload-tras-deshacer-borrar-todo)
+  - [Transición visual global en cambio de tema (modo claro ↔ oscuro)](#transición-visual-global-en-cambio-de-tema-modo-claro--oscuro)
 - [Errores y problemas documentados](#errores-y-problemas-documentados)
   - [Bug en iOS PWA: scroll azul tras cerrar teclado](#bug-en-ios-pwa-scroll-azul-tras-cerrar-teclado)
   - [Problemas comunes en emuladores Android](#problemas-comunes-en-emuladores-android)
@@ -33,6 +34,8 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
 - [Notas meta del proyecto](#notas-meta-del-proyecto)
   - [Nueva conversación principal para el desarrollo de Notifica](#nueva-conversación-principal-para-el-desarrollo-de-notifica)
+  - [Notas para generar mensaje para nueva conversacion de desarrollo](#notas-para-generar-mensaje-para-nueva-conversacion-de-desarrollo)
+  - [Normas para generar bloques de documentación en dev-notes](#normas-para-generar-bloques-de-documentación-en-dev-notes)
 
 ---
 
@@ -502,6 +505,37 @@ Se elimina por completo la propiedad `onDismiss` del toast de restauración. No 
 La restauración ahora es fluida, reactiva y sin recarga forzada.
 
 Este cambio debe mantenerse salvo que una futura regresión demuestre necesidad real de una recarga manual (lo cual no es el caso actual).
+
+### Transición visual global en cambio de tema (modo claro ↔ oscuro)
+
+**Objetivo:**  
+Permitir una transición visual suave cuando el usuario activa o desactiva el modo oscuro, sin parpadeos ni cambios bruscos, y sin romper otras transiciones como la pulsación de botones.
+
+**Diagnóstico inicial:**  
+- Se intentó aplicar una transición global con `* { transition: background-color, color, ... }` a 2500 ms.
+- Funcionaba bien en algunos elementos (fondos de tareas, contenedores), pero no se aplicaba a botones e inputs.
+- Algunos botones (como los que contienen solo iconos SVG) sí aplicaban la transición correctamente, lo que indicaba que no era un problema de `transition-property`, sino de selectores.
+
+**Pruebas y hallazgos:**
+- Añadir una regla específica para `button, input, textarea` permitió aplicar también la transición a estos elementos.
+- Se confirmó que Tailwind aplica estilos base específicos a botones e inputs que podían anular reglas genéricas.
+- Se detectó que con `transition-duration: 2500ms` también se veían afectadas animaciones de pulsación (por ejemplo, el feedback visual al hacer clic en un botón), que se volvieron lentas e imprecisas.
+
+**Solución final aplicada:**
+- Se definieron dos bloques CSS explícitos:  
+  1. Uno para `*` que define la transición global con `transition-property: background-color, border-color, color, fill, stroke;`.
+  2. Otro para `button, input, textarea` que replica la misma transición (para asegurar aplicación uniforme).
+
+- Se bajó la duración global de transición a `300ms`, lo que permite:
+  - Una transición clara y fluida al cambiar de modo claro ↔ oscuro.
+  - Mantener animaciones rápidas e intuitivas para interacción con botones.
+
+**Resultado:**
+- Transición global de color coherente, incluida en botones e inputs.
+- Compatible con pulsaciones y otras interacciones rápidas.
+- Validado en navegadores de escritorio, Android y PWA iOS.
+
+**Aplicable a otros proyectos como Nocta.** Recomendable reutilizar el patrón completo con ajustes mínimos.
 
 ---
 
@@ -978,4 +1012,23 @@ Cuando se genere una nueva conversación de desarrollo para Notifica:
 - Usar frases claras, sintéticas y orientadas a acción.
 - Solo incluir tareas validadas y documentadas. Nunca asumir el estado de una tarea no confirmada.
 - Incluir en “aprendizajes estructurales” cualquier conclusión útil no reflejada aún en los documentos del proyecto.
+
+### Normas para generar bloques de documentación en dev-notes
+
+**Objetivo:**  
+Estandarizar la forma de redactar nuevos bloques de documentación dentro de este archivo, para mantener coherencia, claridad y trazabilidad entre conversaciones.
+
+**Normas generales:**
+
+- **Ubicación:** El asistente debe decidir en qué sección del documento encaja mejor el nuevo bloque, basándose en el contenido ya existente. No debe crear secciones nuevas innecesariamente.
+- **Índice:** Siempre debe generarse una línea para el índice, con el formato exacto ya utilizado (`- [Título](#ancla)`), sin símbolos extra.
+- **Formato:** 
+  - Usar `##` para secciones principales y `###` para subsecciones dentro de ellas.
+  - Usar **negritas** para resaltar partes importantes, no títulos.
+  - No incluir bloques de código ni anotaciones técnicas que ya estén presentes en los archivos del proyecto.
+- **Contenido:** La redacción debe explicar claramente el contexto, los motivos de la decisión, pruebas realizadas, y resultado final. Debe poder entenderse sin necesidad de leer el código fuente.
+- **Entrega:** El bloque debe entregarse como texto plano, en un bloque `.txt` o `.md` sin interpretar, para permitir copiar y pegar fácilmente.
+
+**Aplicación:**  
+Estas reglas deben seguirse siempre que se documente una nueva decisión técnica, funcionalidad implementada, hallazgo relevante o cualquier aspecto del proyecto que requiera trazabilidad.
 

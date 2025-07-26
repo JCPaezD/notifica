@@ -520,10 +520,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Reemplazado `<img>` por SVG inline
         - [x] Color dinámico aplicado con `currentColor` y clases `text-*`
         - [x] SVG limpiado y optimizado para mantener huecos y detalles
-    - [ ] Transición de modo oscuro:
-        - [ ] Añadir clase `transition-colors duration-500` al contenedor principal
-        - [ ] Bloquear doble click durante el cambio con flag temporal (`isSwitching`)
-        - [ ] Validar que la animación no introduce parpadeo en PWA
+  - [x] Transición de modo oscuro:
+        - [x] Implementar transición global de colores con CSS (`animations.css`)
+        - [x] Añadir regla específica para `button`, `input` y `textarea` con `!important` para asegurar aplicación
+        - [x] Ajustar duración a 300ms como compromiso entre fluidez de tema y respuesta de interacción
+        - [ ] Validar que la animación es coherente en PWA, Android y escritorio
     - [ ] Colores modo oscuro muy vibrantes?
 
   - [ ] Validar en PWA Android (modo oscuro del sistema activado)
