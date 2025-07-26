@@ -9,12 +9,17 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { useDarkMode } from '@/composables/useDarkMode'
 import { menuButtonStyles } from '../constants/menuButtonStyles'
+import { useDarkMode } from '@/composables/useDarkMode'
+
+const { preferredMode, setPreferredMode } = useDarkMode()
+
+const themeModes = ['light', 'dark', 'system'] as const
+type ThemeMode = typeof themeModes[number]
 
 
 const isOptionsOpen = ref(false)
-const { isDark, toggleDark } = useDarkMode()
+const { isDark } = useDarkMode()
 
 const mode = ref<'light' | 'dark'>(isDark.value ? 'dark' : 'light')
 
@@ -251,19 +256,28 @@ const onLeave = (el: Element) => {
                     @before-leave="onBeforeLeave"
                     @leave="onLeave"
                   >
-                    <div v-show="isOptionsOpen" id="options-content" class="pl-6 pr-4 space-y-2">
-                      <!-- Botón modo oscuro -->
-                      <button
-                        @click="toggleDark()"
-                        :class="[
-                          'w-full flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium',
-                          getButtonStyle('toggle', mode),
-                          'active:scale-95 transition-all duration-150 ease-in-out'
-                        ]"
-                      >
-                        <span>Modo oscuro</span>
-                        <span>{{ isDark ? 'Oscuro' : 'Claro' }}</span>
-                      </button>
+                    <!-- Selector de tema: Claro / Oscuro / Sistema -->
+                    <div id="options-content" v-show="isOptionsOpen">
+                      <div class="pl-6 pr-4 space-y-2 text-sm">
+                        <p class="text-subtle dark:text-subtle-dark font-medium pl-1">Modo de tema</p>
+                        <div class="flex gap-2">
+                          <button
+                            v-for="mode in themeModes"
+                            :key="mode"
+                            @click="setPreferredMode(mode)"
+                            :class="[
+                              'flex-1 rounded-md px-3 py-2 text-center transition-all duration-150',
+                              preferredMode === mode
+                                ? 'bg-accent-main text-white font-semibold'
+                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+                            ]"
+                          >
+                            <span v-if="mode === 'light'">☀ Claro</span>
+                            <span v-else-if="mode === 'dark'">🌙 Oscuro</span>
+                            <span v-else>⚙ Sistema</span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </Transition>
                 </div>

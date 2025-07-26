@@ -571,9 +571,14 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 
   ⚙️ Subbloque 6: Integración opcional con el sistema operativo
-  - [ ] Detectar modo del sistema en primera carga
-  - [ ] (Opcional) Añadir selector con tres opciones: claro / oscuro / seguir sistema
-  - [ ] No sobrescribir la preferencia manual tras cambio de usuario
+  - [x] Añadir preferencia persistente para modo de tema: 'light' | 'dark' | 'system'
+  - [x] Detectar modo del sistema en primera carga si no hay preferencia
+  - [x] Observar cambios en 'prefers-color-scheme' solo si está en modo 'system'
+  - [x] Aplicar clase 'dark' en <html> según resultado efectivo (usuario o sistema)
+  - [x] Implementar UI clara con selector de 3 opciones (Claro / Oscuro / Sistema)
+      - [x] Visualizar selección activa
+      - [x] Permitir cambiar entre modos fácilmente
+      - [ ] Integrar en SideMenu de forma coherente con diseño actual
 
   📄 Subbloque 7: Documentación
   - [ ] Explicar lógica en `dev-notes.md`: modo `class`, paleta usada, persistencia
