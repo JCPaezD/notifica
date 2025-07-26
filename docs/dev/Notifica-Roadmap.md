@@ -552,12 +552,16 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Icono de notificar aparece negro en modo claro (debe ser verde)
           - [x] Borde izquierdo de estado se estrecha en tareas con texto largo
           - [x] Botones de primera línea se centran verticalmente con texto largo (deben anclarse abajo)
-          - [ ] Mejorar alineación vertical de fila 2 en tareas:
-              - [ ] Alinear botón principal con botones secundarios (notificar y eliminar)
-              - [ ] Alinear el bloque de duración ("0.5h") con el bloque de horas (inicio–fin)
-              - [ ] Mantener consistencia visual en tareas con y sin duración
-              - [ ] Validar en tareas con pocas y muchas líneas
-          - [ ] Transición de oscuro → claro muy lenta en textos e iconos en iOS PWA (pantalla queda "en blanco" durante varios segundos)
+      - [x] Mejorar alineación vertical de fila 2 en tareas:
+          - [x] Alinear botón principal con botones secundarios (notificar y eliminar)
+                → Se unificó la estructura de ambas filas en un único contenedor `grid` con `grid-cols-[1fr_auto_auto]` para garantizar la alineación vertical entre columnas.
+          - [x] Alinear el bloque de duración ("0.5h") con el bloque de horas (inicio–fin)
+                → Ambas celdas se colocaron en `col-start-2` con `justify-self-end` para forzar el alineamiento en columna, sin dependencia de altura.
+          - [x] Mantener consistencia visual en tareas con y sin duración
+                → Se eliminó `grid-rows-2` para permitir altura automática de filas y evitar espacio vacío innecesario. Funciona correctamente con tareas de una o varias líneas.
+          - [x] Validar en tareas con pocas y muchas líneas
+                → Probado visualmente en tareas con diferentes longitudes de descripción y presencia o ausencia de técnico y duración.
+      - [ ] Transición de oscuro → claro muy lenta en textos e iconos en iOS PWA (pantalla queda "en blanco" durante varios segundos)
 
 
   ⚙️ Subbloque 6: Integración opcional con el sistema operativo

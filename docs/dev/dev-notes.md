@@ -29,9 +29,10 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Bug con clases `text-*` no aplicadas por Tailwind](#bug-con-clases-text--no-aplicadas-por-tailwind-extendcolors-vs-extendtextcolor)
   - [Bug con colores en toasts: diagnóstico y solución](#bug-con-colores-en-toasts-diagnóstico-y-solución)
   - [Logo dinámico en modo claro/oscuro](#logo-dinámico-en-modo-clarooscuro)
-- [UI, diseño y publicación](#ui-diseño-y-publicación)
+- [UI, diseño y experiencia de usuario](#ui-diseño-y-experiencia-de-usuario)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
+  - [Reestructuración del layout de las tareas para alineación precisa (botón, duración, horas)](#reestructuración-del-layout-de-las-tareas-para-alineación-precisa-botón-duración-horas)
 - [Notas meta del proyecto](#notas-meta-del-proyecto)
   - [Nueva conversación principal para el desarrollo de Notifica](#nueva-conversación-principal-para-el-desarrollo-de-notifica)
   - [Notas para generar mensaje para nueva conversacion de desarrollo](#notas-para-generar-mensaje-para-nueva-conversacion-de-desarrollo)
@@ -837,7 +838,7 @@ Se validó visualmente en todos los modos y dispositivos. Bug cerrado.
 
 ---
 
-## UI, diseño y publicación
+## UI, diseño y experiencia de usuario
 
 ### Splash personalizada en Android
 
@@ -932,6 +933,36 @@ Al final del día, marca las tareas notificadas y borra las completadas. Puedes 
 Una interfaz simple, rápida y sin distracciones. Ideal para usar a lo largo de la jornada sin complicaciones.
 
 Diseñada desde dentro, para quienes necesitan agilidad en el trabajo técnico.
+
+### Reestructuración del layout de las tareas para alineación precisa (botón, duración, horas)
+
+**Contexto:**  
+En la estructura original basada en `flex`, la alineación vertical entre filas era inconsistente. Los elementos de la segunda fila (como duración y botones secundarios) no se podían alinear correctamente con los de la primera (horas y botón principal), especialmente en tareas con muchas líneas.
+
+**Problemas detectados:**
+- El bloque de duración (`0.5h`) no quedaba alineado con el bloque de horas (inicio–fin).
+- Los botones de notificación y eliminar no quedaban bajo el botón principal, sino desajustados a la derecha.
+- Las dos filas (primera y segunda) estaban estructuradas como bloques `flex` separados, sin relación entre sus columnas.
+
+**Solución aplicada:**  
+Se migró la estructura del contenido de cada tarea a `CSS Grid` con 3 columnas:
+- `grid-cols-[1fr_auto_auto]` define tres columnas alineadas:
+  1. Descripción y técnico (crecen libremente),
+  2. Horas y duración,
+  3. Botón principal y botones secundarios.
+
+Los elementos se posicionan explícitamente en la cuadrícula (`col-start`, `row-start`), logrando alineación vertical entre filas distintas.
+
+Ajustes adicionales:
+- Se eliminó `grid-rows-2` para evitar alturas forzadas y mejorar el ajuste en tareas con muchas o pocas líneas.
+- Se usó `justify-self-end` en horas y duración para forzar su alineación derecha sin afectar al resto del layout.
+- Los botones secundarios se distribuyen horizontalmente con `justify-evenly` dentro de su celda de grid.
+
+**Resultado:**  
+Layout robusto, alineado vertical y horizontalmente, válido para tareas cortas y largas. Se mantiene predecible y limpio en todos los modos y estados.
+
+**Relacionado:**  
+Roadmap · Etapa 8 · Tareas de UI → “Mejorar alineación vertical de fila 2 en tareas”.
 
 ---
 

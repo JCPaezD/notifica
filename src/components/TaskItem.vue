@@ -318,11 +318,10 @@ const handleDeleteTask = () => {
     <div :class="['w-1 shrink-0 z-10', ...statusBarDynamicClasses]"></div>
 
     <!-- Contenido de la tarea -->
-    <div class="flex-grow py-1 px-3 flex flex-col relative z-0">
-      <!-- Fila 1: Descripción, Horas, Botón Acción Principal -->
-      <div class="flex items-end justify-between gap-x-2">
-        <!-- Descripción -->
-        <div class="flex-grow min-w-0">
+    <div class="flex-grow grid grid-cols-[1fr_auto_auto] items-center gap-x-2 py-1 px-3">
+
+      <!-- Fila 1 / Celda 1: Descripción -->
+      <div class="min-w-0 col-start-1 row-start-1 self-end">
           <div class="py-0.5">
             <template v-if="isEditingDescription">
               <input
@@ -342,10 +341,10 @@ const handleDeleteTask = () => {
               </p>
             </template>
           </div>
-        </div>
+      </div>
 
-        <!-- Horas -->
-        <div class="flex-shrink-0 grid grid-cols-[auto_min-content_auto] items-center gap-x-1 text-xs">
+      <!-- Fila 1 / Celda 2: Horas -->
+      <div class="col-start-2 row-start-1 self-end justify-self-end grid grid-cols-[auto_min-content_auto] items-center gap-x-1 text-xs">
           <div class="min-w-[32px] text-center">
             <template v-if="isEditingStartTime">
               <input ref="startTimeInputRef" type="time" v-model="editableStartTime" @keyup.enter="saveStartTime" @blur="saveStartTime" 
@@ -390,10 +389,10 @@ const handleDeleteTask = () => {
               </div>
             </Transition>
           </div>
-        </div>
+      </div>
 
-        <!-- Botón Acción Principal -->
-        <div class="flex-shrink-0 w-[88px]"> <!-- Ancho fijo para el botón para consistencia -->
+      <!-- Fila 1 / Celda 3: Botón Acción Principal -->
+      <div class="col-start-3 row-start-1 self-end w-[88px]"> <!-- Ancho fijo para el botón para consistencia -->
           <Transition
             name="button-swap"
             mode="out-in"
@@ -432,14 +431,10 @@ const handleDeleteTask = () => {
               <span>Reabrir</span>
             </button>
           </Transition>
-        </div>
       </div>
 
-      <!-- Fila 2: Técnico, Duración, Botones Secundarios -->
-      <div class="flex items-center justify-between gap-x-2 mt-1"> <!-- mt reducido -->
-        <!-- Técnico y Duración -->
-        <!-- Técnico + Duración en misma fila con alineación opuesta -->
-        <div class="flex-grow flex justify-between items-center min-w-0 text-xs">
+      <!-- Fila 2 / Celda 1: Técnico -->
+      <div class="min-w-0 col-start-1 row-start-2 text-xs self-start pt-1">
           <!-- Técnico -->
           <div class="min-w-0">
             <template v-if="isEditingTechnician">
@@ -454,8 +449,10 @@ const handleDeleteTask = () => {
               </p>
             </template>
           </div>
+      </div>
 
-          <!-- Duración alineada derecha -->
+      <!-- Fila 2 / Celda 2: Duración -->
+      <div class="col-start-2 row-start-2 justify-self-end self-start pt-1">
           <Transition
             name="duration-fade"
             enter-active-class="transition-all duration-200 ease-out"
@@ -467,15 +464,13 @@ const handleDeleteTask = () => {
           >
             <p v-if="formattedDuration" 
                class="text-xs font-semibold text-text-main/70 dark:text-main-dark/70
-                      bg-surface-hover dark:bg-surface-hover-dark border border-divider dark:border-divider-dark rounded 
-                      px-2 py-0.5 ml-4 whitespace-nowrap mt-0.5">
+                      bg-surface-hover dark:bg-surface-hover-dark border border-divider dark:border-divider-dark rounded px-2 py-0.5 whitespace-nowrap">
               {{ formattedDuration }}
             </p>
           </Transition>
-        </div>
-
-        <!-- Botones Secundarios (Notificado y Eliminar) -->
-        <div class="ml-auto flex items-center gap-2 flex-shrink-0"> <!-- ml-auto para empujar a la derecha, gap-2 -->
+      </div>
+      <!-- Fila 2 / Celda 3: Botones Secundarios -->
+      <div class="col-start-3 row-start-2 flex items-center justify-evenly w-full self-start pt-1">
           <!-- Icono Notificado -->
           <button 
             ref="notifiedIconBtnRef"
@@ -523,9 +518,7 @@ const handleDeleteTask = () => {
               <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
             </svg>
           </button>
-        </div>
       </div>
-
     </div>
   </li>
 </template>
