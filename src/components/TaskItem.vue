@@ -332,7 +332,7 @@ const handleDeleteTask = () => {
                 @blur="saveDescription"
                 @keyup.esc="cancelEditDescription"
                 class="font-semibold text-sm text-text-main dark:text-main-dark p-1 border border-divider dark:border-divider-dark rounded-md w-full 
-                       focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"
+                       focus:ring-1 focus:ring-accent-main focus:border-accent-main focus:transition-colors duration-300 ease-in-out"
               />
             </template>
             <template v-else>
