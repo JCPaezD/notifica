@@ -615,8 +615,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
   > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
   - [x] Corregir zoom con doble tap en chrome/safari de ios 
-  - [ ] Actualizar prompt de "Borrar todo" a "¿Estás seguro de que quieres borrar TODAS las tareas?"
-  - [ ] Quitar toast de no compartido.
+  - [x] Actualizar prompt de "Borrar todo" a "¿Estás seguro de que quieres borrar TODAS las tareas de la aplicación? No podrán ser recuperadas."
+  - [x] Quitar toast de no compartido.
   - [ ] Ajustar texto "Compartir" a este formato:
       📝 Comprobación de señales en PLC 22:46 a 23:02 (0.5 h)
       ✅ Notificado

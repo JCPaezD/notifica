@@ -760,11 +760,7 @@ const exportTasksToJson = async () => {
         });
       }
     } catch (err) {
-      add({
-        title: 'Error al Compartir',
-        description: 'Ocurrió un error al intentar la acción.',
-        type: 'error'
-      });
+      // Toast de error silenciado: el usuario puede haber cancelado la acción de compartir voluntariamente
     }
   };
 
