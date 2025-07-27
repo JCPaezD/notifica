@@ -432,7 +432,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] 🔁 Revertir cambio(s) de layout para evitar el bug (aunque se pierda alguna mejora)
         - [x] 📌 Aceptar el bug como limitación documentada de iOS PWA, si no hay alternativa razonable
 
-- [ ] 🌓 Añadir soporte para modo oscuro (tema `dark` en Tailwind)
+- [x] 🌓 Añadir soporte para modo oscuro (tema `dark` en Tailwind)
 
   ✅ Subbloque 1: Activación y toggle global
   - [x] Activar modo `class` en Tailwind
@@ -589,7 +589,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Confirmar que no quedan decisiones sin documentar y hacer commit de cierre del bloque
 
 
-
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
   - [ ] Ajustar fecha si es coherente
@@ -609,7 +608,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
   - [ ] Confirmación visual tras enviar
 
-- [ ] 🛠 Mejoras UX/UI aprendidas en Nocta
+- [ ] 🛠 Mejoras UX/UI
   - [x] Vuelve a aparece bug: boton deshacer no hace animacion al pulsar (móvil devtools). En escritorio funciona bien.
     > Acción sugerida (futura): revisar que todos los botones de acción en toasts tengan ese @touchstart.
   - [x] Despues de "Borrar todo" + deshacer, al irse el toast hay recarga de la app. Revisar si es necesaria y quitar si no. No ocurre si no deshaces. [20/07/25]
