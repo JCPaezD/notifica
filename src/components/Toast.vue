@@ -69,7 +69,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useToast } from '@/composables/useToast'
+import { toastColors } from '@/constants/toastColors'
+
+const { startDismissTimer } = useToast()
+const toastRef = ref<HTMLElement | null>(null)
+const animateOnMount = ref(false)
 
 const props = defineProps<{
   id: number | string
@@ -80,22 +86,37 @@ const props = defineProps<{
     label: string
     onClick: () => void
   }[]
+  delayClose?: boolean
 }>()
 
 defineEmits<{
   (e: 'onClose'): void
 }>()
 
-const toastRef = ref<HTMLElement | null>(null)
-const animateOnMount = ref(false)
-
 onMounted(() => {
+  // Animación de entrada
   setTimeout(() => {
     animateOnMount.value = true
     setTimeout(() => {
       animateOnMount.value = false
     }, 400)
   }, 300)
+
+  // Tap fuera para activar cierre diferido
+  const handlePointerDown = (event: PointerEvent) => {
+    if (!toastRef.value) return
+    if (toastRef.value.contains(event.target as Node)) return
+
+    if (props.id && props.delayClose) {
+      startDismissTimer(String(props.id), 7000)
+    }
+  }
+
+  window.addEventListener('pointerdown', handlePointerDown)
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('pointerdown', handlePointerDown)
+  })
 })
 
 // Icono SVG como string (para evitar defineComponent y h)
@@ -126,8 +147,6 @@ const iconSvg = computed(() => {
   }
 })
 
-import { toastColors } from '@/constants/toastColors'
-
 const toastType = computed(() => props.type ?? 'info')
 
 const toastClasses = computed(() => {
@@ -142,3 +161,4 @@ const closeButtonClasses = computed(() => {
   return toastColors[toastType.value]?.close ?? ''
 })
 </script>
+

@@ -176,8 +176,9 @@ const deleteTask = (taskId: string) => {
         title: 'Tarea Eliminada',
         description: `"${taskToDelete.description}" ha sido eliminada.`,
         type: 'error',
+        delayClose: true,
         actions: [
-            {
+          {
             label: 'Deshacer',
             onClick: () => {
               // Restaurar la tarea en su posición original tras un leve retardo
@@ -247,6 +248,7 @@ const startNewShift = (showAlert = true) => {
       title: 'Nuevo Turno Iniciado',
       description: `Turno comenzado a las ${shiftStartTimeFormatted}.`,
       type: 'success',
+      delayClose: true,
       actions: [
         {
           label: 'Deshacer',
@@ -277,6 +279,7 @@ const startNewShift = (showAlert = true) => {
     },
     7000 // 7 segundos para reaccionar
   );
+
 };
 
 
@@ -517,6 +520,7 @@ const exportTasksToJson = async () => {
           title: 'Borrado Completo',
           description: 'Todas las tareas han sido eliminadas.',
           type: 'error',
+          delayClose: true,
           actions: [
             {
               label: 'Deshacer',
