@@ -621,8 +621,28 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       📝 Comprobación de señales en PLC 22:46 a 23:02 (0.5 h)
       ✅ Notificado
         👷 J. González
-  - [ ] Botón "Volver al turno actual" pasar a encima de bloque filtros.
-  - [ ] Toasts con "action button" no se cierran hasta tap fuera del toast. Se mantienen ante tap dentro del toast.
+  - [x] Botón "Volver al turno actual" pasar a encima de bloque filtros.
+  - [ ] 🧱 Evolución del sistema de toasts: control de cierre y múltiples acciones
+    - [x] Diseñar la solución para permitir cierre tras tap fuera, soporte de múltiples botones y toasts persistentes
+    - [x] Modificar `useToast.ts` para incluir:
+        - [x] Propiedad `delayClose` para activar cierre manual por tap fuera
+        - [x] Propiedad `persistent` para toasts que no deben cerrarse automáticamente
+        - [x] Propiedad `actions[]` para múltiples botones de acción
+    - [x] Modificar `Toast.vue` para:
+        - [x] Detectar y renderizar correctamente un único botón desde `actions[]`
+        - [x] Renderizar múltiples botones si `actions.length > 1`
+        - [x] Eliminar soporte anterior de `action` (singular)
+        - [x] Mantener compatibilidad visual, animación y botón de cierre `✕`
+    - [ ] Actualizar llamadas a `add(...)` en toasts con botón "Deshacer"
+        > Añadir `delayClose: true` y ajustar duración si es necesario
+    - [ ] Verificar el comportamiento en todos los modos y plataformas
+        > Asegurar que toasts simples, con acción única y múltiples siguen funcionando correctamente
+    - [ ] Documentar en `dev-notes.md`:
+        - [ ] Nuevas propiedades del tipo `Toast` (`delayClose`, `persistent`, `actions[]`)
+        - [ ] Justificación del comportamiento UX aplicado a toasts con botón "Deshacer"
+        - [ ] Preparación para futura implementación del toast con botones "Ayer / Hoy"
+        - [ ] Preparación para futura implementación del toast persistente tipo banner
+  - [ ] Hacer commit final del bloque
   - [ ] Cuando no haya tareas que mostrar -> mensaje placeholder "ninguna tarea" o similar
   - [ ] Revisar UX/UI y usabilidad del boton X del SideMenu. ¿es redundante con el overlay sombreado?
   - [ ] Quitar active de botones al soltar (movil) [opciones se queda active]

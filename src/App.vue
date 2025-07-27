@@ -176,28 +176,30 @@ const deleteTask = (taskId: string) => {
         title: 'Tarea Eliminada',
         description: `"${taskToDelete.description}" ha sido eliminada.`,
         type: 'error',
-        action: {
-          label: 'Deshacer',
-          onClick: () => {
-            // Restaurar la tarea en su posición original tras un leve retardo
-            setTimeout(() => {
-              allTasks.value.splice(taskIndex, 0, taskToDelete);
-            }, 300);
+        actions: [
+            {
+            label: 'Deshacer',
+            onClick: () => {
+              // Restaurar la tarea en su posición original tras un leve retardo
+              setTimeout(() => {
+                allTasks.value.splice(taskIndex, 0, taskToDelete);
+              }, 300);
 
-            // Cerrar el toast original con pequeño retardo para permitir animación
-            setTimeout(() => {
-              remove(toastId);
-            }, 500);
+              // Cerrar el toast original con pequeño retardo para permitir animación
+              setTimeout(() => {
+                remove(toastId);
+              }, 500);
 
-            // Mostrar el toast de restauración ligeramente después
-            setTimeout(() => {
-              add({
-                title: 'Tarea Restaurada',
-                description: `"${taskToDelete.description}" ha sido restaurada.`
-              });
-            }, 550);
+              // Mostrar el toast de restauración ligeramente después
+              setTimeout(() => {
+                add({
+                  title: 'Tarea Restaurada',
+                  description: `"${taskToDelete.description}" ha sido restaurada.`
+                });
+              }, 550);
+            }
           }
-        }
+        ]
       },
       7000 // Asegurar duración larga para el toast con "Deshacer"
     );
@@ -245,31 +247,33 @@ const startNewShift = (showAlert = true) => {
       title: 'Nuevo Turno Iniciado',
       description: `Turno comenzado a las ${shiftStartTimeFormatted}.`,
       type: 'success',
-      action: {
-        label: 'Deshacer',
-        onClick: async () => {
-          // Restaurar el estado anterior del turno
-          currentShiftId.value = previousCurrentShiftId;
-          selectedShiftToView.value = previousSelectedShiftToView;
+      actions: [
+        {
+          label: 'Deshacer',
+          onClick: async () => {
+            // Restaurar el estado anterior del turno
+            currentShiftId.value = previousCurrentShiftId;
+            selectedShiftToView.value = previousSelectedShiftToView;
 
-          // Eliminar tareas que se hayan podido crear en el newShiftId que se está deshaciendo
-          allTasks.value = allTasks.value.filter(task => task.shiftId !== newShiftId);
+            // Eliminar tareas que se hayan podido crear en el newShiftId que se está deshaciendo
+            allTasks.value = allTasks.value.filter(task => task.shiftId !== newShiftId);
 
-          await nextTick(); // Esperar a que la UI se actualice
+            await nextTick(); // Esperar a que la UI se actualice
 
-          setTimeout(() => {
-            remove(toastId);
-          }, 500);
+            setTimeout(() => {
+              remove(toastId);
+            }, 500);
 
-          setTimeout(() => {
-            add({
-              title: 'Acción Deshecha',
-              description: 'Se restauró el estado anterior al nuevo turno.',
-              type: 'info'
-            });
-          }, 550);
+            setTimeout(() => {
+              add({
+                title: 'Acción Deshecha',
+                description: 'Se restauró el estado anterior al nuevo turno.',
+                type: 'info'
+              });
+            }, 550);
+          }
         }
-      }
+      ]
     },
     7000 // 7 segundos para reaccionar
   );
@@ -513,32 +517,34 @@ const exportTasksToJson = async () => {
           title: 'Borrado Completo',
           description: 'Todas las tareas han sido eliminadas.',
           type: 'error',
-          action: {
-            label: 'Deshacer',
-            onClick: async () => { // Hacer la función onClick asíncrona
-              allTasks.value = tasksBeforeDelete; // Restaurar las tareas (revertimos al método de reemplazo)
-              // Convertir cadenas de fecha de vuelta a objetos Date
-              allTasks.value = allTasks.value.map(task => ({
-                ...task,
-                startTime: new Date(task.startTime),
-                endTime: task.endTime ? new Date(task.endTime) : undefined,
-              }));
-              await nextTick(); // Esperar al siguiente ciclo de actualización del DOM
+          actions: [
+            {
+              label: 'Deshacer',
+              onClick: async () => { // Hacer la función onClick asíncrona
+                allTasks.value = tasksBeforeDelete; // Restaurar las tareas (revertimos al método de reemplazo)
+                // Convertir cadenas de fecha de vuelta a objetos Date
+                allTasks.value = allTasks.value.map(task => ({
+                  ...task,
+                  startTime: new Date(task.startTime),
+                  endTime: task.endTime ? new Date(task.endTime) : undefined,
+                }));
+                await nextTick(); // Esperar al siguiente ciclo de actualización del DOM
 
-              setTimeout(() => {
-                remove(toastId);
-              }, 500);
+                setTimeout(() => {
+                  remove(toastId);
+                }, 500);
 
-              // Mostrar notificación de restauración y recargar la página cuando esta se cierre.
-              setTimeout(() => {
-                add({
-                  title: 'Tareas Restauradas',
-                  description: 'Todas las tareas han sido restauradas.',
-                  type: 'info'
-                });
-              }, 550);
+                // Mostrar notificación de restauración y recargar la página cuando esta se cierre.
+                setTimeout(() => {
+                  add({
+                    title: 'Tareas Restauradas',
+                    description: 'Todas las tareas han sido restauradas.',
+                    type: 'info'
+                  });
+                }, 550);
+              }
             }
-          }
+          ]
         },
         7000 // 7 segundos para reaccionar
       );
@@ -587,14 +593,16 @@ const exportTasksToJson = async () => {
     /* add({
       title: 'Notificación de prueba',
       description: 'Esto es una prueba del sistema de toasts propio.',
-      action: {
-        label: 'Cerrar Todo',
-        onClick: () => {
-          setTimeout(() => {
-            toasts.value = []
-          }, 500)
+      actions: [
+        {
+          label: 'Cerrar Todo',
+          onClick: () => {
+            setTimeout(() => {
+              toasts.value = []
+            }, 500)
+          }
         }
-      }
+      ]
     }, 6000) */
   })
 

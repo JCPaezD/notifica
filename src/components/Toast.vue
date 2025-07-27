@@ -11,26 +11,45 @@
     <div class="flex-1">
       <div class="flex justify-between items-start gap-2">
         <div class="font-semibold leading-tight">{{ title }}</div>
-        <button
-          v-if="action"
-          @click="action.onClick"
-          @touchstart="() => {}"
-          type="button"
-          class="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md
-                 active:scale-95 transition-transform duration-150"
-          :class="[actionButtonClasses, { 'animate-pop': animateOnMount }]"
-        >
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+        <div class="flex gap-2" v-if="actions && actions.length > 0">
+          <!-- Un solo botón -->
+          <button
+            v-if="actions.length === 1"
+            @click="actions[0].onClick"
+            @touchstart="() => {}"
+            type="button"
+            class="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md
+                   active:scale-95 transition-transform duration-150"
+            :class="[actionButtonClasses, { 'animate-pop': animateOnMount }]"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19a9 9 0 1 0 0-14M9 5v4H5" />
-          </svg>
-          {{ action.label }}
-        </button>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19a9 9 0 1 0 0-14M9 5v4H5" />
+            </svg>
+            {{ actions[0].label }}
+          </button>
+
+          <!-- Múltiples botones -->
+          <template v-else>
+            <button
+              v-for="(a, i) in actions"
+              :key="i"
+              @click="a.onClick"
+              @touchstart="() => {}"
+              type="button"
+              class="text-xs font-medium px-2 py-0.5 rounded-md
+                     active:scale-95 transition-transform duration-150"
+              :class="[actionButtonClasses]"
+            >
+              {{ a.label }}
+            </button>
+          </template>
+        </div>
       </div>
       <div v-if="description" class="text-xs mt-0.5">
         {{ description }}
@@ -50,7 +69,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps<{
@@ -58,10 +76,10 @@ const props = defineProps<{
   title?: string
   description?: string
   type?: 'success' | 'error' | 'info' | 'warning'
-  action?: {
+  actions?: {
     label: string
     onClick: () => void
-  }
+  }[]
 }>()
 
 defineEmits<{
@@ -123,5 +141,4 @@ const actionButtonClasses = computed(() => {
 const closeButtonClasses = computed(() => {
   return toastColors[toastType.value]?.close ?? ''
 })
-
 </script>
