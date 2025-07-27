@@ -21,6 +21,9 @@ import { useLogoAnimation } from './composables/useLogoAnimation'
 import { useDarkMode } from './composables/useDarkMode'
 const { isDark } = useDarkMode()
 
+const allTaskShiftIds = computed(() =>
+  [...new Set(allTasks.value.map(t => t.shiftId).filter((id): id is string => typeof id === 'string'))]
+)
 
 // --- Composable para la animación del logo ---
 const { logoBlockRef, animateLogo } = useLogoAnimation()
@@ -50,6 +53,7 @@ const selectedShiftToView = ref<string | 'current'>('current') // Turno seleccio
 const shiftTitleId = computed(() =>
   selectedShiftToView.value !== 'current' ? selectedShiftToView.value : ''
 )
+const filtersAreActive = computed(() => showOnlyActive.value || showOnlyNotNotified.value)
 
 interface Shift {
   id: string
@@ -849,13 +853,13 @@ const exportTasksToJson = async () => {
 
     <!-- Sección para añadir nueva tarea -->
     <NewTaskForm
-  v-if="!isViewingPastShift"
-  :model-value-description="newTaskDescription"
-  :model-value-technician="newTaskTechnician"
-  @update:model-value-description="newTaskDescription = $event"
-  @update:model-value-technician="newTaskTechnician = $event"
-  @submit="startNewTask"
-  />
+      v-if="!isViewingPastShift"
+      :model-value-description="newTaskDescription"
+      :model-value-technician="newTaskTechnician"
+      @update:model-value-description="newTaskDescription = $event"
+      @update:model-value-technician="newTaskTechnician = $event"
+      @submit="startNewTask"
+      />
 
     <!-- Selector de Turno -->
     <!-- Este div se moverá debajo de TaskList -->
@@ -867,6 +871,9 @@ const exportTasksToJson = async () => {
       :title="listTitle"
       :title-id="shiftTitleId"
       :title-icon="icons[getShiftIcon(shiftTitleId)]"
+      :filters-active="filtersAreActive"
+      :current-shift-id="currentShiftId"
+      :all-task-shift-ids="allTaskShiftIds"
       @finish-task="finishTask"
       @update-task="updateTask"
       @reactivate-task="reactivateTask"

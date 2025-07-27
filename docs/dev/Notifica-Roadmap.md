@@ -622,7 +622,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       ✅ Notificado
         👷 J. González
   - [x] Botón "Volver al turno actual" pasar a encima de bloque filtros.
-  - [ ] 🧱 Evolución del sistema de toasts: control de cierre y múltiples acciones
+  - [x] 🧱 Evolución del sistema de toasts: control de cierre y múltiples acciones
     - [x] Diseñar la solución para permitir cierre tras tap fuera, soporte de múltiples botones y toasts persistentes
     - [x] Modificar `useToast.ts` para incluir:
         - [x] Propiedad `delayClose` para activar cierre manual por tap fuera
