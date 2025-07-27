@@ -626,7 +626,7 @@ const exportTasksToJson = async () => {
 
   // Formatea una tarea individual como una cadena de texto plano para compartir.
   const formatTaskForPlainText = (task: Task): string => {
-    const taskEmoji = '📝'; // Emoji de tarea
+    const taskEmoji = '📝';
     const technicianEmoji = '👷';
     const notifiedEmoji = '✅';
 
@@ -638,10 +638,6 @@ const exportTasksToJson = async () => {
     if (task.endTime) {
       let endTimeMs = task.endTime.getTime();
       const startTimeMs = task.startTime.getTime();
-      // Manejar tareas que cruzan la medianoche (si endTimeMs es menor, pero el día es el mismo o siguiente)
-      // Esta lógica asume que si endTime es anterior a startTime, es del día siguiente si la duración es positiva.
-      // Para simplificar, si la fecha de endTime es la misma que startTime pero la hora es menor, se asume día siguiente.
-      // O si la fecha de endTime es un día después.
       if (task.endTime.getDate() > task.startTime.getDate() || (task.endTime.getDate() === task.startTime.getDate() && endTimeMs < startTimeMs)) {
         endTimeMs += 24 * 60 * 60 * 1000;
       }
@@ -654,13 +650,13 @@ const exportTasksToJson = async () => {
     let taskString = `${taskEmoji} ${description} ${startTimeStr} a ${endTimeStr}${durationStr ? ' ' + durationStr : ''}`;
 
     if (task.isNotified) {
-      taskString += `\nNotificado SAP ${notifiedEmoji}`;
+      taskString += `\n${notifiedEmoji} Notificado`;
     }
     if (task.technician) {
-      taskString += `\n${task.technician} ${technicianEmoji}`;
+      taskString += `\n    ${technicianEmoji} ${task.technician}`;
     }
     return taskString;
-  }
+  };
 
   // Prepara y comparte (vía plugin nativo, API Web Share o portapapeles) las tareas del turno seleccionado.
   const shareShiftTasks = async () => {
