@@ -86,7 +86,7 @@ const onEnter = (el: Element) => {
 
 const onAfterEnter = (el: Element) => {
   const htmlEl = el as HTMLElement;
-  htmlEl.style.maxHeight = 'auto';
+  htmlEl.style.maxHeight = '';
 };
 
 const onBeforeLeave = (el: Element) => {
@@ -230,6 +230,7 @@ const onLeave = (el: Element) => {
                     ]"
                     :aria-expanded="isOptionsOpen"
                     aria-controls="options-content"
+                    style="z-index: 10; position: relative;"
                   >
                     <span class="flex items-center gap-x-2">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -258,7 +259,7 @@ const onLeave = (el: Element) => {
                   >
                     <div id="options-content" v-show="isOptionsOpen">
                       <!-- Bloque visual agrupado -->
-                      <div class="mx-4 mt-2 rounded-xl border border-divider dark:border-divider-dark bg-surface-1 dark:bg-surface-1-dark ring-1 ring-purple-strong/15 dark:ring-purple-strong-dark/20 p-4 space-y-3 text-sm">
+                      <div class="mx-4 -mt-1 rounded-b-xl border border-t-0 border-divider dark:border-divider-dark bg-surface-1 dark:bg-surface-1-dark ring-1 ring-purple-strong/15 dark:ring-purple-strong-dark/20 p-4 pt-3 space-y-3 text-sm">
                         <p class="text-subtle dark:text-subtle-dark font-medium pl-1">Apariencia</p>
 
                         <div class="flex flex-col gap-2">

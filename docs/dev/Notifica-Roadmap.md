@@ -578,7 +578,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Implementar UI clara con selector de 3 opciones (Claro / Oscuro / Sistema)
       - [x] Visualizar selección activa
       - [x] Permitir cambiar entre modos fácilmente
-      - [ ] Integrar en SideMenu de forma coherente con diseño actual
+      - [x] Integrar en SideMenu de forma coherente con diseño actual
 
   📄 Subbloque 7: Documentación
   - [ ] Explicar lógica en `dev-notes.md`: modo `class`, paleta usada, persistencia
@@ -589,7 +589,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
   - [ ] Ajustar fecha si es coherente
-  - [ ] Mostrar toast con opción de deshacer
+  - [ ] Mostrar toast con opciones "ayer" y "hoy" en vez de deshacer
 
 - [ ] ✉️ Formulario de feedback por email
   - [ ] Botón "Enviar feedback" en menú lateral
@@ -612,6 +612,19 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Revisar regresión: scroll innecesario en listas cortas (Android y PWA)
   > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
   - [x] Corregir zoom con doble tap en chrome/safari de ios 
+  - [ ] Actualizar prompt de "Borrar todo" a "¿Estás seguro de que quieres borrar TODAS las tareas?"
+  - [ ] Toasts con "action button" no se cierran hasta tap fuera del toast. Se mantienen ante tap dentro del toast.
+  - [ ] Ajustar texto "Compartir" a este formato:
+      📝 Comprobación de señales en PLC 22:46 a 23:02 (0.5 h)
+      ✅ Notificado
+        👷 J. González
+  - [ ] Quitar toast de no compartido.
+  - [ ] Botón "Volver al turno actual" pasar a encima de bloque filtros.
+  - [ ] Campo de notas del turno bajo las tareas.
+  - [ ] Revisar UX/UI y usabilidad del boton X del SideMenu. ¿es redundante con el overlay sombreado?
+  - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
+  - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.
+  - [ ] Icono personalizado estilo heroicons svg inline de sol naciente para turno mañana. Y sol normal para tarde. 
   - [ ] Probar iconos rellenos para turnos m/t/n
   - [ ] Quitar active de botones al soltar (movil) [opciones se queda active]
   - [ ] Cuando no haya tareas que mostrar -> mensaje placeholder "ninguna tarea" o similar
