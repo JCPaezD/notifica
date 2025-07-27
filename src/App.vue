@@ -348,15 +348,11 @@ const availableShifts = computed<Shift[]>(() => {
 // Propiedad computada: Determina el título a mostrar encima de la lista de tareas.
 const listTitle = computed(() => {
   if (selectedShiftToView.value === 'current') {
-    if (currentShiftId.value) {
-      return ''; // No se muestra título para el turno actual activo.
-    }
-    return ''; // No se muestra título si no hay turno activo y se está viendo "actual".
+    return ''
   }
-  const selectedShift = availableShifts.value.find(s => s.id === selectedShiftToView.value);
-  // Muestra el título del turno anterior que se está viendo.
-  return selectedShift ? getShiftLabel(selectedShift.id) : '';
-});
+  // selectedShiftToView contiene directamente el shiftId que queremos mostrar
+  return getShiftLabel(selectedShiftToView.value)
+})
 
 import { getShiftLabel, getShiftIcon, getShiftColor } from './composables/useShifts'
 
@@ -874,6 +870,7 @@ const exportTasksToJson = async () => {
       :filters-active="filtersAreActive"
       :current-shift-id="currentShiftId"
       :all-task-shift-ids="allTaskShiftIds"
+      :active-shift-id="currentShiftId"
       @finish-task="finishTask"
       @update-task="updateTask"
       @reactivate-task="reactivateTask"
