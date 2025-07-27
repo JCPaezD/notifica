@@ -580,9 +580,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Permitir cambiar entre modos fácilmente
       - [x] Integrar en SideMenu de forma coherente con diseño actual
 
-  📄 Subbloque 7: Documentación
-  - [ ] Explicar lógica en `dev-notes.md`: modo `class`, paleta usada, persistencia
-  - [ ] Registrar si hay limitaciones conocidas
+  📄 Subbloque 7: Documentación del modo oscuro
+  - [x] Decidir qué aspectos deben documentarse técnicamente y cuáles pueden omitirse
+  - [x] Documentar la inicialización temprana del modo oscuro en `main.ts` para evitar render mixto
+  - [x] Registrar el diseño visual y decisiones UI aplicadas al bloque de apariencia (SideMenu, selector de tema…)
+  - [x] Explicar el patrón técnico usado para animación colapsable sin salto (`scrollHeight`, `max-height`, etc.)
+  - [x] Justificar el uso de `darkMode: 'class'` en lugar de `'media'` y su integración con preferencia `system`
+  - [x] Confirmar que no quedan decisiones sin documentar y hacer commit de cierre del bloque
 
 
 

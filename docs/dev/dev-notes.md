@@ -19,6 +19,9 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Enfoque estratégico de publicación (etapa 8)](#enfoque-estratégico-de-publicación-etapa-8)
   - [Eliminación del reload tras deshacer "Borrar todo"](#eliminación-del-reload-tras-deshacer-borrar-todo)
   - [Transición visual global en cambio de tema (modo claro ↔ oscuro)](#transición-visual-global-en-cambio-de-tema-modo-claro--oscuro)
+  - [Inicialización temprana del modo oscuro en main.ts](#inicialización-temprana-del-modo-oscuro-en-maints)
+  - [Animación colapsable del bloque de apariencia (max-height + scrollHeight)](#animación-colapsable-del-bloque-de-apariencia-max-height--scrollheight)
+  - [Modo oscuro: uso de `class` y soporte para preferencia del sistema](#modo-oscuro-uso-de-class-y-soporte-para-preferencia-del-sistema)
 - [Errores y problemas documentados](#errores-y-problemas-documentados)
   - [Bug en iOS PWA: scroll azul tras cerrar teclado](#bug-en-ios-pwa-scroll-azul-tras-cerrar-teclado)
   - [Problemas comunes en emuladores Android](#problemas-comunes-en-emuladores-android)
@@ -33,6 +36,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
   - [Reestructuración del layout de las tareas para alineación precisa (botón, duración, horas)](#reestructuración-del-layout-de-las-tareas-para-alineación-precisa-botón-duración-horas)
+  - [Bloque de apariencia: diseño UI y selector de tema](#bloque-de-apariencia-diseño-ui-y-selector-de-tema)
 - [Notas meta del proyecto](#notas-meta-del-proyecto)
   - [Nueva conversación principal para el desarrollo de Notifica](#nueva-conversación-principal-para-el-desarrollo-de-notifica)
   - [Notas para generar mensaje para nueva conversacion de desarrollo](#notas-para-generar-mensaje-para-nueva-conversacion-de-desarrollo)
@@ -562,6 +566,86 @@ Si se desea animación en puntos específicos (botones, contenedores), se usará
 - Solución robusta y sin efectos secundarios.
 - Cierre validado del subbloque 5 del modo oscuro en el roadmap.
 
+### Inicialización temprana del modo oscuro en `main.ts`
+
+[27/07/2025]  
+Para evitar el efecto de **render mixto** (pantalla inicial en modo incorrecto durante unos milisegundos antes de aplicar el tema), se decidió aplicar la clase `dark` **antes de montar la app**.
+
+**Motivo:**  
+Al usar `darkMode: 'class'` en Tailwind, la clase `dark` debe estar presente en el DOM en el momento del render inicial. Si se espera a que Vue cargue o que reactive el estado de `isDark`, el primer frame de la interfaz puede mostrarse en modo claro y luego saltar visualmente al modo oscuro, causando un efecto de parpadeo o mezcla de estilos.
+
+**Implementación:**  
+En `main.ts`, antes de `createApp(App).mount(...)`, se ejecuta la siguiente lógica:
+
+- Se lee `darkMode` desde `localStorage` (puede ser `'light'`, `'dark'` o `'system'`).
+- Si no hay valor guardado o el valor es `'system'`, se consulta `window.matchMedia(...)`.
+- Si el resultado es que debe usarse el modo oscuro, se añade manualmente la clase `dark` al `<html>`:
+  
+      document.documentElement.classList.add('dark')
+
+- Si no debe usarse, se asegura que la clase esté ausente con `classList.remove(...)`.
+
+Esto permite que **la app se renderice ya en el modo correcto** desde el primer milisegundo, sin flashes ni desincronización visual.
+
+**Estado actual:**  
+- Validado en Android, PWA iOS, escritorio y dispositivos reales.
+- Compatible con el sistema de preferencia `'light' | 'dark' | 'system'`.
+- Solución robusta y aplicable a futuros proyectos con Tailwind y modo oscuro.
+
+### Animación colapsable del bloque de apariencia (max-height + scrollHeight)
+
+[27/07/2025]  
+Para permitir que el bloque de apariencia en el menú lateral (`SideMenu.vue`) pueda expandirse y contraerse con una transición fluida, se aplicó una técnica basada en `max-height` y `scrollHeight`, combinada con eventos personalizados en el componente `<Transition>`.
+
+**Motivación:**  
+Las transiciones de altura con `v-if` o `v-show` no permiten animación suave, y `height: auto` no puede animarse directamente. Se necesitaba una solución que permitiera transición vertical sin salto, adaptable al contenido real.
+
+**Implementación:**  
+- Al iniciar la apertura del bloque, se mide su altura real (`scrollHeight`) y se asigna como `max-height`, lo que permite una expansión suave.
+- Tras completarse la apertura, se limpia el `max-height` para no restringir futuras modificaciones dinámicas del contenido.
+- Para cerrar, se vuelve a establecer el `scrollHeight` como `max-height` y luego se reduce a `0px`, generando un colapso animado.
+- Toda esta lógica se gestiona mediante los hooks `onEnter`, `onLeave`, etc., definidos directamente en el componente.
+
+**Complementos visuales:**  
+- Se usa `overflow-hidden` para evitar que el contenido sea visible durante la animación de cierre.
+- La duración, interpolación (`ease`), y otros efectos están definidos en las clases CSS asociadas a la transición `collapse`.
+
+**Resultado:**  
+- Transición suave y coherente al mostrar u ocultar el bloque de apariencia.
+- Comportamiento robusto y validado en todos los entornos.
+- Patrón reutilizable para cualquier otro bloque colapsable de la app.
+
+### Modo oscuro: uso de `class` y soporte para preferencia del sistema
+
+[27/07/2025]  
+Para implementar el sistema de modo oscuro en Notifica se eligió el enfoque `darkMode: 'class'` en Tailwind, en lugar de la opción `media`.
+
+**Motivos de la decisión:**
+
+- **Control total sobre el tema activo**  
+  Con `class`, la app puede cambiar de modo claro a oscuro de forma manual o programada, sin depender del sistema operativo.  
+  Esto permite al usuario seleccionar su preferencia independientemente del entorno (especialmente útil en PWA y apps nativas con comportamiento propio).
+
+- **Persistencia de preferencia**  
+  Al gestionar el modo manualmente (con una clase en `<html>`), es posible guardar la elección del usuario en `localStorage`, mantenerla entre sesiones, e ignorar cambios del sistema si así lo desea.
+
+- **Compatibilidad multiplataforma**  
+  El enfoque basado en `media` (matchMedia) es reactivo pero no controlable por el usuario si no se implementa una capa adicional.  
+  En iOS PWA, algunas actualizaciones de estilo pueden fallar al depender solo de `media queries`.  
+  Además, con `class` se puede aplicar la clase correcta incluso **antes de que Vue se monte**, evitando parpadeos o flashes (ver bloque sobre inicialización temprana en `main.ts`).
+
+**Integración con la preferencia `'system'`:**
+
+- El valor `'system'` se gestiona como una tercera opción válida (`light`, `dark`, `system`) en la app.
+- Si el usuario selecciona `'system'`, se evalúa el resultado de `matchMedia('(prefers-color-scheme: dark)')`.
+- Se observa esa preferencia de forma reactiva, y se actualiza la clase `dark` cuando el sistema cambia de modo.
+- Si el usuario cambia su selección manualmente, se detiene la escucha y se fuerza el modo elegido.
+
+**Resultado:**  
+- Sistema flexible, reactivo y respetuoso con el usuario.
+- Visualmente estable, sin flashes ni parpadeos en la carga.
+- Validado en dispositivos con cambios dinámicos de tema (Android, iOS, escritorio).
+- Patrón sólido para futuras apps con necesidades similares de theming.
 
 ---
 
@@ -988,6 +1072,34 @@ Layout robusto, alineado vertical y horizontalmente, válido para tareas cortas 
 
 **Relacionado:**  
 Roadmap · Etapa 8 · Tareas de UI → “Mejorar alineación vertical de fila 2 en tareas”.
+
+### Bloque de apariencia: diseño UI y selector de tema
+
+[27/07/2025]  
+Durante la implementación del sistema de modo oscuro se rediseñó el bloque de apariencia general en el menú lateral (`SideMenu.vue`). El objetivo era ofrecer un control claro, accesible y coherente con el estilo visual de la app.
+
+**Decisiones clave:**  
+- Se sustituyó el selector binario claro/oscuro por una tarjeta con 3 opciones: Claro / Oscuro / Sistema.
+- Cada opción se representa mediante un botón apilado (`flex-col`) con:
+  - Un ícono de Heroicons (`SunIcon`, `MoonIcon`, `ComputerDesktopIcon`)
+  - Un título breve (`Claro`, `Oscuro`, `Sistema`)
+- El modo activo se resalta mediante:
+  - Fondo con clase `surface-hover` (modo claro) o `surface-pressed` (modo oscuro)
+  - Borde izquierdo del botón visible (`border-l-4`) con color `accent-main`
+  - Texto y íconos adaptados al modo actual (`text-main` y `dark:text-main-dark`)
+
+**Integración con la UI:**  
+- La tarjeta aparece como un bloque unido al botón opciones desplegado desde este.
+- Se respetan las proporciones, espaciado y estilos del resto del SideMenu.
+- La sección se puede colapsar o expandir con animación fluida (ver bloque técnico correspondiente).
+- El menú lateral completo se validó visualmente en modo claro y oscuro, con todos los botones revisados por contraste, iconos, color de fondo y comportamiento interactivo.
+
+**Resultado:**  
+- Selector de tema intuitivo y visualmente atractivo.
+- Accesibilidad y contraste garantizados en ambos modos.
+- Comportamiento responsive correcto en móviles y escritorio.
+
+Este bloque puede servir como patrón reutilizable para configuraciones similares (idioma, tamaño de texto…).
 
 ---
 
