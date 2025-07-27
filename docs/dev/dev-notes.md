@@ -286,32 +286,41 @@ Motivos:
 
 El sistema se basa en:
 - `Toast.vue`: componente individual de notificación  
-- `useToast.ts`: composable para gestionar estado reactivo de los toasts  
+- `useToast.ts`: composable para gestionar estado reactivo de los toasts y control de cierre  
 - `toast.ts`: función `add(...)` para mostrar toasts desde cualquier lugar  
 - `<Teleport>` y `<TransitionGroup>` en `App.vue` para renderizar toasts fuera del flujo principal  
 
 Mejoras aplicadas respecto a Nocta:
-- Soporte para botón de acción con `label` y `onClick`  
-- Estilo animado en el botón de acción (`scale-95` al pulsar)  
-- Animación al montar el botón de acción (`animate-pop` tras 300 ms)  
+- Soporte para uno o varios botones de acción mediante `actions[]` con `label` y `onClick`  
+- Estilo animado en botones de acción (`scale-95` al pulsar)  
+- Animación al montar el botón (`animate-pop` tras 300 ms en el primero)  
 - Cierre diferido del toast para permitir ver la animación de pulsación  
-- Separación clara entre ejecución de acción y cierre visual  
-- Estilos personalizados por tipo (`success`, `info`, `error`, `warning`) con icono SVG, fondo suave y bordes redondeados  
+- Separación clara entre ejecución de acción y cierre visual del toast  
+- Estilos personalizados por tipo (`success`, `info`, `error`, `warning`) con icono SVG, fondo pastel y bordes redondeados  
 - Layout compacto y centrado (`max-w-xs`), con margen inferior ajustado para evitar conflicto con barras de sistema  
 - Apilamiento dinámico con animación de transición (`translate-y` y `opacity`) al reordenarse  
 - Integración visual coherente con el resto de la interfaz (colores, botones, tipografía)  
 - Comportamiento corregido en PWA iOS: el botón de acción ya reacciona correctamente al tacto (`@touchstart`)  
 - Bloqueo de selección de texto en todo el toast (`select-none`) para evitar comportamiento inesperado en móviles  
 
+Nuevas capacidades añadidas:
+- `delayClose`: los toasts no se cierran automáticamente. El temporizador de cierre solo se activa tras pulsar fuera del toast. Permite mantener opciones activas como “Deshacer” el tiempo que el usuario necesite.  
+- `startDismissTimer(id, duración?)`: se exporta desde `useToast.ts` para iniciar el cierre manual desde fuera  
+- Detección automática de tap fuera en `Toast.vue` si `delayClose` está activo (evento `pointerdown`)  
+- Soporte para `actions.length > 1`: se renderizan todos los botones en fila con estilo consistente  
+- Preparado para `persistent: true` en el futuro (toast que solo se cierra con ✕ o interacción explícita)  
+
 Estado de validación:
 - Comprobado y validado en escritorio, Android nativo, PWA Android y PWA iOS  
-- Todos los toasts funcionales y visualmente consistentes  
-- Errores anteriores (como botón que no cerraba el toast o scroll fantasma tras teclado) han sido corregidos o descartados tras investigación
+- Todos los toasts funcionales, consistentes y con cierre progresivo según lo esperado  
+- El sistema mantiene retrocompatibilidad con toasts simples sin acción  
+- No se han detectado problemas de eventos en móviles ni pérdidas de reactividad  
 
-Este sistema puede reutilizarse o retroportarse a Nocta con pequeñas adaptaciones, manteniendo una base común de diseño y lógica.
+Este sistema puede reutilizarse o retroportarse a Nocta con pequeñas adaptaciones, manteniendo una base común de diseño, UX y lógica.
 
 Tareas pendientes o ideas futuras:
-- (Opcional) Añadir variantes visuales para toast persistente o informativo largo (banner)  
+- (Opcional) Añadir variante `persistent` para banners que solo se cierren manualmente  
+- (Opcional) Añadir barra de progreso visual o transición de opacidad en cierre tras tap fuera  
 - (Opcional) Resaltar brevemente el contenido afectado por la acción (e.g. Deshacer)  
 - (Opcional) Documentar ejemplo de uso avanzado con múltiples acciones o `onDismiss`
 

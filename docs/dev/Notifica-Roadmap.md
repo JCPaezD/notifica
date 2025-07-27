@@ -635,14 +635,14 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Mantener compatibilidad visual, animación y botón de cierre `✕`
     - [x] Actualizar llamadas a `add(...)` en toasts con botón "Deshacer"
         > Añadir `delayClose: true` y ajustar duración si es necesario
-    - [ ] Documentar en `dev-notes.md`:
-        - [ ] Nuevas propiedades del tipo `Toast` (`delayClose`, `persistent`, `actions[]`)
-        - [ ] Justificación del comportamiento UX aplicado a toasts con botón "Deshacer"
-        - [ ] Preparación para futura implementación del toast con botones "Ayer / Hoy"
-        - [ ] Preparación para futura implementación del toast persistente tipo banner
-    - [ ] Verificar el comportamiento en todos los modos y plataformas
+    - [x] Documentar en `dev-notes.md`:
+        - [x] Nuevas propiedades del tipo `Toast` (`delayClose`, `persistent`, `actions[]`)
+        - [x] Justificación del comportamiento UX aplicado a toasts con botón "Deshacer"
+        - [x] Preparación para futura implementación del toast con botones "Ayer / Hoy"
+        - [x] Preparación para futura implementación del toast persistente tipo banner
+    - [x] Verificar el comportamiento en todos los modos y plataformas
         > Asegurar que toasts simples, con acción única y múltiples siguen funcionando correctamente
-    - [ ] Hacer commit final del bloque
+    - [x] Hacer commit final del bloque
   - [ ] Cuando no haya tareas que mostrar -> mensaje placeholder "ninguna tarea" o similar
   - [ ] Revisar UX/UI y usabilidad del boton X del SideMenu. ¿es redundante con el overlay sombreado?
   - [ ] Quitar active de botones al soltar (movil) [opciones se queda active]
