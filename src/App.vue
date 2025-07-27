@@ -845,7 +845,27 @@ const exportTasksToJson = async () => {
   @submit="startNewTask"
   />
 
-    <!-- Botón para volver al turno actual si se está viendo uno pasado -->
+    <!-- Selector de Turno -->
+    <!-- Este div se moverá debajo de TaskList -->
+
+    <!-- Lista de Tareas (ahora filtrada y ordenada) -->
+    <TaskList
+      :key="taskListKey"
+      :tasks="filteredAndSortedTasks"
+      :title="listTitle"
+      :title-id="shiftTitleId"
+      :title-icon="icons[getShiftIcon(shiftTitleId)]"
+      @finish-task="finishTask"
+      @update-task="updateTask"
+      @reactivate-task="reactivateTask"
+      @delete-task="deleteTask"
+    />
+
+    <!-- Separador Visual -->
+    <hr class="w-5/6 max-w-md border-divider dark:border-divider-dark my-6" />
+    <!-- Ancho porcentual para que sea más corta en móviles, centrada por items-center del main -->
+
+        <!-- Botón para volver al turno actual si se está viendo uno pasado -->
     <Transition enter-active-class="transition-all duration-300 ease-out" enter-from-class="opacity-0 max-h-0"
       enter-to-class="opacity-100 max-h-[80px]" leave-active-class="transition-all duration-300 ease-in"
       leave-from-class="opacity-100 max-h-[80px]" leave-to-class="opacity-0 max-h-0">
@@ -866,26 +886,6 @@ const exportTasksToJson = async () => {
         </button>
       </div>
     </Transition>
-
-    <!-- Selector de Turno -->
-    <!-- Este div se moverá debajo de TaskList -->
-
-    <!-- Lista de Tareas (ahora filtrada y ordenada) -->
-    <TaskList
-      :key="taskListKey"
-      :tasks="filteredAndSortedTasks"
-      :title="listTitle"
-      :title-id="shiftTitleId"
-      :title-icon="icons[getShiftIcon(shiftTitleId)]"
-      @finish-task="finishTask"
-      @update-task="updateTask"
-      @reactivate-task="reactivateTask"
-      @delete-task="deleteTask"
-    />
-
-    <!-- Separador Visual -->
-    <hr class="w-5/6 max-w-md border-divider dark:border-divider-dark my-6" />
-    <!-- Ancho porcentual para que sea más corta en móviles, centrada por items-center del main -->
 
     <!-- Contenedor para Selector de Turno y Filtros -->
     <div
