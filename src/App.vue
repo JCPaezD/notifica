@@ -503,7 +503,7 @@ const exportTasksToJson = async () => {
 
   // Elimina todas las tareas de la aplicación, con opción de deshacer.
   const deleteAllTasks = () => {
-    if (window.confirm('¿Estás seguro de que quieres borrar TODAS las tareas? Esta acción no se puede deshacer.')) {
+    if (window.confirm('¿Estás seguro de que quieres borrar TODAS las tareas de la aplicación? No podrán ser recuperadas.')) {
       const tasksBeforeDelete = JSON.parse(JSON.stringify(allTasks.value)); // Copia profunda de las tareas
 
       allTasks.value = []; // Limpia la lista de tareas en la aplicación

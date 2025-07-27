@@ -616,21 +616,21 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   > El bug ha reaparecido tras los cambios de layout para evitar el bug visual en iOS. Revisar `min-h`, `overflow`, estructura del main, etc.
   - [x] Corregir zoom con doble tap en chrome/safari de ios 
   - [ ] Actualizar prompt de "Borrar todo" a "¿Estás seguro de que quieres borrar TODAS las tareas?"
-  - [ ] Toasts con "action button" no se cierran hasta tap fuera del toast. Se mantienen ante tap dentro del toast.
+  - [ ] Quitar toast de no compartido.
   - [ ] Ajustar texto "Compartir" a este formato:
       📝 Comprobación de señales en PLC 22:46 a 23:02 (0.5 h)
       ✅ Notificado
         👷 J. González
-  - [ ] Quitar toast de no compartido.
   - [ ] Botón "Volver al turno actual" pasar a encima de bloque filtros.
-  - [ ] Campo de notas del turno bajo las tareas.
-  - [ ] Revisar UX/UI y usabilidad del boton X del SideMenu. ¿es redundante con el overlay sombreado?
-  - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
-  - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.
-  - [ ] Icono personalizado estilo heroicons svg inline de sol naciente para turno mañana. Y sol normal para tarde. 
-  - [ ] Probar iconos rellenos para turnos m/t/n
-  - [ ] Quitar active de botones al soltar (movil) [opciones se queda active]
+  - [ ] Toasts con "action button" no se cierran hasta tap fuera del toast. Se mantienen ante tap dentro del toast.
   - [ ] Cuando no haya tareas que mostrar -> mensaje placeholder "ninguna tarea" o similar
+  - [ ] Revisar UX/UI y usabilidad del boton X del SideMenu. ¿es redundante con el overlay sombreado?
+  - [ ] Quitar active de botones al soltar (movil) [opciones se queda active]
+  - [ ] Campo de notas del turno bajo las tareas.
+  - [ ] Probar iconos rellenos para turnos m/t/n
+  - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.
+  - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
+  - [ ] Icono personalizado estilo heroicons svg inline de sol naciente para turno mañana. Y sol normal para tarde. 
   - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
