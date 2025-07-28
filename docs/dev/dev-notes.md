@@ -32,6 +32,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Bug con clases `text-*` no aplicadas por Tailwind](#bug-con-clases-text--no-aplicadas-por-tailwind-extendcolors-vs-extendtextcolor)
   - [Bug con colores en toasts: diagnóstico y solución](#bug-con-colores-en-toasts-diagnóstico-y-solución)
   - [Logo dinámico en modo claro/oscuro](#logo-dinámico-en-modo-clarooscuro)
+  - [Bug visual en botones móviles: hover pegado tras pulsar](#bug-visual-en-botones-móviles-hover-pegado-tras-pulsar)
 - [UI, diseño y experiencia de usuario](#ui-diseño-y-experiencia-de-usuario)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -952,6 +953,34 @@ Se validó visualmente en todos los modos y dispositivos. Bug cerrado.
 - `fill="currentColor"`
 - `fill-rule="evenodd"` y `clip-rule="evenodd"`
 - Evitar `fill` directo en los `<path>`, limpiar con herramientas como [SVGOMG](https://jakearchibald.github.io/svgomg/) si viene de PNG.
+
+### Bug visual en botones móviles: hover pegado tras pulsar
+
+**Problema:**  
+En móviles (iOS y Android, tanto PWA como app nativa), al pulsar un botón, el color de fondo correspondiente al estado `hover` permanecía visible tras soltar el botón. El efecto solo desaparecía al tocar otra parte de la interfaz. Este comportamiento no se producía en escritorio, donde el estado `hover` se gestionaba correctamente.
+
+**Causa:**  
+El estilo `hover:bg-*` aplicado mediante Tailwind se mantenía activo en entornos táctiles porque no existe un evento confiable para desactivar `hover` tras `touchend`. Esto provocaba un estado visual persistente no deseado.
+
+**Solución:**  
+Se reescribieron los estilos de botones utilizando clases estáticas declaradas en un nuevo archivo `buttons.css`, usando `@apply` con las utilidades Tailwind. Se aplicaron las siguientes estrategias:
+- El estilo visual que antes se aplicaba con `hover:` se trasladó al estado `:active`, que sí desaparece correctamente tras soltar el botón.
+- El estado `hover` se mantuvo únicamente para dispositivos que realmente soportan hover, mediante la condición `@media (hover: hover)`.
+- Se reprodujo fielmente el comportamiento visual anterior, manteniendo soporte para tema claro y oscuro sin dependencias JS.
+
+**Implementación:**  
+- Se creó el archivo `src/assets/css/buttons.css`.
+- Se importó al inicio de `main.css`.
+- Se definió la clase `btn-primary` con el mismo diseño que `getButtonStyle('primary', mode)`.
+- Se sustituyó `getButtonStyle(...)` por `'btn-primary'` en el botón “Iniciar” como caso de prueba.
+- Se validó el resultado en DevTools móvil, PWA iOS, app Android y escritorio.
+
+**Impacto y próximos pasos:**  
+- El bug desaparece por completo en todos los entornos móviles.
+- No hay efectos colaterales en animaciones ni en el sistema de cambio de tema.
+- El sistema evita el purgado de clases Tailwind al usar clases estáticas.
+- Esta solución se extenderá a todos los botones afectados y se eliminará `menuButtonStyles.ts` si queda obsoleto.
+- La técnica es aplicable también al proyecto Nocta y a otros elementos como botones de toast.
 
 
 ---
