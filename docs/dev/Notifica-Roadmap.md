@@ -643,7 +643,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Verificar el comportamiento en todos los modos y plataformas
         > Asegurar que toasts simples, con acción única y múltiples siguen funcionando correctamente
     - [x] Hacer commit final del bloque
-  - [ ] Cuando no haya tareas que mostrar -> mensaje placeholder "ninguna tarea" o similar
+  - [x] Añadir mensaje placeholder cuando no hay tareas visibles
+    - [x] Mostrar mensaje según contexto: filtros activos / turno anterior vacío / turno actual vacío
+    - [x] Detectar turno anterior comparando titleId ≠ currentShiftId
+    - [x] Mantener visible el título del turno aunque no tenga tareas
+    - [x] Aplicar animación fade+scale al cambiar de mensaje
+    - [x] Ajustar estilos para evitar salto visual tras animación
   - [ ] Revisar UX/UI y usabilidad del boton X del SideMenu. ¿es redundante con el overlay sombreado?
   - [ ] Quitar active de botones al soltar (movil) [opciones se queda active]
   - [ ] Campo de notas del turno bajo las tareas.

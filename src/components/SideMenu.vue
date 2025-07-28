@@ -267,6 +267,7 @@ const onLeave = (el: Element) => {
                           <button
                             @click="setPreferredMode('light')"
                             :class="[
+                              'h-10',
                               'w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
                               preferredMode === 'light'
                                 ? 'bg-accent-main text-white font-semibold'
@@ -283,6 +284,7 @@ const onLeave = (el: Element) => {
                           <button
                             @click="setPreferredMode('dark')"
                             :class="[
+                              'h-10',
                               'w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
                               preferredMode === 'dark'
                                 ? 'bg-accent-main text-white font-semibold'
@@ -299,6 +301,7 @@ const onLeave = (el: Element) => {
                           <button
                             @click="setPreferredMode('system')"
                             :class="[
+                              'h-10',
                               'w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
                               preferredMode === 'system'
                                 ? 'bg-accent-main text-white font-semibold'

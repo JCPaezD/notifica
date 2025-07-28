@@ -39,7 +39,7 @@
   }
 }
 
-/* animations.css */
+/* Animaciones de entrada y salida de colapsables*/
 .collapse-enter-active,
 .collapse-leave-active {
   transition: all 0.3s ease;
@@ -54,4 +54,22 @@
 .collapse-leave-from {
   max-height: 500px;
   opacity: 1;
+}
+
+
+/* Animaciones de entrada y salida de mensajes "sin tareas"*/
+.fade-scale-enter-active,
+.fade-scale-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: transform, opacity;
+}
+.fade-scale-enter-from,
+.fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.97);
+}
+.fade-scale-enter-to,
+.fade-scale-leave-from {
+  opacity: 1;
+  transform: scale(1);
 }
