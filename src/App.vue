@@ -561,21 +561,6 @@ const exportTasksToJson = async () => {
     }
   };
 
-  // Para eliminar bug hover pegado en botones en movil
-  onMounted(() => {
-    document.addEventListener('touchstart', (e) => {
-      const btn = (e.target as HTMLElement).closest('button');
-      if (btn) {
-        console.log('[touchstart] botón pulsado:', btn);
-        btn.classList.add('disable-hover');
-        setTimeout(() => {
-          console.log('[touchstart] quitando clase disable-hover');
-          btn.classList.remove('disable-hover');
-        }, 150);
-      }
-    });
-  });
-
   // Hook onMounted: Carga el ID del turno actual y las tareas desde localStorage al iniciar la aplicación.
   onMounted(() => {
     // Cargar currentShiftId

@@ -1,0 +1,33 @@
+/* src/assets/css/buttons.css */
+
+/* Estado base – modo claro */
+.btn-primary {
+  @apply bg-status-accent text-accent-strong;
+}
+
+/* Hover solo en dispositivos con hover real */
+@media (hover: hover) {
+  .btn-primary:hover {
+    @apply bg-status-accent-hover;
+  }
+}
+
+/* Active – también en móvil */
+.btn-primary:active {
+  @apply bg-status-accent-hover;
+}
+
+/* Modo oscuro */
+.dark .btn-primary {
+  @apply bg-status-accent-dark text-accent-strong-dark;
+}
+
+@media (hover: hover) {
+  .dark .btn-primary:hover {
+    @apply bg-status-accent-hover-dark;
+  }
+}
+
+.dark .btn-primary:active {
+  @apply bg-status-accent-hover-dark;
+}

@@ -47,7 +47,7 @@
             :class="[
               'w-full px-3 py-1.5 font-semibold rounded-md shadow-sm',
               'active:scale-95 transition-all duration-300 ease-in-out flex items-center justify-center gap-2 text-sm',
-              getButtonStyle('primary', mode)
+              'btn-primary'
             ]"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
