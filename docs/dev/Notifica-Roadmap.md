@@ -649,8 +649,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Mantener visible el título del turno aunque no tenga tareas
     - [x] Aplicar animación fade+scale al cambiar de mensaje
     - [x] Ajustar estilos para evitar salto visual tras animación
-  - [ ] Revisar UX/UI y usabilidad del boton X del SideMenu. ¿es redundante con el overlay sombreado?
-  - [ ] Quitar active de botones al soltar (movil) [opciones se queda active]
+  - [x] Evaluar necesidad del botón "X" para cerrar el menú lateral
+        - [x] Confirmado que su presencia mejora la accesibilidad y claridad para todo tipo de usuarios
+        - [x] Se mantiene el cierre por tap fuera como opción adicional
+  - [ ] Quitar active de botones al soltar (movil) [opciones y otros se quedan active]
   - [ ] Campo de notas del turno bajo las tareas.
   - [ ] Probar iconos rellenos para turnos m/t/n
   - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.

@@ -83,7 +83,7 @@ const emptyMessage = computed(() => {
     return 'Este turno no tiene tareas'
   }
 
-  return 'Empieza una nueva tarea para registrar tu trabajo'
+  return 'Empieza una nueva tarea para este turno'
 })
 
 
