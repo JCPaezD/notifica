@@ -1,33 +1,109 @@
 /* src/assets/css/buttons.css */
 
-/* Estado base – modo claro */
+/* ---------- btn-primary ---------- */
 .btn-primary {
   @apply bg-status-accent text-accent-strong;
 }
-
-/* Hover solo en dispositivos con hover real */
 @media (hover: hover) {
   .btn-primary:hover {
     @apply bg-status-accent-hover;
   }
 }
-
-/* Active – también en móvil */
 .btn-primary:active {
   @apply bg-status-accent-hover;
 }
-
-/* Modo oscuro */
 .dark .btn-primary {
   @apply bg-status-accent-dark text-accent-strong-dark;
 }
-
 @media (hover: hover) {
   .dark .btn-primary:hover {
     @apply bg-status-accent-hover-dark;
   }
 }
-
 .dark .btn-primary:active {
   @apply bg-status-accent-hover-dark;
+}
+
+/* ---------- btn-danger ---------- */
+.btn-danger {
+  @apply bg-status-danger text-danger-strong;
+}
+@media (hover: hover) {
+  .btn-danger:hover {
+    @apply bg-status-danger-hover;
+  }
+}
+.btn-danger:active {
+  @apply bg-status-danger-hover;
+}
+.dark .btn-danger {
+  @apply bg-status-danger-dark text-danger-strong-dark;
+}
+@media (hover: hover) {
+  .dark .btn-danger:hover {
+    @apply bg-status-danger-dark-hover;
+  }
+}
+.dark .btn-danger:active {
+  @apply bg-status-danger-dark-hover;
+}
+
+/* ---------- btn-success ---------- */
+.btn-success {
+  @apply bg-status-success text-success-strong;
+}
+@media (hover: hover) {
+  .btn-success:hover {
+    @apply bg-status-success-hover;
+  }
+}
+.btn-success:active {
+  @apply bg-status-success-hover;
+}
+.dark .btn-success {
+  @apply bg-status-success-dark text-success-strong-dark;
+}
+@media (hover: hover) {
+  .dark .btn-success:hover {
+    @apply bg-status-success-dark-hover;
+  }
+}
+.dark .btn-success:active {
+  @apply bg-status-success-dark-hover;
+}
+
+/* ---------- btn-purple ---------- */
+.btn-purple {
+  @apply bg-status-purple text-purple-strong focus:outline-none;
+}
+@media (hover: hover) {
+  .btn-purple:hover {
+    @apply bg-status-purple-hover;
+  }
+}
+.btn-purple:active {
+  @apply bg-status-purple-hover;
+}
+.dark .btn-purple {
+  @apply bg-status-purple-dark text-purple-strong-dark focus:outline-none;
+}
+@media (hover: hover) {
+  .dark .btn-purple:hover {
+    @apply bg-status-purple-dark-hover;
+  }
+}
+.dark .btn-purple:active {
+  @apply bg-status-purple-dark-hover;
+}
+
+/* ---------- Aliases ---------- */
+.btn-share,
+.btn-import,
+.btn-export {
+  @apply btn-primary;
+}
+
+.btn-options,
+.btn-toggle {
+  @apply btn-purple;
 }

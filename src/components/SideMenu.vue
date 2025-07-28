@@ -158,7 +158,7 @@ const onLeave = (el: Element) => {
                   @click="handleAction('newShift')"
                   :class="[
                     'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
-                    getButtonStyle('newShift', mode),
+                    'btn-success',
                     'active:scale-95 transition-all duration-150 ease-in-out'
                   ]"
                 >
@@ -175,7 +175,7 @@ const onLeave = (el: Element) => {
                   @click="handleAction('shareTasks')"
                   :class="[
                     'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
-                    getButtonStyle('share', mode),
+                    'btn-primary',
                     'active:scale-95 transition-all duration-150 ease-in-out'
                   ]"
                 >
@@ -192,7 +192,7 @@ const onLeave = (el: Element) => {
                   @click="handleAction('importTasks')"
                   :class="[
                     'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
-                    getButtonStyle('import', mode),
+                    'btn-primary',
                     'active:scale-95 transition-all duration-150 ease-in-out'
                   ]"
                 >
@@ -206,7 +206,7 @@ const onLeave = (el: Element) => {
                   @click="handleAction('exportTasks')"
                   :class="[
                     'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
-                    getButtonStyle('export', mode),
+                    'btn-primary',
                     'active:scale-95 transition-all duration-150 ease-in-out'
                   ]"
                 >
@@ -225,7 +225,7 @@ const onLeave = (el: Element) => {
                     @click="isOptionsOpen = !isOptionsOpen"
                     :class="[
                       'w-full flex items-center justify-between gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
-                      getButtonStyle('options', mode),
+                      'btn-purple',
                       'active:scale-95 transition-all duration-150 ease-in-out'
                     ]"
                     :aria-expanded="isOptionsOpen"
@@ -329,7 +329,7 @@ const onLeave = (el: Element) => {
                   @click="handleAction('deleteAll')"
                   :class="[
                     'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
-                    getButtonStyle('delete', mode),
+                    'btn-danger',
                     'active:scale-95 transition-all duration-150 ease-in-out focus:outline-none'
                   ]"
                 >
