@@ -974,13 +974,17 @@ Se reescribieron los estilos de botones utilizando clases estáticas declaradas 
 - Se definió la clase `btn-primary` con el mismo diseño que `getButtonStyle('primary', mode)`.
 - Se sustituyó `getButtonStyle(...)` por `'btn-primary'` en el botón “Iniciar” como caso de prueba.
 - Se validó el resultado en DevTools móvil, PWA iOS, app Android y escritorio.
+- Se completó la migración del resto de botones del `SideMenu`, iconos redondos (`notificar`, `eliminar`), botones de acción y cierre de toast, hamburguesa y cierre de menú.
+- Se mantuvieron y adaptaron todos los efectos visuales previos: `hover`, `active`, `focus`, `scale`, etc.
+- Se refactorizó completamente el archivo `buttons.css` centralizando todos los estilos personalizados de botones.
 
-**Impacto y próximos pasos:**  
+**Impacto y conclusiones:**  
 - El bug desaparece por completo en todos los entornos móviles.
 - No hay efectos colaterales en animaciones ni en el sistema de cambio de tema.
 - El sistema evita el purgado de clases Tailwind al usar clases estáticas.
-- Esta solución se extenderá a todos los botones afectados y se eliminará `menuButtonStyles.ts` si queda obsoleto.
-- La técnica es aplicable también al proyecto Nocta y a otros elementos como botones de toast.
+- El archivo `menuButtonStyles.ts` fue eliminado por completo tras verificarse que todas las referencias habían sido sustituidas.
+- Los botones con transición dinámica (como Finalizar/Reabrir) fueron adaptados cuidadosamente para mantener efectos visuales y resolver el ‘flash’ en el intercambio, modificando el fade `opacity` a `opacity-50` para evitar desaparición total.
+- El nuevo sistema permite ahora implementar botones coherentes y accesibles con feedback completo sin código duplicado ni soluciones JS específicas para móvil.
 
 
 ---

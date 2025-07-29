@@ -652,7 +652,16 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Evaluar necesidad del botón "X" para cerrar el menú lateral
         - [x] Confirmado que su presencia mejora la accesibilidad y claridad para todo tipo de usuarios
         - [x] Se mantiene el cierre por tap fuera como opción adicional
-  - [ ] Quitar active de botones al soltar (movil) [opciones y otros se quedan active]
+  - [x] Quitar active de botones al soltar (movil) [opciones y otros se quedan active]
+      - [x] Diagnóstico del bug en dispositivos táctiles y análisis de causa
+      - [x] Creación de `buttons.css` con clases estáticas `@apply` y condicionales `@media (hover: hover)`
+      - [x] Adaptación del botón “Iniciar” como prueba inicial
+      - [x] Sustitución de todos los botones del menú lateral (`SideMenu`)
+      - [x] Refactorización de botones de tipo icono (`notificar`, `eliminar`)
+      - [x] Adaptación de botones de acción y cierre de toast (feedback completo)
+      - [x] Adaptación de botones “Finalizar / Reabrir” con efecto de transición sin flash
+      - [x] Eliminación de `menuButtonStyles.ts` y funciones asociadas
+      - [x] Limpieza final y validación en PWA, móvil y escritorio
   - [ ] Campo de notas del turno bajo las tareas.
   - [ ] Probar iconos rellenos para turnos m/t/n
   - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.
