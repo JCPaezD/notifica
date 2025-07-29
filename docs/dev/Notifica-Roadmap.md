@@ -702,7 +702,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
             - [x] No se limpiaban notas al hacer "Borrar todo"
             - [x] Error al importar JSON nuevo con notas (`.map is not a function`)
             - [x] El turno actual no muestra notas tras importar JSON con notas (hasta recarga o cambio de turno)
-            - [ ] El listado de turnos ignora turnos con notas pero sin tareas (debe incluirlos)
+            - [x] El listado de turnos ignora turnos con notas pero sin tareas (debe incluirlos)
+            - [ ] El turno actual tras importar JSON no siempre es el más reciente (no considera turnos con solo notas)
             - [ ] Tras "Borrar todo", las notas del turno actual se mantienen en pantalla hasta recarga
             - [ ] El estado colapsado/expandido de las notas se mantiene entre turnos (¿debe reiniciarse si hay notas o no?)
     - [ ] 📤 Integración con compartir (texto plano)

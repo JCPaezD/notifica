@@ -324,9 +324,18 @@ const filteredAndSortedTasks = computed(() => {
 // Propiedad computada: Genera una lista de turnos disponibles basados en los `shiftId` de las tareas.
 const availableShifts = computed<Shift[]>(() => {
   const shiftIds = new Set<string>();
+
+  // Añadir shiftIds desde tareas
   allTasks.value.forEach(task => {
     if (task.shiftId) {
       shiftIds.add(task.shiftId);
+    }
+  });
+
+  // Añadir shiftIds desde notas
+  Object.keys(notesMap.value).forEach(id => {
+    if (id && !shiftIds.has(id)) {
+      shiftIds.add(id);
     }
   });
 
@@ -358,7 +367,13 @@ const listTitle = computed(() => {
 })
 
 import { getShiftLabel, getShiftIcon, getShiftColor } from './composables/useShifts'
-import { getAllNotes, deleteNotesForShift, deleteAllNotes, setAllNotes } from '@/composables/useNotes'
+import {
+  getAllNotes,
+  deleteNotesForShift,
+  deleteAllNotes,
+  setAllNotes,
+  notesMap
+} from '@/composables/useNotes'
 
 // Exporta todas las tareas actuales a un archivo JSON.
 const exportTasksToJson = async () => {
