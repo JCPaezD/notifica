@@ -694,9 +694,17 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Al hacer blur en campo existente vacío → eliminar
         - [x] Aplicar feedback visual leve (placeholder, opacidad, bordes)
     - [ ] 🔄 Integración con exportación / importación
-        - [ ] Añadir `notesByShiftId` como propiedad opcional en el JSON exportado
-        - [ ] Adaptar sistema de importación para detectar y restaurar notas si existen
-        - [ ] Mantener compatibilidad con backups antiguos (sin la clave)
+        - [x] Añadir `notesByShiftId` como propiedad opcional en el JSON exportado
+        - [x] Adaptar sistema de importación para detectar y restaurar notas si existen
+        - [x] Mantener compatibilidad con backups antiguos (sin la clave)
+        - [ ] 🐞 Corrección de bugs en import/export de notas
+            - [x] No se exportaban notas correctamente si no se usaba shiftId válido
+            - [x] No se limpiaban notas al hacer "Borrar todo"
+            - [x] Error al importar JSON nuevo con notas (`.map is not a function`)
+            - [x] El turno actual no muestra notas tras importar JSON con notas (hasta recarga o cambio de turno)
+            - [ ] El listado de turnos ignora turnos con notas pero sin tareas (debe incluirlos)
+            - [ ] Tras "Borrar todo", las notas del turno actual se mantienen en pantalla hasta recarga
+            - [ ] El estado colapsado/expandido de las notas se mantiene entre turnos (¿debe reiniciarse si hay notas o no?)
     - [ ] 📤 Integración con compartir (texto plano)
         - [ ] Si existe nota para el turno exportado, añadir bloque al final:
               "🗒️ Notas:
@@ -710,6 +718,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [ ] Validar backups antiguos y nuevos, con y sin notas
         - [ ] Validar exportación/importación con notas presentes y ausentes
         - [ ] 🎨 Revisión y ajustes visuales del bloque de notas
+        - [ ] Mostrar un indicador visual junto al título “Notas del turno” cuando haya notas guardadas (incluso si el bloque está colapsado)
         - [ ] Revisar tamaño y estilo del icono izquierdo del botón
         - [ ] Verificar alineación vertical y espaciado con el resto de elementos
         - [ ] Ajustar paddings y margenes si es necesario

@@ -6,7 +6,7 @@ import type { PropType } from 'vue'
 import TaskItem from './TaskItem.vue'
 import type { Task } from '../types/Task'
 import { getShiftColor } from '@/composables/useShifts'
-import { computed, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 
 
 const isNotesOpen = ref(false)
@@ -112,7 +112,16 @@ const onLeave = (el: Element) => {
 import { watch } from 'vue'
 import { getNotesForShift, setNotesForShift, deleteNotesForShift } from '@/composables/useNotes'
 
-const notes = ref<string[]>([...getNotesForShift(props.titleId), '']) // Último siempre vacío
+const showNotes = computed(() => props.titleId !== '')
+
+import { notesMap } from '@/composables/useNotes' // debes exportarla explícitamente
+
+const notes = ref<string[]>([])
+
+watchEffect(() => {
+  const base = notesMap.value[props.titleId] ?? []
+  notes.value = [...base, '']
+})
 
 // Guarda y actualiza las notas tras cada edición
 function handleBlur(index: number) {
@@ -208,7 +217,7 @@ watch(() => props.titleId, (newId) => {
       </li>
 
       <!-- Bloque de Notas del Turno -->
-      <li :key="'notes-block'" class="flex flex-row text-sm relative overflow-hidden">
+      <li v-if="showNotes" :key="'notes-block'" class="flex flex-row text-sm relative overflow-hidden">
         <div class="w-1 shrink-0 z-10"></div>
 
         <div class="flex-grow grid grid-cols-[1fr_auto_auto] items-center gap-x-2 py-1 px-3">

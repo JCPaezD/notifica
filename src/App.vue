@@ -51,7 +51,9 @@ const CURRENT_SHIFT_ID_KEY = 'notifica-current-shift-id'
 const currentShiftId = ref<string | null>(null) // ID del turno actualmente activo.
 const selectedShiftToView = ref<string | 'current'>('current') // Turno seleccionado para visualización ('current' o un shiftId).
 const shiftTitleId = computed(() =>
-  selectedShiftToView.value !== 'current' ? selectedShiftToView.value : ''
+  selectedShiftToView.value !== 'current'
+    ? selectedShiftToView.value
+    : currentShiftId.value ?? ''
 )
 const filtersAreActive = computed(() => showOnlyActive.value || showOnlyNotNotified.value)
 
@@ -261,8 +263,9 @@ const startNewShift = (showAlert = true) => {
             currentShiftId.value = previousCurrentShiftId;
             selectedShiftToView.value = previousSelectedShiftToView;
 
-            // Eliminar tareas que se hayan podido crear en el newShiftId que se está deshaciendo
+            // Eliminar tareas y notas que se hayan podido crear en el newShiftId que se está deshaciendo
             allTasks.value = allTasks.value.filter(task => task.shiftId !== newShiftId);
+            deleteNotesForShift(newShiftId)
 
             await nextTick(); // Esperar a que la UI se actualice
 
@@ -355,6 +358,7 @@ const listTitle = computed(() => {
 })
 
 import { getShiftLabel, getShiftIcon, getShiftColor } from './composables/useShifts'
+import { getAllNotes, deleteNotesForShift, deleteAllNotes, setAllNotes } from '@/composables/useNotes'
 
 // Exporta todas las tareas actuales a un archivo JSON.
 const exportTasksToJson = async () => {
@@ -368,7 +372,14 @@ const exportTasksToJson = async () => {
   }
 
   const fileName = `notifica-tareas-${new Date().toISOString().slice(0, 10)}.json`;
-  const dataStr = JSON.stringify(allTasks.value, null, 2);
+
+  // Nuevo objeto combinado
+  const exportData = {
+    tasks: allTasks.value,
+    notesByShiftId: getAllNotes()
+  };
+
+  const dataStr = JSON.stringify(exportData, null, 2);
 
   if (Capacitor.isNativePlatform()) {
     try {
@@ -417,7 +428,7 @@ const exportTasksToJson = async () => {
       description: `Archivo "${fileName}" generado.`,
     })
   }
-};
+}
 
   // Dispara el click en el input de tipo "file" (oculto) para la importación de tareas.
   const triggerFileImport = () => {
@@ -442,7 +453,21 @@ const exportTasksToJson = async () => {
     reader.onload = (e) => {
       try {
         const content = e.target?.result as string;
-        const importedTasks = JSON.parse(content) as Task[];
+        const parsed = JSON.parse(content);
+
+        // Detectar si es formato antiguo (array de tareas) o nuevo (objeto con claves)
+        const importedTasks: Task[] = Array.isArray(parsed)
+          ? parsed
+          : parsed.tasks;
+
+        if (!Array.isArray(importedTasks)) {
+          throw new Error('El archivo no contiene una lista válida de tareas.');
+        }
+
+        // Si existen notas en el JSON, restaurarlas (nuevo formato)
+        if (parsed.notesByShiftId && typeof parsed.notesByShiftId === 'object') {
+          setAllNotes(parsed.notesByShiftId);
+        }
 
         // Validar y transformar las tareas importadas (especialmente las fechas)
         const validatedTasks = importedTasks.map(task => {
@@ -514,11 +539,12 @@ const exportTasksToJson = async () => {
       const tasksBeforeDelete = JSON.parse(JSON.stringify(allTasks.value)); // Copia profunda de las tareas
 
       allTasks.value = []; // Limpia la lista de tareas en la aplicación
+      deleteAllNotes()
 
       const toastId = add(
         {
           title: 'Borrado Completo',
-          description: 'Todas las tareas han sido eliminadas.',
+          description: 'Todas las tareas y notas han sido eliminadas.',
           type: 'error',
           delayClose: true,
           actions: [

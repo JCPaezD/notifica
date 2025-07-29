@@ -3,51 +3,61 @@
 // Gestión de notas asociadas a cada shiftId en localStorage.
 // Formato interno: { [shiftId: string]: string[] }
 
+import { ref } from 'vue'
+
 const STORAGE_KEY = 'notesByShiftId'
 
-interface NotesMap {
-  [shiftId: string]: string[]
-}
-
-// Obtiene todas las notas del almacenamiento (puede estar vacío)
-function getNotesMap(): NotesMap {
-  const raw = localStorage.getItem(STORAGE_KEY)
-  if (!raw) return {}
+const loadFromStorage = (): Record<string, string[]> => {
+  const stored = localStorage.getItem(STORAGE_KEY)
   try {
-    return JSON.parse(raw) as NotesMap
+    return stored ? JSON.parse(stored) : {}
   } catch {
     return {}
   }
 }
 
-// Guarda el objeto completo de notas en localStorage
-function setNotesMap(map: NotesMap) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(map))
+const notesMap = ref<Record<string, string[]>>(loadFromStorage())
+
+const persist = () => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(notesMap.value))
 }
 
-// Obtiene las notas de un turno específico
+// ✅ Devuelve notas del turno
 export function getNotesForShift(shiftId: string): string[] {
-  const map = getNotesMap()
-  return map[shiftId] ?? []
+  return notesMap.value[shiftId] ?? []
 }
 
-// Guarda (o sobreescribe) las notas de un turno
+// ✅ Guarda o actualiza las notas del turno
 export function setNotesForShift(shiftId: string, notes: string[]) {
-  const map = getNotesMap()
-  map[shiftId] = notes
-  setNotesMap(map)
-}
-
-// Elimina todas las notas de un turno específico
-export function deleteNotesForShift(shiftId: string) {
-  const map = getNotesMap()
-  if (shiftId in map) {
-    delete map[shiftId]
-    setNotesMap(map)
+  if (notes.length === 0) {
+    delete notesMap.value[shiftId]
+  } else {
+    notesMap.value[shiftId] = notes
   }
+  persist()
 }
 
-// (Opcional) Devuelve todas las notas almacenadas
-export function getAllNotes(): NotesMap {
-  return getNotesMap()
+// ✅ Borra todas las notas del turno
+export function deleteNotesForShift(shiftId: string) {
+  delete notesMap.value[shiftId]
+  persist()
 }
+
+// ✅ Borra todo el mapa
+export function deleteAllNotes() {
+  notesMap.value = {}
+  persist()
+}
+
+// ✅ Reemplaza por un mapa nuevo
+export function setAllNotes(rawNotes: Record<string, string[]>) {
+  notesMap.value = rawNotes
+  persist()
+}
+
+// ✅ (Opcional futuro) Acceso completo
+export function getAllNotes(): Record<string, string[]> {
+  return notesMap.value
+}
+
+export { notesMap }
