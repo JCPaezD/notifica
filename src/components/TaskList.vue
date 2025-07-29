@@ -6,7 +6,10 @@ import type { PropType } from 'vue'
 import TaskItem from './TaskItem.vue'
 import type { Task } from '../types/Task'
 import { getShiftColor } from '@/composables/useShifts'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+
+
+const isNotesOpen = ref(false)
 
 // Props del componente.
 const props = defineProps({
@@ -86,6 +89,50 @@ const emptyMessage = computed(() => {
   return 'Empieza una nueva tarea para este turno'
 })
 
+const onEnter = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.maxHeight = `${htmlEl.scrollHeight}px`
+}
+
+const onAfterEnter = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.maxHeight = ''
+}
+
+const onBeforeLeave = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.maxHeight = `${htmlEl.scrollHeight}px`
+}
+
+const onLeave = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.maxHeight = '0px'
+}
+
+import { watch } from 'vue'
+import { getNotesForShift, setNotesForShift, deleteNotesForShift } from '@/composables/useNotes'
+
+const notes = ref<string[]>([...getNotesForShift(props.titleId), '']) // Último siempre vacío
+
+// Guarda y actualiza las notas tras cada edición
+function handleBlur(index: number) {
+  const cleaned = notes.value
+    .map(n => n.trim())
+    .filter(n => n.length > 0)
+
+  if (cleaned.length === 0) {
+    deleteNotesForShift(props.titleId)
+    notes.value = ['']
+  } else {
+    setNotesForShift(props.titleId, cleaned)
+    notes.value = [...cleaned, '']
+  }
+}
+
+// Si se cambia de turno visualizado, recarga notas
+watch(() => props.titleId, (newId) => {
+  notes.value = [...getNotesForShift(newId), '']
+})
 
 
 </script>
@@ -156,6 +203,73 @@ const emptyMessage = computed(() => {
                 {{ emptyMessage }}
               </p>
             </Transition>
+          </div>
+        </div>
+      </li>
+
+      <!-- Bloque de Notas del Turno -->
+      <li :key="'notes-block'" class="flex flex-row text-sm relative overflow-hidden">
+        <div class="w-1 shrink-0 z-10"></div>
+
+        <div class="flex-grow grid grid-cols-[1fr_auto_auto] items-center gap-x-2 py-1 px-3">
+          <div class="col-start-1 row-start-1 col-span-3">
+
+            <div class="space-y-1 mt-1">
+              <button
+                @click="isNotesOpen = !isNotesOpen"
+                :class="[
+                  'w-full flex items-center justify-between gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+                  'bg-surface-2 dark:bg-surface-2-dark text-text-main dark:text-main-dark',
+                  'active:scale-95 transition-all duration-150 ease-in-out'
+                ]"
+                :aria-expanded="isNotesOpen"
+                aria-controls="notes-content"
+              >
+                <span class="flex items-center gap-x-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h7.5m-7.5 3h7.5m-7.5 3h4.5" />
+                  </svg>
+                  Notas del turno
+                </span>
+                <svg
+                  class="w-5 h-5 text-text-main dark:text-main-dark/80 transition-transform duration-300"
+                  :class="{ 'rotate-90': isNotesOpen }"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              <Transition
+                name="collapse"
+                @enter="onEnter"
+                @after-enter="onAfterEnter"
+                @before-leave="onBeforeLeave"
+                @leave="onLeave"
+              >
+                <div id="notes-content" v-show="isNotesOpen" class="bg-surface-1 dark:bg-surface-1-dark border border-divider dark:border-divider-dark rounded-xl px-3 py-3 space-y-2">
+                  <div class="space-y-2">
+                    <div
+                      v-for="(note, index) in notes"
+                      :key="`note-${index}`"
+                      class="relative"
+                    >
+                      <input
+                        v-model="notes[index]"
+                        @blur="handleBlur(index)"
+                        type="text"
+                        class="w-full rounded-md bg-surface-2 dark:bg-surface-2-dark text-text-main dark:text-main-dark border border-divider dark:border-divider-dark px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent-main"
+                        :placeholder="index === notes.length - 1 ? 'Añadir nota…' : 'Nota'"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Transition>
+            </div>
+
           </div>
         </div>
       </li>

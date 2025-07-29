@@ -674,25 +674,25 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
               - Borrar un campo elimina la nota
               - Si se vacían todas, se elimina completamente el bloque
               - Diseño limpio, sin botones, con foco móvil-friendly
-    - [ ] 🔍 Revisión del sistema actual
-        - [ ] Revisar cómo se obtiene y organiza la lista de tareas por turno en `TaskList.vue`
-        - [ ] Confirmar que `shiftId` actual está disponible en el contexto de la lista
-        - [ ] Confirmar dónde insertar el nuevo bloque de notas: debajo de tareas y del mensaje de “turno vacío”
+    - [x] 🔍 Revisión del sistema actual
+        - [x] Revisar cómo se obtiene y organiza la lista de tareas por turno en `TaskList.vue`
+        - [x] Confirmar que `shiftId` actual está disponible en el contexto de la lista
+        - [x] Confirmar dónde insertar el nuevo bloque de notas: debajo de tareas y del mensaje de “turno vacío”
     - [ ] 🧱 Implementación funcional
-        - [ ] Crear nuevo composable `useNotes.ts` para gestionar `notesByShiftId` en localStorage
-            - [ ] Funciones: `getNotesForShift()`, `setNotesForShift()`, `deleteNotesForShift()`
-            - [ ] Guardar un array de strings `string[]` por `shiftId`
-        - [ ] Añadir al final de `TaskList.vue` un bloque colapsable “🗒️ Notas del turno”
-            - [ ] Mostrar expandido si existe nota; colapsado si no
-            - [ ] Estilo tipo tarjeta, coherente con diseño de tareas
-            - [ ] Comportamiento de acordeón reutilizable del bloque de apariencia
-        - [ ] Crear componente de lista de inputs encadenados
-            - [ ] Mostrar cada nota como un campo editable independiente
-            - [ ] Siempre renderizar un campo vacío al final
-            - [ ] Al hacer blur en campo vacío con texto → guardar y añadir nuevo campo
-            - [ ] Al hacer blur en campo existente con texto → actualizar
-            - [ ] Al hacer blur en campo existente vacío → eliminar
-            - [ ] Aplicar feedback visual leve (placeholder, opacidad, bordes)
+        - [x] Crear nuevo composable `useNotes.ts` para gestionar `notesByShiftId` en localStorage
+            - [x] Funciones: `getNotesForShift()`, `setNotesForShift()`, `deleteNotesForShift()`
+            - [x] Guardar un array de strings `string[]` por `shiftId`
+    - [x] Añadir al final de `TaskList.vue` un bloque colapsable “🗒️ Notas del turno”
+        - [x] Mostrar expandido si existe nota; colapsado si no  ← manejado por usuario
+        - [x] Estilo tipo tarjeta, coherente con diseño de tareas
+        - [x] Comportamiento de acordeón reutilizable del bloque de apariencia
+    - [x] Crear componente de lista de inputs encadenados
+        - [x] Mostrar cada nota como un campo editable independiente
+        - [x] Siempre renderizar un campo vacío al final
+        - [x] Al hacer blur en campo vacío con texto → guardar y añadir nuevo campo
+        - [x] Al hacer blur en campo existente con texto → actualizar
+        - [x] Al hacer blur en campo existente vacío → eliminar
+        - [x] Aplicar feedback visual leve (placeholder, opacidad, bordes)
     - [ ] 🔄 Integración con exportación / importación
         - [ ] Añadir `notesByShiftId` como propiedad opcional en el JSON exportado
         - [ ] Adaptar sistema de importación para detectar y restaurar notas si existen
@@ -709,6 +709,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [ ] Validar que no afecta a rendimiento ni a otras partes del layout
         - [ ] Validar backups antiguos y nuevos, con y sin notas
         - [ ] Validar exportación/importación con notas presentes y ausentes
+        - [ ] 🎨 Revisión y ajustes visuales del bloque de notas
+        - [ ] Revisar tamaño y estilo del icono izquierdo del botón
+        - [ ] Verificar alineación vertical y espaciado con el resto de elementos
+        - [ ] Ajustar paddings y margenes si es necesario
+        - [ ] Comprobar contraste y legibilidad en modo claro y oscuro
+        - [ ] Evaluar si se requiere ajustar bordes, sombras o transición visual al expandir
     - [ ] 🧼 Limpieza y commit
         - [ ] Confirmar que todo funciona y está documentado si procede
         - [ ] Hacer commit único (`feat: añadir campo de notas del turno como lista editable asociada a shiftId`)
