@@ -18,8 +18,7 @@
             @click="actions[0].onClick"
             @touchstart="() => {}"
             type="button"
-            class="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md
-                   active:scale-95 transition-transform duration-150"
+            class="btn-toast flex items-center gap-1 text-xs font-medium"
             :class="[actionButtonClasses, { 'animate-pop': animateOnMount }]"
           >
             <svg
@@ -42,8 +41,7 @@
               @click="a.onClick"
               @touchstart="() => {}"
               type="button"
-              class="text-xs font-medium px-2 py-0.5 rounded-md
-                     active:scale-95 transition-transform duration-150"
+              class="btn-toast text-xs font-medium"
               :class="[actionButtonClasses]"
             >
               {{ a.label }}
@@ -59,7 +57,7 @@
     <!-- Botón cerrar -->
     <button
       @click="$emit('onClose')"
-      class="ml-1 text-base leading-none transition-colors duration-200"
+      class="btn-toast-close ml-1 text-base leading-none"
       :class="closeButtonClasses"
       aria-label="Cerrar notificación"
     >

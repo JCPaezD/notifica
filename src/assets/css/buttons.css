@@ -107,3 +107,98 @@
 .btn-toggle {
   @apply btn-purple;
 }
+
+
+/* ---------- btn-close (X, hamburguesa) ---------- */
+.btn-close {
+  @apply p-1 rounded-md border border-divider dark:border-divider-dark focus:outline-none transition-all duration-150 ease-in-out active:scale-95;
+}
+@media (hover: hover) {
+  .btn-close:hover {
+    @apply bg-surface-hover dark:bg-surface-hover-dark;
+  }
+}
+.btn-close:active {
+  @apply bg-surface-hover dark:bg-surface-hover-dark;
+}
+
+/* ---------- btn-icon (iconos redondos en tareas) ---------- */
+.btn-icon {
+  @apply p-0.5 rounded-full transition-all duration-300 ease-in-out active:scale-95 transform focus:outline-none;
+}
+@media (hover: hover) {
+  .btn-icon:hover {
+    @apply bg-surface-hover dark:bg-surface-hover-dark;
+  }
+}
+.btn-icon:active {
+  @apply bg-surface-pressed dark:bg-surface-pressed-dark;
+}
+
+/* ---------- btn-icon-success: icono ✓ notificado ---------- */
+.btn-icon-success {
+  @apply btn-icon focus:ring-1 focus:ring-offset-1 focus:ring-accent-main;
+}
+
+/* ---------- btn-icon-alert: icono eliminar tarea ---------- */
+.btn-icon-alert {
+  @apply btn-icon focus:ring-1 focus:ring-offset-1 focus:ring-status-alert;
+}
+
+/* ---------- Toast Buttons ---------- */
+.btn-toast-success {
+  @apply bg-toast-success-action text-toast-success-action-text dark:bg-toast-success-action-dark dark:text-toast-success-action-text-dark transition-transform duration-150;
+}
+@media (hover: hover) {
+  .btn-toast-success:hover {
+    @apply bg-toast-success-action-hover dark:bg-toast-success-action-hover-dark;
+  }
+}
+.btn-toast-success:active {
+  @apply bg-toast-success-action-hover dark:bg-toast-success-action-hover-dark;
+}
+
+.btn-toast-error {
+  @apply bg-toast-error-action text-toast-error-action-text dark:bg-toast-error-action-dark dark:text-toast-error-action-text-dark transition-transform duration-150;
+}
+@media (hover: hover) {
+  .btn-toast-error:hover {
+    @apply bg-toast-error-action-hover dark:bg-toast-error-action-hover-dark;
+  }
+}
+.btn-toast-error:active {
+  @apply bg-toast-error-action-hover dark:bg-toast-error-action-hover-dark;
+}
+
+.btn-toast-warning {
+  @apply bg-toast-warning-action text-toast-warning-action-text dark:bg-toast-warning-action-dark dark:text-toast-warning-action-text-dark transition-transform duration-150;
+}
+@media (hover: hover) {
+  .btn-toast-warning:hover {
+    @apply bg-toast-warning-action-hover dark:bg-toast-warning-action-hover-dark;
+  }
+}
+.btn-toast-warning:active {
+  @apply bg-toast-warning-action-hover dark:bg-toast-warning-action-hover-dark;
+}
+
+.btn-toast-info {
+  @apply bg-toast-info-action text-toast-info-action-text dark:bg-toast-info-action-dark dark:text-toast-info-action-text-dark transition-transform duration-150;
+}
+@media (hover: hover) {
+  .btn-toast-info:hover {
+    @apply bg-toast-info-action-hover dark:bg-toast-info-action-hover-dark;
+  }
+}
+.btn-toast-info:active {
+  @apply bg-toast-info-action-hover dark:bg-toast-info-action-hover-dark;
+}
+
+.btn-toast {
+  @apply px-2 py-0.5 rounded-md active:scale-95 transition-transform duration-150;
+}
+
+/* ---------- Toast Close Button ---------- */
+.btn-toast-close {
+  @apply rounded active:scale-95 transition-transform duration-150;
+}

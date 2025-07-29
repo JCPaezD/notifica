@@ -45,7 +45,9 @@ export default {
         'status-success-hover': '#a7f3d0',
 
         'status-alert': '#fecaca',
+        'status-alert-hover': '#fca5a5',
         'status-active': '#fef08a',
+        'status-active-hover': '#fde68a',
         'status-inprogress': '#cbd5e1',
 
         'status-accent': '#bfdbfe',
@@ -62,10 +64,12 @@ export default {
         'status-success-dark-hover': '#047857',
 
         'status-alert-dark': '#7f1d1d',
+        'status-alert-dark-hover': '#991b1b',
         'status-danger-dark': '#b91c1c',
         'status-danger-dark-hover': '#dc2626',
 
         'status-active-dark': '#78350f',
+        'status-active-dark-hover': '#b45309',
         'status-inprogress-dark': '#475569',
 
         'status-accent-dark': '#1d4ed8',
