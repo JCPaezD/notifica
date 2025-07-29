@@ -69,7 +69,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useDarkMode } from '@/composables/useDarkMode'
-import { menuButtonStyles } from '@/constants/menuButtonStyles'
 
 const { isDark } = useDarkMode()
 const mode = ref<'light' | 'dark'>(isDark.value ? 'dark' : 'light')
@@ -77,10 +76,6 @@ const mode = ref<'light' | 'dark'>(isDark.value ? 'dark' : 'light')
 watch(isDark, () => {
   mode.value = isDark.value ? 'dark' : 'light'
 })
-
-function getButtonStyle(key: keyof typeof menuButtonStyles, theme: 'light' | 'dark') {
-  return menuButtonStyles[key][theme]
-}
 
 defineProps<{
   modelValueDescription: string

@@ -9,7 +9,6 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { menuButtonStyles } from '../constants/menuButtonStyles'
 import { useDarkMode } from '@/composables/useDarkMode'
 
 const { preferredMode, setPreferredMode } = useDarkMode()
@@ -22,10 +21,6 @@ const isOptionsOpen = ref(false)
 const { isDark } = useDarkMode()
 
 const mode = ref<'light' | 'dark'>(isDark.value ? 'dark' : 'light')
-
-function getButtonStyle(key: keyof typeof menuButtonStyles, theme: 'light' | 'dark') {
-  return menuButtonStyles[key][theme]
-}
 
 watch(isDark, () => {
   mode.value = isDark.value ? 'dark' : 'light'
