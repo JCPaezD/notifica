@@ -1198,8 +1198,7 @@ Iniciar el bloque de **modo oscuro (`darkMode`)**:
 - Las validaciones cruzadas (PWA, Android, móvil real) son parte integral del flujo.  
 - Se prioriza la calidad, claridad y mantenimiento futuro del proyecto frente a lanzamientos apresurados.  
 - Las decisiones estratégicas (como el enfoque de producto o cambios en la estructura) deben documentarse explícitamente en `dev-notes.md` o el roadmap.  
-- Encapsular UI interactiva en componentes ayuda a reducir el tamaño de App.vue sin perder control funcional.  
-- El uso de `Notifica` como tracker de sesiones de desarrollo ha comenzado, lo que permite un registro cruzado con commits para revisión y mejora de productividad.  
+- Encapsular UI interactiva en componentes ayuda a reducir el tamaño de App.vue sin perder control funcional.   
 - Confirmado que `touch-action: manipulation` y `-webkit-text-size-adjust: 100%` aplicados globalmente corrigen el bug crítico de scroll en iOS PWA. Este conocimiento es reutilizable en proyectos como Nocta.
 - Validaciones completas y rápidas en entorno real permiten cerrar tareas menores con agilidad y seguridad.
 

@@ -662,12 +662,64 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Adaptación de botones “Finalizar / Reabrir” con efecto de transición sin flash
       - [x] Eliminación de `menuButtonStyles.ts` y funciones asociadas
       - [x] Limpieza final y validación en PWA, móvil y escritorio
-  - [ ] Campo de notas del turno bajo las tareas.
+
+  - [ ] Campo de notas del turno bajo las tareas
+    - [x] 📌 Planificación y análisis inicial
+        - [x] Validar diseño deseado y confirmar encaje visual y funcional con TaskList.vue
+        - [x] Confirmar modelo de datos: almacenamiento separado en `notesByShiftId`
+        - [x] Confirmar integración con exportación/importación y retrocompatibilidad
+        - [x] Registrar decisión de diseño: lista de inputs encadenados sin botón “+”
+              - Autoguardado al hacer blur
+              - Siempre un input vacío al final
+              - Borrar un campo elimina la nota
+              - Si se vacían todas, se elimina completamente el bloque
+              - Diseño limpio, sin botones, con foco móvil-friendly
+    - [ ] 🔍 Revisión del sistema actual
+        - [ ] Revisar cómo se obtiene y organiza la lista de tareas por turno en `TaskList.vue`
+        - [ ] Confirmar que `shiftId` actual está disponible en el contexto de la lista
+        - [ ] Confirmar dónde insertar el nuevo bloque de notas: debajo de tareas y del mensaje de “turno vacío”
+    - [ ] 🧱 Implementación funcional
+        - [ ] Crear nuevo composable `useNotes.ts` para gestionar `notesByShiftId` en localStorage
+            - [ ] Funciones: `getNotesForShift()`, `setNotesForShift()`, `deleteNotesForShift()`
+            - [ ] Guardar un array de strings `string[]` por `shiftId`
+        - [ ] Añadir al final de `TaskList.vue` un bloque colapsable “🗒️ Notas del turno”
+            - [ ] Mostrar expandido si existe nota; colapsado si no
+            - [ ] Estilo tipo tarjeta, coherente con diseño de tareas
+            - [ ] Comportamiento de acordeón reutilizable del bloque de apariencia
+        - [ ] Crear componente de lista de inputs encadenados
+            - [ ] Mostrar cada nota como un campo editable independiente
+            - [ ] Siempre renderizar un campo vacío al final
+            - [ ] Al hacer blur en campo vacío con texto → guardar y añadir nuevo campo
+            - [ ] Al hacer blur en campo existente con texto → actualizar
+            - [ ] Al hacer blur en campo existente vacío → eliminar
+            - [ ] Aplicar feedback visual leve (placeholder, opacidad, bordes)
+    - [ ] 🔄 Integración con exportación / importación
+        - [ ] Añadir `notesByShiftId` como propiedad opcional en el JSON exportado
+        - [ ] Adaptar sistema de importación para detectar y restaurar notas si existen
+        - [ ] Mantener compatibilidad con backups antiguos (sin la clave)
+    - [ ] 📤 Integración con compartir (texto plano)
+        - [ ] Si existe nota para el turno exportado, añadir bloque al final:
+              "🗒️ Notas:
+              - Avisar a mantenimiento sobre bomba 2
+              - Revisar PLC de empaquetadora"
+        - [ ] Asegurar formato legible, indentado, sin romper la estructura actual
+    - [ ] ✅ Verificaciones finales
+        - [ ] Validar visualmente en escritorio, PWA Android, APK Android, PWA iOS
+        - [ ] Validar scroll y comportamiento en tareas largas o turnos vacíos
+        - [ ] Validar que no afecta a rendimiento ni a otras partes del layout
+        - [ ] Validar backups antiguos y nuevos, con y sin notas
+        - [ ] Validar exportación/importación con notas presentes y ausentes
+    - [ ] 🧼 Limpieza y commit
+        - [ ] Confirmar que todo funciona y está documentado si procede
+        - [ ] Hacer commit único (`feat: añadir campo de notas del turno como lista editable asociada a shiftId`)
+
   - [ ] Probar iconos rellenos para turnos m/t/n
   - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
   - [ ] Icono personalizado estilo heroicons svg inline de sol naciente para turno mañana. Y sol normal para tarde. 
   - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 
+  - [ ] Campos descripcion, técnico y horas en tareas en darkmode tienen fondo blanco y texto blanco. Igual a NewTaskForm.vue
+  - [ ] Botón 'volver al turno actual' unificar diseño y feedback con otros botones. Probar delay minimo pulsar-accion para ver animacion.
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
     - [ ] Ajustar paddings con `env(safe-area-inset-*)`
