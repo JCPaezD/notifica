@@ -241,7 +241,11 @@ function handleEnter(index: number) {
       </li>
 
       <!-- Bloque de Notas del Turno -->
-      <li v-if="showNotes" :key="'notes-block'" class="flex flex-row text-sm relative overflow-hidden">
+      <li
+        v-if="showNotes"
+        :key="'notes-block'"
+        class='bg-surface-hover dark:bg-surface-hover-dark'
+      >
         <div class="w-1 shrink-0 z-10"></div>
 
         <div class="flex-grow grid grid-cols-[1fr_auto_auto] items-center gap-x-2 py-1 px-3">
