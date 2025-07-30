@@ -706,7 +706,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
             - [x] El turno actual tras importar JSON no siempre es el más reciente (no considera turnos con solo notas)
             - [x] Tras "Borrar todo", las notas del turno actual se mantienen en pantalla hasta recarga
             - [x] El estado colapsado/expandido de las notas se mantiene entre turnos (¿debe reiniciarse si hay notas o no?)
-            - [ ] El botón "Deshacer" de "Borrar todo" restaura tareas pero no notas
+            - [x] El botón "Deshacer" de "Borrar todo" restaura tareas pero no notas
     - [ ] 📤 Integración con compartir (texto plano)
         - [ ] Si existe nota para el turno exportado, añadir bloque al final:
               "🗒️ Notas:
@@ -714,6 +714,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
               - Revisar PLC de empaquetadora"
         - [ ] Asegurar formato legible, indentado, sin romper la estructura actual
     - [ ] ✅ Verificaciones finales
+        - [ ] Añadir/aceptar nota con intro
         - [ ] Validar visualmente en escritorio, PWA Android, APK Android, PWA iOS
         - [ ] Validar scroll y comportamiento en tareas largas o turnos vacíos
         - [ ] Validar que no afecta a rendimiento ni a otras partes del layout

@@ -557,9 +557,10 @@ const exportTasksToJson = async () => {
   const deleteAllTasks = () => {
     if (window.confirm('¿Estás seguro de que quieres borrar TODAS las tareas de la aplicación? No podrán ser recuperadas.')) {
       const tasksBeforeDelete = JSON.parse(JSON.stringify(allTasks.value)); // Copia profunda de las tareas
+      const notesBeforeDelete = JSON.parse(JSON.stringify(notesMap.value)); // Copia profunda de las notas
 
-      allTasks.value = []; // Limpia la lista de tareas en la aplicación
-      deleteAllNotes()
+      allTasks.value = [];
+      deleteAllNotes();
 
       const toastId = add(
         {
@@ -578,6 +579,7 @@ const exportTasksToJson = async () => {
                   startTime: new Date(task.startTime),
                   endTime: task.endTime ? new Date(task.endTime) : undefined,
                 }));
+                setAllNotes(notesBeforeDelete); // Restaurar las notas
                 await nextTick(); // Esperar al siguiente ciclo de actualización del DOM
 
                 setTimeout(() => {
