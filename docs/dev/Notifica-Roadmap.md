@@ -705,7 +705,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
             - [x] El listado de turnos ignora turnos con notas pero sin tareas (debe incluirlos)
             - [x] El turno actual tras importar JSON no siempre es el más reciente (no considera turnos con solo notas)
             - [x] Tras "Borrar todo", las notas del turno actual se mantienen en pantalla hasta recarga
-            - [ ] El estado colapsado/expandido de las notas se mantiene entre turnos (¿debe reiniciarse si hay notas o no?)
+            - [x] El estado colapsado/expandido de las notas se mantiene entre turnos (¿debe reiniciarse si hay notas o no?)
             - [ ] El botón "Deshacer" de "Borrar todo" restaura tareas pero no notas
     - [ ] 📤 Integración con compartir (texto plano)
         - [ ] Si existe nota para el turno exportado, añadir bloque al final:

@@ -143,6 +143,15 @@ watch(() => props.titleId, (newId) => {
   notes.value = [...getNotesForShift(newId), '']
 })
 
+watch(
+  () => props.titleId,
+  (newId) => {
+    const shiftNotes = getNotesForShift(newId)
+    const hasNonEmptyNotes = shiftNotes.some(n => n.trim() !== '')
+    isNotesOpen.value = hasNonEmptyNotes
+  }
+)
+
 
 </script>
 
