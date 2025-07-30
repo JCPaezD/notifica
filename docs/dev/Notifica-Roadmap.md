@@ -726,11 +726,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Asegurar que el fondo de los inputs en modo oscuro sea coherente (no blanco)
         - [x] Ajustar paddings, márgenes internos y separación vertical para lograr una presentación más compacta (como en las tareas)
         - [x] Validar que al añadir muchas notas (4–6) el bloque sigue siendo visualmente compacto y funcional
-        - [ ] Sustituir inputs por textarea de una línea para permitir expansión de notas largas sin truncado
+        - [x] Sustituir inputs por textarea de una línea para permitir expansión de notas largas sin truncado
     - [ ] 🧱 Revisión general de alineación y espaciado
         - [ ] Verificar alineación vertical del bloque completo con respecto a las tareas
         - [ ] Ajustar márgenes horizontales para que coincida con los elementos contiguos (tareas, filtros)
         - [ ] Validar espaciado vertical entre notas, tareas, placeholder y el bloque colapsado
+        - [ ] Corregir salto visual al colapsar/desplegar el bloque de notas (animación fluida sin escalón)
+        - [ ] Igualar ancho del bloque de inputs al de las tarjetas de tareas (para coherencia visual)
     - [ ] ✅ Verificaciones finales
         - [ ] Validar visualmente en escritorio, PWA Android, APK Android, PWA iOS
         - [ ] Validar scroll y comportamiento en tareas largas o turnos vacíos

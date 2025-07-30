@@ -6,10 +6,20 @@ import type { PropType } from 'vue'
 import TaskItem from './TaskItem.vue'
 import type { Task } from '../types/Task'
 import { getShiftColor } from '@/composables/useShifts'
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect, onMounted, watch, nextTick } from 'vue'
 
 
 const isNotesOpen = ref(false)
+
+const textareaRefs: Record<number, HTMLTextAreaElement | null> = {}
+
+function autoResize(index: number) {
+  const el = textareaRefs[index]
+  if (el) {
+    el.style.height = 'auto'
+    el.style.height = el.scrollHeight + 'px'
+  }
+}
 
 // Props del componente.
 const props = defineProps({
@@ -109,7 +119,6 @@ const onLeave = (el: Element) => {
   htmlEl.style.maxHeight = '0px'
 }
 
-import { watch } from 'vue'
 import { getNotesForShift, setNotesForShift, deleteNotesForShift } from '@/composables/useNotes'
 
 const showNotes = computed(() => props.titleId !== '')
@@ -117,6 +126,19 @@ const showNotes = computed(() => props.titleId !== '')
 import { notesMap } from '@/composables/useNotes' // debes exportarla explícitamente
 
 const notes = ref<string[]>([])
+
+
+onMounted(() => {
+  nextTick(() => {
+    notes.value.forEach((_, i) => autoResize(i));
+  });
+});
+
+watch(notes, () => {
+  nextTick(() => {
+    notes.value.forEach((_, i) => autoResize(i));
+  });
+});
 
 watchEffect(() => {
   const base = notesMap.value[props.titleId] ?? []
@@ -324,16 +346,19 @@ function handleEnter(index: number) {
                         :key="`note-${index}`"
                         class="relative"
                       >
-                        <input
+                        <textarea
                           v-model="notes[index]"
+                          :ref="el => textareaRefs[index] = el as HTMLTextAreaElement"
                           @blur="handleBlur(index)"
                           @keydown.enter.prevent="handleEnter(index)"
-                          type="text"
-                          class="truncate w-full bg-surface-1 dark:bg-surface-1-dark text-text-main dark:text-main-dark
+                          @input="autoResize(index)"
+                          rows="1"
+                          class="w-full bg-surface-1 dark:bg-surface-1-dark text-text-main dark:text-main-dark
                                 border-0 border-b-2 border-transparent focus:border-accent-main
-                                focus:outline-none
+                                focus:outline-none resize-none overflow-hidden
                                 placeholder-text-main/70 dark:placeholder-text-main-dark/70
-                                text-sm pt-[8px] pb-[1px] transition-all duration-150"
+                                text-sm pt-[12px] pb-[1px] leading-tight align-text-bottom transition-all duration-150
+                                whitespace-pre-wrap break-words"
                           :placeholder="index === notes.length - 1 ? 'Añadir nota…' : 'Nota'"
                         />
                       </div>
