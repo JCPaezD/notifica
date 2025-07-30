@@ -152,6 +152,21 @@ watch(
   }
 )
 
+function handleEnter(index: number) {
+  const note = notes.value[index]?.trim() ?? '';
+
+  if (note.length === 0) return;
+
+  // Si está editando el último campo y hay texto, añade uno nuevo
+  if (index === notes.value.length - 1) {
+    notes.value.push('');
+  }
+
+  // Reaplica el blur para limpiar y guardar
+  handleBlur(index);
+  document.activeElement instanceof HTMLElement && document.activeElement.blur();
+}
+
 
 </script>
 
@@ -278,6 +293,7 @@ watch(
                       <input
                         v-model="notes[index]"
                         @blur="handleBlur(index)"
+                        @keydown.enter.prevent="handleEnter(index)"
                         type="text"
                         class="w-full rounded-md bg-surface-2 dark:bg-surface-2-dark text-text-main dark:text-main-dark border border-divider dark:border-divider-dark px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent-main"
                         :placeholder="index === notes.length - 1 ? 'Añadir nota…' : 'Nota'"
