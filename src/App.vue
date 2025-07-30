@@ -498,26 +498,31 @@ const exportTasksToJson = async () => {
         });
 
         allTasks.value = validatedTasks;
-        // Establecer el turno actual al más reciente de las tareas importadas si tienen shiftId
-        if (validatedTasks.length > 0) {
-          const shiftsFromImport = validatedTasks
-            .filter(t => t.shiftId)
-            .map(t => ({ id: t.shiftId!, date: new Date(parseInt(t.shiftId!.replace('shift-', ''))) }))
-            .sort((a, b) => b.date.getTime() - a.date.getTime());
+        // Establecer el turno actual al más reciente considerando tareas y notas
+        const shiftIdsFromTasks = validatedTasks
+          .filter(t => t.shiftId)
+          .map(t => t.shiftId!) // seguro porque se filtró por existencia
 
-          if (shiftsFromImport.length > 0) {
-            currentShiftId.value = shiftsFromImport[0].id;
-            selectedShiftToView.value = 'current';
-          } else {
-            // Si ninguna tarea importada tiene shiftId, pero hay tareas,
-            // podríamos limpiar currentShiftId o iniciar uno nuevo.
-            // Por ahora, si no hay shiftIds en la importación, limpiamos el currentShiftId.
-            currentShiftId.value = null;
-            selectedShiftToView.value = 'current'; // Para que intente mostrar tareas sin shiftId
-          }
+        const shiftIdsFromNotes = parsed.notesByShiftId
+          ? Object.keys(parsed.notesByShiftId)
+          : []
+
+        const allShiftIds = Array.from(new Set([...shiftIdsFromTasks, ...shiftIdsFromNotes]))
+
+        const shiftsWithDates = allShiftIds
+          .map(id => {
+            const ts = parseInt(id.replace('shift-', ''))
+            return isNaN(ts) ? null : { id, date: new Date(ts) }
+          })
+          .filter((s): s is { id: string, date: Date } => s !== null)
+          .sort((a, b) => b.date.getTime() - a.date.getTime())
+
+        if (shiftsWithDates.length > 0) {
+          currentShiftId.value = shiftsWithDates[0].id
+          selectedShiftToView.value = 'current'
         } else {
-          currentShiftId.value = null;
-          selectedShiftToView.value = 'current';
+          currentShiftId.value = null
+          selectedShiftToView.value = 'current'
         }
         add({
           title: 'Importación Exitosa',
