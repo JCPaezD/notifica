@@ -33,6 +33,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Bug con colores en toasts: diagnóstico y solución](#bug-con-colores-en-toasts-diagnóstico-y-solución)
   - [Logo dinámico en modo claro/oscuro](#logo-dinámico-en-modo-clarooscuro)
   - [Bug visual en botones móviles: hover pegado tras pulsar](#bug-visual-en-botones-móviles-hover-pegado-tras-pulsar)
+  - [Bug en animación del colapsable de notas del turno](#bug-en-animación-del-colapsable-de-notas-del-turno)
 - [UI, diseño y experiencia de usuario](#ui-diseño-y-experiencia-de-usuario)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -985,6 +986,47 @@ Se reescribieron los estilos de botones utilizando clases estáticas declaradas 
 - El archivo `menuButtonStyles.ts` fue eliminado por completo tras verificarse que todas las referencias habían sido sustituidas.
 - Los botones con transición dinámica (como Finalizar/Reabrir) fueron adaptados cuidadosamente para mantener efectos visuales y resolver el ‘flash’ en el intercambio, modificando el fade `opacity` a `opacity-50` para evitar desaparición total.
 - El nuevo sistema permite ahora implementar botones coherentes y accesibles con feedback completo sin código duplicado ni soluciones JS específicas para móvil.
+
+### Bug en animación del colapsable de notas del turno
+
+**Descripción del problema:**  
+Al colapsar o desplegar el bloque de notas del turno mediante animación (`max-height` + opacidad), se observaba un salto visual abrupto al inicio y final de la transición. Este salto daba sensación de desincronización o glitch, visible especialmente en la fase de colapso.
+
+**Hipótesis y causas consideradas:**  
+- Interferencia del `v-show` frente a `v-if`  
+- Conflictos con `TransitionGroup`  
+- Animaciones de opacidad simultáneas con `max-height`  
+- Problemas derivados del uso de `space-y-*`, `py-*` o `overflow-hidden`  
+- Comportamiento de los `textarea` autoajustables (`autoResize`)  
+- Efecto del `padding` en el bloque `notes-content`  
+- Estilos heredados desde `App.vue` u otros contenedores  
+- Diferencias frente al colapsable funcional del `SideMenu`  
+- Desfase entre `onLeave` y el fade-out en animación
+
+**Pruebas realizadas (fallidas):**  
+- Eliminar `autoResize`, `v-show`, `Transition`, o `@input` → sin efecto  
+- Cambiar `v-show` por `v-if` → sin efecto  
+- Sustituir `TransitionGroup` por `Transition` → sin efecto  
+- Aplicar `overflow-hidden` o `position` en distintos niveles → sin efecto  
+- Sustituir `textarea` por contenido estático → bug persistía  
+- Borrar clases `space-y-*`, `py-*`, `px-*`, `bg-*` de todos los niveles → sin efecto o solo reducía el salto  
+- Sustituir funciones `onEnter/onLeave` por variantes que usaban `scrollHeight` o `getBoundingClientRect()` → sin efecto  
+- Comparación completa con colapsable funcional de `SideMenu` → misma estructura no replicaba el bug
+
+**Solución parcial aplicada:**  
+Agrupar las clases internas (`px-4`, `py-2`, `space-y-2`) en un nuevo `div` anidado dentro de `notes-content`.  
+Esto redujo drásticamente la altura del salto y permitió mantener una animación fluida sin afectar el layout general.  
+También se ajustó la duración final de la animación a `0.2s` para mejorar la percepción y minimizar aún más el defecto.
+
+**Resultado:**  
+El bug no se eliminó por completo, pero el salto visual quedó reducido a un mínimo apenas perceptible.  
+Se considera un resultado aceptable dentro del diseño actual y se documenta aquí para evitar reprocesos futuros.
+
+**Recomendaciones futuras:**  
+- Si se reestructura el bloque, partir de cero en un entorno aislado podría revelar la causa exacta.  
+- No volver a mover ni eliminar clases en `notes-content` sin validar este bug.  
+- Documentar bien cualquier cambio estructural que implique colapsables con contenido dinámico como `textarea`.  
+- En caso de requerir una solución 100% fluida, replantear el diseño sin usar colapsado animado con `max-height`.
 
 
 ---
