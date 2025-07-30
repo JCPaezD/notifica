@@ -42,7 +42,7 @@
 /* Animaciones de entrada y salida de colapsables*/
 .collapse-enter-active,
 .collapse-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   overflow: hidden;
 }
 .collapse-enter-from,

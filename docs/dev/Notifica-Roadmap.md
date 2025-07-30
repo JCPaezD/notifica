@@ -720,19 +720,20 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Añadir un separador visual en la parte superior del bloque de notas (finalmente cambio de color de fondo)
         - [x] Añadir un indicador visual junto al título cuando haya notas guardadas (incluso si está colapsado)
         - [x] Revisar contraste y legibilidad del bloque en modo claro y oscuro
-    - [ ] 🧱 Rediseño del bloque de inputs de notas (estética y compacidad)
+    - [x] 🧱 Rediseño del bloque de inputs de notas (estética y compacidad)
         - [x] Unificar visualmente los campos de nota como una lista editable coherente, no inputs separados (estilo más compacto)
         - [x] Reducir intensidad de bordes individuales de cada nota (usar bordes más sutiles o solo líneas inferiores)
         - [x] Asegurar que el fondo de los inputs en modo oscuro sea coherente (no blanco)
         - [x] Ajustar paddings, márgenes internos y separación vertical para lograr una presentación más compacta (como en las tareas)
         - [x] Validar que al añadir muchas notas (4–6) el bloque sigue siendo visualmente compacto y funcional
         - [x] Sustituir inputs por textarea de una línea para permitir expansión de notas largas sin truncado
-    - [ ] 🧱 Revisión general de alineación y espaciado
-        - [ ] Verificar alineación vertical del bloque completo con respecto a las tareas
-        - [ ] Ajustar márgenes horizontales para que coincida con los elementos contiguos (tareas, filtros)
-        - [ ] Validar espaciado vertical entre notas, tareas, placeholder y el bloque colapsado
-        - [ ] Corregir salto visual al colapsar/desplegar el bloque de notas (animación fluida sin escalón)
+    - [x] 🧱 Revisión general de alineación y espaciado
+        - [x] Verificar alineación vertical del bloque completo con respecto a las tareas
+        - [x] Ajustar márgenes horizontales para que coincida con los elementos contiguos (tareas, filtros)
+        - [x] Validar espaciado vertical entre notas, tareas, placeholder y el bloque colapsado
+        - [x] Corregir salto visual al colapsar/desplegar el bloque de notas (animación fluida con escalón mínimo)
         - [ ] Igualar ancho del bloque de inputs al de las tarjetas de tareas (para coherencia visual)
+        - [ ] Añadir indentación a las notas y una línea vertical como las hojas de cuaderno (estética final)
     - [ ] ✅ Verificaciones finales
         - [ ] Validar visualmente en escritorio, PWA Android, APK Android, PWA iOS
         - [ ] Validar scroll y comportamiento en tareas largas o turnos vacíos

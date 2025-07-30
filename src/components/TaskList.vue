@@ -338,7 +338,8 @@ function handleEnter(index: number) {
                 @before-leave="onBeforeLeave"
                 @leave="onLeave"
               >
-                <div id="notes-content" v-show="isNotesOpen" class="bg-surface-1 dark:bg-surface-1-dark border border-divider dark:border-divider-dark rounded-xl px-4 py-2 space-y-2">
+                <div id="notes-content" v-show="isNotesOpen" class="bg-surface-1 dark:bg-surface-1-dark border border-divider dark:border-divider-dark rounded-xl space-y-2">
+                  <div class="px-4 py-2">
                   <div class="space-y-2">
                     <div class="divide-y divide-divider dark:divide-divider-dark">
                       <div
@@ -360,9 +361,10 @@ function handleEnter(index: number) {
                                 text-sm pt-[12px] pb-[1px] leading-tight align-text-bottom transition-all duration-150
                                 whitespace-pre-wrap break-words"
                           :placeholder="index === notes.length - 1 ? 'Añadir nota…' : 'Nota'"
-                        />
+                        ></textarea>
                       </div>
                     </div>
+                  </div>
                   </div>
                 </div>
               </Transition>
