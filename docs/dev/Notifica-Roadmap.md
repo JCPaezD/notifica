@@ -678,7 +678,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Revisar cómo se obtiene y organiza la lista de tareas por turno en `TaskList.vue`
         - [x] Confirmar que `shiftId` actual está disponible en el contexto de la lista
         - [x] Confirmar dónde insertar el nuevo bloque de notas: debajo de tareas y del mensaje de “turno vacío”
-    - [ ] 🧱 Implementación funcional
+    - [x] 🧱 Implementación funcional
         - [x] Crear nuevo composable `useNotes.ts` para gestionar `notesByShiftId` en localStorage
             - [x] Funciones: `getNotesForShift()`, `setNotesForShift()`, `deleteNotesForShift()`
             - [x] Guardar un array de strings `string[]` por `shiftId`
@@ -693,11 +693,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Al hacer blur en campo existente con texto → actualizar
         - [x] Al hacer blur en campo existente vacío → eliminar
         - [x] Aplicar feedback visual leve (placeholder, opacidad, bordes)
-    - [ ] 🔄 Integración con exportación / importación
+    - [x] 🔄 Integración con exportación / importación
         - [x] Añadir `notesByShiftId` como propiedad opcional en el JSON exportado
         - [x] Adaptar sistema de importación para detectar y restaurar notas si existen
         - [x] Mantener compatibilidad con backups antiguos (sin la clave)
-        - [ ] 🐞 Corrección de bugs en import/export de notas
+        - [x] 🐞 Corrección de bugs en import/export de notas
             - [x] No se exportaban notas correctamente si no se usaba shiftId válido
             - [x] No se limpiaban notas al hacer "Borrar todo"
             - [x] Error al importar JSON nuevo con notas (`.map is not a function`)
@@ -707,30 +707,35 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
             - [x] Tras "Borrar todo", las notas del turno actual se mantienen en pantalla hasta recarga
             - [x] El estado colapsado/expandido de las notas se mantiene entre turnos (¿debe reiniciarse si hay notas o no?)
             - [x] El botón "Deshacer" de "Borrar todo" restaura tareas pero no notas
-    - [ ] 📤 Integración con compartir (texto plano)
-        - [ ] Si existe nota para el turno exportado, añadir bloque al final:
+    - [x] 📤 Integración con compartir (texto plano)
+        - [x] Si existe nota para el turno exportado, añadir bloque al final:
               "🗒️ Notas:
-              - Avisar a mantenimiento sobre bomba 2
-              - Revisar PLC de empaquetadora"
-        - [ ] Asegurar formato legible, indentado, sin romper la estructura actual
-    - [ ] ✅ Verificaciones finales
+                - Avisar a mantenimiento sobre bomba 2
+                - Revisar PLC de empaquetadora"
+        - [x] Asegurar formato legible, indentado, sin romper la estructura actual
+    - [ ] 🧱 Mejoras pendientes del sistema de notas
         - [ ] Añadir/aceptar nota con intro
-        - [ ] Validar visualmente en escritorio, PWA Android, APK Android, PWA iOS
-        - [ ] Validar scroll y comportamiento en tareas largas o turnos vacíos
-        - [ ] Validar que no afecta a rendimiento ni a otras partes del layout
-        - [ ] Validar backups antiguos y nuevos, con y sin notas
-        - [ ] Validar exportación/importación con notas presentes y ausentes
-        - [ ] 🎨 Revisión y ajustes visuales del bloque de notas
         - [ ] Mostrar un indicador visual junto al título “Notas del turno” cuando haya notas guardadas (incluso si el bloque está colapsado)
         - [ ] Revisar tamaño y estilo del icono izquierdo del botón
         - [ ] Verificar alineación vertical y espaciado con el resto de elementos
         - [ ] Ajustar paddings y margenes si es necesario
         - [ ] Comprobar contraste y legibilidad en modo claro y oscuro
         - [ ] Evaluar si se requiere ajustar bordes, sombras o transición visual al expandir
+    - [ ] ✅ Verificaciones finales
+        - [ ] Validar visualmente en escritorio, PWA Android, APK Android, PWA iOS
+        - [ ] Validar scroll y comportamiento en tareas largas o turnos vacíos
+        - [ ] Validar que no afecta a rendimiento ni a otras partes del layout
+        - [ ] Validar backups antiguos y nuevos, con y sin notas
+        - [ ] Validar exportación/importación con notas presentes y ausentes
+    - [ ] 📚 Documentación técnica
+        - [ ] Añadir sección en `dev-notes.md` describiendo el sistema de notas por turno
+              - Composable `useNotes.ts`: estructura y persistencia
+              - Integración en `TaskList.vue` con bloque colapsable editable
+              - Comportamiento UX: autoguardado, input encadenado, borrado
+              - Exportación, importación y compatibilidad con backups antiguos
     - [ ] 🧼 Limpieza y commit
         - [ ] Confirmar que todo funciona y está documentado si procede
         - [ ] Hacer commit único (`feat: añadir campo de notas del turno como lista editable asociada a shiftId`)
-
   - [ ] Probar iconos rellenos para turnos m/t/n
   - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.

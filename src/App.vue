@@ -372,7 +372,8 @@ import {
   deleteNotesForShift,
   deleteAllNotes,
   setAllNotes,
-  notesMap
+  notesMap,
+  getNotesForShift
 } from '@/composables/useNotes'
 
 // Exporta todas las tareas actuales a un archivo JSON.
@@ -767,7 +768,14 @@ const exportTasksToJson = async () => {
 
     const title = `_*📋 Notificaciones del ${shiftLabel}*:_\n\n`;
     const tasksText = tasksOfShift.map(formatTaskForPlainText).join('\n\n');
-    const fullText = title + tasksText;
+    
+    let fullText = title + tasksText;
+
+    const notes = getNotesForShift(shiftIdToShare);
+    if (notes.length > 0) {
+      const notesBlock = '\n\n_*🗒️ Notas*:_\n' + notes.map(n => `    - ${n}`).join('\n');
+      fullText += notesBlock;
+    }
 
     try {
       const { Share } = await import('@capacitor/share');
