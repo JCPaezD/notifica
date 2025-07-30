@@ -713,14 +713,23 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                 - Avisar a mantenimiento sobre bomba 2
                 - Revisar PLC de empaquetadora"
         - [x] Asegurar formato legible, indentado, sin romper la estructura actual
-    - [ ] 🧱 Mejoras pendientes del sistema de notas
-        - [ ] Añadir/aceptar nota con intro
-        - [ ] Mostrar un indicador visual junto al título “Notas del turno” cuando haya notas guardadas (incluso si el bloque está colapsado)
-        - [ ] Revisar tamaño y estilo del icono izquierdo del botón
-        - [ ] Verificar alineación vertical y espaciado con el resto de elementos
-        - [ ] Ajustar paddings y margenes si es necesario
-        - [ ] Comprobar contraste y legibilidad en modo claro y oscuro
-        - [ ] Evaluar si se requiere ajustar bordes, sombras o transición visual al expandir
+    - [ ] 🧱 Mejoras visuales y estructurales del bloque de notas del turno
+        - [x] Sustituir la animación actual de scale en el botón de título por una transición más adecuada (e.g. cambio de fondo o icono giratorio suave)
+        - [x] Ajustar tamaño y peso visual del icono del título para que coincida con el placeholder ("Notas del turno" cuando no hay tareas)
+        - [x] Corregir el margen izquierdo excesivo del botón de título (alinearlo con tareas o inputs)
+        - [ ] Añadir un separador visual en la parte superior del bloque de notas (e.g. borde superior, sombra ligera o espaciado)
+        - [ ] Añadir un indicador visual junto al título cuando haya notas guardadas (incluso si está colapsado)
+        - [ ] Revisar contraste y legibilidad del bloque en modo claro y oscuro
+    - [ ] 🧱 Rediseño del bloque de inputs de notas (estética y compacidad)
+        - [ ] Unificar visualmente los campos de nota como una lista editable coherente, no inputs separados (estilo más compacto)
+        - [ ] Reducir intensidad de bordes individuales de cada nota (usar bordes más sutiles o solo líneas inferiores)
+        - [ ] Asegurar que el fondo de los inputs en modo oscuro sea coherente (no blanco)
+        - [ ] Ajustar paddings, márgenes internos y separación vertical para lograr una presentación más compacta (como en las tareas)
+        - [ ] Validar que al añadir muchas notas (4–6) el bloque sigue siendo visualmente compacto y funcional
+    - [ ] 🧱 Revisión general de alineación y espaciado
+        - [ ] Verificar alineación vertical del bloque completo con respecto a las tareas
+        - [ ] Ajustar márgenes horizontales para que coincida con los elementos contiguos (tareas, filtros)
+        - [ ] Validar espaciado vertical entre notas, tareas, placeholder y el bloque colapsado
     - [ ] ✅ Verificaciones finales
         - [ ] Validar visualmente en escritorio, PWA Android, APK Android, PWA iOS
         - [ ] Validar scroll y comportamiento en tareas largas o turnos vacíos
