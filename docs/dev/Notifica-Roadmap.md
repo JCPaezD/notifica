@@ -718,7 +718,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Ajustar tamaño y peso visual del icono del título para que coincida con el placeholder ("Notas del turno" cuando no hay tareas)
         - [x] Corregir el margen izquierdo excesivo del botón de título (alinearlo con tareas o inputs)
         - [x] Añadir un separador visual en la parte superior del bloque de notas (finalmente cambio de color de fondo)
-        - [ ] Añadir un indicador visual junto al título cuando haya notas guardadas (incluso si está colapsado)
+        - [x] Añadir un indicador visual junto al título cuando haya notas guardadas (incluso si está colapsado)
         - [ ] Revisar contraste y legibilidad del bloque en modo claro y oscuro
     - [ ] 🧱 Rediseño del bloque de inputs de notas (estética y compacidad)
         - [ ] Unificar visualmente los campos de nota como una lista editable coherente, no inputs separados (estilo más compacto)
