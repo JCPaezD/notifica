@@ -155,7 +155,17 @@ watch(
 function handleEnter(index: number) {
   const note = notes.value[index]?.trim() ?? '';
 
-  if (note.length === 0) return;
+  if (note.length === 0) {
+    // Si la nota vacía no es el último campo, eliminarla
+    if (index !== notes.value.length - 1) {
+      notes.value.splice(index, 1);
+      handleBlur(index); // Actualiza
+      return;
+    }
+    // Si es el último campo vacío, simplemente quita el foco
+    document.activeElement instanceof HTMLElement && document.activeElement.blur();
+    return;
+  }
 
   // Si está editando el último campo y hay texto, añade uno nuevo
   if (index === notes.value.length - 1) {
@@ -166,6 +176,7 @@ function handleEnter(index: number) {
   handleBlur(index);
   document.activeElement instanceof HTMLElement && document.activeElement.blur();
 }
+
 
 
 </script>
@@ -305,21 +316,27 @@ function handleEnter(index: number) {
                 @before-leave="onBeforeLeave"
                 @leave="onLeave"
               >
-                <div id="notes-content" v-show="isNotesOpen" class="bg-surface-1 dark:bg-surface-1-dark border border-divider dark:border-divider-dark rounded-xl px-3 py-3 space-y-2">
+                <div id="notes-content" v-show="isNotesOpen" class="bg-surface-1 dark:bg-surface-1-dark border border-divider dark:border-divider-dark rounded-xl px-4 py-2 space-y-2">
                   <div class="space-y-2">
-                    <div
-                      v-for="(note, index) in notes"
-                      :key="`note-${index}`"
-                      class="relative"
-                    >
-                      <input
-                        v-model="notes[index]"
-                        @blur="handleBlur(index)"
-                        @keydown.enter.prevent="handleEnter(index)"
-                        type="text"
-                        class="w-full rounded-md bg-surface-2 dark:bg-surface-2-dark text-text-main dark:text-main-dark border border-divider dark:border-divider-dark px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent-main"
-                        :placeholder="index === notes.length - 1 ? 'Añadir nota…' : 'Nota'"
-                      />
+                    <div class="divide-y divide-divider dark:divide-divider-dark">
+                      <div
+                        v-for="(note, index) in notes"
+                        :key="`note-${index}`"
+                        class="relative"
+                      >
+                        <input
+                          v-model="notes[index]"
+                          @blur="handleBlur(index)"
+                          @keydown.enter.prevent="handleEnter(index)"
+                          type="text"
+                          class="truncate w-full bg-surface-1 dark:bg-surface-1-dark text-text-main dark:text-main-dark
+                                border-0 border-b-2 border-transparent focus:border-accent-main
+                                focus:outline-none
+                                placeholder-text-main/70 dark:placeholder-text-main-dark/70
+                                text-sm pt-[8px] pb-[1px] transition-all duration-150"
+                          :placeholder="index === notes.length - 1 ? 'Añadir nota…' : 'Nota'"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

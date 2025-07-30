@@ -713,7 +713,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                 - Avisar a mantenimiento sobre bomba 2
                 - Revisar PLC de empaquetadora"
         - [x] Asegurar formato legible, indentado, sin romper la estructura actual
-    - [ ] 🧱 Mejoras visuales y estructurales del bloque de notas del turno
+    - [x] 🧱 Mejoras visuales y estructurales del bloque de notas del turno
         - [x] Sustituir la animación actual de scale en el botón de título por una transición más adecuada (e.g. cambio de fondo o icono giratorio suave)
         - [x] Ajustar tamaño y peso visual del icono del título para que coincida con el placeholder ("Notas del turno" cuando no hay tareas)
         - [x] Corregir el margen izquierdo excesivo del botón de título (alinearlo con tareas o inputs)
@@ -721,11 +721,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Añadir un indicador visual junto al título cuando haya notas guardadas (incluso si está colapsado)
         - [x] Revisar contraste y legibilidad del bloque en modo claro y oscuro
     - [ ] 🧱 Rediseño del bloque de inputs de notas (estética y compacidad)
-        - [ ] Unificar visualmente los campos de nota como una lista editable coherente, no inputs separados (estilo más compacto)
-        - [ ] Reducir intensidad de bordes individuales de cada nota (usar bordes más sutiles o solo líneas inferiores)
-        - [ ] Asegurar que el fondo de los inputs en modo oscuro sea coherente (no blanco)
-        - [ ] Ajustar paddings, márgenes internos y separación vertical para lograr una presentación más compacta (como en las tareas)
-        - [ ] Validar que al añadir muchas notas (4–6) el bloque sigue siendo visualmente compacto y funcional
+        - [x] Unificar visualmente los campos de nota como una lista editable coherente, no inputs separados (estilo más compacto)
+        - [x] Reducir intensidad de bordes individuales de cada nota (usar bordes más sutiles o solo líneas inferiores)
+        - [x] Asegurar que el fondo de los inputs en modo oscuro sea coherente (no blanco)
+        - [x] Ajustar paddings, márgenes internos y separación vertical para lograr una presentación más compacta (como en las tareas)
+        - [x] Validar que al añadir muchas notas (4–6) el bloque sigue siendo visualmente compacto y funcional
+        - [ ] Sustituir inputs por textarea de una línea para permitir expansión de notas largas sin truncado
     - [ ] 🧱 Revisión general de alineación y espaciado
         - [ ] Verificar alineación vertical del bloque completo con respecto a las tareas
         - [ ] Ajustar márgenes horizontales para que coincida con los elementos contiguos (tareas, filtros)
