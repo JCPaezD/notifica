@@ -734,12 +734,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Corregir salto visual al colapsar/desplegar el bloque de notas (animación fluida con escalón mínimo)
         - [x] Igualar ancho del bloque de inputs al de las tarjetas de tareas (para coherencia visual)
         - [x] Añadir indentación a las notas y una línea vertical como las hojas de cuaderno (estética final)
-    - [ ] ✅ Verificaciones finales
-        - [ ] Validar visualmente en escritorio, PWA Android, APK Android, PWA iOS
-        - [ ] Validar scroll y comportamiento en tareas largas o turnos vacíos
-        - [ ] Validar que no afecta a rendimiento ni a otras partes del layout
-        - [ ] Validar backups antiguos y nuevos, con y sin notas
-        - [ ] Validar exportación/importación con notas presentes y ausentes
+    - [x] ✅ Verificaciones finales
+        - [x] Validar visualmente en escritorio, PWA Android, APK Android, PWA iOS
+        - [x] Validar scroll y comportamiento en tareas largas o turnos vacíos
+        - [x] Validar que no afecta a rendimiento ni a otras partes del layout
+        - [x] Validar backups antiguos y nuevos, con y sin notas
+        - [x] Validar exportación/importación con notas presentes y ausentes
     - [ ] 📚 Documentación técnica
         - [ ] Añadir sección en `dev-notes.md` describiendo el sistema de notas por turno
               - Composable `useNotes.ts`: estructura y persistencia
