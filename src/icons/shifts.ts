@@ -22,24 +22,25 @@ export const shiftIcons: Record<'sun' | 'clock' | 'moon', Component> = {
       ])
     }
   }),
-  clock: defineComponent({
-    render() {
-      return h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        fill: 'none',
-        viewBox: '0 0 24 24',
-        strokeWidth: 1.5,
-        stroke: 'currentColor',
-        class: 'w-5 h-5'
-      }, [
-        h('path', {
-          strokeLinecap: 'round',
-          strokeLinejoin: 'round',
-          d: 'M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
-        })
-      ])
-    }
-  }),
+clock: defineComponent({
+  render() {
+    return h('svg', {
+      xmlns: 'http://www.w3.org/2000/svg',
+      fill: 'none',
+      viewBox: '0 0 24 24',
+      strokeWidth: 1.5,
+      stroke: 'currentColor',
+      class: 'w-5 h-5'
+    }, [
+      h('path', {
+        strokeLinecap: 'round',
+        strokeLinejoin: 'round',
+        d: 'M21,17H3m6.7436,0C8.8364,16.3152,8.25,15.2282,8.25,14.0042c0-2.071,1.6789-3.75,3.75-3.75s3.75,1.679,3.75,3.75c0,1.2239-0.5863,2.3109-1.4934,2.9954M12,5v2.25M5.25,13.9996H3M16.7727,9.2313L18.3637,7.6403M21,13.9996h-2.25M7.2273,9.2313L5.6363,7.6403'
+      })
+    ])
+  }
+}),
+
   moon: defineComponent({
     render() {
       return h('svg', {
