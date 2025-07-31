@@ -482,6 +482,7 @@ const exportTasksToJson = async () => {
 
         // Si existen notas en el JSON, restaurarlas (nuevo formato)
         if (parsed.notesByShiftId && typeof parsed.notesByShiftId === 'object') {
+          deleteAllNotes();
           setAllNotes(parsed.notesByShiftId);
         }
 
