@@ -162,12 +162,12 @@ export default {
 
         // 🌓 Turnos
         'shift-morning': '#facc15',
-        'shift-afternoon': '#f59e0b',
+        'shift-afternoon': '#fb923c',
         'shift-night': '#6366f1',
 
         // 🌓 Turnos (modo oscuro)
         'shift-morning-dark': '#fde68a',
-        'shift-afternoon-dark': '#fcd34d',
+        'shift-afternoon-dark': '#fb923c',
         'shift-night-dark': '#a5b4fc',
 
         // ✅ Toast – texto
