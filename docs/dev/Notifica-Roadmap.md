@@ -662,8 +662,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Adaptación de botones “Finalizar / Reabrir” con efecto de transición sin flash
       - [x] Eliminación de `menuButtonStyles.ts` y funciones asociadas
       - [x] Limpieza final y validación en PWA, móvil y escritorio
-
-  - [ ] Campo de notas del turno bajo las tareas
+  - [x] Campo de notas del turno bajo las tareas
     - [x] 📌 Planificación y análisis inicial
         - [x] Validar diseño deseado y confirmar encaje visual y funcional con TaskList.vue
         - [x] Confirmar modelo de datos: almacenamiento separado en `notesByShiftId`
@@ -749,8 +748,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] 🧼 Limpieza y commit
         - [x] Confirmar que todo funciona y está documentado si procede
         - [x] Hacer commit único (`feat: añadir campo de notas del turno como lista editable asociada a shiftId`)
-  - [ ] Probar iconos rellenos para turnos m/t/n
+  - [x] Propuesta de iconos rellenos para turnos m/t/n revisada y descartada por romper la coherencia del diseño (uso exclusivo de iconos outline)
   - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.
+  - [ ] Al importar un archivo, no se limpia correctamente el estado anterior de turnos si contenían notas: revisar proceso de importación y comparar con versiones anteriores si es necesario.
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
   - [ ] Icono personalizado estilo heroicons svg inline de sol naciente para turno mañana. Y sol normal para tarde. 
   - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 
