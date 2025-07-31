@@ -740,15 +740,15 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Validar que no afecta a rendimiento ni a otras partes del layout
         - [x] Validar backups antiguos y nuevos, con y sin notas
         - [x] Validar exportación/importación con notas presentes y ausentes
-    - [ ] 📚 Documentación técnica
-        - [ ] Añadir sección en `dev-notes.md` describiendo el sistema de notas por turno
+    - [x] 📚 Documentación técnica
+        - [x] Añadir sección en `dev-notes.md` describiendo el sistema de notas por turno
               - Composable `useNotes.ts`: estructura y persistencia
               - Integración en `TaskList.vue` con bloque colapsable editable
               - Comportamiento UX: autoguardado, input encadenado, borrado
               - Exportación, importación y compatibilidad con backups antiguos
-    - [ ] 🧼 Limpieza y commit
-        - [ ] Confirmar que todo funciona y está documentado si procede
-        - [ ] Hacer commit único (`feat: añadir campo de notas del turno como lista editable asociada a shiftId`)
+    - [x] 🧼 Limpieza y commit
+        - [x] Confirmar que todo funciona y está documentado si procede
+        - [x] Hacer commit único (`feat: añadir campo de notas del turno como lista editable asociada a shiftId`)
   - [ ] Probar iconos rellenos para turnos m/t/n
   - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.

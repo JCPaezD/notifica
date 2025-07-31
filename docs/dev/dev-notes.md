@@ -22,6 +22,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Inicialización temprana del modo oscuro en main.ts](#inicialización-temprana-del-modo-oscuro-en-maints)
   - [Animación colapsable del bloque de apariencia (max-height + scrollHeight)](#animación-colapsable-del-bloque-de-apariencia-max-height--scrollheight)
   - [Modo oscuro: uso de `class` y soporte para preferencia del sistema](#modo-oscuro-uso-de-class-y-soporte-para-preferencia-del-sistema)
+  - [Notas por turno: sistema editable vinculado a shiftId](#notas-por-turno-sistema-editable-vinculado-a-shiftid)
 - [Errores y problemas documentados](#errores-y-problemas-documentados)
   - [Bug en iOS PWA: scroll azul tras cerrar teclado](#bug-en-ios-pwa-scroll-azul-tras-cerrar-teclado)
   - [Problemas comunes en emuladores Android](#problemas-comunes-en-emuladores-android)
@@ -657,6 +658,56 @@ Para implementar el sistema de modo oscuro en Notifica se eligió el enfoque `da
 - Visualmente estable, sin flashes ni parpadeos en la carga.
 - Validado en dispositivos con cambios dinámicos de tema (Android, iOS, escritorio).
 - Patrón sólido para futuras apps con necesidades similares de theming.
+
+### Notas por turno: sistema editable vinculado a shiftId
+
+**Motivación y propósito:**  
+Se añadió este sistema para permitir al usuario registrar observaciones o comentarios asociados a un turno específico, sin necesidad de crear tareas estructuradas. Esto permite anotar detalles complementarios de forma libre, como incidencias menores, observaciones de proceso, entregas pendientes o cualquier otra información no formalizable como tarea.
+
+**Estructura técnica:**  
+- El almacenamiento de notas se gestiona mediante el composable `useNotes.ts`, que mantiene un objeto reactivo con claves `shiftId` y valores `string[]`.
+- Las notas se guardan en `localStorage` bajo el objeto `notesByShiftId`.
+- Cada turno puede tener una lista de notas independiente. Las actualizaciones se hacen a través de `setNotesForShift()` y `deleteNotesForShift()`.
+
+**Integración visual y UX:**  
+- El bloque visual se encuentra al final de `TaskList.vue`, después de las tareas.
+- Se muestra un botón colapsable con el título “Notas del turno”, un icono y un contador de notas activas.
+- Al expandirse, aparece una lista editable de campos tipo `textarea`. Su comportamiento incluye:
+  - Siempre hay una línea vacía al final para facilitar entrada encadenada.
+  - Al hacer `blur`, las notas vacías se eliminan automáticamente.
+  - Si se modifica una nota existente, se actualiza en tiempo real.
+  - El bloque permanece accesible incluso si todas las notas son borradas, pero se muestra colapsado por defecto en ese caso.
+- La detección de `blur`, `enter` y el estado del último campo se gestionan para permitir una experiencia fluida sin botones explícitos de guardar.
+
+**Persistencia y comportamiento reactivo:**  
+- Las notas se sincronizan automáticamente tras cada edición, sin necesidad de acción manual del usuario.
+- Internamente se mantiene siempre un array limpio de `string[]`, sin notas vacías.
+- El sistema es compatible con sesiones anteriores: si un usuario importa un backup antiguo que no contiene `notesByShiftId`, el sistema lo ignora sin errores ni efectos colaterales.
+
+**Exportación / Importación:**  
+- En los backups `.json`, se incluye `notesByShiftId` junto al resto de claves como `tasks`.
+- En la exportación de texto plano, si existen notas para el turno exportado, se añaden al final del contenido con el siguiente formato:
+
+    🗒️ Notas:
+     - Primera nota
+     - Segunda nota
+
+- Durante la importación, si `notesByShiftId` está presente y es válido, se restaura mediante `setAllNotes()`. También se toma en cuenta para determinar el turno más reciente tras la importación.
+
+**Estilo visual final:**  
+- Se igualó el ancho del bloque al de las tarjetas de tareas para mantener la coherencia del layout.
+- Se mantuvieron las esquinas redondeadas (`rounded-xl`) para integrar visualmente el bloque con el resto de la app.
+- Se aplicó un diseño que evoca una hoja de cuaderno:
+  - Línea vertical roja (`status-alert`) como margen izquierdo.
+  - `textarea` con indentación (`pl-10`) para ubicar el texto tras la línea.
+  - Líneas horizontales completas mediante `border-b-2`, alineadas con el resto del layout.
+- El diseño es totalmente compatible con modo claro y oscuro.
+
+**Validación y resolución de bugs:**  
+- Validado en escritorio, PWA Android, PWA iOS y APK Android real.
+- Se detectó un bug que impedía visualizar el `placeholder` del campo vacío tras una recarga si no había notas. Se resolvió añadiendo una llamada a `autoResize()` del último campo tras la animación de entrada (`onAfterEnter`).
+- Se confirmó que el área de clic era limitada en ese estado, pero el problema desapareció tras resolver el bug anterior.
+
 
 ---
 
