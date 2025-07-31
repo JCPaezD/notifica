@@ -107,7 +107,16 @@ const onEnter = (el: Element) => {
 const onAfterEnter = (el: Element) => {
   const htmlEl = el as HTMLElement
   htmlEl.style.maxHeight = ''
+
+  nextTick(() => {
+    const keys = Object.keys(textareaRefs).map(Number).sort((a, b) => a - b)
+    if (keys.length > 0) {
+      const last = keys[keys.length - 1]
+      autoResize(last)
+    }
+  })
 }
+
 
 const onBeforeLeave = (el: Element) => {
   const htmlEl = el as HTMLElement

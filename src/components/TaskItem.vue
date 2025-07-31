@@ -447,7 +447,7 @@ const handleDeleteTask = () => {
                             focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
             </template>
             <template v-else>
-              <p @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-0.5 -m-0.5 rounded-md truncate">
+              <p @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-0.5 rounded-md truncate">
                 <span v-if="task.technician" class="text-text-subtle dark:text-subtle-dark">{{ task.technician }}</span>
                 <span v-else class="text-icon-muted dark:text-icon-muted-dark italic">Añadir técnico</span> 
               </p>
