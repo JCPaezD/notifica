@@ -479,10 +479,11 @@ const exportTasksToJson = async () => {
         if (!Array.isArray(importedTasks)) {
           throw new Error('El archivo no contiene una lista válida de tareas.');
         }
+        
+        deleteAllNotes();
 
         // Si existen notas en el JSON, restaurarlas (nuevo formato)
         if (parsed.notesByShiftId && typeof parsed.notesByShiftId === 'object') {
-          deleteAllNotes();
           setAllNotes(parsed.notesByShiftId);
         }
 

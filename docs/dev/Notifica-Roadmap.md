@@ -758,7 +758,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Crear e integrar nuevo icono svg tipo heroicons representando el amanecer
     - [x] Normalizar nombres de iconos de turno: usar `morning`, `afternoon`, `night` en `shiftIcons` y `getShiftIcon()`
     - [x] Revisar consistencia de colores entre los iconos de turno mañana, tarde y noche
-    - [ ] Revisar bug: al importar un archivo, no se limpian correctamente los turnos antiguos (puede haber regresión)
+    - [x] Revisar bug: al importar un archivo sin notas, no se eliminaban las notas antiguas, lo que mantenía turnos obsoletos
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
   - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 
   - [ ] Campos descripcion, técnico y horas en tareas en darkmode tienen fondo blanco y texto blanco. Igual a NewTaskForm.vue
