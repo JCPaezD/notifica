@@ -749,7 +749,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Confirmar que todo funciona y está documentado si procede
         - [x] Hacer commit único (`feat: añadir campo de notas del turno como lista editable asociada a shiftId`)
   - [x] Propuesta de iconos rellenos para turnos m/t/n revisada y descartada por romper la coherencia del diseño (uso exclusivo de iconos outline)
-  - [ ] Revisar cambio en tamaños al cambiar en sistema ios/android.
+  - [x] Revisar cambio en tamaños al cambiar en sistema ios/android/desktop.
+      - [x] Android: validado hasta tamaño máximo en emulador. Layout se adapta sin errores ni solapes, aunque se pierde elegancia visual a partir de tamaño 4/7.
+      - [x] iOS: la opción de accesibilidad del sistema no se propaga a PWA, pero sí lo hace el ajuste de texto de Safari, aplicándose también en la PWA tras recarga.
+      - [x] Escritorio: zoom hasta 175% mantiene estructura; scroll en el sidemenu aparece correctamente sin comprometer la funcionalidad.
   - [ ] Al importar un archivo, no se limpia correctamente el estado anterior de turnos si contenían notas: revisar proceso de importación y comparar con versiones anteriores si es necesario.
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
   - [ ] Icono personalizado estilo heroicons svg inline de sol naciente para turno mañana. Y sol normal para tarde. 
