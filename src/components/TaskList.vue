@@ -281,7 +281,7 @@ function handleEnter(index: number) {
       >
         <div class="w-1 shrink-0 z-10"></div>
 
-        <div class="flex-grow grid grid-cols-[1fr_auto_auto] items-center gap-x-2 py-1 px-3">
+        <div class="flex-grow grid grid-cols-[1fr_auto_auto] items-center gap-x-2">
           <div class="col-start-1 row-start-1 col-span-3">
 
             <div class="space-y-1 mt-1">
@@ -294,7 +294,7 @@ function handleEnter(index: number) {
                 :aria-expanded="isNotesOpen"
                 aria-controls="notes-content"
               >
-                <span class="flex items-center gap-x-2">
+                <span class="flex items-center gap-x-2 py-1.5 px-3">
                   <svg xmlns="http://www.w3.org/2000/svg"
                     fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor"
