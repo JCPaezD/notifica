@@ -760,9 +760,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Revisar consistencia de colores entre los iconos de turno mañana, tarde y noche
     - [x] Revisar bug: al importar un archivo sin notas, no se eliminaban las notas antiguas, lo que mantenía turnos obsoletos
   - [x] Campos descripcion, técnico y horas en tareas en darkmode tienen fondo blanco y texto blanco. Igual a NewTaskForm.vue
+  - [x] Botón 'volver al turno actual' unificar diseño y feedback con otros botones. Probar delay minimo pulsar-accion para ver animacion.
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
   - [ ] Añadir splash para PWA ios no perdiendo la de android (si es posible y fácil) 
-  - [ ] Botón 'volver al turno actual' unificar diseño y feedback con otros botones. Probar delay minimo pulsar-accion para ver animacion.
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
     - [ ] Ajustar paddings con `env(safe-area-inset-*)`
