@@ -754,14 +754,14 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] iOS: la opción de accesibilidad del sistema no se propaga a PWA, pero sí lo hace el ajuste de texto de Safari, aplicándose también en la PWA tras recarga.
       - [x] Escritorio: zoom hasta 175% mantiene estructura; scroll en el sidemenu aparece correctamente sin comprometer la funcionalidad.
   - [x] Al importar un archivo se conservaban notas antiguas: solucionado añadiendo deleteAllNotes() antes de setAllNotes() para limpiar el estado anterior correctamente
-  - [ ] Icono personalizado estilo heroicons svg inline de sol naciente para turno mañana. Y sol normal para tarde.
+  - [x] Icono personalizado estilo heroicons svg inline de sol naciente para turno mañana. Y sol normal para tarde.
     - [x] Crear e integrar nuevo icono svg tipo heroicons representando el amanecer
     - [x] Normalizar nombres de iconos de turno: usar `morning`, `afternoon`, `night` en `shiftIcons` y `getShiftIcon()`
     - [x] Revisar consistencia de colores entre los iconos de turno mañana, tarde y noche
     - [x] Revisar bug: al importar un archivo sin notas, no se eliminaban las notas antiguas, lo que mantenía turnos obsoletos
+  - [x] Campos descripcion, técnico y horas en tareas en darkmode tienen fondo blanco y texto blanco. Igual a NewTaskForm.vue
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
-  - [ ] Añadir splash para pa PWA ios no perdiendo la de android (si es posible y fácil) 
-  - [ ] Campos descripcion, técnico y horas en tareas en darkmode tienen fondo blanco y texto blanco. Igual a NewTaskForm.vue
+  - [ ] Añadir splash para PWA ios no perdiendo la de android (si es posible y fácil) 
   - [ ] Botón 'volver al turno actual' unificar diseño y feedback con otros botones. Probar delay minimo pulsar-accion para ver animacion.
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto

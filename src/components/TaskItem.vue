@@ -332,7 +332,8 @@ const handleDeleteTask = () => {
                 @blur="saveDescription"
                 @keyup.esc="cancelEditDescription"
                 class="font-semibold text-sm text-text-main dark:text-main-dark p-1 border border-divider dark:border-divider-dark rounded-md w-full 
-                       focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"
+                       focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out
+                       bg-surface-1 dark:bg-surface-1-dark"
               />
             </template>
             <template v-else>
@@ -349,7 +350,8 @@ const handleDeleteTask = () => {
             <template v-if="isEditingStartTime">
               <input ref="startTimeInputRef" type="time" v-model="editableStartTime" @keyup.enter="saveStartTime" @blur="saveStartTime" 
                      class="text-text-main/90 dark:text-main-dark p-0.5 border border-divider dark:border-divider-dark rounded-md w-[68px] text-xs 
-                            focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
+                            focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out
+                            bg-surface-1 dark:bg-surface-1-dark"/>
             </template>
             <template v-else>
               <span @click="startEditStartTime" class="text-text-main/90 dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
@@ -374,7 +376,8 @@ const handleDeleteTask = () => {
                   <template v-if="isEditingEndTime">
                     <input ref="endTimeInputRef" type="time" v-model="editableEndTime" @keyup.enter="saveEndTime" @blur="saveEndTime" 
                            class="text-success-strong p-0.5 border border-divider dark:border-divider-dark rounded-md w-[68px] text-xs 
-                                  focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
+                                  focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out
+                                  bg-surface-1 dark:bg-surface-1-dark"/>
                   </template>
                   <template v-else>
                     <span @click="startEditEndTime"
@@ -444,7 +447,8 @@ const handleDeleteTask = () => {
             <template v-if="isEditingTechnician">
               <input type="text" ref="technicianInputRef" v-model="editableTechnician" @keyup.enter="saveTechnician" @blur="saveTechnician" 
                      class="text-xs text-text-main dark:text-main-dark p-0.5 border border-divider dark:border-divider-dark rounded-md w-full 
-                            focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out"/>
+                            focus:ring-1 focus:ring-accent-main focus:border-accent-main transition-all duration-300 ease-in-out
+                            bg-surface-1 dark:bg-surface-1-dark"/>
             </template>
             <template v-else>
               <p @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-0.5 rounded-md truncate">
