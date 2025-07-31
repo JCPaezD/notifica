@@ -15,13 +15,13 @@ export function getShiftLabel(shiftId: string): string {
 }
 
 // Devuelve el icono correspondiente a un turno dado su ID.
-export function getShiftIcon(shiftId: string): 'sun' | 'clock' | 'moon' {
+export function getShiftIcon(shiftId: string): 'morning' | 'afternoon' | 'night' {
   const timestamp = Number(shiftId.replace('shift-', ''))
   const hour = dayjs(timestamp).hour()
 
-  if (hour < 12) return 'sun'
-  else if (hour < 20) return 'clock'
-  else return 'moon'
+  if (hour < 12) return 'morning'
+  else if (hour < 20) return 'afternoon'
+  else return 'night'
 }
 
 import { useDarkMode } from './useDarkMode'

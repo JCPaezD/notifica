@@ -1,13 +1,13 @@
 export const shiftColors = {
-  sun: {
+  morning: {
     light: 'text-shift-morning',
     dark: 'text-shift-morning-dark',
   },
-  clock: {
+  afternoon: {
     light: 'text-shift-afternoon',
     dark: 'text-shift-afternoon-dark',
   },
-  moon: {
+  night: {
     light: 'text-shift-night',
     dark: 'text-shift-night-dark',
   },

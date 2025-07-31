@@ -756,6 +756,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Al importar un archivo se conservaban notas antiguas: solucionado añadiendo deleteAllNotes() antes de setAllNotes() para limpiar el estado anterior correctamente
   - [ ] Icono personalizado estilo heroicons svg inline de sol naciente para turno mañana. Y sol normal para tarde.
     - [x] Crear e integrar nuevo icono svg tipo heroicons representando el amanecer
+    - [x] Normalizar nombres de iconos de turno: usar `morning`, `afternoon`, `night` en `shiftIcons` y `getShiftIcon()`
     - [ ] Revisar consistencia de colores entre los iconos de turno mañana, tarde y noche
     - [ ] Revisar bug: al importar un archivo, no se limpian correctamente los turnos antiguos (puede haber regresión)
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.

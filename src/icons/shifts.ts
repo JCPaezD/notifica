@@ -3,8 +3,8 @@
 import { h, defineComponent, type Component } from 'vue'
 
 // --- Íconos de turnos ---
-export const shiftIcons: Record<'sun' | 'clock' | 'moon', Component> = {
-  sun: defineComponent({
+export const shiftIcons: Record<'morning' | 'afternoon' | 'night', Component> = {
+  morning: defineComponent({
     render() {
       return h('svg', {
         xmlns: 'http://www.w3.org/2000/svg',
@@ -22,7 +22,7 @@ export const shiftIcons: Record<'sun' | 'clock' | 'moon', Component> = {
       ])
     }
   }),
-clock: defineComponent({
+afternoon: defineComponent({
   render() {
     return h('svg', {
       xmlns: 'http://www.w3.org/2000/svg',
@@ -41,7 +41,7 @@ clock: defineComponent({
   }
 }),
 
-  moon: defineComponent({
+  night: defineComponent({
     render() {
       return h('svg', {
         xmlns: 'http://www.w3.org/2000/svg',
