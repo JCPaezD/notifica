@@ -290,6 +290,7 @@ function handleEnter(index: number) {
                 :class="[
                   'w-full flex items-center justify-between gap-x-3 py-2 rounded-md text-sm font-medium',
                   'bg-surface-2 dark:bg-surface-2-dark text-text-main dark:text-main-dark',
+                  'pr-3'
                 ]"
                 :aria-expanded="isNotesOpen"
                 aria-controls="notes-content"
@@ -338,8 +339,13 @@ function handleEnter(index: number) {
                 @before-leave="onBeforeLeave"
                 @leave="onLeave"
               >
-                <div id="notes-content" v-show="isNotesOpen" class="bg-surface-1 dark:bg-surface-1-dark border border-divider dark:border-divider-dark rounded-xl space-y-2">
-                  <div class="px-4 py-2">
+                <div id="notes-content"
+                    v-show="isNotesOpen"
+                    class="relative bg-surface-1 dark:bg-surface-1-dark border border-divider dark:border-divider-dark
+                            rounded-xl space-y-2"
+                >
+                  <div class="absolute top-0 bottom-0 left-8 w-px bg-status-alert dark:bg-status-alert-dark z-10"></div>
+                  <div class="py-2">
                   <div class="space-y-2">
                     <div class="divide-y divide-divider dark:divide-divider-dark">
                       <div
@@ -359,7 +365,7 @@ function handleEnter(index: number) {
                                 focus:outline-none resize-none overflow-hidden
                                 placeholder-text-main/70 dark:placeholder-text-main-dark/70
                                 text-sm pt-[12px] pb-[1px] leading-tight align-text-bottom transition-all duration-150
-                                whitespace-pre-wrap break-words"
+                                whitespace-pre-wrap break-words pl-10 px-4"
                           :placeholder="index === notes.length - 1 ? 'Añadir nota…' : 'Nota'"
                         ></textarea>
                       </div>

@@ -47,3 +47,17 @@
     overscroll-behavior: none;
   }
 }
+
+.notes-lined::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 1.25rem; /* coincidir con pl-5 o pl-6 de las notas */
+    width: 1px;
+    background-color: theme('colors.status-accent'); /* azul pastel */
+}
+
+.dark .notes-lined::before {
+    background-color: theme('colors.status-accent-dark'); /* azul pastel oscuro o el que definas */
+}
