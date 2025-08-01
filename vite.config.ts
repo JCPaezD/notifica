@@ -22,7 +22,7 @@ export default defineConfig({
         type: 'module', // Necesario para Vite 5+ en desarrollo.
       },
       manifest: {
-        name: 'Notifica - Registro de Tareas',
+        name: 'Notifica',
         short_name: 'Notifica',
         description: 'App para registrar tareas técnicas por turnos, de forma ágil y sin conexión.',
         theme_color: '#93c5fd',     // Nuevo color de acento principal
