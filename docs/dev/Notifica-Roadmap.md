@@ -772,12 +772,25 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Añadir las meta-etiquetas 'apple-mobile-web-app-capable' y 'mobile-web-app-capable'
     - [x] Cambiar background_color del manifest para adaptar fondo del icono en Android
     - [x] Validar comportamiento en iOS (iPhone 16 Pro y X), Huawei Android 10 y emuladores
+  - [x] Solucionar error de detección del manifiesto PWA en los previews protegidos de Vercel (ver 'dev-notes.md')
   - [ ] Android emuladores horas HH:MM AM/PM, quitar/restringir am/pm.
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
     - [ ] Ajustar paddings con `env(safe-area-inset-*)`
     - [ ] Verificar en dispositivos reales y emuladores
+
+- [ ] Investigar problema de recorte incorrecto del icono maskable al instalar la PWA en Android
+  > Comentario: ver `dev-notes.md` para contexto completo de pruebas previas realizadas
+  - [ ] Comparar el manifest de Notifica con PWAs conocidas donde el icono maskable se recorte correctamente
+  - [ ] Generar nuevos iconos maskable con padding adecuado usando https://maskable.app/editor y probarlos
+  - [ ] Verificar si el recorte incorrecto varía según versión de Android, API o navegador (Chrome, WebView, WebAPK)
+  - [ ] Probar cambios en el valor de "purpose" (maskable vs any maskable) y validar efectos
+  - [ ] Analizar si el formato, metadatos o compresión del PNG pueden estar afectando el renderizado
+  - [ ] Buscar documentación o bugs conocidos en Chromium o foros relacionados con iconos maskable mal recortados
+  - [ ] Decidir si se puede aplicar un workaround eficaz o si debe dejarse documentado como limitación conocida
+  - [ ] Validar solución (si se aplica) en múltiples entornos antes de cerrar el bug
+
 
 - [ ] 📣 Aviso en PWA para migración a app nativa
   - [ ] Detectar si es entorno web o PWA

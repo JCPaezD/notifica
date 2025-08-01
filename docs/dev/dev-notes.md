@@ -35,6 +35,8 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Logo dinámico en modo claro/oscuro](#logo-dinámico-en-modo-clarooscuro)
   - [Bug visual en botones móviles: hover pegado tras pulsar](#bug-visual-en-botones-móviles-hover-pegado-tras-pulsar)
   - [Bug en animación del colapsable de notas del turno](#bug-en-animación-del-colapsable-de-notas-del-turno)
+  - [Bug: icono maskable recortado en instalación PWA Android](#bug-icono-maskable-recortado-en-instalación-pwa-android)
+  - [Bug: manifiesto PWA no detectado en previews protegidos de Vercel](#bug-manifiesto-pwa-no-detectado-en-previews-protegidos-de-vercel)
 - [UI, diseño y experiencia de usuario](#ui-diseño-y-experiencia-de-usuario)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -1079,6 +1081,46 @@ Se considera un resultado aceptable dentro del diseño actual y se documenta aqu
 - Documentar bien cualquier cambio estructural que implique colapsables con contenido dinámico como `textarea`.  
 - En caso de requerir una solución 100% fluida, replantear el diseño sin usar colapsado animado con `max-height`.
 
+
+### Bug: icono maskable recortado en instalación PWA Android
+
+Durante la validación del manifiesto de la PWA en Android, se ha detectado que el icono definido como **maskable** se muestra mal recortado tanto en la vista previa de instalación como en el acceso directo creado en el homescreen.
+
+Este comportamiento afecta tanto a la rama `develop` como a `main`, y está presente desde las primeras versiones del proyecto. Se descubrió al realizar pruebas específicas de instalación PWA en emuladores Android (API 36) y se ha confirmado en un dispositivo físico (Huawei P Smart 2019, Android 10).
+
+**Pruebas realizadas:**
+- Verificada la correcta detección del manifiesto y su contenido tras desactivar la autenticación de previews en Vercel.
+- Imagen `icon-maskable.png` reescalada a 512x512 para coincidir con el valor declarado en `sizes`.
+- Probados los valores `"purpose": "maskable"` y `"purpose": "any maskable"` sin cambios en el comportamiento.
+- Eliminado el warning de DevTools usando solo `"maskable"`, pero sin mejoras visuales en Android.
+- Restaurado `"any maskable"` para ampliar compatibilidad, sin resultados satisfactorios.
+- Realizado wipe de datos y reinstalación en emuladores sin cambios apreciables.
+
+**Resultado:**
+El bug persiste tras aplicar todas las correcciones posibles a nivel de manifiesto e icono. Se trata de un error visual no crítico, ya que la instalación principal para Android será mediante APK nativa. Se ha documentado para posible resolución futura si se prioriza la experiencia PWA en esta plataforma.
+
+**Relacionado con:**
+- Tarea en el roadmap: *Revisar problema de recorte incorrecto del icono maskable al instalar la PWA en Android*
+
+
+### Bug: manifiesto PWA no detectado en previews protegidos de Vercel
+
+Durante las pruebas de la PWA en dispositivos Android y emuladores, se detectó que el manifiesto no era reconocido correctamente en las versiones desplegadas como preview (`develop`) en Vercel. Esto impedía la correcta instalación como PWA, y se manifestaba como errores en consola del navegador y fallos en la carga de iconos y capturas del manifest.
+
+El problema no afectaba a la versión de producción (`main`), lo que generó confusión inicial sobre su origen.
+
+**Análisis y hallazgo:**
+- El archivo `manifest.webmanifest` se servía correctamente y era accesible manualmente por URL.
+- Los recursos como iconos y screenshots también estaban presentes en el deploy.
+- Se comprobó que el manifiesto era generado correctamente en local y en producción.
+- El fallo solo ocurría en los deploys protegidos por la opción "Legacy Pre-Production Deployments" de Vercel, que requiere autenticación de usuario.
+- Al desactivar esa protección, el manifiesto comenzó a ser reconocido inmediatamente sin necesidad de redeploy.
+
+**Resultado:**
+El error se debía a una limitación de las previews protegidas de Vercel. Se resolvió desactivando la autenticación de previews desde la configuración del proyecto. No ha sido necesario modificar código ni configuración adicional del proyecto.
+
+**Relacionado con:**
+- Tarea completada en el roadmap: *Solucionar error de detección del manifiesto PWA en los previews protegidos de Vercel*
 
 ---
 
