@@ -766,8 +766,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Refactor: desacoplar lógica de UI creando `handleAction('returnToCurrent')` en App.vue
     - [x] Delegar la acción real en `handleMenuAction()` como en `SideMenu`
     - [x] Añadir retardo intencionado (`setTimeout(350ms)`) para permitir feedback visual completo
-  - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
   - [ ] Añadir splash para PWA ios no perdiendo la de android (si es posible y fácil) 
+  - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
     - [ ] Ajustar paddings con `env(safe-area-inset-*)`

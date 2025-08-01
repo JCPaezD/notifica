@@ -26,7 +26,7 @@ export default defineConfig({
         short_name: 'Notifica',
         description: 'App para registrar tareas técnicas por turnos, de forma ágil y sin conexión.',
         theme_color: '#93c5fd',     // Nuevo color de acento principal
-        background_color: '#f5f7fa', // Nuevo color de fondo
+        background_color: '#b3e3fa', // Azul pastel de acento
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',
