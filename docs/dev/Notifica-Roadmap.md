@@ -766,7 +766,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Refactor: desacoplar lógica de UI creando `handleAction('returnToCurrent')` en App.vue
     - [x] Delegar la acción real en `handleMenuAction()` como en `SideMenu`
     - [x] Añadir retardo intencionado (`setTimeout(350ms)`) para permitir feedback visual completo
-  - [ ] Añadir splash para PWA ios no perdiendo la de android (si es posible y fácil) 
+  - [x] Añadir splash para PWA iOS sin perder la de Android
+    - [x] Generar 43 splash screens iOS desde Progressier
+    - [x] Añadir rutas absolutas en los 'link rel="apple-touch-startup-image"'
+    - [x] Añadir las meta-etiquetas 'apple-mobile-web-app-capable' y 'mobile-web-app-capable'
+    - [x] Cambiar background_color del manifest para adaptar fondo del icono en Android
+    - [x] Validar comportamiento en iOS (iPhone 16 Pro y X), Huawei Android 10 y emuladores
   - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
