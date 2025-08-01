@@ -858,6 +858,11 @@ const exportTasksToJson = async () => {
       case 'deleteAll':
         deleteAllTasks();
         break;
+      case 'returnToCurrent':
+        setTimeout(() => {
+          selectedShiftToView.value = 'current'
+        }, 350)
+        break;
       default:
         add({
           title: 'Acción Desconocida',
@@ -866,6 +871,10 @@ const exportTasksToJson = async () => {
         });
     }
   };
+
+  const handleAction = (actionName: string) => {
+    handleMenuAction(actionName)
+  }
 
 </script>
 
@@ -939,12 +948,12 @@ const exportTasksToJson = async () => {
     <hr class="w-5/6 max-w-md border-divider dark:border-divider-dark my-6" />
     <!-- Ancho porcentual para que sea más corta en móviles, centrada por items-center del main -->
 
-        <!-- Botón para volver al turno actual si se está viendo uno pasado -->
+    <!-- Botón para volver al turno actual si se está viendo uno pasado -->
     <Transition enter-active-class="transition-all duration-300 ease-out" enter-from-class="opacity-0 max-h-0"
       enter-to-class="opacity-100 max-h-[80px]" leave-active-class="transition-all duration-300 ease-in"
       leave-from-class="opacity-100 max-h-[80px]" leave-to-class="opacity-0 max-h-0">
       <div v-if="isViewingPastShift" class="w-full max-w-lg mb-4 overflow-hidden">
-        <button @click="returnToCurrentShift" class="btn-shift">
+        <button @click="handleAction('returnToCurrent')" class="btn-shift">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="w-5 h-4">
             <path stroke-linecap="round" stroke-linejoin="round"
