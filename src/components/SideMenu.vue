@@ -125,7 +125,7 @@ const onLeave = (el: Element) => {
                     overflow-hidden bg-app-bg dark:bg-surface-1-dark p-4
                     text-left align-middle shadow-xl
                     flex flex-col select-none"
-              style="padding-top: var(--safe-area-inset-top, 0px);"
+              style="padding-top: max(var(--safe-area-inset-top, 0px), 0px);"
               :class="{ 'animate-bounce-out-left': isAnimatingOut }"
               @animationend="handleAnimationEnd"
             >
