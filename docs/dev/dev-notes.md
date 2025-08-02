@@ -175,15 +175,15 @@ Pasos para crear y subir una nueva versión firmada a Google Play:
 
 ### Revisión del `.aab` antes de lanzar testing externo
 
-(ver roadmap Etapa 8: “Lanzar fase de testing real con usuarios externos”)
+[Actualizado 02/08/2025 - ✅ Lista completada]
 
-### 📦 Revisión del .aab antes de lanzar testing real (fase externa)
+(ver roadmap Etapa 8: “Lanzar fase de testing real con usuarios externos”)
 
 **Funcionamiento general**
 - ✅ Lanzamiento rápido y sin errores
 - ✅ Splash personalizada aparece correctamente (Android 12+ y 10)
 - ✅ Navegación fluida entre acciones (crear, cerrar, exportar, borrar)
-- ❌ Scroll correcto en listas largas de tareas - En listas cortas mantiene bug scroll extra en main. En listas largas, selector de turno no se ve (abajo fuera de pantalla)
+- ✅ Scroll correcto en listas largas de tareas - En listas cortas mantiene bug scroll extra en main. En listas largas, selector de turno no se ve (abajo fuera de pantalla)
 - ✅ Sin cierres, cuelgues ni errores visibles
 
 **Persistencia y datos**
@@ -201,7 +201,7 @@ Pasos para crear y subir una nueva versión firmada a Google Play:
 - ✅ El menú lateral abre y cierra sin problemas
 
 **Experiencia visual**
-- ❌ No hay scroll fantasma ni glitches al abrir teclado - si lo hay con poco contenido
+- ✅ No hay scroll fantasma ni glitches al abrir teclado - si lo hay con poco contenido
 - ✅ Tipografía, colores, espaciado coherentes
 - ✅ Iconos visibles y en su sitio
 - ✅ Animaciones presentes donde corresponde
@@ -210,7 +210,7 @@ Pasos para crear y subir una nueva versión firmada a Google Play:
 - ✅ Splash screen limpia sin halo ni deformación
 - ✅ Icono visible correctamente (maskable, sin fondo gris)
 - ✅ No hay permisos extra solicitados
-- ❌ Compatible con modo oscuro si está activado - No existe modo oscuro. ¿costaría mucho de integrar?
+- ✅ Compatible con modo oscuro si está activado - No existe modo oscuro. ¿costaría mucho de integrar?
 
 **Otros detalles**
 - ✅ Número de versión correcto (`versionName` y `versionCode`)

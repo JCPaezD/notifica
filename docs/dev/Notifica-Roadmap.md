@@ -783,7 +783,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [ ] Al abrir la app por primera vez en Android, no se aplica la safe-area superior
           - [ ] El `DialogPanel` sigue desalineado verticalmente en Android tras la primera apertura
 
-
 - [ ] 📄 Actualizar `README.md` con información final  
   - [ ] Eliminar referencias a `vue-sonner` (ya reemplazado)  
   - [ ] Añadir nota sobre el sistema de toasts propio  
@@ -792,29 +791,28 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Añadir o reemplazar capturas si han cambiado tras el rediseño
 
 - [ ] 📣 Preparación para fase de testing real con usuarios externos 
-  - [ ] Revisar si la app (actual `.aab`) está ya en estado adecuado para compartir públicamente  
+  - [ ] Revisar si la app (actual `.aab` y entorno) está ya en estado adecuado para compartir en prueba cerrada
         ↪ [Checklist en dev-notes.md](dev-notes.md#-revisión-del-aab-antes-de-lanzar-testing-externo)
-          - [ ] Confirmar si el bug del scroll innecesario en listas cortas ha sido resuelto sin introducir nuevas regresiones
-          - [ ] Asegurar que el selector de turno es visible en listas largas y no queda fuera de pantalla
-          - [ ] Finalizar revisión y posible solución del bug visual en PWA iOS (doble tap en área vacía)
-          - [ ] Implementar soporte para modo oscuro o decidir posponerlo con documentación adecuada
-    - [ ] Si no lo está, priorizar tareas mínimas necesarias para dejarla lista cuanto antes  
-    - [ ] Confirmar el canal de publicación para testing:
-          - ¿Seguir en prueba interna con invitaciones?
-          - ¿O mover a canal de prueba cerrada?
-    - [ ] Asegurar que cumple requisitos de Google Play:
-          - Al menos 12 testers activos
-          - Durante un periodo de 14 días
+          - [x] Confirmar si el bug del scroll innecesario en listas cortas ha sido resuelto sin introducir nuevas regresiones
+          - [x] Asegurar que el selector de turno es visible en listas largas y no queda fuera de pantalla
+          - [x] Finalizar revisión y posible solución del bug visual en PWA iOS (doble tap en área vacía)
+          - [x] Implementar soporte para modo oscuro o decidir posponerlo con documentación adecuada
+    - [x] Si no lo está, priorizar tareas mínimas necesarias para dejarla lista cuanto antes  
+    - [x] Confirmar el canal de publicación para testing: prueba cerrada
     - [ ] Revisar ficha de app en Google Play Console:
           - Nombre, descripción, capturas, icono, política de privacidad
     - [ ] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
-    - [ ] Preparar mensaje atractivo para captar testers externos voluntarios
-    - [ ] Publicar el mensaje en canales adecuados:
-          - Reddit (ej. /r/androidapps, /r/SideProject)
-          - Foros sobre productividad, técnicos, mantenimiento, apps nuevas
-          - Grupos de Discord o Telegram si procede
-    - [ ] Medir respuesta de testers externos y ajustar si es necesario
-    - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
+  - [ ] Enviar para revisión de Google Play Console.
+  - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
+  - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
+  - [ ] (Opcional) Publicar el mensaje en canales adecuados:
+        - Reddit (ej. /r/androidapps, /r/SideProject)
+        - Foros sobre productividad, técnicos, mantenimiento, apps nuevas
+        - Grupos de Discord o Telegram si procede
+  - [ ] Medir respuesta de testers externos y ajustar si es necesario
+  - [ ] Asegurar que cumple requisitos de Google Play para lanzamiento público:
+        - Al menos 12 testers activos
+        - Durante un periodo de 14 días
 
 - [ ] Implementar selector de formato de duración y precisión
     - [ ] Añadir sistema de persistencia para ajustes de usuario (localStorage)
@@ -986,7 +984,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionales, ajustes no críticos y correcciones tras el uso real.
 
-- [ ] Añadir selector de formato horario: HH:MM / AM-PM / seguir sistema
+- [ ] Añadir selector de formato horario: HH:MM / AM-PM / seguir sistema (opcional)
+- [ ] Botón "Volver al turno actual" no funciona arrastrar y soltar para cancelar clic. (regresión)
 
 
 
