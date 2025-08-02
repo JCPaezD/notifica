@@ -8,19 +8,42 @@
   </a>
 </p>
 
+
 # Notifica
 
-Aplicación web progresiva (PWA) para registrar tareas técnicas durante la jornada laboral, con uso optimizado desde el móvil, funcionamiento 100% offline, y diseño cuidado y accesible.
+Aplicación web progresiva (PWA) para registrar tareas técnicas por turno durante la jornada laboral. Optimizada para uso móvil, con funcionamiento 100% offline, y diseño cuidado, rápido y accesible.
+
 
 ## 📱 Características principales
 
+📝 Registro y gestión de tareas
 * Registro ágil de avisos y tareas por turno
-* Sincronización offline con almacenamiento local
-* Filtros por turno, estado y notificación
 * Edición inline, eliminación y reactivación de tareas
-* Notificaciones tipo toast con opción de "Deshacer"
+* Filtros por turno, estado y notificación
+
+🗒️ Notas y observaciones del turno
+* Notas por turno: campo editable tipo cuaderno para registrar observaciones generales
+  - Guardado automático por turno
+  - Integrado en la exportación e importación de tareas
+  - Diseño accesible, editable y colapsable
+
+📤 Compartir y exportar
 * Exportación para compartir con compañeros
 * Modo PWA instalable (Android, iOS, escritorio)
+
+🔔 Notificaciones y experiencia visual
+* Sistema de notificaciones flotantes con diseño propio:
+  - Cuatro tipos de mensaje (éxito, error, información, aviso)
+  - Acciones configurables (como "Deshacer")
+  - Animaciones suaves, responsive y adaptado a móvil
+* Modo claro y oscuro con detección automática del sistema o selección manual
+  - Transición visual suave al cambiar de tema
+  - Compatible con Android, iOS y escritorio
+
+📶 Sincronización y almacenamiento
+* Sincronización offline con almacenamiento local
+* Guarda tareas localmente entre sesiones
+
 
 ## 🖼️ Vista previa
 
@@ -29,13 +52,15 @@ Aplicación web progresiva (PWA) para registrar tareas técnicas durante la jorn
   <img src="./public/screenshots/screenshot-desktop-1.png" alt="Vista escritorio" width="450"/>
 </p>
 
+
 ## 🚀 Tecnologías utilizadas
 
 * [Vue 3](https://vuejs.org/)
 * [TypeScript](https://www.typescriptlang.org/)
 * [Tailwind CSS](https://tailwindcss.com/)
 * [Vite](https://vitejs.dev/)
-* [vue-sonner](https://github.com/emilkowal/vue-sonner) para notificaciones
+* Sistema de toasts propio (sin dependencias externas), con diseño personalizado
+
 
 ## 📦 Instalación y uso
 
@@ -46,12 +71,14 @@ npm run build   # para versión de producción
 npm run preview # para test de producción local
 ```
 
+
 ## 🌐 Uso como PWA
 
-* Instalación desde Chrome (Android o Escritorio)
-* Funciona offline tras primera carga
-* Guarda tareas localmente entre sesiones
-* Splash screen personalizado y soporte para icono maskable en Android
+* Instalación directa desde Chrome (Android, iOS y escritorio)
+* Funciona 100% offline tras la primera carga
+* Guarda tareas y notas entre sesiones en el dispositivo
+* Splash screen personalizado y soporte para icono adaptativo en Android e iOS
+
 
 ## 🛠️ Estructura del código (para desarrolladores)
 
@@ -67,32 +94,25 @@ public/
 docs/
 ```
 
-## 📊 Auditoría Lighthouse
-
-![Auditoría Lighthouse](./docs/lighthouse-scores.png)
-
-* Rendimiento: 99
-* Accesibilidad: 90
-* Prácticas recomendadas: 100
-* SEO: 83
 
 ## 🧪 Pruebas en dispositivos
 
 * ✅ Chrome (Windows) — Instalación y funcionamiento offline
 * ✅ Android (Chrome) — Instalación y funcionamiento offline
-* ✅ iOS (Safari) — Instalación y funcionamiento offline
+* ✅ iOS (Safari y Chrome) — Instalación y funcionamiento offline
+
 
 ## 📱 Versión Android (APK)
 
-Notifica también está disponible como aplicación Android, gracias a la integración con Capacitor.
+Notifica también está disponible como aplicación Android, mediante Capacitor.
 
 La versión APK es funcionalmente idéntica a la versión PWA, pero se comporta como una app nativa:
-* Se instala como aplicación completa desde archivo `.apk`
+* Se instala como app desde archivo `.apk`
 * Incluye icono personalizado, splash screen y diseño adaptado a móviles
-* Integra barra de estado en color compatible con el diseño de la app
 * Es independiente de la versión PWA, permitiendo mantener ambas instaladas
 
 Todo el código fuente de la app, incluyendo la plataforma Android, está disponible en este repositorio.
+
 
 ## ⚖️ Licencia
 
