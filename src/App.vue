@@ -916,7 +916,7 @@ const exportTasksToJson = async () => {
   </header>
 
   <main
-    style="min-height: calc(100svh - var(--safe-area-inset-top) - 68px);"
+    style="min-height: calc(100svh - max(var(--safe-area-inset-top, 0px), 0px) - 68px);"
     class="bg-app-bg dark:bg-app-bg-dark text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden"
   >
 
