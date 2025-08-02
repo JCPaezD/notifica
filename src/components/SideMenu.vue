@@ -125,6 +125,7 @@ const onLeave = (el: Element) => {
                     overflow-hidden bg-app-bg dark:bg-surface-1-dark p-4
                     text-left align-middle shadow-xl
                     flex flex-col select-none"
+              style="padding-top: var(--safe-area-inset-top, 0px);"
               :class="{ 'animate-bounce-out-left': isAnimatingOut }"
               @animationend="handleAnimationEnd"
             >
@@ -334,7 +335,7 @@ const onLeave = (el: Element) => {
                 </button>
               </div>
 
-              <div class="mt-4 pb-[env(safe-area-inset-bottom,0px)]"> <!-- mt-4 para espacio, safe-area-inset-bottom para evitar UIs -->
+              <div class="mt-4 pb-3"> <!-- mt-4 para espacio, safe-area-inset-bottom para evitar UIs -->
                 <hr class="mt-6 mb-4 border-divider dark:border-divider-dark mx-3" />
                 <div class="flex items-center justify-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg"

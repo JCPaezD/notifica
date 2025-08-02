@@ -10,11 +10,15 @@ import com.getcapacitor.BridgeActivity;
 
 import androidx.core.splashscreen.SplashScreen;
 
+import androidx.core.view.WindowCompat;
+
 public class MainActivity extends BridgeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
+        
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             Window window = getWindow();

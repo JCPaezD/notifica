@@ -756,10 +756,27 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Solucionar error de detección del manifiesto PWA en los previews protegidos de Vercel (ver 'dev-notes.md')
   - [x] Formato horario 12h/24h en Android: se respeta configuración del sistema (sin forzar)
   - [x] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto. Revisado y bloque nuevo.
-  - [ ] 📐 Revisar safe areas para notches y barras flotantes
-    - [ ] Asegurar que ningún contenido queda oculto
-    - [ ] Ajustar paddings con `env(safe-area-inset-*)`
-    - [ ] Verificar en dispositivos reales y emuladores
+  - [x] 📐 Revisar safe areas para notches y barras flotantes
+      - [x] Validación en dispositivos reales (iOS y Android)
+          - [x] iPhone 16 Pro / X: perfecto
+          - [x] Huawei Android 10 / Pixel 4 y 7: correcto
+          - [x] Medium Phone API 36: header pisado, versión muy pegada abajo
+      - [x] Ajuste en header con safe-area superior
+          - [x] Añadir `padding-top: env(safe-area-inset-top)` solo al `<header>`
+          - [x] Confirmar que no afecta a iOS ni dispositivos que ya estaban correctos
+      - [x] Ajuste en footer del SideMenu
+          - [x] Subir visualmente el bloque de versión (`Notifica v...`) con `pb-3` fijo
+          - [x] Evitar `safe-area-inset-bottom` por ser excesivo en iOS
+      - [x] Activar soporte real de safe areas en Android
+          - [x] Instalar `@capacitor-community/safe-area`
+          - [x] Configurar `capacitor.config.ts`
+          - [x] Aplicar `setStatusBar` y `setNavigationBar` en `main.ts`
+          - [x] Confirmar comportamiento correcto de barras superior/inferior
+          - [x] Evitar scroll fantasma ajustando `min-h-[calc(...)]` de `<main>`
+      - [x] Ajuste del SideMenu tras mover header con safe-area
+          - [x] Añadir `pt-[env(safe-area-inset-top)]` a `DialogPanel`
+          - [x] Confirmar alineación correcta con header
+
 
 - [ ] 📄 Actualizar `README.md` con información final  
   - [ ] Eliminar referencias a `vue-sonner` (ya reemplazado)  
@@ -827,6 +844,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [ ] Permitir usar dos filas si no caben horizontalmente
       - [ ] Adaptar separador decimal según configuración regional del sistema
 
+- [ ] Añadir soporte dinámico para colores del sistema (status bar y nav bar) según modo claro/oscuro
+  - [ ] Detectar `prefers-color-scheme` en `main.ts`
+  - [ ] Aplicar color de fondo y color del texto usando `SafeArea.setStatusBar` y `setNavigationBar`
+  - [ ] Confirmar que los colores aplicados coinciden con el modo activo de la app
+  - [ ] (Opcional) Escuchar cambios en `prefers-color-scheme` si se desea actualización dinámica
+  - [ ] Probar en dispositivo Android real y emulador
+  - [ ] Documentar comportamiento y consideraciones en `dev-notes.md`
 
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
