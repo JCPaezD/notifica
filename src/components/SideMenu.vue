@@ -93,6 +93,21 @@ const onLeave = (el: Element) => {
   const htmlEl = el as HTMLElement;
   htmlEl.style.maxHeight = '0px';
 };
+
+
+// Para deteccion de safearea dinamica superior para ajuste de altura de sidemenu
+import { onMounted } from 'vue';
+
+const dialogRef = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  const insetTop = getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top');
+  if (insetTop && dialogRef.value) {
+    dialogRef.value.style.setProperty('padding-top', insetTop.trim());
+  }
+});
+
+
 </script>
 
 <template>
@@ -121,11 +136,11 @@ const onLeave = (el: Element) => {
             enter-to="translate-x-0"
           >
             <DialogPanel
+              ref="dialogRef"
               class="w-64 max-w-sm min-h-[100svh]
                     overflow-hidden bg-app-bg dark:bg-surface-1-dark p-4
                     text-left align-middle shadow-xl
                     flex flex-col select-none"
-              style="padding-top: max(var(--safe-area-inset-top, 0px), 0px);"
               :class="{ 'animate-bounce-out-left': isAnimatingOut }"
               @animationend="handleAnimationEnd"
             >
