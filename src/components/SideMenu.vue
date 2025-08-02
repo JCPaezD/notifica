@@ -334,7 +334,7 @@ const onLeave = (el: Element) => {
                 </button>
               </div>
 
-              <div class="mt-4"> <!-- mt-4 para espacio, quitado pt-4 y border-t -->
+              <div class="mt-4 pb-[env(safe-area-inset-bottom,0px)]"> <!-- mt-4 para espacio, safe-area-inset-bottom para evitar UIs -->
                 <hr class="mt-6 mb-4 border-divider dark:border-divider-dark mx-3" />
                 <div class="flex items-center justify-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg"
