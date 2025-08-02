@@ -37,6 +37,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Bug en animación del colapsable de notas del turno](#bug-en-animación-del-colapsable-de-notas-del-turno)
   - [Bug: icono maskable recortado en instalación PWA Android](#bug-icono-maskable-recortado-en-instalación-pwa-android)
   - [Bug: manifiesto PWA no detectado en previews protegidos de Vercel](#bug-manifiesto-pwa-no-detectado-en-previews-protegidos-de-vercel)
+  - [Safe Areas: integración, fallos y solución provisional](#safe-areas-integración-fallos-y-solución-provisional)
 - [UI, diseño y experiencia de usuario](#ui-diseño-y-experiencia-de-usuario)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -1121,6 +1122,45 @@ El error se debía a una limitación de las previews protegidas de Vercel. Se re
 
 **Relacionado con:**
 - Tarea completada en el roadmap: *Solucionar error de detección del manifiesto PWA en los previews protegidos de Vercel*
+
+### Safe Areas: integración, fallos y solución provisional
+
+**Contexto:**  
+En dispositivos con barras flotantes o notches (especialmente PWA iOS y Android recientes), la app no respetaba correctamente las zonas seguras (safe areas), provocando que la interfaz quedara pisada o mostrara scroll fantasma. En algunos Android también se mostraban barras negras en lugar de integrar visualmente las zonas reservadas.
+
+**Problemas detectados:**  
+- En PWA iOS: el `safe-area-inset-bottom` daba un espacio excesivo.  
+- En Android (nativo): no se aplicaban los `env(safe-area-*)`, causando solapamientos.  
+- En escritorio y DevTools móvil: el uso de `env(...)` sin fallback provocaba que el sidemenu quedara desplazado hacia abajo.  
+- Comportamiento inconsistente al abrir la app: en algunos casos, la status bar se pisaba al primer inicio pero no al abrirla de nuevo.  
+
+**Intentos y soluciones fallidas:**  
+- Aplicar `env(...)` directamente en Tailwind sin plugin → sin efecto en Android.  
+- Añadir `nextTick` tras `onMounted` para esperar a que se apliquen → no solucionó.  
+- Forzar valores con `calc(...)` en CSS con `env(...)` → inconsistencias.  
+
+**Solución aplicada:**  
+- Instalado `@capacitor-community/safe-area` para obtener los valores seguros de forma fiable.  
+- El plugin define automáticamente las variables CSS --safe-area-inset-top y --safe-area-inset-bottom, accesibles desde cualquier componente.
+- Aplicado `padding-top: var(--safe-area-inset-top)` en `<header>` y en `DialogPanel` del SideMenu.  
+- Ajustado `<main>` con `min-height: calc(100svh - var(--safe-area-inset-top) - 68px)` para evitar scroll fantasma.  
+- En Android, se activó la transparencia de la barra inferior con navigationBarColor: '#00000000' y se forzó color claro (#f8f9fa) y texto oscuro en la barra superior con statusBarColor y statusBarContent.
+- Se descartó el uso de `safe-area-inset-bottom` en el sidemenu inferior, sustituyéndolo por `pb-3` fijo.  
+
+**Resultado final:**  
+- **Android nativo:** correcto. Se respeta el safe area, las barras flotantes son transparentes, y no hay solapamientos. El sidemenu queda ligeramente elevado, pero se acepta por ahora.  
+- **PWA iOS:** correcto. Se adapta bien a las zonas seguras sin excesos ni solapamientos.  
+- **Escritorio y DevTools:** correcto. Se evita la desalineación del sidemenu.  
+
+**Problemas abiertos:**  
+- En Android, el `DialogPanel` del sidemenu sigue algo desalineado (ligeramente elevado respecto al header).  
+- Comportamiento inconsistente en Android al abrir la app por primera vez: la status bar puede quedar pisada si no se reinicia.  
+- No se ha encontrado una solución universal y robusta que funcione idénticamente en todas las plataformas.  
+
+**Pendiente de revisar más adelante:**  
+- Investigar si el plugin puede exponer eventos de ready/safe-area actualizados para evitar inconsistencias iniciales.  
+- Probar alternativas con `capacitor-statusbar` o listeners a cambios en la visibilidad de UI del sistema.  
+- Decidir si vale la pena sincronizar dinámicamente los paddings del sidemenu y el header con una función común.
 
 ---
 

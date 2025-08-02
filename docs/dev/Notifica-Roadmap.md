@@ -764,6 +764,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Ajuste en header con safe-area superior
           - [x] Añadir `padding-top: env(safe-area-inset-top)` solo al `<header>`
           - [x] Confirmar que no afecta a iOS ni dispositivos que ya estaban correctos
+          - [x] Aplicar `min-height: calc(100svh - var(--safe-area-inset-top) - 68px)` al `<main>`
       - [x] Ajuste en footer del SideMenu
           - [x] Subir visualmente el bloque de versión (`Notifica v...`) con `pb-3` fijo
           - [x] Evitar `safe-area-inset-bottom` por ser excesivo en iOS
@@ -772,10 +773,15 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Configurar `capacitor.config.ts`
           - [x] Aplicar `setStatusBar` y `setNavigationBar` en `main.ts`
           - [x] Confirmar comportamiento correcto de barras superior/inferior
-          - [x] Evitar scroll fantasma ajustando `min-h-[calc(...)]` de `<main>`
+          - [x] Evitar scroll fantasma ajustando altura del `<main>`
       - [x] Ajuste del SideMenu tras mover header con safe-area
-          - [x] Añadir `pt-[env(safe-area-inset-top)]` a `DialogPanel`
-          - [x] Confirmar alineación correcta con header
+          - [x] Añadir style dinámico `padding-top: var(--safe-area-inset-top)` a `DialogPanel`
+          - [x] Usar `ref` y `onMounted` para aplicar el padding solo en Android nativo
+          - [x] Confirmar alineación correcta en escritorio/devtools
+          - [x] Confirmar comportamiento aceptable en Android (desalineación leve aceptada)
+      - [ ] ⛔ Inconsistencias aún presentes (pendientes de revisión futura)
+          - [ ] Al abrir la app por primera vez en Android, no se aplica la safe-area superior
+          - [ ] El `DialogPanel` sigue desalineado verticalmente en Android tras la primera apertura
 
 
 - [ ] 📄 Actualizar `README.md` con información final  
