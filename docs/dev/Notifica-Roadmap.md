@@ -589,25 +589,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Confirmar que no quedan decisiones sin documentar y hacer commit de cierre del bloque
 
 
-- [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
-  - [ ] Detectar si hora introducida corresponde al día anterior
-  - [ ] Ajustar fecha si es coherente
-  - [ ] Mostrar toast con opciones "ayer" y "hoy" en vez de deshacer
-
-- [ ] ✉️ Formulario de feedback por email
-  - [ ] Botón "Enviar feedback" en menú lateral
-  - [ ] Formulario con tipo de mensaje, descripción y email opcional
-    - [ ] Permitir rellenar el formulario sin conexión
-    - [ ] Guardar los datos localmente si no hay conexión al enviar
-    - [ ] Mostrar toast o mensaje: "Guardado para enviar cuando haya conexión"
-    - [ ] Intentar reenvío automático al recuperar conexión (si es viable)
-    - [ ] Ofrecer reintento manual si falla
-    - [ ] Eliminar de la cola solo si se confirma el envío exitoso
-    - [ ] Confirmar que no bloquea el uso normal de la app
-  - [ ] Guardar en Firestore (colección `feedback`)
-  - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
-  - [ ] Confirmación visual tras enviar
-
 - [ ] 🛠 Mejoras UX/UI
   - [x] Vuelve a aparece bug: boton deshacer no hace animacion al pulsar (móvil devtools). En escritorio funciona bien.
     > Acción sugerida (futura): revisar que todos los botones de acción en toasts tengan ese @touchstart.
@@ -773,12 +754,99 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Cambiar background_color del manifest para adaptar fondo del icono en Android
     - [x] Validar comportamiento en iOS (iPhone 16 Pro y X), Huawei Android 10 y emuladores
   - [x] Solucionar error de detección del manifiesto PWA en los previews protegidos de Vercel (ver 'dev-notes.md')
-  - [ ] Android emuladores horas HH:MM AM/PM, quitar/restringir am/pm.
-  - [ ] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto.
+  - [x] Formato horario 12h/24h en Android: se respeta configuración del sistema (sin forzar)
+  - [x] Opcion mostrar duracion tiempo decimal - hh:mm. Y decidir tamaño fraccion. Decidir opcion por defecto. Revisado y bloque nuevo.
   - [ ] 📐 Revisar safe areas para notches y barras flotantes
     - [ ] Asegurar que ningún contenido queda oculto
     - [ ] Ajustar paddings con `env(safe-area-inset-*)`
     - [ ] Verificar en dispositivos reales y emuladores
+
+- [ ] 📄 Actualizar `README.md` con información final  
+  - [ ] Eliminar referencias a `vue-sonner` (ya reemplazado)  
+  - [ ] Añadir nota sobre el sistema de toasts propio  
+  - [ ] Confirmar que la lista de tecnologías y estructura de carpetas está actualizada  
+  - [ ] Incluir enlace a la versión de Play Store si ya está publicada  
+  - [ ] Añadir o reemplazar capturas si han cambiado tras el rediseño
+
+- [ ] 📣 Preparación para fase de testing real con usuarios externos 
+  - [ ] Revisar si la app (actual `.aab`) está ya en estado adecuado para compartir públicamente  
+        ↪ [Checklist en dev-notes.md](dev-notes.md#-revisión-del-aab-antes-de-lanzar-testing-externo)
+          - [ ] Confirmar si el bug del scroll innecesario en listas cortas ha sido resuelto sin introducir nuevas regresiones
+          - [ ] Asegurar que el selector de turno es visible en listas largas y no queda fuera de pantalla
+          - [ ] Finalizar revisión y posible solución del bug visual en PWA iOS (doble tap en área vacía)
+          - [ ] Implementar soporte para modo oscuro o decidir posponerlo con documentación adecuada
+    - [ ] Si no lo está, priorizar tareas mínimas necesarias para dejarla lista cuanto antes  
+    - [ ] Confirmar el canal de publicación para testing:
+          - ¿Seguir en prueba interna con invitaciones?
+          - ¿O mover a canal de prueba cerrada?
+    - [ ] Asegurar que cumple requisitos de Google Play:
+          - Al menos 12 testers activos
+          - Durante un periodo de 14 días
+    - [ ] Revisar ficha de app en Google Play Console:
+          - Nombre, descripción, capturas, icono, política de privacidad
+    - [ ] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
+    - [ ] Preparar mensaje atractivo para captar testers externos voluntarios
+    - [ ] Publicar el mensaje en canales adecuados:
+          - Reddit (ej. /r/androidapps, /r/SideProject)
+          - Foros sobre productividad, técnicos, mantenimiento, apps nuevas
+          - Grupos de Discord o Telegram si procede
+    - [ ] Medir respuesta de testers externos y ajustar si es necesario
+    - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
+
+- [ ] Implementar selector de formato de duración y precisión
+    - [ ] Añadir sistema de persistencia para ajustes de usuario (localStorage)
+      - [ ] Crear clave para guardar formato de duración elegido por el usuario
+      - [ ] Crear clave para guardar salto mínimo de duración elegido por el usuario
+      - [ ] Asegurar que los valores se aplican al renderizar duraciones en tarjetas
+    - [ ] Modificar sistema de renderizado de duración en tarjetas
+      - [ ] Añadir soporte para mostrar en formato hh:mm
+      - [ ] Añadir soporte para mostrar en formato decimal con separador adaptado al sistema
+      - [ ] Aplicar redondeo según salto configurado (ej. 0.5 h → 30 min)
+      - [ ] Aplicar reset del salto al valor por defecto al cambiar de modo
+      - [ ] Aplicar formato solo si la tarea está finalizada y hay hora fin
+    - [ ] Crear modal para selector de formato de duración (primer uso)
+      - [ ] Mostrar modal al finalizar una tarea por primera vez si no hay formato guardado
+      - [ ] Preguntar por el formato preferido: decimal (ej. "1,5 h") o hh:mm (ej. "1:30 h")
+      - [ ] Mostrar opciones visuales como botones de igual peso
+      - [ ] No permitir cerrar el modal sin elegir una opción
+      - [ ] Guardar valor elegido en localStorage
+    - [ ] Añadir selector de salto tras elección de formato en el modal inicial
+      - [ ] Mostrar lista de botones según el formato elegido:
+            > Formato hh:mm: [1, 5, 10, 15, 30, 60] minutos  
+            > Formato decimal: [0.1, 0.25, 0.5, 1.0] horas
+      - [ ] Guardar salto elegido en localStorage
+      - [ ] Aplicar valor como salto inicial al mostrar duraciones
+    - [ ] Integrar ajuste en opciones persistentes de la app (drawer o ajustes)
+      - [ ] Añadir sección "Formato de duración" en ajustes o menú lateral
+      - [ ] Permitir cambiar entre decimal y hh:mm manualmente
+      - [ ] Al cambiar el formato, resetear el salto al valor por defecto
+      - [ ] Permitir cambiar el salto desde el mismo panel
+      - [ ] Mantener valores sincronizados con localStorage
+    - [ ] Ajustes visuales y de UX
+      - [ ] Mostrar todos los botones de salto sin scroll si caben (máximo 6 opciones)
+      - [ ] Permitir usar dos filas si no caben horizontalmente
+      - [ ] Adaptar separador decimal según configuración regional del sistema
+
+
+- [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
+  - [ ] Detectar si hora introducida corresponde al día anterior
+  - [ ] Ajustar fecha si es coherente
+  - [ ] Mostrar toast con opciones "ayer" y "hoy" en vez de deshacer
+
+- [ ] ✉️ Formulario de feedback por email
+  - [ ] Botón "Enviar feedback" en menú lateral
+  - [ ] Formulario con tipo de mensaje, descripción y email opcional
+    - [ ] Permitir rellenar el formulario sin conexión
+    - [ ] Guardar los datos localmente si no hay conexión al enviar
+    - [ ] Mostrar toast o mensaje: "Guardado para enviar cuando haya conexión"
+    - [ ] Intentar reenvío automático al recuperar conexión (si es viable)
+    - [ ] Ofrecer reintento manual si falla
+    - [ ] Eliminar de la cola solo si se confirma el envío exitoso
+    - [ ] Confirmar que no bloquea el uso normal de la app
+  - [ ] Guardar en Firestore (colección `feedback`)
+  - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
+  - [ ] Confirmación visual tras enviar
+
 
 - [ ] Investigar problema de recorte incorrecto del icono maskable al instalar la PWA en Android
   > Comentario: ver `dev-notes.md` para contexto completo de pruebas previas realizadas
@@ -821,36 +889,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Aplicar los cambios en todos los lugares visibles (inputs, botones, filtros, exportación)
   - [ ] Validar comprensión en contexto (sin necesidad de ayuda externa)
 
-- [ ] 📄 Actualizar `README.md` con información final  
-  - [ ] Eliminar referencias a `vue-sonner` (ya reemplazado)  
-  - [ ] Añadir nota sobre el sistema de toasts propio  
-  - [ ] Confirmar que la lista de tecnologías y estructura de carpetas está actualizada  
-  - [ ] Incluir enlace a la versión de Play Store si ya está publicada  
-  - [ ] Añadir o reemplazar capturas si han cambiado tras el rediseño
-
-- [ ] 📣 Preparación para fase de testing real con usuarios externos 
-  - [ ] Revisar si la app (actual `.aab`) está ya en estado adecuado para compartir públicamente  
-        ↪ [Checklist en dev-notes.md](dev-notes.md#-revisión-del-aab-antes-de-lanzar-testing-externo)
-          - [ ] Confirmar si el bug del scroll innecesario en listas cortas ha sido resuelto sin introducir nuevas regresiones
-          - [ ] Asegurar que el selector de turno es visible en listas largas y no queda fuera de pantalla
-          - [ ] Finalizar revisión y posible solución del bug visual en PWA iOS (doble tap en área vacía)
-          - [ ] Implementar soporte para modo oscuro o decidir posponerlo con documentación adecuada
-    - [ ] Si no lo está, priorizar tareas mínimas necesarias para dejarla lista cuanto antes  
-    - [ ] Confirmar el canal de publicación para testing:
-          - ¿Seguir en prueba interna con invitaciones?
-          - ¿O mover a canal de prueba cerrada?
-    - [ ] Asegurar que cumple requisitos de Google Play:
-          - Al menos 12 testers activos
-          - Durante un periodo de 14 días
-    - [ ] Revisar ficha de app en Google Play Console:
-          - Nombre, descripción, capturas, icono, política de privacidad
-    - [ ] Preparar mensaje atractivo para captar testers externos voluntarios
-    - [ ] Publicar el mensaje en canales adecuados:
-          - Reddit (ej. /r/androidapps, /r/SideProject)
-          - Foros sobre productividad, técnicos, mantenimiento, apps nuevas
-          - Grupos de Discord o Telegram si procede
-    - [ ] Medir respuesta de testers externos y ajustar si es necesario
-    - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
 
 ---
 
@@ -911,6 +949,16 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Foros o grupos relacionados con mantenimiento técnico, trabajo en fábricas, etc.  
   - [ ] Círculos personales o profesionales cercanos (Telegram, WhatsApp, email)  
   - [ ] (Opcional) Crear mini landing page o entrada en Notion con más detalles
+
+---
+
+## 🔄 Etapa 10: Soporte post-publicación y mejoras opcionales
+
+Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionales, ajustes no críticos y correcciones tras el uso real.
+
+- [ ] Añadir selector de formato horario: HH:MM / AM-PM / seguir sistema
+
+
 
 ---
 
