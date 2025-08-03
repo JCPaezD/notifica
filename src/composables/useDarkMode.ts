@@ -52,6 +52,46 @@ function setupSystemListener() {
   }
 }
 
+
+import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support'
+import { Capacitor } from '@capacitor/core'
+
+watch(isDark, async () => {
+  if (Capacitor.getPlatform() !== 'android') return
+
+  const span = document.createElement('span')
+  span.className = 'bg-surface-1 dark:bg-surface-1-dark'
+  span.style.display = 'none'
+  document.body.appendChild(span)
+
+  const color = getComputedStyle(span).backgroundColor
+  document.body.removeChild(span)
+
+  const rgbToHex = (rgb: string) => {
+    const result = color.match(/\d+/g)
+    if (!result || result.length < 3) return '#ffffff'
+    return (
+      '#' +
+      result
+        .slice(0, 3)
+        .map(x => parseInt(x).toString(16).padStart(2, '0'))
+        .join('')
+    )
+  }
+
+  const hexColor = rgbToHex(color)
+
+  try {
+    console.log('[DarkMode] Tema cambiado, aplicando color a EdgeToEdge:', hexColor)
+    await EdgeToEdge.setBackgroundColor({ color: hexColor })
+  } catch (err) {
+    console.warn('[DarkMode] Error al aplicar EdgeToEdge background:', err)
+  }
+})
+
+
+
+
 // API pública
 export function useDarkMode() {
   function setPreferredMode(mode: ThemeMode) {

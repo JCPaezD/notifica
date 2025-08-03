@@ -792,9 +792,32 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
               - [x] Eliminar el plugin SafeArea del proyecto
               - [x] Eliminar todas las referencias a var(...) o env(...)
               - [x] Test multiplataforma de punto estable
-              - [ ] Probar StatusBar.overlaysWebView de forma limpia
-              - [ ] Si no funciona: implementar padding fijo solo en Android nativo
+              - [x] Probar StatusBar.overlaysWebView de forma limpia
+                > descartado: mismo comportamiento inconsistente que plugin SafeArea, sin mejora real
+              - [x] Probar @capawesome/capacitor-android-edge-to-edge-support para solucion en android nativo
+                  - [x] Instalar plugin y probar con configuración mínima
+                  - [x] Comprobar recorte correcto en dispositivos edge-to-edge
+                  - [x] Detectar recorte incorrecto en API 29 y color blanco/gris en barras
+                  - [x] Probar llamadas del plugin StatusBar y descartar incompatibilidades
+                  - [x] Probar setBackgroundColor() del plugin edge-to-edge con color rojo para trazabilidad
+                  - [x] Comprobar que el color se aplica correctamente desde el plugin
+                  - [x] Detectar que fondo por defecto viene del WebView o capa inferior
+                  - [x] Aplicar fondo lime en body/html/app para detectar capas internas
+                  - [x] Confirmar que el color depende del tema pero no es dinámico
+                  - [x] Extraer color de fondo de Tailwind en tiempo real y pasarlo como background al plugin
+                  - [x] Detectar fallo por uso en entorno web sin check de plataforma
+                  - [x] Aplicar fix con Capacitor.getPlatform() === 'android'
+                  - [x] Añadir watch en useDarkMode para actualizar background dinámicamente
+                  - [x] Confirmar funcionamiento dinámico en tiempo real al cambiar tema
+                  - [x] Ajustar clases bg-surface-1 para integrar visualmente con el header
+              - [ ] Revisar comportamiento de las barras extra en API 29
+              - [ ] Ajustar color de iconos en status bar si fuera necesario
+              - [ ] Comprobar comportamiento tras abrir teclado o navegación por gestos
+              - [ ] Considerar si debe armonizarse también el color de la barra de navegación inferior (mediante `@capgo/capacitor-navigation-bar` o similar). ¡buscar si solucion real!
+              - [ ] Añadir tests cruzados con modo oscuro/sistema en todas las plataformas
+              - [ ] Si no funciona: decidir si implementar padding fijo solo en Android nativo
               - [ ] Validar que el layout es coherente en todas las plataformas
+              - [ ] Hacer script para compilar android (build, copy, sync, open/run, ¿clean project necesario?)
 
               - [ ] Verificar que los archivos `favicon.ico` y `manifest.webmanifest` están correctamente empaquetados en la APK
                   - Requiere: `npm run build` + `npx cap copy` + generación de APK

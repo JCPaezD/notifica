@@ -37,7 +37,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Bug en animación del colapsable de notas del turno](#bug-en-animación-del-colapsable-de-notas-del-turno)
   - [Bug: icono maskable recortado en instalación PWA Android](#bug-icono-maskable-recortado-en-instalación-pwa-android)
   - [Bug: manifiesto PWA no detectado en previews protegidos de Vercel](#bug-manifiesto-pwa-no-detectado-en-previews-protegidos-de-vercel)
-  - [Safe Areas: integración, fallos y solución provisional](#safe-areas-integración-fallos-y-solución-provisional)
+  - [Safe Areas: integración, fallos y solución definitiva (plugin EdgeToEdge)](#safe-areas-integración-fallos-y-solución-definitiva-plugin-edgetoedge)
 - [UI, diseño y experiencia de usuario](#ui-diseño-y-experiencia-de-usuario)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -1123,7 +1123,7 @@ El error se debía a una limitación de las previews protegidas de Vercel. Se re
 **Relacionado con:**
 - Tarea completada en el roadmap: *Solucionar error de detección del manifiesto PWA en los previews protegidos de Vercel*
 
-### Safe Areas: integración, fallos y solución provisional
+### Safe Areas: integración, fallos y solución definitiva (plugin EdgeToEdge)
 
 **Contexto:**  
 En dispositivos con barras flotantes o notches (especialmente PWA iOS y Android recientes), la app no respetaba correctamente las zonas seguras (safe areas), provocando que la interfaz quedara pisada o mostrara scroll fantasma. En algunos Android también se mostraban barras negras en lugar de integrar visualmente las zonas reservadas.
@@ -1233,6 +1233,35 @@ Durante el intento de corregir la desalineación del `SideMenu` en Android nativ
 
 Esta decisión permite simplificar el sistema visual, evitar comportamiento impredecible y recuperar control total del layout en Android.
 
+
+
+**Solución al bug de solapamiento en Android con plugin EdgeToEdge**
+Fecha: 2025-08-04
+
+Tras múltiples intentos fallidos con el sistema SafeArea, se logró una solución definitiva al problema de solapamiento de contenido con las barras de sistema en Android nativo.
+
+Dado que todas las soluciones previas (incluyendo `@capacitor-community/safe-area`, `@capacitor/status-bar`, y ajustes de estilos CSS con `env(...)` o `var(...)`) habían resultado inconsistentes o ineficaces, se decidió hacer una investigación externa completa. Para ello se utilizó NotebookLM como asistente de investigación, con el objetivo de buscar únicamente información contrastada, actualizada en 2025 y validada por usuarios reales.
+
+La búsqueda reveló que la única solución fiable y actual en proyectos Capacitor híbridos era el uso del plugin `@capawesome/capacitor-android-edge-to-edge-support`, que aplica insets reales a la WebView desde el código nativo sin depender de estilos dinámicos de la parte web. Esta aproximación resolvía el problema raíz: la WebView de Android no aplica correctamente los márgenes de safe-area hasta después de una interacción (además de incosistencias en distintos componentes de la app), lo que impedía una solución visual sólida en la primera carga.
+
+Se siguieron los siguientes pasos:
+
+- Instalación y activación del plugin EdgeToEdge.
+- Verificación inicial con color rojo para comprobar que el plugin realmente controlaba el fondo de las barras del sistema.
+- Pruebas de color transparent fallidas, lo que llevó a investigar la procedencia del fondo blanco o gris visible.
+- Añadido de un CSS global con `html, body, #app { background-color: transparent !important; }` para permitir que el color de fondo real del WebView fuera visible.
+- No se llegó a ver el WebView como fondo (el color lima de prueba nunca apareció), lo que sugiere que el fondo visible era un fallback de otra capa; tras probar haciendo transparentes las barras desde styles.xml y otros métodos, se confirmó que el bug ya estaba solucionado aplicando el color desde EdgeToEdge, por lo que se detuvo la búsqueda del origen exacto del color blanco/gris.
+- Implementación dinámica del color de fondo usando clases Tailwind (`bg-surface-1` y `dark:bg-surface-1-dark`) aplicadas de forma programática al iniciar la app.
+- Refactor posterior: se añadió un `watch()` al valor de `isDark` en `useDarkMode.ts` para actualizar el color de fondo en tiempo real cuando el usuario cambiaba el modo claro/oscuro, incluyendo el caso de cambio por modo del sistema.
+- Verificación completa en emuladores Android (API 29, 30 y 36), con resultados positivos:
+  - En Android 30 y 36 el color se adapta dinámicamente, y la WebView evita correctamente las barras del sistema.
+  - En Android 29 se respeta la status bar, pero aparece una barra inferior adicional (padding extra), que se analizará en otro momento.
+
+**Mejoras pendientes**
+
+- Revisar el comportamiento en Android API 29: la barra inferior muestra un espacio adicional del mismo color de fondo.
+- Verificar si es necesario adaptar el comportamiento cuando cambia el teclado o se ocultan las barras del sistema.
+- Considerar si debe armonizarse también el color de la barra de navegación inferior (mediante `@capgo/capacitor-navigation-bar` o similar).
 
 ---
 
