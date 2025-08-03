@@ -6,6 +6,9 @@ import App from './App.vue'
 
 import { initialize } from '@capacitor-community/safe-area' // 👈 NUEVO
 
+import { useSafeArea } from '@/composables/useSafeArea'
+
+
 // 🌙 Aplicar clase 'dark' antes de montar la app según el modo guardado
 const saved = localStorage.getItem('darkMode')
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -41,7 +44,12 @@ async function waitForSafeAreaTop(timeout = 200) {
 }
 
 ;(async () => {
-  await initialize() // Inyecta variables --safe-area-inset-*, necesarias aunque no se apliquen en Android hasta reflow
+  await initialize()
   await waitForSafeAreaTop()
+
+  // ✅ Capturar safe-area-top real cuando ya está disponible
+  const { updateSafeAreaTop } = useSafeArea()
+  updateSafeAreaTop()
+
   createApp(App).mount('#app')
 })()

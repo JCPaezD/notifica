@@ -1197,6 +1197,43 @@ Decisión final:
 - Se documenta en el roadmap como tarea cerrada  
 - Si en el futuro se desea resolver, será necesario intervenir desde código nativo (Java/Kotlin) usando `WindowInsets` reales
 
+
+**Actualización: abandono del uso de safe-area en Android y cierre del intento de integración multiplataforma**
+Fecha: 2025-08-03
+
+Durante el intento de corregir la desalineación del `SideMenu` en Android nativo, se ha confirmado que **no existe un método fiable** para aplicar correctamente los márgenes seguros (`--safe-area-inset-*`) en componentes montados dinámicamente como `DialogPanel`.
+
+**Hallazgos clave:**
+
+* Aunque `--safe-area-inset-top` puede leerse desde JavaScript tras interacción (e.g., al pulsar un input), **su aplicación manual por `ref`, `style`, o `computed` no tiene efecto visible** en el menú lateral.
+* Los estilos dinámicos (`padding-top`, `margin-top`, `height`) aplicados por JS no afectan la posición visual en WebView.
+* Se descartó que Headless UI o el uso de `Teleport` fueran la causa.
+* El problema persiste aunque el valor sea capturado correctamente desde el layout root (`document.documentElement`).
+
+**Pruebas realizadas sin éxito:**
+
+* Captura reactiva con watcher a `isOpen` y aplicación de `style.marginTop`.
+* Aplicación directa desde `useSafeArea.ts` expuesto globalmente.
+* Encapsulación de la lógica y sincronización con `waitForSafeAreaTop`.
+* Forzar animación o reflow en el `DialogPanel` tras open.
+* Uso de `var(...)` en el template con fallbacks por clase o estilo.
+
+**Resultado observado:**
+
+* En Android, el `SideMenu` siempre queda desplazado hacia arriba si se apoya en `safe-area`, tanto si el valor está presente como si se inyecta desde JS.
+* En plataformas donde sí funciona (`iOS`, `PWA`, `escritorio`), el diseño es correcto sin necesidad de parches.
+
+**Decisión tomada:**
+
+* Se **abandona definitivamente el uso de `safe-area` en Android WebView**.
+* Se descarta el plugin `@capacitor-community/safe-area` como solución válida multiplataforma.
+* El código `useSafeArea.ts`, sus referencias y el uso de `var(--safe-area-inset-top)` serán eliminados.
+* Se implementará una solución alternativa basada en **`padding-top` fijo solo en Android nativo**, suficientemente alto (e.g., `24px`) para evitar solapamientos.
+* Se investigará también el uso del plugin `@capacitor/status-bar` y su opción `overlaysWebView: false` como posible sustituto del uso de safe-areas, siempre que no introduzca otras inconsistencias.
+
+Esta decisión permite simplificar el sistema visual, evitar comportamiento impredecible y recuperar control total del layout en Android.
+
+
 ---
 
 ## UI, diseño y experiencia de usuario
@@ -1387,20 +1424,10 @@ Esta conversación servirá para:
 - El desarrollo sigue un roadmap riguroso con commits estructurados, pruebas cruzadas en móvil, emulador y navegador, y documentación exhaustiva.
 
 🛠️ **Últimos bloques completados:**  
-- Validación y cierre del bug de scroll innecesario en listas cortas.  
-- Solución completa al zoom por doble tap en Safari/Chrome iOS.  
-- Validación de animación del botón “Deshacer” en toast.  
-- Corrección definitiva del bug crítico del scroll azul en PWA iOS tras cerrar teclado (WebKit).  
-- Documentación completa en `dev-notes.md` de todos los bugs resueltos y causas.  
-- Commits limpios y trazados para validaciones sin cambios funcionales.
+- Lista de ultimas tareas o bloques completados.
 
 🎯 **Siguiente tarea prevista:**  
-Iniciar el bloque de **modo oscuro (`darkMode`)**:
-- Activar soporte en Tailwind.
-- Definir paleta de colores pastel oscura.
-- Aplicar clases condicionales `dark:` a componentes clave.
-- Validar integración automática con el sistema operativo y/o selector manual.
-- Asegurar consistencia visual y legibilidad.
+- Tarea o tareas del roadmap que se pretende abordar o tomar la decisión de cual elegir.
 
 📖 **Notas y aprendizajes estructurales del proyecto:**  
 - Cambiar de conversación en el momento adecuado ayuda a evitar errores por saturación de contexto.  
