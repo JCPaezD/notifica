@@ -788,9 +788,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] El `DialogPanel` sigue desalineado verticalmente en Android tras la primera apertura
             > No es posible alinear dinámicamente el SideMenu en Android WebView usando safe-area-inset-top, ni por CSS ni JS, debido a limitaciones del entorno. Se descarta plugin capacitor-community/safe-area.
           - [ ] Solucionar el aspecto de la app en Android nativo
-              - [ ] Revertir pruebas actuales (useSafeArea.ts, márgenes, etc.)
-              - [ ] Eliminar el plugin SafeArea del proyecto
-              - [ ] Eliminar todas las referencias a var(...) o env(...)
+              - [x] Revertir pruebas actuales (useSafeArea.ts, márgenes, etc.)
+              - [x] Eliminar el plugin SafeArea del proyecto
+              - [x] Eliminar todas las referencias a var(...) o env(...)
+              - [x] Test multiplataforma de punto estable
               - [ ] Probar StatusBar.overlaysWebView de forma limpia
               - [ ] Si no funciona: implementar padding fijo solo en Android nativo
               - [ ] Validar que el layout es coherente en todas las plataformas
