@@ -11,10 +11,6 @@ import {
 } from '@headlessui/vue'
 import { useDarkMode } from '@/composables/useDarkMode'
 
-import { useSafeArea } from '@/composables/useSafeArea'
-const { safeAreaTop } = useSafeArea()
-
-
 const { preferredMode, setPreferredMode } = useDarkMode()
 
 const themeModes = ['light', 'dark', 'system'] as const
@@ -68,19 +64,10 @@ const handleAnimationEnd = () => {
   }
 }
 
-// Observa cuando el menú se abre para aplicar el margen superior necesario.
-// Usa el valor centralizado de safe-area-top capturado en main.ts.
-const titleRef = ref<HTMLElement | null>(null)
-
+// Observa cuando el menú se abre para reiniciar el estado de animación de cierre.
 watch(() => props.isOpen, (newValue, oldValue) => {
   if (newValue && !oldValue) {
     isAnimatingOut.value = false
-
-    // Aplicar compensación visual con valor centralizado de safe-area
-    if (titleRef.value) {
-      const px = safeAreaTop.value
-      titleRef.value.style.marginTop = px > 16 ? `${px - 16}px` : '0px'
-    }
   }
 })
 
