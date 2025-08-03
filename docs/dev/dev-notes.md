@@ -1162,6 +1162,41 @@ En dispositivos con barras flotantes o notches (especialmente PWA iOS y Android 
 - Probar alternativas con `capacitor-statusbar` o listeners a cambios en la visibilidad de UI del sistema.  
 - Decidir si vale la pena sincronizar dinámicamente los paddings del sidemenu y el header con una función común.
 
+
+**Actualización: investigación adicional sobre bug persistente en primera carga (Android)**
+Fecha: 2025-08-02
+
+Tras la validación del sistema de safe-areas, se ha confirmado que en Android nativo (APK) persiste un bug específico al abrir la app por primera vez:
+
+Comportamiento observado:  
+- En la primera carga, la variable `--safe-area-inset-top` está presente pero vale `0px`, lo que provoca que el header quede pisado por la status bar.  
+- Al tocar un input real (input o textarea), se corrige automáticamente y la interfaz se ajusta correctamente.  
+- El comportamiento es consistente en todos los emuladores Android:  
+  - Siempre incorrecto al abrir por primera vez  
+  - Siempre correcto tras la primera interacción  
+  - Persiste si se cierra completamente la app y se vuelve a abrir  
+
+Pruebas realizadas y descartadas:  
+- `initialize()` del plugin: inyecta correctamente las variables CSS, pero no desencadena el layout  
+- Esperar a `document.readyState === "complete"`  
+- Escuchar `window.onload`  
+- Forzar reflow con `getComputedStyle`, `offsetHeight`, `requestAnimationFrame`  
+- Forzar `window.dispatchEvent(new Event('resize'))`  
+- Enfocar programáticamente un input oculto  
+- Esperar evento `visualViewport.resize`  
+- Insertar `debugDiv` para observar los valores: se confirmó que solo cambian al abrir el teclado
+
+Causa confirmada:  
+El WebView de Android no recalcula ni aplica los `env(--safe-area-inset-*)` hasta que se produce una interacción del usuario. Este bug está documentado en el repositorio oficial de Capacitor y en foros de Ionic.  
+Es una limitación técnica sin workaround fiable actualmente desde JavaScript.
+
+Decisión final:  
+- Se acepta como limitación estructural del entorno Capacitor + Android WebView  
+- Se conserva `initialize()` como paso necesario para asegurar la existencia de las variables, aunque estén inicialmente a `0px`  
+- No se aplicarán más intentos de parche temporal (como inputs invisibles o focus forzado)  
+- Se documenta en el roadmap como tarea cerrada  
+- Si en el futuro se desea resolver, será necesario intervenir desde código nativo (Java/Kotlin) usando `WindowInsets` reales
+
 ---
 
 ## UI, diseño y experiencia de usuario

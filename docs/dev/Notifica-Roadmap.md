@@ -780,8 +780,28 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Confirmar alineación correcta en escritorio/devtools
           - [x] Confirmar comportamiento aceptable en Android (desalineación leve aceptada)
       - [ ] ⛔ Inconsistencias aún presentes (pendientes de revisión futura)
-          - [ ] Al abrir la app por primera vez en Android, no se aplica la safe-area superior
+          - [x] Al abrir la app por primera vez en Android, no se aplica la safe-area superior  
+                → Se mantiene `initialize()` para inyectar variables CSS desde el inicio.  
+                → No es posible aplicar `--safe-area-inset-top` en primera carga por limitación del WebView Android con Capacitor.  
+                → Tras múltiples intentos controlados (input invisible, visualViewport, reflow forzado…), se documenta como bug estructural no solucionable desde JS.  
+                → El valor se aplica tras interacción del usuario y el layout se corrige automáticamente.
           - [ ] El `DialogPanel` sigue desalineado verticalmente en Android tras la primera apertura
+
+              - [ ] Verificar que los archivos `favicon.ico` y `manifest.webmanifest` están correctamente empaquetados en la APK
+                  - Requiere: `npm run build` + `npx cap copy` + generación de APK
+                  - Renombrar el `.apk` a `.zip` y explorar el contenido en `/assets/public/`
+                  - Confirmar presencia de los archivos estáticos esperados
+                  - Si faltan, revisar configuración de `vite.config.ts` (assetsInclude, rutas) o proceso de build
+              - [ ] Diagnosticar causa del bloqueo del inspector `chrome://inspect` en emuladores Android
+                  - Confirmar si se reproduce en dispositivo físico con USB
+                  - Probar con emulador limpio o reinstalado
+                  - Evaluar si alguna animación en la app (como apertura del SideMenu) puede estar dejando el DOM en estado inconsistente
+                  - Si no se encuentra causa clara, documentar el entorno exacto donde falla (emulador, versión de Chrome, tipo de build)
+              - [ ] Añadir soporte temporal para mostrar variables CSS como `--safe-area-inset-*` en pantalla (modo debug)
+                  - Útil cuando `chrome://inspect` no está disponible o falla
+                  - Incluir un `div` visible solo en modo desarrollo que muestre los valores de los insets
+                  - Ocultar automáticamente tras unos segundos o mediante flag
+
 
 - [ ] 📄 Actualizar `README.md` con información final  
   - [x] Añadir descripción del nuevo sistema de notificaciones flotantes (toasts propio)  
