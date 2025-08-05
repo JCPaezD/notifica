@@ -4,6 +4,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
 
 ## Índice
 
+- [Contexto general del proyecto (actualizado 04/08/2025)](#contexto-general-del-proyecto-actualizado-04082025)
 - [Flujo de versiones y despliegue](#flujo-de-versiones-y-despliegue)
   - [Flujo de merges y releases](#flujo-de-merges-y-releases)
   - [Publicación de versión PWA y gestión de versiones](#publicación-de-versión-pwa-y-gestión-de-versiones)
@@ -38,6 +39,8 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Bug: icono maskable recortado en instalación PWA Android](#bug-icono-maskable-recortado-en-instalación-pwa-android)
   - [Bug: manifiesto PWA no detectado en previews protegidos de Vercel](#bug-manifiesto-pwa-no-detectado-en-previews-protegidos-de-vercel)
   - [Safe Areas: integración, fallos y solución definitiva (plugin EdgeToEdge)](#safe-areas-integración-fallos-y-solución-definitiva-plugin-edgetoedge)
+  - [Bug crítico: el plugin capacitor-navigation-bar rompe la build debug](#bug-crítico-el-plugin-capacitor-navigation-bar-rompe-la-build-debug)
+  - [Gestión dinámica de la barra de estado (StatusBar)](#gestión-dinámica-de-la-barra-de-estado-statusbar)
 - [UI, diseño y experiencia de usuario](#ui-diseño-y-experiencia-de-usuario)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -66,6 +69,21 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
 - Validar el estilo visual del documento después de reestructuraciones extensas.
 
 ---
+
+## Contexto general del proyecto (actualizado 04/08/2025)
+
+**Notifica** es un proyecto personal iniciado por el autor, técnico de mantenimiento en una fábrica, con el objetivo de sustituir el uso de notas manuales para registrar tareas técnicas durante la jornada laboral. Desde el principio se concibió como una herramienta de uso diario en un entorno real, con foco en la agilidad, la persistencia local y la posibilidad de exportar fácilmente los registros al final del turno.
+
+El autor no tiene formación previa en programación ni diseño. Todo el desarrollo ha sido autoguiado, estructurado y asistido mediante el uso intensivo de ChatGPT como herramienta de apoyo técnico y de producto. Esto ha permitido transformar intuiciones sobre diseño, usabilidad y estructura en soluciones concretas, razonadas y funcionales. El trabajo se ha organizado en etapas con un roadmap progresivo, commits siguiendo convenciones estrictas, y documentación estructurada en este archivo (`dev-notes.md`) y en el `README.md`.
+
+El proyecto ha evolucionado desde una aplicación mínima hasta un producto completo con funcionalidades avanzadas: modo oscuro con detección de sistema y selector manual, sistema propio de notificaciones visuales (toasts), diseño responsive y multiplataforma (PWA + APK nativo), y refinamiento visual y de interacción basado en pruebas reales con usuarios.
+
+Durante el desarrollo se pausó temporalmente para comenzar otro proyecto más ambicioso, **Nocta**, motivado por el uso diario y consistente de Notifica por parte del autor y varios compañeros. Al retomarlo, se aplicaron mejoras estructurales, refactors, y componentes reutilizables pensando en su portabilidad hacia Nocta. Todo el conocimiento técnico adquirido se ha documentado cuidadosamente para poder ser replicado y escalado en futuros desarrollos.
+
+Actualmente (agosto 2025), Notifica se encuentra en fase de publicación como beta cerrada en Google Play Store, con versiones estables validadas en Android, iOS (PWA) y escritorio. La aplicación es funcional, robusta, sin dependencias externas innecesarias, y se utiliza activamente en jornada laboral real. Además de su valor práctico inmediato, este proyecto representa un hito personal de aprendizaje completo: desde el diseño conceptual hasta la publicación y mantenimiento de una app multiplataforma lista para usuarios externos.
+
+Esta nota resume el contexto técnico y personal del proyecto, para referencia futura o para cualquier lector que consulte este archivo en busca de comprensión global del propósito y recorrido de Notifica.
+
 
 ## Flujo de versiones y despliegue
 
@@ -1262,6 +1280,56 @@ Se siguieron los siguientes pasos:
 - Revisar el comportamiento en Android API 29: la barra inferior muestra un espacio adicional del mismo color de fondo.
 - Verificar si es necesario adaptar el comportamiento cuando cambia el teclado o se ocultan las barras del sistema.
 - Considerar si debe armonizarse también el color de la barra de navegación inferior (mediante `@capgo/capacitor-navigation-bar` o similar).
+
+
+### Bug crítico: el plugin capacitor-navigation-bar rompe la build debug
+
+**Fecha:** 2025-08-05  
+**Estado:** Documentado y descartado
+
+**Contexto:**  
+Durante el refinamiento visual en Android, se intentó aplicar transparencia en la barra de navegación inferior mediante el plugin `@capgo/capacitor-navigation-bar`, con el objetivo de mostrar contenido detrás de la misma y adaptar los iconos al tema claro/oscuro. El plugin se integró con una llamada directa en `main.ts`, sin alterar otras partes del sistema.
+
+**Pruebas realizadas:**  
+- El plugin se instaló correctamente y se sincronizó con `npx cap sync`.
+- Se añadió una llamada a `NavigationBar.setNavigationBarColor(...)` en `main.ts`.
+- La app compiló en modo `debug` sin errores visibles.
+- Al ejecutarla en el emulador, se produjo el error:  
+  `Activity class {com.jcpaezd.notifica/com.jcpaezd.notifica.MainActivity} does not exist`
+- Se generó un APK manual y se analizó con Android Studio.
+- El `AndroidManifest.xml` contenía correctamente la declaración de `MainActivity`.
+- Sin embargo, el archivo `classes.dex` no incluía la clase `MainActivity` ni ninguna clase propia del proyecto.
+
+**Conclusión:**  
+El plugin rompe silenciosamente la build en modo `debug`, provocando un APK inválido. Esto impide la ejecución normal de la app, aunque no se produzcan errores de compilación. El problema desaparece completamente al desinstalar el plugin y eliminar su uso en `main.ts`.
+
+**Decisión:**  
+Se descarta el uso del plugin `@capgo/capacitor-navigation-bar` hasta nuevo aviso. No se recomienda volver a instalarlo ni usarlo en builds de desarrollo. Se considerarán otras alternativas (manuales o nativas) si se requiere modificar visualmente la barra inferior sin comprometer la integridad del proyecto.
+
+
+### Gestión dinámica de la barra de estado (StatusBar)
+
+**Contexto:**  
+Hasta ahora, el color de fondo de la barra de estado (status bar) y el color de sus iconos no se adaptaban correctamente al tema visual de la app en Android. En versiones modernas (API 30 en adelante), el objetivo era sincronizar el color de fondo con el tema activo y ajustar el color de los iconos (blanco o negro) para garantizar contraste y legibilidad. En versiones antiguas, había problemas de visualización e insets dobles.
+
+**Motivación:**  
+Ofrecer una integración visual coherente con el tema de la app, respetando el diseño edge-to-edge y evitando errores visuales en versiones no compatibles. También se buscaba solucionar problemas de insets dobles en dispositivos con Android 10 y anteriores.
+
+**Pruebas realizadas:**  
+- Se integró `@capacitor/status-bar` y se aplicó el cambio de estilo de los iconos tras detectar el tema (oscuro/claro).
+- Se obtuvo el color actual desde las clases definidas por Tailwind para cada tema.
+- Se limitó la aplicación de cambios al API 30 o superior, tras detectar mediante `@capacitor/device` la versión exacta del sistema.
+- Se probó en emuladores con API 29, 30 y 36, así como en dispositivo físico con Android 10.
+
+**Resultado:**  
+- En **API ≥ 30**, tanto el color de fondo como los iconos se actualizan correctamente según el tema.  
+- En **API 29 emulado**, se corrige el problema de la barra superior adicional. Aunque los iconos no cambian, el fondo mantiene coherencia.  
+- En **Android 10 físico**, persisten ambas barras adicionales y los iconos no cambian dinámicamente (solo tras reinicio), pero no rompen la experiencia.  
+- Se evita aplicar cambios visuales en dispositivos no compatibles, lo que mejora la estabilidad general.
+
+**Notas adicionales:**  
+- La solución se basa en una separación clara de lógica por API, y puede servir como modelo para futuras adaptaciones relacionadas con la barra de navegación u otros comportamientos específicos de Android.
+- También se ha creado un archivo utilitario (`src/utils/platform.ts`) para centralizar la lógica de detección del nivel de API en Android. Este archivo expone una función `isAndroidApiAtLeast(minApi)` que devuelve un booleano según la versión del sistema. Permite condicionar de forma segura la ejecución de funciones sensibles a la versión, mejorando la legibilidad del código y evitando duplicaciones.
 
 ---
 

@@ -5,6 +5,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support'
+import { StatusBar, Style } from '@capacitor/status-bar'
+import { Device } from '@capacitor/device'
+
+
 
 // 🌙 Aplicar clase 'dark' antes de montar la app según el modo guardado
 const saved = localStorage.getItem('darkMode')
@@ -28,13 +32,8 @@ document.addEventListener('deviceready', async () => {
 
   try {
     await EdgeToEdge.enable()
-    await EdgeToEdge.setBackgroundColor({ color: '#00ffffff' })
-
-    // await StatusBar.setOverlaysWebView({ overlay: false })
-    // await StatusBar.setBackgroundColor({ color: '#00ffffff' })
-    // await StatusBar.setStyle({ style: Style.Dark })
   } catch (error) {
-    console.warn('[EdgeToEdge|StatusBar] No se pudo aplicar configuración:', error)
+    console.warn('[EdgeToEdge] No se pudo activar edge-to-edge:', error)
   }
 
   // ⚙️ Obtener color de fondo actual (resuelto por Tailwind) desde un span temporal
@@ -61,16 +60,46 @@ document.addEventListener('deviceready', async () => {
 
   const hexColor = rgbToHex(color)
 
-  // 🧪 Aplicar a EdgeToEdge plugin
+  // 🎨 Aplicar color dinámico a barras de sistema (status bar + edge-to-edge)
   try {
-    console.log('🎨 Color resuelto:', color)
-    console.log('🎨 HEX:', hexColor)
-
+    await StatusBar.setOverlaysWebView({ overlay: false })
+    await StatusBar.setBackgroundColor({ color: hexColor })
+    await StatusBar.setStyle({ style: shouldUseDark ? Style.Dark : Style.Light })
     await EdgeToEdge.setBackgroundColor({ color: hexColor })
-  } catch (err) {
-    console.warn('Error al aplicar EdgeToEdge background (dinámico):', err)
+    if ((await Device.getInfo()).androidSDKVersion === 30) {
+      await StatusBar.setBackgroundColor({ color: hexColor })
+    }
+  } catch (error) {
+    console.warn('[StatusBar|EdgeToEdge] No se pudo aplicar configuración dinámica:', error)
   }
 })
+
+
+// 🧪 Mostrar logs visuales flotantes para depuración
+const debugDiv = document.createElement('div')
+debugDiv.id = 'debug-log'
+debugDiv.style.position = 'fixed'
+debugDiv.style.top = '50%'
+debugDiv.style.left = '50%'
+debugDiv.style.transform = 'translate(-50%, -50%)'
+debugDiv.style.backgroundColor = 'rgba(0,0,0,0.7)'
+debugDiv.style.color = 'white'
+debugDiv.style.padding = '8px 12px'
+debugDiv.style.fontSize = '14px'
+debugDiv.style.borderRadius = '8px'
+debugDiv.style.zIndex = '9999'
+debugDiv.style.pointerEvents = 'none'
+debugDiv.style.maxWidth = '90%'
+debugDiv.style.whiteSpace = 'pre-line'
+debugDiv.style.textAlign = 'center'
+debugDiv.textContent = 'Cargando log...'
+document.body.appendChild(debugDiv)
+
+function showDebugLog(text: string) {
+  const div = document.getElementById('debug-log')
+  if (div) div.textContent = text
+}
+export { showDebugLog }
 
 
 createApp(App).mount('#app')

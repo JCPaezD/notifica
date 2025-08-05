@@ -810,15 +810,19 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                   - [x] Añadir watch en useDarkMode para actualizar background dinámicamente
                   - [x] Confirmar funcionamiento dinámico en tiempo real al cambiar tema
                   - [x] Ajustar clases bg-surface-1 para integrar visualmente con el header
-              - [ ] Revisar comportamiento de las barras extra en API 29
-              - [ ] Ajustar color de iconos en status bar si fuera necesario
-              - [ ] Comprobar comportamiento tras abrir teclado o navegación por gestos
-              - [ ] Considerar si debe armonizarse también el color de la barra de navegación inferior (mediante `@capgo/capacitor-navigation-bar` o similar). ¡buscar si solucion real!
+              - [x] Descartado: Si no funciona: decidir si implementar padding fijo solo en Android nativo
+              - [x] Probar `@capgo/capacitor-navigation-bar` para ajustar fondo e iconos de la barra de navegación inferior si fuera necesario
+              - [x] Probar `@capacitor/status-bar` para ajustar dinámicamente el color de los iconos de la status bar según el tema de la app
+              - [ ] Investigar por qué en algunos dispositivos antiguos (API 29–30 físicos) las barras adicionales (superior e inferior) siguen apareciendo tras el fix de status bar
+              - [ ] Intentar que el cambio de color de iconos y fondo en Android 10 (API 29) se actualice sin necesidad de reiniciar la app
+              - [ ] Evaluar si es posible aplicar un ajuste similar al del color de iconos para forzar la eliminación de insets extra en versiones antiguas
+              - [ ] Validar en dispositivos físicos con Android 11 (API 30) si el comportamiento de fondo e iconos de la status bar es estable en condiciones reales (diferente de emulador)
+              - [ ] Probar más versiones intermedias (API 31–35) para asegurar que la lógica condicional por versión de API no introduce efectos no deseados
               - [ ] Añadir tests cruzados con modo oscuro/sistema en todas las plataformas
-              - [ ] Si no funciona: decidir si implementar padding fijo solo en Android nativo
               - [ ] Validar que el layout es coherente en todas las plataformas
               - [ ] Hacer script para compilar android (build, copy, sync, open/run, ¿clean project necesario?)
 
+              **EXTRA POR REVISAR-ORDENAR**
               - [ ] Verificar que los archivos `favicon.ico` y `manifest.webmanifest` están correctamente empaquetados en la APK
                   - Requiere: `npm run build` + `npx cap copy` + generación de APK
                   - Renombrar el `.apk` a `.zip` y explorar el contenido en `/assets/public/`
@@ -829,10 +833,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                   - Probar con emulador limpio o reinstalado
                   - Evaluar si alguna animación en la app (como apertura del SideMenu) puede estar dejando el DOM en estado inconsistente
                   - Si no se encuentra causa clara, documentar el entorno exacto donde falla (emulador, versión de Chrome, tipo de build)
-              - [ ] Añadir soporte temporal para mostrar variables CSS como `--safe-area-inset-*` en pantalla (modo debug)
-                  - Útil cuando `chrome://inspect` no está disponible o falla
-                  - Incluir un `div` visible solo en modo desarrollo que muestre los valores de los insets
-                  - Ocultar automáticamente tras unos segundos o mediante flag
 
 
 - [ ] 📄 Actualizar `README.md` con información final  
@@ -856,6 +856,17 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [ ] Añadir más capturas en el README para mostrar características destacadas
     - [ ] Sustituir archivos del directorio `public/screenshots/` usados por el manifest
     - [ ] Subir las nuevas capturas a la ficha de la Play Store (cuando se publique la APK)
+
+- [ ] Añadir bloque "Sobre este proyecto" al final del README.md  
+    - [ ] Redactar una sección breve y profesional que explique el contexto del desarrollo:  
+        - [ ] Que es el primer proyecto completo del autor, sin formación previa en desarrollo.  
+        - [ ] Que fue construido desde cero y usado en entorno laboral real por varios compañeros.  
+        - [ ] Que todo el diseño, código y documentación fue realizado por el propio autor con la ayuda de ChatGPT como asistente técnico y de producto.  
+        - [ ] Que el proyecto sirvió también como base técnica y conceptual para un segundo proyecto más ambicioso (Nocta).  
+    - [ ] Usar tono neutro y claro (no promocional, ni con falsas humildades).  
+    - [ ] Añadirlo como último bloque del README, antes de la sección de licencia o en una nueva sección tipo `## Sobre este proyecto`.  
+    - [ ] Validar que no interfiere con el resto del README ni repite información innecesaria.  
+    - [ ] Confirmar que está presente y visible antes de publicar la versión pública en Play Store.
 
 - [ ] 📣 Preparación para fase de testing real con usuarios externos 
   - [ ] Revisar si la app (actual `.aab` y entorno) está ya en estado adecuado para compartir en prueba cerrada

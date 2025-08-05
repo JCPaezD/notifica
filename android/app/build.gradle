@@ -32,6 +32,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Permite instalar la versión debug junto a la release
+            applicationIdSuffix ".debug"
+            // Para identificarla en el launcher
+            resValue "string", "app_name", "Notifica (Debug)"
+            // Para verlo en Ajustes > Info de la app
+            versionNameSuffix "-debug"
+            // (debuggable true es implícito en este tipo)
+        }
         release {
             signingConfig signingConfigs.release
             minifyEnabled false

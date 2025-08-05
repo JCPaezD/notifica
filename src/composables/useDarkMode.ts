@@ -1,4 +1,6 @@
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+import { showDebugLog } from '@/main'
+
 
 type ThemeMode = 'light' | 'dark' | 'system'
 
@@ -55,10 +57,15 @@ function setupSystemListener() {
 
 import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support'
 import { Capacitor } from '@capacitor/core'
+import { StatusBar, Style } from '@capacitor/status-bar'
+import { isAndroidApiAtLeast } from '@/utils/platform' // ajusta la ruta si es distinta
+import { Device } from '@capacitor/device'
+
 
 watch(isDark, async () => {
   if (Capacitor.getPlatform() !== 'android') return
 
+  // 🎨 Crear un span temporal con las clases de color de fondo según tema actual (Tailwind)
   const span = document.createElement('span')
   span.className = 'bg-surface-1 dark:bg-surface-1-dark'
   span.style.display = 'none'
@@ -67,6 +74,7 @@ watch(isDark, async () => {
   const color = getComputedStyle(span).backgroundColor
   document.body.removeChild(span)
 
+  // 🎯 Convertir rgb(...) → #rrggbb
   const rgbToHex = (rgb: string) => {
     const result = color.match(/\d+/g)
     if (!result || result.length < 3) return '#ffffff'
@@ -81,13 +89,30 @@ watch(isDark, async () => {
 
   const hexColor = rgbToHex(color)
 
+  // 🧪 Mostrar información útil en pantalla para pruebas
+  const apiOK = await isAndroidApiAtLeast(30)
+  showDebugLog(`API >= 30: ${apiOK}\nTema actual: ${isDark.value ? 'dark' : 'light'}\nColor HEX: ${hexColor}`)
+
   try {
-    console.log('[DarkMode] Tema cambiado, aplicando color a EdgeToEdge:', hexColor)
+    console.log('[DarkMode] Tema cambiado, aplicando color a EdgeToEdge y StatusBar:', hexColor)
+
+    // 🧪 Actualizar fondo de barras del sistema en EdgeToEdge
     await EdgeToEdge.setBackgroundColor({ color: hexColor })
+    if ((await Device.getInfo()).androidSDKVersion === 30) {
+      await StatusBar.setBackgroundColor({ color: hexColor })
+    }
+
+
+    // 🌓 Cambiar estilo de iconos en status bar solo en Android API 30+
+    if (await isAndroidApiAtLeast(30)) {
+      const isNowDark = document.documentElement.classList.contains('dark')
+      await StatusBar.setStyle({ style: isNowDark ? Style.Dark : Style.Light })
+    }
   } catch (err) {
-    console.warn('[DarkMode] Error al aplicar EdgeToEdge background:', err)
+    console.warn('[DarkMode] Error al aplicar EdgeToEdge background o StatusBar:', err)
   }
 })
+
 
 
 
