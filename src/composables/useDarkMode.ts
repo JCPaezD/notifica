@@ -1,5 +1,5 @@
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
-import { showDebugLog } from '@/main'
+// import { showDebugLog } from '@/main'
 
 
 type ThemeMode = 'light' | 'dark' | 'system'
@@ -90,8 +90,8 @@ watch(isDark, async () => {
   const hexColor = rgbToHex(color)
 
   // 🧪 Mostrar información útil en pantalla para pruebas
-  const apiOK = await isAndroidApiAtLeast(30)
-  showDebugLog(`API >= 30: ${apiOK}\nTema actual: ${isDark.value ? 'dark' : 'light'}\nColor HEX: ${hexColor}`)
+  // const apiOK = await isAndroidApiAtLeast(30)
+  // showDebugLog(`API >= 30: ${apiOK}\nTema actual: ${isDark.value ? 'dark' : 'light'}\nColor HEX: ${hexColor}`)
 
   try {
     console.log('[DarkMode] Tema cambiado, aplicando color a EdgeToEdge y StatusBar:', hexColor)

@@ -76,30 +76,30 @@ document.addEventListener('deviceready', async () => {
 
 
 // 🧪 Mostrar logs visuales flotantes para depuración
-const debugDiv = document.createElement('div')
-debugDiv.id = 'debug-log'
-debugDiv.style.position = 'fixed'
-debugDiv.style.top = '50%'
-debugDiv.style.left = '50%'
-debugDiv.style.transform = 'translate(-50%, -50%)'
-debugDiv.style.backgroundColor = 'rgba(0,0,0,0.7)'
-debugDiv.style.color = 'white'
-debugDiv.style.padding = '8px 12px'
-debugDiv.style.fontSize = '14px'
-debugDiv.style.borderRadius = '8px'
-debugDiv.style.zIndex = '9999'
-debugDiv.style.pointerEvents = 'none'
-debugDiv.style.maxWidth = '90%'
-debugDiv.style.whiteSpace = 'pre-line'
-debugDiv.style.textAlign = 'center'
-debugDiv.textContent = 'Cargando log...'
-document.body.appendChild(debugDiv)
+//const debugDiv = document.createElement('div')
+//debugDiv.id = 'debug-log'
+//debugDiv.style.position = 'fixed'
+//debugDiv.style.top = '50%'
+//debugDiv.style.left = '50%'
+//debugDiv.style.transform = 'translate(-50%, -50%)'
+//debugDiv.style.backgroundColor = 'rgba(0,0,0,0.7)'
+//debugDiv.style.color = 'white'
+//debugDiv.style.padding = '8px 12px'
+//debugDiv.style.fontSize = '14px'
+//debugDiv.style.borderRadius = '8px'
+//debugDiv.style.zIndex = '9999'
+//debugDiv.style.pointerEvents = 'none'
+//debugDiv.style.maxWidth = '90%'
+//debugDiv.style.whiteSpace = 'pre-line'
+//debugDiv.style.textAlign = 'center'
+//debugDiv.textContent = 'Cargando log...'
+//document.body.appendChild(debugDiv)
 
-function showDebugLog(text: string) {
-  const div = document.getElementById('debug-log')
-  if (div) div.textContent = text
-}
-export { showDebugLog }
+// function showDebugLog(text: string) {
+//   const div = document.getElementById('debug-log')
+//   if (div) div.textContent = text
+// }
+// export { showDebugLog }
 
 
 createApp(App).mount('#app')
