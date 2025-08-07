@@ -44,6 +44,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
 - [UI, diseño y experiencia de usuario](#ui-diseño-y-experiencia-de-usuario)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
+  - [Capturas oficiales de la app (v1.0)](#capturas-oficiales-de-la-app-v10)
   - [Reestructuración del layout de las tareas para alineación precisa (botón, duración, horas)](#reestructuración-del-layout-de-las-tareas-para-alineación-precisa-botón-duración-horas)
   - [Bloque de apariencia: diseño UI y selector de tema](#bloque-de-apariencia-diseño-ui-y-selector-de-tema)
 - [Notas meta del proyecto](#notas-meta-del-proyecto)
@@ -1428,6 +1429,34 @@ Al final del día, marca las tareas notificadas y borra las completadas. Puedes 
 Una interfaz simple, rápida y sin distracciones. Ideal para usar a lo largo de la jornada sin complicaciones.
 
 Diseñada desde dentro, para quienes necesitan agilidad en el trabajo técnico.
+
+### Capturas oficiales de la app (v1.0)
+
+Listado de imágenes disponibles para documentación, README y ficha de Play Store.  
+Las imágenes se encuentran en `/public/screenshots/`.
+
+| Nº  | Descripción                    | Ruta en proyecto                            | Enlace navegable en editor local                       |
+|-----|--------------------------------|----------------------------------------------|---------------------------------------------------------|
+| 01  | Tareas vacías                  | `/public/screenshots/01-tareas-vacias.png`   | [abrir](../../public/screenshots/01-tareas-vacias.png) |
+| 02  | Varias tareas                  | `/public/screenshots/02-varias-tareas.png`   | [abrir](../../public/screenshots/02-varias-tareas.png) |
+| 03  | Turno anterior                 | `/public/screenshots/03-turno-anterior.png`  | [abrir](../../public/screenshots/03-turno-anterior.png) |
+| 04  | Toast tarea completada         | `/public/screenshots/04-toast-tarea-completada.png` | [abrir](../../public/screenshots/04-toast-tarea-completada.png) |
+| 05  | Notas del turno                | `/public/screenshots/05-notas-turno.png`     | [abrir](../../public/screenshots/05-notas-turno.png)   |
+| 06  | Compartir activo               | `/public/screenshots/06-compartir-activo.png`| [abrir](../../public/screenshots/06-compartir-activo.png) |
+| 07  | Confirmar borrado             | `/public/screenshots/07-confirmar-borrado.png`| [abrir](../../public/screenshots/07-confirmar-borrado.png) |
+| 08  | Scroll + selector de turno     | `/public/screenshots/08-scroll-selector-turno.png` | [abrir](../../public/screenshots/08-scroll-selector-turno.png) |
+| 09  | Vista modo oscuro              | `/public/screenshots/09-modo-oscuro.png`     | [abrir](../../public/screenshots/09-modo-oscuro.png)   |
+| 10  | Vista modo claro               | `/public/screenshots/10-modo-claro.png`      | [abrir](../../public/screenshots/10-modo-claro.png)    |
+| 11  | Toast múltiples                | `/public/screenshots/11-toast-multiples.png` | [abrir](../../public/screenshots/11-toast-multiples.png) |
+| 12  | Selector de tema               | `/public/screenshots/12-selector-tema.png`   | [abrir](../../public/screenshots/12-selector-tema.png) |
+| 13  | Móvil modo claro               | `/public/screenshots/13-movil-claro.png`     | [abrir](../../public/screenshots/13-movil-claro.png)   |
+| 14  | Móvil modo oscuro              | `/public/screenshots/14-movil-oscuro.png`    | [abrir](../../public/screenshots/14-movil-oscuro.png)  |
+| 15  | Escritorio modo claro          | `/public/screenshots/15-escritorio-claro.png`| [abrir](../../public/screenshots/15-escritorio-claro.png) |
+| 16  | Escritorio modo oscuro         | `/public/screenshots/16-escritorio-oscuro.png`| [abrir](../../public/screenshots/16-escritorio-oscuro.png) |
+| 17  | Foco en input                  | `/public/screenshots/17-foco-input.png`      | [abrir](../../public/screenshots/17-foco-input.png)    |
+| 18  | Texto aumentado                | `/public/screenshots/18-texto-aumentado.png` | [abrir](../../public/screenshots/18-texto-aumentado.png) |
+| 19  | Toast de error                 | `/public/screenshots/19-toast-error.png`     | [abrir](../../public/screenshots/19-toast-error.png)   |
+
 
 ### Reestructuración del layout de las tareas para alineación precisa (botón, duración, horas)
 

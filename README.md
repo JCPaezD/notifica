@@ -48,8 +48,8 @@ Aplicación web progresiva (PWA) para registrar tareas técnicas por turno duran
 ## 🖼️ Vista previa
 
 <p align="center">
-  <img src="./public/screenshots/screenshot-mobile-1.png" alt="Vista móvil" width="250"/>
-  <img src="./public/screenshots/screenshot-desktop-1.png" alt="Vista escritorio" width="450"/>
+  <img src="./public/screenshots/13-movil-claro.png" alt="Vista móvil" width="250"/>
+  <img src="./public/screenshots/15-escritorio-claro.png" alt="Vista escritorio" width="450"/>
 </p>
 
 

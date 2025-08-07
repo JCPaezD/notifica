@@ -845,16 +845,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Revalidar los resultados de Lighthouse (o eliminarlos si ya no son representativos) - eliminados 
   - [x] Revalidar y ajustar el texto sobre la versión APK (añadir enlace si ya está publicada)  
   - [ ] 🖼️ Actualizar capturas de la app (README, manifest y Play Store)
-    - [ ] Generar nuevas capturas representativas con el diseño actual
-          - [ ] Vista móvil (modo claro)
-          - [ ] Vista escritorio (modo claro)
-          - [ ] Vista móvil (modo oscuro)
-          - [ ] Vista mostrando campo de notas del turno
-          - [ ] Vista con toasts visibles
-          - [ ] Vista con interacción accesible (ej. foco, alto contraste, etc.) (opcional)
-    - [ ] Reemplazar imágenes del README por las nuevas capturas
-    - [ ] Añadir más capturas en el README para mostrar características destacadas
-    - [ ] Sustituir archivos del directorio `public/screenshots/` usados por el manifest
+    - [x] Generar nuevas capturas representativas con el diseño actual
+          - [x] 19 capturas nuevas - lista en dev-notes
+    - [x] Reemplazar imágenes del README por las nuevas capturas
+    - [x] Sustituir archivos del directorio `public/screenshots/` usados por el manifest y `public/screenshots-playstore/`
     - [ ] Subir las nuevas capturas a la ficha de la Play Store (cuando se publique la APK)
 
 - [ ] Añadir bloque "Sobre este proyecto" al final del README.md  
