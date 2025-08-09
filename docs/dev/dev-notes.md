@@ -166,9 +166,10 @@ Antes de hacer merge a main para publicar una nueva versión PWA:
 Pasos para crear y subir una nueva versión firmada a Google Play:
 
 1. Aumentar versión:
-   - Editar `android/app/build.gradle`:
+  - Editar `android/app/build.gradle`:
      - `versionCode`: sumar 1 (ej: 2 → 3)
      - `versionName`: nueva etiqueta visible (ej: "1.0.2")
+  - Editar footer 
 
 2. Sincronizar Gradle y generar `.aab`:
    - En Android Studio:

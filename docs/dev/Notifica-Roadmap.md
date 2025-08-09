@@ -878,6 +878,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [ ] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
   - [ ] Enviar para revisión de Google Play Console.
   - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
+  - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
   - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
   - [ ] (Opcional) Publicar el mensaje en canales adecuados:
         - Reddit (ej. /r/androidapps, /r/SideProject)
