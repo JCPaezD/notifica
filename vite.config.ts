@@ -51,14 +51,14 @@ export default defineConfig({
         screenshots: [
           {
             "src": "screenshots/15-escritorio-claro.png", // Ruta relativa a la carpeta public
-            "sizes": "571x794", // Tamaño de tu captura de escritorio
+            "sizes": "1053x806", // Tamaño de tu captura de escritorio
             "type": "image/png",
             "form_factor": "wide",
             "label": "Vista de Notifica en Escritorio"
           },
           {
             "src": "screenshots/13-movil-claro.png", // Ruta relativa a la carpeta public
-            "sizes": "357x738", // Tamaño de tu captura móvil (ejemplo)
+            "sizes": "1080x2276", // Tamaño de tu captura móvil (ejemplo)
             "type": "image/png",
             "form_factor": "narrow",
             "label": "Vista de Notifica en Móvil"

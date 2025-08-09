@@ -872,8 +872,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Si no lo está, priorizar tareas mínimas necesarias para dejarla lista cuanto antes  
     - [x] Confirmar el canal de publicación para testing: prueba cerrada
     - [ ] Revisar ficha de app en Google Play Console:
-          - Nombre, descripción, capturas, icono, política de privacidad
-    - [ ] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
+          - [x] Nombre, descripción, capturas, icono.
+          - [x] Política de privacidad: [Privacy Policy](https://jcpaezd.github.io/notifica/privacy-policy.md)
+          - [x] Corregir tamaños de capturas en manifest para PWA
+          - [ ] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
   - [ ] Enviar para revisión de Google Play Console.
   - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
   - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
