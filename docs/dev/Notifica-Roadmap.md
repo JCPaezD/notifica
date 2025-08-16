@@ -933,10 +933,15 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Revisar opciones: `vue-i18n`, objeto propio reactivo, solución mínima
     - [x] Documentar ventajas/inconvenientes de cada método
     - [x] Tomar decisión final (aprender el razonamiento aunque ya esté claro usar `vue-i18n`)
-  - [ ] Configurar infraestructura i18n
+  - [x] Configurar infraestructura i18n
     - [x] Instalar y configurar `vue-i18n` en `main.ts`
     - [x] Crear carpeta `locales/` con `es.ts` y `en.ts` iniciales
-    - [ ] Definir convención única de claves (basada en `rewording-ES.md`)
+    - [x] Definir convención única de claves (basada en `rewording-ES.md`)
+      - Jerarquía fija por tipo (`btn`, `menu`, `shift`, `task`, `toast`, `dialog`, `filter`, `aria`, `tooltip`, `placeholder`, `header`, `title`, `share`, `export`).
+      - Estilo: inglés, camelCase en último nivel, profundidad máx. 3.
+      - Parámetros dinámicos con `{nombre}` en minúsculas (`{count}`, `{description}`, …).
+      - Plurales usando sintaxis de `vue-i18n`.
+      - Branding “Notifica” no se traduce.
   - [ ] Integrar textos en sistema de traducción
     - [ ] Volcar `ES final` desde `docs/rewording-ES.md` a `es.ts`
     - [ ] Crear `en.ts` con traducción inicial de todos los textos
