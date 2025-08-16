@@ -835,7 +835,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                   - Si no se encuentra causa clara, documentar el entorno exacto donde falla (emulador, versión de Chrome, tipo de build)
 
 
-- [ ] 📄 Actualizar `README.md` con información final  
+- [x] 📄 Actualizar `README.md` con información final  
   - [x] Añadir descripción del nuevo sistema de notificaciones flotantes (toasts propio)  
   - [x] Añadir mención al campo de notas del turno, editable por shift  
   - [x] Añadir soporte de modo claro/oscuro con detección automática o preferencia de usuario  
@@ -844,12 +844,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Revisión de bloques generales del readme (descripción, carácterísticas, etc)
   - [x] Revalidar los resultados de Lighthouse (o eliminarlos si ya no son representativos) - eliminados 
   - [x] Revalidar y ajustar el texto sobre la versión APK (añadir enlace si ya está publicada)  
-  - [ ] 🖼️ Actualizar capturas de la app (README, manifest y Play Store)
+  - [x] 🖼️ Actualizar capturas de la app (README, manifest y Play Store)
     - [x] Generar nuevas capturas representativas con el diseño actual
           - [x] 19 capturas nuevas - lista en dev-notes
     - [x] Reemplazar imágenes del README por las nuevas capturas
     - [x] Sustituir archivos del directorio `public/screenshots/` usados por el manifest y `public/screenshots-playstore/`
-    - [ ] Subir las nuevas capturas a la ficha de la Play Store (cuando se publique la APK)
+    - [x] Subir las nuevas capturas a la ficha de la Play Store (cuando se publique la APK)
 
 - [ ] Añadir bloque "Sobre este proyecto" al final del README.md  
     - [ ] Redactar una sección breve y profesional que explique el contexto del desarrollo:  
@@ -863,7 +863,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [ ] Confirmar que está presente y visible antes de publicar la versión pública en Play Store.
 
 - [ ] 📣 Preparación para fase de testing real con usuarios externos 
-  - [ ] Revisar si la app (actual `.aab` y entorno) está ya en estado adecuado para compartir en prueba cerrada
+  - [x] Revisar si la app (actual `.aab` y entorno) está ya en estado adecuado para compartir en prueba cerrada
         ↪ [Checklist en dev-notes.md](dev-notes.md#-revisión-del-aab-antes-de-lanzar-testing-externo)
           - [x] Confirmar si el bug del scroll innecesario en listas cortas ha sido resuelto sin introducir nuevas regresiones
           - [x] Asegurar que el selector de turno es visible en listas largas y no queda fuera de pantalla
@@ -871,12 +871,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Implementar soporte para modo oscuro o decidir posponerlo con documentación adecuada
     - [x] Si no lo está, priorizar tareas mínimas necesarias para dejarla lista cuanto antes  
     - [x] Confirmar el canal de publicación para testing: prueba cerrada
-    - [ ] Revisar ficha de app en Google Play Console:
+    - [x] Revisar ficha de app en Google Play Console:
           - [x] Nombre, descripción, capturas, icono.
           - [x] Política de privacidad: [Privacy Policy](https://jcpaezd.github.io/notifica/privacy-policy.md)
           - [x] Corregir tamaños de capturas en manifest para PWA
-          - [ ] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
-  - [ ] Enviar para revisión de Google Play Console.
+          - [x] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
+  - [x] Enviar para revisión de Google Play Console.
   - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
   - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
   - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
@@ -888,6 +888,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Asegurar que cumple requisitos de Google Play para lanzamiento público:
         - Al menos 12 testers activos
         - Durante un periodo de 14 días
+  - [ ] Revisar restricciones de orientación/redimensionamiento para compatibilidad con tablets y plegables (Android 16+)
 
 - [ ] Implementar selector de formato de duración y precisión
     - [ ] Añadir sistema de persistencia para ajustes de usuario (localStorage)
@@ -986,11 +987,24 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Ajustar diseño si hay textos más largos o distintos por idioma
 
 - [ ] ✏️ Revisar wording para ampliar público potencial
-  - [ ] Evaluar si etiquetas como “Aviso” y “Técnicos” deben ser más genéricas
-  - [ ] Proponer variantes como “Descripción”, “Responsables”, etc.
-  - [ ] Verificar que el nuevo wording sigue siendo claro para los usuarios actuales
-  - [ ] Aplicar los cambios en todos los lugares visibles (inputs, botones, filtros, exportación)
-  - [ ] Validar comprensión en contexto (sin necesidad de ayuda externa)
+  - [x] Inventario de textos de la UI
+    - [x] Extraer todos los textos visibles (botones, menús, placeholders, labels, toasts, modales, exportación)
+    - [x] Documentarlos en `docs/rewording-ES.md`
+  - [ ] Propuesta de alternativas
+    - [ ] Detectar términos potencialmente confusos o demasiado específicos (“Aviso”, “Técnicos”)
+    - [ ] Proponer variantes más genéricas/claras (“Descripción”, “Responsables”)
+    - [ ] Mantener consistencia con notas, tareas y filtros
+  - [ ] Decisión de wording final
+    - [ ] Validar claridad con criterios internos (¿se entiende sin manual? ¿es neutral para distintos perfiles?)
+    - [ ] Cerrar lista definitiva en `docs/rewording-ES.md`
+  - [ ] Implementación de cambios
+    - [ ] Sustituir textos en componentes (inputs, botones, menús, filtros)
+    - [ ] Actualizar textos en exportación e importación
+    - [ ] Revisar documentación (`README.md`, capturas si procede)
+  - [ ] Validación en entorno real
+    - [ ] Revisar PWA en móvil (claro/oscuro, offline)
+    - [ ] Revisar APK Android
+    - [ ] Confirmar comprensión en contexto (sin necesidad de explicación)
 
 
 ---
@@ -1061,6 +1075,8 @@ Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionale
 
 - [ ] Añadir selector de formato horario: HH:MM / AM-PM / seguir sistema (opcional)
 - [ ] Botón "Volver al turno actual" no funciona arrastrar y soltar para cancelar clic. (regresión)
+- [ ] Migrar a APIs modernas de edge-to-edge (Android 15+).
+- [ ] Eliminar uso de parámetros obsoletos en WindowInsets.
 
 
 

@@ -1,0 +1,816 @@
+- /span>
+!-- Ancho fijo para el botón para consistencia -->
+!-- Margen vertical aumentado -->
+!-- mt-4 para espacio, safe-area-inset-bottom para evitar UIs -->
+!-- mt-auto empuja esto hacia abajo -->
+!isHidden
+!isViewingPastShift
+!task.endTime
+#000000ff
+(a, i) in actions
+(note, index) in notes
+(task, index) in tasks
+.json
+--:--/span>
+:aria-expanded=
+{ 'rotate-90': isOptionsOpen }
+{{ task.technician }}/span>
+{{ title }}/div>
+23 || minutes  0 || minutes > 59) {
+a.onClick
+Abrir menú
+absolute inset-0 flex h-full w-full items-center justify-center transition-opacity
+absolute left-4 top-4.5 btn-close md:hover:bg-surface-hover dark:md:hover:bg-surface-hover-dark
+Acciones/span>
+actions[0].onClick
+Activas/span>
+actual
+allTaskShiftIds
+Añadir técnico/span>
+Apariencia/p>
+aria-controls=
+availableShifts
+bg-app-bg dark:bg-app-bg-dark text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden
+bg-surface-1 dark:bg-surface-1-dark rounded-xl p-3 shadow-sm w-full max-w-lg mb-4 border border-divider dark:border-divider-dark overflow-hidden
+bg-surface-1 dark:bg-surface-1-dark rounded-xl shadow-sm border border-divider dark:border-divider-dark flex flex-col overflow-hidden
+body
+Borrar todo/span>
+btn-close
+btn-icon-alert
+btn-icon-success
+btn-shift
+btn-toast flex items-center gap-1 text-xs font-medium
+btn-toast text-xs font-medium
+btn-toast-close ml-1 text-base leading-none
+button
+button-swap
+cancelEditDescription
+Cerrar menú
+Cerrar notificación
+closeButtonClasses
+closeMenu
+closeSideMenu
+collapse
+col-start-1 row-start-1 col-span-3 py-1 text-center text-subtle dark:text-subtle-dark
+col-start-2 row-start-1 self-end justify-self-end grid grid-cols-[auto_min-content_auto] items-center gap-x-1 text-xs
+col-start-3 row-start-1 self-end w-[88px]
+Compartir/span>
+currentColor
+currentShiftId
+cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-0.5 rounded-md truncate
+deleteTask
+description
+descriptionInputRef
+Deshacer
+div
+divide-y divide-divider dark:divide-divider-dark
+duration-fade
+editableDescription
+editableEndTime
+editableStartTime
+editableTechnician
+el => textareaRefs[index] = el as HTMLTextAreaElement
+Eliminar tarea
+Eliminar Tarea
+emptyMessage
+endtime-display-swap
+endTimeInputRef
+Estado de notificación
+evenodd
+Exportar/span>
+fade-scale
+file
+fileImportInputRef
+filteredAndSortedTasks
+filtersAreActive
+Finalizar/span>
+finishTask
+fixed bottom-8 inset-x-0 flex flex-col items-center space-y-2 z-[9999] overflow-hidden pointer-events-none
+fixed inset-0 overflow-y-auto
+flex flex-row text-sm relative overflow-hidden
+flex items-center gap-2 text-xl font-semibold text-text-main dark:text-main-dark
+flex items-center gap-x-2 transition-all duration-300 ease-in-out md:hover:scale-105 md:hover:drop-shadow-md
+flex items-start gap-3 px-4 py-2 rounded-lg shadow-md w-[92vw] max-w-xs border text-sm leading-snug animate-toast-enter select-none pointer-events-auto text-text-main dark:text-main-dark
+flex min-h-full items-start justify-start text-left
+flex space-x-4 items-start
+flex-grow
+font-medium text-sm text-text-main dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md break-words leading-tight
+font-semibold leading-tight
+formattedDuration
+h-4 w-4 text-text-main dark:text-main-dark
+h-5 w-5 text-icon-muted dark:text-icon-muted-dark
+h-5 w-5 text-icon-success dark:text-icon-success-dark
+h-5 w-5 text-status-alert dark:text-status-alert-dark
+h-8 w-8 text-text-main dark:text-main-dark
+handleAction('returnToCurrent')
+handleAnimationEnd
+handleDeleteTask
+handleFinalizeAndEditEndTime
+handleFinishTask
+handleMenuAction
+handleReactivateTask
+hidden
+http://www.w3.org/2000/svg
+i
+iconSvg
+Importar/span>
+importTasksFromJson
+inline-block
+isEditingDescription
+isEditingEndTime
+isEditingStartTime
+isEditingTechnician
+isNotesOpen
+isNotesOpen = !isNotesOpen
+isOpen
+isOptionsOpen
+isOptionsOpen = !isOptionsOpen
+isShiftDropdownOpen
+isSideMenuOpen
+isViewingPastShift
+listTitle
+logoBlockRef
+M10 18a8 8 0 100-16 8 8 0 000 16zm-.75-10.25a.75.75 0 011.5 0v3.5a.75.75
+M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z
+M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586
+M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m16.95 4.95l-1.061-1.061M6.111 6.111 5.05 5.05m0 13.9 1.061-1.061m12.728-12.728-1.061 1.061M15 12a3 3 0 11-6 0 3 3 0 016 0z
+M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z
+M122.92 32.93C130.66 26.93 140.09 22.98 149.9 22.28C157.33 21.75 164.86 22.26 172.11 24.01C175.34 24.9 179.27 26.37 180.1 30.03C180.92 33.08 178.62 35.64 176.65 37.63C169.95 44.27 163.35 51.02 156.55 57.55C155.03 58.96 153.56 60.7 154.1 62.93C154.76 67.83 154.75 73.69 158.86 77.15C161.28 79.49 164.76 79.94 167.97 80.04C170.48 80.12 173.41 80.28 175.33 78.34C183.54 70.56 191.13 62.14 199.23 54.26C202.14 51 207.89 53.16 208.76 57.2C213.07 71.97 212.77 88.61 205.46 102.41C202.79 107.97 198.53 112.52 194.11 116.73C206.17 124.6 215.98 136.34 219.88 150.36C223.69 163.57 222.55 178.21 216.63 190.65C208.98 206.98 193.35 219.56 175.47 222.66C160.05 226.02 143.45 221.43 131.03 211.92C116.5 201.06 108.17 182.94 108.47 164.9C106.82 165.69 105.23 166.64 103.94 167.95C94.06 177.72 84.36 187.69 74.43 197.42C65.68 205.83 51.03 206.85 41.14 199.86C30.98 192.76 26.5 178.51 30.84 166.89C32.39 161.69 36.14 157.63 39.96 153.96C59.91 133.91 79.92 113.92 99.88 93.89C101.65 91.93 103.73 89.76 103.71 86.94C103.76 82.62 103.08 78.32 103.2 74C102.95 58.26 110.36 42.48 122.92 32.93ZM120.36 51.36C115.25 59.19 113.27 68.79 113.97 78.04C114.26 82.29 115.09 86.56 114.49 90.82C113.94 94.21 111.74 97.01 109.4 99.41C88.95 119.95 68.75 140.75 48.02 161.03C44.56 164.25 41.13 168.07 40.7 173.01C39.24 180.47 42.88 188.8 49.98 191.95C56.09 194.79 63.67 193.11 68.36 188.37C82.52 174.19 96.62 159.94 110.65 145.64C112.53 143.79 114.04 141.61 115.25 139.29C122.54 125.53 135.62 114.84 150.72 110.88C161.6 107.88 173.23 108.72 183.94 112.04C189.37 107.03 194.67 101.51 197.52 94.58C201.06 86.52 201.27 77.49 200.53 68.86C195.66 71.7 192.39 76.52 188.27 80.27C184.03 84.18 180.29 89.87 174.02 90.35C169.35 90.61 164.64 90.47 159.97 90.26C157.28 90.25 155.51 87.96 153.67 86.34C150.06 82.61 145.18 79.21 144.55 73.63C143.99 68.27 142.78 62.81 143.6 57.43C145.69 52.61 150.29 49.54 153.72 45.72C157.17 41.9 161.54 38.77 164.01 34.16C147.83 29.33 129.22 37.2 120.36 51.36ZM157.32 122.19C144.36 124.41 132.71 132.85 126.37 144.34C120.79 154.42 119.27 166.63 122.09 177.79C124.93 189.74 133.13 200.27 143.98 206.01C152.93 210.94 163.63 212.37 173.64 210.54C188.42 207.69 201.55 197.01 206.88 182.87C209.85 175.46 210.41 167.28 209.42 159.41C207.14 143.42 195.38 129.25 180.15 123.93C172.86 121.35 164.91 120.92 157.32 122.19Z
+M162.41 135.41C165.51 133.66 169.94 135.68 170.64 139.16C171.47 146.94 170.04 154.89 171.31 162.6C175.78 166.25 181.34 168.48 185.41 172.62C188.51 176.22 184.93 182.58 180.24 181.64C176.73 180.57 173.92 178.03 170.8 176.2C167.14 173.56 162.63 171.86 159.74 168.31C158.4 161.34 159.53 154.09 159.14 147.01C159.36 143.07 157.99 137.54 162.41 135.41Z
+M18 10A8 8 0 11 2 10a8 8 0 0116 0zM9 9a1 1 0
+M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z
+M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H6.911a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661Z
+M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z
+M3.5 2.75a.75.75 0 00-1.5 0v14.5a.75.75 0 001.5 0v-4.392l1.657-.348a6.723 6.723 0 016.271 1.719 2.25 2.25 0 003.914 0 6.723 6.723 0 016.271-1.719l1.657.348A.75.75 0 0018 12.25v-2.5a.75.75 0 00-.501-.712l-1.657-.348a6.723 6.723 0 01-6.271-1.719A2.25 2.25 0 005.657 5.25a6.723 6.723 0 01-2.157-.442V2.75z
+M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5
+M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z
+M6 18L18 6M6 6l12 12
+M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z
+M7.793 2.232a.75.75 0 01-.025 1.06L3.622 7.25h6.128a5.5 5.5 0 110 11H5.75a.75.75 0 010-1.5h3.999a4 4 0 100-8H3.622l4.146 4.023a.75.75 0 11-1.036 1.085l-5.5-5.25a.75.75 0 010-1.085l5.5-5.25a.75.75 0 011.06.025z
+M8.257 3.099c.765-1.36 2.721-1.36 3.486 0l6.853
+M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z
+M9 19a9 9 0 1 0 0-14M9 5v4H5
+M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z
+M9 5l7 7-7 7
+menu
+menuitem
+min-w-[32px] text-center
+min-w-0 col-start-1 row-start-1 self-end
+ml-0.5 h-3 w-3 text-text-main/70 dark:text-main-dark/70
+modelShowOnlyActive
+modelShowOnlyActive = !modelShowOnlyActive
+modelShowOnlyNotNotified
+modelShowOnlyNotNotified = !modelShowOnlyNotNotified
+modelValueDescription
+modelValueTechnician
+Mostrar solo tareas activas/span>
+Mostrar solo tareas sin notificar/span>
+mt-0.5 shrink-0
+mt-4 pb-3
+mt-auto
+mx-4 -mt-1 rounded-b-xl border border-t-0 border-divider dark:border-divider-dark bg-surface-1 dark:bg-surface-1-dark ring-1 ring-purple-strong/15 dark:ring-purple-strong-dark/20 p-4 pt-3 space-y-3 text-sm
+my-6 border-divider dark:border-divider-dark mx-3
+newTaskDescription
+newTaskDescription = $event
+newTaskTechnician
+newTaskTechnician = $event
+none
+Notas del turno/span>
+notes.filter(n => n.trim().length > 0).length
+notes-content
+Notifica v1.2.0 - JCPD 2025/p>
+Notifica/h1>
+notified-icon
+notifiedIconBtnRef
+notified-icon-swap
+Nuevo aviso
+Nuevo Turno/span>
+onAfterEnter
+onBeforeLeave
+onEnter
+onLeave
+opacity-0
+opacity-0 max-h-0
+opacity-100 max-h-[80px]
+openSideMenu
+options-content
+out-in
+props.title
+props.titleIcon
+py-0.5
+Reabrir/span>
+reactivateTask
+relative
+relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none
+relative z-50
+relayDeleteTask
+relayFinishTask
+relayReactivateTask
+relayUpdateTask
+remove(toast.id)
+round
+saveDescription
+saveEndTime
+saveStartTime
+saveTechnician
+selectedShiftToView
+selectShift
+shift in availableShifts
+shift.id
+shift.id !== currentShiftId
+shiftDropdownButtonRef
+shiftDropdownMenuRef
+shiftTitleId
+showNotes
+showOnlyActive
+showOnlyNotNotified
+Sin Notificar/span>
+src/App.vue:10:import Toast from './components/Toast.vue'
+src/App.vue:101:    type: 'success'
+src/App.vue:11:import { useToast } from './composables/useToast'
+src/App.vue:116:      title: 'Tarea Finalizada',
+src/App.vue:117:      description: `"${task.description}" completada a las ${task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`,
+src/App.vue:118:      type: 'success'
+src/App.vue:12:import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+src/App.vue:13:import { Share } from '@capacitor/share';
+src/App.vue:134:          title: 'Tarea Notificada',
+src/App.vue:136:          type: 'success'
+src/App.vue:14:import { Capacitor } from '@capacitor/core';
+src/App.vue:140:          title: 'Notificación Anulada',
+src/App.vue:146:        title: 'Tarea Actualizada',
+src/App.vue:15:import dayjs from 'dayjs'
+src/App.vue:152:      title: 'Error al Actualizar',
+src/App.vue:16:import 'dayjs/locale/es' // si usas español
+src/App.vue:164:      title: 'Tarea Reactivada',
+src/App.vue:166:      type: 'warning'
+src/App.vue:17:dayjs.locale('es')
+src/App.vue:178:    // Se usa type: 'error' para mostrar el toast en rojo
+src/App.vue:18:import type { Task } from './types/Task' // Importar la interfaz Task compartida
+src/App.vue:182:        title: 'Tarea Eliminada',
+src/App.vue:184:        type: 'error',
+src/App.vue:188:            label: 'Deshacer',
+src/App.vue:19:import { shiftIcons as icons } from './icons/shifts'
+src/App.vue:20:import { useLogoAnimation } from './composables/useLogoAnimation'
+src/App.vue:203:                  title: 'Tarea Restaurada',
+src/App.vue:21:import { useDarkMode } from './composables/useDarkMode'
+src/App.vue:225:  const shiftStartTimeFormatted = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+src/App.vue:238:        title: 'Acción Cancelada',
+src/App.vue:239:        description: 'Inicio de nuevo turno cancelado por el usuario.',
+src/App.vue:240:        type: 'error'
+src/App.vue:248:  selectedShiftToView.value = 'current';
+src/App.vue:25:  [...new Set(allTasks.value.map(t => t.shiftId).filter((id): id is string => typeof id === 'string'))]
+src/App.vue:254:      title: 'Nuevo Turno Iniciado',
+src/App.vue:256:      type: 'success',
+src/App.vue:260:          label: 'Deshacer',
+src/App.vue:278:                title: 'Acción Deshecha',
+src/App.vue:279:                description: 'Se restauró el estado anterior al nuevo turno.',
+src/App.vue:280:                type: 'info'
+src/App.vue:298:  if (selectedShiftToView.value === 'current') {
+src/App.vue:306:  } else if (selectedShiftToView.value === 'current' && !currentShiftId.value) {
+src/App.vue:344:      const timestamp = parseInt(id.replace('shift-', ''));
+src/App.vue:350:          day: '2-digit',
+src/App.vue:351:          month: '2-digit',
+src/App.vue:352:          year: '2-digit'
+src/App.vue:353:        })} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+src/App.vue:354:        date
+src/App.vue:362:  if (selectedShiftToView.value === 'current') {
+src/App.vue:369:import { getShiftLabel, getShiftIcon, getShiftColor } from './composables/useShifts'
+src/App.vue:376:  getNotesForShift
+src/App.vue:377:} from '@/composables/useNotes'
+src/App.vue:383:      title: 'Exportación Vacía',
+src/App.vue:384:      description: 'No hay tareas para exportar.',
+src/App.vue:385:      type: 'warning'
+src/App.vue:4:import { ref, computed, onMounted, watch, nextTick } from 'vue' // Añadido onUnmounted
+src/App.vue:418:        title: 'Exportar tareas',
+src/App.vue:419:        text: 'Archivo de tareas exportado desde Notifica.',
+src/App.vue:425:        title: 'Tareas exportadas',
+src/App.vue:429:      console.error('Error al exportar archivo JSON:', err);
+src/App.vue:431:        title: 'Error al exportar',
+src/App.vue:432:        description: 'No se pudo generar el archivo.',
+src/App.vue:437:    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+src/App.vue:438:    const linkElement = document.createElement('a');
+src/App.vue:439:    linkElement.setAttribute('href', dataUri);
+src/App.vue:440:    linkElement.setAttribute('download', fileName);
+src/App.vue:443:      title: 'Tareas Exportadas',
+src/App.vue:459:        title: 'Importación Fallida',
+src/App.vue:460:        description: 'No se seleccionó ningún archivo.',
+src/App.vue:461:        type: 'warning'
+src/App.vue:47:const LOCAL_STORAGE_KEY = 'notifica-tasks'
+src/App.vue:48:const CURRENT_SHIFT_ID_KEY = 'notifica-current-shift-id'
+src/App.vue:480:          throw new Error('El archivo no contiene una lista válida de tareas.');
+src/App.vue:486:        if (parsed.notesByShiftId && typeof parsed.notesByShiftId === 'object') {
+src/App.vue:493:            throw new Error('Formato de tarea inválido. Faltan campos requeridos.');
+src/App.vue:5:import TaskList from './components/TaskList.vue' // Importar el nuevo componente
+src/App.vue:517:            const ts = parseInt(id.replace('shift-', ''))
+src/App.vue:52:const selectedShiftToView = ref<string | 'current'>('current') // Turno seleccionado para visualización ('current' o un shiftId).
+src/App.vue:525:          selectedShiftToView.value = 'current'
+src/App.vue:528:          selectedShiftToView.value = 'current'
+src/App.vue:531:          title: 'Importación Exitosa',
+src/App.vue:533:          type: 'info'
+src/App.vue:537:          title: 'Error de Importación',
+src/App.vue:538:          description: `Al procesar el archivo: ${error instanceof Error ? error.message : 'Error desconocido'}`,
+src/App.vue:539:          type: 'error'
+src/App.vue:54:  selectedShiftToView.value !== 'current'
+src/App.vue:549:        title: 'Error de Lectura',
+src/App.vue:550:        description: 'Ocurrió un problema al leer el archivo seleccionado.',
+src/App.vue:551:        type: 'error'
+src/App.vue:561:    if (window.confirm('¿Estás seguro de que quieres borrar TODAS las tareas de la aplicación? No podrán ser recuperadas.')) {
+src/App.vue:570:          title: 'Borrado Completo',
+src/App.vue:571:          description: 'Todas las tareas y notas han sido eliminadas.',
+src/App.vue:572:          type: 'error',
+src/App.vue:576:              label: 'Deshacer',
+src/App.vue:595:                    title: 'Tareas Restauradas',
+src/App.vue:596:                    description: 'Todas las tareas han sido restauradas.',
+src/App.vue:597:                    type: 'info'
+src/App.vue:6:import SideMenu from './components/SideMenu.vue' // Importar el menú lateral
+src/App.vue:608:        title: 'Acción Cancelada',
+src/App.vue:609:        description: 'El borrado de tareas fue cancelado.',
+src/App.vue:610:        type: 'info'
+src/App.vue:621:      selectedShiftToView.value = 'current'; // Por defecto, ver el turno actual al cargar
+src/App.vue:623:      selectedShiftToView.value = 'current'; // Asegurarse de que está en 'current' si no hay shiftId guardado
+src/App.vue:640:          title: 'Error de Carga',
+src/App.vue:641:          description: 'No se pudieron cargar las tareas guardadas. Podrían estar corruptas.',
+src/App.vue:642:          type: 'error'
+src/App.vue:644:        console.error('Error al parsear tareas desde localStorage:', error);
+src/App.vue:649:      title: 'Notificación de prueba',
+src/App.vue:650:      description: 'Esto es una prueba del sistema de toasts propio.',
+src/App.vue:653:          label: 'Cerrar Todo',
+src/App.vue:677:    selectedShiftToView.value = 'current';
+src/App.vue:682:    return selectedShiftToView.value !== 'current';
+src/App.vue:686:  const selectShift = (shiftId: string | 'current') => {
+src/App.vue:697:    const startTimeStr = task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+src/App.vue:698:    const endTimeStr = task.endTime ? task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--';
+src/App.vue:7:import ShiftSelector from './components/ShiftSelector.vue'
+src/App.vue:704:      if (task.endTime.getDate() > task.startTime.getDate() || (task.endTime.getDate() === task.startTime.getDate() && endTimeMs < startTimeMs)) {
+src/App.vue:713:    let taskString = `${taskEmoji} ${description} ${startTimeStr} a ${endTimeStr}${durationStr ? ' ' + durationStr : ''}`;
+src/App.vue:729:    if (selectedShiftToView.value === 'current') {
+src/App.vue:732:        const ts = parseInt(currentShiftId.value.replace('shift-', ''));
+src/App.vue:735:          day: '2-digit',
+src/App.vue:736:          month: '2-digit',
+src/App.vue:737:          year: '2-digit'
+src/App.vue:739:          hour: '2-digit',
+src/App.vue:74:      title: 'Campo Requerido',
+src/App.vue:740:          minute: '2-digit'
+src/App.vue:75:      description: 'Por favor, introduce una descripción para la tarea.',
+src/App.vue:751:        title: 'Error al Compartir',
+src/App.vue:752:        description: 'No hay un turno seleccionado o activo para compartir.',
+src/App.vue:753:        type: 'warning'
+src/App.vue:76:      type: 'warning'
+src/App.vue:764:        title: 'Nada que Compartir',
+src/App.vue:766:        type: 'warning'
+src/App.vue:772:    const tasksText = tasksOfShift.map(formatTaskForPlainText).join('\n\n');
+src/App.vue:778:      const notesBlock = '\n\n_*🗒️ Notas*:_\n' + notes.map(n => `    - ${n}`).join('\n');
+src/App.vue:78:    return
+src/App.vue:783:      const { Share } = await import('@capacitor/share');
+src/App.vue:790:          dialogTitle: 'Compartir Tareas'
+src/App.vue:793:          title: 'Tareas Compartidas',
+src/App.vue:794:          description: 'Contenido enviado mediante sistema nativo.',
+src/App.vue:795:          type: 'info'
+src/App.vue:8:import TaskFilters from './components/TaskFilters.vue'
+src/App.vue:800:      console.warn('Capacitor Share no disponible o falló, se usará fallback web.');
+src/App.vue:810:          title: 'Tareas Compartidas',
+src/App.vue:811:          description: 'Contenido enviado a la aplicación de compartir.',
+src/App.vue:812:          type: 'info'
+src/App.vue:817:          title: 'Tareas Copiadas',
+src/App.vue:818:          description: 'Contenido copiado al portapapeles.',
+src/App.vue:819:          type: 'info'
+src/App.vue:823:          title: 'Error al Compartir',
+src/App.vue:824:          description: 'Tu navegador no soporta la función de compartir o copiar.',
+src/App.vue:825:          type: 'error'
+src/App.vue:846:      case 'newShift':
+src/App.vue:849:      case 'importTasks':
+src/App.vue:852:      case 'exportTasks':
+src/App.vue:855:      case 'shareTasks':
+src/App.vue:858:      case 'deleteAll':
+src/App.vue:861:      case 'returnToCurrent':
+src/App.vue:863:          selectedShiftToView.value = 'current'
+src/App.vue:868:          title: 'Acción Desconocida',
+src/App.vue:870:          type: 'warning'
+src/App.vue:890:        aria-label="Abrir menú">
+src/App.vue:9:import NewTaskForm from './components/NewTaskForm.vue'
+src/App.vue:912:        <h1 class="text-4xl font-extrabold tracking-tight text-text-main dark:text-main-dark">Notifica</h1>
+src/App.vue:939:      :title="listTitle"
+src/App.vue:961:        <button @click="handleAction('returnToCurrent')" class="btn-shift">
+src/App.vue:967:          Volver al Turno Actual
+src/App.vue:99:    title: 'Tarea Iniciada',
+src/components/NewTaskForm.vue:19:            @input="$emit('update:modelValueDescription', ($event.target as HTMLTextAreaElement).value)"
+src/components/NewTaskForm.vue:20:            @keyup.enter.prevent="$emit('submit')"
+src/components/NewTaskForm.vue:21:            placeholder="Nuevo aviso"
+src/components/NewTaskForm.vue:35:            @input="$emit('update:modelValueTechnician', ($event.target as HTMLInputElement).value)"
+src/components/NewTaskForm.vue:36:            @keyup.enter="$emit('submit')"
+src/components/NewTaskForm.vue:37:            placeholder="Técnico(s)"
+src/components/NewTaskForm.vue:46:            @click="$emit('submit')"
+src/components/NewTaskForm.vue:48:              'w-full px-3 py-1.5 font-semibold rounded-md shadow-sm',
+src/components/NewTaskForm.vue:49:              'active:scale-95 transition-all duration-300 ease-in-out flex items-center justify-center gap-2 text-sm',
+src/components/NewTaskForm.vue:50:              'btn-primary'
+src/components/NewTaskForm.vue:61:            Iniciar
+src/components/NewTaskForm.vue:70:import { ref, watch } from 'vue'
+src/components/NewTaskForm.vue:71:import { useDarkMode } from '@/composables/useDarkMode'
+src/components/NewTaskForm.vue:74:const mode = ref<'light' | 'dark'>(isDark.value ? 'dark' : 'light')
+src/components/NewTaskForm.vue:77:  mode.value = isDark.value ? 'dark' : 'light'
+src/components/NewTaskForm.vue:87:  (e: 'update:modelValueDescription', value: string): void
+src/components/NewTaskForm.vue:88:  (e: 'update:modelValueTechnician', value: string): void
+src/components/NewTaskForm.vue:89:  (e: 'submit'): void
+src/components/ShiftSelector.vue:100:  selectedShiftToView: string | 'current'
+src/components/ShiftSelector.vue:104:  (e: 'select', shiftId: string | 'current'): void
+src/components/ShiftSelector.vue:128:function emitSelect(shiftId: string | 'current') {
+src/components/ShiftSelector.vue:129:  emit('select', shiftId)
+src/components/ShiftSelector.vue:133:import { onMounted, onUnmounted } from 'vue'
+src/components/ShiftSelector.vue:148:  document.addEventListener('mousedown', handleClickOutsideShiftDropdown)
+src/components/ShiftSelector.vue:15:      Turno
+src/components/ShiftSelector.vue:152:  document.removeEventListener('mousedown', handleClickOutsideShiftDropdown)
+src/components/ShiftSelector.vue:39:        ? 'bottom-full mb-2 origin-bottom-left'
+src/components/ShiftSelector.vue:40:        : 'mt-2 origin-top-left'"
+src/components/ShiftSelector.vue:46:          @click="emitSelect('current')"
+src/components/ShiftSelector.vue:54:            :class="['w-4 h-4 shrink-0', getShiftColor(currentShiftId || '')]"
+src/components/ShiftSelector.vue:76:              :class="['w-4 h-4 shrink-0', getShiftColor(shift.id)]"
+src/components/ShiftSelector.vue:87:import { ref } from 'vue'
+src/components/ShiftSelector.vue:88:import { getShiftIcon, getShiftLabel, getShiftColor } from '@/composables/useShifts'
+src/components/ShiftSelector.vue:89:import { shiftIcons as icons } from '@/icons/shifts'
+src/components/SideMenu.vue:11:} from '@headlessui/vue'
+src/components/SideMenu.vue:118:              :class="{ 'animate-bounce-out-left': isAnimatingOut }"
+src/components/SideMenu.vue:12:import { useDarkMode } from '@/composables/useDarkMode'
+src/components/SideMenu.vue:130:                  <span>Acciones</span>
+src/components/SideMenu.vue:131:                  <button @click="closeMenu" class="btn-close" aria-label="Cerrar menú">
+src/components/SideMenu.vue:142:                  <button @click="handleAction('newShift')" :class="[
+src/components/SideMenu.vue:143:                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+src/components/SideMenu.vue:144:                    'btn-success',
+src/components/SideMenu.vue:145:                    'active:scale-95 transition-all duration-150 ease-in-out'
+src/components/SideMenu.vue:152:                    <span>Nuevo Turno</span>
+src/components/SideMenu.vue:158:                  <button @click="handleAction('shareTasks')" :class="[
+src/components/SideMenu.vue:159:                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+src/components/SideMenu.vue:16:const themeModes = ['light', 'dark', 'system'] as const
+src/components/SideMenu.vue:160:                    'btn-primary',
+src/components/SideMenu.vue:161:                    'active:scale-95 transition-all duration-150 ease-in-out'
+src/components/SideMenu.vue:168:                    <span>Compartir</span>
+src/components/SideMenu.vue:174:                  <button @click="handleAction('importTasks')" :class="[
+src/components/SideMenu.vue:175:                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+src/components/SideMenu.vue:176:                    'btn-primary',
+src/components/SideMenu.vue:177:                    'active:scale-95 transition-all duration-150 ease-in-out'
+src/components/SideMenu.vue:184:                    <span>Importar</span>
+src/components/SideMenu.vue:187:                  <button @click="handleAction('exportTasks')" :class="[
+src/components/SideMenu.vue:188:                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+src/components/SideMenu.vue:189:                    'btn-primary',
+src/components/SideMenu.vue:190:                    'active:scale-95 transition-all duration-150 ease-in-out'
+src/components/SideMenu.vue:197:                    <span>Exportar</span>
+src/components/SideMenu.vue:206:                      'w-full flex items-center justify-between gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+src/components/SideMenu.vue:207:                      'btn-purple',
+src/components/SideMenu.vue:208:                      'active:scale-95 transition-all duration-150 ease-in-out'
+src/components/SideMenu.vue:217:                        Opciones
+src/components/SideMenu.vue:221:                        :class="{ 'rotate-90': isOptionsOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+src/components/SideMenu.vue:23:const mode = ref<'light' | 'dark'>(isDark.value ? 'dark' : 'light')
+src/components/SideMenu.vue:233:                          <p class="text-subtle dark:text-subtle-dark font-medium pl-1">Apariencia</p>
+src/components/SideMenu.vue:237:                            <button @click="setPreferredMode('light')" :class="[
+src/components/SideMenu.vue:238:                              'h-10',
+src/components/SideMenu.vue:239:                              'w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
+src/components/SideMenu.vue:240:                              preferredMode === 'light'
+src/components/SideMenu.vue:241:                                ? 'bg-accent-main text-white font-semibold'
+src/components/SideMenu.vue:242:                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+src/components/SideMenu.vue:249:                              Claro
+src/components/SideMenu.vue:253:                            <button @click="setPreferredMode('dark')" :class="[
+src/components/SideMenu.vue:254:                              'h-10',
+src/components/SideMenu.vue:255:                              'w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
+src/components/SideMenu.vue:256:                              preferredMode === 'dark'
+src/components/SideMenu.vue:257:                                ? 'bg-accent-main text-white font-semibold'
+src/components/SideMenu.vue:258:                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+src/components/SideMenu.vue:26:  mode.value = isDark.value ? 'dark' : 'light'
+src/components/SideMenu.vue:265:                              Oscuro
+src/components/SideMenu.vue:269:                            <button @click="setPreferredMode('system')" :class="[
+src/components/SideMenu.vue:270:                              'h-10',
+src/components/SideMenu.vue:271:                              'w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
+src/components/SideMenu.vue:272:                              preferredMode === 'system'
+src/components/SideMenu.vue:273:                                ? 'bg-accent-main text-white font-semibold'
+src/components/SideMenu.vue:274:                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+src/components/SideMenu.vue:281:                              Sistema
+src/components/SideMenu.vue:295:                  <button @click="handleAction('deleteAll')" :class="[
+src/components/SideMenu.vue:296:                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+src/components/SideMenu.vue:297:                    'btn-danger',
+src/components/SideMenu.vue:298:                    'active:scale-95 transition-all duration-150 ease-in-out focus:outline-none'
+src/components/SideMenu.vue:305:                    <span>Borrar todo</span>
+src/components/SideMenu.vue:322:                    <p class="text-muted-80 dark:text-muted-80-dark text-[11px]">Notifica v1.2.0 - JCPD 2025</p>
+src/components/SideMenu.vue:4:import { ref, watch, computed } from 'vue'
+src/components/SideMenu.vue:41:const emit = defineEmits(['close', 'action'])
+src/components/SideMenu.vue:48:  // emit('close') se llamará en handleAnimationEnd
+src/components/SideMenu.vue:53:  emit('action', actionName)
+src/components/SideMenu.vue:57:// Maneja el final de la animación CSS. Emite 'close' si la animación de salida ha terminado.
+src/components/SideMenu.vue:63:    emit('close') // Emitir 'close' para que el componente padre oculte el menú.
+src/components/SideMenu.vue:92:  htmlEl.style.maxHeight = '0px';
+src/components/TaskFilters.vue:13:        <span class="sr-only">Mostrar solo tareas activas</span>
+src/components/TaskFilters.vue:15:          modelShowOnlyActive ? 'translate-x-5' : 'translate-x-0'
+src/components/TaskFilters.vue:19:            modelShowOnlyActive ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200'
+src/components/TaskFilters.vue:24:            modelShowOnlyActive ? 'opacity-100 ease-in duration-200' : 'opacity-0 ease-out duration-100'
+src/components/TaskFilters.vue:34:      <span class="text-xs font-medium text-text-main dark:text-main-dark">Sin Notificar</span>
+src/components/TaskFilters.vue:37:          modelShowOnlyNotNotified ? 'bg-accent-main' : 'bg-toggle-inactive dark:bg-toggle-inactive-dark'
+src/components/TaskFilters.vue:42:        <span class="sr-only">Mostrar solo tareas sin notificar</span>
+src/components/TaskFilters.vue:44:          modelShowOnlyNotNotified ? 'translate-x-5' : 'translate-x-0'
+src/components/TaskFilters.vue:48:            modelShowOnlyNotNotified ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200'
+src/components/TaskFilters.vue:5:      <span class="text-xs font-medium text-text-main dark:text-main-dark">Activas</span>
+src/components/TaskFilters.vue:53:            modelShowOnlyNotNotified ? 'opacity-100 ease-in duration-200' : 'opacity-0 ease-out duration-100'
+src/components/TaskFilters.vue:64:const modelShowOnlyActive = defineModel<boolean>('showOnlyActive')
+src/components/TaskFilters.vue:65:const modelShowOnlyNotNotified = defineModel<boolean>('showOnlyNotNotified')
+src/components/TaskFilters.vue:8:          modelShowOnlyActive ? 'bg-accent-main' : 'bg-toggle-inactive dark:bg-toggle-inactive-dark'
+src/components/TaskItem.vue:108: * Emite 'update-task' si la hora ha cambiado.
+src/components/TaskItem.vue:113:    alert('Formato de hora inválido. Use HH:MM.')
+src/components/TaskItem.vue:115:    return
+src/components/TaskItem.vue:123:    emit('update-task', { ...props.task, startTime: newStartTime })
+src/components/TaskItem.vue:133:  editableTechnician.value = props.task.technician || '' // Usar '' si es undefined
+src/components/TaskItem.vue:141: * Emite 'update-task' si el técnico ha cambiado.
+src/components/TaskItem.vue:147:    emit('update-task', { ...props.task, technician: newTechnician })
+src/components/TaskItem.vue:169: * Emite 'update-task' si la hora ha cambiado.
+src/components/TaskItem.vue:176:    alert('Formato de hora inválido. Use HH:MM.')
+src/components/TaskItem.vue:178:    return
+src/components/TaskItem.vue:185:    emit('update-task', { ...props.task, endTime: newEndTime })
+src/components/TaskItem.vue:195:  emit('reactivate-task', props.task.id)
+src/components/TaskItem.vue:205:    emit('finish-task', props.task.id); // Esto hará que App.vue ponga un endTime
+src/components/TaskItem.vue:216:    return null
+src/components/TaskItem.vue:252:    return 'bg-status-success dark:bg-status-success-dark'
+src/components/TaskItem.vue:255:    return 'bg-status-active dark:bg-status-active-dark'
+src/components/TaskItem.vue:257:  return 'bg-status-inprogress dark:bg-status-inprogress-dark'
+src/components/TaskItem.vue:26:const emit = defineEmits(['finish-task', 'update-task', 'reactivate-task', 'delete-task'])
+src/components/TaskItem.vue:267:    classes.push('rounded-tl-md');
+src/components/TaskItem.vue:270:    classes.push('rounded-bl-md');
+src/components/TaskItem.vue:293: * Cambia el estado de 'notificado' de la tarea.
+src/components/TaskItem.vue:297:  emit('update-task', { ...props.task, isNotified: !props.task.isNotified })
+src/components/TaskItem.vue:308:    emit('delete-task', props.task.id);
+src/components/TaskItem.vue:318:    <div :class="['w-1 shrink-0 z-10', ...statusBarDynamicClasses]"></div>
+src/components/TaskItem.vue:32:  emit('finish-task', props.task.id)
+src/components/TaskItem.vue:341:                {{ task.description || '[Sin descripción]' }}
+src/components/TaskItem.vue:358:                {{ task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+src/components/TaskItem.vue:374:              <div :key="task.endTime ? 'time-value' : 'placeholder'" class="inline-block">
+src/components/TaskItem.vue:385:                      {{ task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+src/components/TaskItem.vue:422:              <span>Finalizar</span>
+src/components/TaskItem.vue:438:              <span>Reabrir</span>
+src/components/TaskItem.vue:456:                <span v-else class="text-icon-muted dark:text-icon-muted-dark italic">Añadir técnico</span> 
+src/components/TaskItem.vue:486:            :title="task.isNotified ? 'Marcar como No Notificado' : 'Marcar como Notificado'"
+src/components/TaskItem.vue:488:            aria-label="Estado de notificación"
+src/components/TaskItem.vue:5:import type { PropType } from 'vue'
+src/components/TaskItem.vue:517:            title="Eliminar Tarea"
+src/components/TaskItem.vue:519:            aria-label="Eliminar tarea"
+src/components/TaskItem.vue:6:import { computed, ref, nextTick, watch } from 'vue'
+src/components/TaskItem.vue:7:import type { Task } from '../types/Task' // Importar la interfaz Task compartida
+src/components/TaskItem.vue:73: * Emite 'update-task' si la descripción ha cambiado.
+src/components/TaskItem.vue:79:    emit('update-task', { ...props.task, description: newDescription })
+src/components/TaskList.vue:128:  htmlEl.style.maxHeight = '0px'
+src/components/TaskList.vue:131:import { getNotesForShift, setNotesForShift, deleteNotesForShift } from '@/composables/useNotes'
+src/components/TaskList.vue:135:import { notesMap } from '@/composables/useNotes' // debes exportarla explícitamente
+src/components/TaskList.vue:19:    el.style.height = 'auto'
+src/components/TaskList.vue:20:    el.style.height = el.scrollHeight + 'px'
+src/components/TaskList.vue:221:      <p class="text-s text-text-subtle dark:text-subtle-dark mb-1">Viendo Turno</p>
+src/components/TaskList.vue:226:          :class="['w-4 h-4 shrink-0', getShiftColor(props.titleId)]"
+src/components/TaskList.vue:257:        :key="'no-tasks-placeholder'"
+src/components/TaskList.vue:288:        :key="'notes-block'"
+src/components/TaskList.vue:289:        class='bg-surface-hover dark:bg-surface-hover-dark'
+src/components/TaskList.vue:300:                  'w-full flex items-center justify-between gap-x-3 py-2 rounded-md text-sm font-medium',
+src/components/TaskList.vue:301:                  'bg-surface-2 dark:bg-surface-2-dark text-text-main dark:text-main-dark',
+src/components/TaskList.vue:302:                  'pr-3'
+src/components/TaskList.vue:315:                  <span class="text-base">Notas del turno</span>
+src/components/TaskList.vue:319:                    appear
+src/components/TaskList.vue:334:                  :class="{ 'rotate-90': isNotesOpen }"
+src/components/TaskList.vue:34:    default: 'Lista de Tareas' // Título por defecto si no se proporciona
+src/components/TaskList.vue:378:                          :placeholder="index === notes.length - 1 ? 'Añadir nota…' : 'Nota'"
+src/components/TaskList.vue:5:import type { PropType } from 'vue'
+src/components/TaskList.vue:6:import TaskItem from './TaskItem.vue'
+src/components/TaskList.vue:65:const emit = defineEmits(['finish-task', 'update-task', 'reactivate-task', 'delete-task'])
+src/components/TaskList.vue:67:// Retransmite el evento 'finish-task' desde TaskItem al padre.
+src/components/TaskList.vue:69:  emit('finish-task', taskId)
+src/components/TaskList.vue:7:import type { Task } from '../types/Task'
+src/components/TaskList.vue:72:// Retransmite el evento 'update-task' desde TaskItem al padre.
+src/components/TaskList.vue:74:  emit('update-task', updatedTask)
+src/components/TaskList.vue:77:// Retransmite el evento 'reactivate-task' desde TaskItem al padre.
+src/components/TaskList.vue:79:  emit('reactivate-task', taskId)
+src/components/TaskList.vue:8:import { getShiftColor } from '@/composables/useShifts'
+src/components/TaskList.vue:83:  emit('delete-task', taskId)
+src/components/TaskList.vue:88:    return 'Prueba a desactivar los filtros'
+src/components/TaskList.vue:9:import { computed, ref, watchEffect, onMounted, watch, nextTick } from 'vue'
+src/components/TaskList.vue:96:    return 'Este turno no tiene tareas'
+src/components/TaskList.vue:99:  return 'Empieza una nueva tarea para este turno'
+src/components/Toast.vue:113:  window.addEventListener('pointerdown', handlePointerDown)
+src/components/Toast.vue:116:    window.removeEventListener('pointerdown', handlePointerDown)
+src/components/Toast.vue:123:    case 'success':
+src/components/Toast.vue:128:    case 'error':
+src/components/Toast.vue:133:    case 'warning':
+src/components/Toast.vue:148:const toastType = computed(() => props.type ?? 'info')
+src/components/Toast.vue:22:            :class="[actionButtonClasses, { 'animate-pop': animateOnMount }]"
+src/components/Toast.vue:59:      @click="$emit('onClose')"
+src/components/Toast.vue:62:      aria-label="Cerrar notificación"
+src/components/Toast.vue:70:import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+src/components/Toast.vue:71:import { useToast } from '@/composables/useToast'
+src/components/Toast.vue:72:import { toastColors } from '@/constants/toastColors'
+src/components/Toast.vue:82:  type?: 'success' | 'error' | 'info' | 'warning'
+src/components/Toast.vue:91:  (e: 'onClose'): void
+src/composables/toast.ts:7:  type?: 'success' | 'error' | 'info' | 'warning'
+src/composables/useDarkMode.ts:1:import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+src/composables/useDarkMode.ts:10:// Leer valor persistido o usar 'system' por defecto
+src/composables/useDarkMode.ts:108:      const isNowDark = document.documentElement.classList.contains('dark')
+src/composables/useDarkMode.ts:112:    console.warn('[DarkMode] Error al aplicar EdgeToEdge background o StatusBar:', err)
+src/composables/useDarkMode.ts:12:const preferredMode = ref<ThemeMode>(validModes.includes(stored as ThemeMode) ? stored as ThemeMode : 'system')
+src/composables/useDarkMode.ts:127:    preferredMode.value = 'dark'
+src/composables/useDarkMode.ts:131:    preferredMode.value = 'light'
+src/composables/useDarkMode.ts:135:    preferredMode.value = 'system'
+src/composables/useDarkMode.ts:139:    preferredMode.value = isDark.value ? 'light' : 'dark'
+src/composables/useDarkMode.ts:14:// Media query: usado solo si estamos en modo 'system'
+src/composables/useDarkMode.ts:15:const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+src/composables/useDarkMode.ts:2:// import { showDebugLog } from '@/main'
+src/composables/useDarkMode.ts:25:  if (preferredMode.value === 'system') return systemPrefersDark.value
+src/composables/useDarkMode.ts:26:  return preferredMode.value === 'dark'
+src/composables/useDarkMode.ts:34:html.classList.toggle('dark', isDark.value)
+src/composables/useDarkMode.ts:38:  html.classList.toggle('dark', newVal)
+src/composables/useDarkMode.ts:44:  setupSystemListener() // Reactiva listener si pasamos a 'system'
+src/composables/useDarkMode.ts:49:  if (preferredMode.value === 'system') {
+src/composables/useDarkMode.ts:5:type ThemeMode = 'light' | 'dark' | 'system'
+src/composables/useDarkMode.ts:50:    mediaQuery.addEventListener('change', handleMediaChange)
+src/composables/useDarkMode.ts:53:    mediaQuery.removeEventListener('change', handleMediaChange)
+src/composables/useDarkMode.ts:58:import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support'
+src/composables/useDarkMode.ts:59:import { Capacitor } from '@capacitor/core'
+src/composables/useDarkMode.ts:60:import { StatusBar, Style } from '@capacitor/status-bar'
+src/composables/useDarkMode.ts:61:import { isAndroidApiAtLeast } from '@/utils/platform' // ajusta la ruta si es distinta
+src/composables/useDarkMode.ts:62:import { Device } from '@capacitor/device'
+src/composables/useDarkMode.ts:66:  if (Capacitor.getPlatform() !== 'android') return
+src/composables/useDarkMode.ts:69:  const span = document.createElement('span')
+src/composables/useDarkMode.ts:7:const LOCAL_STORAGE_KEY = 'darkMode'
+src/composables/useDarkMode.ts:70:  span.className = 'bg-surface-1 dark:bg-surface-1-dark'
+src/composables/useDarkMode.ts:71:  span.style.display = 'none'
+src/composables/useDarkMode.ts:8:const validModes: ThemeMode[] = ['light', 'dark', 'system']
+src/composables/useDarkMode.ts:80:    if (!result || result.length < 3) return '#ffffff'
+src/composables/useDarkMode.ts:94:  // showDebugLog(`API >= 30: ${apiOK}\nTema actual: ${isDark.value ? 'dark' : 'light'}\nColor HEX: ${hexColor}`)
+src/composables/useDarkMode.ts:97:    console.log('[DarkMode] Tema cambiado, aplicando color a EdgeToEdge y StatusBar:', hexColor)
+src/composables/useLogoAnimation.ts:1:import { ref } from 'vue'
+src/composables/useLogoAnimation.ts:13:        logoBlockRef.value?.classList.add('scale-105', 'drop-shadow-md')
+src/composables/useLogoAnimation.ts:15:          logoBlockRef.value?.classList.remove('scale-105', 'drop-shadow-md')
+src/composables/useNotes.ts:6:import { ref } from 'vue'
+src/composables/useNotes.ts:8:const STORAGE_KEY = 'notesByShiftId'
+src/composables/useShifts.ts:11:  const dayName = capitalize(date.format('ddd').replace('.', '')) // sin punto final
+src/composables/useShifts.ts:12:  const dateStr = date.format('DD/MM')
+src/composables/useShifts.ts:13:  const hourStr = date.format('HH:mm')
+src/composables/useShifts.ts:18:export function getShiftIcon(shiftId: string): 'morning' | 'afternoon' | 'night' {
+src/composables/useShifts.ts:19:  const timestamp = Number(shiftId.replace('shift-', ''))
+src/composables/useShifts.ts:22:  if (hour < 12) return 'morning'
+src/composables/useShifts.ts:23:  else if (hour < 20) return 'afternoon'
+src/composables/useShifts.ts:24:  else return 'night'
+src/composables/useShifts.ts:27:import { useDarkMode } from './useDarkMode'
+src/composables/useShifts.ts:28:import { shiftColors } from '../constants/shiftColors'
+src/composables/useShifts.ts:3:import dayjs from 'dayjs'
+src/composables/useShifts.ts:34:  return shiftColors[icon][isDark.value ? 'dark' : 'light']
+src/composables/useShifts.ts:4:import { capitalize } from '../utils/text'
+src/composables/useShifts.ts:9:  const timestamp = Number(shiftId.replace('shift-', ''))
+src/composables/useToast.ts:1:import { ref } from 'vue'
+src/composables/useToast.ts:22:    toast: Omit<Toast, 'id'>,
+src/composables/useToast.ts:7:  type?: 'success' | 'error' | 'info' | 'warning'
+src/constants/shiftColors.ts:11:    light: 'text-shift-night',
+src/constants/shiftColors.ts:12:    dark: 'text-shift-night-dark',
+src/constants/shiftColors.ts:3:    light: 'text-shift-morning',
+src/constants/shiftColors.ts:4:    dark: 'text-shift-morning-dark',
+src/constants/shiftColors.ts:7:    light: 'text-shift-afternoon',
+src/constants/shiftColors.ts:8:    dark: 'text-shift-afternoon-dark',
+src/constants/toastColors.ts:10:    close: 'text-toast-error-close hover:text-toast-error-close-hover dark:text-toast-error-close-dark dark:hover:text-toast-error-close-hover-dark',
+src/constants/toastColors.ts:13:    base: 'bg-toast-warning border-toast-warning-border text-toast-warning-text dark:bg-toast-warning-dark dark:border-toast-warning-border-dark dark:text-toast-warning-text-dark',
+src/constants/toastColors.ts:14:    action: 'bg-toast-warning-action hover:bg-toast-warning-action-hover text-toast-warning-action-text dark:bg-toast-warning-action-dark dark:hover:bg-toast-warning-action-hover-dark dark:text-toast-warning-action-text-dark',
+src/constants/toastColors.ts:15:    close: 'text-toast-warning-close hover:text-toast-warning-close-hover dark:text-toast-warning-close-dark dark:hover:text-toast-warning-close-hover-dark',
+src/constants/toastColors.ts:18:    base: 'bg-toast-info border-toast-info-border text-toast-info-text dark:bg-toast-info-dark dark:border-toast-info-border-dark dark:text-toast-info-text-dark',
+src/constants/toastColors.ts:19:    action: 'bg-toast-info-action hover:bg-toast-info-action-hover text-toast-info-action-text dark:bg-toast-info-action-dark dark:hover:bg-toast-info-action-hover-dark dark:text-toast-info-action-text-dark',
+src/constants/toastColors.ts:20:    close: 'text-toast-info-close hover:text-toast-info-close-hover dark:text-toast-info-close-dark dark:hover:text-toast-info-close-hover-dark',
+src/constants/toastColors.ts:3:    base: 'bg-toast-success border-toast-success-border text-toast-success-text dark:bg-toast-success-dark dark:border-toast-success-border-dark dark:text-toast-success-text-dark',
+src/constants/toastColors.ts:4:    action: 'bg-toast-success-action hover:bg-toast-success-action-hover text-toast-success-action-text dark:bg-toast-success-action-dark dark:hover:bg-toast-success-action-hover-dark dark:text-toast-success-action-text-dark',
+src/constants/toastColors.ts:5:    close: 'text-toast-success-close hover:text-toast-success-close-hover dark:text-toast-success-close-dark dark:hover:text-toast-success-close-hover-dark',
+src/constants/toastColors.ts:8:    base: 'bg-toast-error border-toast-error-border text-toast-error-text dark:bg-toast-error-dark dark:border-toast-error-border-dark dark:text-toast-error-text-dark',
+src/constants/toastColors.ts:9:    action: 'bg-toast-error-action hover:bg-toast-error-action-hover text-toast-error-action-text dark:bg-toast-error-action-dark dark:hover:bg-toast-error-action-hover-dark dark:text-toast-error-action-text-dark',
+src/icons/shifts.ts:10:        xmlns: 'http://www.w3.org/2000/svg',
+src/icons/shifts.ts:11:        fill: 'none',
+src/icons/shifts.ts:14:        stroke: 'currentColor',
+src/icons/shifts.ts:15:        class: 'w-5 h-5'
+src/icons/shifts.ts:17:        h('path', {
+src/icons/shifts.ts:18:          strokeLinecap: 'round',
+src/icons/shifts.ts:19:          strokeLinejoin: 'round',
+src/icons/shifts.ts:20:          d: 'M21,17H3m6.7436,0C8.8364,16.3152,8.25,15.2282,8.25,14.0042c0-2.071,1.6789-3.75,3.75-3.75s3.75,1.679,3.75,3.75c0,1.2239-0.5863,2.3109-1.4934,2.9954M12,5v2.25M5.25,13.9996H3M16.7727,9.2313L18.3637,7.6403M21,13.9996h-2.25M7.2273,9.2313L5.6363,7.6403'
+src/icons/shifts.ts:27:      return h('svg', {
+src/icons/shifts.ts:28:        xmlns: 'http://www.w3.org/2000/svg',
+src/icons/shifts.ts:29:        fill: 'none',
+src/icons/shifts.ts:3:import { h, defineComponent, type Component } from 'vue'
+src/icons/shifts.ts:32:        stroke: 'currentColor',
+src/icons/shifts.ts:33:        class: 'w-5 h-5'
+src/icons/shifts.ts:35:        h('path', {
+src/icons/shifts.ts:36:          strokeLinecap: 'round',
+src/icons/shifts.ts:37:          strokeLinejoin: 'round',
+src/icons/shifts.ts:38:          d: 'M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z'
+src/icons/shifts.ts:45:      return h('svg', {
+src/icons/shifts.ts:46:        xmlns: 'http://www.w3.org/2000/svg',
+src/icons/shifts.ts:47:        fill: 'none',
+src/icons/shifts.ts:50:        stroke: 'currentColor',
+src/icons/shifts.ts:51:        class: 'w-5 h-5'
+src/icons/shifts.ts:53:        h('path', {
+src/icons/shifts.ts:54:          strokeLinecap: 'round',
+src/icons/shifts.ts:55:          strokeLinejoin: 'round',
+src/icons/shifts.ts:56:          d: 'M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z'
+src/icons/shifts.ts:6:export const shiftIcons: Record<'morning' | 'afternoon' | 'night', Component> = {
+src/icons/shifts.ts:9:      return h('svg', {
+src/main.ts:1:import './assets/main.css'
+src/main.ts:105:createApp(App).mount('#app')
+src/main.ts:13:// 🌙 Aplicar clase 'dark' antes de montar la app según el modo guardado
+src/main.ts:14:const saved = localStorage.getItem('darkMode')
+src/main.ts:15:const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+src/main.ts:18:  saved === 'dark' ||
+src/main.ts:19:  (saved === 'system' || saved === null) && prefersDark
+src/main.ts:2:import './assets/css/animations.css'
+src/main.ts:22:  document.documentElement.classList.add('dark')
+src/main.ts:24:  document.documentElement.classList.remove('dark')
+src/main.ts:27:import { Capacitor } from '@capacitor/core'
+src/main.ts:30:document.addEventListener('deviceready', async () => {
+src/main.ts:31:  if (Capacitor.getPlatform() !== 'android') return
+src/main.ts:36:    console.warn('[EdgeToEdge] No se pudo activar edge-to-edge:', error)
+src/main.ts:4:import { createApp } from 'vue'
+src/main.ts:40:  const span = document.createElement('span')
+src/main.ts:41:  span.className = 'bg-surface-1 dark:bg-surface-1-dark'
+src/main.ts:42:  span.style.display = 'none'
+src/main.ts:5:import App from './App.vue'
+src/main.ts:51:    if (!result || result.length < 3) return '#ffffff'
+src/main.ts:7:import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support'
+src/main.ts:73:    console.warn('[StatusBar|EdgeToEdge] No se pudo aplicar configuración dinámica:', error)
+src/main.ts:79://const debugDiv = document.createElement('div')
+src/main.ts:8:import { StatusBar, Style } from '@capacitor/status-bar'
+src/main.ts:80://debugDiv.id = 'debug-log'
+src/main.ts:81://debugDiv.style.position = 'fixed'
+src/main.ts:84://debugDiv.style.transform = 'translate(-50%, -50%)'
+src/main.ts:85://debugDiv.style.backgroundColor = 'rgba(0,0,0,0.7)'
+src/main.ts:86://debugDiv.style.color = 'white'
+src/main.ts:87://debugDiv.style.padding = '8px 12px'
+src/main.ts:88://debugDiv.style.fontSize = '14px'
+src/main.ts:89://debugDiv.style.borderRadius = '8px'
+src/main.ts:9:import { Device } from '@capacitor/device'
+src/main.ts:91://debugDiv.style.pointerEvents = 'none'
+src/main.ts:93://debugDiv.style.whiteSpace = 'pre-line'
+src/main.ts:94://debugDiv.style.textAlign = 'center'
+src/main.ts:95://debugDiv.textContent = 'Cargando log...'
+src/main.ts:99://   const div = document.getElementById('debug-log')
+src/utils/platform.ts:1:import { Capacitor } from '@capacitor/core'
+src/utils/platform.ts:12:    console.warn('[Platform] No se pudo obtener el API de Android:', err)
+src/utils/platform.ts:2:import { Device } from '@capacitor/device'
+src/utils/platform.ts:5:  if (Capacitor.getPlatform() !== 'android') return false
+sr-only
+startEditDescription
+startEditEndTime
+startEditStartTime
+startEditTechnician
+startNewTask
+startTimeInputRef
+sticky top-0 z-50 bg-surface-1 dark:bg-surface-1-dark shadow-sm w-full will-change-transform
+switch
+task
+task.endTime
+task.endTime ? 'time-value' : 'placeholder'
+task.id
+task.isNotified
+task.startTime.getDate() || (task.endTime.getDate() === task.startTime.getDate() && endTimeMs  startTimeMs)) {
+task.technician
+task-description
+task-list
+taskListKey
+task-technician
+technicianInputRef
+template
+text
+text-4xl font-extrabold tracking-tight text-text-main dark:text-main-dark
+text-base
+text-icon-muted dark:text-icon-muted-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md
+text-icon-muted dark:text-icon-muted-dark italic
+text-muted-80 dark:text-muted-80-dark text-[11px]
+text-s text-text-subtle dark:text-subtle-dark mb-1
+text-sm
+text-subtle dark:text-subtle-dark font-medium pl-1
+text-success-strong dark:text-success-strong-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md
+text-text-main/90 dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md
+text-text-subtle dark:text-subtle-dark
+text-xs font-medium text-text-main dark:text-main-dark
+text-xs mt-0.5
+time
+titleRef
+toast
+toast in toasts
+toast.id
+toastClasses
+toastRef
+toggleNotifiedStatus
+toggleShiftDropdown
+transform transition ease-in-out duration-300
+transition-all duration-150 ease-in
+transition-all duration-200 ease-out
+transition-all duration-300 ease-in
+transition-all duration-300 ease-in-out
+transition-all duration-300 ease-out
+transition-opacity ease-out duration-300
+transition-transform duration-500 ease-out
+translate-x-0
+-translate-x-full
+true
+ts
+Turno Actual
+ul
+unnotified-icon
+updateTask
+vertical
+Viendo Turno/p>
+w-3.5 h-3.5
+w-5 h-4
+w-5 h-5
+w-7 h-7 text-text-main dark:text-main-dark
+w-full max-w-lg
+w-full max-w-lg mb-4 overflow-hidden
