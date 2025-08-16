@@ -990,9 +990,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Inventario de textos de la UI
     - [x] Extraer todos los textos visibles (botones, menús, placeholders, labels, toasts, modales, exportación)
     - [x] Documentarlos en `docs/rewording-ES.md`
-  - [ ] Propuesta de alternativas
+  - [x] Propuesta de alternativas
     - [x] Detectar términos potencialmente confusos o demasiado específicos (“Aviso”, “Técnicos”)
-    - [ ] Proponer variantes más genéricas/claras (“Descripción”, “Responsables”)
+    - [x] Proponer variantes más genéricas/claras (“Descripción”, “Responsables”)
         - [x] Revisar uso de “Turno / Nuevo Turno”
           - ✅ Sustituir por “Tramo / Nuevo Tramo”
         - [x] Revisar uso de “Técnico(s) / Añadir técnico”
@@ -1021,10 +1021,11 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Revisar términos de accesibilidad (“Estado de notificación”)
           - ✅ Unificar con las mismas reglas de tono y terminología del rewording general
           - ✅ Usar etiquetas claras y consistentes con la UI visible (ej. “Estado de registro”, “Eliminar tarea”, “Cerrar notificación”)
-    - [ ] Mantener consistencia con notas, tareas y filtros
-  - [ ] Decisión de wording final
-    - [ ] Validar claridad con criterios internos (¿se entiende sin manual? ¿es neutral para distintos perfiles?)
-    - [ ] Cerrar lista definitiva en `docs/rewording-ES.md`
+  - [x] Mantener consistencia con notas, tareas y filtros
+  - [x] Wording final documentado y validado en docs/rewording-ES.md
+    - [x] Revisar y actualizar docs/rewording-ES.md bloque por bloque con las decisiones del roadmap
+    - [x] Validar claridad con criterios internos (¿se entiende sin manual? ¿es neutral para distintos perfiles?)
+    - [x] Cerrar lista definitiva en `docs/rewording-ES.md`
   - [ ] Implementación de cambios
     - [ ] Sustituir textos en componentes (inputs, botones, menús, filtros)
     - [ ] Actualizar textos en exportación e importación
