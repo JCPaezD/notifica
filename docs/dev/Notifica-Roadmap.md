@@ -991,8 +991,36 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Extraer todos los textos visibles (botones, menús, placeholders, labels, toasts, modales, exportación)
     - [x] Documentarlos en `docs/rewording-ES.md`
   - [ ] Propuesta de alternativas
-    - [ ] Detectar términos potencialmente confusos o demasiado específicos (“Aviso”, “Técnicos”)
+    - [x] Detectar términos potencialmente confusos o demasiado específicos (“Aviso”, “Técnicos”)
     - [ ] Proponer variantes más genéricas/claras (“Descripción”, “Responsables”)
+        - [x] Revisar uso de “Turno / Nuevo Turno”
+          - ✅ Sustituir por “Tramo / Nuevo Tramo”
+        - [x] Revisar uso de “Técnico(s) / Añadir técnico”
+          - ✅ Sustituir por “Asignado a… / Asignar a…”
+        - [x] Revisar uso de “Aviso / Nuevo aviso”
+          - ✅ Sustituir por “Descripción” (solo en placeholder del campo)
+          - ✅ Mantener “Tarea(s)” en el resto de la app
+        - [x] Revisar uso de “Notificada / Sin notificar / Notificación anulada”
+          - ✅ Sustituir por “Registrada / Sin registrar / Registro anulado”
+          - ✅ Mantener “Notifica” como nombre de la aplicación (marca), no ligado estrictamente a este estado
+        - [x] Revisar uso de “Finalizar / Reabrir”
+          - ✅ Mantener “Finalizar / Reabrir” sin cambios
+        - [x] Revisar mensajes de sistema demasiado técnicos (ej. “El archivo no contiene una lista válida de tareas”)
+          - ✅ Definir marco común:
+             - Tono: Neutro / Semi-técnico
+             - Estilo: 
+               - 2ª persona para errores que requieren acción del usuario (“Introduce…”, “Revisa…”)
+               - Impersonal para mensajes de estado o confirmación (“Archivo generado.”, “Turno comenzado…”)
+          - ✅ Mensajes simples y concisos, sin detalles técnicos innecesarios ni explicaciones largas
+        - [x] Revisar prefijo de exportación “notifica-tareas”
+          - ✅ Sustituir por “notifica-backup-YYYY-MM-DD.json”
+          - ✅ Corto, reconocible y usado en apps modernas incluso en español
+        - [x] Revisar placeholders y encabezados largos (“Notas del turno”, “[Sin descripción]”)
+          - ✅ Sustituir “Notas del turno” por “Notas”
+          - ✅ Sustituir “[Sin descripción]” por “(Sin descripción)”
+        - [x] Revisar términos de accesibilidad (“Estado de notificación”)
+          - ✅ Unificar con las mismas reglas de tono y terminología del rewording general
+          - ✅ Usar etiquetas claras y consistentes con la UI visible (ej. “Estado de registro”, “Eliminar tarea”, “Cerrar notificación”)
     - [ ] Mantener consistencia con notas, tareas y filtros
   - [ ] Decisión de wording final
     - [ ] Validar claridad con criterios internos (¿se entiende sin manual? ¿es neutral para distintos perfiles?)
