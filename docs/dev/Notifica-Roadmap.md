@@ -851,17 +851,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Sustituir archivos del directorio `public/screenshots/` usados por el manifest y `public/screenshots-playstore/`
     - [x] Subir las nuevas capturas a la ficha de la Play Store (cuando se publique la APK)
 
-- [ ] Añadir bloque "Sobre este proyecto" al final del README.md  
-    - [ ] Redactar una sección breve y profesional que explique el contexto del desarrollo:  
-        - [ ] Que es el primer proyecto completo del autor, sin formación previa en desarrollo.  
-        - [ ] Que fue construido desde cero y usado en entorno laboral real por varios compañeros.  
-        - [ ] Que todo el diseño, código y documentación fue realizado por el propio autor con la ayuda de ChatGPT como asistente técnico y de producto.  
-        - [ ] Que el proyecto sirvió también como base técnica y conceptual para un segundo proyecto más ambicioso (Nocta).  
-    - [ ] Usar tono neutro y claro (no promocional, ni con falsas humildades).  
-    - [ ] Añadirlo como último bloque del README, antes de la sección de licencia o en una nueva sección tipo `## Sobre este proyecto`.  
-    - [ ] Validar que no interfiere con el resto del README ni repite información innecesaria.  
-    - [ ] Confirmar que está presente y visible antes de publicar la versión pública en Play Store.
-
 - [ ] 📣 Preparación para fase de testing real con usuarios externos 
   - [x] Revisar si la app (actual `.aab` y entorno) está ya en estado adecuado para compartir en prueba cerrada
         ↪ [Checklist en dev-notes.md](dev-notes.md#-revisión-del-aab-antes-de-lanzar-testing-externo)
@@ -889,6 +878,96 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - Al menos 12 testers activos
         - Durante un periodo de 14 días
   - [ ] Revisar restricciones de orientación/redimensionamiento para compatibilidad con tablets y plegables (Android 16+)
+
+- [ ] ✏️ Revisar wording para ampliar público potencial
+  - [x] Inventario de textos de la UI
+    - [x] Extraer todos los textos visibles (botones, menús, placeholders, labels, toasts, modales, exportación)
+    - [x] Documentarlos en `docs/rewording-ES.md`
+  - [x] Propuesta de alternativas
+    - [x] Detectar términos potencialmente confusos o demasiado específicos (“Aviso”, “Técnicos”)
+    - [x] Proponer variantes más genéricas/claras (“Descripción”, “Responsables”)
+        - [x] Revisar uso de “Turno / Nuevo Turno”
+          - ✅ Sustituir por “Tramo / Nuevo Tramo”
+        - [x] Revisar uso de “Técnico(s) / Añadir técnico”
+          - ✅ Sustituir por “Asignado a… / Asignar a…”
+        - [x] Revisar uso de “Aviso / Nuevo aviso”
+          - ✅ Sustituir por “Descripción” (solo en placeholder del campo)
+          - ✅ Mantener “Tarea(s)” en el resto de la app
+        - [x] Revisar uso de “Notificada / Sin notificar / Notificación anulada”
+          - ✅ Sustituir por “Registrada / Sin registrar / Registro anulado”
+          - ✅ Mantener “Notifica” como nombre de la aplicación (marca), no ligado estrictamente a este estado
+        - [x] Revisar uso de “Finalizar / Reabrir”
+          - ✅ Mantener “Finalizar / Reabrir” sin cambios
+        - [x] Revisar mensajes de sistema demasiado técnicos (ej. “El archivo no contiene una lista válida de tareas”)
+          - ✅ Definir marco común:
+             - Tono: Neutro / Semi-técnico
+             - Estilo: 
+               - 2ª persona para errores que requieren acción del usuario (“Introduce…”, “Revisa…”)
+               - Impersonal para mensajes de estado o confirmación (“Archivo generado.”, “Turno comenzado…”)
+          - ✅ Mensajes simples y concisos, sin detalles técnicos innecesarios ni explicaciones largas
+        - [x] Revisar prefijo de exportación “notifica-tareas”
+          - ✅ Sustituir por “notifica-backup-YYYY-MM-DD.json”
+          - ✅ Corto, reconocible y usado en apps modernas incluso en español
+        - [x] Revisar placeholders y encabezados largos (“Notas del turno”, “[Sin descripción]”)
+          - ✅ Sustituir “Notas del turno” por “Notas”
+          - ✅ Sustituir “[Sin descripción]” por “(Sin descripción)”
+        - [x] Revisar términos de accesibilidad (“Estado de notificación”)
+          - ✅ Unificar con las mismas reglas de tono y terminología del rewording general
+          - ✅ Usar etiquetas claras y consistentes con la UI visible (ej. “Estado de registro”, “Eliminar tarea”, “Cerrar notificación”)
+  - [x] Mantener consistencia con notas, tareas y filtros
+  - [x] Wording final documentado y validado en docs/rewording-ES.md
+    - [x] Revisar y actualizar docs/rewording-ES.md bloque por bloque con las decisiones del roadmap
+    - [x] Validar claridad con criterios internos (¿se entiende sin manual? ¿es neutral para distintos perfiles?)
+    - [x] Cerrar lista definitiva en `docs/rewording-ES.md`
+  - [ ] Implementación de cambios
+    - [ ] Sustituir textos en componentes (inputs, botones, menús, filtros)
+    - [ ] Actualizar textos en exportación e importación
+    - [ ] Revisar documentación (`README.md`, capturas si procede)
+  - [ ] Validación en entorno real
+    - [ ] Revisar PWA en móvil (claro/oscuro, offline)
+    - [ ] Revisar APK Android
+    - [ ] Confirmar comprensión en contexto (sin necesidad de explicación)
+
+- [ ] 🌍 Añadir soporte multidioma (español e inglés)
+  - [x] Elegir estrategia de internacionalización
+    - [x] Revisar opciones: `vue-i18n`, objeto propio reactivo, solución mínima
+    - [x] Documentar ventajas/inconvenientes de cada método
+    - [x] Tomar decisión final (aprender el razonamiento aunque ya esté claro usar `vue-i18n`)
+  - [ ] Configurar infraestructura i18n
+    - [x] Instalar y configurar `vue-i18n` en `main.ts`
+    - [x] Crear carpeta `locales/` con `es.ts` y `en.ts` iniciales
+    - [ ] Definir convención única de claves (basada en `rewording-ES.md`)
+  - [ ] Integrar textos en sistema de traducción
+    - [ ] Volcar `ES final` desde `docs/rewording-ES.md` a `es.ts`
+    - [ ] Crear `en.ts` con traducción inicial de todos los textos
+    - [ ] Sustituir textos hardcodeados en componentes por claves i18n
+    - [ ] Manejar casos con parámetros dinámicos (`{count}`, `{description}`…) y plurales
+  - [ ] Añadir selector de idioma
+    - [ ] Decidir comportamiento: manual en UI o idioma del sistema
+    - [ ] Implementar selector en la app
+    - [ ] Validar persistencia de idioma elegido
+  - [ ] Validación y pruebas
+    - [ ] Revisar PWA en móvil en ambos idiomas (claro/oscuro, offline)
+    - [ ] Revisar APK en Android (y iOS si se compila más adelante)
+    - [ ] Confirmar que no se rompen diseños con textos largos o diferentes por idioma
+  - [ ] Documentación y cierre
+    - [ ] Explicar en `dev-notes.md` cómo añadir/editar traducciones existentes
+    - [ ] Explicar en `dev-notes.md` cómo introducir textos nuevos en la app usando i18n
+    - [ ] Actualizar capturas o ejemplos en `README.md` si procede (según decisión sobre idiomas en repo)
+    - [ ] Añadir recordatorio en roadmap para actualizar ficha de Play Store (capturas, descripción) cuando se prepare la versión en inglés
+    - [ ] Commit de integración i18n básica funcionando
+
+- [ ] Añadir bloque "Sobre este proyecto" al final del README.md  
+    - [ ] Redactar una sección breve y profesional que explique el contexto del desarrollo:  
+        - [ ] Que es el primer proyecto completo del autor, sin formación previa en desarrollo.  
+        - [ ] Que fue construido desde cero y usado en entorno laboral real por varios compañeros.  
+        - [ ] Que todo el diseño, código y documentación fue realizado por el propio autor con la ayuda de ChatGPT como asistente técnico y de producto.  
+        - [ ] Que el proyecto sirvió también como base técnica y conceptual para un segundo proyecto más ambicioso (Nocta).  
+    - [ ] Usar tono neutro y claro (no promocional, ni con falsas humildades).  
+    - [ ] Añadirlo como último bloque del README, antes de la sección de licencia o en una nueva sección tipo `## Sobre este proyecto`.  
+    - [ ] Validar que no interfiere con el resto del README ni repite información innecesaria.  
+    - [ ] Confirmar que está presente y visible antes de publicar la versión pública en Play Store.
+
 
 - [ ] Implementar selector de formato de duración y precisión
     - [ ] Añadir sistema de persistencia para ajustes de usuario (localStorage)
@@ -978,62 +1057,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [ ] Asegurar que se puede consultar en cualquier momento
   - [ ] Validar legibilidad en móvil y dispositivos pequeños
 
-- [ ] 🌍 Añadir soporte multidioma (español e inglés)
-  - [ ] Elegir estrategia: vue-i18n, objeto propio, o solución mínima
-  - [ ] Extraer todos los textos visibles a sistema de traducción
-  - [ ] Traducir todos los textos actuales al inglés
-  - [ ] Añadir un selector de idioma manual (o usar idioma del sistema)
-  - [ ] Validar comportamiento en Android e iOS
-  - [ ] Ajustar diseño si hay textos más largos o distintos por idioma
-
-- [ ] ✏️ Revisar wording para ampliar público potencial
-  - [x] Inventario de textos de la UI
-    - [x] Extraer todos los textos visibles (botones, menús, placeholders, labels, toasts, modales, exportación)
-    - [x] Documentarlos en `docs/rewording-ES.md`
-  - [x] Propuesta de alternativas
-    - [x] Detectar términos potencialmente confusos o demasiado específicos (“Aviso”, “Técnicos”)
-    - [x] Proponer variantes más genéricas/claras (“Descripción”, “Responsables”)
-        - [x] Revisar uso de “Turno / Nuevo Turno”
-          - ✅ Sustituir por “Tramo / Nuevo Tramo”
-        - [x] Revisar uso de “Técnico(s) / Añadir técnico”
-          - ✅ Sustituir por “Asignado a… / Asignar a…”
-        - [x] Revisar uso de “Aviso / Nuevo aviso”
-          - ✅ Sustituir por “Descripción” (solo en placeholder del campo)
-          - ✅ Mantener “Tarea(s)” en el resto de la app
-        - [x] Revisar uso de “Notificada / Sin notificar / Notificación anulada”
-          - ✅ Sustituir por “Registrada / Sin registrar / Registro anulado”
-          - ✅ Mantener “Notifica” como nombre de la aplicación (marca), no ligado estrictamente a este estado
-        - [x] Revisar uso de “Finalizar / Reabrir”
-          - ✅ Mantener “Finalizar / Reabrir” sin cambios
-        - [x] Revisar mensajes de sistema demasiado técnicos (ej. “El archivo no contiene una lista válida de tareas”)
-          - ✅ Definir marco común:
-             - Tono: Neutro / Semi-técnico
-             - Estilo: 
-               - 2ª persona para errores que requieren acción del usuario (“Introduce…”, “Revisa…”)
-               - Impersonal para mensajes de estado o confirmación (“Archivo generado.”, “Turno comenzado…”)
-          - ✅ Mensajes simples y concisos, sin detalles técnicos innecesarios ni explicaciones largas
-        - [x] Revisar prefijo de exportación “notifica-tareas”
-          - ✅ Sustituir por “notifica-backup-YYYY-MM-DD.json”
-          - ✅ Corto, reconocible y usado en apps modernas incluso en español
-        - [x] Revisar placeholders y encabezados largos (“Notas del turno”, “[Sin descripción]”)
-          - ✅ Sustituir “Notas del turno” por “Notas”
-          - ✅ Sustituir “[Sin descripción]” por “(Sin descripción)”
-        - [x] Revisar términos de accesibilidad (“Estado de notificación”)
-          - ✅ Unificar con las mismas reglas de tono y terminología del rewording general
-          - ✅ Usar etiquetas claras y consistentes con la UI visible (ej. “Estado de registro”, “Eliminar tarea”, “Cerrar notificación”)
-  - [x] Mantener consistencia con notas, tareas y filtros
-  - [x] Wording final documentado y validado en docs/rewording-ES.md
-    - [x] Revisar y actualizar docs/rewording-ES.md bloque por bloque con las decisiones del roadmap
-    - [x] Validar claridad con criterios internos (¿se entiende sin manual? ¿es neutral para distintos perfiles?)
-    - [x] Cerrar lista definitiva en `docs/rewording-ES.md`
-  - [ ] Implementación de cambios
-    - [ ] Sustituir textos en componentes (inputs, botones, menús, filtros)
-    - [ ] Actualizar textos en exportación e importación
-    - [ ] Revisar documentación (`README.md`, capturas si procede)
-  - [ ] Validación en entorno real
-    - [ ] Revisar PWA en móvil (claro/oscuro, offline)
-    - [ ] Revisar APK Android
-    - [ ] Confirmar comprensión en contexto (sin necesidad de explicación)
 
 
 ---

@@ -8,6 +8,10 @@ import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support'
 import { StatusBar, Style } from '@capacitor/status-bar'
 import { Device } from '@capacitor/device'
 
+import { createI18n } from 'vue-i18n'
+import es from './locales/es'
+import en from './locales/en'
+
 
 
 // 🌙 Aplicar clase 'dark' antes de montar la app según el modo guardado
@@ -102,4 +106,28 @@ document.addEventListener('deviceready', async () => {
 // export { showDebugLog }
 
 
-createApp(App).mount('#app')
+
+// 🌍 Idioma inicial
+const savedLocale = localStorage.getItem('locale')
+
+const browserLocale = navigator.language.split('-')[0] // ej: "es-ES" → "es"
+
+const locale =
+  savedLocale ||
+  (['es', 'en'].includes(browserLocale) ? browserLocale : 'en')
+
+
+const i18n = createI18n({
+  legacy: false,          // Usar Composition API
+  locale,                 // Idioma inicial
+  fallbackLocale: 'en',   // Fallback general
+  messages: {
+    es,
+    en,
+  },
+})
+
+
+createApp(App)
+  .use(i18n)
+  .mount('#app')
