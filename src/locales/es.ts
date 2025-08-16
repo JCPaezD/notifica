@@ -31,6 +31,11 @@ export default {
       // Descripciones y placeholders
       placeholder: "Descripción",
     },
+    action: {
+      // Acciones sobre tareas
+      finish: "Finalizar",
+      reopen: "Reabrir",
+    },
   },
   nav: {
     // Navegación
@@ -46,6 +51,11 @@ export default {
     },
     toast: {
       // Etiquetas accesibilidad toasts
+    },
+    filter: {
+      // Accesibilidad filtros (sr-only)
+      activeOnly: "Mostrar solo tareas activas",
+      unregisteredOnly: "Mostrar solo tareas sin registrar",
     },
   },
   toast: {
@@ -72,6 +82,8 @@ export default {
   },
   filter: {
     // Filtros y estados de lista
+    active: "Activas",
+    unregistered: "Sin registrar",
   },
   tooltip: {
     task: {
