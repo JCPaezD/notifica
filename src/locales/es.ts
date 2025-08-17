@@ -28,8 +28,7 @@ export default {
       add: "Asignar a…",
     },
     description: {
-      // Descripciones y placeholders
-      placeholder: "Descripción",
+      // Descripciones de tareas (sin placeholder)
     },
     action: {
       // Acciones sobre tareas
