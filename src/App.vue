@@ -391,7 +391,7 @@ const exportTasksToJson = async () => {
     return;
   }
 
-  const fileName = `notifica-tareas-${new Date().toISOString().slice(0, 10)}.json`;
+  const fileName = t('export.filename', { date: new Date().toISOString().slice(0, 10) });
 
   // Nuevo objeto combinado
   const exportData = {
@@ -419,21 +419,21 @@ const exportTasksToJson = async () => {
 
       // 3. Lanzar diálogo de compartir archivo
       await Share.share({
-        title: 'Exportar tareas',
-        text: 'Archivo de tareas exportado desde Notifica.',
+        title: t('dialog.export.title'),
+        text: t('dialog.export.message'),
         files: [fileUri.uri],
-        dialogTitle: `Compartir archivo ${fileName}`,
+        dialogTitle: t('dialog.export.title'),
       });
 
       add({
-        title: 'Tareas exportadas',
-        description: `Archivo "${fileName}" listo para compartir.`,
+        title: t('toast.export.success'),
+        description: t('toast.share.readyFile', { fileName }),
       })
     } catch (err) {
       console.error('Error al exportar archivo JSON:', err);
       add({
-        title: 'Error al exportar',
-        description: 'No se pudo generar el archivo.',
+        title: t('toast.export.error'),
+        description: t('toast.export.errorDetail'),
       })
     }
   } else {
@@ -444,8 +444,8 @@ const exportTasksToJson = async () => {
     linkElement.setAttribute('download', fileName);
     linkElement.click();
     add({
-      title: 'Tareas Exportadas',
-      description: `Archivo "${fileName}" generado.`,
+      title: t('toast.export.success'),
+      description: t('toast.export.generatedFile', { fileName }),
     })
   }
 }
@@ -460,8 +460,8 @@ const exportTasksToJson = async () => {
     const fileInput = event.target as HTMLInputElement;
     if (!fileInput.files || fileInput.files.length === 0) {
       add({
-        title: 'Importación Fallida',
-        description: 'No se seleccionó ningún archivo.',
+        title: t('toast.import.failed'),
+        description: t('toast.import.noFile'),
         type: 'warning'
       });
       return;
@@ -481,7 +481,7 @@ const exportTasksToJson = async () => {
           : parsed.tasks;
 
         if (!Array.isArray(importedTasks)) {
-          throw new Error('El archivo no contiene una lista válida de tareas.');
+          throw new Error(t('toast.import.invalidList'));
         }
         
         deleteAllNotes();
@@ -494,7 +494,7 @@ const exportTasksToJson = async () => {
         // Validar y transformar las tareas importadas (especialmente las fechas)
         const validatedTasks = importedTasks.map(task => {
           if (!task.id || !task.description || !task.startTime) {
-            throw new Error('Formato de tarea inválido. Faltan campos requeridos.');
+            throw new Error(t('toast.import.invalidTask'));
           }
           return {
             ...task,
@@ -532,14 +532,14 @@ const exportTasksToJson = async () => {
           selectedShiftToView.value = 'current'
         }
         add({
-          title: 'Importación Exitosa',
-          description: `${validatedTasks.length} tareas importadas correctamente.`,
+          title: t('toast.import.success'),
+          description: t('toast.import.count', { count: validatedTasks.length }),
           type: 'info'
         });
       } catch (error) {
         add({
-          title: 'Error de Importación',
-          description: `Al procesar el archivo: ${error instanceof Error ? error.message : 'Error desconocido'}`,
+          title: t('toast.import.error'),
+          description: t('toast.import.errorDetail', { errorMessage: error instanceof Error ? error.message : 'Error desconocido' }),
           type: 'error'
         });
       } finally {
@@ -550,8 +550,8 @@ const exportTasksToJson = async () => {
 
     reader.onerror = () => {
       add({
-        title: 'Error de Lectura',
-        description: 'Ocurrió un problema al leer el archivo seleccionado.',
+        title: t('toast.import.readError'),
+        description: t('toast.import.readErrorDetail'),
         type: 'error'
       });
       if (fileInput) fileInput.value = '';
@@ -562,7 +562,7 @@ const exportTasksToJson = async () => {
 
   // Elimina todas las tareas de la aplicación, con opción de deshacer.
   const deleteAllTasks = () => {
-    if (window.confirm('¿Estás seguro de que quieres borrar TODAS las tareas de la aplicación? No podrán ser recuperadas.')) {
+    if (window.confirm(t('dialog.deleteAll.confirm'))) {
       const tasksBeforeDelete = JSON.parse(JSON.stringify(allTasks.value)); // Copia profunda de las tareas
       const notesBeforeDelete = JSON.parse(JSON.stringify(notesMap.value)); // Copia profunda de las notas
 
@@ -571,13 +571,13 @@ const exportTasksToJson = async () => {
 
       const toastId = add(
         {
-          title: 'Borrado Completo',
-          description: 'Todas las tareas y notas han sido eliminadas.',
+          title: t('toast.deleteAll.done'),
+          description: t('toast.deleteAll.detail'),
           type: 'error',
           delayClose: true,
           actions: [
             {
-              label: 'Deshacer',
+              label: t('toast.action.undo'),
               onClick: async () => { // Hacer la función onClick asíncrona
                 allTasks.value = tasksBeforeDelete; // Restaurar las tareas (revertimos al método de reemplazo)
                 // Convertir cadenas de fecha de vuelta a objetos Date
@@ -596,8 +596,8 @@ const exportTasksToJson = async () => {
                 // Mostrar notificación de restauración y recargar la página cuando esta se cierre.
                 setTimeout(() => {
                   add({
-                    title: 'Tareas Restauradas',
-                    description: 'Todas las tareas han sido restauradas.',
+                    title: t('toast.deleteAll.restored'),
+                    description: t('toast.deleteAll.restoredDetail'),
                     type: 'info'
                   });
                 }, 550);
@@ -609,8 +609,8 @@ const exportTasksToJson = async () => {
       );
     } else {
       add({
-        title: 'Acción Cancelada',
-        description: 'El borrado de tareas fue cancelado.',
+        title: t('toast.action.cancelled'),
+        description: t('toast.deleteAll.cancelled'),
         type: 'info'
       });
     }
@@ -641,8 +641,8 @@ const exportTasksToJson = async () => {
         }))
       } catch (error) {
         add({
-          title: 'Error de Carga',
-          description: 'No se pudieron cargar las tareas guardadas. Podrían estar corruptas.',
+          title: t('toast.load.error'),
+          description: t('toast.load.errorDetail'),
           type: 'error'
         });
         console.error('Error al parsear tareas desde localStorage:', error);
@@ -650,8 +650,8 @@ const exportTasksToJson = async () => {
     }
     // Toast de prueba al cargar la app para tests
     /* add({
-      title: 'Notificación de prueba',
-      description: 'Esto es una prueba del sistema de toasts propio.',
+      title: t('toast.demo.title'),
+      description: t('toast.demo.detail'),
       actions: [
         {
           label: 'Cerrar Todo',

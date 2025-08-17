@@ -26,9 +26,8 @@
 - [x] | Acción Deshecha | src/App.vue:278 | Acción deshecha | toast.action.undone | — | no | Toast info 
 - [x] | Se restauró el estado anterior al nuevo turno. | src/App.vue:279 | Se restauró el estado anterior al nuevo tramo | toast.shift.rollback | — | no | Descripción de toast 
 - [x] | listTitle (dinámico) | src/App.vue:361 | Tramo del {shift} | title.taskList | shift | no | title dinámico, usa getShiftLabel(selectedShiftToView) 
-- [ ] | Exportación Vacía | src/App.vue:383 | Exportación vacía | toast.export.empty | — | no | Toast warning 
-- [ ] | No hay tareas para exportar. | src/App.vue:384 | No hay tareas para exportar | toast.export.noTasks | — | no | Descripción de toast 
-
+- [x] | Exportación Vacía | src/App.vue:383 | Exportación vacía | toast.export.empty | — | no | Toast warning 
+- [x] | No hay tareas para exportar. | src/App.vue:384 | No hay tareas para exportar | toast.export.noTasks | — | no | Descripción de toast 
 - [ ] | notifica-tareas | src/App.vue:390 | notifica-backup-{date}.json | export.filename | date | no | Prefijo nombre de archivo exportado 
 - [ ] | Exportar tareas | src/App.vue:418 | Exportar tareas | dialog.export.title | — | no | Título diálogo / OS share 
 - [ ] | Archivo de tareas exportado desde Notifica. | src/App.vue:419 | Archivo de tareas exportado desde Notifica | dialog.export.message | — | no | Texto de OS share 
