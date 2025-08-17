@@ -59,7 +59,7 @@
       @click="$emit('onClose')"
       class="btn-toast-close ml-1 text-base leading-none"
       :class="closeButtonClasses"
-      aria-label="Cerrar notificación"
+      :aria-label="t('aria.toast.close')"
     >
       &times;
     </button>
@@ -70,6 +70,10 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useToast } from '@/composables/useToast'
 import { toastColors } from '@/constants/toastColors'
+
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 
 const { startDismissTimer } = useToast()
 const toastRef = ref<HTMLElement | null>(null)

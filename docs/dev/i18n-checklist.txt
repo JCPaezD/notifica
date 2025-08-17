@@ -108,12 +108,12 @@
 - [x] | Estado de notificación | src/components/TaskItem.vue:488 | Estado de registro | aria.task.state | — | no | aria-label 
 - [x] | Eliminar Tarea | src/components/TaskItem.vue:517 | Eliminar tarea | tooltip.task.delete | — | no | title (tooltip) 
 - [x] | Eliminar tarea | src/components/TaskItem.vue:519 | Eliminar tarea | aria.task.delete | — | no | aria-label 
-- [ ] | Activas | src/components/TaskList.vue:118 | Activas | filter.active | — | no | Estado filtro 
-- [ ] | Sin Notificar | src/components/TaskList.vue:122 | Sin registrar | filter.unregistered | — | no | Estado filtro 
-- [ ] | Mostrar solo tareas activas | src/components/TaskList.vue:142 | Mostrar solo tareas activas | a11y.filter.activeOnly | — | no | Accesibilidad (sr-only) 
-- [ ] | Mostrar solo tareas sin notificar | src/components/TaskList.vue:147 | Mostrar solo tareas sin registrar | a11y.filter.unregisteredOnly | — | no | Accesibilidad (sr-only) 
-- [ ] | Notas del turno | src/components/TaskList.vue:315 | Notas | header.notes | — | no | Encabezado sección 
-- [ ] | Añadir nota… | src/components/TaskList.vue:378 | Añadir nota… | placeholder.note.add | — | no | Placeholder dinámico (última nota) 
-- [ ] | Nota | src/components/TaskList.vue:378 | Nota | placeholder.note | — | no | Placeholder dinámico (notas previas) 
-- [ ] | Viendo Turno | src/components/TaskList.vue:221 | Viendo tramo | taskList.viewingShift | — | no | Texto superior lista de tareas |
-- [ ] | Cerrar notificación | src/components/Toast.vue:62 | Cerrar notificación | aria.toast.close | — | no | aria-label (accesibilidad) 
+- [x] | Activas | src/components/TaskList.vue:118 | Activas | filter.active | — | no | Estado filtro 
+- [x] | Sin Notificar | src/components/TaskList.vue:122 | Sin registrar | filter.unregistered | — | no | Estado filtro 
+- [x] | Mostrar solo tareas activas | src/components/TaskList.vue:142 | Mostrar solo tareas activas | a11y.filter.activeOnly | — | no | Accesibilidad (sr-only) 
+- [x] | Mostrar solo tareas sin notificar | src/components/TaskList.vue:147 | Mostrar solo tareas sin registrar | a11y.filter.unregisteredOnly | — | no | Accesibilidad (sr-only) 
+- [x] | Notas del turno | src/components/TaskList.vue:315 | Notas | header.notes | — | no | Encabezado sección 
+- [x] | Añadir nota… | src/components/TaskList.vue:378 | Añadir nota… | placeholder.note.add | — | no | Placeholder dinámico (última nota) 
+- [x] | Nota | src/components/TaskList.vue:378 | Nota | placeholder.note | — | no | Placeholder dinámico (notas previas) 
+- [x] | Viendo Turno | src/components/TaskList.vue:221 | Viendo tramo | taskList.viewingShift | — | no | Texto superior lista de tareas |
+- [x] | Cerrar notificación | src/components/Toast.vue:62 | Cerrar notificación | aria.toast.close | — | no | aria-label (accesibilidad) 

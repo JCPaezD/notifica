@@ -8,6 +8,8 @@ import type { Task } from '../types/Task'
 import { getShiftColor } from '@/composables/useShifts'
 import { computed, ref, watchEffect, onMounted, watch, nextTick } from 'vue'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const isNotesOpen = ref(false)
 
@@ -218,7 +220,7 @@ function handleEnter(index: number) {
       v-if="props.title" 
       class="mb-4 px-1"
     >
-      <p class="text-s text-text-subtle dark:text-subtle-dark mb-1">Viendo Turno</p>
+      <p class="text-s text-text-subtle dark:text-subtle-dark mb-1">{{ t('taskList.viewingShift') }}</p>
       <div class="flex items-center gap-2 text-xl font-semibold text-text-main dark:text-main-dark">
         <component
           v-if="props.titleIcon"
@@ -312,7 +314,7 @@ function handleEnter(index: number) {
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                   </svg>
-                  <span class="text-base">Notas del turno</span>
+                  <span class="text-base">{{ t('header.notes') }}</span>
                   <Transition
                     name="fade-scale"
                     mode="out-in"
@@ -375,7 +377,7 @@ function handleEnter(index: number) {
                                 placeholder-text-main/70 dark:placeholder-text-main-dark/70
                                 text-sm pt-[12px] pb-[1px] leading-tight align-text-bottom transition-all duration-150
                                 whitespace-pre-wrap break-words pl-10 px-4"
-                          :placeholder="index === notes.length - 1 ? 'Añadir nota…' : 'Nota'"
+                          :placeholder="index === notes.length - 1 ? t('placeholder.note.add') : t('placeholder.note.default')"
                         ></textarea>
                       </div>
                     </div>
