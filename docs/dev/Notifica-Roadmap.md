@@ -966,8 +966,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] i18n: sustituir textos en TaskItem.vue (líneas 102–110 del checklist)
       - [x] i18n: sustituir textos en TaskList.vue (líneas 111 y 117 del checklist)
       - [x] i18n: sustituir textos en Toast.vue (línea 118 del checklist)
-    - [ ] Manejar casos con parámetros dinámicos (`{count}`, `{description}`…) y plurales
-    - [ ] Crear toggle provisional ES/EN para pruebas en móvil
+    - [x] Manejar casos con parámetros dinámicos (`{count}`, `{description}`…) y plurales
+    - [x] Crear toggle provisional ES/EN para pruebas en móvil
     - [ ] Validar sistema i18n completo (desktop, PWA y APK)
   - [ ] Añadir selector de idioma
     - [ ] Decidir comportamiento: manual en UI o idioma del sistema

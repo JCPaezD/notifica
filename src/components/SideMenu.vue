@@ -14,6 +14,15 @@ import { useDarkMode } from '@/composables/useDarkMode'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
+const { locale } = useI18n()
+
+const currentLocale = computed(() => locale.value)
+
+function setLocale(lang: 'es' | 'en') {
+  locale.value = lang
+  localStorage.setItem('locale', lang)
+}
+
 const { preferredMode, setPreferredMode } = useDarkMode()
 
 const themeModes = ['light', 'dark', 'system'] as const
@@ -284,6 +293,32 @@ const onLeave = (el: Element) => {
                               {{ t('menu.theme.system') }}
                             </button>
                           </div>
+
+                        <!-- Bloque Idioma -->
+                        <div class="space-y-2">
+                          <p class="text-subtle dark:text-subtle-dark font-medium pl-1">Idioma</p>
+                          <div class="flex gap-2">
+                            <!-- Botón Español -->
+                            <button @click="setLocale('es')" :class="[ 
+                              'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
+                              currentLocale === 'es'
+                                ? 'bg-accent-main text-white font-semibold'
+                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+                            ]">
+                              ES
+                            </button>
+
+                            <!-- Botón Inglés -->
+                            <button @click="setLocale('en')" :class="[ 
+                              'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
+                              currentLocale === 'en'
+                                ? 'bg-accent-main text-white font-semibold'
+                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+                            ]">
+                              EN
+                            </button>
+                          </div>
+                        </div>
                         </div>
                       </div>
                     </Transition>
