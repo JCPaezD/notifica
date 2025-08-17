@@ -955,7 +955,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Bloque 4
       - [x] Bloque 5
       - [x] Bloque 6
-    - [ ] Crear `en.ts` con traducción inicial de todos los textos
+    - [x] Crear `en.ts` con traducción inicial de todos los textos
     - [ ] Sustituir textos hardcodeados en componentes por claves i18n
     - [ ] Manejar casos con parámetros dinámicos (`{count}`, `{description}`…) y plurales
   - [ ] Añadir selector de idioma
