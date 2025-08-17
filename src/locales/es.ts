@@ -228,6 +228,7 @@ export default {
     },
   },
   export: {
-    // Textos relacionados con exportar
+    // Exportación de archivos
+    filename: "notifica-backup-{date}.json",
   },
 }
