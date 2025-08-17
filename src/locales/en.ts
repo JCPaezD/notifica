@@ -229,7 +229,11 @@ export default {
   },
   title: {
     // Títulos de pantallas/secciones
-    taskList: "Segment for {shift}",
+    taskList: "Segment of {shift}",
+  },
+  taskList: {
+    // Textos de la lista de tareas
+    viewingShift: "Viewing segment",
   },
   share: {
     content: {

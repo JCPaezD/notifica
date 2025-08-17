@@ -1,33 +1,34 @@
-- [ ] | Notifica | src/App.vue:?? | Notifica | — | — | no | Nombre de la aplicación (branding, no se traduce, queda fuera del sistema i18n) 
-- [ ] | Tarea Finalizada | src/App.vue:116 | Tarea finalizada | toast.task.finished | — | no | Toast success 
-- [ ] | "${task.description}" completada a las ${task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}. | src/App.vue:117 | «{description}» completada a las {endTime} | toast.task.finishedDetail | description, endTime | no | Descripción de toast de finalización 
-- [ ] | Tarea Notificada | src/App.vue:134 | Tarea registrada | toast.task.registered | — | no | Toast success 
-- [ ] | "${updatedTask.description}" marcada como notificada. | src/App.vue:135 | «{description}» marcada como registrada | toast.task.registeredDetail | description | no | Toast success (estado) 
-- [ ] | Notificación Anulada | src/App.vue:140 | Registro anulado | toast.task.unregistered | — | no | Toast info/warning 
-- [ ] | "${updatedTask.description}" ya no está notificada. | src/App.vue:141 | «{description}» ya no está registrada | toast.task.unregisteredDetail | description | no | Toast info (estado) 
-- [ ] | Tarea Actualizada | src/App.vue:146 | Tarea actualizada | toast.task.updated | — | no | Toast info 
-- [ ] | "${updatedTask.description}" ha sido actualizada. | src/App.vue:147 | «{description}» actualizada | toast.task.updatedDetail | description | no | Toast info (update) 
-- [ ] | Error al Actualizar | src/App.vue:152 | Error al actualizar | toast.error.update | — | no | Toast error 
-- [ ] | No se encontró la tarea con ID: ${updatedTask.id}. | src/App.vue:153 | No se encontró la tarea con ID: {id} | toast.task.notFound | id | no | Toast error (not found) 
-- [ ] | Tarea Reactivada | src/App.vue:164 | Tarea reabierta | toast.task.reopened | — | no | Toast info 
-- [ ] | "${task.description}" ha sido reabierta. | src/App.vue:165 | «{description}» reabierta | toast.task.reopenedDetail | description | no | Toast info (reabrir) 
-- [ ] | Tarea Eliminada | src/App.vue:182 | Tarea eliminada | toast.task.deleted | — | no | Toast error (destructiva) 
-- [ ] | "${taskToDelete.description}" ha sido eliminada. | src/App.vue:183 | «{description}» eliminada | toast.task.deletedDetail | description | no | Toast error (delete) 
-- [ ] | Deshacer | src/App.vue:188 | Deshacer | toast.action.undo | — | no | Acción de toast (botón) 
-- [ ] | Tarea Restaurada | src/App.vue:203 | Tarea restaurada | toast.task.restored | — | no | Toast info 
-- [ ] | "${taskToDelete.description}" ha sido restaurada. | src/App.vue:204 | «{description}» restaurada | toast.task.restoredDetail | description | no | Toast info (restore) 
-- [ ] | Iniciando nuevo turno a las ${shiftStartTimeFormatted}. | src/App.vue:233 | Iniciando nuevo tramo a las {time} | toast.shift.starting | time | no | Confirm (línea 1) 
-- [ ] | Esto archivará las tareas actuales. ¿Desea continuar? | src/App.vue:234 | Esto archivará las tareas actuales. ¿Deseas continuar? | dialog.shift.confirmArchive | — | no | Confirm (línea 2) 
-- [ ] | Acción Cancelada | src/App.vue:238 | Acción cancelada | toast.action.cancelled | — | no | Toast info/error 
-- [ ] | Inicio de nuevo turno cancelado por el usuario. | src/App.vue:239 | Inicio de nuevo tramo cancelado por el usuario | toast.shift.cancelled | — | no | Descripción de toast 
-- [ ] | Nuevo Turno Iniciado | src/App.vue:254 | Nuevo tramo iniciado | toast.shift.started | — | no | Toast success 
-- [ ] | Turno comenzado a las ${shiftStartTimeFormatted}. | src/App.vue:255 | Tramo comenzado a las {time} | toast.shift.startedDetail | time | no | Toast success (tramo) 
-- [ ] | Deshacer | src/App.vue:260 | Deshacer | toast.action.undo | — | no | Acción de toast (botón) 
-- [ ] | Acción Deshecha | src/App.vue:278 | Acción deshecha | toast.action.undone | — | no | Toast info 
-- [ ] | Se restauró el estado anterior al nuevo turno. | src/App.vue:279 | Se restauró el estado anterior al nuevo tramo | toast.shift.rollback | — | no | Descripción de toast 
-- [ ] | listTitle (dinámico) | src/App.vue:361 | Tramo del {shift} | title.taskList | shift | no | title dinámico, usa getShiftLabel(selectedShiftToView) 
+- [x] | Notifica | src/App.vue:?? | Notifica | — | — | no | Nombre de la aplicación (branding, no se traduce, queda fuera del sistema i18n) 
+- [x] | Tarea Finalizada | src/App.vue:116 | Tarea finalizada | toast.task.finished | — | no | Toast success 
+- [x] | "${task.description}" completada a las ${task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}. | src/App.vue:117 | «{description}» completada a las {endTime} | toast.task.finishedDetail | description, endTime | no | Descripción de toast de finalización 
+- [x] | Tarea Notificada | src/App.vue:134 | Tarea registrada | toast.task.registered | — | no | Toast success 
+- [x] | "${updatedTask.description}" marcada como notificada. | src/App.vue:135 | «{description}» marcada como registrada | toast.task.registeredDetail | description | no | Toast success (estado) 
+- [x] | Notificación Anulada | src/App.vue:140 | Registro anulado | toast.task.unregistered | — | no | Toast info/warning 
+- [x] | "${updatedTask.description}" ya no está notificada. | src/App.vue:141 | «{description}» ya no está registrada | toast.task.unregisteredDetail | description | no | Toast info (estado) 
+- [x] | Tarea Actualizada | src/App.vue:146 | Tarea actualizada | toast.task.updated | — | no | Toast info 
+- [x] | "${updatedTask.description}" ha sido actualizada. | src/App.vue:147 | «{description}» actualizada | toast.task.updatedDetail | description | no | Toast info (update) 
+- [x] | Error al Actualizar | src/App.vue:152 | Error al actualizar | toast.error.update | — | no | Toast error 
+- [x] | No se encontró la tarea con ID: ${updatedTask.id}. | src/App.vue:153 | No se encontró la tarea con ID: {id} | toast.task.notFound | id | no | Toast error (not found) 
+- [x] | Tarea Reactivada | src/App.vue:164 | Tarea reabierta | toast.task.reopened | — | no | Toast info 
+- [x] | "${task.description}" ha sido reabierta. | src/App.vue:165 | «{description}» reabierta | toast.task.reopenedDetail | description | no | Toast info (reabrir) 
+- [x] | Tarea Eliminada | src/App.vue:182 | Tarea eliminada | toast.task.deleted | — | no | Toast error (destructiva) 
+- [x] | "${taskToDelete.description}" ha sido eliminada. | src/App.vue:183 | «{description}» eliminada | toast.task.deletedDetail | description | no | Toast error (delete) 
+- [x] | Deshacer | src/App.vue:188 | Deshacer | toast.action.undo | — | no | Acción de toast (botón) 
+- [x] | Tarea Restaurada | src/App.vue:203 | Tarea restaurada | toast.task.restored | — | no | Toast info 
+- [x] | "${taskToDelete.description}" ha sido restaurada. | src/App.vue:204 | «{description}» restaurada | toast.task.restoredDetail | description | no | Toast info (restore) 
+- [x] | Iniciando nuevo turno a las ${shiftStartTimeFormatted}. | src/App.vue:233 | Iniciando nuevo tramo a las {time} | toast.shift.starting | time | no | Confirm (línea 1) 
+- [x] | Esto archivará las tareas actuales. ¿Desea continuar? | src/App.vue:234 | Esto archivará las tareas actuales. ¿Deseas continuar? | dialog.shift.confirmArchive | — | no | Confirm (línea 2) 
+- [x] | Acción Cancelada | src/App.vue:238 | Acción cancelada | toast.action.cancelled | — | no | Toast info/error 
+- [x] | Inicio de nuevo turno cancelado por el usuario. | src/App.vue:239 | Inicio de nuevo tramo cancelado por el usuario | toast.shift.cancelled | — | no | Descripción de toast 
+- [x] | Nuevo Turno Iniciado | src/App.vue:254 | Nuevo tramo iniciado | toast.shift.started | — | no | Toast success 
+- [x] | Turno comenzado a las ${shiftStartTimeFormatted}. | src/App.vue:255 | Tramo comenzado a las {time} | toast.shift.startedDetail | time | no | Toast success (tramo) 
+- [x] | Deshacer | src/App.vue:260 | Deshacer | toast.action.undo | — | no | Acción de toast (botón) 
+- [x] | Acción Deshecha | src/App.vue:278 | Acción deshecha | toast.action.undone | — | no | Toast info 
+- [x] | Se restauró el estado anterior al nuevo turno. | src/App.vue:279 | Se restauró el estado anterior al nuevo tramo | toast.shift.rollback | — | no | Descripción de toast 
+- [x] | listTitle (dinámico) | src/App.vue:361 | Tramo del {shift} | title.taskList | shift | no | title dinámico, usa getShiftLabel(selectedShiftToView) 
 - [ ] | Exportación Vacía | src/App.vue:383 | Exportación vacía | toast.export.empty | — | no | Toast warning 
 - [ ] | No hay tareas para exportar. | src/App.vue:384 | No hay tareas para exportar | toast.export.noTasks | — | no | Descripción de toast 
+
 - [ ] | notifica-tareas | src/App.vue:390 | notifica-backup-{date}.json | export.filename | date | no | Prefijo nombre de archivo exportado 
 - [ ] | Exportar tareas | src/App.vue:418 | Exportar tareas | dialog.export.title | — | no | Título diálogo / OS share 
 - [ ] | Archivo de tareas exportado desde Notifica. | src/App.vue:419 | Archivo de tareas exportado desde Notifica | dialog.export.message | — | no | Texto de OS share 
@@ -117,3 +118,4 @@
 - [ ] | Añadir nota… | src/components/TaskList.vue:378 | Añadir nota… | placeholder.note.add | — | no | Placeholder dinámico (última nota) 
 - [ ] | Nota | src/components/TaskList.vue:378 | Nota | placeholder.note | — | no | Placeholder dinámico (notas previas) 
 - [ ] | Cerrar notificación | src/components/Toast.vue:62 | Cerrar notificación | aria.toast.close | — | no | aria-label (accesibilidad) 
+- [ ] | Viendo Turno | src/components/TaskList.vue:221 | Viendo tramo | taskList.viewingShift | — | no | Texto superior lista de tareas |

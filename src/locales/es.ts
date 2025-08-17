@@ -231,6 +231,10 @@ export default {
     // Títulos de pantallas/secciones
     taskList: "Tramo del {shift}",
   },
+  taskList: {
+    // Textos de la lista de tareas
+    viewingShift: "Viendo tramo",
+  },
   share: {
     content: {
       // Encabezados del contenido compartido

@@ -129,6 +129,8 @@
 | [Sin descripción] | src/components/TaskItem.vue:341 | (Sin descripción) | task.noDescription | — | no | Fallback descripción vacía |
 | Añadir nota… | src/components/TaskList.vue:378 | Añadir nota… | placeholder.note.add | — | no | Placeholder dinámico (última nota) |
 | Nota | src/components/TaskList.vue:378 | Nota | placeholder.note | — | no | Placeholder dinámico (notas previas) |
+| Viendo Turno | src/components/TaskList.vue:221 | Viendo tramo | taskList.viewingShift | — | no | Texto superior lista de tareas |
+
 
 
 ## Bloque 5 — Otros (branding / textos residuales)

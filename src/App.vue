@@ -21,6 +21,10 @@ import { useLogoAnimation } from './composables/useLogoAnimation'
 import { useDarkMode } from './composables/useDarkMode'
 const { isDark } = useDarkMode()
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+
 const allTaskShiftIds = computed(() =>
   [...new Set(allTasks.value.map(t => t.shiftId).filter((id): id is string => typeof id === 'string'))]
 )
@@ -113,8 +117,8 @@ const finishTask = (taskId: string) => {
   if (task) {
     task.endTime = new Date()
     add({
-      title: 'Tarea Finalizada',
-      description: `"${task.description}" completada a las ${task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`,
+      title: t('toast.task.finished'),
+      description: t('toast.task.finishedDetail', { description: task.description, endTime: task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }),
       type: 'success'
     })
   }
@@ -131,26 +135,26 @@ const updateTask = (updatedTask: Task) => {
     if (oldIsNotifiedState !== updatedTask.isNotified) {
       if (updatedTask.isNotified) {
         add({
-          title: 'Tarea Notificada',
-          description: `"${updatedTask.description}" marcada como notificada.`,
+          title: t('toast.task.registered'),
+          description: t('toast.task.registeredDetail', { description: updatedTask.description }),
           type: 'success'
         })
       } else {
         add({
-          title: 'Notificación Anulada',
-          description: `"${updatedTask.description}" ya no está notificada.`,
+          title: t('toast.task.unregistered'),
+          description: t('toast.task.unregisteredDetail', { description: updatedTask.description }),
         })
       }
     } else if (oldIsNotifiedState === updatedTask.isNotified) { // Si no cambió el estado de notificación, pero otros campos sí
       add({
-        title: 'Tarea Actualizada',
-        description: `"${updatedTask.description}" ha sido actualizada.`,
+        title: t('toast.task.updated'),
+        description: t('toast.task.updatedDetail', { description: updatedTask.description }),
       })
     }
   } else {
     add({
-      title: 'Error al Actualizar',
-      description: `No se encontró la tarea con ID: ${updatedTask.id}.`,
+      title: t('toast.error.update'),
+      description: t('toast.task.notFound', { id: updatedTask.id }),
     })
   }
 }
@@ -161,8 +165,8 @@ const reactivateTask = (taskId: string) => {
   if (task) {
     delete task.endTime
     add({
-      title: 'Tarea Reactivada',
-      description: `"${task.description}" ha sido reabierta.`,
+      title: t('toast.task.reopened'),
+      description: t('toast.task.reopenedDetail', { description: task.description }),
       type: 'warning'
     });
   }
@@ -179,13 +183,13 @@ const deleteTask = (taskId: string) => {
     // El botón de deshacer se define mediante la propiedad action del objeto toast
     const toastId = add(
       {
-        title: 'Tarea Eliminada',
-        description: `"${taskToDelete.description}" ha sido eliminada.`,
+        title: t('toast.task.deleted'),
+        description: t('toast.task.deletedDetail', { description: taskToDelete.description }),
         type: 'error',
         delayClose: true,
         actions: [
           {
-            label: 'Deshacer',
+            label: t('toast.action.undo'),
             onClick: () => {
               // Restaurar la tarea en su posición original tras un leve retardo
               setTimeout(() => {
@@ -200,8 +204,8 @@ const deleteTask = (taskId: string) => {
               // Mostrar el toast de restauración ligeramente después
               setTimeout(() => {
                 add({
-                  title: 'Tarea Restaurada',
-                  description: `"${taskToDelete.description}" ha sido restaurada.`
+                  title: t('toast.task.restored'),
+                  description: t('toast.task.restoredDetail', { description: taskToDelete.description }),
                 });
               }, 550);
             }
@@ -230,13 +234,13 @@ const startNewShift = (showAlert = true) => {
 
   if (showAlert) {
     const confirmed = window.confirm(
-      `Iniciando nuevo turno a las ${shiftStartTimeFormatted}. \n\n` +
-      `Esto archivará las tareas actuales. ¿Desea continuar?`
+      t('toast.shift.starting', { time: shiftStartTimeFormatted }) + '\n\n' +
+      t('dialog.shift.confirmArchive')
     );
     if (!confirmed) {
       add({
-        title: 'Acción Cancelada',
-        description: 'Inicio de nuevo turno cancelado por el usuario.',
+        title: t('toast.action.cancelled'),
+        description: t('toast.shift.cancelled'),
         type: 'error'
       });
       return;
@@ -251,13 +255,13 @@ const startNewShift = (showAlert = true) => {
 
   const toastId = add(
     {
-      title: 'Nuevo Turno Iniciado',
-      description: `Turno comenzado a las ${shiftStartTimeFormatted}.`,
+      title: t('toast.shift.started'),
+      description: t('toast.shift.startedDetail', { time: shiftStartTimeFormatted }),
       type: 'success',
       delayClose: true,
       actions: [
         {
-          label: 'Deshacer',
+          label: t('toast.action.undo'),
           onClick: async () => {
             // Restaurar el estado anterior del turno
             currentShiftId.value = previousCurrentShiftId;
@@ -275,8 +279,8 @@ const startNewShift = (showAlert = true) => {
 
             setTimeout(() => {
               add({
-                title: 'Acción Deshecha',
-                description: 'Se restauró el estado anterior al nuevo turno.',
+                title: t('toast.action.undone'),
+                description: t('toast.shift.rollback'),
                 type: 'info'
               });
             }, 550);
@@ -363,7 +367,7 @@ const listTitle = computed(() => {
     return ''
   }
   // selectedShiftToView contiene directamente el shiftId que queremos mostrar
-  return getShiftLabel(selectedShiftToView.value)
+  return t('title.taskList', { shift: getShiftLabel(selectedShiftToView.value) })
 })
 
 import { getShiftLabel, getShiftIcon, getShiftColor } from './composables/useShifts'
@@ -380,8 +384,8 @@ import {
 const exportTasksToJson = async () => {
   if (allTasks.value.length === 0) {
     add({
-      title: 'Exportación Vacía',
-      description: 'No hay tareas para exportar.',
+      title: t('toast.export.empty'),
+      description: t('toast.export.noTasks'),
       type: 'warning'
     });
     return;
