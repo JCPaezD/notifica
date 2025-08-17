@@ -944,17 +944,17 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - Branding “Notifica” no se traduce.
   - [ ] Integrar textos en sistema de traducción
     - [ ] Volcar `ES final` desde `docs/rewording-ES.md` a `es.ts`
-      - [x] Bloque 1 — Botones y labels cortos
-      - [x] Bloque 2 — Filtros y estados
-      - [ ] Bloque 3 — Mensajes de sistema / toasts
+      - [x] Bloque 1
+      - [x] Bloque 2
+      - [ ] Bloque 3
         - [ ] Parte 1 (líneas 1–20)
         - [ ] Parte 2 (líneas 21–40)
         - [ ] Parte 3 (líneas 41–60)
         - [ ] Parte 4 (líneas 61–80)
         - [ ] Parte 5 (resto)
-      - [ ] Bloque 4 — Diálogos y modales
-      - [ ] Bloque 5 — Placeholders y tooltips
-      - [ ] Bloque 6 — Cabeceras, títulos y extras
+      - [ ] Bloque 4
+      - [ ] Bloque 5
+      - [ ] Bloque 6
     - [ ] Crear `en.ts` con traducción inicial de todos los textos
     - [ ] Sustituir textos hardcodeados en componentes por claves i18n
     - [ ] Manejar casos con parámetros dinámicos (`{count}`, `{description}`…) y plurales

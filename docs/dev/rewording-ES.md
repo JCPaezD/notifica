@@ -72,7 +72,8 @@
 | Borrado Completo | src/App.vue:570 | Borrado completo | toast.deleteAll.done | — | no | Toast error (destructiva) |
 | Todas las tareas y notas han sido eliminadas. | src/App.vue:571 | Todas las tareas y notas han sido eliminadas | toast.deleteAll.detail | — | no | Descripción de toast |
 | Deshacer | src/App.vue:576 | Deshacer | toast.action.undo | — | no | Acción de toast (botón) |
-| Tareas Restauradas | src/App.vue:595 | Tareas restauradas | toast.deleteAll.restored | — | no | Toast info (rollback) || Todas las tareas han sido restauradas. | src/App.vue:596 |  | Descripción de toast |
+| Tareas Restauradas | src/App.vue:595 | Tareas restauradas | toast.deleteAll.restored | — | no | Toast info (rollback) |
+| Todas las tareas han sido restauradas. | src/App.vue:596 | Todas las tareas han sido restauradas | toast.deleteAll.restoredDetail | — | no | Descripción de toast |
 | Acción Cancelada | src/App.vue:608 | Acción cancelada | toast.action.cancelled | — | no | Toast info |
 | El borrado de tareas fue cancelado. | src/App.vue:609 | El borrado de tareas fue cancelado | toast.deleteAll.cancelled | — | no | Descripción de toast |
 | Error de Carga | src/App.vue:640 | Error de carga | toast.load.error | — | no | Toast error (carga inicial) |
@@ -91,10 +92,12 @@
 | Tareas Copiadas | src/App.vue:817 | Tareas copiadas | toast.clipboard.success | — | no | Toast info (clipboard) |
 | Contenido copiado al portapapeles. | src/App.vue:818 | Contenido copiado al portapapeles | toast.clipboard.detail | — | no | Descripción de toast |
 | Error al Compartir | src/App.vue:823 | Error al compartir | toast.share.errorFallback | — | no | Toast error (share fallback) |
-| Tu navegador no soporta la función de compartir o copiar. | src/App.vue:824 | Tu navegador no soporta la función de compartir o copiar | toast.share.unsupported | — | no | Descripción de toast || Acción Desconocida | src/App.vue:868 |  | Toast warning |
+| Tu navegador no soporta la función de compartir o copiar. | src/App.vue:824 | Tu navegador no soporta la función de compartir o copiar | toast.share.unsupported | — | no | Descripción de toast |
+| Acción Desconocida | src/App.vue:868 | Acción desconocida | toast.action.unknown | — | no | Toast warning |
 | "${updatedTask.description}" marcada como notificada. | src/App.vue:135 | «{description}» marcada como registrada | toast.task.registeredDetail | description | no | Toast success (estado) |
 | "${updatedTask.description}" ya no está notificada. | src/App.vue:141 | «{description}» ya no está registrada | toast.task.unregisteredDetail | description | no | Toast info (estado) |
 | "${updatedTask.description}" ha sido actualizada. | src/App.vue:147 | «{description}» actualizada | toast.task.updatedDetail | description | no | Toast info (update) |
+
 | No se encontró la tarea con ID: ${updatedTask.id}. | src/App.vue:153 | No se encontró la tarea con ID: {id} | toast.task.notFound | id | no | Toast error (not found) |
 | "${task.description}" ha sido reabierta. | src/App.vue:165 | «{description}» reabierta | toast.task.reopenedDetail | description | no | Toast info (reabrir) |
 | "${taskToDelete.description}" ha sido eliminada. | src/App.vue:183 | «{description}» eliminada | toast.task.deletedDetail | description | no | Toast error (delete) |

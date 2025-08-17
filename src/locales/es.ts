@@ -61,23 +61,131 @@ export default {
   toast: {
     task: {
       // Toasts relacionados con tareas
+      started: "Tarea iniciada",
+      finished: "Tarea finalizada",
+      finishedDetail: "«{description}» completada a las {endTime}",
+      registered: "Tarea registrada",
+      registeredDetail: "«{description}» marcada como registrada",
+      unregistered: "Registro anulado",
+      unregisteredDetail: "«{description}» ya no está registrada",
+      updated: "Tarea actualizada",
+      updatedDetail: "«{description}» actualizada",
+      reopened: "Tarea reabierta",
+      deleted: "Tarea eliminada",
+      restored: "Tarea restaurada",
+      notFound: "No se encontró la tarea con ID: {id}",
+      reopenedDetail: "«{description}» reabierta",
+      deletedDetail: "«{description}» eliminada",
+      restoredDetail: "«{description}» restaurada",
+    },
+    error: {
+      // Errores generales
+      update: "Error al actualizar",
+    },
+    action: {
+      // Acciones de botones en toasts
+      undo: "Deshacer",
+      cancelled: "Acción cancelada",
+      undone: "Acción deshecha",
+      closeAll: "Cerrar todo",
+      unknown: "Acción desconocida",
+    },
+    shift: {
+      // Toasts relacionados con tramos
+      cancelled: "Inicio de nuevo tramo cancelado por el usuario",
+      started: "Nuevo tramo iniciado",
+      rollback: "Se restauró el estado anterior al nuevo tramo",
+      starting: "Iniciando nuevo tramo a las {time}",
+      startedDetail: "Tramo comenzado a las {time}",
+    },
+    validation: {
+      // Mensajes de validación
+      required: "Campo requerido",
+      description: "Introduce una descripción para la tarea",
     },
     import: {
       // Toasts relacionados con importación
+      failed: "Importación fallida",
+      noFile: "No se seleccionó ningún archivo",
+      success: "Importación completada",
+      error: "Error de importación",
+      errorDetail: "Error al procesar el archivo: {errorMessage}",
+      readError: "Error de lectura",
+      readErrorDetail: "Ocurrió un problema al leer el archivo seleccionado",
+      invalidList: "El archivo no contiene una lista válida de tareas",
+      invalidTask: "Formato de tarea inválido. Faltan campos requeridos",
+      count: "{count} tarea importada correctamente | {count} tareas importadas correctamente",
     },
     export: {
       // Toasts relacionados con exportación
+      empty: "Exportación vacía",
+      noTasks: "No hay tareas para exportar",
+      success: "Tareas exportadas",
+      error: "Error al exportar",
+      errorDetail: "No se pudo generar el archivo",
+      generatedFile: "Archivo «{fileName}» generado",
     },
     share: {
       // Toasts relacionados con compartir
+      error: "Error al compartir",
+      noShift: "No hay un tramo seleccionado o activo para compartir",
+      empty: "Nada que compartir",
+      success: "Tareas compartidas",
+      detail: "Contenido enviado mediante sistema nativo",
+      successFallback: "Tareas compartidas",
+      detailFallback: "Contenido enviado a la aplicación de compartir",
+      errorFallback: "Error al compartir",
+      unsupported: "Tu navegador no soporta la función de compartir o copiar",
+      readyFile: "Archivo «{fileName}» listo para compartir",
+      noTasks: "No hay tareas en el {shift} para compartir",
+    },
+    clipboard: {
+      // Toasts relacionados con portapapeles
+      success: "Tareas copiadas",
+      detail: "Contenido copiado al portapapeles",
+    },
+    deleteAll: {
+      // Toasts relacionados con borrado masivo
+      done: "Borrado completo",
+      detail: "Todas las tareas y notas han sido eliminadas",
+      restored: "Tareas restauradas",
+      restoredDetail: "Todas las tareas han sido restauradas",
+      cancelled: "El borrado de tareas fue cancelado",
+    },
+    load: {
+      // Toasts relacionados con carga inicial
+      error: "Error de carga",
+      errorDetail: "No se pudieron cargar las tareas guardadas. Podrían estar corruptas",
+    },
+    demo: {
+      // Toasts de demostración
+      title: "Notificación de prueba",
+      detail: "Esto es una prueba del sistema de toasts propio",
+    },
+    menu: {
+      // Toasts relacionados con acciones de menú no implementadas
+      unimplemented: "La acción de menú «{action}» no está implementada",
     },
   },
   dialog: {
     deleteAll: {
-      // Confirmación de borrar todo
+      // Diálogo de borrado total
+      confirm: "¿Borrar todas las tareas de la aplicación? No podrán recuperarse",
     },
     share: {
-      // Diálogo compartir
+      // Diálogo de compartir
+      title: "Compartir tareas",
+      titleShift: "Notificaciones del {shift}",
+      titleShiftFallback: "Notificaciones del {shift}",
+    },
+    export: {
+      // Diálogo de exportación
+      title: "Exportar tareas",
+      message: "Archivo de tareas exportado desde Notifica",
+    },
+    shift: {
+      // Diálogo al iniciar nuevo tramo
+      confirmArchive: "Esto archivará las tareas actuales. ¿Deseas continuar?",
     },
   },
   filter: {
@@ -102,7 +210,11 @@ export default {
     // Títulos de pantallas/secciones
   },
   share: {
-    // Textos relacionados con compartir
+    content: {
+      // Encabezados del contenido compartido
+      headerTasks: "📋 Notificaciones del {shift}",
+      headerNotes: "🗒️ Notas",
+    },
   },
   export: {
     // Textos relacionados con exportar
