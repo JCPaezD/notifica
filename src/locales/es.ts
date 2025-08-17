@@ -86,6 +86,7 @@ export default {
       reopenedDetail: "«{description}» reabierta",
       deletedDetail: "«{description}» eliminada",
       restoredDetail: "«{description}» restaurada",
+      startedDetail: "«{description}» comenzada",
     },
     error: {
       // Errores generales

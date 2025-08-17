@@ -116,6 +116,7 @@
 | Notificaciones del ${shiftLabel} | src/App.vue:788 | Notificaciones del {shift} | dialog.share.titleShift | shift | no | Título diálogo OS share |
 | Notificaciones del ${shiftLabel} | src/App.vue:806 | Notificaciones del {shift} | dialog.share.titleShiftFallback | shift | no | Título diálogo OS share (fallback) |
 | La acción de menú "${actionName}" no está implementada. | src/App.vue:869 | La acción de menú «{action}» no está implementada | toast.menu.unimplemented | action | no | Toast warning |
+| "${newTask.description}" comenzada. | src/App.vue:100 | «{description}» comenzada | toast.task.startedDetail | description | no | Toast success (detalle inicio)
 
 
 

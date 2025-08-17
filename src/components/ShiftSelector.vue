@@ -12,7 +12,7 @@
       aria-haspopup="true"
       :aria-expanded="isShiftDropdownOpen"
     >
-      Turno
+      {{ t('shift.term') }}
       <svg class="ml-0.5 h-3 w-3 text-text-main/70 dark:text-main-dark/70" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
         fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd"
@@ -87,6 +87,10 @@
 import { ref } from 'vue'
 import { getShiftIcon, getShiftLabel, getShiftColor } from '@/composables/useShifts'
 import { shiftIcons as icons } from '@/icons/shifts'
+
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 
 interface Shift {
   id: string

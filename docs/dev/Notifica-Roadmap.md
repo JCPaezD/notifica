@@ -958,8 +958,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Crear `en.ts` con traducción inicial de todos los textos
     - [ ] Sustituir textos hardcodeados en componentes por claves i18n
       - [x] i18n: sustituir textos en SideMenu.vue (líneas 92–101 del checklist)
-      - [ ] i18n: sustituir textos en App.vue (líneas 1–30 del checklist)
-      - [ ] i18n: sustituir textos en App.vue (líneas 31–60 del checklist)
+      - [x] i18n: sustituir textos en App.vue (líneas 1–30 del checklist)
+      - [x] i18n: sustituir textos en App.vue (líneas 31–60 del checklist)
       - [ ] i18n: sustituir textos en App.vue (líneas 61–86 del checklist)
       - [ ] i18n: sustituir textos en NewTaskForm.vue (líneas 87–90 del checklist)
       - [ ] i18n: sustituir textos en ShiftSelector.vue (línea 91 del checklist)

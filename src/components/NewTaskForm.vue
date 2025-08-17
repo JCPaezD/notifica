@@ -18,7 +18,7 @@
             :value="modelValueDescription"
             @input="$emit('update:modelValueDescription', ($event.target as HTMLTextAreaElement).value)"
             @keyup.enter.prevent="$emit('submit')"
-            placeholder="Nuevo aviso"
+            :placeholder="t('placeholder.task.description')"
             rows="2"
             class="p-3 bg-surface-1 dark:bg-surface-1-dark border border-divider dark:border-divider-dark rounded-md shadow-sm 
                    focus:ring-2 focus:ring-accent-main focus:border-accent-main 
@@ -34,7 +34,7 @@
             :value="modelValueTechnician"
             @input="$emit('update:modelValueTechnician', ($event.target as HTMLInputElement).value)"
             @keyup.enter="$emit('submit')"
-            placeholder="Técnico(s)"
+            :placeholder="t('placeholder.task.assignee')"
             class="p-1 
                    bg-surface-1 dark:bg-surface-1-dark border border-divider dark:border-divider-dark rounded-md shadow-sm 
                    focus:ring-2 focus:ring-accent-main focus:border-accent-main 

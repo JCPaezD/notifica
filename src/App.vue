@@ -75,8 +75,8 @@ const taskListKey = ref(0); // Key para forzar la re-renderización de TaskList,
 const startNewTask = () => {
   if (newTaskDescription.value.trim() === '') {
     add({
-      title: 'Campo Requerido',
-      description: 'Por favor, introduce una descripción para la tarea.',
+      title: t('toast.validation.required'),
+      description: t('toast.validation.description'),
       type: 'warning'
     });
     return
@@ -100,8 +100,8 @@ const startNewTask = () => {
   newTaskDescription.value = '' // Limpiar el campo después de iniciar
   newTaskTechnician.value = '' // Limpiar el campo del técnico
   add({
-    title: 'Tarea Iniciada',
-    description: `"${newTask.description}" comenzada.`,
+    title: t('toast.task.started'),
+    description: t('toast.task.startedDetail', { description: newTask.description }),
     type: 'success'
   })
 
@@ -654,7 +654,7 @@ const exportTasksToJson = async () => {
       description: t('toast.demo.detail'),
       actions: [
         {
-          label: 'Cerrar Todo',
+          label: t('toast.action.closeAll'),
           onClick: () => {
             setTimeout(() => {
               toasts.value = []
@@ -752,8 +752,8 @@ const exportTasksToJson = async () => {
 
     if (!shiftIdToShare) {
       add({
-        title: 'Error al Compartir',
-        description: 'No hay un turno seleccionado o activo para compartir.',
+        title: t('toast.share.error'),
+        description: t('toast.share.noShift'),
         type: 'warning'
       });
       return;
@@ -765,21 +765,21 @@ const exportTasksToJson = async () => {
 
     if (tasksOfShift.length === 0) {
       add({
-        title: 'Nada que Compartir',
-        description: `No hay tareas en el ${shiftLabel} para compartir.`,
+        title: t('toast.share.empty'),
+        description: t('toast.share.noTasks', { shift: shiftLabel }),
         type: 'warning'
       });
       return;
     }
 
-    const title = `_*📋 Notificaciones del ${shiftLabel}*:_\n\n`;
+    const title = `_*${t('share.content.headerTasks', { shift: shiftLabel })}*:_\n\n`;
     const tasksText = tasksOfShift.map(formatTaskForPlainText).join('\n\n');
     
     let fullText = title + tasksText;
 
     const notes = getNotesForShift(shiftIdToShare);
     if (notes.length > 0) {
-      const notesBlock = '\n\n_*🗒️ Notas*:_\n' + notes.map(n => `    - ${n}`).join('\n');
+      const notesBlock = `\n\n_*${t('share.content.headerNotes')}*:_\n` + notes.map(n => `    - ${n}`).join('\n');
       fullText += notesBlock;
     }
 
@@ -789,13 +789,13 @@ const exportTasksToJson = async () => {
 
       if (canShare.value) {
         await Share.share({
-          title: `Notificaciones del ${shiftLabel}`,
+          title: t('dialog.share.titleShift', { shift: shiftLabel }),
           text: fullText,
-          dialogTitle: 'Compartir Tareas'
+          dialogTitle: t('dialog.share.title')
         });
         add({
-          title: 'Tareas Compartidas',
-          description: 'Contenido enviado mediante sistema nativo.',
+          title: t('toast.share.success'),
+          description: t('toast.share.detail'),
           type: 'info'
         });
         return;
@@ -807,25 +807,25 @@ const exportTasksToJson = async () => {
     try {
       if (navigator.share) {
         await navigator.share({
-          title: `Notificaciones del ${shiftLabel}`,
+          title: t('dialog.share.titleShiftFallback', { shift: shiftLabel }),
           text: fullText,
         });
         add({
-          title: 'Tareas Compartidas',
-          description: 'Contenido enviado a la aplicación de compartir.',
+          title: t('toast.share.successFallback'),
+          description: t('toast.share.detailFallback'),
           type: 'info'
         });
       } else if (navigator.clipboard) {
         await navigator.clipboard.writeText(fullText);
         add({
-          title: 'Tareas Copiadas',
-          description: 'Contenido copiado al portapapeles.',
+          title: t('toast.clipboard.success'),
+          description: t('toast.clipboard.detail'),
           type: 'info'
         });
       } else {
         add({
-          title: 'Error al Compartir',
-          description: 'Tu navegador no soporta la función de compartir o copiar.',
+          title: t('toast.share.errorFallback'),
+          description: t('toast.share.unsupported'),
           type: 'error'
         });
       }
@@ -869,8 +869,8 @@ const exportTasksToJson = async () => {
         break;
       default:
         add({
-          title: 'Acción Desconocida',
-          description: `La acción de menú "${actionName}" no está implementada.`,
+          title: t('toast.action.unknown'),
+          description: t('toast.menu.unimplemented', { action: actionName }),
           type: 'warning'
         });
     }
@@ -891,7 +891,7 @@ const exportTasksToJson = async () => {
     <div class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none">
       <button @click="openSideMenu"
         class="absolute left-4 top-4.5 btn-close md:hover:bg-surface-hover dark:md:hover:bg-surface-hover-dark"
-        aria-label="Abrir menú">
+        :aria-label="t('aria.menu.open')">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-7 h-7 text-text-main dark:text-main-dark">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -968,7 +968,7 @@ const exportTasksToJson = async () => {
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
           </svg>
-          Volver al Turno Actual
+          {{ t('nav.shift.returnCurrent') }}
         </button>
       </div>
     </Transition>

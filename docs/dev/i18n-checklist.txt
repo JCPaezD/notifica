@@ -28,66 +28,65 @@
 - [x] | listTitle (dinámico) | src/App.vue:361 | Tramo del {shift} | title.taskList | shift | no | title dinámico, usa getShiftLabel(selectedShiftToView) 
 - [x] | Exportación Vacía | src/App.vue:383 | Exportación vacía | toast.export.empty | — | no | Toast warning 
 - [x] | No hay tareas para exportar. | src/App.vue:384 | No hay tareas para exportar | toast.export.noTasks | — | no | Descripción de toast 
-- [ ] | notifica-tareas | src/App.vue:390 | notifica-backup-{date}.json | export.filename | date | no | Prefijo nombre de archivo exportado 
-- [ ] | Exportar tareas | src/App.vue:418 | Exportar tareas | dialog.export.title | — | no | Título diálogo / OS share 
-- [ ] | Archivo de tareas exportado desde Notifica. | src/App.vue:419 | Archivo de tareas exportado desde Notifica | dialog.export.message | — | no | Texto de OS share 
-- [ ] | Tareas exportadas | src/App.vue:425 | Tareas exportadas | toast.export.success | — | no | Toast success (exportación) 
-- [ ] | Archivo "${fileName}" listo para compartir. | src/App.vue:426 | Archivo «{fileName}» listo para compartir | toast.share.readyFile | fileName | no | Toast info (share) 
-- [ ] | Error al exportar | src/App.vue:431 | Error al exportar | toast.export.error | — | no | Toast error (exportación) 
-- [ ] | No se pudo generar el archivo. | src/App.vue:432 | No se pudo generar el archivo | toast.export.errorDetail | — | no | Descripción de toast 
-- [ ] | Archivo "${fileName}" generado. | src/App.vue:444 | Archivo «{fileName}» generado | toast.export.generatedFile | fileName | no | Toast success (export) 
-- [ ] | Importación Fallida | src/App.vue:459 | Importación fallida | toast.import.failed | — | no | Toast warning (importación) 
-- [ ] | No se seleccionó ningún archivo. | src/App.vue:460 | No se seleccionó ningún archivo | toast.import.noFile | — | no | Descripción de toast 
-- [ ] | El archivo no contiene una lista válida de tareas. | src/App.vue:480 | El archivo no contiene una lista válida de tareas | toast.import.invalidList | — | no | Error message (propaga a toast) 
-- [ ] | Formato de tarea inválido. Faltan campos requeridos. | src/App.vue:493 | Formato de tarea inválido. Faltan campos requeridos | toast.import.invalidTask | — | no | Error message (propaga a toast) 
-- [ ] | Importación Exitosa | src/App.vue:531 | Importación completada | toast.import.success | — | no | Toast info (importación) 
-- [ ] | ${validatedTasks.length} tareas importadas correctamente. | src/App.vue:532 | {count} tarea importada correctamente \| {count} tareas importadas correctamente | toast.import.count | count | sí 
-- [ ] | Error de Importación | src/App.vue:537 | Error de importación | toast.import.error | — | no | Toast error (importación) 
-- [ ] | Al procesar el archivo: ${error instanceof Error ? error.message : 'Error desconocido'} | src/App.vue:538 | Error al procesar el archivo: {errorMessage} | toast.import.errorDetail | errorMessage | no | Descripción de toast (dinámica) 
-- [ ] | Error de Lectura | src/App.vue:549 | Error de lectura | toast.import.readError | — | no | Toast error (importación) 
-- [ ] | Ocurrió un problema al leer el archivo seleccionado. | src/App.vue:550 | Ocurrió un problema al leer el archivo seleccionado | toast.import.readErrorDetail | — | no | Descripción de toast 
-- [ ] | ¿Estás seguro de que quieres borrar TODAS las tareas de la aplicación? No podrán ser recuperadas. | src/App.vue:561 | ¿Borrar todas las tareas de la aplicación? No podrán recuperarse | dialog.deleteAll.confirm | — | no | Confirm (diálogo nativo) 
-- [ ] | Borrado Completo | src/App.vue:570 | Borrado completo | toast.deleteAll.done | — | no | Toast error (destructiva) 
-- [ ] | Todas las tareas y notas han sido eliminadas. | src/App.vue:571 | Todas las tareas y notas han sido eliminadas | toast.deleteAll.detail | — | no | Descripción de toast 
-- [ ] | Deshacer | src/App.vue:576 | Deshacer | toast.action.undo | — | no | Acción de toast (botón) 
-- [ ] | Tareas Restauradas | src/App.vue:595 | Tareas restauradas | toast.deleteAll.restored | — | no | Toast info (rollback) 
-- [ ] | Todas las tareas han sido restauradas. | src/App.vue:596 | Todas las tareas han sido restauradas | toast.deleteAll.restoredDetail | — | no | Descripción de toast 
-- [ ] | Acción Cancelada | src/App.vue:608 | Acción cancelada | toast.action.cancelled | — | no | Toast info 
-- [ ] | El borrado de tareas fue cancelado. | src/App.vue:609 | El borrado de tareas fue cancelado | toast.deleteAll.cancelled | — | no | Descripción de toast 
-- [ ] | Error de Carga | src/App.vue:640 | Error de carga | toast.load.error | — | no | Toast error (carga inicial) 
-- [ ] | No se pudieron cargar las tareas guardadas. Podrían estar corruptas. | src/App.vue:641 | No se pudieron cargar las tareas guardadas. Podrían estar corruptas | toast.load.errorDetail | — | no | Descripción de toast 
-- [ ] | Notificación de prueba | src/App.vue:649 | Notificación de prueba | toast.demo.title | — | no | Toast demo 
-- [ ] | Esto es una prueba del sistema de toasts propio. | src/App.vue:650 | Esto es una prueba del sistema de toasts propio | toast.demo.detail | — | no | Descripción de toast 
-- [ ] | Cerrar Todo | src/App.vue:653 | Cerrar todo | toast.action.closeAll | — | no | Acción de toast (botón) 
-- [ ] | Campo Requerido | src/App.vue:74 | Campo requerido | toast.validation.required | — | no | Toast warning (validación) 
-- [ ] | Por favor, introduce una descripción para la tarea. | src/App.vue:75 | Introduce una descripción para la tarea | toast.validation.description | — | no | Toast warning (validación) 
-- [ ] | Error al Compartir | src/App.vue:751 | Error al compartir | toast.share.error | — | no | Toast error (share) 
-- [ ] | No hay un turno seleccionado o activo para compartir. | src/App.vue:752 | No hay un tramo seleccionado o activo para compartir | toast.share.noShift | — | no | Descripción de toast 
-- [ ] | Nada que Compartir | src/App.vue:764 | Nada que compartir | toast.share.empty | — | no | Toast warning (share) 
-- [ ] | No hay tareas en el ${shiftLabel} para compartir. | src/App.vue:765 | No hay tareas en el {shift} para compartir | toast.share.noTasks | shift | no | Toast info (share) 
-- [ ] | _*📋 Notificaciones del ${shiftLabel}*:_ | src/App.vue:771 | 📋 Notificaciones del {shift} | share.content.headerTasks | shift | no | Título (contenido de compartir) 
-- [ ] | _*🗒️ Notas*:_ | src/App.vue:778 | 🗒️ Notas | share.content.headerNotes | — | no | Encabezado bloque notas (share) 
-- [ ] | Notificaciones del ${shiftLabel} | src/App.vue:788 | Notificaciones del {shift} | dialog.share.titleShift | shift | no | Título diálogo OS share 
-- [ ] | Compartir Tareas | src/App.vue:790 | Compartir tareas | dialog.share.title | — | no | Título diálogo OS share 
-- [ ] | Tareas Compartidas | src/App.vue:793 | Tareas compartidas | toast.share.success | — | no | Toast info (share) 
-- [ ] | Contenido enviado mediante sistema nativo. | src/App.vue:794 | Contenido enviado mediante sistema nativo | toast.share.detail | — | no | Descripción de toast 
-- [ ] | Notificaciones del ${shiftLabel} | src/App.vue:806 | Notificaciones del {shift} | dialog.share.titleShiftFallback | shift | no | Título diálogo OS share (fallback) 
-- [ ] | Tareas Compartidas | src/App.vue:810 | Tareas compartidas | toast.share.successFallback | — | no | Toast info (share fallback) 
-- [ ] | Contenido enviado a la aplicación de compartir. | src/App.vue:811 | Contenido enviado a la aplicación de compartir | toast.share.detailFallback | — | no | Descripción de toast 
-- [ ] | Tareas Copiadas | src/App.vue:817 | Tareas copiadas | toast.clipboard.success | — | no | Toast info (clipboard) 
-- [ ] | Contenido copiado al portapapeles. | src/App.vue:818 | Contenido copiado al portapapeles | toast.clipboard.detail | — | no | Descripción de toast 
-- [ ] | Error al Compartir | src/App.vue:823 | Error al compartir | toast.share.errorFallback | — | no | Toast error (share fallback) 
-- [ ] | Tu navegador no soporta la función de compartir o copiar. | src/App.vue:824 | Tu navegador no soporta la función de compartir o copiar | toast.share.unsupported | — | no | Descripción de toast 
-- [ ] | Acción Desconocida | src/App.vue:868 | Acción desconocida | toast.action.unknown | — | no | Toast warning 
-- [ ] | La acción de menú "${actionName}" no está implementada. | src/App.vue:869 | La acción de menú «{action}» no está implementada | toast.menu.unimplemented | action | no | Toast warning 
-- [ ] | Abrir menú | src/App.vue:890 | Abrir menú | a11y.menu.open | — | no | Accesibilidad (aria-label) 
-- [ ] | Abrir menú | src/App.vue:890 | Abrir menú | aria.menu.open | — | no | aria-label (botón menú) 
-- [ ] | Volver al Turno Actual | src/App.vue:967 | Volver al Tramo Actual | nav.shift.returnCurrent | — | no | Acción de navegación 
-- [ ] | Tarea Iniciada | src/App.vue:99 | Tarea iniciada | toast.task.started | — | no | Toast success 
-- [ ] | Nuevo aviso | src/components/NewTaskForm.vue:21 | Descripción | placeholder.task.description | — | no | Placeholder input 
-- [ ] | Nuevo aviso | src/components/NewTaskForm.vue:21 | Descripción | task.description.placeholder | — | no | Placeholder de descripción 
-- [ ] | Técnico(s) | src/components/NewTaskForm.vue:37 | Asignado a… | placeholder.task.assignee | — | no | Placeholder input 
-- [ ] | Iniciar | src/components/NewTaskForm.vue:61 | Iniciar | btn.start | — | no | Botón inicio tarea 
+- [x] | notifica-tareas | src/App.vue:390 | notifica-backup-{date}.json | export.filename | date | no | Prefijo nombre de archivo exportado 
+- [x] | Exportar tareas | src/App.vue:418 | Exportar tareas | dialog.export.title | — | no | Título diálogo / OS share 
+- [x] | Archivo de tareas exportado desde Notifica. | src/App.vue:419 | Archivo de tareas exportado desde Notifica | dialog.export.message | — | no | Texto de OS share 
+- [x] | Tareas exportadas | src/App.vue:425 | Tareas exportadas | toast.export.success | — | no | Toast success (exportación) 
+- [x] | Archivo "${fileName}" listo para compartir. | src/App.vue:426 | Archivo «{fileName}» listo para compartir | toast.share.readyFile | fileName | no | Toast info (share) 
+- [x] | Error al exportar | src/App.vue:431 | Error al exportar | toast.export.error | — | no | Toast error (exportación) 
+- [x] | No se pudo generar el archivo. | src/App.vue:432 | No se pudo generar el archivo | toast.export.errorDetail | — | no | Descripción de toast 
+- [x] | Archivo "${fileName}" generado. | src/App.vue:444 | Archivo «{fileName}» generado | toast.export.generatedFile | fileName | no | Toast success (export) 
+- [x] | Importación Fallida | src/App.vue:459 | Importación fallida | toast.import.failed | — | no | Toast warning (importación) 
+- [x] | No se seleccionó ningún archivo. | src/App.vue:460 | No se seleccionó ningún archivo | toast.import.noFile | — | no | Descripción de toast 
+- [x] | El archivo no contiene una lista válida de tareas. | src/App.vue:480 | El archivo no contiene una lista válida de tareas | toast.import.invalidList | — | no | Error message (propaga a toast) 
+- [x] | Formato de tarea inválido. Faltan campos requeridos. | src/App.vue:493 | Formato de tarea inválido. Faltan campos requeridos | toast.import.invalidTask | — | no | Error message (propaga a toast) 
+- [x] | Importación Exitosa | src/App.vue:531 | Importación completada | toast.import.success | — | no | Toast info (importación) 
+- [x] | ${validatedTasks.length} tareas importadas correctamente. | src/App.vue:532 | {count} tarea importada correctamente \| {count} tareas importadas correctamente | toast.import.count | count | sí 
+- [x] | Error de Importación | src/App.vue:537 | Error de importación | toast.import.error | — | no | Toast error (importación) 
+- [x] | Al procesar el archivo: ${error instanceof Error ? error.message : 'Error desconocido'} | src/App.vue:538 | Error al procesar el archivo: {errorMessage} | toast.import.errorDetail | errorMessage | no | Descripción de toast (dinámica) 
+- [x] | Error de Lectura | src/App.vue:549 | Error de lectura | toast.import.readError | — | no | Toast error (importación) 
+- [x] | Ocurrió un problema al leer el archivo seleccionado. | src/App.vue:550 | Ocurrió un problema al leer el archivo seleccionado | toast.import.readErrorDetail | — | no | Descripción de toast 
+- [x] | ¿Estás seguro de que quieres borrar TODAS las tareas de la aplicación? No podrán ser recuperadas. | src/App.vue:561 | ¿Borrar todas las tareas de la aplicación? No podrán recuperarse | dialog.deleteAll.confirm | — | no | Confirm (diálogo nativo) 
+- [x] | Borrado Completo | src/App.vue:570 | Borrado completo | toast.deleteAll.done | — | no | Toast error (destructiva) 
+- [x] | Todas las tareas y notas han sido eliminadas. | src/App.vue:571 | Todas las tareas y notas han sido eliminadas | toast.deleteAll.detail | — | no | Descripción de toast 
+- [x] | Deshacer | src/App.vue:576 | Deshacer | toast.action.undo | — | no | Acción de toast (botón) 
+- [x] | Tareas Restauradas | src/App.vue:595 | Tareas restauradas | toast.deleteAll.restored | — | no | Toast info (rollback) 
+- [x] | Todas las tareas han sido restauradas. | src/App.vue:596 | Todas las tareas han sido restauradas | toast.deleteAll.restoredDetail | — | no | Descripción de toast 
+- [x] | Acción Cancelada | src/App.vue:608 | Acción cancelada | toast.action.cancelled | — | no | Toast info 
+- [x] | El borrado de tareas fue cancelado. | src/App.vue:609 | El borrado de tareas fue cancelado | toast.deleteAll.cancelled | — | no | Descripción de toast 
+- [x] | Error de Carga | src/App.vue:640 | Error de carga | toast.load.error | — | no | Toast error (carga inicial) 
+- [x] | No se pudieron cargar las tareas guardadas. Podrían estar corruptas. | src/App.vue:641 | No se pudieron cargar las tareas guardadas. Podrían estar corruptas | toast.load.errorDetail | — | no | Descripción de toast 
+- [x] | Notificación de prueba | src/App.vue:649 | Notificación de prueba | toast.demo.title | — | no | Toast demo 
+- [x] | Esto es una prueba del sistema de toasts propio. | src/App.vue:650 | Esto es una prueba del sistema de toasts propio | toast.demo.detail | — | no | Descripción de toast 
+- [x] | Cerrar Todo | src/App.vue:653 | Cerrar todo | toast.action.closeAll | — | no | Acción de toast (botón) 
+- [x] | Campo Requerido | src/App.vue:74 | Campo requerido | toast.validation.required | — | no | Toast warning (validación) 
+- [x] | Por favor, introduce una descripción para la tarea. | src/App.vue:75 | Introduce una descripción para la tarea | toast.validation.description | — | no | Toast warning (validación) 
+- [x] | Error al Compartir | src/App.vue:751 | Error al compartir | toast.share.error | — | no | Toast error (share) 
+- [x] | No hay un turno seleccionado o activo para compartir. | src/App.vue:752 | No hay un tramo seleccionado o activo para compartir | toast.share.noShift | — | no | Descripción de toast 
+- [x] | Nada que Compartir | src/App.vue:764 | Nada que compartir | toast.share.empty | — | no | Toast warning (share) 
+- [x] | No hay tareas en el ${shiftLabel} para compartir. | src/App.vue:765 | No hay tareas en el {shift} para compartir | toast.share.noTasks | shift | no | Toast info (share) 
+- [x] | _*📋 Notificaciones del ${shiftLabel}*:_ | src/App.vue:771 | 📋 Notificaciones del {shift} | share.content.headerTasks | shift | no | Título (contenido de compartir) 
+- [x] | _*🗒️ Notas*:_ | src/App.vue:778 | 🗒️ Notas | share.content.headerNotes | — | no | Encabezado bloque notas (share) 
+- [x] | Notificaciones del ${shiftLabel} | src/App.vue:788 | Notificaciones del {shift} | dialog.share.titleShift | shift | no | Título diálogo OS share 
+- [x] | Compartir Tareas | src/App.vue:790 | Compartir tareas | dialog.share.title | — | no | Título diálogo OS share 
+- [x] | Tareas Compartidas | src/App.vue:793 | Tareas compartidas | toast.share.success | — | no | Toast info (share) 
+- [x] | Contenido enviado mediante sistema nativo. | src/App.vue:794 | Contenido enviado mediante sistema nativo | toast.share.detail | — | no | Descripción de toast 
+- [x] | Notificaciones del ${shiftLabel} | src/App.vue:806 | Notificaciones del {shift} | dialog.share.titleShiftFallback | shift | no | Título diálogo OS share (fallback) 
+- [x] | Tareas Compartidas | src/App.vue:810 | Tareas compartidas | toast.share.successFallback | — | no | Toast info (share fallback) 
+- [x] | Contenido enviado a la aplicación de compartir. | src/App.vue:811 | Contenido enviado a la aplicación de compartir | toast.share.detailFallback | — | no | Descripción de toast 
+- [x] | Tareas Copiadas | src/App.vue:817 | Tareas copiadas | toast.clipboard.success | — | no | Toast info (clipboard) 
+- [x] | Contenido copiado al portapapeles. | src/App.vue:818 | Contenido copiado al portapapeles | toast.clipboard.detail | — | no | Descripción de toast 
+- [x] | Error al Compartir | src/App.vue:823 | Error al compartir | toast.share.errorFallback | — | no | Toast error (share fallback) 
+- [x] | Tu navegador no soporta la función de compartir o copiar. | src/App.vue:824 | Tu navegador no soporta la función de compartir o copiar | toast.share.unsupported | — | no | Descripción de toast 
+- [x] | Acción Desconocida | src/App.vue:868 | Acción desconocida | toast.action.unknown | — | no | Toast warning 
+- [x] | La acción de menú "${actionName}" no está implementada. | src/App.vue:869 | La acción de menú «{action}» no está implementada | toast.menu.unimplemented | action | no | Toast warning 
+- [x] | Abrir menú | src/App.vue:890 | Abrir menú | aria.menu.open | — | no | aria-label (botón menú) 
+- [x] | Volver al Turno Actual | src/App.vue:967 | Volver al Tramo Actual | nav.shift.returnCurrent | — | no | Acción de navegación 
+- [x] | Tarea Iniciada | src/App.vue:99 | Tarea iniciada | toast.task.started | — | no | Toast success 
+- [x] | "${newTask.description}" comenzada. | src/App.vue:100 | «{description}» comenzada | toast.task.startedDetail | description | no | Toast success (detalle inicio)
+- [x] | Nuevo aviso | src/components/NewTaskForm.vue:21 | Descripción | placeholder.task.description | — | no | Placeholder input 
+- [x] | Técnico(s) | src/components/NewTaskForm.vue:37 | Asignado a… | placeholder.task.assignee | — | no | Placeholder input 
+- [x] | Iniciar | src/components/NewTaskForm.vue:61 | Iniciar | btn.start | — | no | Botón inicio tarea 
 - [ ] | Turno | src/components/ShiftSelector.vue:15 | Tramo | shift.term | — | no | Botón selector de tramo 
 - [x] | Cerrar menú | src/components/SideMenu.vue:131 | Cerrar menú | aria.menu.close | — | no | aria-label 
 - [x] | Nuevo Turno | src/components/SideMenu.vue:152 | Nuevo Tramo | shift.new | — | no | Acción menú lateral 
