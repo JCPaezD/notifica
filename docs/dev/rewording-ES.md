@@ -15,6 +15,7 @@
 | Exportar | src/components/SideMenu.vue:197 | Exportar | btn.export | — | no | Acción menú lateral |
 | Compartir | src/components/SideMenu.vue:168 | Compartir | btn.share | — | no | Acción menú lateral |
 | Borrar todo | src/components/SideMenu.vue:305 | Borrar todo | btn.deleteAll | — | no | Acción destructiva (menú) |
+| Acciones | src/components/SideMenu.vue:133 | Menú | menu.title | — | no | Título del menú lateral |
 | Añadir técnico | src/components/TaskItem.vue:456 | Asignar a… | task.assignee.add | — | no | Placeholder cuando la tarea ya creada no tiene asignación |
 | Nuevo aviso | src/components/NewTaskForm.vue:21 | Descripción | task.description.placeholder | — | no | Placeholder de descripción |
 | Volver al Turno Actual | src/App.vue:967 | Volver al Tramo Actual | nav.shift.returnCurrent | — | no | Acción de navegación |

@@ -9,6 +9,7 @@ export default {
   },
   menu: {
     // Menús y navegación
+    title: "Menu",
     options: "Options",
     theme: {
       // Tema claro/oscuro/sistema

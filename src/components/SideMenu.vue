@@ -11,6 +11,9 @@ import {
 } from '@headlessui/vue'
 import { useDarkMode } from '@/composables/useDarkMode'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 const { preferredMode, setPreferredMode } = useDarkMode()
 
 const themeModes = ['light', 'dark', 'system'] as const
@@ -127,8 +130,8 @@ const onLeave = (el: Element) => {
                         leading-6 text-text-main dark:text-main-dark flex
                         justify-between items-center mb-4"
                 >
-                  <span>Acciones</span>
-                  <button @click="closeMenu" class="btn-close" aria-label="Cerrar menú">
+                  <span>{{ t('menu.title') }}</span>
+                  <button @click="closeMenu" class="btn-close" :aria-label="t('aria.menu.close')">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                       stroke="currentColor" class="w-7 h-7 text-text-main dark:text-main-dark">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -149,7 +152,7 @@ const onLeave = (el: Element) => {
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>Nuevo Turno</span>
+                    <span>{{ t('shift.new') }}</span>
                   </button>
 
                   <hr class="my-6 border-divider dark:border-divider-dark mx-3" /> <!-- Margen vertical aumentado -->
@@ -165,7 +168,7 @@ const onLeave = (el: Element) => {
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
                     </svg>
-                    <span>Compartir</span>
+                    <span>{{ t('btn.share') }}</span>
                   </button>
 
                   <hr class="my-6 border-divider dark:border-divider-dark mx-3" /> <!-- Margen vertical aumentado -->
@@ -181,7 +184,7 @@ const onLeave = (el: Element) => {
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                     </svg>
-                    <span>Importar</span>
+                    <span>{{ t('btn.import') }}</span>
                   </button>
                   <!-- Exportar -->
                   <button @click="handleAction('exportTasks')" :class="[
@@ -194,7 +197,7 @@ const onLeave = (el: Element) => {
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                     </svg>
-                    <span>Exportar</span>
+                    <span>{{ t('btn.export') }}</span>
                   </button>
 
                   <hr class="my-6 border-divider dark:border-divider-dark mx-3" /> <!-- Margen vertical aumentado -->
@@ -214,7 +217,7 @@ const onLeave = (el: Element) => {
                           <path stroke-linecap="round" stroke-linejoin="round"
                             d="M4.5 6.75h15m-15 5.25h15m-15 5.25h15" />
                         </svg>
-                        Opciones
+                        {{ t('menu.options') }}
                       </span>
                       <svg
                         class="w-5 h-5 text-purple-strong dark:text-purple-strong-dark/80 transition-transform duration-300"
@@ -246,7 +249,7 @@ const onLeave = (el: Element) => {
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                   d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m16.95 4.95l-1.061-1.061M6.111 6.111 5.05 5.05m0 13.9 1.061-1.061m12.728-12.728-1.061 1.061M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                               </svg>
-                              Claro
+                              {{ t('menu.theme.light') }}
                             </button>
 
                             <!-- Botón Oscuro -->
@@ -262,7 +265,7 @@ const onLeave = (el: Element) => {
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                   d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
                               </svg>
-                              Oscuro
+                              {{ t('menu.theme.dark') }}
                             </button>
 
                             <!-- Botón Sistema -->
@@ -278,7 +281,7 @@ const onLeave = (el: Element) => {
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                   d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
                               </svg>
-                              Sistema
+                              {{ t('menu.theme.system') }}
                             </button>
                           </div>
                         </div>
@@ -302,7 +305,7 @@ const onLeave = (el: Element) => {
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12.56 0c1.153 0 2.242.078 3.324.214M15 5.79V4.5A2.25 2.25 0 0012.75 2.25h-1.5A2.25 2.25 0 009 4.5v1.29m0 0C9 7.529 9.21 8.25 9.45 9" />
                     </svg>
-                    <span>Borrar todo</span>
+                    <span>{{ t('btn.deleteAll') }}</span>
                   </button>
                 </div>
 
