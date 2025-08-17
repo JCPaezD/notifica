@@ -97,7 +97,6 @@
 | "${updatedTask.description}" marcada como notificada. | src/App.vue:135 | «{description}» marcada como registrada | toast.task.registeredDetail | description | no | Toast success (estado) |
 | "${updatedTask.description}" ya no está notificada. | src/App.vue:141 | «{description}» ya no está registrada | toast.task.unregisteredDetail | description | no | Toast info (estado) |
 | "${updatedTask.description}" ha sido actualizada. | src/App.vue:147 | «{description}» actualizada | toast.task.updatedDetail | description | no | Toast info (update) |
-
 | No se encontró la tarea con ID: ${updatedTask.id}. | src/App.vue:153 | No se encontró la tarea con ID: {id} | toast.task.notFound | id | no | Toast error (not found) |
 | "${task.description}" ha sido reabierta. | src/App.vue:165 | «{description}» reabierta | toast.task.reopenedDetail | description | no | Toast info (reabrir) |
 | "${taskToDelete.description}" ha sido eliminada. | src/App.vue:183 | «{description}» eliminada | toast.task.deletedDetail | description | no | Toast error (delete) |

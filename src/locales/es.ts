@@ -36,6 +36,8 @@ export default {
       finish: "Finalizar",
       reopen: "Reabrir",
     },
+    // Textos de fallback de tareas
+    noDescription: "(Sin descripción)",
   },
   nav: {
     // Navegación
@@ -199,12 +201,21 @@ export default {
     },
   },
   placeholder: {
+    task: {
+      // Placeholders para tareas
+      description: "Descripción",
+      assignee: "Asignado a…",
+    },
     note: {
-      // Placeholders de notas
+      // Placeholders para notas
+      add: "Añadir nota…",
+      // Usado en notas previas
+      default: "Nota",
     },
   },
   header: {
-    // Cabeceras y secciones
+    // Encabezados de secciones
+    notes: "Notas",
   },
   title: {
     // Títulos de pantallas/secciones
