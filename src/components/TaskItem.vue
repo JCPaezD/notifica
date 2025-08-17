@@ -6,6 +6,9 @@ import type { PropType } from 'vue'
 import { computed, ref, nextTick, watch } from 'vue'
 import type { Task } from '../types/Task' // Importar la interfaz Task compartida
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 // Props del componente.
 const props = defineProps({
   task: {
@@ -338,7 +341,7 @@ const handleDeleteTask = () => {
             </template>
             <template v-else>
               <p @click="startEditDescription" class="font-medium text-sm text-text-main dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md break-words leading-tight">
-                {{ task.description || '[Sin descripción]' }}
+                {{ task.description || t('task.noDescription') }}
               </p>
             </template>
           </div>
@@ -419,7 +422,7 @@ const handleDeleteTask = () => {
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
                 <path d="M3.5 2.75a.75.75 0 00-1.5 0v14.5a.75.75 0 001.5 0v-4.392l1.657-.348a6.723 6.723 0 016.271 1.719 2.25 2.25 0 003.914 0 6.723 6.723 0 016.271-1.719l1.657.348A.75.75 0 0018 12.25v-2.5a.75.75 0 00-.501-.712l-1.657-.348a6.723 6.723 0 01-6.271-1.719A2.25 2.25 0 005.657 5.25a6.723 6.723 0 01-2.157-.442V2.75z" />
               </svg>
-              <span>Finalizar</span>
+              <span>{{ t('task.action.finish') }}</span>
             </button>
             <button v-else @click="handleReactivateTask" 
                     class="w-full px-2 py-0.5 
@@ -435,7 +438,7 @@ const handleDeleteTask = () => {
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
                 <path fill-rule="evenodd" d="M7.793 2.232a.75.75 0 01-.025 1.06L3.622 7.25h6.128a5.5 5.5 0 110 11H5.75a.75.75 0 010-1.5h3.999a4 4 0 100-8H3.622l4.146 4.023a.75.75 0 11-1.036 1.085l-5.5-5.25a.75.75 0 010-1.085l5.5-5.25a.75.75 0 011.06.025z" clip-rule="evenodd" />
               </svg>
-              <span>Reabrir</span>
+              <span>{{ t('task.action.reopen') }}</span>
             </button>
           </Transition>
       </div>
@@ -453,7 +456,7 @@ const handleDeleteTask = () => {
             <template v-else>
               <p @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-0.5 rounded-md truncate">
                 <span v-if="task.technician" class="text-text-subtle dark:text-subtle-dark">{{ task.technician }}</span>
-                <span v-else class="text-icon-muted dark:text-icon-muted-dark italic">Añadir técnico</span> 
+                <span v-else class="text-icon-muted dark:text-icon-muted-dark italic">{{ t('task.assignee.add') }}</span>
               </p>
             </template>
           </div>
@@ -483,9 +486,9 @@ const handleDeleteTask = () => {
           <button 
             ref="notifiedIconBtnRef"
             @click="toggleNotifiedStatus" 
-            :title="task.isNotified ? 'Marcar como No Notificado' : 'Marcar como Notificado'"
+            :title="task.isNotified ? t('tooltip.task.unregistered') : t('tooltip.task.registered')"
             class="btn-icon-success"
-            aria-label="Estado de notificación"
+            :aria-label="t('aria.task.state')"
           >
             <Transition
               name="notified-icon-swap"
@@ -514,9 +517,9 @@ const handleDeleteTask = () => {
           <!-- Botón Eliminar Tarea -->
           <button
             @click="handleDeleteTask"
-            title="Eliminar Tarea"
+            :title="t('tooltip.task.delete')"
             class="btn-icon-alert"
-            aria-label="Eliminar tarea"
+            :aria-label="t('aria.task.delete')"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-status-alert dark:text-status-alert-dark" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />

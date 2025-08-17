@@ -99,15 +99,15 @@
 - [x] | Sistema | src/components/SideMenu.vue:281 | Sistema | menu.theme.system | — | no | Tema según sistema 
 - [x] | Borrar todo | src/components/SideMenu.vue:305 | Borrar todo | btn.deleteAll | — | no | Acción destructiva (menú) 
 - [x] | Acciones | src/components/SideMenu.vue:133 | Menú | menu.title | — | no | Título del menú lateral |
-- [ ] | Finalizar | src/components/TaskItem.vue:305 | Finalizar | task.action.finish | — | no | Acción sobre tarea 
-- [ ] | Reabrir | src/components/TaskItem.vue:314 | Reabrir | task.action.reopen | — | no | Acción sobre tarea 
-- [ ] | [Sin descripción] | src/components/TaskItem.vue:341 | (Sin descripción) | task.noDescription | — | no | Fallback descripción vacía 
-- [ ] | Añadir técnico | src/components/TaskItem.vue:456 | Asignar a… | task.assignee.add | — | no | Placeholder cuando la tarea ya creada no tiene asignación 
-- [ ] | Marcar como No Notificado | src/components/TaskItem.vue:486 | Marcar como no registrada | tooltip.task.unregistered | — | no | title (tooltip) 
-- [ ] | Marcar como Notificado | src/components/TaskItem.vue:486 | Marcar como registrada | tooltip.task.registered | — | no | title (tooltip) 
-- [ ] | Estado de notificación | src/components/TaskItem.vue:488 | Estado de registro | aria.task.state | — | no | aria-label 
-- [ ] | Eliminar Tarea | src/components/TaskItem.vue:517 | Eliminar tarea | tooltip.task.delete | — | no | title (tooltip) 
-- [ ] | Eliminar tarea | src/components/TaskItem.vue:519 | Eliminar tarea | aria.task.delete | — | no | aria-label 
+- [x] | Finalizar | src/components/TaskItem.vue:305 | Finalizar | task.action.finish | — | no | Acción sobre tarea 
+- [x] | Reabrir | src/components/TaskItem.vue:314 | Reabrir | task.action.reopen | — | no | Acción sobre tarea 
+- [x] | [Sin descripción] | src/components/TaskItem.vue:341 | (Sin descripción) | task.noDescription | — | no | Fallback descripción vacía 
+- [x] | Añadir técnico | src/components/TaskItem.vue:456 | Asignar a… | task.assignee.add | — | no | Placeholder cuando la tarea ya creada no tiene asignación 
+- [x] | Marcar como No Notificado | src/components/TaskItem.vue:486 | Marcar como no registrada | tooltip.task.unregistered | — | no | title (tooltip) 
+- [x] | Marcar como Notificado | src/components/TaskItem.vue:486 | Marcar como registrada | tooltip.task.registered | — | no | title (tooltip) 
+- [x] | Estado de notificación | src/components/TaskItem.vue:488 | Estado de registro | aria.task.state | — | no | aria-label 
+- [x] | Eliminar Tarea | src/components/TaskItem.vue:517 | Eliminar tarea | tooltip.task.delete | — | no | title (tooltip) 
+- [x] | Eliminar tarea | src/components/TaskItem.vue:519 | Eliminar tarea | aria.task.delete | — | no | aria-label 
 - [ ] | Activas | src/components/TaskList.vue:118 | Activas | filter.active | — | no | Estado filtro 
 - [ ] | Sin Notificar | src/components/TaskList.vue:122 | Sin registrar | filter.unregistered | — | no | Estado filtro 
 - [ ] | Mostrar solo tareas activas | src/components/TaskList.vue:142 | Mostrar solo tareas activas | a11y.filter.activeOnly | — | no | Accesibilidad (sr-only) 
@@ -115,5 +115,5 @@
 - [ ] | Notas del turno | src/components/TaskList.vue:315 | Notas | header.notes | — | no | Encabezado sección 
 - [ ] | Añadir nota… | src/components/TaskList.vue:378 | Añadir nota… | placeholder.note.add | — | no | Placeholder dinámico (última nota) 
 - [ ] | Nota | src/components/TaskList.vue:378 | Nota | placeholder.note | — | no | Placeholder dinámico (notas previas) 
-- [ ] | Cerrar notificación | src/components/Toast.vue:62 | Cerrar notificación | aria.toast.close | — | no | aria-label (accesibilidad) 
 - [ ] | Viendo Turno | src/components/TaskList.vue:221 | Viendo tramo | taskList.viewingShift | — | no | Texto superior lista de tareas |
+- [ ] | Cerrar notificación | src/components/Toast.vue:62 | Cerrar notificación | aria.toast.close | — | no | aria-label (accesibilidad) 
