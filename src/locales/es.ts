@@ -50,14 +50,21 @@ export default {
     menu: {
       // Etiquetas accesibilidad menú
       open: "Abrir menú",
+      close: "Cerrar menú",
     },
     toast: {
       // Etiquetas accesibilidad toasts
+      close: "Cerrar notificación",
     },
     filter: {
       // Accesibilidad filtros (sr-only)
       activeOnly: "Mostrar solo tareas activas",
       unregisteredOnly: "Mostrar solo tareas sin registrar",
+    },
+    task: {
+      // Accesibilidad en tareas
+      state: "Estado de registro",
+      delete: "Eliminar tarea",
     },
   },
   toast: {
@@ -198,6 +205,9 @@ export default {
   tooltip: {
     task: {
       // Tooltips relacionados con tareas
+      unregistered: "Marcar como no registrada",
+      registered: "Marcar como registrada",
+      delete: "Eliminar tarea",
     },
   },
   placeholder: {
@@ -219,6 +229,7 @@ export default {
   },
   title: {
     // Títulos de pantallas/secciones
+    taskList: "Tramo del {shift}",
   },
   share: {
     content: {
