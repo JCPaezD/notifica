@@ -179,4 +179,7 @@
 | a (conector entre horas) | src/App.vue:?? | a | share.content.to | — | no | Conector entre hora inicio y fin en exportación/compartir |
 | ${date.toLocaleDateString …} ${date.toLocaleTimeString …} | src/App.vue:?? | dinámico según locale (ej. 23/08/25 05:16 / 08/23/25 05:16 AM) | dayjs.locale / locale.value | date,hour | no | Formato de fecha+hora en títulos de compartir/exportar, gobernado por i18n |
 | ${roundedHours.toFixed(1)} | src/App.vue:?? | dinámico según locale (ej. 1,5 / 1.5) | locale.value | number | no | Formato de decimales en duración, gobernado por i18n |
+| {{ task.startTime.toLocaleTimeString … }} | src/components/TaskItem.vue:?? | dinámico según locale | locale | hour | no | Formato de hora de inicio dependiente del idioma |
+| {{ task.endTime.toLocaleTimeString … }} | src/components/TaskItem.vue:?? | dinámico según locale | locale | hour | no | Formato de hora de fin dependiente del idioma |
+| roundedHours.toFixed(1) | src/components/TaskItem.vue:?? | dinámico según locale (ej. 1,5 / 1.5) | locale | number | no | Formato de decimales en duración dependiente del idioma |
 

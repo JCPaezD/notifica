@@ -7,7 +7,7 @@ import { computed, ref, nextTick, watch } from 'vue'
 import type { Task } from '../types/Task' // Importar la interfaz Task compartida
 
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // Props del componente.
 const props = defineProps({
@@ -242,7 +242,7 @@ const formattedDuration = computed(() => {
   const roundedHours = Math.ceil(durationHours / 0.5) * 0.5
 
   // Formatear a un decimal, asegurando que .0 se muestre
-  const displayHours = roundedHours.toFixed(1)
+  const displayHours = roundedHours.toLocaleString(locale.value, { minimumFractionDigits: 1, maximumFractionDigits: 1 })
 
   return `${displayHours} h`
 });
@@ -358,7 +358,7 @@ const handleDeleteTask = () => {
             </template>
             <template v-else>
               <span @click="startEditStartTime" class="text-text-main/90 dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
-                {{ task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+                {{ task.startTime.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }) }}
               </span>
             </template>
           </div>
@@ -385,7 +385,7 @@ const handleDeleteTask = () => {
                   <template v-else>
                     <span @click="startEditEndTime"
                           class="text-success-strong dark:text-success-strong-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
-                      {{ task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+                      {{ task.endTime.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }) }}
                     </span>
                   </template>
                 </template>
