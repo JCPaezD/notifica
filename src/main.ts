@@ -12,6 +12,10 @@ import { createI18n } from 'vue-i18n'
 import es from './locales/es'
 import en from './locales/en'
 
+import dayjs from 'dayjs'
+import 'dayjs/locale/es'
+import 'dayjs/locale/en'
+import { watch } from 'vue'
 
 
 // 🌙 Aplicar clase 'dark' antes de montar la app según el modo guardado
@@ -125,6 +129,13 @@ const i18n = createI18n({
     es,
     en,
   },
+})
+
+// 🌍 Sincronizar locale de vue-i18n con dayjs
+dayjs.locale(locale) // Idioma inicial de fechas
+
+watch(i18n.global.locale, (newLocale) => {
+  dayjs.locale(newLocale)
 })
 
 

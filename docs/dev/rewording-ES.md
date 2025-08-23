@@ -170,3 +170,4 @@
 | Este turno no tiene tareas | src/components/TaskList.vue:?? | Este tramo no tiene tareas | empty.noTasksShift | — | no | Placeholder lista vacía (otro tramo) |
 | Empieza una nueva tarea para este turno | src/components/TaskList.vue:?? | Empieza una nueva tarea para este tramo | empty.startNew | — | no | Placeholder lista vacía (turno actual) |
 | Lista de Tareas | src/components/TaskList.vue:?? | Lista de tareas | taskList.defaultTitle | — | no | Título por defecto lista de tareas |
+| lun, mar, mié... | src/composables/useShifts.ts:13 | lun, mar, mié... / mon, tue, wed... | dayjs.locale (dinámico) | — | sí | Abreviaturas de días gestionadas por dayjs según locale (es/en) |

@@ -12,9 +12,6 @@ import { useToast } from './composables/useToast'
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { Capacitor } from '@capacitor/core';
-import dayjs from 'dayjs'
-import 'dayjs/locale/es' // si usas español
-dayjs.locale('es')
 import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { shiftIcons as icons } from './icons/shifts'
 import { useLogoAnimation } from './composables/useLogoAnimation'
