@@ -184,6 +184,10 @@ export default {
       // Diálogo de borrado total
       confirm: "¿Borrar todas las tareas de la aplicación? No podrán recuperarse",
     },
+    task: {
+      // Diálogo de borrado individual de tarea
+      confirmDelete: "¿Seguro que quieres eliminar la tarea «{description}»?",
+    },
     share: {
       // Diálogo de compartir
       title: "Compartir tareas",

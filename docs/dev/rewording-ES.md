@@ -171,3 +171,4 @@
 | Empieza una nueva tarea para este turno | src/components/TaskList.vue:?? | Empieza una nueva tarea para este tramo | empty.startNew | — | no | Placeholder lista vacía (turno actual) |
 | Lista de Tareas | src/components/TaskList.vue:?? | Lista de tareas | taskList.defaultTitle | — | no | Título por defecto lista de tareas |
 | lun, mar, mié... | src/composables/useShifts.ts:13 | lun, mar, mié... / mon, tue, wed... | dayjs.locale (dinámico) | — | sí | Abreviaturas de días gestionadas por dayjs según locale (es/en) |
+| ¿Estás seguro de que quieres eliminar la tarea "${description}"? | src/components/TaskItem.vue:?? | ¿Seguro que quieres eliminar la tarea «{description}»? | dialog.task.confirmDelete | description | no | Confirmación borrado individual de tarea |

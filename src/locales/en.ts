@@ -184,6 +184,10 @@ export default {
       // Diálogo de borrado total
       confirm: "Delete all tasks in the app? They cannot be recovered",
     },
+    task: {
+      // Diálogo de borrado individual de tarea
+      confirmDelete: "Are you sure you want to delete the task «{description}»?",
+    },
     share: {
       // Diálogo de compartir
       title: "Share tasks",

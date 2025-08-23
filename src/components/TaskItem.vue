@@ -307,7 +307,7 @@ const toggleNotifiedStatus = () => {
  * Pide confirmación y emite un evento para eliminar la tarea actual.
  */
 const handleDeleteTask = () => {
-  if (window.confirm(`¿Estás seguro de que quieres eliminar la tarea "${props.task.description}"?`)) {
+  if (window.confirm(t('dialog.task.confirmDelete', { description: props.task.description }))) {
     emit('delete-task', props.task.id);
   }
 }
