@@ -172,3 +172,6 @@
 | Lista de Tareas | src/components/TaskList.vue:?? | Lista de tareas | taskList.defaultTitle | — | no | Título por defecto lista de tareas |
 | lun, mar, mié... | src/composables/useShifts.ts:13 | lun, mar, mié... / mon, tue, wed... | dayjs.locale (dinámico) | — | sí | Abreviaturas de días gestionadas por dayjs según locale (es/en) |
 | ¿Estás seguro de que quieres eliminar la tarea "${description}"? | src/components/TaskItem.vue:?? | ¿Seguro que quieres eliminar la tarea «{description}»? | dialog.task.confirmDelete | description | no | Confirmación borrado individual de tarea |
+| Turno Actual | src/App.vue:?? | Tramo Actual | shift.current | — | no | Texto para identificar el turno actual |
+| Turno del ${date} | src/App.vue:?? | Tramo del {date} | shift.ofDate | date | no | Texto para identificar un turno por fecha |
+| Turno del ${label} | src/App.vue:?? | Tramo del {label} | shift.ofLabel | label | no | Texto para identificar un turno por label |

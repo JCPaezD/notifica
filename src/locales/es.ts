@@ -24,6 +24,9 @@ export default {
     // Turnos
     term: "Tramo",
     new: "Nuevo Tramo",
+    current: "Tramo Actual",
+    ofDate: "Tramo del {date}",
+    ofLabel: "Tramo del {label}",
   },
   task: {
     assignee: {

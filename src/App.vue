@@ -725,14 +725,15 @@ const exportTasksToJson = async () => {
   // Prepara y comparte (vía plugin nativo, API Web Share o portapapeles) las tareas del turno seleccionado.
   const shareShiftTasks = async () => {
     let shiftIdToShare: string | null | undefined = undefined;
-    let shiftLabel = "Turno Actual";
+    let shiftLabel = t('shift.current');
 
     if (selectedShiftToView.value === 'current') {
       shiftIdToShare = currentShiftId.value;
       if (currentShiftId.value) {
         const ts = parseInt(currentShiftId.value.replace('shift-', ''));
         const date = new Date(ts);
-        shiftLabel = `Turno del ${date.toLocaleDateString([], {
+
+        const dateStr = `${date.toLocaleDateString([], {
           day: '2-digit',
           month: '2-digit',
           year: '2-digit'
@@ -740,11 +741,13 @@ const exportTasksToJson = async () => {
           hour: '2-digit',
           minute: '2-digit'
         })}`;
+
+        shiftLabel = t('shift.ofDate', { date: dateStr });
       }
     } else {
       shiftIdToShare = selectedShiftToView.value;
       const foundShift = availableShifts.value.find(s => s.id === shiftIdToShare);
-      if (foundShift) shiftLabel = `Turno del ${foundShift.label}`;
+      if (foundShift) shiftLabel = t('shift.ofLabel', { label: foundShift.label });
     }
 
     if (!shiftIdToShare) {

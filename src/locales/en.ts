@@ -24,6 +24,9 @@ export default {
     // Turnos
     term: "Segment",
     new: "New segment",
+    current: "Current segment",
+    ofDate: "Segment of {date}",
+    ofLabel: "Segment of {label}",
   },
   task: {
     assignee: {

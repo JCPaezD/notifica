@@ -973,8 +973,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Placeholders de tareas vacias (3) y fallback de titulo (default) en props de TaskList.vue
       - [x] Dias lun->mon etc. En selector de turnos y 'Viendo turno'
       - [x] Mensaje confirmacion de eliminar tarea
-      - [ ] "...for Turno..." en texto plano compartido
-      - [ ] "No task in Turno del..." al compartir vacia
+      - [x] Sustituir textos hardcodeados de “Turno Actual”, “Turno del {date}” y “Turno del {label}” en App.vue
   - [ ] Añadir selector de idioma
     - [ ] Decidir comportamiento: manual en UI o idioma del sistema
     - [ ] Implementar selector en la app
