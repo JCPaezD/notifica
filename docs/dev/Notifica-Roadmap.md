@@ -984,8 +984,23 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Revisar y aplicar el mismo criterio de i18n en TaskItem.vue (horas inicio/fin y duración)
     - [ ] Añadir selector de idioma
       - [x] Toma de decisiones sobre formato, ubicación y estilo del selector (modal centrado, botones ES/EN/Sistema, cambio de nombre a Ajustes/Settings)
-      - [ ] Refactor: trasladar Apariencia e Idioma del SideMenu al nuevo modal de Ajustes
       - [ ] Implementar modal reutilizando la base de Nocta (centrado, escalable)
+        - [x] Migrar API de props open/onClose a v-model:open con defineEmits
+        - [x] Adaptar colores de fondo y texto al sistema de superficies de Notifica (bg-surface, text-*)
+        - [x] Revisar estilo de overlay (color, blur) para integrarlo con Notifica
+        - [ ] Homogeneizar sombras y bordes con el resto de la app
+        - [ ] Revisar animaciones: mantener o integrar con animations.css
+        - [x] Mejorar accesibilidad (atributos role, aria-modal)
+      - [ ] Refactor: trasladar Apariencia e Idioma del SideMenu al nuevo modal de Ajustes
+        - [ ] Reemplazar acción de "Opciones" para que abra el modal de Ajustes (y cierre el SideMenu si procede)
+        - [ ] Crear botón de acceso a Ajustes en el SideMenu
+        - [ ] Incluir título accesible dentro del slot del modal (<h2 id="modal-title">…</h2>)
+        - [ ] Trasladar bloque de Apariencia desde SideMenu al modal
+        - [ ] Trasladar bloque de Idioma desde SideMenu al modal
+        - [ ] Revisar estilos internos de Apariencia e Idioma para adaptarlos al nuevo contenedor
+        - [ ] Eliminar bloques antiguos de Apariencia e Idioma en SideMenu y limpiar lógica sobrante
+        - [ ] Validar apertura/cierre correcto del modal desde el SideMenu
+        - [ ] Validar accesibilidad completa (aria-labelledby apunta al título)
       - [ ] Cambiar nombre de "Opciones/Options" a "Ajustes/Settings"
       - [ ] Implementar selector de idioma con 3 botones (ES, EN, Sistema)
       - [ ] Validar persistencia de idioma elegido en localStorage

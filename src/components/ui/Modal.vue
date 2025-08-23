@@ -1,12 +1,10 @@
 <template>
   <Teleport to="body">
-    <div
-      v-if="open"
-      class="fixed inset-0 z-50 flex items-center justify-center"
-    >
+    <div v-if="props.modelValue" class="fixed inset-0 z-50 flex items-center justify-center">
+
       <!-- Fondo semitransparente -->
       <div
-        class="fixed inset-0 bg-black/50 backdrop-blur-sm"
+        class="fixed inset-0 bg-black/30 dark:bg-black/50"
         @click="handleClose"
       ></div>
 
@@ -20,10 +18,16 @@
         leave-to-class="opacity-0 scale-95"
       >
         <div
-          class="relative z-50 max-w-md w-full rounded-2xl bg-ui-secondary p-6 shadow-xl"
-          @click.stop
+            class="relative z-50 max-w-md w-full rounded-xl
+                    bg-app-bg dark:bg-surface-1-dark
+                    text-text-main dark:text-main-dark
+                    p-6 shadow-xl"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            @click.stop
         >
-          <slot />
+            <slot />
         </div>
       </Transition>
     </div>
@@ -34,17 +38,20 @@
 import { onMounted, onBeforeUnmount } from 'vue';
 
 const props = defineProps<{
-  open: boolean;
-  onClose: () => void;
+  modelValue: boolean;
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: boolean): void;
 }>();
 
 function handleClose() {
-  props.onClose();
+  emit('update:modelValue', false);
 }
 
 function handleKeydown(event: KeyboardEvent) {
   if (event.key === 'Escape') {
-    props.onClose();
+    emit('update:modelValue', false);
   }
 }
 
