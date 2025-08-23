@@ -969,6 +969,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Manejar casos con parámetros dinámicos (`{count}`, `{description}`…) y plurales
     - [x] Crear toggle provisional ES/EN para pruebas en móvil
     - [ ] Validar sistema i18n completo (desktop, PWA y APK)
+      - [x] Apariencia e Idioma en opciones
+      - [ ] Placeholders de tareas vacias (3)
+      - [ ] Dias lun->mon etc. En selector de turnos y 'Viendo turno'
+      - [ ] Mensaje confirmacion de eliminar tarea
+      - [ ] "...for Turno..." en texto plano compartido
+      - [ ] "No task in Turno del..." al compartir vacia
   - [ ] Añadir selector de idioma
     - [ ] Decidir comportamiento: manual en UI o idioma del sistema
     - [ ] Implementar selector en la app

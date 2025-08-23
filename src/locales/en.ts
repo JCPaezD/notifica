@@ -11,6 +11,8 @@ export default {
     // Menús y navegación
     title: "Menu",
     options: "Options",
+    appearance: "Appearance",
+    language: "Language",
     theme: {
       // Tema claro/oscuro/sistema
       light: "Light",

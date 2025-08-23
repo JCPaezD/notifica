@@ -155,3 +155,10 @@
 | Marcar como Notificado | src/components/TaskItem.vue:486 | Marcar como registrada | tooltip.task.registered | — | no | title (tooltip) |
 | Eliminar Tarea | src/components/TaskItem.vue:517 | Eliminar tarea | tooltip.task.delete | — | no | title (tooltip) |
 | listTitle (dinámico) | src/App.vue:361 | Tramo del {shift} | title.taskList | shift | no | title dinámico, usa getShiftLabel(selectedShiftToView) |
+
+## Bloque 7 — Extras, olvidos, etc.
+
+| Texto actual | Ubicación | ES final | Clave i18n | Params | Plural | Notas |
+|--------------|-----------|----------|------------|--------|--------|-------|
+| Apariencia | src/components/SideMenu.vue:?? | Apariencia | menu.appearance | — | no | Título sección opciones |
+| Idioma | src/components/SideMenu.vue:?? | Idioma | menu.language | — | no | Título sección opciones |

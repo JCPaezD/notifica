@@ -242,7 +242,7 @@ const onLeave = (el: Element) => {
                         <!-- Bloque visual agrupado -->
                         <div
                           class="mx-4 -mt-1 rounded-b-xl border border-t-0 border-divider dark:border-divider-dark bg-surface-1 dark:bg-surface-1-dark ring-1 ring-purple-strong/15 dark:ring-purple-strong-dark/20 p-4 pt-3 space-y-3 text-sm">
-                          <p class="text-subtle dark:text-subtle-dark font-medium pl-1">Apariencia</p>
+                          <p class="text-subtle dark:text-subtle-dark font-medium pl-1">{{ t('menu.appearance') }}</p>
 
                           <div class="flex flex-col gap-2">
                             <!-- Botón Claro -->
@@ -296,7 +296,7 @@ const onLeave = (el: Element) => {
 
                         <!-- Bloque Idioma -->
                         <div class="space-y-2">
-                          <p class="text-subtle dark:text-subtle-dark font-medium pl-1">Idioma</p>
+                          <p class="text-subtle dark:text-subtle-dark font-medium pl-1">{{ t('menu.language') }}</p>
                           <div class="flex gap-2">
                             <!-- Botón Español -->
                             <button @click="setLocale('es')" :class="[ 
