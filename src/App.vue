@@ -19,7 +19,7 @@ import { useDarkMode } from './composables/useDarkMode'
 const { isDark } = useDarkMode()
 
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 
 const allTaskShiftIds = computed(() =>
@@ -695,8 +695,8 @@ const exportTasksToJson = async () => {
     const notifiedEmoji = '✅';
 
     const description = task.description;
-    const startTimeStr = task.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const endTimeStr = task.endTime ? task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--';
+    const startTimeStr = task.startTime.toLocaleTimeString(locale.value, { hour: '2-digit', minute: '2-digit' });
+    const endTimeStr = task.endTime ? task.endTime.toLocaleTimeString(locale.value, { hour: '2-digit', minute: '2-digit' }) : '--:--';
 
     let durationStr = '';
     if (task.endTime) {
@@ -708,13 +708,13 @@ const exportTasksToJson = async () => {
       const durationMs = endTimeMs - startTimeMs;
       const durationHours = durationMs / (1000 * 60 * 60);
       const roundedHours = Math.ceil(durationHours / 0.5) * 0.5;
-      durationStr = `(${roundedHours.toFixed(1)} h)`;
+      durationStr = `(${roundedHours.toLocaleString(locale.value, { minimumFractionDigits: 1, maximumFractionDigits: 1 })} h)`;
     }
 
-    let taskString = `${taskEmoji} ${description} ${startTimeStr} a ${endTimeStr}${durationStr ? ' ' + durationStr : ''}`;
+    let taskString = `${taskEmoji} ${description} ${startTimeStr} ${t('share.content.to')} ${endTimeStr}${durationStr ? ' ' + durationStr : ''}`;
 
     if (task.isNotified) {
-      taskString += `\n${notifiedEmoji} Notificado`;
+      taskString += `\n${notifiedEmoji} ${t('task.registered')}`;
     }
     if (task.technician) {
       taskString += `\n    ${technicianEmoji} ${task.technician}`;
@@ -733,11 +733,11 @@ const exportTasksToJson = async () => {
         const ts = parseInt(currentShiftId.value.replace('shift-', ''));
         const date = new Date(ts);
 
-        const dateStr = `${date.toLocaleDateString([], {
+        const dateStr = `${date.toLocaleDateString(locale.value, {
           day: '2-digit',
           month: '2-digit',
           year: '2-digit'
-        })} ${date.toLocaleTimeString([], {
+        })} ${date.toLocaleTimeString(locale.value, {
           hour: '2-digit',
           minute: '2-digit'
         })}`;

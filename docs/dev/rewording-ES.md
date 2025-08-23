@@ -175,3 +175,8 @@
 | Turno Actual | src/App.vue:?? | Tramo Actual | shift.current | — | no | Texto para identificar el turno actual |
 | Turno del ${date} | src/App.vue:?? | Tramo del {date} | shift.ofDate | date | no | Texto para identificar un turno por fecha |
 | Turno del ${label} | src/App.vue:?? | Tramo del {label} | shift.ofLabel | label | no | Texto para identificar un turno por label |
+| Notificado | src/App.vue:?? | Registrada | task.registered | — | no | Texto mostrado en exportación/compartir para indicar que una tarea fue registrada |
+| a (conector entre horas) | src/App.vue:?? | a | share.content.to | — | no | Conector entre hora inicio y fin en exportación/compartir |
+| ${date.toLocaleDateString …} ${date.toLocaleTimeString …} | src/App.vue:?? | dinámico según locale (ej. 23/08/25 05:16 / 08/23/25 05:16 AM) | dayjs.locale / locale.value | date,hour | no | Formato de fecha+hora en títulos de compartir/exportar, gobernado por i18n |
+| ${roundedHours.toFixed(1)} | src/App.vue:?? | dinámico según locale (ej. 1,5 / 1.5) | locale.value | number | no | Formato de decimales en duración, gobernado por i18n |
+

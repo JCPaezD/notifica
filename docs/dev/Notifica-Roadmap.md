@@ -833,6 +833,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                   - Probar con emulador limpio o reinstalado
                   - Evaluar si alguna animación en la app (como apertura del SideMenu) puede estar dejando el DOM en estado inconsistente
                   - Si no se encuentra causa clara, documentar el entorno exacto donde falla (emulador, versión de Chrome, tipo de build)
+  - [ ] Al desplegar opciones, el SideMenu crece en altura y se hace scrolleable. Esta bien (fallback pantallas pequeñas y pantalla horizontal), pero intentar limitar scroll elástico, solo scroll necesario.
+  - [ ] Texto plano compartido: a veces las horas/duracion aparece bajo la descripcion y otras en la misma linea. Revisar y unificar (siempre siguiente linea, posible icono reloj o sin el)
 
 
 - [x] 📄 Actualizar `README.md` con información final  
@@ -974,6 +976,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Dias lun->mon etc. En selector de turnos y 'Viendo turno'
       - [x] Mensaje confirmacion de eliminar tarea
       - [x] Sustituir textos hardcodeados de “Turno Actual”, “Turno del {date}” y “Turno del {label}” en App.vue
+      - [x] Sustituir textos hardcodeados en exportación/compartir:
+        - "Notificado" → usar clave i18n (Registrado / Registered)
+        - Conector "a" entre horas → usar clave i18n
+      - [x] Unificar formatos de fechas y horas en exportación/compartir según i18n (no navegador)
+      - [x] Localizar formato de duración (coma/punto) en exportación/compartir según i18n
+      - [ ] Revisar y aplicar el mismo criterio de i18n en TaskItem.vue (horas inicio/fin y duración)
+      - [ ] 
   - [ ] Añadir selector de idioma
     - [ ] Decidir comportamiento: manual en UI o idioma del sistema
     - [ ] Implementar selector en la app

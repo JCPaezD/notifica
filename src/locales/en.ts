@@ -43,6 +43,8 @@ export default {
     },
     // Textos de fallback de tareas
     noDescription: "(No description)",
+    // Texto mostrado en exportación/compartir para indicar que una tarea fue registrada
+    registered: "Registered",
   },
   nav: {
     // Navegación
@@ -257,6 +259,8 @@ export default {
       // Encabezados del contenido compartido
       headerTasks: "📋 Notifications for {shift}",
       headerNotes: "🗒️ Notes",
+      // Conector entre hora de inicio y fin en exportación (ej. "08:00 a 10:00")
+      to: "to",
     },
   },
   export: {
