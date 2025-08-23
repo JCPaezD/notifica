@@ -981,12 +981,15 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - Conector "a" entre horas → usar clave i18n
       - [x] Unificar formatos de fechas y horas en exportación/compartir según i18n (no navegador)
       - [x] Localizar formato de duración (coma/punto) en exportación/compartir según i18n
-      - [ ] Revisar y aplicar el mismo criterio de i18n en TaskItem.vue (horas inicio/fin y duración)
-      - [ ] 
-  - [ ] Añadir selector de idioma
-    - [ ] Decidir comportamiento: manual en UI o idioma del sistema
-    - [ ] Implementar selector en la app
-    - [ ] Validar persistencia de idioma elegido
+      - [x] Revisar y aplicar el mismo criterio de i18n en TaskItem.vue (horas inicio/fin y duración)
+    - [ ] Añadir selector de idioma
+      - [x] Toma de decisiones sobre formato, ubicación y estilo del selector (modal centrado, botones ES/EN/Sistema, cambio de nombre a Ajustes/Settings)
+      - [ ] Refactor: trasladar Apariencia e Idioma del SideMenu al nuevo modal de Ajustes
+      - [ ] Implementar modal reutilizando la base de Nocta (centrado, escalable)
+      - [ ] Cambiar nombre de "Opciones/Options" a "Ajustes/Settings"
+      - [ ] Implementar selector de idioma con 3 botones (ES, EN, Sistema)
+      - [ ] Validar persistencia de idioma elegido en localStorage
+      - [ ] Validar en PWA y APK: funcionamiento correcto del modal, selector y textos en ambos idiomas
   - [ ] Validación y pruebas
     - [ ] Revisar PWA en móvil en ambos idiomas (claro/oscuro, offline)
     - [ ] Revisar APK en Android (y iOS si se compila más adelante)
