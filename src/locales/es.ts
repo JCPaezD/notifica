@@ -237,6 +237,13 @@ export default {
   taskList: {
     // Textos de la lista de tareas
     viewingShift: "Viendo tramo",
+    defaultTitle: "Lista de tareas",
+  },
+  empty: {
+    // Mensajes cuando no hay tareas
+    filters: "Prueba a desactivar los filtros",
+    noTasksShift: "Este tramo no tiene tareas",
+    startNew: "Empieza una nueva tarea para este tramo",
   },
   share: {
     content: {

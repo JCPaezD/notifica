@@ -33,7 +33,7 @@ const props = defineProps({
   // Título opcional a mostrar encima de la lista de tareas.
   title: {
     type: String,
-    default: 'Lista de Tareas' // Título por defecto si no se proporciona
+    default: '', // Valor vacío, el fallback se maneja con i18n
   },
   // ID del turno al que corresponde el título (para mostrar icono).
   titleId: {
@@ -62,6 +62,11 @@ const props = defineProps({
   }
 })
 
+// Computed para el título mostrado: usa props.title o el fallback de i18n
+const titleDisplayed = computed(() =>
+  props.title || t('taskList.defaultTitle')
+)
+
 // Emits para comunicar acciones al componente padre (App.vue).
 // Estos eventos son retransmitidos desde los componentes TaskItem.
 const emit = defineEmits(['finish-task', 'update-task', 'reactivate-task', 'delete-task'])
@@ -87,7 +92,7 @@ const relayDeleteTask = (taskId: string) => {
 
 const emptyMessage = computed(() => {
   if (props.filtersActive) {
-    return 'Prueba a desactivar los filtros'
+    return t('empty.filters')
   }
 
   if (
@@ -95,10 +100,10 @@ const emptyMessage = computed(() => {
     props.activeShiftId &&
     props.titleId !== props.activeShiftId
   ) {
-    return 'Este turno no tiene tareas'
+    return t('empty.noTasksShift')
   }
 
-  return 'Empieza una nueva tarea para este turno'
+  return t('empty.startNew')
 })
 
 const onEnter = (el: Element) => {
@@ -227,7 +232,7 @@ function handleEnter(index: number) {
           :is="props.titleIcon"
           :class="['w-4 h-4 shrink-0', getShiftColor(props.titleId)]"
         />
-        <span>{{ props.title }}</span>
+        <span>{{ titleDisplayed }}</span>
       </div>
     </div>
     <TransitionGroup 

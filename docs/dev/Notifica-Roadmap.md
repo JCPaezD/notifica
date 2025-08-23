@@ -970,7 +970,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Crear toggle provisional ES/EN para pruebas en móvil
     - [ ] Validar sistema i18n completo (desktop, PWA y APK)
       - [x] Apariencia e Idioma en opciones
-      - [ ] Placeholders de tareas vacias (3)
+      - [x] Placeholders de tareas vacias (3) y fallback de titulo (default) en props de TaskList.vue
       - [ ] Dias lun->mon etc. En selector de turnos y 'Viendo turno'
       - [ ] Mensaje confirmacion de eliminar tarea
       - [ ] "...for Turno..." en texto plano compartido

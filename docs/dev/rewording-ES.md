@@ -162,3 +162,11 @@
 |--------------|-----------|----------|------------|--------|--------|-------|
 | Apariencia | src/components/SideMenu.vue:?? | Apariencia | menu.appearance | — | no | Título sección opciones |
 | Idioma | src/components/SideMenu.vue:?? | Idioma | menu.language | — | no | Título sección opciones |
+| Prueba a desactivar los filtros | src/components/TaskList.vue:?? | Prueba a desactivar los filtros | empty.filters | — | no | Placeholder lista vacía (filtros activos) |
+| Este turno no tiene tareas | src/components/TaskList.vue:?? | Este tramo no tiene tareas | empty.noTasksShift | — | no | Placeholder lista vacía (otro tramo) |
+| Empieza una nueva tarea para este turno | src/components/TaskList.vue:?? | Empieza una nueva tarea para este tramo | empty.startNew | — | no | Placeholder lista vacía (turno actual) |
+| Lista de Tareas | src/components/TaskList.vue:?? | Lista de tareas | title.taskListDefault | — | no | Título por defecto lista de tareas |
+| Prueba a desactivar los filtros | src/components/TaskList.vue:?? | Prueba a desactivar los filtros | empty.filters | — | no | Placeholder lista vacía (filtros activos) |
+| Este turno no tiene tareas | src/components/TaskList.vue:?? | Este tramo no tiene tareas | empty.noTasksShift | — | no | Placeholder lista vacía (otro tramo) |
+| Empieza una nueva tarea para este turno | src/components/TaskList.vue:?? | Empieza una nueva tarea para este tramo | empty.startNew | — | no | Placeholder lista vacía (turno actual) |
+| Lista de Tareas | src/components/TaskList.vue:?? | Lista de tareas | taskList.defaultTitle | — | no | Título por defecto lista de tareas |

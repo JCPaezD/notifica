@@ -237,6 +237,13 @@ export default {
   taskList: {
     // Textos de la lista de tareas
     viewingShift: "Viewing segment",
+    defaultTitle: "Task list",
+  },
+  empty: {
+    // Mensajes cuando no hay tareas
+    filters: "Try disabling filters",
+    noTasksShift: "This segment has no tasks",
+    startNew: "Start a new task for this segment",
   },
   share: {
     content: {
