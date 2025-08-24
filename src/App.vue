@@ -7,6 +7,7 @@ import SideMenu from './components/SideMenu.vue' // Importar el menú lateral
 import ShiftSelector from './components/ShiftSelector.vue'
 import TaskFilters from './components/TaskFilters.vue'
 import NewTaskForm from './components/NewTaskForm.vue'
+import Modal from './components/ui/Modal.vue'
 import Toast from './components/Toast.vue'
 import { useToast } from './composables/useToast'
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
@@ -67,6 +68,16 @@ interface Shift {
 // --- Estado para el menú lateral ---
 const isSideMenuOpen = ref(false) // Controla la visibilidad del menú lateral.
 const taskListKey = ref(0); // Key para forzar la re-renderización de TaskList, útil tras ciertas operaciones.
+
+// --- Estado para el menú de ajustes ---
+const isSettingsOpen = ref(false)
+
+const openSettings = () => {
+  isSettingsOpen.value = true
+}
+const closeSettings = () => {
+  isSettingsOpen.value = false
+}
 
 // Crea y añade una nueva tarea a la lista.
 const startNewTask = () => {
@@ -867,6 +878,9 @@ const exportTasksToJson = async () => {
           selectedShiftToView.value = 'current'
         }, 350)
         break;
+      case 'settings':
+        openSettings();
+        break;
       default:
         add({
           title: t('toast.action.unknown'),
@@ -887,6 +901,7 @@ const exportTasksToJson = async () => {
 
   <header
     class="sticky top-0 z-50 bg-surface-1 dark:bg-surface-1-dark shadow-sm w-full will-change-transform"
+    :class="{ 'pointer-events-none': isSettingsOpen }"
   >
     <div class="relative w-full max-w-lg mx-auto flex items-center justify-center pt-4 pb-3 px-4 md:px-0 select-none">
       <button @click="openSideMenu"
@@ -921,6 +936,7 @@ const exportTasksToJson = async () => {
   <main
     style="min-height: calc(100svh - 68px);"
     class="bg-app-bg dark:bg-app-bg-dark text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden"
+    :class="{ 'pointer-events-none': isSettingsOpen }"
   >
 
     <!-- Sección para añadir nueva tarea -->
@@ -998,6 +1014,16 @@ const exportTasksToJson = async () => {
     <input type="file" ref="fileImportInputRef" @change="importTasksFromJson" accept=".json" class="hidden" />
 
   </main>
+
+  <Modal v-model:modelValue="isSettingsOpen">
+    <!-- Contenido temporal -->
+    <div class="text-center p-4">
+      <p class="text-lg font-semibold">Modal de Ajustes (placeholder test)</p>
+      <button @click="closeSettings" class="mt-4 px-4 py-2 bg-accent-main text-white rounded-md">
+        Cerrar - test
+      </button>
+    </div>
+  </Modal>
 
   <!-- Sistema propio de notificaciones -->
   <Teleport to="body">

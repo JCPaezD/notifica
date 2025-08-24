@@ -1,65 +1,65 @@
 <template>
-  <Teleport to="body">
-    <div v-if="props.modelValue" class="fixed inset-0 z-50 flex items-center justify-center">
+    <TransitionRoot appear :show="props.modelValue" as="template">
+        <Dialog as="div" class="relative z-[60]" @close="handleClose" :initial-focus="closeButtonRef">
+            <!-- Fondo semitransparente con fade -->
+            <TransitionChild
+                as="template"
+                enter="transition-opacity ease-out duration-200"
+                enter-from="opacity-0"
+                enter-to="opacity-100"
+                leave="transition-opacity ease-in duration-150"
+                leave-from="opacity-100"
+                leave-to="opacity-0"
+                >
+                <DialogOverlay class="fixed inset-0 bg-black/30 dark:bg-black/50" />
+            </TransitionChild>
 
-      <!-- Fondo semitransparente -->
-      <div
-        class="fixed inset-0 bg-black/30 dark:bg-black/50"
-        @click="handleClose"
-      ></div>
 
-      <!-- Contenido del modal -->
-      <Transition
-        enter-active-class="transition ease-out duration-200"
-        enter-from-class="opacity-0 scale-95"
-        enter-to-class="opacity-100 scale-100"
-        leave-active-class="transition ease-in duration-150"
-        leave-from-class="opacity-100 scale-100"
-        leave-to-class="opacity-0 scale-95"
-      >
-        <div
-            class="relative z-50 max-w-md w-full rounded-xl
-                    bg-app-bg dark:bg-surface-1-dark
-                    text-text-main dark:text-main-dark
-                    p-6 shadow-xl"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            @click.stop
-        >
-            <slot />
-        </div>
-      </Transition>
-    </div>
-  </Teleport>
+            <div class="fixed inset-0 overflow-y-auto">
+                <div class="flex min-h-full items-center justify-center text-center">
+                    <TransitionChild
+                    as="template"
+                    enter="transition ease-out duration-200"
+                    enter-from="opacity-0 scale-95"
+                    enter-to="opacity-100 scale-100"
+                    leave="transition ease-in duration-150"
+                    leave-from="opacity-100 scale-100"
+                    leave-to="opacity-0 scale-95"
+                    >
+                    <DialogPanel
+                        class="relative z-50 max-w-md w-full mx-4 rounded-xl
+                            bg-app-bg dark:bg-surface-1-dark
+                            text-text-main dark:text-main-dark
+                            p-6 shadow-xl pointer-events-auto"
+                    >
+                        <DialogTitle class="sr-only">Modal</DialogTitle>
+                        <slot />
+                        <button ref="closeButtonRef" type="button" class="sr-only">Cerrar</button>
+                    </DialogPanel>
+                    </TransitionChild>
+                </div>
+            </div>
+        </Dialog>
+    </TransitionRoot>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from 'vue';
+import { ref } from 'vue'
+import { Dialog, DialogOverlay, DialogPanel, TransitionChild, TransitionRoot, DialogTitle } from '@headlessui/vue'
 
 const props = defineProps<{
-  modelValue: boolean;
-}>();
+  modelValue: boolean
+}>()
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void;
-}>();
+  (e: 'update:modelValue', value: boolean): void
+}>()
 
 function handleClose() {
-  emit('update:modelValue', false);
+  emit('update:modelValue', false)
 }
 
-function handleKeydown(event: KeyboardEvent) {
-  if (event.key === 'Escape') {
-    emit('update:modelValue', false);
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('keydown', handleKeydown);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', handleKeydown);
-});
+const closeButtonRef = ref(null)
 </script>
+
+

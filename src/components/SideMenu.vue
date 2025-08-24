@@ -214,7 +214,7 @@ const onLeave = (el: Element) => {
                   <!-- 🔧 Bloque de Opciones -->
                   <div class="space-y-1">
                     <!-- Opciones (botón superior) -->
-                    <button @click="isOptionsOpen = !isOptionsOpen" :class="[
+                    <button @click="handleAction('settings')" :class="[
                       'w-full flex items-center justify-between gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
                       'btn-purple',
                       'active:scale-95 transition-all duration-150 ease-in-out'
