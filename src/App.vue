@@ -18,11 +18,20 @@ import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { shiftIcons as icons } from './icons/shifts'
 import { useLogoAnimation } from './composables/useLogoAnimation'
 import { useDarkMode } from './composables/useDarkMode'
-const { isDark } = useDarkMode()
 
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
 
+// --- Dark mode ---
+const { isDark, preferredMode, setPreferredMode } = useDarkMode()
+
+// --- Idioma ---
+const currentLocale = computed(() => locale.value)
+
+function setLocale(lang: 'es' | 'en') {
+  locale.value = lang
+  localStorage.setItem('locale', lang)
+}
 
 const allTaskShiftIds = computed(() =>
   [...new Set(allTasks.value.map(t => t.shiftId).filter((id): id is string => typeof id === 'string'))]
@@ -1018,12 +1027,68 @@ const exportTasksToJson = async () => {
 
   <Modal v-model:modelValue="isSettingsOpen">
     <div class="text-center p-4">
-      <DialogTitle as="h2" id="modal-title" class="text-lg font-semibold">
-        Ajustes
+      <DialogTitle as="h2" id="modal-title" class="text-lg font-semibold mb-4">
+        {{ t('menu.options') }}
       </DialogTitle>
-      <button @click="closeSettings" class="mt-4 px-4 py-2 bg-accent-main text-white rounded-md">
-        Cerrar - test
-      </button>
+
+      <!-- Bloque Apariencia -->
+      <div class="mb-6">
+        <p class="text-subtle dark:text-subtle-dark font-medium pl-1 mb-2">{{ t('menu.appearance') }}</p>
+        <div class="flex flex-col gap-2">
+          <!-- Botón Claro -->
+          <button @click="setPreferredMode('light')" :class="[
+            'h-10 w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
+            preferredMode === 'light'
+              ? 'bg-accent-main text-white font-semibold'
+              : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+          ]">
+            {{ t('menu.theme.light') }}
+          </button>
+
+          <!-- Botón Oscuro -->
+          <button @click="setPreferredMode('dark')" :class="[
+            'h-10 w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
+            preferredMode === 'dark'
+              ? 'bg-accent-main text-white font-semibold'
+              : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+          ]">
+            {{ t('menu.theme.dark') }}
+          </button>
+
+          <!-- Botón Sistema -->
+          <button @click="setPreferredMode('system')" :class="[
+            'h-10 w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
+            preferredMode === 'system'
+              ? 'bg-accent-main text-white font-semibold'
+              : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+          ]">
+            {{ t('menu.theme.system') }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Bloque Idioma -->
+      <div>
+        <p class="text-subtle dark:text-subtle-dark font-medium pl-1 mb-2">{{ t('menu.language') }}</p>
+        <div class="flex gap-2">
+          <button @click="setLocale('es')" :class="[
+            'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
+            currentLocale === 'es'
+              ? 'bg-accent-main text-white font-semibold'
+              : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+          ]">
+            ES
+          </button>
+          <button @click="setLocale('en')" :class="[
+            'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
+            currentLocale === 'en'
+              ? 'bg-accent-main text-white font-semibold'
+              : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+          ]">
+            EN
+          </button>
+        </div>
+      </div>
     </div>
   </Modal>
 

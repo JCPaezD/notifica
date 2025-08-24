@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // src/components/SideMenu.vue
 // Componente del menú lateral deslizable que ofrece acciones rápidas para la aplicación.
-import { ref, watch, computed } from 'vue'
+import { ref, watch } from 'vue'
 import {
   Dialog,
   DialogPanel,
@@ -9,34 +9,9 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { useDarkMode } from '@/composables/useDarkMode'
 
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-
-const { locale } = useI18n()
-
-const currentLocale = computed(() => locale.value)
-
-function setLocale(lang: 'es' | 'en') {
-  locale.value = lang
-  localStorage.setItem('locale', lang)
-}
-
-const { preferredMode, setPreferredMode } = useDarkMode()
-
-const themeModes = ['light', 'dark', 'system'] as const
-type ThemeMode = typeof themeModes[number]
-
-
-const isOptionsOpen = ref(false)
-const { isDark } = useDarkMode()
-
-const mode = ref<'light' | 'dark'>(isDark.value ? 'dark' : 'light')
-
-watch(isDark, () => {
-  mode.value = isDark.value ? 'dark' : 'light'
-})
 
 // Props
 // `isOpen`: Controla la visibilidad del menú lateral.
@@ -82,30 +57,6 @@ watch(() => props.isOpen, (newValue, oldValue) => {
     isAnimatingOut.value = false
   }
 })
-
-// --- Lógica para la animación del colapsable ---
-const onEnter = (el: Element) => {
-  const htmlEl = el as HTMLElement;
-  htmlEl.style.maxHeight = `${htmlEl.scrollHeight}px`;
-};
-
-const onAfterEnter = (el: Element) => {
-  const htmlEl = el as HTMLElement;
-  htmlEl.style.maxHeight = '';
-};
-
-const onBeforeLeave = (el: Element) => {
-  const htmlEl = el as HTMLElement;
-  htmlEl.style.maxHeight = `${htmlEl.scrollHeight}px`;
-};
-
-const onLeave = (el: Element) => {
-  const htmlEl = el as HTMLElement;
-  htmlEl.style.maxHeight = '0px';
-};
-
-
-
 
 </script>
 
@@ -211,118 +162,19 @@ const onLeave = (el: Element) => {
 
                   <hr class="my-6 border-divider dark:border-divider-dark mx-3" /> <!-- Margen vertical aumentado -->
 
-                  <!-- 🔧 Bloque de Opciones -->
-                  <div class="space-y-1">
-                    <!-- Opciones (botón superior) -->
-                    <button @click="handleAction('settings')" :class="[
-                      'w-full flex items-center justify-between gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
-                      'btn-purple',
-                      'active:scale-95 transition-all duration-150 ease-in-out'
-                    ]" :aria-expanded="isOptionsOpen" aria-controls="options-content"
-                      style="z-index: 10; position: relative;">
-                      <span class="flex items-center gap-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                          stroke-width="1.5" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M4.5 6.75h15m-15 5.25h15m-15 5.25h15" />
-                        </svg>
-                        {{ t('menu.options') }}
-                      </span>
-                      <svg
-                        class="w-5 h-5 text-purple-strong dark:text-purple-strong-dark/80 transition-transform duration-300"
-                        :class="{ 'rotate-90': isOptionsOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-
-                    <Transition name="collapse" @enter="onEnter" @after-enter="onAfterEnter"
-                      @before-leave="onBeforeLeave" @leave="onLeave">
-                      <div id="options-content" v-show="isOptionsOpen">
-                        <!-- Bloque visual agrupado -->
-                        <div
-                          class="mx-4 -mt-1 rounded-b-xl border border-t-0 border-divider dark:border-divider-dark bg-surface-1 dark:bg-surface-1-dark ring-1 ring-purple-strong/15 dark:ring-purple-strong-dark/20 p-4 pt-3 space-y-3 text-sm">
-                          <p class="text-subtle dark:text-subtle-dark font-medium pl-1">{{ t('menu.appearance') }}</p>
-
-                          <div class="flex flex-col gap-2">
-                            <!-- Botón Claro -->
-                            <button @click="setPreferredMode('light')" :class="[
-                              'h-10',
-                              'w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
-                              preferredMode === 'light'
-                                ? 'bg-accent-main text-white font-semibold'
-                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
-                            ]">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m16.95 4.95l-1.061-1.061M6.111 6.111 5.05 5.05m0 13.9 1.061-1.061m12.728-12.728-1.061 1.061M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                              </svg>
-                              {{ t('menu.theme.light') }}
-                            </button>
-
-                            <!-- Botón Oscuro -->
-                            <button @click="setPreferredMode('dark')" :class="[
-                              'h-10',
-                              'w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
-                              preferredMode === 'dark'
-                                ? 'bg-accent-main text-white font-semibold'
-                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
-                            ]">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                              </svg>
-                              {{ t('menu.theme.dark') }}
-                            </button>
-
-                            <!-- Botón Sistema -->
-                            <button @click="setPreferredMode('system')" :class="[
-                              'h-10',
-                              'w-full flex items-center gap-2 px-3 py-2 rounded-md transition-all duration-150',
-                              preferredMode === 'system'
-                                ? 'bg-accent-main text-white font-semibold'
-                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
-                            ]">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
-                              </svg>
-                              {{ t('menu.theme.system') }}
-                            </button>
-                          </div>
-
-                        <!-- Bloque Idioma -->
-                        <div class="space-y-2">
-                          <p class="text-subtle dark:text-subtle-dark font-medium pl-1">{{ t('menu.language') }}</p>
-                          <div class="flex gap-2">
-                            <!-- Botón Español -->
-                            <button @click="setLocale('es')" :class="[ 
-                              'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
-                              currentLocale === 'es'
-                                ? 'bg-accent-main text-white font-semibold'
-                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
-                            ]">
-                              ES
-                            </button>
-
-                            <!-- Botón Inglés -->
-                            <button @click="setLocale('en')" :class="[ 
-                              'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
-                              currentLocale === 'en'
-                                ? 'bg-accent-main text-white font-semibold'
-                                : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
-                            ]">
-                              EN
-                            </button>
-                          </div>
-                        </div>
-                        </div>
-                      </div>
-                    </Transition>
-                  </div>
+                  <!-- Ajustes -->
+                  <button @click="handleAction('settings')" :class="[
+                    'w-full flex items-center gap-x-3 px-3 py-3 rounded-md text-sm font-medium',
+                    'btn-purple',
+                    'active:scale-95 transition-all duration-150 ease-in-out'
+                  ]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                      stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M4.5 6.75h15m-15 5.25h15m-15 5.25h15" />
+                    </svg>
+                    <span>{{ t('menu.options') }}</span>
+                  </button>
 
                 </div>
 
