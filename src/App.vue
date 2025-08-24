@@ -1026,10 +1026,15 @@ const exportTasksToJson = async () => {
   </main>
 
   <Modal v-model:modelValue="isSettingsOpen">
-    <div class="text-center p-4">
-      <DialogTitle as="h2" id="modal-title" class="text-lg font-semibold mb-4">
+    <!-- Franja de cabecera -->
+    <div class="bg-surface-hover dark:bg-surface-hover-dark rounded-t-xl px-6 py-4 text-left">
+      <DialogTitle as="h2" id="modal-title" class="text-lg font-semibold">
         {{ t('menu.options') }}
       </DialogTitle>
+    </div>
+
+    <!-- Zona de contenido -->
+    <div class="bg-surface-1 dark:bg-surface-1-dark rounded-b-xl px-6 py-4 text-left">
 
       <!-- Bloque Apariencia -->
       <div class="mb-6">

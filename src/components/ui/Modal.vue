@@ -28,13 +28,16 @@
                     >
                     <DialogPanel
                         class="relative z-50 max-w-md w-full mx-4 rounded-xl
-                            bg-app-bg dark:bg-surface-1-dark
+                            bg-surface-hover dark:bg-surface-hover-dark
                             text-text-main dark:text-main-dark
-                            p-6 shadow-xl pointer-events-auto"
+                            shadow-xl pointer-events-auto border border-divider dark:border-divider-dark"
                     >
-                        <DialogTitle class="sr-only">Modal</DialogTitle>
-                        <slot />
-                        <button ref="closeButtonRef" type="button" class="sr-only">Cerrar</button>
+                        <!-- Contenido interno del modal -->
+                        <div class="bg-surface-1 dark:bg-surface-1-dark rounded-xl">
+                            <DialogTitle class="sr-only">Modal</DialogTitle>
+                            <slot />
+                            <button ref="closeButtonRef" type="button" class="sr-only">Cerrar</button>
+                        </div>
                     </DialogPanel>
                     </TransitionChild>
                 </div>

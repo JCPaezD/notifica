@@ -305,7 +305,7 @@ function handleEnter(index: number) {
                 @click="isNotesOpen = !isNotesOpen"
                 :class="[
                   'w-full flex items-center justify-between gap-x-3 py-2 rounded-md text-sm font-medium',
-                  'bg-surface-2 dark:bg-surface-2-dark text-text-main dark:text-main-dark',
+                  'bg-surface-hover dark:bg-surface-hover-dark text-text-main dark:text-main-dark',
                   'pr-3'
                 ]"
                 :aria-expanded="isNotesOpen"
