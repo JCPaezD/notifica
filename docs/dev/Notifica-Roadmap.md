@@ -995,10 +995,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Reemplazar acción de "Opciones" para que abra el modal de Ajustes (y cierre el SideMenu si procede)
         - [x] Corregido bug de hover/active residual migrando Modal a Headless UI (UX móvil)
         - [x] Cambiar wording de Opciones a Ajustes (Options>Settings)
-        - [ ] Incluir título accesible dentro del slot del modal (<h2 id="modal-title">…</h2>)
+        - [x] Incluir título accesible en el slot del modal mediante <DialogTitle as="h2" id="modal-title">
         - [ ] Trasladar bloque de Apariencia desde SideMenu al modal
         - [ ] Trasladar bloque de Idioma desde SideMenu al modal
         - [ ] Revisar estilos internos de Apariencia e Idioma para adaptarlos al nuevo contenedor
+        - [ ] Revisar colores del modal para hacerlos compatibles con dark/light mode
+        - [ ] Revisar textos del modal para hacerlos dinamicos i18n
         - [ ] Eliminar bloques antiguos de Apariencia e Idioma en SideMenu y limpiar lógica sobrante
         - [ ] Validar apertura/cierre correcto del modal desde el SideMenu
         - [ ] Validar accesibilidad completa (aria-labelledby apunta al título)

@@ -8,6 +8,7 @@ import ShiftSelector from './components/ShiftSelector.vue'
 import TaskFilters from './components/TaskFilters.vue'
 import NewTaskForm from './components/NewTaskForm.vue'
 import Modal from './components/ui/Modal.vue'
+import { DialogTitle } from '@headlessui/vue'
 import Toast from './components/Toast.vue'
 import { useToast } from './composables/useToast'
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
@@ -1016,9 +1017,10 @@ const exportTasksToJson = async () => {
   </main>
 
   <Modal v-model:modelValue="isSettingsOpen">
-    <!-- Contenido temporal -->
     <div class="text-center p-4">
-      <p class="text-lg font-semibold">Modal de Ajustes (placeholder test)</p>
+      <DialogTitle as="h2" id="modal-title" class="text-lg font-semibold">
+        Ajustes
+      </DialogTitle>
       <button @click="closeSettings" class="mt-4 px-4 py-2 bg-accent-main text-white rounded-md">
         Cerrar - test
       </button>
