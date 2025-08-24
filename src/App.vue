@@ -1042,6 +1042,11 @@ const exportTasksToJson = async () => {
               ? 'bg-accent-main text-white font-semibold'
               : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
           ]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m16.95 4.95l-1.061-1.061M6.111 6.111 5.05 5.05m0 13.9 1.061-1.061m12.728-12.728-1.061 1.061M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
             {{ t('menu.theme.light') }}
           </button>
 
@@ -1052,6 +1057,11 @@ const exportTasksToJson = async () => {
               ? 'bg-accent-main text-white font-semibold'
               : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
           ]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
             {{ t('menu.theme.dark') }}
           </button>
 
@@ -1062,6 +1072,11 @@ const exportTasksToJson = async () => {
               ? 'bg-accent-main text-white font-semibold'
               : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
           ]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+            </svg>
             {{ t('menu.theme.system') }}
           </button>
         </div>
