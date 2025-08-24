@@ -10,7 +10,7 @@ export default {
   menu: {
     // Menús y navegación
     title: "Menu",
-    options: "Options",
+    options: "Settings",
     appearance: "Appearance",
     language: "Language",
     theme: {
