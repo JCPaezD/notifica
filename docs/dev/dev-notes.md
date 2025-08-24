@@ -41,6 +41,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Safe Areas: integración, fallos y solución definitiva (plugin EdgeToEdge)](#safe-areas-integración-fallos-y-solución-definitiva-plugin-edgetoedge)
   - [Bug crítico: el plugin capacitor-navigation-bar rompe la build debug](#bug-crítico-el-plugin-capacitor-navigation-bar-rompe-la-build-debug)
   - [Gestión dinámica de la barra de estado (StatusBar)](#gestión-dinámica-de-la-barra-de-estado-statusbar)
+  - [Bug en modal: hover/active residual y migración a Headless UI](#bug-en-modal-hoveractive-residual-y-migración-a-headless-ui)
 - [UI, diseño y experiencia de usuario](#ui-diseño-y-experiencia-de-usuario)
   - [Splash personalizada en Android](#splash-personalizada-en-android)
   - [Descripción para ficha de Play Store](#descripción-para-ficha-de-play-store)
@@ -1332,6 +1333,32 @@ Ofrecer una integración visual coherente con el tema de la app, respetando el d
 **Notas adicionales:**  
 - La solución se basa en una separación clara de lógica por API, y puede servir como modelo para futuras adaptaciones relacionadas con la barra de navegación u otros comportamientos específicos de Android.
 - También se ha creado un archivo utilitario (`src/utils/platform.ts`) para centralizar la lógica de detección del nivel de API en Android. Este archivo expone una función `isAndroidApiAtLeast(minApi)` que devuelve un booleano según la versión del sistema. Permite condicionar de forma segura la ejecución de funciones sensibles a la versión, mejorando la legibilidad del código y evitando duplicaciones.
+
+
+### Bug en modal: hover/active residual y migración a Headless UI
+
+**Contexto:**  
+Al migrar un modal preliminar desde Nocta, se detectó que al cerrar el modal pulsando sobre el overlay, los botones o campos situados debajo quedaban en estado *hover/active* “pegado” en dispositivos móviles. Este comportamiento no ocurría en escritorio ni en el SideMenu (también basado en Headless UI).
+
+**Pruebas realizadas:**  
+- Se probaron soluciones con `@click.stop`, `@pointerdown.stop`, y retrasos en el desmontaje (`setTimeout`), sin éxito.  
+- Se revisó el CSS de botones y campos, descartando que fuera la causa.  
+- Se comparó con el SideMenu, confirmando que en ese componente el overlay bloqueaba los eventos correctamente.  
+- Se consultó documentación y ejemplos de Headless UI (v1.7.23), verificando la estructura recomendada.  
+- Se reprodujo el bug incluso forzando `isSettingsOpen = true`, lo que descartó fallos en la propagación del estado.
+
+**Diagnóstico:**  
+El bug se debía a que el modal era un componente **custom**, sin la gestión completa de overlay, foco y animaciones que Headless UI implementa en `Dialog`. La propagación de eventos y la coordinación de transiciones no estaban controladas de forma robusta, lo que permitía que el `touchstart` llegara al contenido subyacente.
+
+**Decisión:**  
+Se descartaron parches manuales y se optó por **migrar el modal a Headless UI**, unificándolo con el SideMenu para tener consistencia en la gestión de overlays, animaciones y accesibilidad.  
+
+**Resultado:**  
+- El modal ahora funciona con `Dialog`, `DialogOverlay` y `DialogPanel`, usando la misma estructura que el SideMenu.  
+- El bug del hover/active residual quedó completamente resuelto.  
+- Se consolidó el código, eliminando duplicados y asegurando compatibilidad con teclado y lectores de pantalla.  
+- Se añadió un **botón oculto (`sr-only`) con `initialFocus`** para cumplir con los requisitos de accesibilidad incluso en modales sin elementos interactivos visibles.  
+- Ambas piezas (SideMenu y Modal) quedan unificadas bajo la misma librería y patrón, simplificando el mantenimiento futuro.
 
 ---
 
