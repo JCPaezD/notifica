@@ -1000,6 +1000,16 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Trasladar bloque de Idioma desde SideMenu al modal
         - [x] Eliminar bloques antiguos de Apariencia e Idioma en SideMenu y limpiar lógica sobrante
         - [ ] Revisar estilos internos de Apariencia e Idioma para adaptarlos al nuevo contenedor
+            - [x] Ajustar franja superior del título con fondo diferenciado y borde inferior
+            - [x] Añadir separador `<hr>` entre Apariencia e Idioma
+            - [x] Reordenar Apariencia a Sistema → Claro → Oscuro
+            - [x] Pasar Apariencia a `grid grid-cols-3 gap-2` con ajustes responsive px/gap
+            - [x] Pasar Idioma a `grid grid-cols-3 gap-2` con botón AUTO deshabilitado como placeholder
+            - [x] Ajustar jerarquía de títulos: Ajustes (`text-2xl`, `w-7 h-7`) y secciones (`text-base font-semibold`, `w-5 h-5`)
+            - [ ] Validar en PWA/iPhone que `text-2xl` no es excesivo en pantallas pequeñas
+            - [ ] Confirmar consistencia visual con TaskList y Notas
+            - [ ] Confirmar visualización correcta en dark/light mode
+            - [ ] Confirmar que todas las claves i18n funcionan (excepto AUTO, hardcodeado temporalmente)
         - [ ] Revisar colores del modal para hacerlos compatibles con dark/light mode
         - [ ] Revisar textos del modal para hacerlos dinamicos i18n
         - [ ] Validar apertura/cierre correcto del modal desde el SideMenu
