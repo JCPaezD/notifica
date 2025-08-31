@@ -869,6 +869,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
   - [x] Enviar para revisión de Google Play Console.
   - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
+  - [ ] Solicitar acceso a producción en Google Play Console tras completar test cerrado
   - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
   - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
   - [ ] (Opcional) Publicar el mensaje en canales adecuados:
@@ -1013,8 +1014,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
             - [x] Confirmar que todas las claves i18n funcionan (excepto AUTO, hardcodeado temporalmente)
         - [x] Validar apertura/cierre correcto del modal desde el SideMenu
         - [x] Validar accesibilidad completa (aria-labelledby apunta al título)
-      - [ ] Implementar 'sistema' en el selector de idioma con 3 botones (ES, EN, Sistema)
-      - [ ] Validar persistencia de idioma elegido en localStorage
+      - [x] Implementar 'sistema' en el selector de idioma con 3 botones (ES, EN, Sistema)
+      - [x] Validar persistencia de idioma elegido en localStorage
       - [ ] Validar en PWA y APK: funcionamiento correcto del modal, selector y textos en ambos idiomas
   - [ ] Validación y pruebas
     - [ ] Revisar PWA en móvil en ambos idiomas (claro/oscuro, offline)

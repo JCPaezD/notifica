@@ -115,10 +115,12 @@ document.addEventListener('deviceready', async () => {
 const savedLocale = localStorage.getItem('locale')
 
 const browserLocale = navigator.language.split('-')[0] // ej: "es-ES" → "es"
+const resolvedBrowser = ['es', 'en'].includes(browserLocale) ? browserLocale : 'en'
 
 const locale =
-  savedLocale ||
-  (['es', 'en'].includes(browserLocale) ? browserLocale : 'en')
+  savedLocale === 'system'
+    ? resolvedBrowser
+    : savedLocale || resolvedBrowser
 
 
 const i18n = createI18n({

@@ -26,11 +26,22 @@ const { t, locale } = useI18n()
 const { isDark, preferredMode, setPreferredMode } = useDarkMode()
 
 // --- Idioma ---
-const currentLocale = computed(() => locale.value)
+const selectedLocale = ref(localStorage.getItem('locale') || 'system')
 
-function setLocale(lang: 'es' | 'en') {
-  locale.value = lang
-  localStorage.setItem('locale', lang)
+watch(selectedLocale, (newVal) => {
+  if (newVal === 'system') {
+    const browserLocale = navigator.language.split('-')[0]
+    const resolved = ['es', 'en'].includes(browserLocale) ? browserLocale : 'en'
+    locale.value = resolved
+    localStorage.setItem('locale', 'system')
+  } else {
+    locale.value = newVal
+    localStorage.setItem('locale', newVal)
+  }
+})
+
+function setLocale(lang: 'es' | 'en' | 'system') {
+  selectedLocale.value = lang
 }
 
 const allTaskShiftIds = computed(() =>
@@ -1122,13 +1133,18 @@ const exportTasksToJson = async () => {
           {{ t('menu.language') }}
         </p>
         <div class="grid grid-cols-3 gap-2">
-          <!-- Botón Sistema/Auto (placeholder deshabilitado) -->
-          <button disabled class="flex-1 h-10 flex items-center justify-center rounded-md opacity-50 cursor-not-allowed border border-divider dark:border-divider-dark">
+          <!-- Botón Sistema/Auto -->
+          <button @click="setLocale('system')" :class="[
+            'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
+            selectedLocale === 'system'
+              ? 'bg-accent-main text-white font-semibold'
+              : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
+          ]">
             AUTO
           </button>
           <button @click="setLocale('es')" :class="[
             'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
-            currentLocale === 'es'
+            selectedLocale === 'es'
               ? 'bg-accent-main text-white font-semibold'
               : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
           ]">
@@ -1136,7 +1152,7 @@ const exportTasksToJson = async () => {
           </button>
           <button @click="setLocale('en')" :class="[
             'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
-            currentLocale === 'en'
+            selectedLocale === 'en'
               ? 'bg-accent-main text-white font-semibold'
               : 'bg-surface-1 dark:bg-surface-1-dark text-subtle dark:text-subtle-dark border border-divider hover:bg-surface-hover dark:hover:bg-surface-hover-dark'
           ]">
