@@ -988,10 +988,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Migrar API de props open/onClose a v-model:open con defineEmits
         - [x] Adaptar colores de fondo y texto al sistema de superficies de Notifica (bg-surface, text-*)
         - [x] Revisar estilo de overlay (color, blur) para integrarlo con Notifica
-        - [ ] Homogeneizar sombras y bordes con el resto de la app
-        - [ ] Revisar animaciones: mantener o integrar con animations.css
+        - [x] Homogeneizar sombras y bordes con el resto de la app
+        - [x] Revisar animaciones: mantener o integrar con animations.css
         - [x] Mejorar accesibilidad (atributos role, aria-modal)
-      - [ ] Refactor: trasladar Apariencia e Idioma del SideMenu al nuevo modal de Ajustes
+      - [x] Refactor: trasladar Apariencia e Idioma del SideMenu al nuevo modal de Ajustes
         - [x] Reemplazar acción de "Opciones" para que abra el modal de Ajustes (y cierre el SideMenu si procede)
         - [x] Corregido bug de hover/active residual migrando Modal a Headless UI (UX móvil)
         - [x] Cambiar wording de Opciones a Ajustes (Options>Settings)
@@ -1012,7 +1012,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
             - [x] Confirmar visualización correcta en dark/light mode
             - [x] Confirmar que todas las claves i18n funcionan (excepto AUTO, hardcodeado temporalmente)
         - [x] Validar apertura/cierre correcto del modal desde el SideMenu
-        - [ ] Validar accesibilidad completa (aria-labelledby apunta al título)
+        - [x] Validar accesibilidad completa (aria-labelledby apunta al título)
       - [ ] Implementar 'sistema' en el selector de idioma con 3 botones (ES, EN, Sistema)
       - [ ] Validar persistencia de idioma elegido en localStorage
       - [ ] Validar en PWA y APK: funcionamiento correcto del modal, selector y textos en ambos idiomas
@@ -1199,6 +1199,7 @@ Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionale
 - [ ] Botón "Volver al turno actual" no funciona arrastrar y soltar para cancelar clic. (regresión)
 - [ ] Migrar a APIs modernas de edge-to-edge (Android 15+).
 - [ ] Eliminar uso de parámetros obsoletos en WindowInsets.
+- [ ] Revisar accesibilidad en toda la app (lectores de pantalla, etc)
 
 
 

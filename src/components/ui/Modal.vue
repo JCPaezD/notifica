@@ -1,6 +1,6 @@
 <template>
     <TransitionRoot appear :show="props.modelValue" as="template">
-        <Dialog as="div" class="relative z-[60]" @close="handleClose" :initial-focus="closeButtonRef">
+        <Dialog as="div" class="relative z-[60]" @close="handleClose" :initial-focus="closeButtonRef" aria-labelledby="modal-title">
             <!-- Fondo semitransparente con fade -->
             <TransitionChild
                 as="template"
