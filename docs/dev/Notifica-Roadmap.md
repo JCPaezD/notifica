@@ -884,7 +884,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - Durante un periodo de 14 días
   - [ ] Revisar restricciones de orientación/redimensionamiento para compatibilidad con tablets y plegables (Android 16+)
 
-- [ ] ✏️ Revisar wording para ampliar público potencial
+- [x] ✏️ Revisar wording para ampliar público potencial
   - [x] Inventario de textos de la UI
     - [x] Extraer todos los textos visibles (botones, menús, placeholders, labels, toasts, modales, exportación)
     - [x] Documentarlos en `docs/rewording-ES.md`
@@ -924,14 +924,14 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Revisar y actualizar docs/rewording-ES.md bloque por bloque con las decisiones del roadmap
     - [x] Validar claridad con criterios internos (¿se entiende sin manual? ¿es neutral para distintos perfiles?)
     - [x] Cerrar lista definitiva en `docs/rewording-ES.md`
-  - [ ] Implementación de cambios
-    - [ ] Sustituir textos en componentes (inputs, botones, menús, filtros)
-    - [ ] Actualizar textos en exportación e importación
-    - [ ] Revisar documentación (`README.md`, capturas si procede)
-  - [ ] Validación en entorno real
-    - [ ] Revisar PWA en móvil (claro/oscuro, offline)
-    - [ ] Revisar APK Android
-    - [ ] Confirmar comprensión en contexto (sin necesidad de explicación)
+  - [x] Implementación de cambios
+    - [x] Sustituir textos en componentes (inputs, botones, menús, filtros)
+    - [x] Actualizar textos en exportación e importación
+    - [x] Revisar documentación (`README.md`, capturas si procede)
+  - [x] Validación en entorno real
+    - [x] Revisar PWA en móvil (claro/oscuro, offline)
+    - [x] Revisar APK Android
+    - [x] Confirmar comprensión en contexto (sin necesidad de explicación)
 
 - [x] 🌍 Añadir soporte multidioma (español e inglés)
   - [x] Elegir estrategia de internacionalización
