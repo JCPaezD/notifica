@@ -868,8 +868,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Corregir tamaños de capturas en manifest para PWA
           - [x] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
   - [x] Enviar para revisión de Google Play Console.
-  - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
-  - [ ] Solicitar acceso a producción en Google Play Console tras completar test cerrado
+  - [x] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
+  - [x] Solicitar acceso a producción en Google Play Console tras completar test cerrado
   - [ ] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android 
   - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, etc) y lanzar actualizacion.
   - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
