@@ -870,6 +870,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Enviar para revisión de Google Play Console.
   - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
   - [ ] Solicitar acceso a producción en Google Play Console tras completar test cerrado
+  - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, etc) y lanzar actualizacion.
   - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
   - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
   - [ ] (Opcional) Publicar el mensaje en canales adecuados:
@@ -945,7 +946,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - Parámetros dinámicos con `{nombre}` en minúsculas (`{count}`, `{description}`, …).
       - Plurales usando sintaxis de `vue-i18n`.
       - Branding “Notifica” no se traduce.
-  - [ ] Integrar textos en sistema de traducción
+  - [x] Integrar textos en sistema de traducción
     - [x] Volcar `ES final` desde `docs/rewording-ES.md` a `es.ts`
       - [x] Bloque 1
       - [x] Bloque 2
@@ -985,7 +986,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Revisar y aplicar el mismo criterio de i18n en TaskItem.vue (horas inicio/fin y duración)
     - [x] Añadir selector de idioma
       - [x] Toma de decisiones sobre formato, ubicación y estilo del selector (modal centrado, botones ES/EN/Sistema, cambio de nombre a Ajustes/Settings)
-      - [ ] Implementar modal reutilizando la base de Nocta (centrado, escalable)
+      - [x] Implementar modal reutilizando la base de Nocta (centrado, escalable)
         - [x] Migrar API de props open/onClose a v-model:open con defineEmits
         - [x] Adaptar colores de fondo y texto al sistema de superficies de Notifica (bg-surface, text-*)
         - [x] Revisar estilo de overlay (color, blur) para integrarlo con Notifica
@@ -1022,8 +1023,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Revisar APK en Android (y iOS si se compila más adelante)
     - [x] Confirmar que no se rompen diseños con textos largos o diferentes por idioma
   - [ ] Documentación y cierre
-    - [ ] Explicar en `dev-notes.md` cómo añadir/editar traducciones existentes
-    - [ ] Explicar en `dev-notes.md` cómo introducir textos nuevos en la app usando i18n
+    - [x] Explicar en `dev-notes.md` cómo añadir/editar traducciones existentes
+    - [x] Explicar en `dev-notes.md` cómo introducir textos nuevos en la app usando i18n
     - [ ] Actualizar capturas o ejemplos en `README.md` si procede (según decisión sobre idiomas en repo)
     - [ ] Añadir recordatorio en roadmap para actualizar ficha de Play Store (capturas, descripción) cuando se prepare la versión en inglés
     - [ ] Commit de integración i18n básica funcionando

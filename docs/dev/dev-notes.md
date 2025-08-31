@@ -48,6 +48,8 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Capturas oficiales de la app (v1.0)](#capturas-oficiales-de-la-app-v10)
   - [Reestructuración del layout de las tareas para alineación precisa (botón, duración, horas)](#reestructuración-del-layout-de-las-tareas-para-alineación-precisa-botón-duración-horas)
   - [Bloque de apariencia: diseño UI y selector de tema](#bloque-de-apariencia-diseño-ui-y-selector-de-tema)
+  - [Gestión de traducciones existentes con i18n](#gestión-de-traducciones-existentes-con-i18n)  
+  - [Añadir nuevos textos traducibles con i18n](#añadir-nuevos-textos-traducibles-con-i18n)  
 - [Notas meta del proyecto](#notas-meta-del-proyecto)
   - [Nueva conversación principal para el desarrollo de Notifica](#nueva-conversación-principal-para-el-desarrollo-de-notifica)
   - [Notas para generar mensaje para nueva conversacion de desarrollo](#notas-para-generar-mensaje-para-nueva-conversacion-de-desarrollo)
@@ -1543,6 +1545,67 @@ Durante la implementación del sistema de modo oscuro se rediseñó el bloque de
 - Comportamiento responsive correcto en móviles y escritorio.
 
 Este bloque puede servir como patrón reutilizable para configuraciones similares (idioma, tamaño de texto…).
+
+
+## Gestión de traducciones existentes con i18n
+
+Todas las cadenas de la aplicación están centralizadas en los archivos de idioma ubicados en `src/locales/`.  
+Actualmente existen dos archivos principales (`es.ts` y `en.ts`) que contienen todas las claves y sus valores traducidos.  
+
+**Pautas para editar traducciones:**
+- No se debe modificar texto directamente en los componentes o vistas.  
+- Siempre que se quiera corregir, cambiar o ajustar una traducción, debe hacerse en los archivos `es.ts` y `en.ts`.  
+- Las claves deben mantenerse consistentes en todos los idiomas. Si se cambia el nombre de una clave, hay que actualizarla en todos los idiomas y en el código que la utilice.  
+- Vue I18n está configurado para usar **inglés (en)** como fallback. Si una clave no existe en el idioma actual, automáticamente se mostrará la traducción inglesa.  
+
+**Cómo añadir un nuevo idioma**
+
+Para incorporar un nuevo idioma a la aplicación, el proceso es el siguiente:
+
+1. **Crear el archivo de traducciones**  
+   - Copiar uno de los archivos existentes en `src/locales/` (por ejemplo, `en.ts`) y renombrarlo con el código del nuevo idioma (`fr.ts`, `de.ts`, etc.).  
+   - Traducir todas las claves al nuevo idioma manteniendo la misma estructura de claves.
+
+2. **Registrar el idioma en `main.ts`**  
+   - Importar el nuevo archivo de traducciones.  
+   - Añadirlo dentro del objeto `messages` de `createI18n`.  
+   - Ampliar la lógica de `browserLocale` para que reconozca el nuevo código de idioma si se quiere usar como opción por defecto.
+
+3. **Actualizar el modal de selección de idioma**  
+   - Editar el bloque de idioma en `App.vue` para añadir un nuevo botón con la abreviatura correspondiente (FR, DE, IT, etc.).  
+   - Usar el mismo estilo y clases que los botones existentes.  
+
+4. **Validar en la aplicación**  
+   - Seleccionar el nuevo idioma desde el modal y comprobar que todos los textos aparecen traducidos.  
+   - Verificar que la opción **AUTO** del selector también detecta el nuevo idioma cuando el dispositivo esté configurado con él.
+
+Este procedimiento asegura que el nuevo idioma quede integrado de forma coherente en toda la app, sin necesidad de modificar los componentes uno a uno.
+
+Este sistema asegura que la app se mantenga coherente y sea sencillo añadir o actualizar traducciones sin riesgo de dejar cadenas sueltas en el código.  
+
+---
+
+## Añadir nuevos textos traducibles con i18n
+
+Para introducir textos nuevos en la aplicación, el flujo recomendado es el siguiente:  
+
+1. **Definir una clave clara y coherente**  
+   - Usar un esquema jerárquico como `menu.settings`, `task.add`, `notes.title`, etc.  
+   - Evitar nombres ambiguos o demasiado genéricos.  
+
+2. **Añadir la clave en todos los idiomas disponibles**  
+   - Editar `src/locales/es.ts` y `src/locales/en.ts`, añadiendo la nueva clave con su traducción correspondiente.  
+   - Si se añaden nuevos idiomas en el futuro, hay que replicar la clave en cada uno de ellos.  
+
+3. **Usar la clave en el código**  
+   - En los componentes, obtener la función `t` desde `useI18n()` y llamar a `t('clave')`.  
+   - Nunca insertar textos hardcodeados directamente en los templates.  
+
+4. **Validar la visualización**  
+   - Probar la app en todos los idiomas disponibles para asegurarse de que el texto aparece correctamente traducido y sin romper el diseño.  
+   - Recordar que la opción **AUTO (system)** hace que la app arranque en el idioma del dispositivo si está soportado (actualmente ES o EN), y en caso contrario se aplica inglés como fallback.  
+
+Este flujo garantiza que las nuevas cadenas se integren de forma ordenada, consistente y sin duplicar lógica en los componentes.  
 
 ---
 
