@@ -971,7 +971,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] i18n: sustituir textos en Toast.vue (línea 118 del checklist)
     - [x] Manejar casos con parámetros dinámicos (`{count}`, `{description}`…) y plurales
     - [x] Crear toggle provisional ES/EN para pruebas en móvil
-    - [ ] Validar sistema i18n completo (desktop, PWA y APK)
+    - [x] Validar sistema i18n completo (desktop, PWA y APK)
       - [x] Apariencia e Idioma en opciones
       - [x] Placeholders de tareas vacias (3) y fallback de titulo (default) en props de TaskList.vue
       - [x] Dias lun->mon etc. En selector de turnos y 'Viendo turno'
@@ -983,7 +983,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Unificar formatos de fechas y horas en exportación/compartir según i18n (no navegador)
       - [x] Localizar formato de duración (coma/punto) en exportación/compartir según i18n
       - [x] Revisar y aplicar el mismo criterio de i18n en TaskItem.vue (horas inicio/fin y duración)
-    - [ ] Añadir selector de idioma
+    - [x] Añadir selector de idioma
       - [x] Toma de decisiones sobre formato, ubicación y estilo del selector (modal centrado, botones ES/EN/Sistema, cambio de nombre a Ajustes/Settings)
       - [ ] Implementar modal reutilizando la base de Nocta (centrado, escalable)
         - [x] Migrar API de props open/onClose a v-model:open con defineEmits
@@ -1016,7 +1016,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - [x] Validar accesibilidad completa (aria-labelledby apunta al título)
       - [x] Implementar 'sistema' en el selector de idioma con 3 botones (ES, EN, Sistema)
       - [x] Validar persistencia de idioma elegido en localStorage
-      - [ ] Validar en PWA y APK: funcionamiento correcto del modal, selector y textos en ambos idiomas
+      - [x] Validar en PWA y APK: funcionamiento correcto del modal, selector y textos en ambos idiomas
   - [ ] Validación y pruebas
     - [ ] Revisar PWA en móvil en ambos idiomas (claro/oscuro, offline)
     - [ ] Revisar APK en Android (y iOS si se compila más adelante)
