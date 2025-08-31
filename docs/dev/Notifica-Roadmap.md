@@ -1006,7 +1006,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
             - [x] Pasar Apariencia a `grid grid-cols-3 gap-2` con ajustes responsive px/gap
             - [x] Pasar Idioma a `grid grid-cols-3 gap-2` con botón AUTO deshabilitado como placeholder
             - [x] Ajustar jerarquía de títulos: Ajustes (`text-2xl`, `w-7 h-7`) y secciones (`text-base font-semibold`, `w-5 h-5`)
-            - [ ] Validar en PWA/iPhone que `text-2xl` no es excesivo en pantallas pequeñas
+            - [x] Validar en PWA/iPhone que `text-2xl` no es excesivo en pantallas pequeñas
             - [ ] Añadir botón cerrar ("x" en cabecera o "cerrar" abajo)
             - [ ] Confirmar consistencia visual con TaskList y Notas
             - [ ] Confirmar visualización correcta en dark/light mode
