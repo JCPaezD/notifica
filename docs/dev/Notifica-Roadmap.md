@@ -1017,10 +1017,10 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
       - [x] Implementar 'sistema' en el selector de idioma con 3 botones (ES, EN, Sistema)
       - [x] Validar persistencia de idioma elegido en localStorage
       - [x] Validar en PWA y APK: funcionamiento correcto del modal, selector y textos en ambos idiomas
-  - [ ] Validación y pruebas
-    - [ ] Revisar PWA en móvil en ambos idiomas (claro/oscuro, offline)
-    - [ ] Revisar APK en Android (y iOS si se compila más adelante)
-    - [ ] Confirmar que no se rompen diseños con textos largos o diferentes por idioma
+  - [x] Validación y pruebas
+    - [x] Revisar PWA en móvil en ambos idiomas (claro/oscuro, offline)
+    - [x] Revisar APK en Android (y iOS si se compila más adelante)
+    - [x] Confirmar que no se rompen diseños con textos largos o diferentes por idioma
   - [ ] Documentación y cierre
     - [ ] Explicar en `dev-notes.md` cómo añadir/editar traducciones existentes
     - [ ] Explicar en `dev-notes.md` cómo introducir textos nuevos en la app usando i18n
