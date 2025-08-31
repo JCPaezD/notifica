@@ -870,6 +870,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Enviar para revisión de Google Play Console.
   - [ ] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
   - [ ] Solicitar acceso a producción en Google Play Console tras completar test cerrado
+  - [ ] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android 
   - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, etc) y lanzar actualizacion.
   - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
   - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
@@ -932,7 +933,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [ ] Revisar APK Android
     - [ ] Confirmar comprensión en contexto (sin necesidad de explicación)
 
-- [ ] 🌍 Añadir soporte multidioma (español e inglés)
+- [x] 🌍 Añadir soporte multidioma (español e inglés)
   - [x] Elegir estrategia de internacionalización
     - [x] Revisar opciones: `vue-i18n`, objeto propio reactivo, solución mínima
     - [x] Documentar ventajas/inconvenientes de cada método
@@ -1022,12 +1023,12 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Revisar PWA en móvil en ambos idiomas (claro/oscuro, offline)
     - [x] Revisar APK en Android (y iOS si se compila más adelante)
     - [x] Confirmar que no se rompen diseños con textos largos o diferentes por idioma
-  - [ ] Documentación y cierre
+  - [x] Documentación y cierre
     - [x] Explicar en `dev-notes.md` cómo añadir/editar traducciones existentes
     - [x] Explicar en `dev-notes.md` cómo introducir textos nuevos en la app usando i18n
-    - [ ] Actualizar capturas o ejemplos en `README.md` si procede (según decisión sobre idiomas en repo)
-    - [ ] Añadir recordatorio en roadmap para actualizar ficha de Play Store (capturas, descripción) cuando se prepare la versión en inglés
-    - [ ] Commit de integración i18n básica funcionando
+    - [x] Actualizar `README.md` con nota sobre multidioma
+    - [x] Añadir recordatorio en roadmap para actualizar ficha de Play Store (capturas, descripción) cuando se prepare la versión en inglés
+    - [x] Commit de integración i18n básica funcionando
 
 - [ ] Añadir bloque "Sobre este proyecto" al final del README.md  
     - [ ] Redactar una sección breve y profesional que explique el contexto del desarrollo:  
@@ -1202,6 +1203,7 @@ Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionale
 - [ ] Migrar a APIs modernas de edge-to-edge (Android 15+).
 - [ ] Eliminar uso de parámetros obsoletos en WindowInsets.
 - [ ] Revisar accesibilidad en toda la app (lectores de pantalla, etc)
+- [ ] Preparar lanzamiento de vestion en PlayStore en inglés (o paises angloparlantes).
 
 
 

@@ -11,19 +11,19 @@
 
 # Notifica
 
-Aplicación web progresiva (PWA) para registrar tareas técnicas por turno durante la jornada laboral. Optimizada para uso móvil, con funcionamiento 100% offline, y diseño cuidado, rápido y accesible.
+Aplicación web progresiva (PWA) para registrar tareas técnicas por tramo durante la jornada laboral. Optimizada para uso móvil, con funcionamiento 100% offline, y diseño cuidado, rápido y accesible.
 
 
 ## 📱 Características principales
 
 📝 Registro y gestión de tareas
-* Registro ágil de avisos y tareas por turno
+* Registro ágil de tareas por tramo
 * Edición inline, eliminación y reactivación de tareas
-* Filtros por turno, estado y notificación
+* Filtros por tramo, estado y registro
 
-🗒️ Notas y observaciones del turno
-* Notas por turno: campo editable tipo cuaderno para registrar observaciones generales
-  - Guardado automático por turno
+🗒️ Notas y observaciones del tramo
+* Notas por tramo: campo editable tipo cuaderno para registrar observaciones generales
+  - Guardado automático por tramo
   - Integrado en la exportación e importación de tareas
   - Diseño accesible, editable y colapsable
 
@@ -43,6 +43,10 @@ Aplicación web progresiva (PWA) para registrar tareas técnicas por turno duran
 📶 Sincronización y almacenamiento
 * Sincronización offline con almacenamiento local
 * Guarda tareas localmente entre sesiones
+
+🌍 Multidioma (español e inglés)
+* Selección manual o detección automática (AUTO) según idioma del sistema
+* Persistencia en el dispositivo entre sesiones
 
 
 ## 🖼️ Vista previa
