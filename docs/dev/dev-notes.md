@@ -1487,6 +1487,14 @@ Las imágenes se encuentran en `/public/screenshots/`.
 | 18  | Texto aumentado                | `/public/screenshots/18-texto-aumentado.png` | [abrir](../../public/screenshots/18-texto-aumentado.png) |
 | 19  | Toast de error                 | `/public/screenshots/19-toast-error.png`     | [abrir](../../public/screenshots/19-toast-error.png)   |
 
+*Notas:
+- Capturas Android con emulador "Medium phone" API 36.0
+- Recortar 60px arriba y 64px abajo.
+- Script para generar mock-data:
+    node dev-tools/mock-data/generateMock.cjs
+    - Ejecutar en raiz del proyecto e insertar datos
+- 
+
 
 ### Reestructuración del layout de las tareas para alineación precisa (botón, duración, horas)
 

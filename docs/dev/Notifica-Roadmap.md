@@ -835,6 +835,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                   - Si no se encuentra causa clara, documentar el entorno exacto donde falla (emulador, versión de Chrome, tipo de build)
   - [ ] Al desplegar opciones, el SideMenu crece en altura y se hace scrolleable. Esta bien (fallback pantallas pequeñas y pantalla horizontal), pero intentar limitar scroll elástico, solo scroll necesario.
   - [ ] Texto plano compartido: a veces las horas/duracion aparece bajo la descripcion y otras en la misma linea. Revisar y unificar (siempre siguiente linea, posible icono reloj o sin el)
+  - [ ] Rewording: ¿Cambiar "Registered" por "Logged"?
 
 
 - [x] 📄 Actualizar `README.md` con información final  
@@ -869,8 +870,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
   - [x] Enviar para revisión de Google Play Console.
   - [x] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
-  - [x] Solicitar acceso a producción en Google Play Console tras completar test cerrado
-  - [ ] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android 
+  - [x] Solicitar acceso a producción en Google Play Console tras completar test cerrado [01/09/2025-0:50]
+  - [x] Crear utilidad para generar datos mock (script + listas) para capturas y pruebas
+  - [ ] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android
   - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, etc) y lanzar actualizacion.
   - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
   - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
@@ -1204,7 +1206,6 @@ Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionale
 - [ ] Eliminar uso de parámetros obsoletos en WindowInsets.
 - [ ] Revisar accesibilidad en toda la app (lectores de pantalla, etc)
 - [ ] Preparar lanzamiento de vestion en PlayStore en inglés (o paises angloparlantes).
-
 
 
 ---
