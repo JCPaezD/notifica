@@ -24,6 +24,7 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
   - [Animación colapsable del bloque de apariencia (max-height + scrollHeight)](#animación-colapsable-del-bloque-de-apariencia-max-height--scrollheight)
   - [Modo oscuro: uso de `class` y soporte para preferencia del sistema](#modo-oscuro-uso-de-class-y-soporte-para-preferencia-del-sistema)
   - [Notas por turno: sistema editable vinculado a shiftId](#notas-por-turno-sistema-editable-vinculado-a-shiftid)
+  - [Utilidad para generar datos mock](#utilidad-para-generar-datos-mock)
 - [Errores y problemas documentados](#errores-y-problemas-documentados)
   - [Bug en iOS PWA: scroll azul tras cerrar teclado](#bug-en-ios-pwa-scroll-azul-tras-cerrar-teclado)
   - [Problemas comunes en emuladores Android](#problemas-comunes-en-emuladores-android)
@@ -734,6 +735,27 @@ Se añadió este sistema para permitir al usuario registrar observaciones o come
 - Se detectó un bug que impedía visualizar el `placeholder` del campo vacío tras una recarga si no había notas. Se resolvió añadiendo una llamada a `autoResize()` del último campo tras la animación de entrada (`onAfterEnter`).
 - Se confirmó que el área de clic era limitada en ese estado, pero el problema desapareció tras resolver el bug anterior.
 
+
+### Utilidad para generar datos mock
+
+Se creó un script auxiliar en `/dev-tools/mock-data/generateMock.cjs` junto con listas editables de descripciones, técnicos y notas.  
+Este script permite generar archivos JSON de ejemplo con la misma estructura que la app, para usarlos en pruebas y capturas oficiales.
+
+**Funcionamiento:**
+- Al ejecutarlo (`node dev-tools/mock-data/generateMock.cjs`) solicita en consola:
+  - Fecha inicio y fin
+  - Número de tramos por día
+  - Número de tareas por tramo
+  - Ratio de tareas completadas
+  - Ratio de tareas registradas
+  - Duración mínima y máxima de tareas
+  - Offset horario local (ej. +2)
+  - Número máximo de notas por tramo
+- Con estos datos genera un archivo JSON en `dev-tools/mock-data/output/mock-YYYY-MM-DD-HH-MM.json`.
+
+**Uso previsto:**  
+Sirve para poblar la aplicación con datos realistas de prueba, facilitando la validación de funciones y la creación de capturas de pantalla consistentes.  
+Las listas base (`tasks.json`, `names.json`, `notes.json`) pueden ampliarse para dar más variedad al generador.
 
 ---
 
