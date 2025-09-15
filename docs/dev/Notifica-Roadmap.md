@@ -876,7 +876,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Crear utilidad para generar datos mock (script + listas) para capturas y pruebas
   - [x] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android
   - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, capturas, etc) y lanzar actualizacion.
-  - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
   - [ ] Revisar restricciones de orientación/redimensionamiento para compatibilidad con tablets y plegables (Android 16+)
 
 - [x] ✏️ Revisar wording para ampliar público potencial
@@ -1193,12 +1192,13 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 
 Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionales, ajustes no críticos y correcciones tras el uso real.
 
+- [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
 - [ ] Añadir selector de formato horario: HH:MM / AM-PM / seguir sistema (opcional)
 - [ ] Botón "Volver al turno actual" no funciona arrastrar y soltar para cancelar clic. (regresión)
 - [ ] Migrar a APIs modernas de edge-to-edge (Android 15+).
 - [ ] Eliminar uso de parámetros obsoletos en WindowInsets.
 - [ ] Revisar accesibilidad en toda la app (lectores de pantalla, etc)
-- [ ] Preparar lanzamiento de vestion en PlayStore en inglés (o paises angloparlantes).
+- [ ] Preparar lanzamiento de version en PlayStore en inglés (o paises angloparlantes).
 
 
 ---
