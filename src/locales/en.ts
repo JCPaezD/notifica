@@ -196,8 +196,8 @@ export default {
     share: {
       // Diálogo de compartir
       title: "Share tasks",
-      titleShift: "Notifications for {shift}",
-      titleShiftFallback: "Notifications for {shift}",
+      titleShift: "Tasks for {shift}",
+      titleShiftFallback: "Tasks for {shift}",
     },
     export: {
       // Diálogo de exportación
@@ -257,7 +257,7 @@ export default {
   share: {
     content: {
       // Encabezados del contenido compartido
-      headerTasks: "📋 Notifications for {shift}",
+      headerTasks: "📋 Tasks for {shift}",
       headerNotes: "🗒️ Notes",
       // Conector entre hora de inicio y fin en exportación (ej. "08:00 a 10:00")
       to: "to",
