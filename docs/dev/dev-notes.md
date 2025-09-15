@@ -1509,13 +1509,62 @@ Las imágenes se encuentran en `/public/screenshots/`.
 | 18  | Texto aumentado                | `/public/screenshots/18-texto-aumentado.png` | [abrir](../../public/screenshots/18-texto-aumentado.png) |
 | 19  | Toast de error                 | `/public/screenshots/19-toast-error.png`     | [abrir](../../public/screenshots/19-toast-error.png)   |
 
-*Notas:
-- Capturas Android con emulador "Medium phone" API 36.0
-- Recortar 60px arriba y 64px abajo.
+**Notas:**
+- Capturas Android con emulador "Medium phone" API 36.0.
+- Recortar 60px arriba y 64px abajo (excepto capturas de escritorio, que se mantienen completas).
 - Script para generar mock-data:
     node dev-tools/mock-data/generateMock.cjs
-    - Ejecutar en raiz del proyecto e insertar datos
-- 
+    - Ejecutar en la raíz del proyecto e insertar datos interactivos.
+- Hacer todas las capturas siguiendo el listado.
+- Guardar las capturas en carpeta temporal (ej. Screenshots/YYYY-MM-DD).
+- En esa carpeta, clic derecho → abrir PowerShell.
+
+**Pasos para procesar capturas**
+1. Crear carpeta de salida:
+    mkdir recortadas
+
+2. Ejecutar script de recorte (manteniendo sin recortar las posiciones 15 y 16):
+    ..\Recortar-Screenshots.ps1
+   - El script recorta 60px arriba y 64px abajo a todas las imágenes.
+   - Copia sin recortar las imágenes 15 y 16 (índices 14 y 15 en orden alfabético).
+
+3. Verificar dimensiones de salida (opcional, requiere ImageMagick):
+    magick identify -format "%f %wx%h\n" .\recortadas\*.png
+   - Capturas móviles → 1080×2276.
+   - Capturas escritorio (15 y 16) → 1080×2400.
+
+4. Renombrar en bloque según lista oficial (ejecutar en recortadas):
+    $names = @(
+    "01-tareas-vacias.png",
+    "02-varias-tareas.png",
+    "03-turno-anterior.png",
+    "04-toast-tarea-completada.png",
+    "05-notas-turno.png",
+    "06-compartir-activo.png",
+    "07-confirmar-borrado.png",
+    "08-scroll-selector-turno.png",
+    "09-modo-oscuro.png",
+    "10-modo-claro.png",
+    "11-toast-multiples.png",
+    "12-selector-tema.png",
+    "13-movil-claro.png",
+    "14-movil-oscuro.png",
+    "15-escritorio-claro.png",
+    "16-escritorio-oscuro.png",
+    "17-foco-input.png",
+    "18-texto-aumentado.png",
+    "19-toast-error.png"
+    )
+
+    $files = Get-ChildItem *.png | Sort-Object Name
+    for ($i=0; $i -lt $files.Count; $i++) {
+        Rename-Item $files[$i].FullName $names[$i]
+    }
+
+5. Mover a proyecto:
+   - Sustituir /public/screenshots/ por el contenido de recortadas.
+   - Actualizar también capturas en la ficha de Play Store cuando corresponda.
+
 
 
 ### Reestructuración del layout de las tareas para alineación precisa (botón, duración, horas)
