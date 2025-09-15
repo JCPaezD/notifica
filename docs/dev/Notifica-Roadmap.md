@@ -870,7 +870,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Asegurar que el idioma por defecto y fallback en el manifest y Play Console es español
   - [x] Enviar para revisión de Google Play Console.
   - [x] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
+  - [x] Medir respuesta de testers externos y ajustar si es necesario
   - [x] Solicitar acceso a producción en Google Play Console tras completar test cerrado [01/09/2025-0:50]
+  - [x] Asegurar que cumple requisitos de Google Play para lanzamiento público (12 testers activos durante 14 días). Solicitud de acceso a producción aceptada [01/09/2025-17:30].
   - [x] Crear utilidad para generar datos mock (script + listas) para capturas y pruebas
   - [x] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android
   - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, capturas, etc) y lanzar actualizacion.
@@ -880,10 +882,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
         - Reddit (ej. /r/androidapps, /r/SideProject)
         - Foros sobre productividad, técnicos, mantenimiento, apps nuevas
         - Grupos de Discord o Telegram si procede
-  - [ ] Medir respuesta de testers externos y ajustar si es necesario
-  - [ ] Asegurar que cumple requisitos de Google Play para lanzamiento público:
-        - Al menos 12 testers activos
-        - Durante un periodo de 14 días
   - [ ] Revisar restricciones de orientación/redimensionamiento para compatibilidad con tablets y plegables (Android 16+)
 
 - [x] ✏️ Revisar wording para ampliar público potencial
