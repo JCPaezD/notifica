@@ -25,7 +25,6 @@ function askQuestion(query, rl) {
   const ratioRegistradas = parseFloat(await askQuestion("Ratio registradas (0-1): ", rl));
   const durMin = parseInt(await askQuestion("Duración mínima de tareas (min): ", rl), 10);
   const durMax = parseInt(await askQuestion("Duración máxima de tareas (min): ", rl), 10);
-  const offsetHoras = parseInt(await askQuestion("Offset horario local en horas (ej. +2): ", rl), 10);
   const maxNotasPorTramo = parseInt(await askQuestion("Máximo de notas por tramo: ", rl), 10);
 
   rl.close();
@@ -38,10 +37,16 @@ function askQuestion(query, rl) {
   // Horarios fijos de tramos
   const horarios = [7, 15, 23]; // horas en local
 
-  // Función para generar un timestamp UTC desde fecha + hora local
-  function makeShiftStart(date, hourLocal, offset) {
+  // Funciones para calcular inicio de tareas y shiftId
+  function makeTaskStart(date, hourLocal) {
     const d = new Date(date);
-    d.setUTCHours(hourLocal - offset, 0, 0, 0);
+    d.setHours(hourLocal, 0, 0, 0); // hora local
+    return d.getTime();
+  }
+
+  function makeShiftId(date, hourLocal) {
+    const d = new Date(date);
+    d.setUTCHours(hourLocal, 0, 0, 0); // hora en UTC
     return d.getTime();
   }
 
@@ -54,8 +59,8 @@ function askQuestion(query, rl) {
 
   for (let d = new Date(fechaInicio); d <= fechaFin; d.setDate(d.getDate() + 1)) {
     for (let t = 0; t < numTramosPorDia; t++) {
-      const shiftStart = makeShiftStart(d, horarios[t % horarios.length], offsetHoras);
-      const shiftId = "shift-" + shiftStart;
+      const shiftStart = makeTaskStart(d, horarios[t % horarios.length]);
+      const shiftId = "shift-" + makeShiftId(d, horarios[t % horarios.length]);
 
       // Notas
       const numNotas = Math.floor(Math.random() * (maxNotasPorTramo + 1));
@@ -82,10 +87,11 @@ function askQuestion(query, rl) {
         // Técnico aleatorio
         const technician = namesList[Math.floor(Math.random() * namesList.length)];
 
-        // Hora inicio dentro del tramo
+        // Hora inicio dentro del tramo (base UTC del shiftId)
         const tramoDurMs = 8 * 60 * 60 * 1000; // 8h
         const randomOffset = Math.floor(Math.random() * tramoDurMs);
-        const startTime = new Date(shiftStart + randomOffset);
+        const baseShiftUtc = makeShiftId(d, horarios[t % horarios.length]);
+        const startTime = new Date(baseShiftUtc + randomOffset);
 
         tramoTasks.push({
           id: startTime.getTime().toString(),
