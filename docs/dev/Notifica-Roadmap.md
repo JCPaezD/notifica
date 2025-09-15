@@ -877,11 +877,6 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android
   - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, capturas, etc) y lanzar actualizacion.
   - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
-  - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
-  - [ ] (Opcional) Publicar el mensaje en canales adecuados:
-        - Reddit (ej. /r/androidapps, /r/SideProject)
-        - Foros sobre productividad, técnicos, mantenimiento, apps nuevas
-        - Grupos de Discord o Telegram si procede
   - [ ] Revisar restricciones de orientación/redimensionamiento para compatibilidad con tablets y plegables (Android 16+)
 
 - [x] ✏️ Revisar wording para ampliar público potencial
