@@ -872,8 +872,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Aprovechar el periodo de test activo para seguir refinando el resto de tareas de la Etapa 8
   - [x] Solicitar acceso a producción en Google Play Console tras completar test cerrado [01/09/2025-0:50]
   - [x] Crear utilidad para generar datos mock (script + listas) para capturas y pruebas
-  - [ ] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android
-  - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, etc) y lanzar actualizacion.
+  - [x] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android
+  - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, capturas, etc) y lanzar actualizacion.
   - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
   - [ ] (Opcional) Preparar mensaje atractivo para captar testers externos voluntarios
   - [ ] (Opcional) Publicar el mensaje en canales adecuados:
