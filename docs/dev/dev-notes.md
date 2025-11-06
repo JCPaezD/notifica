@@ -1462,7 +1462,27 @@ Confirmado que no afectaban al funcionamiento ni al aspecto en ningún dispositi
 
 ### Descripción para ficha de Play Store
 
-(Actualizada: [13/07/2025])
+[06/11/2025] Descripción actualizada para ficha de Play Store
+
+Lleva el control de tu día de forma ágil, clara y sin conexión.
+
+Notifica te ayuda a registrar lo que haces en cada tramo del día y compartirlo fácilmente.
+Perfecta para organizar tareas, anotar tiempos y tener siempre un resumen limpio y ordenado, sin perder tiempo ni conexión.
+
+Características principales:
+• Crea tareas al instante y registra su inicio y fin (automático o manual).
+• Filtra por estado o tramo para centrarte en lo que importa.
+• Añade notas rápidas a cada tramo para observaciones o recordatorios.
+• Exporta y comparte tus tareas por WhatsApp, correo o cualquier app compatible.
+• Funciona 100 % offline: sin conexión, sin registro, sin permisos extra.
+• Interfaz cuidada, con modo claro y oscuro, y soporte multidioma (es/en).
+
+Cuando termines, marca las tareas completadas y envía tu resumen con un toque.
+Ágil, práctica y diseñada para adaptarse a cualquier entorno: trabajo, estudio o proyectos personales.
+
+---
+
+(Versión antigua - Actualizada: [13/07/2025])
 
 Registra tus tareas técnicas de forma rápida, clara y sin conexión.
 

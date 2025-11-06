@@ -875,7 +875,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Asegurar que cumple requisitos de Google Play para lanzamiento público (12 testers activos durante 14 días). Solicitud de acceso a producción aceptada [01/09/2025-17:30].
   - [x] Crear utilidad para generar datos mock (script + listas) para capturas y pruebas
   - [x] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android
-  - [ ] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, capturas, etc) y lanzar actualizacion.
+  - [x] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, capturas, etc) y lanzar actualizacion.
   - [ ] Revisar restricciones de orientación/redimensionamiento para compatibilidad con tablets y plegables (Android 16+)
 
 - [x] ✏️ Revisar wording para ampliar público potencial
