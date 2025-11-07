@@ -854,7 +854,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Sustituir archivos del directorio `public/screenshots/` usados por el manifest y `public/screenshots-playstore/`
     - [x] Subir las nuevas capturas a la ficha de la Play Store (cuando se publique la APK)
 
-- [ ] 📣 Preparación para fase de testing real con usuarios externos 
+- [x] 📣 Preparación para fase de testing real con usuarios externos 
   - [x] Revisar si la app (actual `.aab` y entorno) está ya en estado adecuado para compartir en prueba cerrada
         ↪ [Checklist en dev-notes.md](dev-notes.md#-revisión-del-aab-antes-de-lanzar-testing-externo)
           - [x] Confirmar si el bug del scroll innecesario en listas cortas ha sido resuelto sin introducir nuevas regresiones
@@ -876,7 +876,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Crear utilidad para generar datos mock (script + listas) para capturas y pruebas
   - [x] Actualizar todas las capturas en `/public/screenshots/` (README, manifest, Play Store) antes de la próxima versión estable de Android
   - [x] Actualizar ficha Play Store con nueva(s) feat (rewording, multidioma, capturas, etc) y lanzar actualizacion.
-  - [ ] Revisar restricciones de orientación/redimensionamiento para compatibilidad con tablets y plegables (Android 16+)
+  - [x] Revisar restricciones de orientación/redimensionamiento para compatibilidad con tablets y plegables (Android 16+).
+      * Verificado, no crítico. Migrado a etapa 10.
 
 - [x] ✏️ Revisar wording para ampliar público potencial
   - [x] Inventario de textos de la UI
@@ -1195,8 +1196,13 @@ Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionale
 - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
 - [ ] Añadir selector de formato horario: HH:MM / AM-PM / seguir sistema (opcional)
 - [ ] Botón "Volver al turno actual" no funciona arrastrar y soltar para cancelar clic. (regresión)
-- [ ] Migrar a APIs modernas de edge-to-edge (Android 15+).
-- [ ] Eliminar uso de parámetros obsoletos en WindowInsets.
+- [ ] Revisar y adaptar la app al nuevo sistema de vista de extremo a extremo (Android 15 / SDK 35):
+      Gestionar correctamente insets y safe-areas cuando el edge-to-edge sea predeterminado.
+      Basado en aviso de Play Console: comprobar visualmente y aplicar nuevas APIs si es necesario.
+- [ ] Actualizar el plugin @capacitor/status-bar y Material 3 cuando implementen soporte total para SDK 35.
+      Aviso actual de Play Console: uso interno de Window.setStatusBarColor / setNavigationBarColor (obsoletas).
+- [ ] Evaluar en el futuro si conviene retirar android:screenOrientation="portrait" para mejorar compatibilidad con pantallas grandes (Android 16+).
+      Aviso informativo: el sistema ignorará esta restricción en tablets/plegables; no crítico para teléfonos.
 - [ ] Revisar accesibilidad en toda la app (lectores de pantalla, etc)
 - [ ] Preparar lanzamiento de version en PlayStore en inglés (o paises angloparlantes).
 
