@@ -743,7 +743,9 @@ const exportTasksToJson = async () => {
       durationStr = `(${roundedHours.toLocaleString(locale.value, { minimumFractionDigits: 1, maximumFractionDigits: 1 })} h)`;
     }
 
-    let taskString = `${taskEmoji} ${description} ${startTimeStr} ${t('share.content.to')} ${endTimeStr}${durationStr ? ' ' + durationStr : ''}`;
+    const clockEmoji = '⏱️';
+    let taskString =
+      `${taskEmoji} ${description}\n${clockEmoji} ${startTimeStr} ${t('share.content.to')} ${endTimeStr}${durationStr ? ' ' + durationStr : ''}`;
 
     if (task.isNotified) {
       taskString += `\n${notifiedEmoji} ${t('task.registered')}`;
