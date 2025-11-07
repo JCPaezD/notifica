@@ -589,7 +589,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Confirmar que no quedan decisiones sin documentar y hacer commit de cierre del bloque
 
 
-- [ ] 🛠 Mejoras UX/UI
+- [x] 🛠 Mejoras UX/UI
   - [x] Vuelve a aparece bug: boton deshacer no hace animacion al pulsar (móvil devtools). En escritorio funciona bien.
     > Acción sugerida (futura): revisar que todos los botones de acción en toasts tengan ese @touchstart.
   - [x] Despues de "Borrar todo" + deshacer, al irse el toast hay recarga de la app. Revisar si es necesaria y quitar si no. No ocurre si no deshaces. [20/07/25]
@@ -817,7 +817,8 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Al desplegar opciones, el SideMenu crece en altura y se hace scrolleable. Esta bien (fallback pantallas pequeñas y pantalla horizontal), pero intentar limitar scroll elástico, solo scroll necesario.  
     > Solucionado al pasar opciones a un modal independiente.
   - [x] Texto plano compartido: a veces las horas/duracion aparece bajo la descripcion y otras en la misma linea. Revisar y unificar (siempre siguiente linea, posible icono reloj o sin el)
-  - [ ] Rewording: ¿Cambiar "Registered" por "Logged"?
+  - [x] Rewording: ¿Cambiar "Registered" por "Logged"?
+  - [x] Mini rewording lingüístico en inglés: simplificación de textos redundantes, mejora de naturalidad y consistencia UX (import, export, clipboard, deleteAll, unimplemented, update)
 
 
 - [x] 📄 Actualizar `README.md` con información final  

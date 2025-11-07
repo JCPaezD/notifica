@@ -97,7 +97,7 @@ export default {
     },
     error: {
       // Errores generales
-      update: "Error updating",
+      update: "Update failed",
     },
     action: {
       // Acciones de botones en toasts
@@ -131,13 +131,13 @@ export default {
       readErrorDetail: "There was a problem reading the selected file",
       invalidList: "The file does not contain a valid list of tasks",
       invalidTask: "Invalid task format. Required fields are missing",
-      count: "{count} task imported successfully | {count} tasks imported successfully",
+      count: "{count} task imported | {count} tasks imported",
     },
     export: {
       // Toasts relacionados con exportación
       empty: "Empty export",
       noTasks: "No tasks to export",
-      success: "Tasks exported",
+      success: "Export completed",
       error: "Export error",
       errorDetail: "Could not generate the file",
       generatedFile: "File “{fileName}” generated",
@@ -159,7 +159,7 @@ export default {
     clipboard: {
       // Toasts relacionados con portapapeles
       success: "Tasks copied",
-      detail: "Content copied to clipboard",
+      detail: "Copied to clipboard",
     },
     deleteAll: {
       // Toasts relacionados con borrado masivo
@@ -181,13 +181,13 @@ export default {
     },
     menu: {
       // Toasts relacionados con acciones de menú no implementadas
-      unimplemented: "Menu action \"{action}\" is not implemented",
+      unimplemented: "Menu action \"{action}\" is not yet implemented",
     },
   },
   dialog: {
     deleteAll: {
       // Diálogo de borrado total
-      confirm: "Delete all tasks in the app? They cannot be recovered",
+      confirm: "Delete all tasks in the app? This action cannot be undone",
     },
     task: {
       // Diálogo de borrado individual de tarea

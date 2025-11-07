@@ -131,7 +131,7 @@ export default {
       readErrorDetail: "Ocurrió un problema al leer el archivo seleccionado",
       invalidList: "El archivo no contiene una lista válida de tareas",
       invalidTask: "Formato de tarea inválido. Faltan campos requeridos",
-      count: "{count} tarea importada correctamente | {count} tareas importadas correctamente",
+      count: "{count} tarea importada | {count} tareas importadas",
     },
     export: {
       // Toasts relacionados con exportación
@@ -181,7 +181,7 @@ export default {
     },
     menu: {
       // Toasts relacionados con acciones de menú no implementadas
-      unimplemented: "La acción de menú «{action}» no está implementada",
+      unimplemented: "La acción de menú «{action}» aún no está implementada",
     },
   },
   dialog: {
