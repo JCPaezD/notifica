@@ -779,7 +779,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
           - [x] Usar `ref` y `onMounted` para aplicar el padding solo en Android nativo
           - [x] Confirmar alineación correcta en escritorio/devtools
           - [x] Confirmar comportamiento aceptable en Android (desalineación leve aceptada)
-      - [ ] ⛔ Inconsistencias aún presentes (pendientes de revisión futura)
+      - [x] ⛔ Inconsistencias aún presentes (pendientes de revisión futura)
           - [x] Al abrir la app por primera vez en Android, no se aplica la safe-area superior  
                 → Se mantiene `initialize()` para inyectar variables CSS desde el inicio.  
                 → No es posible aplicar `--safe-area-inset-top` en primera carga por limitación del WebView Android con Capacitor.  
@@ -787,7 +787,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                 → El valor se aplica tras interacción del usuario y el layout se corrige automáticamente.
           - [x] El `DialogPanel` sigue desalineado verticalmente en Android tras la primera apertura
             > No es posible alinear dinámicamente el SideMenu en Android WebView usando safe-area-inset-top, ni por CSS ni JS, debido a limitaciones del entorno. Se descarta plugin capacitor-community/safe-area.
-          - [ ] Solucionar el aspecto de la app en Android nativo
+          - [x] Solucionar el aspecto de la app en Android nativo
               - [x] Revertir pruebas actuales (useSafeArea.ts, márgenes, etc.)
               - [x] Eliminar el plugin SafeArea del proyecto
               - [x] Eliminar todas las referencias a var(...) o env(...)
@@ -813,27 +813,9 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
               - [x] Descartado: Si no funciona: decidir si implementar padding fijo solo en Android nativo
               - [x] Probar `@capgo/capacitor-navigation-bar` para ajustar fondo e iconos de la barra de navegación inferior si fuera necesario
               - [x] Probar `@capacitor/status-bar` para ajustar dinámicamente el color de los iconos de la status bar según el tema de la app
-              - [ ] Investigar por qué en algunos dispositivos antiguos (API 29–30 físicos) las barras adicionales (superior e inferior) siguen apareciendo tras el fix de status bar
-              - [ ] Intentar que el cambio de color de iconos y fondo en Android 10 (API 29) se actualice sin necesidad de reiniciar la app
-              - [ ] Evaluar si es posible aplicar un ajuste similar al del color de iconos para forzar la eliminación de insets extra en versiones antiguas
-              - [ ] Validar en dispositivos físicos con Android 11 (API 30) si el comportamiento de fondo e iconos de la status bar es estable en condiciones reales (diferente de emulador)
-              - [ ] Probar más versiones intermedias (API 31–35) para asegurar que la lógica condicional por versión de API no introduce efectos no deseados
-              - [ ] Añadir tests cruzados con modo oscuro/sistema en todas las plataformas
-              - [ ] Validar que el layout es coherente en todas las plataformas
-              - [ ] Hacer script para compilar android (build, copy, sync, open/run, ¿clean project necesario?)
-
-              **EXTRA POR REVISAR-ORDENAR**
-              - [ ] Verificar que los archivos `favicon.ico` y `manifest.webmanifest` están correctamente empaquetados en la APK
-                  - Requiere: `npm run build` + `npx cap copy` + generación de APK
-                  - Renombrar el `.apk` a `.zip` y explorar el contenido en `/assets/public/`
-                  - Confirmar presencia de los archivos estáticos esperados
-                  - Si faltan, revisar configuración de `vite.config.ts` (assetsInclude, rutas) o proceso de build
-              - [ ] Diagnosticar causa del bloqueo del inspector `chrome://inspect` en emuladores Android
-                  - Confirmar si se reproduce en dispositivo físico con USB
-                  - Probar con emulador limpio o reinstalado
-                  - Evaluar si alguna animación en la app (como apertura del SideMenu) puede estar dejando el DOM en estado inconsistente
-                  - Si no se encuentra causa clara, documentar el entorno exacto donde falla (emulador, versión de Chrome, tipo de build)
-  - [ ] Al desplegar opciones, el SideMenu crece en altura y se hace scrolleable. Esta bien (fallback pantallas pequeñas y pantalla horizontal), pero intentar limitar scroll elástico, solo scroll necesario.
+                > Depuración de edge-to-edge y android nativo migrado a etapa 10.
+  - [x] Al desplegar opciones, el SideMenu crece en altura y se hace scrolleable. Esta bien (fallback pantallas pequeñas y pantalla horizontal), pero intentar limitar scroll elástico, solo scroll necesario.  
+    > Solucionado al pasar opciones a un modal independiente.
   - [ ] Texto plano compartido: a veces las horas/duracion aparece bajo la descripcion y otras en la misma linea. Revisar y unificar (siempre siguiente linea, posible icono reloj o sin el)
   - [ ] Rewording: ¿Cambiar "Registered" por "Logged"?
 
@@ -1205,6 +1187,28 @@ Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionale
       Aviso informativo: el sistema ignorará esta restricción en tablets/plegables; no crítico para teléfonos.
 - [ ] Revisar accesibilidad en toda la app (lectores de pantalla, etc)
 - [ ] Preparar lanzamiento de version en PlayStore en inglés (o paises angloparlantes).
+- [ ] Compatibilidad visual en Android nativo y edge-to-edge
+    - [ ] Hacer script para compilar android (build, copy, sync, open/run, ¿clean project necesario?)
+    - [ ] Investigar por qué en algunos dispositivos antiguos (API 29–30 físicos) las barras adicionales (superior e inferior) siguen apareciendo tras el fix de status bar
+    - [ ] Intentar que el cambio de color de iconos y fondo en Android 10 (API 29) se actualice sin necesidad de reiniciar la app
+    - [ ] Evaluar si es posible aplicar un ajuste similar al del color de iconos para forzar la eliminación de insets extra en versiones antiguas
+    - [ ] Validar en dispositivos físicos con Android 11 (API 30) si el comportamiento de fondo e iconos de la status bar es estable en condiciones reales (diferente de emulador)
+    - [ ] Probar más versiones intermedias (API 31–35) para asegurar que la lógica condicional por versión de API no introduce efectos no deseados
+    - [ ] Validar que el layout es coherente en todas las plataformas
+- [ ] Depuración Android: empaquetado y herramientas
+    - [ ] Verificar que los archivos `favicon.ico` y `manifest.webmanifest` están correctamente empaquetados en la APK
+        - Requiere: `npm run build` + `npx cap copy` + generación de APK
+        - Renombrar el `.apk` a `.zip` y explorar el contenido en `/assets/public/`
+        - Confirmar presencia de los archivos estáticos esperados
+        - Si faltan, revisar configuración de `vite.config.ts` (assetsInclude, rutas) o proceso de build
+    - [ ] Diagnosticar causa del bloqueo del inspector `chrome://inspect` en emuladores Android
+        - Confirmar si se reproduce en dispositivo físico con USB
+        - Probar con emulador limpio o reinstalado
+        - Evaluar si alguna animación en la app (como apertura del SideMenu) puede estar dejando el DOM en estado inconsistente
+        - Si no se encuentra causa clara, documentar el entorno exacto donde falla (emulador, versión de Chrome, tipo de build)
+
+- [ ] Validar coherencia del modo oscuro y tema del sistema en PWA, Android y escritorio (tests cruzados)
+
 
 
 ---
