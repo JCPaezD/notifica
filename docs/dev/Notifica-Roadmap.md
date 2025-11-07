@@ -816,7 +816,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
                 > Depuración de edge-to-edge y android nativo migrado a etapa 10.
   - [x] Al desplegar opciones, el SideMenu crece en altura y se hace scrolleable. Esta bien (fallback pantallas pequeñas y pantalla horizontal), pero intentar limitar scroll elástico, solo scroll necesario.  
     > Solucionado al pasar opciones a un modal independiente.
-  - [ ] Texto plano compartido: a veces las horas/duracion aparece bajo la descripcion y otras en la misma linea. Revisar y unificar (siempre siguiente linea, posible icono reloj o sin el)
+  - [x] Texto plano compartido: a veces las horas/duracion aparece bajo la descripcion y otras en la misma linea. Revisar y unificar (siempre siguiente linea, posible icono reloj o sin el)
   - [ ] Rewording: ¿Cambiar "Registered" por "Logged"?
 
 

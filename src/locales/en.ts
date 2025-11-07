@@ -44,7 +44,7 @@ export default {
     // Textos de fallback de tareas
     noDescription: "(No description)",
     // Texto mostrado en exportación/compartir para indicar que una tarea fue registrada
-    registered: "Registered",
+    registered: "Logged",
   },
   nav: {
     // Navegación
@@ -66,11 +66,11 @@ export default {
     filter: {
       // Accesibilidad filtros (sr-only)
       activeOnly: "Show only active tasks",
-      unregisteredOnly: "Show only unregistered tasks",
+      unregisteredOnly: "Show only unlogged tasks",
     },
     task: {
       // Accesibilidad en tareas
-      state: "Registration status",
+      state: "Logging status",
       delete: "Delete task",
     },
   },
@@ -80,10 +80,10 @@ export default {
       started: "Task started",
       finished: "Task finished",
       finishedDetail: "“{description}” completed at {endTime}",
-      registered: "Task registered",
-      registeredDetail: "“{description}” marked as registered",
-      unregistered: "Registration cancelled",
-      unregisteredDetail: "“{description}” is no longer registered",
+      registered: "Task logged",
+      registeredDetail: "“{description}” marked as logged",
+      unregistered: "Logging cancelled",
+      unregisteredDetail: "“{description}” is no longer logged",
       updated: "Task updated",
       updatedDetail: "“{description}” updated",
       reopened: "Task reopened",
@@ -212,13 +212,13 @@ export default {
   filter: {
     // Filtros y estados de lista
     active: "Active",
-    unregistered: "Unregistered",
+    unregistered: "Unlogged",
   },
   tooltip: {
     task: {
       // Tooltips relacionados con tareas
-      unregistered: "Mark as unregistered",
-      registered: "Mark as registered",
+      unregistered: "Mark as unlogged",
+      registered: "Mark as logged",
       delete: "Delete task",
     },
   },
