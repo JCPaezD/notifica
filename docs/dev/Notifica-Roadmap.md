@@ -1008,107 +1008,16 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
     - [x] Añadir recordatorio en roadmap para actualizar ficha de Play Store (capturas, descripción) cuando se prepare la versión en inglés
     - [x] Commit de integración i18n básica funcionando
 
-- [ ] Añadir bloque "Sobre este proyecto" al final del README.md  
-    - [ ] Redactar una sección breve y profesional que explique el contexto del desarrollo:  
-        - [ ] Que es el primer proyecto completo del autor, sin formación previa en desarrollo.  
-        - [ ] Que fue construido desde cero y usado en entorno laboral real por varios compañeros.  
-        - [ ] Que todo el diseño, código y documentación fue realizado por el propio autor con la ayuda de ChatGPT como asistente técnico y de producto.  
-        - [ ] Que el proyecto sirvió también como base técnica y conceptual para un segundo proyecto más ambicioso (Nocta).  
-    - [ ] Usar tono neutro y claro (no promocional, ni con falsas humildades).  
-    - [ ] Añadirlo como último bloque del README, antes de la sección de licencia o en una nueva sección tipo `## Sobre este proyecto`.  
-    - [ ] Validar que no interfiere con el resto del README ni repite información innecesaria.  
-    - [ ] Confirmar que está presente y visible antes de publicar la versión pública en Play Store.
-
-
-- [ ] Implementar selector de formato de duración y precisión
-    - [ ] Añadir sistema de persistencia para ajustes de usuario (localStorage)
-      - [ ] Crear clave para guardar formato de duración elegido por el usuario
-      - [ ] Crear clave para guardar salto mínimo de duración elegido por el usuario
-      - [ ] Asegurar que los valores se aplican al renderizar duraciones en tarjetas
-    - [ ] Modificar sistema de renderizado de duración en tarjetas
-      - [ ] Añadir soporte para mostrar en formato hh:mm
-      - [ ] Añadir soporte para mostrar en formato decimal con separador adaptado al sistema
-      - [ ] Aplicar redondeo según salto configurado (ej. 0.5 h → 30 min)
-      - [ ] Aplicar reset del salto al valor por defecto al cambiar de modo
-      - [ ] Aplicar formato solo si la tarea está finalizada y hay hora fin
-    - [ ] Crear modal para selector de formato de duración (primer uso)
-      - [ ] Mostrar modal al finalizar una tarea por primera vez si no hay formato guardado
-      - [ ] Preguntar por el formato preferido: decimal (ej. "1,5 h") o hh:mm (ej. "1:30 h")
-      - [ ] Mostrar opciones visuales como botones de igual peso
-      - [ ] No permitir cerrar el modal sin elegir una opción
-      - [ ] Guardar valor elegido en localStorage
-    - [ ] Añadir selector de salto tras elección de formato en el modal inicial
-      - [ ] Mostrar lista de botones según el formato elegido:
-            > Formato hh:mm: [1, 5, 10, 15, 30, 60] minutos  
-            > Formato decimal: [0.1, 0.25, 0.5, 1.0] horas
-      - [ ] Guardar salto elegido en localStorage
-      - [ ] Aplicar valor como salto inicial al mostrar duraciones
-    - [ ] Integrar ajuste en opciones persistentes de la app (drawer o ajustes)
-      - [ ] Añadir sección "Formato de duración" en ajustes o menú lateral
-      - [ ] Permitir cambiar entre decimal y hh:mm manualmente
-      - [ ] Al cambiar el formato, resetear el salto al valor por defecto
-      - [ ] Permitir cambiar el salto desde el mismo panel
-      - [ ] Mantener valores sincronizados con localStorage
-    - [ ] Ajustes visuales y de UX
-      - [ ] Mostrar todos los botones de salto sin scroll si caben (máximo 6 opciones)
-      - [ ] Permitir usar dos filas si no caben horizontalmente
-      - [ ] Adaptar separador decimal según configuración regional del sistema
-
-- [ ] Añadir soporte dinámico para colores del sistema (status bar y nav bar) según modo claro/oscuro
-  - [ ] Detectar `prefers-color-scheme` en `main.ts`
-  - [ ] Aplicar color de fondo y color del texto usando `SafeArea.setStatusBar` y `setNavigationBar`
-  - [ ] Confirmar que los colores aplicados coinciden con el modo activo de la app
-  - [ ] (Opcional) Escuchar cambios en `prefers-color-scheme` si se desea actualización dinámica
-  - [ ] Probar en dispositivo Android real y emulador
-  - [ ] Documentar comportamiento y consideraciones en `dev-notes.md`
-
 - [ ] 🕛 Corrección automática de fecha en tareas cerca de medianoche
   - [ ] Detectar si hora introducida corresponde al día anterior
   - [ ] Ajustar fecha si es coherente
   - [ ] Mostrar toast con opciones "ayer" y "hoy" en vez de deshacer
-
-- [ ] ✉️ Formulario de feedback por email
-  - [ ] Botón "Enviar feedback" en menú lateral
-  - [ ] Formulario con tipo de mensaje, descripción y email opcional
-    - [ ] Permitir rellenar el formulario sin conexión
-    - [ ] Guardar los datos localmente si no hay conexión al enviar
-    - [ ] Mostrar toast o mensaje: "Guardado para enviar cuando haya conexión"
-    - [ ] Intentar reenvío automático al recuperar conexión (si es viable)
-    - [ ] Ofrecer reintento manual si falla
-    - [ ] Eliminar de la cola solo si se confirma el envío exitoso
-    - [ ] Confirmar que no bloquea el uso normal de la app
-  - [ ] Guardar en Firestore (colección `feedback`)
-  - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
-  - [ ] Confirmación visual tras enviar
-
-
-- [ ] Investigar problema de recorte incorrecto del icono maskable al instalar la PWA en Android
-  > Comentario: ver `dev-notes.md` para contexto completo de pruebas previas realizadas
-  - [ ] Comparar el manifest de Notifica con PWAs conocidas donde el icono maskable se recorte correctamente
-  - [ ] Generar nuevos iconos maskable con padding adecuado usando https://maskable.app/editor y probarlos
-  - [ ] Verificar si el recorte incorrecto varía según versión de Android, API o navegador (Chrome, WebView, WebAPK)
-  - [ ] Probar cambios en el valor de "purpose" (maskable vs any maskable) y validar efectos
-  - [ ] Analizar si el formato, metadatos o compresión del PNG pueden estar afectando el renderizado
-  - [ ] Buscar documentación o bugs conocidos en Chromium o foros relacionados con iconos maskable mal recortados
-  - [ ] Decidir si se puede aplicar un workaround eficaz o si debe dejarse documentado como limitación conocida
-  - [ ] Validar solución (si se aplica) en múltiples entornos antes de cerrar el bug
-
 
 - [ ] 📣 Aviso en PWA para migración a app nativa
   - [ ] Detectar si es entorno web o PWA
   - [ ] Mostrar toast persistente con enlace a Play Store
   - [ ] Ocultar aviso si ya está instalada la versión nativa (opcional)
   - [ ] Añadir fallback para iOS con link personalizado
-
-- [ ] 📘 Añadir ayuda o tutorial para usuarios nuevos
-  - [ ] Definir qué funciones deben explicarse (crear turno, añadir tarea, filtros, exportar, etc.)
-  - [ ] Elegir el formato: modal scrollable, vista “Ayuda”, o guía paso a paso (más complejo)
-  - [ ] Diseñar estructura clara, con texto corto y ejemplos visuales
-  - [ ] Añadir acceso desde el menú lateral u otro lugar visible
-  - [ ] Asegurar que se puede consultar en cualquier momento
-  - [ ] Validar legibilidad en móvil y dispositivos pequeños
-
-
 
 ---
 
@@ -1175,6 +1084,7 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
 ## 🔄 Etapa 10: Soporte post-publicación y mejoras opcionales
 
 Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionales, ajustes no críticos y correcciones tras el uso real.
+  > Revisar el orden, no tienen ningún orden concreto.
 
 - [ ] (Opcional) Probar app para tablet y hacer capturas para PlayStore.
 - [ ] Añadir selector de formato horario: HH:MM / AM-PM / seguir sistema (opcional)
@@ -1196,6 +1106,7 @@ Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionale
     - [ ] Validar en dispositivos físicos con Android 11 (API 30) si el comportamiento de fondo e iconos de la status bar es estable en condiciones reales (diferente de emulador)
     - [ ] Probar más versiones intermedias (API 31–35) para asegurar que la lógica condicional por versión de API no introduce efectos no deseados
     - [ ] Validar que el layout es coherente en todas las plataformas
+
 - [ ] Depuración Android: empaquetado y herramientas
     - [ ] Verificar que los archivos `favicon.ico` y `manifest.webmanifest` están correctamente empaquetados en la APK
         - Requiere: `npm run build` + `npx cap copy` + generación de APK
@@ -1207,8 +1118,99 @@ Tareas posteriores a la publicación en Play Store, incluyendo mejoras opcionale
         - Probar con emulador limpio o reinstalado
         - Evaluar si alguna animación en la app (como apertura del SideMenu) puede estar dejando el DOM en estado inconsistente
         - Si no se encuentra causa clara, documentar el entorno exacto donde falla (emulador, versión de Chrome, tipo de build)
-
+        
 - [ ] Validar coherencia del modo oscuro y tema del sistema en PWA, Android y escritorio (tests cruzados)
+
+- [ ] Añadir bloque "Sobre este proyecto" al final del README.md  
+    - [ ] Redactar una sección breve y profesional que explique el contexto del desarrollo:  
+        - [ ] Que es el primer proyecto completo del autor, sin formación previa en desarrollo.  
+        - [ ] Que fue construido desde cero y usado en entorno laboral real por varios compañeros.  
+        - [ ] Que todo el diseño, código y documentación fue realizado por el propio autor con la ayuda de ChatGPT como asistente técnico y de producto.  
+        - [ ] Que el proyecto sirvió también como base técnica y conceptual para un segundo proyecto más ambicioso (Nocta).  
+    - [ ] Usar tono neutro y claro (no promocional, ni con falsas humildades).  
+    - [ ] Añadirlo como último bloque del README, antes de la sección de licencia o en una nueva sección tipo `## Sobre este proyecto`.  
+    - [ ] Validar que no interfiere con el resto del README ni repite información innecesaria.  
+    - [ ] Confirmar que está presente y visible antes de publicar la versión pública en Play Store.
+
+- [ ] Implementar selector de formato de duración y precisión
+    - [ ] Añadir sistema de persistencia para ajustes de usuario (localStorage)
+      - [ ] Crear clave para guardar formato de duración elegido por el usuario
+      - [ ] Crear clave para guardar salto mínimo de duración elegido por el usuario
+      - [ ] Asegurar que los valores se aplican al renderizar duraciones en tarjetas
+    - [ ] Modificar sistema de renderizado de duración en tarjetas
+      - [ ] Añadir soporte para mostrar en formato hh:mm
+      - [ ] Añadir soporte para mostrar en formato decimal con separador adaptado al sistema
+      - [ ] Aplicar redondeo según salto configurado (ej. 0.5 h → 30 min)
+      - [ ] Aplicar reset del salto al valor por defecto al cambiar de modo
+      - [ ] Aplicar formato solo si la tarea está finalizada y hay hora fin
+    - [ ] Crear modal para selector de formato de duración (primer uso)
+      - [ ] Mostrar modal al finalizar una tarea por primera vez si no hay formato guardado
+      - [ ] Preguntar por el formato preferido: decimal (ej. "1,5 h") o hh:mm (ej. "1:30 h")
+      - [ ] Mostrar opciones visuales como botones de igual peso
+      - [ ] No permitir cerrar el modal sin elegir una opción
+      - [ ] Guardar valor elegido en localStorage
+    - [ ] Añadir selector de salto tras elección de formato en el modal inicial
+      - [ ] Mostrar lista de botones según el formato elegido:
+            > Formato hh:mm: [1, 5, 10, 15, 30, 60] minutos  
+            > Formato decimal: [0.1, 0.25, 0.5, 1.0] horas
+      - [ ] Guardar salto elegido en localStorage
+      - [ ] Aplicar valor como salto inicial al mostrar duraciones
+    - [ ] Integrar ajuste en opciones persistentes de la app (drawer o ajustes)
+      - [ ] Añadir sección "Formato de duración" en ajustes o menú lateral
+      - [ ] Permitir cambiar entre decimal y hh:mm manualmente
+      - [ ] Al cambiar el formato, resetear el salto al valor por defecto
+      - [ ] Permitir cambiar el salto desde el mismo panel
+      - [ ] Mantener valores sincronizados con localStorage
+    - [ ] Ajustes visuales y de UX
+      - [ ] Mostrar todos los botones de salto sin scroll si caben (máximo 6 opciones)
+      - [ ] Permitir usar dos filas si no caben horizontalmente
+      - [ ] Adaptar separador decimal según configuración regional del sistema
+
+- [ ] Añadir soporte dinámico para colores del sistema (status bar y nav bar) según modo claro/oscuro
+  - [ ] Detectar `prefers-color-scheme` en `main.ts`
+  - [ ] Aplicar color de fondo y color del texto usando `SafeArea.setStatusBar` y `setNavigationBar`
+  - [ ] Confirmar que los colores aplicados coinciden con el modo activo de la app
+  - [ ] (Opcional) Escuchar cambios en `prefers-color-scheme` si se desea actualización dinámica
+  - [ ] Probar en dispositivo Android real y emulador
+  - [ ] Documentar comportamiento y consideraciones en `dev-notes.md`
+
+
+- [ ] ✉️ Formulario de feedback por email
+  - [ ] Botón "Enviar feedback" en menú lateral
+  - [ ] Formulario con tipo de mensaje, descripción y email opcional
+    - [ ] Permitir rellenar el formulario sin conexión
+    - [ ] Guardar los datos localmente si no hay conexión al enviar
+    - [ ] Mostrar toast o mensaje: "Guardado para enviar cuando haya conexión"
+    - [ ] Intentar reenvío automático al recuperar conexión (si es viable)
+    - [ ] Ofrecer reintento manual si falla
+    - [ ] Eliminar de la cola solo si se confirma el envío exitoso
+    - [ ] Confirmar que no bloquea el uso normal de la app
+  - [ ] Guardar en Firestore (colección `feedback`)
+  - [ ] Trigger en Firebase Functions con envío por email (`nodemailer`, Resend, etc.)
+  - [ ] Confirmación visual tras enviar
+
+
+- [ ] Investigar problema de recorte incorrecto del icono maskable al instalar la PWA en Android
+  > Comentario: ver `dev-notes.md` para contexto completo de pruebas previas realizadas
+  - [ ] Comparar el manifest de Notifica con PWAs conocidas donde el icono maskable se recorte correctamente
+  - [ ] Generar nuevos iconos maskable con padding adecuado usando https://maskable.app/editor y probarlos
+  - [ ] Verificar si el recorte incorrecto varía según versión de Android, API o navegador (Chrome, WebView, WebAPK)
+  - [ ] Probar cambios en el valor de "purpose" (maskable vs any maskable) y validar efectos
+  - [ ] Analizar si el formato, metadatos o compresión del PNG pueden estar afectando el renderizado
+  - [ ] Buscar documentación o bugs conocidos en Chromium o foros relacionados con iconos maskable mal recortados
+  - [ ] Decidir si se puede aplicar un workaround eficaz o si debe dejarse documentado como limitación conocida
+  - [ ] Validar solución (si se aplica) en múltiples entornos antes de cerrar el bug
+
+
+- [ ] 📘 Añadir ayuda o tutorial para usuarios nuevos
+  - [ ] Definir qué funciones deben explicarse (crear turno, añadir tarea, filtros, exportar, etc.)
+  - [ ] Elegir el formato: modal scrollable, vista “Ayuda”, o guía paso a paso (más complejo)
+  - [ ] Diseñar estructura clara, con texto corto y ejemplos visuales
+  - [ ] Añadir acceso desde el menú lateral u otro lugar visible
+  - [ ] Asegurar que se puede consultar en cualquier momento
+  - [ ] Validar legibilidad en móvil y dispositivos pequeños
+
+
 
 
 
