@@ -11,6 +11,7 @@ export default {
     // Menús y navegación
     title: "Menu",
     options: "Settings",
+    releaseNotes: "What’s new",
     appearance: "Appearance",
     language: "Language",
     theme: {
@@ -51,6 +52,23 @@ export default {
     shift: {
       // Acciones relacionadas con turnos en la navegación
       returnCurrent: "Return to current segment",
+    },
+  },
+  releaseNotice: {
+    title: "New version",
+    body: "What's new in Notifica for you:",
+    cta: "Install Android app",
+    close: "Close what's new",
+    dismissLink: "Dismiss notice",
+    summary: "Dark mode, shift notes, and ES / EN language.",
+    highlights: {
+      darkMode: "Dark mode",
+      notes: "Shift notes",
+      language: "Language ES / EN",
+    },
+    footer: {
+      store: "You can also keep using this version.",
+      web: "This update also improves this version's experience.",
     },
   },
   aria: {
