@@ -1093,6 +1093,31 @@ Se reescribieron los estilos de botones utilizando clases estáticas declaradas 
 - Los botones con transición dinámica (como Finalizar/Reabrir) fueron adaptados cuidadosamente para mantener efectos visuales y resolver el ‘flash’ en el intercambio, modificando el fade `opacity` a `opacity-50` para evitar desaparición total.
 - El nuevo sistema permite ahora implementar botones coherentes y accesibles con feedback completo sin código duplicado ni soluciones JS específicas para móvil.
 
+### Bug en PWA iOS: las acciones de la vista principal no cancelaban el click al arrastrar fuera
+
+**Problema:**  
+En PWA instalada en iOS, varios controles de la vista principal seguían ejecutando su acción aunque el gesto táctil saliera del botón o elemento clicable antes de soltar. Se detectó primero en `Volver al tramo actual`, pero la revisión posterior mostró el mismo patrón en filtros, selector de tramo, botón `Iniciar` y varias acciones de tarea.
+
+**Diagnóstico:**  
+No era un bug de una acción concreta, sino una diferencia de semántica táctil en iOS PWA al confiar únicamente en `@click` y en la cancelación nativa por arrastre. El `SideMenu` no reproducía el problema, por lo que se acotó como un bug general de la vista principal, no de toda la app.
+
+**Solución aplicada:**  
+Se creó una directiva reutilizable en `src/directives/cancelTouchClick.ts` y se registró globalmente en `main.ts`.  
+La directiva:
+- detecta si un gesto táctil sale del área del control,
+- marca la activación como cancelada,
+- y bloquea el siguiente `click` sintético durante una ventana corta de seguridad.
+
+Después de una primera iteración, fue necesario ampliar la ventana de bloqueo para cubrir también el caso `hold + drag + release` en iOS PWA.
+
+**Criterio de comportamiento:**  
+La solución es deliberadamente conservadora: si el dedo sale del área del control en cualquier momento del gesto, la acción se considera cancelada aunque luego vuelva a entrar antes de soltar. Para lanzamiento se considera un comportamiento correcto y más seguro frente a activaciones accidentales.
+
+**Validación:**  
+- Corregido y validado manualmente en PWA iOS instalada.
+- Probado sobre los controles afectados de la vista principal.
+- Sin regresiones apreciables en taps normales.
+
 ### Bug en animación del colapsable de notas del turno
 
 **Descripción del problema:**  
