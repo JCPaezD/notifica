@@ -13,6 +13,16 @@
 
 Aplicación web progresiva (PWA) para registrar tareas técnicas por tramo durante la jornada laboral. Optimizada para uso móvil, con funcionamiento 100% offline, y diseño cuidado, rápido y accesible.
 
+## Estado actual
+
+La versión estable actualmente en uso es la PWA desplegada en Vercel.
+
+En este repositorio:
+
+* La rama `main` representa esa versión estable en producción
+* La rama `develop` concentra la evolución posterior del producto y se usa como base de trabajo y pruebas
+* La versión Android nativa mediante Capacitor está preparada como parte de la fase de lanzamiento actualmente en cierre
+
 
 ## 📱 Características principales
 
@@ -110,8 +120,8 @@ docs/
 
 Notifica también está disponible como aplicación Android, mediante Capacitor.
 
-La versión APK es funcionalmente idéntica a la versión PWA, pero se comporta como una app nativa:
-* Se instala como app desde archivo `.apk`
+La versión Android es funcionalmente equivalente a la versión PWA, pero se comporta como una app nativa:
+* Puede distribuirse como app Android independiente
 * Incluye icono personalizado, splash screen y diseño adaptado a móviles
 * Es independiente de la versión PWA, permitiendo mantener ambas instaladas
 

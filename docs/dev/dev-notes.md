@@ -75,19 +75,24 @@ Este documento recoge decisiones técnicas, flujos de trabajo y convenciones par
 
 ---
 
-## Contexto general del proyecto (actualizado 04/08/2025)
+## Contexto general del proyecto (actualizado 03/04/2026)
 
 **Notifica** es un proyecto personal iniciado por el autor, técnico de mantenimiento en una fábrica, con el objetivo de sustituir el uso de notas manuales para registrar tareas técnicas durante la jornada laboral. Desde el principio se concibió como una herramienta de uso diario en un entorno real, con foco en la agilidad, la persistencia local y la posibilidad de exportar fácilmente los registros al final del turno.
 
-El autor no tiene formación previa en programación ni diseño. Todo el desarrollo ha sido autoguiado, estructurado y asistido mediante el uso intensivo de ChatGPT como herramienta de apoyo técnico y de producto. Esto ha permitido transformar intuiciones sobre diseño, usabilidad y estructura en soluciones concretas, razonadas y funcionales. El trabajo se ha organizado en etapas con un roadmap progresivo, commits siguiendo convenciones estrictas, y documentación estructurada en este archivo (`dev-notes.md`) y en el `README.md`.
+El proyecto ha evolucionado desde una aplicación mínima hasta un producto completo con funcionalidades avanzadas: modo oscuro con detección de sistema y selector manual, sistema propio de notificaciones visuales (toasts), diseño responsive y multiplataforma (PWA + app Android mediante Capacitor), notas por turno, exportación/importación y soporte multidioma. A nivel práctico, no es un experimento detenido en fase temprana, sino una herramienta real ya utilizada en jornada laboral.
 
-El proyecto ha evolucionado desde una aplicación mínima hasta un producto completo con funcionalidades avanzadas: modo oscuro con detección de sistema y selector manual, sistema propio de notificaciones visuales (toasts), diseño responsive y multiplataforma (PWA + APK nativo), y refinamiento visual y de interacción basado en pruebas reales con usuarios.
+Actualmente, la situación del proyecto es la siguiente:
 
-Durante el desarrollo se pausó temporalmente para comenzar otro proyecto más ambicioso, **Nocta**, motivado por el uso diario y consistente de Notifica por parte del autor y varios compañeros. Al retomarlo, se aplicaron mejoras estructurales, refactors, y componentes reutilizables pensando en su portabilidad hacia Nocta. Todo el conocimiento técnico adquirido se ha documentado cuidadosamente para poder ser replicado y escalado en futuros desarrollos.
+- La rama `main` representa la PWA en producción desplegada en Vercel y utilizada por usuarios reales.
+- La rama `develop` concentra la evolución posterior del producto y se usa como rama de trabajo y como PWA de pruebas.
+- La publicación en Google Play Console ya está aprobada para lanzamiento público.
+- La fase abierta del proyecto ya no es validar la viabilidad técnica básica, sino cerrar correctamente la fase de lanzamiento y dejar alineados producto, ramas, documentación y workflow.
 
-Actualmente (agosto 2025), Notifica se encuentra en fase de publicación como beta cerrada en Google Play Store, con versiones estables validadas en Android, iOS (PWA) y escritorio. La aplicación es funcional, robusta, sin dependencias externas innecesarias, y se utiliza activamente en jornada laboral real. Además de su valor práctico inmediato, este proyecto representa un hito personal de aprendizaje completo: desde el diseño conceptual hasta la publicación y mantenimiento de una app multiplataforma lista para usuarios externos.
+La pausa del proyecto no se produjo por falta de valor del producto ni por un bloqueo técnico principal, sino por una combinación de desgaste del tramo final y fricción del flujo de trabajo de ese momento. Eso redujo la inercia justo cuando la aplicación ya estaba madura y la publicación pública en Android parecía cercana.
 
-Esta nota resume el contexto técnico y personal del proyecto, para referencia futura o para cualquier lector que consulte este archivo en busca de comprensión global del propósito y recorrido de Notifica.
+La reentrada iniciada en abril de 2026 parte de una situación distinta: existe un workflow más estable, una mejor base documental y un criterio más claro para revisar alcance antes de implementar. Por eso, el objetivo de esta etapa no es reinventar `Notifica`, sino retomar un proyecto ya valioso y cerrar de forma controlada la fase de lanzamiento pendiente.
+
+Este bloque sirve como reanclaje del estado real del proyecto en 2026. A partir de aquí, el roadmap y el resto de este documento deben interpretarse con ese marco: `main` como producto vivo, `develop` como release acumulada pendiente de aterrizaje, y la documentación como soporte activo para decidir scope, ordenar el trabajo y cerrar la publicación sin reabrir el proyecto innecesariamente.
 
 
 ## Flujo de versiones y despliegue
