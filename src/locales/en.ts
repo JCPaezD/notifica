@@ -68,7 +68,7 @@ export default {
     },
     footer: {
       store: "You can also keep using this version.",
-      web: "This update also improves this version's experience.",
+      web: "This update also improves your experience on iPhone and iPad.",
     },
   },
   aria: {

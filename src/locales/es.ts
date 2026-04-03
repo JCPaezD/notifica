@@ -68,7 +68,7 @@ export default {
     },
     footer: {
       store: "También puedes seguir usando esta versión.",
-      web: "Esta actualización mejora también la experiencia de esta versión.",
+      web: "Esta actualización también mejora tu experiencia en iPhone y iPad.",
     },
   },
   aria: {
