@@ -3,7 +3,7 @@
     <!-- Toggle Mostrar solo activas -->
     <div class="flex items-center space-x-1">
       <span class="text-xs font-medium text-text-main dark:text-main-dark">{{ t('filter.active') }}</span>
-      <button @click="modelShowOnlyActive = !modelShowOnlyActive"
+      <button v-cancel-touch-click @click="modelShowOnlyActive = !modelShowOnlyActive"
         :class="[
           modelShowOnlyActive ? 'bg-accent-main' : 'bg-toggle-inactive dark:bg-toggle-inactive-dark'
         ]"
@@ -32,7 +32,7 @@
     <!-- Toggle Mostrar solo sin notificar -->
     <div class="flex items-center space-x-1">
       <span class="text-xs font-medium text-text-main dark:text-main-dark">{{ t('filter.unregistered') }}</span>
-      <button @click="modelShowOnlyNotNotified = !modelShowOnlyNotNotified"
+      <button v-cancel-touch-click @click="modelShowOnlyNotNotified = !modelShowOnlyNotNotified"
         :class="[
           modelShowOnlyNotNotified ? 'bg-accent-main' : 'bg-toggle-inactive dark:bg-toggle-inactive-dark'
         ]"

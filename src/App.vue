@@ -1001,7 +1001,7 @@ const exportTasksToJson = async () => {
       enter-to-class="opacity-100 max-h-[80px]" leave-active-class="transition-all duration-300 ease-in"
       leave-from-class="opacity-100 max-h-[80px]" leave-to-class="opacity-0 max-h-0">
       <div v-if="isViewingPastShift" class="w-full max-w-lg mb-4 overflow-hidden">
-        <button @click="handleAction('returnToCurrent')" class="btn-shift">
+        <button v-cancel-touch-click @click="handleAction('returnToCurrent')" class="btn-shift">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="w-5 h-4">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -1053,6 +1053,7 @@ const exportTasksToJson = async () => {
           {{ t('menu.options') }}
         </span>
         <button 
+          v-cancel-touch-click
           @click="isSettingsOpen = false" 
           :aria-label="t('aria.menu.close')"
           class="focus:outline-none"
@@ -1078,7 +1079,7 @@ const exportTasksToJson = async () => {
         </p>
         <div class="grid grid-cols-3 gap-2">
           <!-- Botón Sistema -->
-          <button @click="setPreferredMode('system')" :class="[
+          <button v-cancel-touch-click @click="setPreferredMode('system')" :class="[
             'h-10 w-full flex items-center gap-1 px-2 md:px-3 md:gap-2 py-2 rounded-md transition-all duration-150',
             preferredMode === 'system'
               ? 'bg-accent-main text-white font-semibold'
@@ -1093,7 +1094,7 @@ const exportTasksToJson = async () => {
           </button>
 
           <!-- Botón Claro -->
-          <button @click="setPreferredMode('light')" :class="[
+          <button v-cancel-touch-click @click="setPreferredMode('light')" :class="[
             'h-10 w-full flex items-center gap-1 px-2 md:px-3 md:gap-2 py-2 rounded-md transition-all duration-150',
             preferredMode === 'light'
               ? 'bg-accent-main text-white font-semibold'
@@ -1108,7 +1109,7 @@ const exportTasksToJson = async () => {
           </button>
 
           <!-- Botón Oscuro -->
-          <button @click="setPreferredMode('dark')" :class="[
+          <button v-cancel-touch-click @click="setPreferredMode('dark')" :class="[
             'h-10 w-full flex items-center gap-1 px-2 md:px-3 md:gap-2 py-2 rounded-md transition-all duration-150',
             preferredMode === 'dark'
               ? 'bg-accent-main text-white font-semibold'
@@ -1136,7 +1137,7 @@ const exportTasksToJson = async () => {
         </p>
         <div class="grid grid-cols-3 gap-2">
           <!-- Botón Sistema/Auto -->
-          <button @click="setLocale('system')" :class="[
+          <button v-cancel-touch-click @click="setLocale('system')" :class="[
             'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
             selectedLocale === 'system'
               ? 'bg-accent-main text-white font-semibold'
@@ -1144,7 +1145,7 @@ const exportTasksToJson = async () => {
           ]">
             AUTO
           </button>
-          <button @click="setLocale('es')" :class="[
+          <button v-cancel-touch-click @click="setLocale('es')" :class="[
             'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
             selectedLocale === 'es'
               ? 'bg-accent-main text-white font-semibold'
@@ -1152,7 +1153,7 @@ const exportTasksToJson = async () => {
           ]">
             ES
           </button>
-          <button @click="setLocale('en')" :class="[
+          <button v-cancel-touch-click @click="setLocale('en')" :class="[
             'flex-1 h-10 flex items-center justify-center rounded-md transition-all duration-150',
             selectedLocale === 'en'
               ? 'bg-accent-main text-white font-semibold'

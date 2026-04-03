@@ -302,6 +302,7 @@ function handleEnter(index: number) {
 
             <div class="space-y-1 mt-1">
               <button
+                v-cancel-touch-click
                 @click="isNotesOpen = !isNotesOpen"
                 :class="[
                   'w-full flex items-center justify-between gap-x-3 py-2 rounded-md text-sm font-medium',

@@ -340,7 +340,7 @@ const handleDeleteTask = () => {
               />
             </template>
             <template v-else>
-              <p @click="startEditDescription" class="font-medium text-sm text-text-main dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md break-words leading-tight">
+              <p v-cancel-touch-click @click="startEditDescription" class="font-medium text-sm text-text-main dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md break-words leading-tight">
                 {{ task.description || t('task.noDescription') }}
               </p>
             </template>
@@ -357,7 +357,7 @@ const handleDeleteTask = () => {
                             bg-surface-1 dark:bg-surface-1-dark"/>
             </template>
             <template v-else>
-              <span @click="startEditStartTime" class="text-text-main/90 dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
+              <span v-cancel-touch-click @click="startEditStartTime" class="text-text-main/90 dark:text-main-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
                 {{ task.startTime.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }) }}
               </span>
             </template>
@@ -383,14 +383,14 @@ const handleDeleteTask = () => {
                                   bg-surface-1 dark:bg-surface-1-dark"/>
                   </template>
                   <template v-else>
-                    <span @click="startEditEndTime"
+                    <span v-cancel-touch-click @click="startEditEndTime"
                           class="text-success-strong dark:text-success-strong-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">
                       {{ task.endTime.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }) }}
                     </span>
                   </template>
                 </template>
                 <template v-else>
-                  <span @click="handleFinalizeAndEditEndTime" class="text-icon-muted dark:text-icon-muted-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">--:--</span>
+                  <span v-cancel-touch-click @click="handleFinalizeAndEditEndTime" class="text-icon-muted dark:text-icon-muted-dark cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-1 rounded-md">--:--</span>
                 </template>
               </div>
             </Transition>
@@ -409,7 +409,7 @@ const handleDeleteTask = () => {
             leave-from-class="opacity-100 scale-100"
             leave-to-class="opacity-50 scale-90"
           >
-            <button v-if="!task.endTime" @click="handleFinishTask" 
+            <button v-if="!task.endTime" v-cancel-touch-click @click="handleFinishTask" 
                     class="w-full px-2 py-0.5 
                           text-icon-alert dark:text-icon-alert-dark text-xs font-semibold
                           rounded-md
@@ -424,7 +424,7 @@ const handleDeleteTask = () => {
               </svg>
               <span>{{ t('task.action.finish') }}</span>
             </button>
-            <button v-else @click="handleReactivateTask" 
+            <button v-else v-cancel-touch-click @click="handleReactivateTask" 
                     class="w-full px-2 py-0.5 
                           text-icon-active dark:text-icon-active-dark text-xs font-semibold
                           rounded-md
@@ -454,7 +454,7 @@ const handleDeleteTask = () => {
                             bg-surface-1 dark:bg-surface-1-dark"/>
             </template>
             <template v-else>
-              <p @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-0.5 rounded-md truncate">
+              <p v-cancel-touch-click @click="startEditTechnician" class="cursor-pointer hover:bg-surface-hover dark:hover:bg-surface-hover-dark p-1 -m-0.5 rounded-md truncate">
                 <span v-if="task.technician" class="text-text-subtle dark:text-subtle-dark">{{ task.technician }}</span>
                 <span v-else class="text-icon-muted dark:text-icon-muted-dark italic">{{ t('task.assignee.add') }}</span>
               </p>
@@ -485,6 +485,7 @@ const handleDeleteTask = () => {
           <!-- Icono Notificado -->
           <button 
             ref="notifiedIconBtnRef"
+            v-cancel-touch-click
             @click="toggleNotifiedStatus" 
             :title="task.isNotified ? t('tooltip.task.unregistered') : t('tooltip.task.registered')"
             class="btn-icon-success"
@@ -516,6 +517,7 @@ const handleDeleteTask = () => {
           </button>
           <!-- Botón Eliminar Tarea -->
           <button
+            v-cancel-touch-click
             @click="handleDeleteTask"
             :title="t('tooltip.task.delete')"
             class="btn-icon-alert"

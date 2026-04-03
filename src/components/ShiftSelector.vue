@@ -3,6 +3,7 @@
   <div class="relative flex-shrink-0">
     <button
       ref="shiftDropdownButtonRef"
+      v-cancel-touch-click
       @click="toggleShiftDropdown"
       type="button"
       class="inline-flex items-center justify-center w-[72px] 
@@ -43,6 +44,7 @@
     >
       <div class="py-0.5" role="none">
         <button
+          v-cancel-touch-click
           @click="emitSelect('current')"
           class="text-text-main dark:text-main-dark w-full text-left min-h-[44px] px-4 py-2 text-sm 
                  hover:bg-surface-hover dark:hover:bg-surface-hover-dark hover:text-text-main dark:hover:text-main-dark
@@ -65,6 +67,7 @@
         <template v-for="shift in availableShifts" :key="shift.id">
           <button
             v-if="shift.id !== currentShiftId"
+            v-cancel-touch-click
             @click="emitSelect(shift.id)"
             class="text-text-main dark:text-main-dark w-full text-left min-h-[44px] px-4 py-2 text-sm 
                    hover:bg-surface-hover dark:hover:bg-surface-hover-dark hover:text-text-main dark:hover:text-main-dark

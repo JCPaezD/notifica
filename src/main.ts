@@ -11,6 +11,7 @@ import { Device } from '@capacitor/device'
 import { createI18n } from 'vue-i18n'
 import es from './locales/es'
 import en from './locales/en'
+import { cancelTouchClickDirective } from './directives/cancelTouchClick'
 
 import dayjs from 'dayjs'
 import 'dayjs/locale/es'
@@ -142,5 +143,6 @@ watch(i18n.global.locale, (newLocale) => {
 
 
 createApp(App)
+  .directive('cancel-touch-click', cancelTouchClickDirective)
   .use(i18n)
   .mount('#app')
