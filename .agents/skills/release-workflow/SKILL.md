@@ -28,6 +28,7 @@ Project shape:
 Current release-sensitive files usually include:
 
 - `package.json`
+- `package-lock.json` when version metadata changes
 - `android/app/build.gradle`
 - visible version text in `src/components/SideMenu.vue`
 - launch/release documentation in:
@@ -80,6 +81,7 @@ If the current scope is unclear or documentation is stale, surface that before p
 Before any release edits, inspect:
 
 - `package.json`
+- `package-lock.json` when package version metadata has been changed or will be changed
 - `android/app/build.gradle`
 - visible version text in `src/components/SideMenu.vue`
 - relevant release notes in `docs/dev/dev-notes.md`
@@ -128,8 +130,12 @@ If the task touches launch scope, migration prompts, or platform positioning, re
 When a release or launch update is being prepared, update the relevant metadata deliberately:
 
 - `package.json`
+- `package-lock.json` if the package version was updated
 - `android/app/build.gradle`
 - visible version text in `src/components/SideMenu.vue`
+
+If `package.json` version changes, do not leave `package-lock.json` stale.
+Regenerate or update it using the normal package-manager workflow instead of editing it manually.
 
 Then review whether these documents must also change:
 
@@ -220,6 +226,8 @@ Treat these as the release-facing version sources to review together:
 - `package.json`
 - `android/app/build.gradle`
 - visible version text in `src/components/SideMenu.vue`
+
+Also ensure `package-lock.json` remains aligned with `package.json` when the package version changes.
 
 If they intentionally differ, explain why.
 

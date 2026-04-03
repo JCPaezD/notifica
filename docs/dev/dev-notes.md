@@ -137,11 +137,12 @@ La versión web (PWA) de Notifica se despliega automáticamente cada vez que se 
 La versión de la app se muestra actualmente en dos lugares:
 
 1. package.json
-   - Campo "version": "1.0.0" refleja la versión del proyecto.
+   - El campo `version` refleja la versión general del proyecto.
    - Esta es la fuente de verdad y debería actualizarse manualmente antes de cada publicación.
+   - `package-lock.json` debe quedar sincronizado con ese valor.
 
 2. SideMenu.vue
-   - La versión aparece en el pie del menú lateral como texto hardcodeado (ej. Notifica v1.0.0 - JCPD 2025).
+   - La versión aparece en el pie del menú lateral como texto hardcodeado.
    - Debe actualizarse manualmente para que coincida con package.json.
 
 3. Android (si aplica)
@@ -164,6 +165,7 @@ Por ahora se mantiene la edición manual para simplicidad y control total.
 Antes de hacer merge a main para publicar una nueva versión PWA:
 
 - [ ] Aumentar versión en package.json ("version": "1.X.Y")
+- [ ] Confirmar que `package-lock.json` queda alineado con esa versión
 - [ ] Actualizar texto en SideMenu.vue
 - [ ] (Opcional) Sincronizar versionName en Android (build.gradle)
 - [ ] (Opcional) Crear un tag git:
@@ -176,9 +178,9 @@ Pasos para crear y subir una nueva versión firmada a Google Play:
 
 1. Aumentar versión:
   - Editar `android/app/build.gradle`:
-     - `versionCode`: sumar 1 (ej: 2 → 3)
-     - `versionName`: nueva etiqueta visible (ej: "1.0.2")
-  - Editar footer 
+     - `versionCode`: sumar 1 respecto a la release anterior
+     - `versionName`: nueva etiqueta visible alineada con la versión del proyecto
+  - Editar footer de `SideMenu.vue`
 
 2. Sincronizar Gradle y generar `.aab`:
    - En Android Studio:
