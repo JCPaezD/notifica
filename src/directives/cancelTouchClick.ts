@@ -3,6 +3,7 @@ import type { Directive } from 'vue'
 type TouchClickState = {
   activeTouchId: number | null
   shouldCancelClick: boolean
+  cancelClickUntil: number
 }
 
 type TouchClickableElement = HTMLElement & {
@@ -14,6 +15,7 @@ type TouchClickableElement = HTMLElement & {
 }
 
 const CANCEL_TOLERANCE_PX = 8
+const CANCEL_CLICK_WINDOW_MS = 700
 
 function isTouchInsideElement(
   touch: Touch,
@@ -51,6 +53,7 @@ export const cancelTouchClickDirective: Directive<HTMLElement> = {
     el.__cancelTouchClickState__ = {
       activeTouchId: null,
       shouldCancelClick: false,
+      cancelClickUntil: 0,
     }
 
     el.__cancelTouchClickOnStart__ = (event: TouchEvent) => {
@@ -58,6 +61,7 @@ export const cancelTouchClickDirective: Directive<HTMLElement> = {
         el.__cancelTouchClickState__ = {
           activeTouchId: null,
           shouldCancelClick: false,
+          cancelClickUntil: 0,
         }
         return
       }
@@ -65,6 +69,7 @@ export const cancelTouchClickDirective: Directive<HTMLElement> = {
       el.__cancelTouchClickState__ = {
         activeTouchId: event.touches[0].identifier,
         shouldCancelClick: false,
+        cancelClickUntil: 0,
       }
     }
 
@@ -82,20 +87,27 @@ export const cancelTouchClickDirective: Directive<HTMLElement> = {
     }
 
     el.__cancelTouchClickOnEnd__ = () => {
-      window.setTimeout(() => {
-        if (!el.__cancelTouchClickState__) {
-          return
-        }
+      const state = el.__cancelTouchClickState__
 
-        el.__cancelTouchClickState__.activeTouchId = null
-        el.__cancelTouchClickState__.shouldCancelClick = false
-      }, 0)
+      if (!state) {
+        return
+      }
+
+      if (state.shouldCancelClick) {
+        state.cancelClickUntil = Date.now() + CANCEL_CLICK_WINDOW_MS
+      }
+
+      state.activeTouchId = null
+      state.shouldCancelClick = false
     }
 
     el.__cancelTouchClickOnClick__ = (event: MouseEvent) => {
-      if (el.__cancelTouchClickState__?.shouldCancelClick) {
+      const state = el.__cancelTouchClickState__
+
+      if (state && Date.now() <= state.cancelClickUntil) {
         event.preventDefault()
         event.stopPropagation()
+        state.cancelClickUntil = 0
       }
     }
 
