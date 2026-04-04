@@ -205,6 +205,42 @@ Pasos para crear y subir una nueva versión firmada a Google Play:
 
 4. Instalar en dispositivo real desde el enlace de test interno o Play Store
 
+### Flujo operativo actual para generar y archivar el `.aab` de release
+
+[04/04/2026]
+
+Para preparar una release Android pública con el flujo actual del proyecto:
+
+1. Ejecutar:
+
+       npm run build
+       npx cap sync android
+       cd android
+       .\gradlew.bat bundleRelease
+
+2. El bundle firmado se genera en:
+
+       android/app/build/outputs/bundle/release/app-release.aab
+
+3. Tras generarlo, crear una copia archivada en:
+
+       android/app/release/
+
+4. Patrón recomendado para el nombre del artefacto archivado:
+
+       app-release-YYYY-MM-DD-HH-MM-vX.Y.Z.aab
+
+Antes de subir la release a Play Console conviene dejar cerrados estos puntos:
+
+- `versionName` y `versionCode`
+- nombre visible de la versión si se va a usar
+- notas de la versión
+- regiones iniciales de publicación
+
+**Nota:**
+
+Si `minifyEnabled false`, la advertencia de Play Console sobre archivo de desofuscación no bloquea la release.
+
 ### Revisión del `.aab` antes de lanzar testing externo
 
 [Actualizado 02/08/2025 - ✅ Lista completada]

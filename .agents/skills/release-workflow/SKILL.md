@@ -179,9 +179,18 @@ When relevant, the release path may include:
 
 - build preparation
 - `.aab` generation
+- archived human-named `.aab` copy in `android/app/release/`
 - review before upload
 - Play Console upload/update
 - production visibility decisions
+
+After generating a release `.aab`, create a dated/versioned archival copy in `android/app/release/` using a human-readable filename before uploading it to Play Console.
+
+Before Play Console submission, explicitly prepare:
+
+- release notes
+- visible release name when used
+- initial publication regions
 
 Do not claim Android release completion without the user-confirmed manual steps.
 
