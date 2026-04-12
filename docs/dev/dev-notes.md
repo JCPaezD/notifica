@@ -1842,6 +1842,7 @@ Esta conversación servirá para:
 - Encapsular UI interactiva en componentes ayuda a reducir el tamaño de App.vue sin perder control funcional.   
 - Confirmado que `touch-action: manipulation` y `-webkit-text-size-adjust: 100%` aplicados globalmente corrigen el bug crítico de scroll en iOS PWA. Este conocimiento es reutilizable en proyectos como Nocta.
 - Validaciones completas y rápidas en entorno real permiten cerrar tareas menores con agilidad y seguridad.
+- Detectado en validacion final de lanzamiento un bug menor en PWA iOS instalada: al editar notas de tramo con el teclado abierto, el selector nativo superior de campos puede dejar visible fondo blanco por scroll de la app bajo la capa semitransparente del sistema. No bloquea el uso ni el lanzamiento y queda para revision post-lanzamiento.
 
 ---
 
