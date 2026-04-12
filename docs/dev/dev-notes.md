@@ -1843,6 +1843,7 @@ Esta conversación servirá para:
 - Confirmado que `touch-action: manipulation` y `-webkit-text-size-adjust: 100%` aplicados globalmente corrigen el bug crítico de scroll en iOS PWA. Este conocimiento es reutilizable en proyectos como Nocta.
 - Validaciones completas y rápidas en entorno real permiten cerrar tareas menores con agilidad y seguridad.
 - Detectado en validacion final de lanzamiento un bug menor en PWA iOS instalada: al editar notas de tramo con el teclado abierto, el selector nativo superior de campos puede dejar visible fondo blanco por scroll de la app bajo la capa semitransparente del sistema. No bloquea el uso ni el lanzamiento y queda para revision post-lanzamiento.
+- La fase principal de lanzamiento de `v1.3.0` queda cerrada con app Android publicada y validada en Google Play, PWA estable actualizada y validada en `main`, y tag `v1.3.0` + GitHub Release ya creados. El aviso temporal `Novedades` sigue activo y debe revisarse en trabajo post-lanzamiento para decidir si se retira o se simplifica.
 
 ---
 
