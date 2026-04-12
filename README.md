@@ -15,13 +15,18 @@ Aplicación web progresiva (PWA) para registrar tareas técnicas por tramo duran
 
 ## Estado actual
 
-La versión estable actualmente en uso es la PWA desplegada en Vercel.
+La versión estable actualmente en uso es la PWA desplegada en Vercel:
+
+- https://notifica-kappa.vercel.app/
+
+La app Android nativa también está publicada en Google Play:
+
+- https://play.google.com/store/apps/details?id=com.jcpaezd.notifica
 
 En este repositorio:
 
 * La rama `main` representa esa versión estable en producción
 * La rama `develop` concentra la evolución posterior del producto y se usa como base de trabajo y pruebas
-* La versión Android nativa mediante Capacitor está preparada como parte de la fase de lanzamiento actualmente en cierre
 
 
 ## 📱 Características principales
@@ -116,12 +121,14 @@ docs/
 * ✅ iOS (Safari y Chrome) — Instalación y funcionamiento offline
 
 
-## 📱 Versión Android (APK)
+## 📱 Versión Android
 
-Notifica también está disponible como aplicación Android, mediante Capacitor.
+Notifica también está disponible como aplicación Android mediante Capacitor y publicada en Google Play:
+
+- https://play.google.com/store/apps/details?id=com.jcpaezd.notifica
 
 La versión Android es funcionalmente equivalente a la versión PWA, pero se comporta como una app nativa:
-* Puede distribuirse como app Android independiente
+* Puede instalarse desde Google Play como app Android independiente
 * Incluye icono personalizado, splash screen y diseño adaptado a móviles
 * Es independiente de la versión PWA, permitiendo mantener ambas instaladas
 

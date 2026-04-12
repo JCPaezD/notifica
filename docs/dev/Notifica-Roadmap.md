@@ -1029,37 +1029,37 @@ App web tipo PWA para registrar tareas laborales de forma ágil, sin conexión y
   - [x] Valorar si conviene ocultar el aviso al instalar la versión nativa
   - [x] Dejar preparado el comportamiento para validarlo con la release real
 
-- [ ] 📱 Publicar app Android en Google Play
-  - [ ] Revisar ficha final de Play Store (nombre, descripción, capturas, política de datos, etc.)
-  - [ ] Confirmar que versión, textos e imágenes están actualizados
-  - [ ] Preparar release pública en producción
-  - [ ] Usar `managed publishing` si conviene para controlar el momento exacto de visibilidad
-  - [ ] Activar publicación pública cuando se decida
-  - [ ] Confirmar que la app está visible y accesible desde la Play Store
+- [x] 📱 Publicar app Android en Google Play
+  - [x] Revisar ficha final de Play Store (nombre, descripción, capturas, política de datos, etc.)
+  - [x] Confirmar que versión, textos e imágenes están actualizados
+  - [x] Preparar release pública en producción
+  - [x] Confirmar que no se depende de `managed publishing` para controlar este lanzamiento
+  - [x] Activar publicación pública cuando se decida
+  - [x] Confirmar que la app está visible y accesible desde la Play Store
 
-- [ ] 📤 Publicar versión PWA como estable
-  - [ ] Confirmar que `develop` está lista para merge a `main`
-  - [ ] Revisar y actualizar versión visible y metadatos si corresponde
-  - [ ] Confirmar que el aviso de migración ya puede apuntar a la ficha real de Play Store
-  - [ ] Actualizar también el `README.md` si han cambiado tecnologías, capturas, enlaces o instrucciones
-  - [ ] Hacer merge a `main`
-  - [ ] Verificar despliegue correcto en Vercel producción
-  - [ ] Confirmar correcto funcionamiento como app instalada desde navegador en dispositivos de referencia
-  - [ ] Validar comportamiento final del aviso de migración ya con enlace real
-  - [ ] (Opcional) Crear un tag git:
+- [x] 📤 Publicar versión PWA como estable
+  - [x] Confirmar que `develop` está lista para merge a `main`
+  - [x] Revisar y actualizar versión visible y metadatos si corresponde
+  - [x] Confirmar que el aviso de migración ya puede apuntar a la ficha real de Play Store
+  - [x] Actualizar también el `README.md` si han cambiado tecnologías, capturas, enlaces o instrucciones
+  - [x] Hacer merge a `main`
+  - [x] Verificar despliegue correcto en Vercel producción
+  - [x] Confirmar correcto funcionamiento como app instalada desde navegador en dispositivos de referencia
+  - [x] Validar comportamiento final del aviso de migración ya con enlace real
+  - [x] (Opcional) Crear un tag git:
       git tag v1.X.Y -m "Descripción del release"
       git push origin v1.X.Y
 
-- [ ] 👥 Comunicación mínima del lanzamiento
-  - [ ] Avisar a usuarios actuales de la app
-  - [ ] Preparar mensaje breve para el grupo de trabajo
+- [x] 👥 Comunicación mínima del lanzamiento
+  - [x] Avisar a usuarios actuales de la app
+  - [x] Preparar mensaje breve para el grupo de trabajo
 
-- [ ] ✅ Cerrar la fase de lanzamiento
-  - [ ] Confirmar que la PWA estable ya está publicada y validada
-  - [ ] Confirmar que la app Android ya está publicada y validada
-  - [ ] Confirmar que el aviso de migración en PWA está resuelto
-  - [ ] Confirmar que la comunicación mínima está hecha
-  - [ ] Actualizar también el `README.md` si se han hecho cambios relevantes
+- [x] ✅ Cerrar la fase de lanzamiento
+  - [x] Confirmar que la PWA estable ya está publicada y validada
+  - [x] Confirmar que la app Android ya está publicada y validada
+  - [x] Confirmar que el aviso de migración en PWA está resuelto
+  - [x] Confirmar que la comunicación mínima está hecha
+  - [x] Actualizar también el `README.md` si se han hecho cambios relevantes
 
 ---
 
