@@ -1087,6 +1087,7 @@ Tareas posteriores al lanzamiento público, incluyendo mejoras opcionales, deuda
       - [ ] Confirmar que exportación, importación y ordenación siguen coherentes
 
 - [ ] (Opcional) Probar app para tablet y hacer capturas para Play Store
+- [ ] Revisar bug menor en PWA iOS instalada al editar notas de tramo con teclado abierto y selector nativo de campos visible
 - [ ] Añadir selector de formato horario: HH:MM / AM-PM / seguir sistema (opcional)
 - [ ] Revisar y adaptar la app al nuevo sistema de vista de extremo a extremo (Android 15 / SDK 35):
       Gestionar correctamente insets y safe-areas cuando el edge-to-edge sea predeterminado.
