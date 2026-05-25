@@ -16,6 +16,15 @@ import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { shiftIcons as icons } from './icons/shifts'
 import { useLogoAnimation } from './composables/useLogoAnimation'
 import { useDarkMode } from './composables/useDarkMode'
+import { getShiftLabel, getShiftIcon, getShiftColor } from './composables/useShifts'
+import {
+  getAllNotes,
+  deleteNotesForShift,
+  deleteAllNotes,
+  setAllNotes,
+  notesMap,
+  getNotesForShift
+} from '@/composables/useNotes'
 import { createTaskBackup, normalizeImportedTaskBackup } from '@/domain/taskImportExport'
 import { buildShiftShareText } from '@/domain/shareText'
 import { buildAvailableShifts, filterAndSortTasks } from '@/domain/taskFilters'
@@ -383,16 +392,6 @@ const listTitle = computed(() => {
   // selectedShiftToView contiene directamente el shiftId que queremos mostrar
   return t('title.taskList', { shift: getShiftLabel(selectedShiftToView.value) })
 })
-
-import { getShiftLabel, getShiftIcon, getShiftColor } from './composables/useShifts'
-import {
-  getAllNotes,
-  deleteNotesForShift,
-  deleteAllNotes,
-  setAllNotes,
-  notesMap,
-  getNotesForShift
-} from '@/composables/useNotes'
 
 // Exporta todas las tareas actuales a un archivo JSON.
 const exportTasksToJson = async () => {

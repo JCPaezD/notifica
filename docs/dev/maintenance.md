@@ -60,6 +60,12 @@ Para cambios acumulados durante la fortificacion tecnica:
   - comprobar una tarea que cruza medianoche
   - compartir/exportar una tarea finalizada
   - revisar filtros basicos
+- tras el Bloque E, incluir tambien:
+  - recargar y comprobar persistencia local
+  - importar JSON en formato antiguo y nuevo
+  - borrar/restaurar tarea
+  - borrar todo/deshacer restaurando notas
+  - iniciar nuevo tramo/deshacer
 - no perder la trazabilidad de que cambio anadio cada punto al checklist.
 
 Para cambios Android:

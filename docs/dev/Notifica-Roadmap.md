@@ -110,7 +110,7 @@ Validacion pendiente acumulada:
 
 ### Bloque E - Refactor Progresivo De Arquitectura
 
-Estado: planificado.
+Estado: implementado en primera tanda, pendiente de validacion acumulada.
 
 Objetivo:
 
@@ -122,6 +122,24 @@ Principios:
 
 - anadir tests antes de extraer comportamiento de riesgo
 - evitar migraciones salvo que la compatibilidad este disenada explicitamente
+
+Resultado inicial:
+
+- `App.vue` se ha reducido y ahora delega reglas en `src/domain/`, `src/services/` y `src/adapters/`.
+- Se conectaron helpers de dominio ya testeados para import/export, filtros, texto compartido y duracion.
+- Se extrajo persistencia de tareas y turno actual.
+- Se extrajeron helpers de ciclo de vida de tareas.
+- Se extrajeron adaptadores de export/share para navegador y Capacitor.
+
+Validacion pendiente acumulada:
+
+- persistencia local y recuperacion tras recarga
+- importacion JSON antigua y nueva
+- exportacion JSON en web/PWA
+- compartir texto y archivo
+- crear/finalizar/reabrir/borrar/restaurar tareas
+- borrar todo/deshacer restaurando notas
+- filtros, turnos con notas, duracion y cruce de medianoche
 
 ### Bloque F - Tooling Android Y Android Skills Oficiales
 
