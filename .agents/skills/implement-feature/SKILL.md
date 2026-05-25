@@ -68,8 +68,10 @@ Before implementing anything non-trivial:
 
 1. Inspect the repository structure.
 2. Read the relevant parts of:
+   - `docs/dev/README.md`
    - `docs/dev/Notifica-Roadmap.md`
    - `docs/dev/dev-notes.md`
+   - focused docs such as `docs/dev/architecture.md`, `docs/dev/maintenance.md`, `docs/dev/i18n.md`, or `docs/dev/known-issues.md` when the task touches those areas
 3. Check the current implementation path in the repo before deciding how to change it.
 
 If the task affects release flow, versioning, Android behavior, PWA behavior, migration messaging, or user-visible scope, treat the documentation as required context, not optional context.
