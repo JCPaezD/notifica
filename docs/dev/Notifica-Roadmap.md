@@ -81,7 +81,7 @@ Resultado:
 
 ### Bloque D - Tests Y Automatizaciones Base
 
-Estado: planificado.
+Estado: implementado pendiente de revision.
 
 Objetivo:
 
@@ -91,10 +91,22 @@ Objetivo:
 
 Foco candidato:
 
-- tests unitarios para logica pura de tareas/fechas/exportacion tras extraerla
-- tests de componentes o integracion para flujos criticos cuando sea practico
-- scripts de build/type-check como automatizacion base
-- checklist Android primero; automatizacion Android solo si aporta valor claro
+- Vitest como base de tests unitarios.
+- Vue Test Utils para componentes Vue criticos.
+- Playwright como smoke E2E ligero e independiente.
+- Tests de dominio para fechas/duracion, filtros/turnos, import/export y texto compartido.
+- Tests de composables/utilidades para notas, toasts y plataforma Android.
+- CI basica para `develop` y pull requests.
+- Android se mantiene como validacion manual/checklist salvo automatizacion especifica futura.
+
+Validacion pendiente acumulada:
+
+- validar en el deploy dev de Vercel antes de cerrar la fase de fortificacion o preparar merge/release
+- comprobar flujo basico de tareas y duracion
+- comprobar caso de tarea que cruza medianoche
+- comprobar compartir/exportar una tarea finalizada
+- anotar cualquier regresion antes de pasar al Bloque E
+- esta validacion puede acumularse con la del refactor grande para evitar pruebas intermedias repetidas, siempre que el checklist no se pierda
 
 ### Bloque E - Refactor Progresivo De Arquitectura
 
@@ -150,6 +162,7 @@ Restriccion:
 - Las reglas de dominio no estan suficientemente aisladas para tests.
 - Persistencia/import/export necesitan proteccion explicita antes de refactors.
 - La version visible y metadatos de release siguen siendo parcialmente manuales.
+- Revisar `npm audit`, Browserslist y warning de doble import de `@capacitor/share` en un bloque de mantenimiento separado.
 
 ### Plataforma / Android
 

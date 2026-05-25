@@ -5,6 +5,7 @@
 import type { PropType } from 'vue'
 import { computed, ref, nextTick, watch } from 'vue'
 import type { Task } from '../types/Task' // Importar la interfaz Task compartida
+import { applyClockValueToDate, formatTaskDuration } from '@/domain/taskTime'
 
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
@@ -111,15 +112,12 @@ const startEditStartTime = () => {
  * Emite 'update-task' si la hora ha cambiado.
  */
 const saveStartTime = () => {
-  const [hours, minutes] = editableStartTime.value.split(':').map(Number)
-  if (isNaN(hours) || isNaN(minutes) || hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+  const newStartTime = applyClockValueToDate(props.task.startTime, editableStartTime.value)
+  if (!newStartTime) {
     alert('Formato de hora inválido. Use HH:MM.')
     isEditingStartTime.value = false // Salir del modo edición
     return
   }
-
-  const newStartTime = new Date(props.task.startTime) // Clonar para no mutar la prop directamente
-  newStartTime.setHours(hours, minutes, 0, 0) // Establecer nueva hora y minutos, segundos y ms a 0
 
   // Comprobar si la hora realmente cambió (comparando timestamps)
   if (newStartTime.getTime() !== props.task.startTime.getTime()) {
@@ -174,15 +172,12 @@ const startEditEndTime = () => {
 const saveEndTime = () => {
   if (!props.task.endTime) return
 
-  const [hours, minutes] = editableEndTime.value.split(':').map(Number)
-  if (isNaN(hours) || isNaN(minutes) || hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+  const newEndTime = applyClockValueToDate(props.task.endTime, editableEndTime.value)
+  if (!newEndTime) {
     alert('Formato de hora inválido. Use HH:MM.')
     isEditingEndTime.value = false // Salir del modo edición
     return
   }
-
-  const newEndTime = new Date(props.task.endTime) // Clonar para no mutar la prop directamente
-  newEndTime.setHours(hours, minutes, 0, 0) // Establecer nueva hora y minutos, segundos y ms a 0
 
   if (newEndTime.getTime() !== props.task.endTime.getTime()) {
     emit('update-task', { ...props.task, endTime: newEndTime })
@@ -215,36 +210,7 @@ const handleFinalizeAndEditEndTime = () => {
  * Considera tareas que cruzan la medianoche.
  */
 const formattedDuration = computed(() => {
-  if (!props.task.endTime || !props.task.startTime) {
-    return null
-  }
-
-  const startHours = props.task.startTime.getHours();
-  const startMinutes = props.task.startTime.getMinutes();
-  const endHours = props.task.endTime.getHours();
-  const endMinutes = props.task.endTime.getMinutes();
-
-  let startTotalMinutes = startHours * 60 + startMinutes;
-  let endTotalMinutes = endHours * 60 + endMinutes;
-
-  // Manejar el cruce de medianoche
-  // Si la hora de finalización (en minutos desde la medianoche) es menor que la hora de inicio,
-  // y las fechas son diferentes (o asumimos que si es menor, cruzó la medianoche si la fecha es la misma o posterior)
-  // Para simplificar y enfocarnos solo en la diferencia horaria como si fuera en un lapso de <24h o cruzando una medianoche:
-  if (endTotalMinutes < startTotalMinutes) {
-    endTotalMinutes += 24 * 60; // Añadir 24 horas en minutos
-  }
-
-  const durationMinutes = endTotalMinutes - startTotalMinutes;
-  const durationHours = durationMinutes / 60;
-
-  // Redondear por exceso al siguiente múltiplo de 0.5
-  const roundedHours = Math.ceil(durationHours / 0.5) * 0.5
-
-  // Formatear a un decimal, asegurando que .0 se muestre
-  const displayHours = roundedHours.toLocaleString(locale.value, { minimumFractionDigits: 1, maximumFractionDigits: 1 })
-
-  return `${displayHours} h`
+  return formatTaskDuration(props.task.startTime, props.task.endTime, locale.value)
 });
 
 /**
