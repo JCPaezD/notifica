@@ -71,6 +71,13 @@ Para cambios acumulados durante la fortificacion tecnica:
   - pulsar `Deshacer` y comprobar que recupera exactamente la hora de fin anterior
   - repetir la prueba con filtros activos si la tarea cambia de visibilidad
   - revisar en movil/web que los botones de tarea no quedan demasiado juntos
+- tras extraer `ShiftNotes.vue`, incluir tambien:
+  - abrir y cerrar notas de turno
+  - crear una nota y comprobar persistencia tras blur
+  - pulsar Enter en nota con texto y comprobar que aparece una fila nueva
+  - pulsar Enter en nota vacia y comprobar que no se guarda contenido vacio
+  - cambiar entre turnos con y sin notas
+  - confirmar que no aparecen notas cuando no hay turno activo
 - no perder la trazabilidad de que cambio anadio cada punto al checklist.
 
 Nota:
