@@ -28,6 +28,16 @@ import {
   saveCurrentShiftId,
   saveTasksToStorage,
 } from '@/services/taskPersistence'
+import {
+  createStartedTask,
+  finishTaskById,
+  getTaskRemovalSnapshot,
+  reactivateTaskById,
+  removeTaskAtIndex,
+  replaceTaskById,
+  restoreTaskAtIndex,
+  reviveTaskDates,
+} from '@/domain/taskLifecycle'
 
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
@@ -148,14 +158,13 @@ const startNewTask = () => {
     startNewShift(false); // Iniciar un nuevo turno automáticamente si no hay uno activo, sin alerta
   }
 
-  const newTask: Task = {
-    id: Date.now().toString(), // ID simple basado en el timestamp
+  const newTask = createStartedTask({
+    id: Date.now().toString(),
     description: newTaskDescription.value,
     startTime: new Date(),
-    technician: newTaskTechnician.value.trim() || undefined, // Añadir técnico, o undefined si está vacío
-    isNotified: false, // Inicializar isNotified como false por defecto
-    shiftId: currentShiftId.value || undefined, // Asignar el ID del turno actual
-  }
+    technician: newTaskTechnician.value.trim() || undefined,
+    shiftId: currentShiftId.value || undefined,
+  })
 
   allTasks.value.push(newTask)
   newTaskDescription.value = '' // Limpiar el campo después de iniciar
@@ -174,12 +183,12 @@ const startNewTask = () => {
 
 // Marca una tarea como finalizada, estableciendo su hora de finalización.
 const finishTask = (taskId: string) => {
-  const task = allTasks.value.find(t => t.id === taskId)
+  const endTime = new Date()
+  const task = finishTaskById(allTasks.value, taskId, endTime)
   if (task) {
-    task.endTime = new Date()
     add({
       title: t('toast.task.finished'),
-      description: t('toast.task.finishedDetail', { description: task.description, endTime: task.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }),
+      description: t('toast.task.finishedDetail', { description: task.description, endTime: endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }),
       type: 'success'
     })
   }
@@ -187,10 +196,9 @@ const finishTask = (taskId: string) => {
 
 // Actualiza los datos de una tarea existente.
 const updateTask = (updatedTask: Task) => {
-  const taskIndex = allTasks.value.findIndex(t => t.id === updatedTask.id)
-  if (taskIndex !== -1) {
-    const oldIsNotifiedState = allTasks.value[taskIndex].isNotified; // Guardar el estado anterior
-    allTasks.value[taskIndex] = updatedTask
+  const result = replaceTaskById(allTasks.value, updatedTask)
+  if (result) {
+    const oldIsNotifiedState = result.previousTask.isNotified; // Guardar el estado anterior
 
     // Comprobar si el estado de notificación cambió
     if (oldIsNotifiedState !== updatedTask.isNotified) {
@@ -222,9 +230,8 @@ const updateTask = (updatedTask: Task) => {
 
 // Reactiva una tarea que había sido finalizada, eliminando su hora de finalización.
 const reactivateTask = (taskId: string) => {
-  const task = allTasks.value.find(t => t.id === taskId)
+  const task = reactivateTaskById(allTasks.value, taskId)
   if (task) {
-    delete task.endTime
     add({
       title: t('toast.task.reopened'),
       description: t('toast.task.reopenedDetail', { description: task.description }),
@@ -235,9 +242,9 @@ const reactivateTask = (taskId: string) => {
 
 // Elimina una tarea de la lista, con opción de deshacer la acción.
 const deleteTask = (taskId: string) => {
-  const taskIndex = allTasks.value.findIndex(t => t.id === taskId);
-  if (taskIndex !== -1) {
-    const taskToDelete = { ...allTasks.value[taskIndex] }; // Guardar una copia completa de la tarea
+  const removalSnapshot = getTaskRemovalSnapshot(allTasks.value, taskId);
+  if (removalSnapshot) {
+    const { taskIndex, task: taskToDelete } = removalSnapshot;
 
     // Mostrar toast con opción de Deshacer usando el sistema de notificaciones propio
     // Se usa type: 'error' para mostrar el toast en rojo
@@ -254,7 +261,7 @@ const deleteTask = (taskId: string) => {
             onClick: () => {
               // Restaurar la tarea en su posición original tras un leve retardo
               setTimeout(() => {
-                allTasks.value.splice(taskIndex, 0, taskToDelete);
+                restoreTaskAtIndex(allTasks.value, taskIndex, taskToDelete);
               }, 300);
 
               // Cerrar el toast original con pequeño retardo para permitir animación
@@ -278,7 +285,7 @@ const deleteTask = (taskId: string) => {
 
     // Eliminar la tarea tras un breve retardo para suavizar la interacción
     setTimeout(() => {
-      allTasks.value.splice(taskIndex, 1);
+      removeTaskAtIndex(allTasks.value, taskIndex);
     }, 300);
   }
 }
@@ -539,11 +546,7 @@ const exportTasksToJson = async () => {
               onClick: async () => { // Hacer la función onClick asíncrona
                 allTasks.value = tasksBeforeDelete; // Restaurar las tareas (revertimos al método de reemplazo)
                 // Convertir cadenas de fecha de vuelta a objetos Date
-                allTasks.value = allTasks.value.map(task => ({
-                  ...task,
-                  startTime: new Date(task.startTime),
-                  endTime: task.endTime ? new Date(task.endTime) : undefined,
-                }));
+                allTasks.value = reviveTaskDates(allTasks.value);
                 setAllNotes(notesBeforeDelete); // Restaurar las notas
                 await nextTick(); // Esperar al siguiente ciclo de actualización del DOM
 
