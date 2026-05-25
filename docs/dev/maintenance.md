@@ -78,6 +78,11 @@ Para cambios acumulados durante la fortificacion tecnica:
   - pulsar Enter en nota vacia y comprobar que no se guarda contenido vacio
   - cambiar entre turnos con y sin notas
   - confirmar que no aparecen notas cuando no hay turno activo
+- tras extraer `AppLogo.vue` y `SettingsModal.vue`, incluir tambien:
+  - comprobar logo en cabecera y pie del menu lateral
+  - abrir/cerrar ajustes desde el menu lateral
+  - cambiar tema entre sistema, claro y oscuro
+  - cambiar idioma entre auto, ES y EN
 - no perder la trazabilidad de que cambio anadio cada punto al checklist.
 
 Nota:
