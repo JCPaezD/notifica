@@ -19,17 +19,23 @@ Estructura general:
 
 ```text
 src/
+  adapters/
   components/
   composables/
   constants/
+  domain/
   locales/
+  services/
   types/
   utils/
 ```
 
 Areas importantes:
 
-- `App.vue`: orquestacion principal, estado de tareas, llamadas de persistencia, comportamiento de plataforma, import/export y estado UI general.
+- `App.vue`: shell/orquestacion principal, estado reactivo y wiring de componentes.
+- `src/domain/`: reglas testeables de tareas, duracion, import/export, filtros y texto compartido.
+- `src/services/`: servicios de aplicacion como persistencia de tareas/turno.
+- `src/adapters/`: integracion con APIs de navegador y Capacitor.
 - `src/components/`: componentes visuales e interactivos.
 - `src/composables/`: comportamiento reusable de UI/estado, como notificaciones.
 - `src/locales/`: traducciones en espanol e ingles.
@@ -38,8 +44,9 @@ Areas importantes:
 ## Deuda Arquitectonica Conocida
 
 - `App.vue` es demasiado grande y mezcla responsabilidades.
-- Las reglas de dominio no estan suficientemente aisladas para tests focalizados.
-- Persistencia, import/export, ciclo de vida de tareas, plataforma y UI estan demasiado acoplados.
+- Aun quedan responsabilidades de orquestacion importantes en `App.vue`.
+- Parte del ciclo de vida de tareas ya esta extraido, pero los flujos con toasts/undo siguen en `App.vue`.
+- Persistencia, import/export, share y ciclo de vida tienen primera separacion, pero falta consolidar casos de uso mas completos.
 - Parte del comportamiento existe como conocimiento historico documentado, pero no como limites de modulo claros.
 
 ## Direccion Objetivo
@@ -73,12 +80,11 @@ Esto es una direccion, no una exigencia de crear todas las carpetas de golpe.
 
 ## Primeros Candidatos De Extraccion
 
-- ciclo de vida de tareas: iniciar, finalizar, reabrir, eliminar, restaurar
-- calculos de horas y duraciones
-- reglas de filtrado y ordenacion por turno
-- formato de exportacion de texto
-- validacion y normalizacion de importacion
-- adaptador de persistencia localStorage
+- casos de uso de tarea que todavia mezclan dominio, toasts y timers
+- flujo de turnos: iniciar, deshacer nuevo turno, seleccionar turno actual/pasado
+- notas por tramo y su relacion con tareas/turnos
+- preferencias UI: idioma, aviso de novedades, plataforma iOS-like
+- adaptadores de plataforma restantes si aparecen nuevas necesidades Android/PWA
 
 ## Objetivo Portfolio
 
