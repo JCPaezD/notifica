@@ -376,7 +376,7 @@ const handleDeleteTask = () => {
             leave-to-class="opacity-50 scale-90"
           >
             <button v-if="!task.endTime" v-cancel-touch-click @click="handleFinishTask" 
-                    class="w-full px-2 py-1
+                    class="w-full px-2 py-0.5
                           text-icon-alert dark:text-icon-alert-dark text-xs font-semibold
                           rounded-md
                           focus:outline-none
@@ -391,7 +391,7 @@ const handleDeleteTask = () => {
               <span>{{ t('task.action.finish') }}</span>
             </button>
             <button v-else v-cancel-touch-click @click="handleReactivateTask" 
-                    class="w-full px-2 py-1
+                    class="w-full px-2 py-0.5
                           text-icon-active dark:text-icon-active-dark text-xs font-semibold
                           rounded-md
                           focus:outline-none focus:ring-1 
