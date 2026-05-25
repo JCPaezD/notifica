@@ -66,6 +66,11 @@ Para cambios acumulados durante la fortificacion tecnica:
   - borrar/restaurar tarea
   - borrar todo/deshacer restaurando notas
   - iniciar nuevo tramo/deshacer
+- tras el Bloque G, incluir tambien:
+  - reabrir una tarea finalizada y comprobar que pierde temporalmente la hora de fin
+  - pulsar `Deshacer` y comprobar que recupera exactamente la hora de fin anterior
+  - repetir la prueba con filtros activos si la tarea cambia de visibilidad
+  - revisar en movil/web que los botones de tarea no quedan demasiado juntos
 - no perder la trazabilidad de que cambio anadio cada punto al checklist.
 
 Para cambios Android:

@@ -38,7 +38,7 @@ import {
   createStartedTask,
   finishTaskById,
   getTaskRemovalSnapshot,
-  reactivateTaskById,
+  reactivateTaskWithSnapshot,
   removeTaskAtIndex,
   replaceTaskById,
   restoreTaskAtIndex,
@@ -237,13 +237,35 @@ const updateTask = (updatedTask: Task) => {
 
 // Reactiva una tarea que había sido finalizada, eliminando su hora de finalización.
 const reactivateTask = (taskId: string) => {
-  const task = reactivateTaskById(allTasks.value, taskId)
-  if (task) {
-    add({
+  const result = reactivateTaskWithSnapshot(allTasks.value, taskId)
+  if (result) {
+    const { task, previousTask } = result
+    const toastId = add({
       title: t('toast.task.reopened'),
       description: t('toast.task.reopenedDetail', { description: task.description }),
-      type: 'warning'
-    });
+      type: 'warning',
+      delayClose: true,
+      actions: [
+        {
+          label: t('toast.action.undo'),
+          onClick: () => {
+            replaceTaskById(allTasks.value, previousTask)
+
+            setTimeout(() => {
+              remove(toastId)
+            }, 500)
+
+            setTimeout(() => {
+              add({
+                title: t('toast.task.restored'),
+                description: t('toast.task.restoredDetail', { description: previousTask.description }),
+                type: 'info',
+              })
+            }, 550)
+          },
+        },
+      ],
+    }, 7000)
   }
 }
 

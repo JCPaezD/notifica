@@ -376,7 +376,7 @@ const handleDeleteTask = () => {
             leave-to-class="opacity-50 scale-90"
           >
             <button v-if="!task.endTime" v-cancel-touch-click @click="handleFinishTask" 
-                    class="w-full px-2 py-0.5 
+                    class="w-full px-2 py-1
                           text-icon-alert dark:text-icon-alert-dark text-xs font-semibold
                           rounded-md
                           focus:outline-none
@@ -391,7 +391,7 @@ const handleDeleteTask = () => {
               <span>{{ t('task.action.finish') }}</span>
             </button>
             <button v-else v-cancel-touch-click @click="handleReactivateTask" 
-                    class="w-full px-2 py-0.5 
+                    class="w-full px-2 py-1
                           text-icon-active dark:text-icon-active-dark text-xs font-semibold
                           rounded-md
                           focus:outline-none focus:ring-1 
@@ -447,7 +447,7 @@ const handleDeleteTask = () => {
           </Transition>
       </div>
       <!-- Fila 2 / Celda 3: Botones Secundarios -->
-      <div class="col-start-3 row-start-2 flex items-center justify-evenly w-full self-start pt-1">
+      <div class="col-start-3 row-start-2 flex items-center justify-center gap-3 w-full self-start pt-1.5">
           <!-- Icono Notificado -->
           <button 
             ref="notifiedIconBtnRef"
