@@ -92,9 +92,14 @@ For UI, UX, layout, dialogs, interaction flow, Android behavior, PWA behavior, o
 
 ## Android Tooling
 
-Android-specific tooling or official Android skills belong to a later tooling review block unless the current task explicitly asks for that investigation.
+Android CLI and selected official Android skills are available for Android-specific work:
 
-Do not install or adopt Android skills, CLIs, MCP servers, or IDE automation inside this workflow map without a separate review of:
+- `android-cli`: use for Android CLI commands, SDK inspection, device interaction, deployment, and environment diagnostics.
+- `edge-to-edge`: use as a reference/checklist for Android system bars, insets, and edge-to-edge investigations. Notifica uses Capacitor/WebView, so do not apply Compose migration steps directly.
+- `testing-setup`: use as a reference for native Android testing strategy. Keep the default Notifica test stack in Vue/Vitest/Playwright unless Android-specific automation is explicitly designed.
+- `adaptive`: use as a reference for future Android large-screen/adaptive UI thinking. Do not infer that Notifica should migrate to Compose, Navigation 3, or native Android UI.
+
+Do not install additional Android skills, CLIs, MCP servers, or IDE automation inside this workflow map without a separate review of:
 
 - fit with Notifica's Capacitor Android workflow
 - setup cost

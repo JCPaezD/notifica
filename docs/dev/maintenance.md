@@ -73,6 +73,25 @@ Para cambios Android:
 - tratar Android Studio, instalacion en dispositivo, emuladores y Play Console como checkpoints manuales salvo automatizacion especifica
 - no considerar validada una release Android solo con checks web
 
+## Tooling Android
+
+Android CLI esta disponible como herramienta local para inspeccion y apoyo en tareas Android:
+
+```bash
+android --no-metrics --version
+android --no-metrics info
+android --no-metrics skills list
+```
+
+Notas:
+
+- En Windows, si `android` no aparece en una sesion ya abierta, usar `C:/Users/jcpdp/.android/bin/android-cli.exe` o abrir una terminal nueva para recoger el `PATH`.
+- Usar `--no-metrics` por defecto en comandos automatizados.
+- `android emulator` puede estar limitado en Windows segun la docu oficial; Android Studio/emuladores existentes y `adb` siguen siendo los checkpoints principales.
+- Las skills oficiales instaladas en `.agents/skills/` son `android-cli`, `edge-to-edge`, `testing-setup` y `adaptive`.
+- En Notifica, `edge-to-edge`, `testing-setup` y `adaptive` son referencias para trabajos Android/Capacitor, no instrucciones para migrar la UI a Compose.
+- El comando `android screen capture` queda como candidato para automatizar capturas Android cuando haya emulador o dispositivo conectado.
+
 ## Higiene Del Repo
 
 - Mantener inventarios temporales en `docs/dev/working/`.
