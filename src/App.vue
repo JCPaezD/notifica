@@ -19,7 +19,7 @@ import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { shiftIcons as icons } from './icons/shifts'
 import { useLogoAnimation } from './composables/useLogoAnimation'
 import { useDarkMode } from './composables/useDarkMode'
-import { createTaskBackup } from '@/domain/taskImportExport'
+import { createTaskBackup, normalizeImportedTaskBackup } from '@/domain/taskImportExport'
 import { buildShiftShareText } from '@/domain/shareText'
 import { buildAvailableShifts, filterAndSortTasks } from '@/domain/taskFilters'
 
@@ -479,65 +479,17 @@ const exportTasksToJson = async () => {
         const content = e.target?.result as string;
         const parsed = JSON.parse(content);
 
-        // Detectar si es formato antiguo (array de tareas) o nuevo (objeto con claves)
-        const importedTasks: Task[] = Array.isArray(parsed)
-          ? parsed
-          : parsed.tasks;
+        const normalizedBackup = normalizeImportedTaskBackup(parsed);
 
-        if (!Array.isArray(importedTasks)) {
-          throw new Error(t('toast.import.invalidList'));
-        }
-        
         deleteAllNotes();
+        setAllNotes(normalizedBackup.notesByShiftId);
 
-        // Si existen notas en el JSON, restaurarlas (nuevo formato)
-        if (parsed.notesByShiftId && typeof parsed.notesByShiftId === 'object') {
-          setAllNotes(parsed.notesByShiftId);
-        }
-
-        // Validar y transformar las tareas importadas (especialmente las fechas)
-        const validatedTasks = importedTasks.map(task => {
-          if (!task.id || !task.description || !task.startTime) {
-            throw new Error(t('toast.import.invalidTask'));
-          }
-          return {
-            ...task,
-            startTime: new Date(task.startTime),
-            endTime: task.endTime ? new Date(task.endTime) : undefined,
-            isNotified: task.isNotified === true, // Asegurar que sea booleano
-          };
-        });
-
-        allTasks.value = validatedTasks;
-        // Establecer el turno actual al más reciente considerando tareas y notas
-        const shiftIdsFromTasks = validatedTasks
-          .filter(t => t.shiftId)
-          .map(t => t.shiftId!) // seguro porque se filtró por existencia
-
-        const shiftIdsFromNotes = parsed.notesByShiftId
-          ? Object.keys(parsed.notesByShiftId)
-          : []
-
-        const allShiftIds = Array.from(new Set([...shiftIdsFromTasks, ...shiftIdsFromNotes]))
-
-        const shiftsWithDates = allShiftIds
-          .map(id => {
-            const ts = parseInt(id.replace('shift-', ''))
-            return isNaN(ts) ? null : { id, date: new Date(ts) }
-          })
-          .filter((s): s is { id: string, date: Date } => s !== null)
-          .sort((a, b) => b.date.getTime() - a.date.getTime())
-
-        if (shiftsWithDates.length > 0) {
-          currentShiftId.value = shiftsWithDates[0].id
-          selectedShiftToView.value = 'current'
-        } else {
-          currentShiftId.value = null
-          selectedShiftToView.value = 'current'
-        }
+        allTasks.value = normalizedBackup.tasks;
+        currentShiftId.value = normalizedBackup.currentShiftId;
+        selectedShiftToView.value = 'current';
         add({
           title: t('toast.import.success'),
-          description: t('toast.import.count', { count: validatedTasks.length }),
+          description: t('toast.import.count', { count: normalizedBackup.tasks.length }),
           type: 'info'
         });
       } catch (error) {
@@ -694,42 +646,6 @@ const exportTasksToJson = async () => {
   const selectShift = (shiftId: string | 'current') => {
     selectedShiftToView.value = shiftId
   }
-
-  // Formatea una tarea individual como una cadena de texto plano para compartir.
-  const formatTaskForPlainText = (task: Task): string => {
-    const taskEmoji = '📝';
-    const technicianEmoji = '👷';
-    const notifiedEmoji = '✅';
-
-    const description = task.description;
-    const startTimeStr = task.startTime.toLocaleTimeString(locale.value, { hour: '2-digit', minute: '2-digit' });
-    const endTimeStr = task.endTime ? task.endTime.toLocaleTimeString(locale.value, { hour: '2-digit', minute: '2-digit' }) : '--:--';
-
-    let durationStr = '';
-    if (task.endTime) {
-      let endTimeMs = task.endTime.getTime();
-      const startTimeMs = task.startTime.getTime();
-      if (task.endTime.getDate() > task.startTime.getDate() || (task.endTime.getDate() === task.startTime.getDate() && endTimeMs < startTimeMs)) {
-        endTimeMs += 24 * 60 * 60 * 1000;
-      }
-      const durationMs = endTimeMs - startTimeMs;
-      const durationHours = durationMs / (1000 * 60 * 60);
-      const roundedHours = Math.ceil(durationHours / 0.5) * 0.5;
-      durationStr = `(${roundedHours.toLocaleString(locale.value, { minimumFractionDigits: 1, maximumFractionDigits: 1 })} h)`;
-    }
-
-    const clockEmoji = '⏱️';
-    let taskString =
-      `${taskEmoji} ${description}\n${clockEmoji} ${startTimeStr} ${t('share.content.to')} ${endTimeStr}${durationStr ? ' ' + durationStr : ''}`;
-
-    if (task.isNotified) {
-      taskString += `\n${notifiedEmoji} ${t('task.registered')}`;
-    }
-    if (task.technician) {
-      taskString += `\n    ${technicianEmoji} ${task.technician}`;
-    }
-    return taskString;
-  };
 
   // Prepara y comparte (vía plugin nativo, API Web Share o portapapeles) las tareas del turno seleccionado.
   const shareShiftTasks = async () => {
