@@ -5,6 +5,7 @@ import {
   finishTaskById,
   getTaskRemovalSnapshot,
   reactivateTaskById,
+  reactivateTaskWithSnapshot,
   removeTaskAtIndex,
   replaceTaskById,
   restoreTaskAtIndex,
@@ -35,6 +36,18 @@ describe('taskLifecycle', () => {
 
     expect(finishTaskById(tasks, '1', endTime)?.endTime).toBe(endTime)
     expect(reactivateTaskById(tasks, '1')?.endTime).toBeUndefined()
+  })
+
+  it('reactivates a task while preserving the previous finished state', () => {
+    const endTime = new Date('2026-05-25T09:00:00')
+    const tasks = [createTask('1', { endTime, isNotified: true })]
+
+    const result = reactivateTaskWithSnapshot(tasks, '1')
+
+    expect(result?.task.endTime).toBeUndefined()
+    expect(result?.previousTask.endTime).toBe(endTime)
+    expect(result?.previousTask.isNotified).toBe(true)
+    expect(tasks[0].endTime).toBeUndefined()
   })
 
   it('replaces an existing task and reports the previous state', () => {

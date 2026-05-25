@@ -50,6 +50,22 @@ export function reactivateTaskById(tasks: Task[], taskId: string): Task | null {
   return task
 }
 
+export function reactivateTaskWithSnapshot(
+  tasks: Task[],
+  taskId: string,
+): { task: Task; previousTask: Task } | null {
+  const task = tasks.find((candidate) => candidate.id === taskId)
+  if (!task) return null
+
+  const previousTask = { ...task }
+  delete task.endTime
+
+  return {
+    task,
+    previousTask,
+  }
+}
+
 export function getTaskRemovalSnapshot(
   tasks: Task[],
   taskId: string,

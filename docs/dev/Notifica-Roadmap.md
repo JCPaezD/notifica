@@ -161,7 +161,7 @@ Decision actual:
 
 ### Bloque G - Quick Wins UX
 
-Estado: planificado.
+Estado: en curso.
 
 Candidato:
 
