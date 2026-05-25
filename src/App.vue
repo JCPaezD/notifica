@@ -19,6 +19,9 @@ import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { shiftIcons as icons } from './icons/shifts'
 import { useLogoAnimation } from './composables/useLogoAnimation'
 import { useDarkMode } from './composables/useDarkMode'
+import { createTaskBackup } from '@/domain/taskImportExport'
+import { buildShiftShareText } from '@/domain/shareText'
+import { buildAvailableShifts, filterAndSortTasks } from '@/domain/taskFilters'
 
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
@@ -352,69 +355,17 @@ const startNewShift = (showAlert = true) => {
 
 // Propiedad computada: Filtra y ordena las tareas a mostrar según el turno seleccionado y los filtros activos.
 const filteredAndSortedTasks = computed(() => {
-  let tasksToDisplay = [...allTasks.value];
-  let targetShiftId: string | null | undefined = undefined;
-
-  if (selectedShiftToView.value === 'current') {
-    targetShiftId = currentShiftId.value;
-  } else {
-    targetShiftId = selectedShiftToView.value; // Es un shiftId específico
-  }
-
-  if (targetShiftId) {
-    tasksToDisplay = tasksToDisplay.filter(task => task.shiftId === targetShiftId);
-  } else if (selectedShiftToView.value === 'current' && !currentShiftId.value) {
-    // Viendo "actual" pero no hay turno activo (ej. inicio limpio), mostrar tareas sin shiftId (antiguas o ninguna)
-    tasksToDisplay = tasksToDisplay.filter(task => !task.shiftId);
-  }
-  // Si selectedShiftToView.value es un ID de un turno que ya no tiene tareas (porque se borraron todas),
-  // tasksToDisplay quedará vacío, lo cual es correcto.
-
-  if (showOnlyActive.value) {
-    tasksToDisplay = tasksToDisplay.filter(task => !task.endTime)
-  }
-  if (showOnlyNotNotified.value) {
-    tasksToDisplay = tasksToDisplay.filter(task => !task.isNotified)
-  }
-
-  // Ordenar por hora de inicio (más antiguas primero, para un flujo cronológico)
-  return tasksToDisplay.sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
+  return filterAndSortTasks(allTasks.value, {
+    selectedShiftToView: selectedShiftToView.value,
+    currentShiftId: currentShiftId.value,
+    showOnlyActive: showOnlyActive.value,
+    showOnlyNotNotified: showOnlyNotNotified.value,
+  })
 });
 
 // Propiedad computada: Genera una lista de turnos disponibles basados en los `shiftId` de las tareas.
 const availableShifts = computed<Shift[]>(() => {
-  const shiftIds = new Set<string>();
-
-  // Añadir shiftIds desde tareas
-  allTasks.value.forEach(task => {
-    if (task.shiftId) {
-      shiftIds.add(task.shiftId);
-    }
-  });
-
-  // Añadir shiftIds desde notas
-  Object.keys(notesMap.value).forEach(id => {
-    if (id && !shiftIds.has(id)) {
-      shiftIds.add(id);
-    }
-  });
-
-  return Array.from(shiftIds)
-    .map(id => {
-      const timestamp = parseInt(id.replace('shift-', ''));
-      if (isNaN(timestamp)) return { id, label: id, date: new Date(0) };
-      const date = new Date(timestamp);
-      return {
-        id,
-        label: `${date.toLocaleDateString([], {
-          day: '2-digit',
-          month: '2-digit',
-          year: '2-digit'
-        })} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
-        date
-      };
-    })
-    .sort((a, b) => b.date.getTime() - a.date.getTime());
+  return buildAvailableShifts(allTasks.value, notesMap.value, [])
 });
 
 // Propiedad computada: Determina el título a mostrar encima de la lista de tareas.
@@ -450,10 +401,7 @@ const exportTasksToJson = async () => {
   const fileName = t('export.filename', { date: new Date().toISOString().slice(0, 10) });
 
   // Nuevo objeto combinado
-  const exportData = {
-    tasks: allTasks.value,
-    notesByShiftId: getAllNotes()
-  };
+  const exportData = createTaskBackup(allTasks.value, getAllNotes());
 
   const dataStr = JSON.stringify(exportData, null, 2);
 
@@ -833,16 +781,8 @@ const exportTasksToJson = async () => {
       return;
     }
 
-    const title = `_*${t('share.content.headerTasks', { shift: shiftLabel })}*:_\n\n`;
-    const tasksText = tasksOfShift.map(formatTaskForPlainText).join('\n\n');
-    
-    let fullText = title + tasksText;
-
     const notes = getNotesForShift(shiftIdToShare);
-    if (notes.length > 0) {
-      const notesBlock = `\n\n_*${t('share.content.headerNotes')}*:_\n` + notes.map(n => `    - ${n}`).join('\n');
-      fullText += notesBlock;
-    }
+    const fullText = buildShiftShareText(tasksOfShift, notes, shiftLabel, t, locale.value);
 
     try {
       const { Share } = await import('@capacitor/share');

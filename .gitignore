@@ -138,6 +138,10 @@ dist-ssr
 # Vitest
 coverage/
 
+# Playwright
+test-results/
+playwright-report/
+
 dev-dist/
 .vscode/
 

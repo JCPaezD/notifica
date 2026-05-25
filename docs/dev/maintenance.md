@@ -14,14 +14,24 @@ No tratar `main` como una rama de integracion rutinaria.
 ```bash
 npm install
 npm run dev
+npm run test:unit
+npm run test:e2e
+npm run quality
 npm run build
 npm run preview
 ```
 
-Carencia actual:
+Tests actuales:
 
-- el proyecto aun no tiene script dedicado de tests
-- anadir un stack de tests forma parte de la fase de fortificacion
+- `npm run test:unit`: Vitest + jsdom para dominio, composables, utilidades y componentes.
+- `npm run test:e2e`: Playwright smoke sobre la app servida con `npm run preview`.
+- `npm run quality`: type-check, tests unitarios y build de Vite en secuencia.
+- `.github/workflows/quality.yml`: CI para `develop` y pull requests con `npm ci`, Chromium de Playwright, `quality` y smoke E2E.
+
+Nota:
+
+- Playwright requiere tener descargados los navegadores locales con `npx playwright install chromium`.
+- Los artefactos temporales de Playwright (`test-results/`, `playwright-report/`) estan ignorados.
 
 ## Validacion Base
 
@@ -33,10 +43,24 @@ Para cambios solo de documentacion:
 
 Para cambios de comportamiento web/app:
 
-- ejecutar `npm run build`
+- ejecutar `npm run quality`
 - validar el flujo afectado en navegador o app instalada
 - confirmar traducciones si cambia texto visible
 - confirmar modo claro/oscuro si cambia UI
+
+Para cambios acumulados durante la fortificacion tecnica:
+
+- se puede diferir la validacion manual intermedia mientras el trabajo siga en `develop`
+- cada bloque que toque comportamiento debe aportar sus puntos al checklist acumulado
+- antes de cerrar la fortificacion, preparar merge/release o considerar estable el refactor, validar en PWA movil y web:
+  - crear tarea
+  - finalizar tarea
+  - ver duracion
+  - editar hora de inicio y fin
+  - comprobar una tarea que cruza medianoche
+  - compartir/exportar una tarea finalizada
+  - revisar filtros basicos
+- no perder la trazabilidad de que cambio anadio cada punto al checklist.
 
 Para cambios Android:
 
@@ -71,3 +95,9 @@ Preferir commits que cuenten una historia clara:
 - preparacion de release
 
 No mezclar codigo, docs y artefactos generados sin una relacion deliberada.
+
+## Mantenimiento Pendiente No Bloqueante
+
+- Revisar `npm audit` en un bloque dedicado de mantenimiento de dependencias.
+- Revisar warning de Browserslist desactualizado.
+- Revisar warning de build por import estatico y dinamico de `@capacitor/share` cuando se trabaje el refactor de plataforma/adaptadores.
