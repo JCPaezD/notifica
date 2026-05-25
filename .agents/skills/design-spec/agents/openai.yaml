@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Spec"
+  short_description: "Design selected Notifica items before implementation."
+  default_prompt: "Use $design-spec to create a concise implementation-ready design spec for this selected Notifica item."

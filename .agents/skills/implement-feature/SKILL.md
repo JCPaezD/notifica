@@ -16,12 +16,19 @@ Use it whenever a task involves:
 - changing release-visible behavior
 - performing a structured refactor tied to product behavior
 
+Use `.agents/workflow.md` to confirm whether implementation is really the next safe step.
+
 Do not use it for:
 
 - pure diagnosis without implementation
 - trivial formatting changes
 - tiny documentation-only edits
 - obvious single-line fixes with no meaningful architectural or UX impact
+- raw notes or mixed feedback that should first use `capture-item`
+- unclear captured items that should first use `refine-item`
+- roadmap placement or version/block planning that should first use `plan-version`
+- selected work that still needs behavior or technical design through `design-spec`
+- designed work that is too large or risky and should first use `breakdown-feature`
 
 ## Project context
 
@@ -93,13 +100,14 @@ Respect the current project shape:
 
 Follow this process:
 
-1. Inspect relevant files and understand the current implementation.
-2. Confirm how the change fits the documented scope and architecture.
-3. Reuse existing services, composables, components, and styling patterns whenever possible.
-4. Implement the minimal coherent change required.
-5. Run relevant checks when applicable.
-6. Stop for human validation when the change affects visible behavior that benefits from manual review.
-7. Update documentation only when the change is validated or when the task is explicitly documentation-first.
+1. Confirm from `.agents/workflow.md` that the task is ready for implementation.
+2. Inspect relevant files and understand the current implementation.
+3. Confirm how the change fits the documented scope and architecture.
+4. Reuse existing services, composables, components, and styling patterns whenever possible.
+5. Implement the minimal coherent change required.
+6. Run relevant checks when applicable.
+7. Stop for human validation when the change affects visible behavior that benefits from manual review.
+8. Update documentation only when the change is validated or when the task is explicitly documentation-first.
 
 ## UI and behavior consistency
 

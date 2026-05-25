@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refine Item"
+  short_description: "Clarify captured Notifica items before planning."
+  default_prompt: "Use $refine-item to clarify this captured Notifica item so its scope and next workflow step are clear."
