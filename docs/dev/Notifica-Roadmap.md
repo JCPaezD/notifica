@@ -143,14 +143,21 @@ Validacion pendiente acumulada:
 
 ### Bloque F - Tooling Android Y Android Skills Oficiales
 
-Estado: planificado.
+Estado: implementado pendiente de uso real.
 
 Objetivo:
 
 - investigar `android/skills` y soporte de Android CLI para trabajo Android asistido por agentes
 - decidir si instalar alguna skill Android aporta valor real a este proyecto Capacitor
 
-No instalar tooling por defecto. Revisar primero encaje, coste de setup, seguridad y valor repetible.
+Decision actual:
+
+- Android CLI instalado y probado de forma controlada
+- no instalar `android skills add --all`
+- skills oficiales instaladas: `android-cli`, `edge-to-edge`, `testing-setup` y `adaptive`
+- usar `edge-to-edge` como apoyo para futura auditoria Android/Capacitor
+- usar `testing-setup` y `adaptive` solo como referencias para validacion Android y pantallas grandes
+- aplazar `agp-9-upgrade` y `r8-analyzer` hasta que haya necesidad concreta
 
 ### Bloque G - Quick Wins UX
 
