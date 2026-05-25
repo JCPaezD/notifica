@@ -22,6 +22,12 @@ import { useDarkMode } from './composables/useDarkMode'
 import { createTaskBackup, normalizeImportedTaskBackup } from '@/domain/taskImportExport'
 import { buildShiftShareText } from '@/domain/shareText'
 import { buildAvailableShifts, filterAndSortTasks } from '@/domain/taskFilters'
+import {
+  loadCurrentShiftId,
+  loadTasksFromStorage,
+  saveCurrentShiftId,
+  saveTasksToStorage,
+} from '@/services/taskPersistence'
 
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
@@ -81,10 +87,6 @@ const allTasks = ref<Task[]>([]) // Almacena todas las tareas de la aplicación.
 // --- Estados para los filtros de visualización de tareas ---
 const showOnlyActive = ref(false) // Toggle: Mostrar solo activas
 const showOnlyNotNotified = ref(false) // Toggle: Mostrar solo sin notificar
-
-// --- Claves para LocalStorage ---
-const LOCAL_STORAGE_KEY = 'notifica-tasks'
-const CURRENT_SHIFT_ID_KEY = 'notifica-current-shift-id'
 
 // --- Gestión de Turnos ---
 const currentShiftId = ref<string | null>(null) // ID del turno actualmente activo.
@@ -575,7 +577,7 @@ const exportTasksToJson = async () => {
   // Hook onMounted: Carga el ID del turno actual y las tareas desde localStorage al iniciar la aplicación.
   onMounted(() => {
     // Cargar currentShiftId
-    const storedShiftId = localStorage.getItem(CURRENT_SHIFT_ID_KEY);
+    const storedShiftId = loadCurrentShiftId();
     if (storedShiftId) {
       currentShiftId.value = storedShiftId;
       selectedShiftToView.value = 'current'; // Por defecto, ver el turno actual al cargar
@@ -584,25 +586,15 @@ const exportTasksToJson = async () => {
     }
 
     // Cargar tareas
-    const storedTasks = localStorage.getItem(LOCAL_STORAGE_KEY)
-    if (storedTasks) {
-      try {
-        const parsedTasks = JSON.parse(storedTasks) as Task[]
-        // Es importante convertir las cadenas de fecha de vuelta a objetos Date
-        allTasks.value = parsedTasks.map(task => ({
-          ...task,
-          startTime: new Date(task.startTime),
-          endTime: task.endTime ? new Date(task.endTime) : undefined,
-          // shiftId ya es string, isNotified ya es boolean (o debería serlo desde la importación)
-        }))
-      } catch (error) {
-        add({
-          title: t('toast.load.error'),
-          description: t('toast.load.errorDetail'),
-          type: 'error'
-        });
-        console.error('Error al parsear tareas desde localStorage:', error);
-      }
+    try {
+      allTasks.value = loadTasksFromStorage()
+    } catch (error) {
+      add({
+        title: t('toast.load.error'),
+        description: t('toast.load.errorDetail'),
+        type: 'error'
+      });
+      console.error('Error al parsear tareas desde localStorage:', error);
     }
     // Toast de prueba al cargar la app para tests
     /* add({
@@ -623,13 +615,12 @@ const exportTasksToJson = async () => {
 
   // Watcher: Guarda todas las tareas en localStorage cada vez que el array `allTasks` cambia.
   watch(allTasks, (newTasks) => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks))
+    saveTasksToStorage(newTasks)
   }, { deep: true }) // deep: true es crucial para observar cambios dentro de los objetos del array
 
   // Watcher: Guarda el ID del turno actual en localStorage cada vez que `currentShiftId` cambia.
   watch(currentShiftId, (newShiftId) => {
-    if (newShiftId) localStorage.setItem(CURRENT_SHIFT_ID_KEY, newShiftId);
-    else localStorage.removeItem(CURRENT_SHIFT_ID_KEY); // Si no hay turno activo, quitarlo
+    saveCurrentShiftId(newShiftId);
   })
 
   // Cambia la vista para mostrar las tareas del turno actual.
