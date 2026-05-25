@@ -6,22 +6,23 @@ Los diagnosticos historicos detallados se conservan en [archive/dev-notes-histor
 
 ## Issues Actuales De Mayor Valor
 
-### Reabrir Tarea Puede Perder `endTime`
+### Layout De Acciones En Tarea Puede Provocar Missclicks
 
 Problema:
 
-- Reabrir una tarea elimina la hora de fin.
-- Un clic accidental puede perder un dato util.
+- Las acciones de tarea pueden quedar muy proximas en algunas superficies.
+- El caso mas sensible era reabrir una tarea finalizada por error al intentar pulsar otra accion.
 
-Direccion preferida:
+Estado:
 
-- anadir toast con `Undo`
-- conservar el `endTime` anterior el tiempo suficiente para restaurarlo
-- revisar espaciado/tamano de botones si siguen siendo probables los clics accidentales
+- mitigado en `develop` con toast `Deshacer` al reabrir tarea
+- validado en PWA desktop y movil simulado desde Vercel dev
+- el boton principal se mantuvo compacto; aumentar su altura empeoraba el objetivo
 
-Ubicacion:
+Trabajo diferido:
 
-- `v1.3.x Fortificacion Tecnica`, quick win UX.
+- revisar layout, separacion o posicion de acciones si los missclicks persisten en uso real
+- evitar convertirlo en rediseÃ±o amplio salvo que haya evidencia clara
 
 ### Fecha/Hora Cerca De Medianoche
 

@@ -161,12 +161,14 @@ Decision actual:
 
 ### Bloque G - Quick Wins UX
 
-Estado: en curso.
+Estado: implementado y validado en `develop` / Vercel dev.
 
-Candidato:
+Resultado:
 
-- anadir `Undo` al reabrir tarea para evitar perdida irreversible de `endTime` por clic accidental
-- revisar espaciado y proximidad visual de botones de accion en tareas
+- se anadio `Undo` al reabrir tarea para evitar perdida irreversible de `endTime` por clic accidental
+- el boton principal se mantuvo compacto tras validar que aumentar su altura empeoraba el riesgo de missclick
+- se mantiene una separacion visual ligera con acciones secundarias
+- queda diferida una revision mas amplia del layout de acciones si los clics accidentales persisten
 
 Restriccion:
 
@@ -176,29 +178,31 @@ Restriccion:
 
 ### Alta Prioridad / Candidatos Cercanos
 
-- Anadir undo al reabrir tarea.
-- Anadir tests y automatizacion base.
-- Extraer logica de tareas/fechas/exportacion a modulos testeables.
-- Mejorar documentacion y presentacion del repo.
+- Ejecutar verificacion manual acumulada antes de cerrar la fortificacion, mergear o preparar release.
+- Revisar informe externo post-checkpoint y decidir si abre nuevos bloques o ajustes de plan.
+- Revisar mantenimiento de dependencias: `npm audit` y Browserslist/caniuse-lite.
+- Decidir si `v1.3.x` sera una release publica o una fase interna de fortificacion antes de versionar.
 
 ### Deuda Tecnica
 
 - `App.vue` centraliza demasiado estado y orquestacion.
-- Las reglas de dominio no estan suficientemente aisladas para tests.
-- Persistencia/import/export necesitan proteccion explicita antes de refactors.
+- Los flujos con toasts/undo y timers siguen mayoritariamente en `App.vue`.
+- `startNewShift`, `deleteTask` y `deleteAllTasks` siguen mezclando reglas de negocio con UX/toasts.
+- Notas por tramo siguen acopladas entre lista, composable y flujo de turnos.
 - La version visible y metadatos de release siguen siendo parcialmente manuales.
-- Revisar `npm audit`, Browserslist y warning de doble import de `@capacitor/share` en un bloque de mantenimiento separado.
+- Revisar `npm audit` y Browserslist en un bloque de mantenimiento separado.
 
 ### Plataforma / Android
 
 - Revisar comportamiento edge-to-edge en Android 15 / SDK 35.
 - Vigilar warnings de status bar y navigation bar.
-- Investigar tooling/skills oficiales Android.
+- Usar Android CLI y skills oficiales instaladas como apoyo selectivo, no como sustituto del workflow local.
+- Explorar `android screen capture` para automatizar capturas Android cuando haya dispositivo o emulador disponible.
 - Mantener validacion Android como checkpoint manual hasta justificar automatizacion.
 
 ### Producto / UX
 
-- Revisar flujo de reapertura de tareas.
+- Revisar layout de acciones en `TaskItem` si persisten missclicks entre registrar/notificar/reabrir.
 - Mantener correccion de fechas cerca de medianoche como trabajo futuro.
 - Mantener ayuda/tutorial y formulario de feedback como candidatos posteriores.
 - Valorar capturas tablet y pantallas grandes mas adelante.
