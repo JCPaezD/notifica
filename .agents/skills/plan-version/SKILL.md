@@ -1,0 +1,90 @@
+---
+name: plan-version
+description: Build, adjust, or reorganize Notifica roadmap blocks, internal work blocks, and version plans from captured or refined items. Use when Codex needs to decide what belongs in a version or fortification block, choose roadmap placement, move backlog items, reorder priorities, create macro-slices for an approved block, clarify roadmap structure, or document an approved planning decision. Skip for already placed small changes that can safely move to design or implementation.
+---
+
+# Plan Version
+
+Use this skill to turn candidate items into a coherent work block or roadmap adjustment.
+
+`Version` may mean a public product version, a patch, a stabilization pass, or an internal block such as `v1.3.x Fortificacion tecnica`.
+
+See `.agents/workflow.md` for the shared workflow map.
+
+## Core Rules
+
+When using this skill:
+
+- plan at block level, not implementation level
+- decide what enters now, what moves, and what stays out
+- keep selected scope coherent and realistic
+- explain why included items belong together
+- explain why excluded or moved items should wait
+- create macro-slices for real work blocks before implementation resumes
+- make the next workflow step explicit
+
+Do not turn planning into technical design.
+
+## Boundaries
+
+Use this skill for placement, scope, grouping, ordering, and macro-slicing.
+
+Macro-slicing means selected areas, includes/excludes, general order, strong dependencies, and next step per slice. It does not mean executable implementation tasks.
+
+Use `design-spec` after this skill for selected slices that need behavior or technical design. Use `breakdown-feature` after design when a slice is too large, mixed, or risky for one clean implementation pass.
+
+## Output Format
+
+Return the main result in normal markdown.
+
+Use Spanish for conversation output when the user is working in Spanish. Keep roadmap text in the target file's established language.
+
+**Version**
+- <name or working label>
+
+**Goal**
+- what this block is trying to achieve
+
+**Includes**
+1. <item>
+2. <item>
+
+**Moves**
+- <item> -> from <block> to <block>
+
+**Excludes**
+- <item> -> why not now
+
+**Order**
+1. <item or block>
+2. <item or block>
+
+**Macro-Slices**
+- <slice> -> next step: design-spec | breakdown-feature | implement-feature | backlog
+
+**Justification**
+- short rationale
+
+**Risks**
+- only real risks
+
+**Dependencies**
+- explicit dependencies if they matter
+
+**Open Questions**
+- only if they materially affect the plan
+
+**Next Step**
+- refine-item | design-spec | breakdown-feature | document-now | implement-feature
+
+## Documentation Rule
+
+This skill may update documentation when the user approves the planning decision.
+
+Use:
+
+- `docs/dev/Notifica-Roadmap.md` for public roadmap or backlog changes
+- `../notifica_docs/` for private living plans, internal strategy, raw analysis, or plans not yet ready for public project documentation
+- `docs/dev/dev-notes.md` only when the planning discussion establishes a stable process or decision rule
+
+When updating roadmap docs, prefer operational roadmap edits over long planning prose.

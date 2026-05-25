@@ -22,6 +22,8 @@
 - Before implementing any non-trivial feature, fix, release task, or behavior change, read the relevant parts of:
   - `docs/dev/Notifica-Roadmap.md`
   - `docs/dev/dev-notes.md`
+- Use `.agents/workflow.md` as the repo-local workflow map when deciding whether work should be captured, refined, planned, designed, broken down, implemented, debugged, or treated as release work.
+- Do not force every request through the full workflow. Use the latest safe step that matches the user's input and the current project state.
 - If the change affects public-facing behavior, release flow, versioning, platform differences, or launch scope, review the documentation first and align the work with it.
 - If the documentation is clearly outdated, do not silently ignore it. Update it deliberately as part of the task, or stop and clarify the mismatch.
 
@@ -78,3 +80,14 @@
 - Favor scope clarity and clean closure over opportunistic expansion.
 - It is acceptable to include a clearly valuable improvement if it is well understood, low-friction, and does not reopen the project scope significantly.
 - Do not silently escalate a launch task into a broad refactor or a redesign pass.
+
+## Repo-local workflow skills
+
+- Use `.agents/skills/capture-item` for raw notes, mixed feedback, loose ideas, or unclear small points that need to be preserved and routed.
+- Use `.agents/skills/refine-item` for already captured or documented items whose scope or intent is still ambiguous.
+- Use `.agents/skills/plan-version` for roadmap placement, version scope, fortification blocks, prioritization, and macro-slicing.
+- Use `.agents/skills/design-spec` when a selected item needs behavior or technical design before implementation.
+- Use `.agents/skills/breakdown-feature` when a designed change is too large, risky, or mixed for one clean implementation pass.
+- Use `.agents/skills/implement-feature` only when the change is clear enough to execute.
+- Use `.agents/skills/debug-root-cause` for unclear or persistent bugs where diagnosis should happen before fixes.
+- Use `.agents/skills/release-workflow` for PWA, Android, versioning, build, Play Console, or release closure work.

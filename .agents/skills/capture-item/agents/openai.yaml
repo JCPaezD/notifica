@@ -1,0 +1,4 @@
+interface:
+  display_name: "Capture Item"
+  short_description: "Capture raw Notifica notes into workflow items."
+  default_prompt: "Use $capture-item to capture these raw Notifica notes into clear items and route each one to the next safe workflow step."

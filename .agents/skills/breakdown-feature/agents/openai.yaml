@@ -1,0 +1,4 @@
+interface:
+  display_name: "Breakdown Feature"
+  short_description: "Split designed Notifica work into execution tasks."
+  default_prompt: "Use $breakdown-feature to break this designed Notifica change into small execution-ready tasks."

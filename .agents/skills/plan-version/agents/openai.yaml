@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Version"
+  short_description: "Plan Notifica versions and work blocks."
+  default_prompt: "Use $plan-version to decide where these Notifica items belong and produce the next safe work block or roadmap adjustment."
