@@ -73,6 +73,11 @@ Para cambios acumulados durante la fortificacion tecnica:
   - revisar en movil/web que los botones de tarea no quedan demasiado juntos
 - no perder la trazabilidad de que cambio anadio cada punto al checklist.
 
+Nota:
+
+- El Bloque G ya se valido en Vercel dev con PWA desktop y movil simulado.
+- Mantener esos puntos en la verificacion acumulada final antes de cerrar la fortificacion, mergear o preparar release.
+
 Para cambios Android:
 
 - tratar Android Studio, instalacion en dispositivo, emuladores y Play Console como checkpoints manuales salvo automatizacion especifica
