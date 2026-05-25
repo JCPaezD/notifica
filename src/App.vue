@@ -12,9 +12,6 @@ import Modal from './components/ui/Modal.vue'
 import { DialogTitle } from '@headlessui/vue'
 import Toast from './components/Toast.vue'
 import { useToast } from './composables/useToast'
-import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
-import { Share } from '@capacitor/share';
-import { Capacitor } from '@capacitor/core';
 import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { shiftIcons as icons } from './icons/shifts'
 import { useLogoAnimation } from './composables/useLogoAnimation'
@@ -38,6 +35,7 @@ import {
   restoreTaskAtIndex,
   reviveTaskDates,
 } from '@/domain/taskLifecycle'
+import { exportJsonBackup, isNativePlatform, sharePlainText } from '@/adapters/shareExportAdapters'
 
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
@@ -75,7 +73,7 @@ const { logoBlockRef, animateLogo } = useLogoAnimation()
 
 // Ref para la lista reactiva de toasts y la función de eliminación
 const { toasts, remove, add } = useToast()
-const isNativeApp = Capacitor.isNativePlatform()
+const isNativeApp = isNativePlatform()
 const isIosLike = (() => {
   const userAgent = navigator.userAgent
   const matchesIos = /iPad|iPhone|iPod/.test(userAgent)
@@ -414,51 +412,31 @@ const exportTasksToJson = async () => {
 
   const dataStr = JSON.stringify(exportData, null, 2);
 
-  if (Capacitor.isNativePlatform()) {
-    try {
-      // 1. Guardar archivo en caché
-      const writeResult = await Filesystem.writeFile({
-        path: fileName,
-        data: dataStr,
-        directory: Directory.Cache,
-        encoding: Encoding.UTF8,
-      });
+  try {
+    const exportResult = await exportJsonBackup({
+      fileName,
+      data: dataStr,
+      title: t('dialog.export.title'),
+      text: t('dialog.export.message'),
+    })
 
-      // 2. Obtener URI accesible al sistema
-      const fileUri = await Filesystem.getUri({
-        path: fileName,
-        directory: Directory.Cache,
-      });
-
-      // 3. Lanzar diálogo de compartir archivo
-      await Share.share({
-        title: t('dialog.export.title'),
-        text: t('dialog.export.message'),
-        files: [fileUri.uri],
-        dialogTitle: t('dialog.export.title'),
-      });
-
+    if (exportResult === 'native-share') {
       add({
         title: t('toast.export.success'),
         description: t('toast.share.readyFile', { fileName }),
       })
-    } catch (err) {
-      console.error('Error al exportar archivo JSON:', err);
-      add({
-        title: t('toast.export.error'),
-        description: t('toast.export.errorDetail'),
-      })
+      return
     }
-  } else {
-    // Web / PWA: descarga directa
-    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', fileName);
-    linkElement.click();
+
     add({
       title: t('toast.export.success'),
       description: t('toast.export.generatedFile', { fileName }),
+    })
+  } catch (err) {
+    console.error('Error al exportar archivo JSON:', err);
+    add({
+      title: t('toast.export.error'),
+      description: t('toast.export.errorDetail'),
     })
   }
 }
@@ -694,54 +672,46 @@ const exportTasksToJson = async () => {
     const notes = getNotesForShift(shiftIdToShare);
     const fullText = buildShiftShareText(tasksOfShift, notes, shiftLabel, t, locale.value);
 
-    try {
-      const { Share } = await import('@capacitor/share');
-      const canShare = await Share.canShare();
+    const shareResult = await sharePlainText({
+      nativeTitle: t('dialog.share.titleShift', { shift: shiftLabel }),
+      webTitle: t('dialog.share.titleShiftFallback', { shift: shiftLabel }),
+      dialogTitle: t('dialog.share.title'),
+      text: fullText,
+    })
 
-      if (canShare.value) {
-        await Share.share({
-          title: t('dialog.share.titleShift', { shift: shiftLabel }),
-          text: fullText,
-          dialogTitle: t('dialog.share.title')
-        });
+    if (shareResult === 'native-share') {
         add({
           title: t('toast.share.success'),
           description: t('toast.share.detail'),
           type: 'info'
         });
         return;
-      }
-    } catch (e) {
-      console.warn('Capacitor Share no disponible o falló, se usará fallback web.');
     }
 
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: t('dialog.share.titleShiftFallback', { shift: shiftLabel }),
-          text: fullText,
-        });
+    if (shareResult === 'web-share') {
         add({
           title: t('toast.share.successFallback'),
           description: t('toast.share.detailFallback'),
           type: 'info'
         });
-      } else if (navigator.clipboard) {
-        await navigator.clipboard.writeText(fullText);
+      return
+    }
+
+    if (shareResult === 'clipboard') {
         add({
           title: t('toast.clipboard.success'),
           description: t('toast.clipboard.detail'),
           type: 'info'
         });
-      } else {
+      return
+    }
+
+    if (shareResult === 'unsupported') {
         add({
           title: t('toast.share.errorFallback'),
           description: t('toast.share.unsupported'),
           type: 'error'
         });
-      }
-    } catch (err) {
-      // Toast de error silenciado: el usuario puede haber cancelado la acción de compartir voluntariamente
     }
   };
 
