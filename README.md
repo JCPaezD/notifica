@@ -8,134 +8,107 @@
   </a>
 </p>
 
-
 # Notifica
 
-Aplicación web progresiva (PWA) para registrar tareas técnicas por tramo durante la jornada laboral. Optimizada para uso móvil, con funcionamiento 100% offline, y diseño cuidado, rápido y accesible.
+Notifica es una app PWA y Android para registrar tareas tecnicas durante la jornada laboral, pensada para uso movil, funcionamiento offline y exportacion rapida al final del turno.
 
-## Estado actual
+El proyecto nacio para resolver una necesidad real de trabajo: sustituir notas manuales por un registro agil, persistente y facil de compartir.
 
-La versión estable actualmente en uso es la PWA desplegada en Vercel:
+## Estado
 
-- https://notifica-kappa.vercel.app/
+- PWA estable: https://notifica-kappa.vercel.app/
+- Android: https://play.google.com/store/apps/details?id=com.jcpaezd.notifica
+- `main`: produccion
+- `develop`: desarrollo y pruebas
 
-La app Android nativa también está publicada en Google Play:
+La app ya se usa en condiciones reales. La fase actual del proyecto no busca crecer en funcionalidades de golpe, sino reforzar base tecnica, documentacion, tests y arquitectura.
 
-- https://play.google.com/store/apps/details?id=com.jcpaezd.notifica
+## Funcionalidades
 
-En este repositorio:
+- Registro rapido de tareas por tramo.
+- Edicion inline de descripcion, horas y tecnico asignado.
+- Finalizacion, reapertura, eliminacion y restauracion de tareas.
+- Filtros por tramo, estado y tareas pendientes de registrar.
+- Notas libres por tramo.
+- Exportacion y comparticion del resumen del turno.
+- Importacion/exportacion JSON.
+- Persistencia local offline.
+- Modo claro, oscuro y automatico.
+- Interfaz responsive para movil y escritorio.
+- Soporte multidioma ES/EN.
+- Sistema propio de toasts con acciones como `Deshacer`.
 
-* La rama `main` representa esa versión estable en producción
-* La rama `develop` concentra la evolución posterior del producto y se usa como base de trabajo y pruebas
-
-
-## 📱 Características principales
-
-📝 Registro y gestión de tareas
-* Registro ágil de tareas por tramo
-* Edición inline, eliminación y reactivación de tareas
-* Filtros por tramo, estado y registro
-
-🗒️ Notas y observaciones del tramo
-* Notas por tramo: campo editable tipo cuaderno para registrar observaciones generales
-  - Guardado automático por tramo
-  - Integrado en la exportación e importación de tareas
-  - Diseño accesible, editable y colapsable
-
-📤 Compartir y exportar
-* Exportación para compartir con compañeros
-* Modo PWA instalable (Android, iOS, escritorio)
-
-🔔 Notificaciones y experiencia visual
-* Sistema de notificaciones flotantes con diseño propio:
-  - Cuatro tipos de mensaje (éxito, error, información, aviso)
-  - Acciones configurables (como "Deshacer")
-  - Animaciones suaves, responsive y adaptado a móvil
-* Modo claro y oscuro con detección automática del sistema o selección manual
-  - Transición visual suave al cambiar de tema
-  - Compatible con Android, iOS y escritorio
-
-📶 Sincronización y almacenamiento
-* Sincronización offline con almacenamiento local
-* Guarda tareas localmente entre sesiones
-
-🌍 Multidioma (español e inglés)
-* Selección manual o detección automática (AUTO) según idioma del sistema
-* Persistencia en el dispositivo entre sesiones
-
-
-## 🖼️ Vista previa
+## Capturas
 
 <p align="center">
-  <img src="./public/screenshots/13-movil-claro.png" alt="Vista móvil" width="250"/>
+  <img src="./public/screenshots/13-movil-claro.png" alt="Vista movil" width="250"/>
   <img src="./public/screenshots/15-escritorio-claro.png" alt="Vista escritorio" width="450"/>
 </p>
 
+## Stack
 
-## 🚀 Tecnologías utilizadas
+- [Vue 3](https://vuejs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Capacitor](https://capacitorjs.com/)
+- [vue-i18n](https://vue-i18n.intlify.dev/)
 
-* [Vue 3](https://vuejs.org/)
-* [TypeScript](https://www.typescriptlang.org/)
-* [Tailwind CSS](https://tailwindcss.com/)
-* [Vite](https://vitejs.dev/)
-* Sistema de toasts propio (sin dependencias externas), con diseño personalizado
-
-
-## 📦 Instalación y uso
+## Uso Local
 
 ```bash
 npm install
-npm run dev     # para desarrollo local
-npm run build   # para versión de producción
-npm run preview # para test de producción local
+npm run dev
+npm run build
+npm run preview
 ```
 
+## Estructura
 
-## 🌐 Uso como PWA
-
-* Instalación directa desde Chrome (Android, iOS y escritorio)
-* Funciona 100% offline tras la primera carga
-* Guarda tareas y notas entre sesiones en el dispositivo
-* Splash screen personalizado y soporte para icono adaptativo en Android e iOS
-
-
-## 🛠️ Estructura del código (para desarrolladores)
-
-```
+```text
 src/
-├─ components/         → Componentes visuales (SideMenu, TaskItem, etc.)
-├─ composables/        → Lógica reutilizable (useNotifications, etc.)
-├─ types/              → Definiciones TypeScript personalizadas
-├─ utils/              → Utilidades generales
-public/
-├─ icons/              → Iconos para manifest.json (maskable incluido)
-├─ screenshots/        → Capturas para documentación y manifest
+  components/   Vue components
+  composables/  reusable UI/state logic
+  constants/    shared constants
+  locales/      i18n translations
+  types/        TypeScript types
+  utils/        shared utilities
+
 docs/
+  dev/          active development documentation
 ```
 
+La documentacion de desarrollo empieza en [docs/dev/README.md](./docs/dev/README.md).
 
-## 🧪 Pruebas en dispositivos
+Documentos principales:
 
-* ✅ Chrome (Windows) — Instalación y funcionamiento offline
-* ✅ Android (Chrome) — Instalación y funcionamiento offline
-* ✅ iOS (Safari y Chrome) — Instalación y funcionamiento offline
+- [Roadmap](./docs/dev/Notifica-Roadmap.md)
+- [Development notes](./docs/dev/dev-notes.md)
+- [Architecture notes](./docs/dev/architecture.md)
+- [Maintenance guide](./docs/dev/maintenance.md)
+- [Release process](./docs/dev/release-process.md)
+- [i18n guide](./docs/dev/i18n.md)
+- [Known issues](./docs/dev/known-issues.md)
 
+## Android
 
-## 📱 Versión Android
+La version Android se genera con Capacitor a partir de la misma aplicacion web.
 
-Notifica también está disponible como aplicación Android mediante Capacitor y publicada en Google Play:
+La app se comporta como una aplicacion Android independiente:
 
-- https://play.google.com/store/apps/details?id=com.jcpaezd.notifica
+- instalable desde Google Play
+- icono y splash screen propios
+- soporte offline
+- persistencia local en el dispositivo
 
-La versión Android es funcionalmente equivalente a la versión PWA, pero se comporta como una app nativa:
-* Puede instalarse desde Google Play como app Android independiente
-* Incluye icono personalizado, splash screen y diseño adaptado a móviles
-* Es independiente de la versión PWA, permitiendo mantener ambas instaladas
+El flujo de release Android esta documentado en [docs/dev/release-process.md](./docs/dev/release-process.md).
 
-Todo el código fuente de la app, incluyendo la plataforma Android, está disponible en este repositorio.
+## Sobre El Proyecto
 
+Notifica es un proyecto personal construido como herramienta real de uso diario. Por eso prioriza flujos simples, fiabilidad offline, bajo rozamiento y compatibilidad con datos existentes.
 
-## ⚖️ Licencia
+La etapa actual, `v1.3.x Technical Fortification`, busca convertir esa base funcional en un proyecto mas mantenible y presentable: mejor documentacion, tests, automatizaciones y separacion gradual de responsabilidades.
 
-Este proyecto está licenciado bajo la Licencia MIT.
-Consulta el archivo [LICENSE](./LICENSE) para más detalles.
+## Licencia
+
+Este proyecto esta licenciado bajo la licencia MIT. Consulta [LICENSE](./LICENSE) para mas detalles.

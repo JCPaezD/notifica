@@ -8,7 +8,9 @@
   - Android app built with Capacitor
 - `main` is the production branch for the live PWA used by real users.
 - `develop` is the working branch and the basis for the development PWA used for testing.
-- `docs/dev/Notifica-Roadmap.md` and `docs/dev/dev-notes.md` are core project documents and must be treated as working sources of truth for scope, release flow, and known technical decisions.
+- `docs/dev/README.md`, `docs/dev/Notifica-Roadmap.md`, and `docs/dev/dev-notes.md` are core project entry points and must be treated as working sources of truth for scope, current decisions, and documentation navigation.
+- Release-specific work must also review `docs/dev/release-process.md`.
+- Architecture or refactor work must also review `docs/dev/architecture.md`.
 
 ## Shell and command execution
 
@@ -20,8 +22,15 @@
 ## Documentation and planning discipline
 
 - Before implementing any non-trivial feature, fix, release task, or behavior change, read the relevant parts of:
+  - `docs/dev/README.md`
   - `docs/dev/Notifica-Roadmap.md`
   - `docs/dev/dev-notes.md`
+- Also read the focused document for the task when applicable:
+  - `docs/dev/architecture.md`
+  - `docs/dev/maintenance.md`
+  - `docs/dev/release-process.md`
+  - `docs/dev/i18n.md`
+  - `docs/dev/known-issues.md`
 - Use `.agents/workflow.md` as the repo-local workflow map when deciding whether work should be captured, refined, planned, designed, broken down, implemented, debugged, or treated as release work.
 - Do not force every request through the full workflow. Use the latest safe step that matches the user's input and the current project state.
 - If the change affects public-facing behavior, release flow, versioning, platform differences, or launch scope, review the documentation first and align the work with it.
@@ -40,7 +49,7 @@
   - `package.json`
   - `android/app/build.gradle`
   - visible version text in the UI
-  - relevant documentation blocks in `docs/dev/dev-notes.md` and `docs/dev/Notifica-Roadmap.md`
+  - relevant documentation blocks in `docs/dev/release-process.md`, `docs/dev/dev-notes.md`, and `docs/dev/Notifica-Roadmap.md`
 
 ## Git safety
 

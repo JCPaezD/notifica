@@ -32,6 +32,7 @@ Current release-sensitive files usually include:
 - `android/app/build.gradle`
 - visible version text in `src/components/SideMenu.vue`
 - launch/release documentation in:
+  - `docs/dev/release-process.md`
   - `docs/dev/Notifica-Roadmap.md`
   - `docs/dev/dev-notes.md`
   - `README.md` when user-facing information changes
@@ -84,6 +85,7 @@ Before any release edits, inspect:
 - `package-lock.json` when package version metadata has been changed or will be changed
 - `android/app/build.gradle`
 - visible version text in `src/components/SideMenu.vue`
+- relevant release process notes in `docs/dev/release-process.md`
 - relevant release notes in `docs/dev/dev-notes.md`
 - relevant launch tasks in `docs/dev/Notifica-Roadmap.md`
 
@@ -140,6 +142,7 @@ Regenerate or update it using the normal package-manager workflow instead of edi
 Then review whether these documents must also change:
 
 - `README.md`
+- `docs/dev/release-process.md`
 - `docs/dev/dev-notes.md`
 - `docs/dev/Notifica-Roadmap.md`
 

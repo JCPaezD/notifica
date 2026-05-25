@@ -64,7 +64,12 @@ Use `plan-version` for priority, roadmap placement, version scope, grouping, ord
 Use the correct documentation surface:
 
 - `docs/dev/Notifica-Roadmap.md`: public project roadmap, release blocks, planned product work, and durable backlog placement.
-- `docs/dev/dev-notes.md`: stable technical decisions, workflow rules, release process notes, platform caveats, and maintenance knowledge.
+- `docs/dev/dev-notes.md`: current durable decisions and documentation navigation.
+- `docs/dev/architecture.md`: architecture, known structural debt, and refactor direction.
+- `docs/dev/maintenance.md`: local workflow, validation, checks, and repo maintenance.
+- `docs/dev/release-process.md`: PWA and Android release/versioning process.
+- `docs/dev/i18n.md`: translation workflow and text management.
+- `docs/dev/known-issues.md`: known bugs, platform caveats, and deferred issues.
 - `../notifica_docs/`: private product notes, strategy, internal plans, raw analysis, and living plans that should not affect the public repo yet.
 
 Do not write private planning material into the public repo unless the user explicitly decides it should become public project documentation.
