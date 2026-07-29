@@ -179,6 +179,7 @@ Restriccion:
 ### Alta Prioridad / Candidatos Cercanos
 
 - Ejecutar verificacion manual acumulada antes de cerrar la fortificacion, mergear o preparar release.
+- Priorizar para la proxima actualizacion el ajuste `Mantener pantalla encendida`, desactivado por defecto, para evitar bloqueos de pantalla durante traspasos o carga manual en sistemas externos.
 - Revisar informe externo post-checkpoint y decidir si abre nuevos bloques o ajustes de plan.
 - Revisar mantenimiento de dependencias: `npm audit` y Browserslist/caniuse-lite.
 - Decidir si `v1.3.x` sera una release publica o una fase interna de fortificacion antes de versionar.
@@ -199,6 +200,7 @@ Restriccion:
 - Usar Android CLI y skills oficiales instaladas como apoyo selectivo, no como sustituto del workflow local.
 - Explorar `android screen capture` para automatizar capturas Android cuando haya dispositivo o emulador disponible.
 - Mantener validacion Android como checkpoint manual hasta justificar automatizacion.
+- Disenar e implementar `Mantener pantalla encendida`: `FLAG_KEEP_SCREEN_ON` en Android APK y Screen Wake Lock API en PWA cuando este disponible, con degradacion transparente si no hay soporte.
 
 ### Producto / UX
 
