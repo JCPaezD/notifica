@@ -15,6 +15,12 @@ Notifica es una app Vue 3 + TypeScript + Vite con Tailwind CSS. Se distribuye co
 
 La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacion, tests, arquitectura y mantenimiento antes de volver a crecer en funcionalidades.
 
+## Entorno De Validacion
+
+- Preview generica de `develop` en Vercel: [Notifica develop](https://notifica-git-develop-jcpaezds-projects.vercel.app/).
+- Usar esta URL para la primera revision de cambios desplegados desde `develop`.
+- No confundirla con la PWA de produccion publicada desde `main`.
+
 ## Principios Activos
 
 - Tratar `main` como produccion viva.
