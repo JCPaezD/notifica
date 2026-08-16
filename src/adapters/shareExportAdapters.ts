@@ -2,11 +2,17 @@ import { Capacitor } from '@capacitor/core'
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem'
 import { Share } from '@capacitor/share'
 
-export type JsonExportResult = 'native-share' | 'web-download'
+export type JsonExportResult = 'native-share' | 'web-share' | 'web-download' | 'cancelled'
 export type TextShareResult = 'native-share' | 'web-share' | 'clipboard' | 'unsupported' | 'cancelled'
 
 export function isNativePlatform() {
   return Capacitor.isNativePlatform()
+}
+
+function isAbortError(error: unknown) {
+  return typeof DOMException !== 'undefined'
+    && error instanceof DOMException
+    && error.name === 'AbortError'
 }
 
 export async function exportJsonBackup(options: {
@@ -28,21 +34,70 @@ export async function exportJsonBackup(options: {
       directory: Directory.Cache,
     })
 
-    await Share.share({
-      title: options.title,
-      text: options.text,
-      files: [fileUri.uri],
-      dialogTitle: options.title,
-    })
+    try {
+      await Share.share({
+        title: options.title,
+        text: options.text,
+        files: [fileUri.uri],
+        dialogTitle: options.title,
+      })
+    } catch (error) {
+      if (isAbortError(error)) return 'cancelled'
+      throw error
+    }
 
     return 'native-share'
   }
 
-  const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(options.data)
+  let canShareFile = false
+  let file: File | undefined
+
+  if (
+    typeof File !== 'undefined'
+    && typeof navigator.share === 'function'
+    && typeof navigator.canShare === 'function'
+  ) {
+    file = new File([options.data], options.fileName, { type: 'application/json' })
+
+    try {
+      canShareFile = navigator.canShare({ files: [file] })
+    } catch {
+      canShareFile = false
+    }
+  }
+
+  if (canShareFile && file) {
+    try {
+      await navigator.share({
+        title: options.title,
+        text: options.text,
+        files: [file],
+      })
+      return 'web-share'
+    } catch (error) {
+      if (isAbortError(error)) return 'cancelled'
+      throw error
+    }
+  }
+
+  const blob = new Blob([options.data], { type: 'application/json' })
+  const objectUrl = typeof URL.createObjectURL === 'function'
+    ? URL.createObjectURL(blob)
+    : `data:application/json;charset=utf-8,${encodeURIComponent(options.data)}`
   const linkElement = document.createElement('a')
-  linkElement.setAttribute('href', dataUri)
+  linkElement.setAttribute('href', objectUrl)
   linkElement.setAttribute('download', options.fileName)
-  linkElement.click()
+  linkElement.style.display = 'none'
+  document.body.appendChild(linkElement)
+
+  try {
+    linkElement.click()
+  } finally {
+    linkElement.remove()
+    if (objectUrl.startsWith('blob:') && typeof URL.revokeObjectURL === 'function') {
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 0)
+    }
+  }
 
   return 'web-download'
 }
