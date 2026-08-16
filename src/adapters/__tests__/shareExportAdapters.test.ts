@@ -5,6 +5,8 @@ const writeFileMock = vi.fn()
 const getUriMock = vi.fn()
 const canShareMock = vi.fn()
 const shareMock = vi.fn()
+const webCanShareMock = vi.fn()
+const webShareMock = vi.fn()
 
 vi.mock('@capacitor/core', () => ({
   Capacitor: {
@@ -40,6 +42,16 @@ describe('shareExportAdapters', () => {
     getUriMock.mockReset()
     canShareMock.mockReset()
     shareMock.mockReset()
+    webCanShareMock.mockReset()
+    webShareMock.mockReset()
+    Object.defineProperty(navigator, 'canShare', {
+      configurable: true,
+      value: undefined,
+    })
+    Object.defineProperty(navigator, 'share', {
+      configurable: true,
+      value: undefined,
+    })
     vi.spyOn(console, 'warn').mockImplementation(() => undefined)
   })
 
@@ -64,11 +76,51 @@ describe('shareExportAdapters', () => {
     }))
   })
 
+  it('shares JSON through the Web Share API when file sharing is available', async () => {
+    isNativePlatformMock.mockReturnValue(false)
+    webCanShareMock.mockReturnValue(true)
+    webShareMock.mockResolvedValue(undefined)
+    Object.defineProperty(navigator, 'canShare', {
+      configurable: true,
+      value: webCanShareMock,
+    })
+    Object.defineProperty(navigator, 'share', {
+      configurable: true,
+      value: webShareMock,
+    })
+    const { exportJsonBackup } = await import('../shareExportAdapters')
+
+    await expect(exportJsonBackup({
+      fileName: 'backup.json',
+      data: '{}',
+      title: 'Export',
+      text: 'Backup',
+    })).resolves.toBe('web-share')
+
+    expect(webCanShareMock).toHaveBeenCalledWith({ files: [expect.any(File)] })
+    expect(webShareMock).toHaveBeenCalledWith(expect.objectContaining({
+      title: 'Export',
+      text: 'Backup',
+      files: [expect.any(File)],
+    }))
+  })
+
   it('exports JSON through a web download outside native platforms', async () => {
     isNativePlatformMock.mockReturnValue(false)
-    const link = document.createElement('a')
-    const click = vi.spyOn(link, 'click').mockImplementation(() => undefined)
-    vi.spyOn(document, 'createElement').mockReturnValue(link)
+    const createObjectUrl = vi.fn(() => 'blob:backup')
+    const revokeObjectUrl = vi.fn()
+    Object.defineProperty(URL, 'createObjectURL', {
+      configurable: true,
+      value: createObjectUrl,
+    })
+    Object.defineProperty(URL, 'revokeObjectURL', {
+      configurable: true,
+      value: revokeObjectUrl,
+    })
+    let clickedLink: HTMLAnchorElement | undefined
+    vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function () {
+      clickedLink = this
+    })
     const { exportJsonBackup } = await import('../shareExportAdapters')
 
     await expect(exportJsonBackup({
@@ -78,8 +130,32 @@ describe('shareExportAdapters', () => {
       text: 'Backup',
     })).resolves.toBe('web-download')
 
-    expect(link.getAttribute('download')).toBe('backup.json')
-    expect(click).toHaveBeenCalled()
+    expect(clickedLink?.getAttribute('href')).toBe('blob:backup')
+    expect(clickedLink?.getAttribute('download')).toBe('backup.json')
+    expect(createObjectUrl).toHaveBeenCalledWith(expect.any(Blob))
+    expect(revokeObjectUrl).not.toHaveBeenCalled()
+  })
+
+  it('does not report success when web file sharing is cancelled', async () => {
+    isNativePlatformMock.mockReturnValue(false)
+    webCanShareMock.mockReturnValue(true)
+    webShareMock.mockRejectedValue(new DOMException('User cancelled', 'AbortError'))
+    Object.defineProperty(navigator, 'canShare', {
+      configurable: true,
+      value: webCanShareMock,
+    })
+    Object.defineProperty(navigator, 'share', {
+      configurable: true,
+      value: webShareMock,
+    })
+    const { exportJsonBackup } = await import('../shareExportAdapters')
+
+    await expect(exportJsonBackup({
+      fileName: 'backup.json',
+      data: '{}',
+      title: 'Export',
+      text: 'Backup',
+    })).resolves.toBe('cancelled')
   })
 
   it('shares text through Capacitor when available', async () => {

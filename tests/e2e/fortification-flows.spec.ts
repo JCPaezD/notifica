@@ -75,3 +75,14 @@ test('opens settings and updates theme and language preferences', async ({ page 
   await expect.poll(async () => page.evaluate(() => localStorage.getItem('locale'))).toBe('en')
   await expect(page.getByRole('button', { name: /^Dark$/ })).toBeVisible()
 })
+
+test('exports a JSON backup through the browser download flow', async ({ page }) => {
+  await createTask(page, 'Export backup')
+
+  await page.getByRole('button', { name: /Open menu/i }).click()
+  const downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: /^Export$/ }).click()
+
+  const download = await downloadPromise
+  expect(download.suggestedFilename()).toMatch(/^notifica-backup-\d{4}-\d{2}-\d{2}\.json$/)
+})

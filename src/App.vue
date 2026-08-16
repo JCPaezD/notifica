@@ -443,10 +443,18 @@ const exportTasksToJson = async () => {
       text: t('dialog.export.message'),
     })
 
-    if (exportResult === 'native-share') {
+    if (exportResult === 'native-share' || exportResult === 'web-share') {
       add({
         title: t('toast.export.success'),
         description: t('toast.share.readyFile', { fileName }),
+      })
+      return
+    }
+
+    if (exportResult === 'cancelled') {
+      add({
+        title: t('toast.action.cancelled'),
+        type: 'info',
       })
       return
     }
