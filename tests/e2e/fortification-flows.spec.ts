@@ -74,6 +74,17 @@ test('opens settings and updates theme and language preferences', async ({ page 
   await page.getByRole('button', { name: /^EN$/ }).click()
   await expect.poll(async () => page.evaluate(() => localStorage.getItem('locale'))).toBe('en')
   await expect(page.getByRole('button', { name: /^Dark$/ })).toBeVisible()
+
+  const keepScreenAwake = page.getByRole('switch', { name: /^Keep screen on$/ })
+  await expect(keepScreenAwake).toHaveAttribute('aria-checked', 'false')
+  await keepScreenAwake.click()
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('keepScreenAwake'))).toBe('true')
+  await expect(keepScreenAwake).toHaveAttribute('aria-checked', 'true')
+
+  await page.reload()
+  await page.getByRole('button', { name: /Open menu/i }).click()
+  await page.getByRole('button', { name: /^Settings$/ }).click()
+  await expect(page.getByRole('switch', { name: /^Keep screen on$/ })).toHaveAttribute('aria-checked', 'true')
 })
 
 test('exports a JSON backup through the browser download flow', async ({ page }) => {

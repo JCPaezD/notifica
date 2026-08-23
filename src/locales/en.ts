@@ -12,6 +12,7 @@ export default {
     title: "Menu",
     options: "Settings",
     releaseNotes: "What’s new",
+    keepScreenAwake: "Keep screen on",
     appearance: "Appearance",
     language: "Language",
     theme: {
@@ -72,6 +73,9 @@ export default {
     },
   },
   aria: {
+    settings: {
+      keepScreenAwake: "Keep screen on",
+    },
     menu: {
       // Etiquetas accesibilidad menú
       open: "Open menu",
