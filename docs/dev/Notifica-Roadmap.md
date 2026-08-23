@@ -27,6 +27,13 @@ No objetivos:
 - agrupar todo el backlog en una unica version grande
 - romper importacion/exportacion o persistencia local sin plan explicito de migracion
 
+## Objetivo De Release
+
+- `v1.3.x` se mantiene como fase interna de fortificacion.
+- El objetivo publico siguiente es una release coordinada PWA + Android `1.4.0`.
+- El alcance confirmado incluye los cambios ya validados en `develop`, `Mantener pantalla encendida` y un bloque separado de mantenimiento de dependencias/seguridad.
+- Antes de cerrar `1.4.0` se revisaran expresamente los pendientes que hoy quedan fuera, incluida la retirada o mantenimiento del aviso de nueva version y su CTA de Play Store, sin incorporarlos automaticamente.
+
 ## Bloques De Fortificacion
 
 ### Bloque A - Planificacion Privada Y Captura
@@ -81,7 +88,7 @@ Resultado:
 
 ### Bloque D - Tests Y Automatizaciones Base
 
-Estado: implementado pendiente de revision.
+Estado: implementado y validado en la verificacion acumulada del 2026-08-16.
 
 Objetivo:
 
@@ -99,18 +106,14 @@ Foco candidato:
 - CI basica para `develop` y pull requests.
 - Android se mantiene como validacion manual/checklist salvo automatizacion especifica futura.
 
-Validacion pendiente acumulada:
+Validacion acumulada:
 
-- validar en el deploy dev de Vercel antes de cerrar la fase de fortificacion o preparar merge/release
-- comprobar flujo basico de tareas y duracion
-- comprobar caso de tarea que cruza medianoche
-- comprobar compartir/exportar una tarea finalizada
-- anotar cualquier regresion antes de pasar al Bloque E
-- esta validacion puede acumularse con la del refactor grande para evitar pruebas intermedias repetidas, siempre que el checklist no se pierda
+- completada en deploy dev de Vercel, PWA movil/web y Android local el 2026-08-16
+- los detalles y observaciones quedan registrados en la checklist privada de fortificacion
 
 ### Bloque E - Refactor Progresivo De Arquitectura
 
-Estado: implementado en primera tanda, pendiente de validacion acumulada.
+Estado: implementado en primera tanda y validado en la verificacion acumulada del 2026-08-16.
 
 Objetivo:
 
@@ -131,19 +134,20 @@ Resultado inicial:
 - Se extrajeron helpers de ciclo de vida de tareas.
 - Se extrajeron adaptadores de export/share para navegador y Capacitor.
 
-Validacion pendiente acumulada:
+Validacion acumulada:
 
 - persistencia local y recuperacion tras recarga
 - importacion JSON antigua y nueva
-- exportacion JSON en web/PWA
+- exportacion JSON en web/PWA y Android local
 - compartir texto y archivo
 - crear/finalizar/reabrir/borrar/restaurar tareas
 - borrar todo/deshacer restaurando notas
 - filtros, turnos con notas, duracion y cruce de medianoche
+- detalle completo y resultado en la checklist privada de fortificacion
 
 ### Bloque F - Tooling Android Y Android Skills Oficiales
 
-Estado: implementado pendiente de uso real.
+Estado: implementado y usado en validacion Android local el 2026-08-16.
 
 Objetivo:
 
@@ -178,11 +182,11 @@ Restriccion:
 
 ### Alta Prioridad / Candidatos Cercanos
 
-- Ejecutar verificacion manual acumulada antes de cerrar la fortificacion, mergear o preparar release.
-- Priorizar para la proxima actualizacion el ajuste `Mantener pantalla encendida`, desactivado por defecto, para evitar bloqueos de pantalla durante traspasos o carga manual en sistemas externos.
+- Verificacion manual acumulada completada el 2026-08-16; mantener las observaciones no bloqueantes visibles antes de decidir release.
+- El ajuste `Mantener pantalla encendida` ya esta implementado en `develop`, desactivado por defecto; queda pendiente la validacion manual PWA y Android antes de cerrarlo dentro de `1.4.0`.
 - Revisar informe externo post-checkpoint y decidir si abre nuevos bloques o ajustes de plan.
-- Revisar mantenimiento de dependencias: `npm audit` y Browserslist/caniuse-lite.
-- Decidir si `v1.3.x` sera una release publica o una fase interna de fortificacion antes de versionar.
+- Pase inicial de mantenimiento de dependencias aplicado; `npm audit --omit=dev` queda limpio y los avisos restantes son de tooling de desarrollo.
+- Abrir una puerta de alcance antes del cierre final para decidir conscientemente si algun pendiente excluido debe entrar.
 
 ### Deuda Tecnica
 
@@ -191,11 +195,11 @@ Restriccion:
 - `startNewShift`, `deleteTask` y `deleteAllTasks` siguen mezclando reglas de negocio con UX/toasts.
 - Notas por tramo siguen acopladas entre lista, composable y flujo de turnos.
 - La version visible y metadatos de release siguen siendo parcialmente manuales.
-- Revisar `npm audit` y Browserslist en un bloque de mantenimiento separado.
+- Mantener bajo revision el audit completo y el warning de Browserslist; el grafo de produccion ya queda limpio tras el primer pase de mantenimiento de dependencias.
 
 ### Plataforma / Android
 
-- Revisar comportamiento edge-to-edge en Android 15 / SDK 35.
+- Mantener como comprobacion especifica de release cualquier revision adicional de edge-to-edge en Android 15 / SDK 35.
 - Vigilar warnings de status bar y navigation bar.
 - Usar Android CLI y skills oficiales instaladas como apoyo selectivo, no como sustituto del workflow local.
 - Explorar `android screen capture` para automatizar capturas Android cuando haya dispositivo o emulador disponible.
