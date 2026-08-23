@@ -31,7 +31,15 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - Orden de trabajo acordado: mantenimiento de dependencias, diseno e implementacion de `Mantener pantalla encendida`, validacion completa y puerta de alcance de pendientes, preparacion de release.
 - El primer pase de mantenimiento de dependencias ya esta aplicado dentro de las lineas compatibles: Capacitor 7, Vite 6, PostCSS, Workbox/PWA y `npm-run-all2` 9.
 - Tras el pase, `npm audit --omit=dev` queda limpio; el audit completo conserva 8 avisos transitivos de tooling (1 baja, 1 moderada y 6 altas, sin criticas), que no bloquean el grafo de produccion y quedan separados para una futura revision de herramientas.
-- La implementacion de `Mantener pantalla encendida` esta actualmente en `develop`: ajuste persistente y desactivado por defecto, Screen Wake Lock en web y `FLAG_KEEP_SCREEN_ON` mediante plugin Android local. Sigue pendiente la validacion manual final en PWA y Android.
+- La implementacion de `Mantener pantalla encendida` esta actualmente en `develop`: ajuste persistente y desactivado por defecto, Screen Wake Lock validado en la PWA iPhone y `FLAG_KEEP_SCREEN_ON` validado en la APK debug del Huawei para activacion, persistencia, ciclo de segundo plano/reapertura, auto-bloqueo con el ajuste desactivado y liberacion en caliente.
+
+### Checkpoint Android De Mantener Pantalla Encendida - 2026-08-24
+
+- La APK debug `com.jcpaezd.notifica.debug` se recompilo, instalo y arranco correctamente en el Huawei `POT-LX1`; la APK de produccion `com.jcpaezd.notifica` permanecio instalada e independiente.
+- Con el ajuste activo, la pantalla permanecio encendida al menos 10 minutos despues del ultimo toque conocido, superando el timeout normal configurado de 5 minutos.
+- La activacion/desactivacion, el paso a segundo plano, la reapertura y la persistencia del ajuste se comportaron correctamente durante la prueba manual.
+- La prueba inicial de bloqueo no fue concluyente porque el dispositivo estaba conectado por USB y reporto `stay_on_while_plugged_in=7`, `mPlugType=2` y `screen_off_timeout=300000`; se repitio con valores temporales `0` y `30000`, y se confirmo el auto-bloqueo y la liberacion en caliente.
+- Los valores originales del dispositivo se restauraron y verificaron: `stay_on_while_plugged_in=7` y `screen_off_timeout=300000`.
 
 ## Principios Activos
 

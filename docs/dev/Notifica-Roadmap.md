@@ -183,7 +183,7 @@ Restriccion:
 ### Alta Prioridad / Candidatos Cercanos
 
 - Verificacion manual acumulada completada el 2026-08-16; mantener las observaciones no bloqueantes visibles antes de decidir release.
-- El ajuste `Mantener pantalla encendida` ya esta implementado en `develop`, desactivado por defecto; queda pendiente la validacion manual PWA y Android antes de cerrarlo dentro de `1.4.0`.
+- El ajuste `Mantener pantalla encendida` ya esta implementado en `develop`, desactivado por defecto y validado manualmente en la PWA iPhone y en la APK debug del Huawei, incluido el auto-bloqueo con la opcion desactivada.
 - Revisar informe externo post-checkpoint y decidir si abre nuevos bloques o ajustes de plan.
 - Pase inicial de mantenimiento de dependencias aplicado; `npm audit --omit=dev` queda limpio y los avisos restantes son de tooling de desarrollo.
 - Abrir una puerta de alcance antes del cierre final para decidir conscientemente si algun pendiente excluido debe entrar.
@@ -204,7 +204,7 @@ Restriccion:
 - Usar Android CLI y skills oficiales instaladas como apoyo selectivo, no como sustituto del workflow local.
 - Explorar `android screen capture` para automatizar capturas Android cuando haya dispositivo o emulador disponible.
 - Mantener validacion Android como checkpoint manual hasta justificar automatizacion.
-- Disenar e implementar `Mantener pantalla encendida`: `FLAG_KEEP_SCREEN_ON` en Android APK y Screen Wake Lock API en PWA cuando este disponible, con degradacion transparente si no hay soporte.
+- Mantener como cerrada la validacion Android de `Mantener pantalla encendida`: activacion, persistencia, ciclo de segundo plano, auto-bloqueo desactivado y liberacion en caliente quedaron comprobados en la APK debug.
 
 ### Producto / UX
 
