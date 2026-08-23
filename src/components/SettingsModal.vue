@@ -10,12 +10,14 @@ defineProps<{
   modelValue: boolean
   preferredMode: ThemeMode
   selectedLocale: LocaleMode
+  keepScreenAwake: boolean
 }>()
 
 const emit = defineEmits<{
   'update:modelValue': [value: boolean]
   'set-preferred-mode': [mode: ThemeMode]
   'set-locale': [locale: LocaleMode]
+  'set-keep-screen-awake': [enabled: boolean]
 }>()
 
 const { t } = useI18n()
@@ -137,6 +139,35 @@ const { t } = useI18n()
             EN
           </button>
         </div>
+      </div>
+
+      <hr class="my-4 border-divider dark:border-divider-dark mx-3" />
+
+      <div class="flex items-center justify-between gap-4">
+        <span class="flex items-center gap-2 text-base font-semibold text-subtle dark:text-subtle-dark">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-2.636-1.591 1.591M5.25 12H3m3.636-6.364L5.045 4.045M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+          </svg>
+          {{ t('menu.keepScreenAwake') }}
+        </span>
+        <button
+          v-cancel-touch-click
+          type="button"
+          role="switch"
+          :aria-checked="keepScreenAwake"
+          :aria-label="t('aria.settings.keepScreenAwake')"
+          @click="emit('set-keep-screen-awake', !keepScreenAwake)"
+          :class="[
+            keepScreenAwake ? 'bg-accent-main' : 'bg-toggle-inactive dark:bg-toggle-inactive-dark',
+            'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-main'
+          ]"
+        >
+          <span
+            :class="keepScreenAwake ? 'translate-x-5' : 'translate-x-0'"
+            class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-surface-thumb dark:bg-surface-thumb-dark shadow ring-0 transition ease-in-out duration-200"
+            aria-hidden="true"
+          />
+        </button>
       </div>
     </div>
   </Modal>

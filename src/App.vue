@@ -16,6 +16,7 @@ import type { Task } from './types/Task' // Importar la interfaz Task compartida
 import { shiftIcons as icons } from './icons/shifts'
 import { useLogoAnimation } from './composables/useLogoAnimation'
 import { useDarkMode } from './composables/useDarkMode'
+import { useKeepScreenAwake } from './composables/useKeepScreenAwake'
 import { getShiftLabel, getShiftIcon, getShiftColor } from './composables/useShifts'
 import {
   getAllNotes,
@@ -53,6 +54,7 @@ type LocaleMode = 'es' | 'en' | 'system'
 
 // --- Dark mode ---
 const { preferredMode, setPreferredMode } = useDarkMode()
+const { keepScreenAwake, setKeepScreenAwake } = useKeepScreenAwake()
 
 // --- Idioma ---
 const selectedLocale = ref<LocaleMode>((localStorage.getItem('locale') || 'system') as LocaleMode)
@@ -926,8 +928,10 @@ const exportTasksToJson = async () => {
     v-model:modelValue="isSettingsOpen"
     :preferred-mode="preferredMode"
     :selected-locale="selectedLocale"
+    :keep-screen-awake="keepScreenAwake"
     @set-preferred-mode="setPreferredMode"
     @set-locale="setLocale"
+    @set-keep-screen-awake="setKeepScreenAwake"
   />
 
   <!-- Sistema propio de notificaciones -->

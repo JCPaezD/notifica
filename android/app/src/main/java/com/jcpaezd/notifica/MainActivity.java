@@ -15,6 +15,7 @@ import androidx.core.view.WindowCompat;
 public class MainActivity extends BridgeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        registerPlugin(KeepScreenOnPlugin.class);
         SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
         
