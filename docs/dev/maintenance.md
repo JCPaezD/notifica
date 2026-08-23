@@ -83,6 +83,12 @@ Para cambios acumulados durante la fortificacion tecnica:
   - abrir/cerrar ajustes desde el menu lateral
   - cambiar tema entre sistema, claro y oscuro
   - cambiar idioma entre auto, ES y EN
+- tras implementar `Mantener pantalla encendida`, incluir tambien:
+  - comprobar que el ajuste aparece desactivado por defecto y conserva su valor tras recargar
+  - activarlo y desactivarlo en caliente
+  - comprobar el bloqueo de pantalla en primer plano y su liberacion al pasar a segundo plano cuando la plataforma lo soporte
+  - comprobar la degradacion transparente en navegadores sin Screen Wake Lock
+  - repetir la validacion en APK debug y confirmar que la APK de produccion permanece intacta
 - no perder la trazabilidad de que cambio anadio cada punto al checklist.
 
 Nota:
@@ -143,8 +149,15 @@ Preferir commits que cuenten una historia clara:
 
 No mezclar codigo, docs y artefactos generados sin una relacion deliberada.
 
+## Estado Del Mantenimiento De Dependencias
+
+- El primer pase de mantenimiento de dependencias se ha aplicado dentro de las lineas compatibles de `1.4.0`, manteniendo Capacitor 7 y Vite 6.
+- `npm audit --omit=dev` queda limpio: no quedan vulnerabilidades en el grafo de produccion.
+- El audit completo conserva 8 avisos transitivos de tooling de desarrollo (1 baja, 1 moderada y 6 altas, sin criticas); quedan separados para una futura revision especifica de herramientas y no bloquean el grafo de produccion.
+- El warning de Browserslist desactualizado sigue siendo conocido y no bloqueante.
+- El warning de build por import estatico y dinamico de `@capacitor/share` quedo eliminado tras la extraccion de los adaptadores de export/share; vigilar que no se reintroduzca en cambios futuros.
+
 ## Mantenimiento Pendiente No Bloqueante
 
-- Revisar `npm audit` en un bloque dedicado de mantenimiento de dependencias.
-- Revisar warning de Browserslist desactualizado.
-- Revisar warning de build por import estatico y dinamico de `@capacitor/share` cuando se trabaje el refactor de plataforma/adaptadores.
+- Revisar en el futuro las vulnerabilidades restantes del tooling de desarrollo sin aplicar `npm audit fix` global automaticamente.
+- Revisar el warning de Browserslist desactualizado cuando haya un bloque de tooling con alcance suficiente.

@@ -54,6 +54,8 @@ Algunas APIs o internals de plugins pueden estar obsoletos o comportarse distint
 
 Revisarlo durante trabajo de tooling o release Android.
 
+En el Huawei `POT-LX1` validado localmente, la barra inferior de navegacion del sistema permanece clara/blanca cuando Notifica usa el tema oscuro, en lugar de adoptar el color del tema. No bloquea el uso actual y queda pendiente de una revision Android futura.
+
 ### PWA iOS: Edicion De Notas Con Teclado
 
 Existe un bug menor en PWA iOS al editar notas de tramo con el teclado abierto y navegacion nativa de campos visible.
