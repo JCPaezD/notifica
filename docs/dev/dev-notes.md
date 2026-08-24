@@ -34,6 +34,14 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - La implementacion de `Mantener pantalla encendida` esta actualmente en `develop`: ajuste persistente y desactivado por defecto, Screen Wake Lock validado en la PWA iPhone y `FLAG_KEEP_SCREEN_ON` validado en la APK debug del Huawei para activacion, persistencia, ciclo de segundo plano/reapertura, auto-bloqueo con el ajuste desactivado y liberacion en caliente.
 - La retirada del aviso de nueva version queda aprobada como el ultimo cambio funcional acotado antes de preparar `1.4.0`.
 
+### Validacion De Retirada Del Aviso - 2026-08-24
+
+- La PWA movil de `develop` no muestra el banner antiguo de nueva version.
+- El menu lateral ya no muestra la entrada de novedades.
+- Los ajustes, tareas, notas, `Deshacer`, exportacion y compartir siguen funcionando correctamente.
+- La PWA conserva preferencias y datos tras recarga/reapertura.
+- La prueba desktop se omitio conscientemente al compartir la misma ruta funcional y no haber cambios especificos de viewport.
+
 ### Checkpoint Android De Mantener Pantalla Encendida - 2026-08-24
 
 - La APK debug `com.jcpaezd.notifica.debug` se recompilo, instalo y arranco correctamente en el Huawei `POT-LX1`; la APK de produccion `com.jcpaezd.notifica` permanecio instalada e independiente.
