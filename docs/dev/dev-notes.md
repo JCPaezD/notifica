@@ -65,6 +65,14 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - La verificacion local de firma pasa, con las advertencias esperables del keystore local sobre certificado autofirmado y ausencia de timestamp; la credencial y el esquema de firma de Play Console deben confirmarse en el gate real.
 - El AAB candidato se conserva localmente en `android/app/release/app-release-2026-08-24-v1.4.0.aab`; es un artefacto ignorado por Git y no se ha subido a Play Console.
 - Este checkpoint deja preparada la release, pero no autoriza merge a `main`, tag, produccion, Play Console ni publicacion. Queda pendiente la revision final del candidato desplegado en `develop` y la confirmacion expresa del usuario.
+
+### Validacion Del Preview Del Candidato - 2026-08-24
+
+- `develop` se publico en `origin/develop` en `592e98e` y el preview generico de Vercel respondio `HTTP 200`.
+- El bundle remoto contiene la version visible `Notifica v1.4.0` y no contiene el aviso/menu retirado.
+- En la PWA publicada se comprobo la version visible `v1.4.0`, la ausencia de `Novedades` y la presencia de `Mantener pantalla encendida` desactivado por defecto.
+- Una pestaña que conservaba la version anterior mostro `v1.3.0` hasta recargarse; despues de la recarga quedo en `v1.4.0`. Se registra como observacion de actualizacion de service worker/cache, no como regresion funcional.
+- La preparacion queda pausada antes del gate final: no hay merge a `main`, produccion, tag, Play Console ni publicacion.
 - Los valores originales del dispositivo se restauraron y verificaron: `stay_on_while_plugged_in=7` y `screen_off_timeout=300000`.
 
 ## Principios Activos
