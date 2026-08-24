@@ -11,7 +11,6 @@ export default {
     // Menús y navegación
     title: "Menú",
     options: "Ajustes",
-    releaseNotes: "Novedades",
     keepScreenAwake: "Mantener pantalla encendida",
     appearance: "Apariencia",
     language: "Idioma",
@@ -53,23 +52,6 @@ export default {
     shift: {
       // Acciones relacionadas con turnos en la navegación
       returnCurrent: "Volver al Tramo Actual",
-    },
-  },
-  releaseNotice: {
-    title: "Nueva versión",
-    body: "Novedades de Notifica con mejoras para ti:",
-    cta: "Instalar app Android",
-    close: "Cerrar novedades",
-    dismissLink: "Cerrar aviso",
-    summary: "Modo oscuro, notas por tramo e idioma ES / EN.",
-    highlights: {
-      darkMode: "Modo oscuro",
-      notes: "Notas por tramo",
-      language: "Idioma ES / EN",
-    },
-    footer: {
-      store: "También puedes seguir usando esta versión.",
-      web: "Esta actualización también mejora tu experiencia en iPhone y iPad.",
     },
   },
   aria: {

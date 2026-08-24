@@ -4,7 +4,6 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('locale', 'en')
     localStorage.setItem('darkMode', 'light')
-    localStorage.setItem('notifica-release-notice-dismissed', 'true')
   })
 })
 
@@ -85,6 +84,15 @@ test('opens settings and updates theme and language preferences', async ({ page 
   await page.getByRole('button', { name: /Open menu/i }).click()
   await page.getByRole('button', { name: /^Settings$/ }).click()
   await expect(page.getByRole('switch', { name: /^Keep screen on$/ })).toHaveAttribute('aria-checked', 'true')
+})
+
+test('does not show the retired release notice in the PWA', async ({ page }) => {
+  await page.goto('/')
+
+  await expect(page.getByText(/^New version$/)).toHaveCount(0)
+
+  await page.getByRole('button', { name: /Open menu/i }).click()
+  await expect(page.getByRole('button', { name: /What's new/i })).toHaveCount(0)
 })
 
 test('exports a JSON backup through the browser download flow', async ({ page }) => {
