@@ -62,6 +62,7 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - `npm run test:e2e` paso con 12 tests en Chromium y mobile-Chrome.
 - `npx cap sync android`, `assembleDebug` y `bundleRelease` pasaron con la firma local configurada.
 - El manifest Android generado fue comprobado con `com.jcpaezd.notifica`, `versionCode 11` y `versionName 1.4.0`; la firma del AAB se verifico.
+- La verificacion local de firma pasa, con las advertencias esperables del keystore local sobre certificado autofirmado y ausencia de timestamp; la credencial y el esquema de firma de Play Console deben confirmarse en el gate real.
 - El AAB candidato se conserva localmente en `android/app/release/app-release-2026-08-24-v1.4.0.aab`; es un artefacto ignorado por Git y no se ha subido a Play Console.
 - Este checkpoint deja preparada la release, pero no autoriza merge a `main`, tag, produccion, Play Console ni publicacion. Queda pendiente la revision final del candidato desplegado en `develop` y la confirmacion expresa del usuario.
 - Los valores originales del dispositivo se restauraron y verificaron: `stay_on_while_plugged_in=7` y `screen_off_timeout=300000`.
