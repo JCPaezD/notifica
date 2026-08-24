@@ -19,6 +19,31 @@ El trabajo de release debe mantener coherentes:
 - version visible en `src/components/SideMenu.vue`
 - documentacion de release cuando aplique
 
+## Preparacion Y Gate Previo
+
+La preparacion de una release puede dejar un candidato listo sin publicarlo. Para el
+candidato publico coordinado `1.4.0`:
+
+- `package.json` y `package-lock.json` quedan en `1.4.0`.
+- Android queda preparado con `versionName "1.4.0"` y `versionCode 11` como candidato.
+- La version visible de la app queda en `v1.4.0`.
+- El trabajo permanece en `develop` y se valida primero sobre el deploy dev.
+
+El `versionCode` debe volver a comprobarse contra Play Console en el momento real de
+preparar la subida. Esta fase no publica, no hace merge a `main`, no crea tag, no
+actualiza la PWA de produccion y no sube nada a Play Console.
+
+La publicacion requiere un gate explicito posterior con estas confirmaciones:
+
+- alcance y diff final revisados por el usuario
+- momento adecuado para publicar, incluyendo disponibilidad y estado mental del usuario
+- autorizacion expresa para mergear `develop` a `main`
+- verificacion manual de la PWA desplegada en produccion
+- autorizacion expresa para preparar/subir el Android release a Play Console
+- firma, artefacto AAB, versionCode, notas y ficha de Play Store comprobados
+
+Si alguna confirmacion falta, el candidato permanece preparado pero no publicado.
+
 ## Release PWA
 
 1. Completar y validar cambios en `develop`.

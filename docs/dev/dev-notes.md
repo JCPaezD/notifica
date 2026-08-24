@@ -27,7 +27,12 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - El objetivo publico siguiente es una release coordinada PWA + Android `1.4.0`.
 - El alcance congelado de `1.4.0` incluye los cambios ya validados en `develop`, la feature `Mantener pantalla encendida`, el mantenimiento compatible de dependencias/seguridad y la retirada completa del aviso de nueva version, su CTA de Play Store y su entrada del menu PWA.
 - La revision explicita de pendientes quedo cerrada el 2026-08-24: fechas cerca de medianoche, barra inferior Android en tema oscuro, deuda tecnica adicional y automatizacion de capturas Android permanecen fuera de `1.4.0`.
-- No se modifica todavia ningun metadato de version, `versionCode`, `main` ni Play Console. La preparacion de release verificara la coherencia de `1.4.0` y el siguiente `versionCode` antes de publicar.
+- La preparacion del candidato deja coherentes `package.json`, `package-lock.json`,
+  Android y la version visible en `1.4.0`; el `versionCode` candidato es `11` y se
+  comprobara de nuevo contra Play Console antes de una subida real.
+- Esta preparacion es un gate previo y no implica merge a `main`, tag, produccion,
+  Play Console ni publicacion. La decision final queda pendiente de confirmacion
+  expresa del usuario y de un momento adecuado para publicar.
 - Orden de trabajo acordado: mantenimiento de dependencias, implementacion y validacion de `Mantener pantalla encendida`, retirada y validacion del aviso antiguo, preparacion de release.
 - El primer pase de mantenimiento de dependencias ya esta aplicado dentro de las lineas compatibles: Capacitor 7, Vite 6, PostCSS, Workbox/PWA y `npm-run-all2` 9.
 - Tras el pase, `npm audit --omit=dev` queda limpio; el audit completo conserva 8 avisos transitivos de tooling (1 baja, 1 moderada y 6 altas, sin criticas), que no bloquean el grafo de produccion y quedan separados para una futura revision de herramientas.
@@ -48,6 +53,17 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - Con el ajuste activo, la pantalla permanecio encendida al menos 10 minutos despues del ultimo toque conocido, superando el timeout normal configurado de 5 minutos.
 - La activacion/desactivacion, el paso a segundo plano, la reapertura y la persistencia del ajuste se comportaron correctamente durante la prueba manual.
 - La prueba inicial de bloqueo no fue concluyente porque el dispositivo estaba conectado por USB y reporto `stay_on_while_plugged_in=7`, `mPlugType=2` y `screen_off_timeout=300000`; se repitio con valores temporales `0` y `30000`, y se confirmo el auto-bloqueo y la liberacion en caliente.
+
+### Preparacion Del Candidato 1.4.0 - 2026-08-24
+
+- Los metadatos de `package.json`, `package-lock.json`, Android y la version visible quedan coherentes en `1.4.0`.
+- El `versionCode` Android candidato es `11`; debe comprobarse de nuevo contra Play Console en el momento real de subida.
+- `npm run quality` paso: type-check, 14 archivos de tests unitarios, 54 tests y build PWA.
+- `npm run test:e2e` paso con 12 tests en Chromium y mobile-Chrome.
+- `npx cap sync android`, `assembleDebug` y `bundleRelease` pasaron con la firma local configurada.
+- El manifest Android generado fue comprobado con `com.jcpaezd.notifica`, `versionCode 11` y `versionName 1.4.0`; la firma del AAB se verifico.
+- El AAB candidato se conserva localmente en `android/app/release/app-release-2026-08-24-v1.4.0.aab`; es un artefacto ignorado por Git y no se ha subido a Play Console.
+- Este checkpoint deja preparada la release, pero no autoriza merge a `main`, tag, produccion, Play Console ni publicacion. Queda pendiente la revision final del candidato desplegado en `develop` y la confirmacion expresa del usuario.
 - Los valores originales del dispositivo se restauraron y verificaron: `stay_on_while_plugged_in=7` y `screen_off_timeout=300000`.
 
 ## Principios Activos

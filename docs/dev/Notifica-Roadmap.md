@@ -33,7 +33,11 @@ No objetivos:
 - El objetivo publico siguiente es una release coordinada PWA + Android `1.4.0`.
 - El alcance congelado incluye los cambios ya validados en `develop`, `Mantener pantalla encendida`, el mantenimiento compatible de dependencias/seguridad y la retirada completa del aviso de nueva version, su CTA de Play Store y su entrada del menu PWA.
 - La puerta de alcance de pendientes quedo cerrada el 2026-08-24: fechas cerca de medianoche, barra inferior Android en tema oscuro, deuda tecnica adicional y automatizacion de capturas Android permanecen fuera de `1.4.0`.
-- No se modifican aun metadatos de version, `versionCode`, `main` ni Play Console.
+- El candidato local de release queda preparado en `develop` con metadatos `1.4.0`,
+  `versionCode 11` y version visible `v1.4.0`; el `versionCode` se comprobara de nuevo
+  contra Play Console antes de una subida real.
+- Este estado es un gate previo: no implica merge a `main`, tag, despliegue de
+  produccion, subida a Play Console ni publicacion.
 
 ## Bloques De Fortificacion
 
