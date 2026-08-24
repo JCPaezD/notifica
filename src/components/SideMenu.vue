@@ -202,7 +202,7 @@ watch(() => props.isOpen, (newValue, oldValue) => {
                   <hr class="mt-6 mb-4 border-divider dark:border-divider-dark mx-3" />
                   <div class="flex items-center justify-center gap-1">
                     <AppLogo class="h-4 w-4 text-text-main dark:text-main-dark" />
-                    <p class="text-muted-80 dark:text-muted-80-dark text-[11px]">Notifica v1.3.0 - JCPD 2026</p>
+                    <p class="text-muted-80 dark:text-muted-80-dark text-[11px]">Notifica v1.4.0 - JCPD 2026</p>
                   </div>
                 </div>
               </div>
