@@ -50,6 +50,31 @@ test('creates and persists shift notes for the active segment', async ({ page })
     .toContain('Panel was already open')
 })
 
+test('restores persisted notes open and visible after reopening the app', async ({ page }) => {
+  await createTask(page, 'Restore notes')
+
+  const notesButton = page.getByRole('button', { name: /Notes/ })
+  await notesButton.click()
+
+  await page.getByPlaceholder('Add note…', { exact: true }).fill('First persisted note')
+  await page.keyboard.press('Tab')
+  await page.getByPlaceholder('Add note…', { exact: true }).fill('Second persisted note')
+  await page.keyboard.press('Tab')
+  await expect(page.getByPlaceholder('Note', { exact: true })).toHaveCount(2)
+
+  await page.reload()
+
+  const restoredNotesButton = page.getByRole('button', { name: /Notes/ })
+  await expect(restoredNotesButton).toHaveAttribute('aria-expanded', 'true')
+
+  const restoredNotes = page.getByPlaceholder('Note', { exact: true })
+  await expect(restoredNotes).toHaveCount(2)
+  await expect(restoredNotes.nth(0)).toBeVisible()
+  await expect(restoredNotes.nth(0)).toHaveValue('First persisted note')
+  await expect(restoredNotes.nth(1)).toBeVisible()
+  await expect(restoredNotes.nth(1)).toHaveValue('Second persisted note')
+})
+
 test('opens settings and updates theme and language preferences', async ({ page }) => {
   await page.goto('/')
 

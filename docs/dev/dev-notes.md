@@ -59,7 +59,7 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - Los metadatos de `package.json`, `package-lock.json`, Android y la version visible quedan coherentes en `1.4.0`.
 - El `versionCode` Android candidato es `11`; debe comprobarse de nuevo contra Play Console en el momento real de subida.
 - `npm run quality` paso: type-check, 14 archivos de tests unitarios, 54 tests y build PWA.
-- `npm run test:e2e` paso con 12 tests en Chromium y mobile-Chrome.
+- `npm run test:e2e` paso con 14 tests en Chromium y mobile-Chrome.
 - `npx cap sync android`, `assembleDebug` y `bundleRelease` pasaron con la firma local configurada.
 - El manifest Android generado fue comprobado con `com.jcpaezd.notifica`, `versionCode 11` y `versionName 1.4.0`; la firma del AAB se verifico.
 - La verificacion local de firma pasa, con las advertencias esperables del keystore local sobre certificado autofirmado y ausencia de timestamp; la credencial y el esquema de firma de Play Console deben confirmarse en el gate real.
@@ -74,6 +74,15 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - Una pestaña que conservaba la version anterior mostro `v1.3.0` hasta recargarse; despues de la recarga quedo en `v1.4.0`. Se registra como observacion de actualizacion de service worker/cache, no como regresion funcional.
 - La preparacion queda pausada antes del gate final: no hay merge a `main`, produccion, tag, Play Console ni publicacion.
 - Los valores originales del dispositivo se restauraron y verificaron: `stay_on_while_plugged_in=7` y `screen_off_timeout=300000`.
+
+### Regresion Y Correccion De Notas - 2026-08-25
+
+- Durante la revision del gate final en la PWA movil se detecto que, tras reabrir la app con notas en el tramo actual, el panel aparecia cerrado y las notas existentes quedaban con altura cero hasta editarlas.
+- La diagnosis local confirmo que los datos se recuperaban correctamente; el problema estaba en la sincronizacion inicial de la apertura y en el redimensionado de textareas cuando el panel se mostraba.
+- `ShiftNotes.vue` ahora inicializa la apertura tambien en el montaje y redimensiona todas las notas al montarse, al cambiar el contenido y despues de abrir la transicion.
+- Se anadio un E2E que comprueba reapertura, apertura automatica, visibilidad y valores de varias notas persistidas; la suite completa pasa con 14 tests en Chromium y mobile-Chrome.
+- `npm run quality` pasa con type-check, 14 archivos unitarios, 54 tests y build PWA.
+- La revalidacion manual de Notas en la PWA desplegada en `develop` queda pendiente; hasta completarla no se cierra el gate final ni se autoriza release.
 
 ## Principios Activos
 
