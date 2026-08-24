@@ -29,6 +29,12 @@ function autoResize(index: number) {
   }
 }
 
+function resizeAllNotes() {
+  nextTick(() => {
+    notes.value.forEach((_, index) => autoResize(index))
+  })
+}
+
 const onEnter = (el: Element) => {
   const htmlEl = el as HTMLElement
   htmlEl.style.maxHeight = `${htmlEl.scrollHeight}px`
@@ -37,13 +43,7 @@ const onEnter = (el: Element) => {
 const onAfterEnter = (el: Element) => {
   const htmlEl = el as HTMLElement
   htmlEl.style.maxHeight = ''
-
-  nextTick(() => {
-    const keys = Object.keys(textareaRefs).map(Number).sort((a, b) => a - b)
-    if (keys.length > 0) {
-      autoResize(keys[keys.length - 1])
-    }
-  })
+  resizeAllNotes()
 }
 
 const onBeforeLeave = (el: Element) => {
@@ -57,15 +57,11 @@ const onLeave = (el: Element) => {
 }
 
 onMounted(() => {
-  nextTick(() => {
-    notes.value.forEach((_, index) => autoResize(index))
-  })
+  resizeAllNotes()
 })
 
 watch(notes, () => {
-  nextTick(() => {
-    notes.value.forEach((_, index) => autoResize(index))
-  })
+  resizeAllNotes()
 })
 
 watchEffect(() => {
@@ -97,7 +93,8 @@ watch(
   (newId) => {
     const shiftNotes = getNotesForShift(newId)
     isNotesOpen.value = shiftNotes.some(note => note.trim() !== '')
-  }
+  },
+  { immediate: true }
 )
 
 function handleEnter(index: number) {
