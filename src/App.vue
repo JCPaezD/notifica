@@ -7,7 +7,6 @@ import SideMenu from './components/SideMenu.vue' // Importar el menú lateral
 import ShiftSelector from './components/ShiftSelector.vue'
 import TaskFilters from './components/TaskFilters.vue'
 import NewTaskForm from './components/NewTaskForm.vue'
-import ReleaseNoticeBanner from './components/ReleaseNoticeBanner.vue'
 import AppLogo from './components/AppLogo.vue'
 import SettingsModal from './components/SettingsModal.vue'
 import Toast from './components/Toast.vue'
@@ -45,7 +44,7 @@ import {
   restoreTaskAtIndex,
   reviveTaskDates,
 } from '@/domain/taskLifecycle'
-import { exportJsonBackup, isNativePlatform, sharePlainText } from '@/adapters/shareExportAdapters'
+import { exportJsonBackup, sharePlainText } from '@/adapters/shareExportAdapters'
 
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
@@ -58,8 +57,6 @@ const { keepScreenAwake, setKeepScreenAwake } = useKeepScreenAwake()
 
 // --- Idioma ---
 const selectedLocale = ref<LocaleMode>((localStorage.getItem('locale') || 'system') as LocaleMode)
-const RELEASE_NOTICE_DISMISSED_KEY = 'notifica-release-notice-dismissed'
-const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.jcpaezd.notifica'
 
 watch(selectedLocale, (newVal) => {
   if (newVal === 'system') {
@@ -86,16 +83,6 @@ const { logoBlockRef, animateLogo } = useLogoAnimation()
 
 // Ref para la lista reactiva de toasts y la función de eliminación
 const { toasts, remove, add } = useToast()
-const isNativeApp = isNativePlatform()
-const isIosLike = (() => {
-  const userAgent = navigator.userAgent
-  const matchesIos = /iPad|iPhone|iPod/.test(userAgent)
-  const matchesTouchMac = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1
-  return matchesIos || matchesTouchMac
-})()
-const releaseNoticeDismissed = ref(localStorage.getItem(RELEASE_NOTICE_DISMISSED_KEY) === 'true')
-const shouldShowReleaseNotice = computed(() => !isNativeApp && !releaseNoticeDismissed.value)
-const shouldShowReleaseStoreCta = computed(() => !isNativeApp && !isIosLike)
 
 // --- Estado para la creación de nuevas tareas ---
 const newTaskDescription = ref('')
@@ -137,20 +124,6 @@ const openSettings = () => {
 }
 const closeSettings = () => {
   isSettingsOpen.value = false
-}
-
-const dismissReleaseNotice = () => {
-  releaseNoticeDismissed.value = true
-  localStorage.setItem(RELEASE_NOTICE_DISMISSED_KEY, 'true')
-}
-
-const reopenReleaseNotice = () => {
-  releaseNoticeDismissed.value = false
-  localStorage.setItem(RELEASE_NOTICE_DISMISSED_KEY, 'false')
-}
-
-const openReleaseStore = () => {
-  window.open(PLAY_STORE_URL, '_blank', 'noopener,noreferrer')
 }
 
 // Crea y añade una nueva tarea a la lista.
@@ -784,9 +757,6 @@ const exportTasksToJson = async () => {
       case 'settings':
         openSettings();
         break;
-      case 'releaseNotes':
-        reopenReleaseNotice();
-        break;
       default:
         add({
           title: t('toast.action.unknown'),
@@ -805,7 +775,6 @@ const exportTasksToJson = async () => {
 <template>
   <SideMenu
     :is-open="isSideMenuOpen"
-    :show-release-notes-entry="!isNativeApp"
     @close="closeSideMenu"
     @action="handleMenuAction"
   />
@@ -838,13 +807,6 @@ const exportTasksToJson = async () => {
     class="bg-app-bg dark:bg-app-bg-dark text-text-main dark:text-main-dark flex flex-col items-center pt-4 px-4 select-none overflow-hidden"
     :class="{ 'pointer-events-none': isSettingsOpen }"
   >
-
-    <ReleaseNoticeBanner
-      :visible="shouldShowReleaseNotice"
-      :show-store-cta="shouldShowReleaseStoreCta"
-      @close="dismissReleaseNotice"
-      @open-store="openReleaseStore"
-    />
 
     <!-- Sección para añadir nueva tarea -->
     <NewTaskForm

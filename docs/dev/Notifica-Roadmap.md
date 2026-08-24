@@ -31,8 +31,9 @@ No objetivos:
 
 - `v1.3.x` se mantiene como fase interna de fortificacion.
 - El objetivo publico siguiente es una release coordinada PWA + Android `1.4.0`.
-- El alcance confirmado incluye los cambios ya validados en `develop`, `Mantener pantalla encendida` y un bloque separado de mantenimiento de dependencias/seguridad.
-- Antes de cerrar `1.4.0` se revisaran expresamente los pendientes que hoy quedan fuera, incluida la retirada o mantenimiento del aviso de nueva version y su CTA de Play Store, sin incorporarlos automaticamente.
+- El alcance congelado incluye los cambios ya validados en `develop`, `Mantener pantalla encendida`, el mantenimiento compatible de dependencias/seguridad y la retirada completa del aviso de nueva version, su CTA de Play Store y su entrada del menu PWA.
+- La puerta de alcance de pendientes quedo cerrada el 2026-08-24: fechas cerca de medianoche, barra inferior Android en tema oscuro, deuda tecnica adicional y automatizacion de capturas Android permanecen fuera de `1.4.0`.
+- No se modifican aun metadatos de version, `versionCode`, `main` ni Play Console.
 
 ## Bloques De Fortificacion
 
@@ -184,9 +185,9 @@ Restriccion:
 
 - Verificacion manual acumulada completada el 2026-08-16; mantener las observaciones no bloqueantes visibles antes de decidir release.
 - El ajuste `Mantener pantalla encendida` ya esta implementado en `develop`, desactivado por defecto y validado manualmente en la PWA iPhone y en la APK debug del Huawei, incluido el auto-bloqueo con la opcion desactivada.
+- La retirada completa del aviso de nueva version y su entrada de menu esta implementada en `develop`; queda pendiente su validacion manual PWA antes de preparar la release.
 - Revisar informe externo post-checkpoint y decidir si abre nuevos bloques o ajustes de plan.
 - Pase inicial de mantenimiento de dependencias aplicado; `npm audit --omit=dev` queda limpio y los avisos restantes son de tooling de desarrollo.
-- Abrir una puerta de alcance antes del cierre final para decidir conscientemente si algun pendiente excluido debe entrar.
 
 ### Deuda Tecnica
 

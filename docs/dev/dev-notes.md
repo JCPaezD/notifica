@@ -21,17 +21,18 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - Usar esta URL para la primera revision de cambios desplegados desde `develop`.
 - No confundirla con la PWA de produccion publicada desde `main`.
 
-## Decision De Versionado Y Alcance - 2026-08-23
+## Decision De Versionado Y Alcance - 2026-08-24
 
 - `v1.3.x` se mantiene como fase interna de fortificacion y no se publica como version de producto.
 - El objetivo publico siguiente es una release coordinada PWA + Android `1.4.0`.
-- El alcance confirmado de `1.4.0` incluye los cambios ya validados en `develop`, la feature `Mantener pantalla encendida` y un bloque separado de mantenimiento de dependencias/seguridad.
-- Antes de congelar el alcance final se revisaran explicitamente los pendientes excluidos: fechas cerca de medianoche, barra inferior Android en tema oscuro, release notice/menu/iconos, incluida la retirada o mantenimiento del aviso de nueva version y su CTA de Play Store, deuda tecnica adicional y automatizacion de capturas Android. Ninguno entra automaticamente por esta decision.
+- El alcance congelado de `1.4.0` incluye los cambios ya validados en `develop`, la feature `Mantener pantalla encendida`, el mantenimiento compatible de dependencias/seguridad y la retirada completa del aviso de nueva version, su CTA de Play Store y su entrada del menu PWA.
+- La revision explicita de pendientes quedo cerrada el 2026-08-24: fechas cerca de medianoche, barra inferior Android en tema oscuro, deuda tecnica adicional y automatizacion de capturas Android permanecen fuera de `1.4.0`.
 - No se modifica todavia ningun metadato de version, `versionCode`, `main` ni Play Console. La preparacion de release verificara la coherencia de `1.4.0` y el siguiente `versionCode` antes de publicar.
-- Orden de trabajo acordado: mantenimiento de dependencias, diseno e implementacion de `Mantener pantalla encendida`, validacion completa y puerta de alcance de pendientes, preparacion de release.
+- Orden de trabajo acordado: mantenimiento de dependencias, implementacion y validacion de `Mantener pantalla encendida`, retirada y validacion del aviso antiguo, preparacion de release.
 - El primer pase de mantenimiento de dependencias ya esta aplicado dentro de las lineas compatibles: Capacitor 7, Vite 6, PostCSS, Workbox/PWA y `npm-run-all2` 9.
 - Tras el pase, `npm audit --omit=dev` queda limpio; el audit completo conserva 8 avisos transitivos de tooling (1 baja, 1 moderada y 6 altas, sin criticas), que no bloquean el grafo de produccion y quedan separados para una futura revision de herramientas.
 - La implementacion de `Mantener pantalla encendida` esta actualmente en `develop`: ajuste persistente y desactivado por defecto, Screen Wake Lock validado en la PWA iPhone y `FLAG_KEEP_SCREEN_ON` validado en la APK debug del Huawei para activacion, persistencia, ciclo de segundo plano/reapertura, auto-bloqueo con el ajuste desactivado y liberacion en caliente.
+- La retirada del aviso de nueva version queda aprobada como el ultimo cambio funcional acotado antes de preparar `1.4.0`.
 
 ### Checkpoint Android De Mantener Pantalla Encendida - 2026-08-24
 
