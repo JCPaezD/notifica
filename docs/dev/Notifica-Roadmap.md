@@ -190,7 +190,7 @@ Restriccion:
 - Verificacion manual acumulada completada el 2026-08-16; mantener las observaciones no bloqueantes visibles antes de decidir release.
 - El ajuste `Mantener pantalla encendida` ya esta implementado en `develop`, desactivado por defecto y validado manualmente en la PWA iPhone y en la APK debug del Huawei, incluido el auto-bloqueo con la opcion desactivada.
 - La retirada completa del aviso de nueva version y su entrada de menu quedo validada manualmente en la PWA movil de `develop`; la comprobacion desktop se omitio conscientemente por compartir la misma ruta funcional.
-- Revalidar manualmente en la PWA de `develop` la correccion de la regresion de Notas detectada al reabrir la app; el E2E y la pasada automatica ya estan en verde.
+- La correccion de la regresion de Notas detectada al reabrir la app quedo revalidada manualmente en la PWA de `develop` el 2026-08-25; el E2E y la pasada automatica tambien estan en verde.
 - Revisar informe externo post-checkpoint y decidir si abre nuevos bloques o ajustes de plan.
 - Pase inicial de mantenimiento de dependencias aplicado; `npm audit --omit=dev` queda limpio y los avisos restantes son de tooling de desarrollo.
 

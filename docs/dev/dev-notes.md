@@ -82,7 +82,7 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - `ShiftNotes.vue` ahora inicializa la apertura tambien en el montaje y redimensiona todas las notas al montarse, al cambiar el contenido y despues de abrir la transicion.
 - Se anadio un E2E que comprueba reapertura, apertura automatica, visibilidad y valores de varias notas persistidas; la suite completa pasa con 14 tests en Chromium y mobile-Chrome.
 - `npm run quality` pasa con type-check, 14 archivos unitarios, 54 tests y build PWA.
-- La revalidacion manual de Notas en la PWA desplegada en `develop` queda pendiente; hasta completarla no se cierra el gate final ni se autoriza release.
+- La revalidacion manual de Notas en la PWA desplegada en `develop` quedo completada el 2026-08-25: reapertura, apertura automatica, visibilidad inmediata, cambio de tramo, edicion y persistencia pasaron correctamente.
 
 ## Principios Activos
 
