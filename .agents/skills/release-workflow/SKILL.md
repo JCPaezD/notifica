@@ -169,6 +169,31 @@ Remember:
 - Vercel production is tied to `main`
 - `develop` is used for the development/testing PWA flow
 
+### Pull request review and branch protection
+
+Keep the `develop` -> `main` pull request for release traceability, diff review,
+status checks, and the final production decision. A project review of the diff
+and a GitHub review approval are separate gates.
+
+Before instructing the user to approve or merge a release pull request, inspect:
+
+- the pull request author
+- the required review count and other protection rules on `main`
+- the checks and merge methods currently available
+
+The pull request author cannot approve their own pull request. If branch
+protection requires approvals, use one of these paths:
+
+- an independent collaborator with review permission approves the pull request;
+- in a solo-maintainer repository, preserve the pull request and its checks, but
+  use an administrator bypass only after explicit user authorization immediately
+  before the production merge.
+
+Do not lower branch protection just for this release, create a second account
+only to self-approve, or treat a comment review as an approval. When using the
+solo-maintainer path, record the reason and verify that all other protection
+requirements, including linear history and successful checks, remain satisfied.
+
 ### 7. Android release path
 
 For Android release work:
@@ -230,6 +255,7 @@ Do not:
 - tag automatically
 - merge automatically
 - push automatically
+- bypass required pull request reviews automatically
 
 ## Versioning rules for this repo
 

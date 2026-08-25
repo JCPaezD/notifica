@@ -49,13 +49,35 @@ Si alguna confirmacion falta, el candidato permanece preparado pero no publicado
 1. Completar y validar cambios en `develop`.
 2. Confirmar metadatos de version y version visible si la release cambia version.
 3. Abrir PR de `develop` a `main`.
-4. Revisar diff y alcance de release.
-5. Hacer merge a `main`.
-6. Verificar despliegue de Vercel en produccion.
-7. Validar la PWA en condiciones similares a produccion.
-8. Crear tag Git solo cuando sea intencional.
+4. Comprobar la proteccion vigente de `main`, el autor del PR, los checks y los
+   metodos de merge disponibles.
+5. Revisar diff y alcance de release.
+6. Resolver el requisito de revision formal si existe.
+7. Hacer merge a `main` solo con autorizacion expresa.
+8. Verificar despliegue de Vercel en produccion.
+9. Validar la PWA en condiciones similares a produccion.
+10. Crear tag Git solo cuando sea intencional.
 
 `main` es produccion viva. No actualizarla de forma rutinaria.
+
+### Revision Del PR En Un Repositorio De Una Sola Cuenta
+
+La PR sigue siendo el mecanismo recomendado para conservar trazabilidad,
+mostrar el diff completo y ejecutar los checks antes de tocar `main`. Revisar el
+diff y el alcance con el usuario no equivale a una aprobacion formal de GitHub.
+
+El autor de una PR no puede aprobar su propia PR. Si la proteccion de `main`
+exige aprobaciones:
+
+- usar un revisor independiente con permisos sobre el repositorio cuando exista;
+- si el repositorio tiene una sola cuenta mantenedora, conservar la PR y sus
+  checks y usar un bypass administrativo solo con autorizacion expresa e
+  inmediata del usuario antes del merge.
+
+No se debe bajar la proteccion de `main` solo para esta release, crear otra
+cuenta unicamente para autoaprobarse ni considerar un comentario como
+aprobacion. El bypass debe dejar documentada la razon y respetar el resto de
+requisitos, especialmente checks correctos e historial lineal.
 
 ## Release Android
 
