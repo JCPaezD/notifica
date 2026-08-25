@@ -79,6 +79,16 @@ cuenta unicamente para autoaprobarse ni considerar un comentario como
 aprobacion. El bypass debe dejar documentada la razon y respetar el resto de
 requisitos, especialmente checks correctos e historial lineal.
 
+### Realineacion De `develop` Tras Un Merge Con Rebase
+
+Si el merge de `develop` a `main` se hace con rebase, los commits equivalentes
+de `main` tienen nuevos identificadores y la siguiente PR puede aparecer como
+conflictiva aunque el contenido sea equivalente. Antes de abrir la siguiente
+PR, actualizar las referencias remotas, integrar `origin/main` en `develop` con
+un merge normal, resolver y revisar los conflictos, y volver a empujar
+`develop`. Comprobar despues que el diff de la PR solo contiene el alcance
+nuevo. No reescribir `develop` con `push --force` para corregir esta situacion.
+
 ## Release Android
 
 Antes de preparar una release Android:
