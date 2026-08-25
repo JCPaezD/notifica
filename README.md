@@ -10,7 +10,7 @@
 
 # Notifica
 
-Notifica es una app PWA y Android para registrar tareas tecnicas durante la jornada laboral, pensada para uso movil, funcionamiento offline y exportacion rapida al final del turno.
+Notifica es una app PWA y Android para registrar tareas tecnicas durante la jornada laboral, pensada para uso movil, funcionamiento offline y exportacion rapida al final del tramo.
 
 El proyecto nacio para resolver una necesidad real de trabajo: sustituir notas manuales por un registro agil, persistente y facil de compartir.
 
@@ -30,10 +30,11 @@ La app ya se usa en condiciones reales. La fase actual del proyecto no busca cre
 - Finalizacion, reapertura, eliminacion y restauracion de tareas.
 - Filtros por tramo, estado y tareas pendientes de registrar.
 - Notas libres por tramo.
-- Exportacion y comparticion del resumen del turno.
+- Exportacion y comparticion del resumen del tramo.
 - Importacion/exportacion JSON.
 - Persistencia local offline.
 - Modo claro, oscuro y automatico.
+- Ajuste para mantener la pantalla encendida mientras la app esta abierta y en primer plano.
 - Interfaz responsive para movil y escritorio.
 - Soporte multidioma ES/EN.
 - Sistema propio de toasts con acciones como `Deshacer`.
@@ -107,7 +108,7 @@ El flujo de release Android esta documentado en [docs/dev/release-process.md](./
 
 Notifica es un proyecto personal construido como herramienta real de uso diario. Por eso prioriza flujos simples, fiabilidad offline, bajo rozamiento y compatibilidad con datos existentes.
 
-La etapa actual, `v1.3.x Technical Fortification`, busca convertir esa base funcional en un proyecto mas mantenible y presentable: mejor documentacion, tests, automatizaciones y separacion gradual de responsabilidades.
+La etapa actual de consolidacion tecnica busca convertir esa base funcional en un proyecto mas mantenible y presentable: mejor documentacion, tests, automatizaciones y separacion gradual de responsabilidades.
 
 ## Licencia
 
