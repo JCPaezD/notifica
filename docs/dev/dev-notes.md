@@ -91,6 +91,15 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - Con una tarea y una nota creadas y la nota desenfocada para confirmar la escritura, `force-stop` y reapertura conservaron la tarea, el contador, la apertura automatica del panel y el texto visible.
 - El AAB candidato actualizado queda archivado localmente en `android/app/release/app-release-2026-08-25-v1.4.0.aab`; no se modifico Play Console.
 
+### Actualizacion Android A API 36 - 2026-08-25
+
+- La revision de Play Console detecto que las futuras actualizaciones deben orientarse a Android 16 / API 36 desde el 2026-08-31; la produccion actual sigue en `1.3.0` y no se hizo ninguna subida.
+- Se instalo localmente `platforms;android-36` y `android/variables.gradle` queda con `minSdkVersion 23`, `compileSdkVersion 36` y `targetSdkVersion 36`.
+- `npx cap sync android`, `assembleDebug` y `bundleRelease` finalizaron correctamente. Se conserva el mismo `versionName 1.4.0` y `versionCode 11`.
+- El AAB API 36 queda archivado localmente en `android/app/release/app-release-2026-08-25-v1.4.0-api36.aab`, con SHA-256 `4DB8379AA804FC9C507630C93AB2D3593766333D8C2ABB3858C408B51BD8C2F4`.
+- Se valido la variante debug `com.jcpaezd.notifica.debug` en el AVD `Medium_Phone_API_36.0`: arranque, interfaz, acceso a Ajustes, activacion en caliente de `Mantener pantalla encendida` y persistencia tras relanzar. El valor se restauro a desactivado y el emulador se cerro.
+- Los avisos de Gradle/Capacitor y de firma local son los esperables y no bloquearon la compilacion. Play Console, merge, tag y publicacion siguen pendientes.
+
 ### Decision Sobre Persistencia Ante Cierre Abrupto - 2026-08-25
 
 - El guardado de una nota al perder el foco es el comportamiento esperado por diseno. La perdida de una edicion aun enfocada al cerrar abruptamente la app queda registrada como mejora de robustez.

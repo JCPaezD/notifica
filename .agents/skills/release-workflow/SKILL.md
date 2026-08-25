@@ -194,6 +194,12 @@ only to self-approve, or treat a comment review as an approval. When using the
 solo-maintainer path, record the reason and verify that all other protection
 requirements, including linear history and successful checks, remain satisfied.
 
+After a rebase merge into `main`, realign the shared `develop` branch before
+opening the next release PR: fetch the remote refs, merge `origin/main` into
+`develop` normally, resolve and review any conflicts, and push the result. Then
+verify that the PR diff contains only the new intended scope. Do not rewrite
+`develop` with a force push solely to repair the divergent history.
+
 ### 7. Android release path
 
 For Android release work:
