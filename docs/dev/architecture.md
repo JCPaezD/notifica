@@ -83,7 +83,7 @@ Esto es una direccion, no una exigencia de crear todas las carpetas de golpe.
 - casos de uso de tarea que todavia mezclan dominio, toasts y timers
 - flujo de turnos: iniciar, deshacer nuevo turno, seleccionar turno actual/pasado
 - notas por tramo y su relacion con tareas/turnos
-- preferencias UI: idioma, aviso de novedades, plataforma iOS-like
+- preferencias UI: idioma, mantener pantalla encendida, plataforma iOS-like
 - adaptadores de plataforma restantes si aparecen nuevas necesidades Android/PWA
 
 ## Objetivo Portfolio
