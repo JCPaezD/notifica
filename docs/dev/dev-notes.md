@@ -97,6 +97,19 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - La ventana de perdida de una tarea creada y cerrada casi inmediatamente solo se observo en una prueba sintetica de `force-stop`, sin reproduccion en uso manual normal.
 - Se acepta expresamente este riesgo para `1.4.0`; la mejora queda priorizada como bug/hardening para la siguiente version, sin reabrir el alcance actual ni bloquear el gate de release.
 
+### Notas De Version Aprobadas - 2026-08-25
+
+Texto aprobado para la ficha/release de `1.4.0`:
+
+- Nuevo ajuste «Mantener pantalla encendida».
+- Notas por tramo visibles al reabrir la app.
+- Exportacion JSON y uso compartido mejorados.
+- Correcciones y optimizaciones generales.
+
+Criterio de oportunidad: publicar en cuanto el gate este cerrado y exista una
+ventana suficiente para comprobar produccion con calma. No hay una hora concreta
+preferida.
+
 ## Principios Activos
 
 - Tratar `main` como produccion viva.
