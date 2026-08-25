@@ -107,6 +107,11 @@ cd android
 
 El `.aab` generado debe validarse antes de publicarlo en Play Console.
 
+La candidata `1.4.0` debe usar `compileSdkVersion 36` y `targetSdkVersion 36`
+para cumplir el requisito vigente de Play Console para futuras actualizaciones.
+Este ajuste ya fue compilado y validado localmente en el AVD
+`Medium_Phone_API_36.0`; no implica por si mismo una subida ni una publicacion.
+
 ## Validacion Manual
 
 La validacion manual es obligatoria antes de cerrar trabajo de release.
