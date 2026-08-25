@@ -191,6 +191,8 @@ Restriccion:
 - El ajuste `Mantener pantalla encendida` ya esta implementado en `develop`, desactivado por defecto y validado manualmente en la PWA iPhone y en la APK debug del Huawei, incluido el auto-bloqueo con la opcion desactivada.
 - La retirada completa del aviso de nueva version y su entrada de menu quedo validada manualmente en la PWA movil de `develop`; la comprobacion desktop se omitio conscientemente por compartir la misma ruta funcional.
 - La correccion de la regresion de Notas detectada al reabrir la app quedo revalidada manualmente en la PWA de `develop` el 2026-08-25; el E2E y la pasada automatica tambien estan en verde.
+- La revalidacion Android posterior se completo en el AVD `Pixel_7` con la APK release `1.4.0`; tareas y notas desenfocadas sobrevivieron a `force-stop` y reapertura.
+- El hardening de persistencia ante cierres abruptos queda priorizado como bug para la siguiente version y aceptado como riesgo no bloqueante de `1.4.0`.
 - Revisar informe externo post-checkpoint y decidir si abre nuevos bloques o ajustes de plan.
 - Pase inicial de mantenimiento de dependencias aplicado; `npm audit --omit=dev` queda limpio y los avisos restantes son de tooling de desarrollo.
 
@@ -200,6 +202,7 @@ Restriccion:
 - Los flujos con toasts/undo y timers siguen mayoritariamente en `App.vue`.
 - `startNewShift`, `deleteTask` y `deleteAllTasks` siguen mezclando reglas de negocio con UX/toasts.
 - Notas por tramo siguen acopladas entre lista, composable y flujo de turnos.
+- Prioridad siguiente: reforzar la persistencia de cambios recientes ante cierres abruptos y valorar autoguardado durante la edicion de notas.
 - La version visible y metadatos de release siguen siendo parcialmente manuales.
 - Mantener bajo revision el audit completo y el warning de Browserslist; el grafo de produccion ya queda limpio tras el primer pase de mantenimiento de dependencias.
 
