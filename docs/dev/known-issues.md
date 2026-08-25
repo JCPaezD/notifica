@@ -62,6 +62,16 @@ Existe un bug menor en PWA iOS al editar notas de tramo con el teclado abierto y
 
 No es bloqueante, pero debe seguir visible para revision futura.
 
+### Persistencia Ante Cierre Abrupto
+
+La persistencia actual confirma las notas al perder el foco. Si la app termina abruptamente mientras una nota sigue en edicion, la ultima edicion puede no haberse confirmado; ademas, existe una ventana muy corta y no determinista tras crear una tarea en la que un `force-stop` inmediato puede dejar el cambio pendiente.
+
+Estado:
+
+- no reproducido durante el uso manual normal ni tras cierres con escritura confirmada
+- aceptado como riesgo no bloqueante para `1.4.0`
+- priorizado como bug/hardening para la siguiente version, con posible persistencia mas inmediata y pruebas especificas de cierre abrupto
+
 ### Recorte De Icono Maskable
 
 El renderizado de iconos maskable puede variar segun superficie de instalacion Android/PWA.

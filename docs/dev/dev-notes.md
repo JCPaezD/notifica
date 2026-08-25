@@ -84,6 +84,19 @@ La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacio
 - `npm run quality` pasa con type-check, 14 archivos unitarios, 54 tests y build PWA.
 - La revalidacion manual de Notas en la PWA desplegada en `develop` quedo completada el 2026-08-25: reapertura, apertura automatica, visibilidad inmediata, cambio de tramo, edicion y persistencia pasaron correctamente.
 
+### Revalidacion Android Tras La Correccion De Notas - 2026-08-25
+
+- Se eligio el AVD `Pixel_7` con Android API 34 para repetir la comprobacion sin usar el Huawei.
+- `npx cap sync android`, `assembleDebug`, `bundleRelease` y `assembleRelease` finalizaron correctamente; la APK release `com.jcpaezd.notifica` `1.4.0` / `versionCode 11` se instalo y probo en el emulador.
+- Con una tarea y una nota creadas y la nota desenfocada para confirmar la escritura, `force-stop` y reapertura conservaron la tarea, el contador, la apertura automatica del panel y el texto visible.
+- El AAB candidato actualizado queda archivado localmente en `android/app/release/app-release-2026-08-25-v1.4.0.aab`; no se modifico Play Console.
+
+### Decision Sobre Persistencia Ante Cierre Abrupto - 2026-08-25
+
+- El guardado de una nota al perder el foco es el comportamiento esperado por diseno. La perdida de una edicion aun enfocada al cerrar abruptamente la app queda registrada como mejora de robustez.
+- La ventana de perdida de una tarea creada y cerrada casi inmediatamente solo se observo en una prueba sintetica de `force-stop`, sin reproduccion en uso manual normal.
+- Se acepta expresamente este riesgo para `1.4.0`; la mejora queda priorizada como bug/hardening para la siguiente version, sin reabrir el alcance actual ni bloquear el gate de release.
+
 ## Principios Activos
 
 - Tratar `main` como produccion viva.
