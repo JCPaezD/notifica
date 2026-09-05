@@ -135,7 +135,6 @@ Antes de anadir contenido largo a un documento vivo, decidir si es:
 - decision o proceso vigente -> documento activo
 - traza historica -> `archive/`
 - material temporal -> `working/`
-- estrategia privada o analisis bruto -> `../notifica_docs/`
 
 ## Commits
 

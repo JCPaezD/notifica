@@ -13,7 +13,7 @@ Notifica es una app Vue 3 + TypeScript + Vite con Tailwind CSS. Se distribuye co
 
 `develop` es la rama activa de trabajo.
 
-La fase interna `v1.3.x Fortificacion Tecnica` se cerro con la release publica `1.4.0`. Los candidatos restantes no tienen todavia una siguiente version o bloque funcional asignado.
+La fase interna `v1.3.x Fortificacion Tecnica` se cerro con la release publica `1.4.0`. La siguiente meta aprobada a nivel macro es `1.5.0 - Consolidacion, QoL y tooling`; su detalle vive en la planificacion privada y sus slices se diseñaran por separado.
 
 ## Entorno De Validacion
 
@@ -26,8 +26,8 @@ La fase interna `v1.3.x Fortificacion Tecnica` se cerro con la release publica `
 - La PWA de produccion y la app Android estan publicadas; la release `1.4.0` con `versionCode 11` esta activa en Google Play.
 - La validacion manual post-release de PWA y Android quedo completada sin incidencias bloqueantes.
 - La release `1.4.0` no se reabre. El seguimiento de requisitos tecnicos de Google Play queda como mantenimiento preventivo P2, sin trabajo inmediato.
-- La persistencia ante cierres abruptos sigue siendo el principal candidato de hardening, con riesgo aceptado para `1.4.0` y trabajo pendiente para una siguiente meta.
-- Antes de implementar ese hardening o cualquier otro candidato se definira una siguiente version o bloque con objetivo, inclusiones, exclusiones, orden y criterios de cierre.
+- La persistencia ante cierres abruptos forma parte del alcance macro aprobado de `1.5.0`, con riesgo aceptado para `1.4.0`; su comportamiento concreto se definira en el slice correspondiente.
+- Tests, refactors de apoyo, validacion y tooling Android forman parte del alcance transversal aprobado de `1.5.0` y se concretaran por slices.
 - El Huawei no esta conectado para pruebas; cualquier nueva ventana Android/ADB requerira coordinacion explicita.
 
 Las secciones fechadas posteriores conservan el registro historico de como se preparo y publico `1.4.0`.
@@ -137,7 +137,6 @@ preferida.
 - Preservar compatibilidad con datos existentes en localStorage y JSON importado/exportado.
 - No refactorizar persistencia, fechas o exportacion sin tests o plan de validacion concreto.
 - Mantener cambios UI/UX pequenos bajo validacion humana antes de cerrarlos.
-- Usar `../notifica_docs` para planes privados, estrategia interna y analisis que aun no deben vivir en el repo publico.
 
 ## Workflow
 

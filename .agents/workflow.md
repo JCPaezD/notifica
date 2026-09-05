@@ -74,6 +74,25 @@ Use the correct documentation surface:
 
 Do not write private planning material into the public repo unless the user explicitly decides it should become public project documentation.
 
+### Version Planning Documentation Layers
+
+For a new version or work block, preserve the historical project layering:
+
+- the public roadmap defines the current operational phase and moves selected
+  backlog items under the approved version heading;
+- the private planning area develops the scope, alternatives, exclusions,
+  macro-slices, dependencies, decisions, and validation boundaries;
+- a private checklist tracks the selected version's verification and closure;
+- `design-spec` defines the behavior and contracts of a selected slice only
+  after the version scope is approved.
+
+Do not put private macro-slices, detailed exclusions, technical contracts,
+privacy decisions, or implementation design into the public roadmap. When the
+scope is still being discussed, leave the roadmap's version placement
+unchanged. During iteration, preserve accepted cross-cutting work such as
+tests, refactors, tooling, and validation unless the user explicitly moves it
+out of scope.
+
 ## Documentation Rules
 
 Keep documentation aligned with the real repo state.
