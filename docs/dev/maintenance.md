@@ -165,7 +165,7 @@ No mezclar codigo, docs y artefactos generados sin una relacion deliberada.
 ## Seguimiento Futuro: Requisitos Tecnicos De Google Play
 
 Estado: seguimiento preventivo de prioridad media (P2). No bloquea la release
-`1.4.0` ni requiere cambios inmediatos.
+cerrada `1.4.0` ni requiere cambios inmediatos.
 
 - Google Play ha anunciado nuevos umbrales de memoria dinamica, memoria de
   bitmaps y optimizacion DEX, con aplicacion prevista desde febrero de 2027.

@@ -13,13 +13,24 @@ Notifica es una app Vue 3 + TypeScript + Vite con Tailwind CSS. Se distribuye co
 
 `develop` es la rama activa de trabajo.
 
-La fase actual es `v1.3.x Fortificacion Tecnica`: mejorar workflow, documentacion, tests, arquitectura y mantenimiento antes de volver a crecer en funcionalidades.
+La fase interna `v1.3.x Fortificacion Tecnica` se cerro con la release publica `1.4.0`. Los candidatos restantes no tienen todavia una siguiente version o bloque funcional asignado.
 
 ## Entorno De Validacion
 
 - Preview generica de `develop` en Vercel: [Notifica develop](https://notifica-git-develop-jcpaezds-projects.vercel.app/).
 - Usar esta URL para la primera revision de cambios desplegados desde `develop`.
 - No confundirla con la PWA de produccion publicada desde `main`.
+
+## Estado Actual Tras Release 1.4.0 - 2026-09-05
+
+- La PWA de produccion y la app Android estan publicadas; la release `1.4.0` con `versionCode 11` esta activa en Google Play.
+- La validacion manual post-release de PWA y Android quedo completada sin incidencias bloqueantes.
+- La release `1.4.0` no se reabre. El seguimiento de requisitos tecnicos de Google Play queda como mantenimiento preventivo P2, sin trabajo inmediato.
+- La persistencia ante cierres abruptos sigue siendo el principal candidato de hardening, con riesgo aceptado para `1.4.0` y trabajo pendiente para una siguiente meta.
+- Antes de implementar ese hardening o cualquier otro candidato se definira una siguiente version o bloque con objetivo, inclusiones, exclusiones, orden y criterios de cierre.
+- El Huawei no esta conectado para pruebas; cualquier nueva ventana Android/ADB requerira coordinacion explicita.
+
+Las secciones fechadas posteriores conservan el registro historico de como se preparo y publico `1.4.0`.
 
 ## Decision De Versionado Y Alcance - 2026-08-24
 

@@ -22,7 +22,7 @@ Estado:
 Trabajo diferido:
 
 - revisar layout, separacion o posicion de acciones si los missclicks persisten en uso real
-- evitar convertirlo en rediseÃ±o amplio salvo que haya evidencia clara
+- evitar convertirlo en rediseño amplio salvo que haya evidencia clara
 
 ### Fecha/Hora Cerca De Medianoche
 

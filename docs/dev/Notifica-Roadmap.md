@@ -9,9 +9,12 @@ El roadmap historico completo se conserva en [archive/roadmap-history.md](./arch
 - La PWA de produccion esta publicada desde `main` en Vercel.
 - La app Android esta publicada en Google Play.
 - Usuarios reales siguen usando la app sin problemas bloqueantes detectados tras el lanzamiento.
-- La siguiente fase debe reforzar la base del proyecto antes de abrir una version grande de funcionalidades.
+- La release publica `1.4.0` esta cerrada y la validacion manual post-release quedo completada.
+- No hay todavia una siguiente version ni un bloque funcional aprobados; primero se definira una meta con alcance incluido y excluido.
 
-## Fase Actual: v1.3.x Fortificacion Tecnica
+## Fase De Fortificacion Cerrada: v1.3.x
+
+Estado: cerrada en el alcance publicado de `1.4.0`.
 
 Objetivo:
 
@@ -27,17 +30,21 @@ No objetivos:
 - agrupar todo el backlog en una unica version grande
 - romper importacion/exportacion o persistencia local sin plan explicito de migracion
 
-## Objetivo De Release
+## Release Publicada: 1.4.0
 
 - `v1.3.x` se mantiene como fase interna de fortificacion.
-- El objetivo publico siguiente es una release coordinada PWA + Android `1.4.0`.
-- El alcance congelado incluye los cambios ya validados en `develop`, `Mantener pantalla encendida`, el mantenimiento compatible de dependencias/seguridad y la retirada completa del aviso de nueva version, su CTA de Play Store y su entrada del menu PWA.
-- La puerta de alcance de pendientes quedo cerrada el 2026-08-24: fechas cerca de medianoche, barra inferior Android en tema oscuro, deuda tecnica adicional y automatizacion de capturas Android permanecen fuera de `1.4.0`.
-- El candidato local de release queda preparado en `develop` con metadatos `1.4.0`,
-  `versionCode 11` y version visible `v1.4.0`; el `versionCode` se comprobara de nuevo
-  contra Play Console antes de una subida real.
-- Este estado es un gate previo: no implica merge a `main`, tag, despliegue de
-  produccion, subida a Play Console ni publicacion.
+- El alcance publicado incluyo los cambios ya validados en `develop`, `Mantener pantalla encendida`, el mantenimiento compatible de dependencias/seguridad y la retirada completa del aviso de nueva version, su CTA de Play Store y su entrada del menu PWA.
+- La release se integro en `main`, se publico en la PWA de produccion, se etiqueto como `v1.4.0` y se publico en Android con `versionCode 11`.
+- La validacion post-release de PWA y Android quedo completada sin incidencias bloqueantes.
+- Las fechas cerca de medianoche, la barra inferior Android en tema oscuro, la deuda tecnica adicional y la automatizacion de capturas Android quedaron fuera de `1.4.0` y siguen siendo trabajo diferido.
+- No queda ninguna accion de publicacion pendiente ni se reabre `1.4.0` por el seguimiento tecnico de Play.
+
+## Siguiente Objetivo
+
+- No hay una siguiente version publica decidida.
+- Antes de implementar hardening, refactors o nuevas features, se evaluara y documentara una meta de version o bloque: objetivo, alcance incluido, exclusiones, orden general y criterios de cierre.
+- La persistencia ante cierres abruptos es el candidato tecnico prioritario conocido, pero no queda aprobada como primer trabajo hasta cerrar esa planificacion.
+- El seguimiento de requisitos tecnicos de Google Play permanece como mantenimiento preventivo P2 y no entra automaticamente en el siguiente alcance.
 
 ## Bloques De Fortificacion
 
@@ -185,16 +192,17 @@ Restriccion:
 
 ## Backlog Vivo
 
-### Alta Prioridad / Candidatos Cercanos
+### Candidatos Para La Siguiente Meta
 
-- Verificacion manual acumulada completada el 2026-08-16; mantener las observaciones no bloqueantes visibles antes de decidir release.
-- El ajuste `Mantener pantalla encendida` ya esta implementado en `develop`, desactivado por defecto y validado manualmente en la PWA iPhone y en la APK debug del Huawei, incluido el auto-bloqueo con la opcion desactivada.
-- La retirada completa del aviso de nueva version y su entrada de menu quedo validada manualmente en la PWA movil de `develop`; la comprobacion desktop se omitio conscientemente por compartir la misma ruta funcional.
-- La correccion de la regresion de Notas detectada al reabrir la app quedo revalidada manualmente en la PWA de `develop` el 2026-08-25; el E2E y la pasada automatica tambien estan en verde.
-- La revalidacion Android posterior se completo en el AVD `Pixel_7` con la APK release `1.4.0`; tareas y notas desenfocadas sobrevivieron a `force-stop` y reapertura.
-- El hardening de persistencia ante cierres abruptos queda priorizado como bug para la siguiente version y aceptado como riesgo no bloqueante de `1.4.0`.
-- Revisar informe externo post-checkpoint y decidir si abre nuevos bloques o ajustes de plan.
-- Pase inicial de mantenimiento de dependencias aplicado; `npm audit --omit=dev` queda limpio y los avisos restantes son de tooling de desarrollo.
+- Hardening de persistencia ante cierres abruptos: cambios recientes de tareas y notas, con pruebas especificas y compatibilidad de datos existentes.
+- Refactor progresivo de casos de uso y orquestacion que siguen concentrados en `App.vue`.
+- Fechas y horas cerca de medianoche, con diseño previo y tests de duracion, ordenacion, importacion y exportacion.
+- Mantenimiento del tooling de desarrollo, incluyendo el audit completo y Browserslist, cuando exista un bloque con alcance suficiente.
+
+### Seguimiento No Bloqueante
+
+- Mantener una observacion ligera de las metricas post-release de Android cuando Play Console tenga datos suficientes.
+- Mantener el seguimiento preventivo P2 de requisitos tecnicos de Play segun los disparadores documentados en `maintenance.md`.
 
 ### Deuda Tecnica
 
@@ -202,7 +210,7 @@ Restriccion:
 - Los flujos con toasts/undo y timers siguen mayoritariamente en `App.vue`.
 - `startNewShift`, `deleteTask` y `deleteAllTasks` siguen mezclando reglas de negocio con UX/toasts.
 - Notas por tramo siguen acopladas entre lista, composable y flujo de turnos.
-- Prioridad siguiente: reforzar la persistencia de cambios recientes ante cierres abruptos y valorar autoguardado durante la edicion de notas.
+- El hardening de persistencia ante cierres abruptos es el candidato tecnico prioritario conocido, pendiente de incluirlo o no en la siguiente meta.
 - La version visible y metadatos de release siguen siendo parcialmente manuales.
 - Mantener bajo revision el audit completo y el warning de Browserslist; el grafo de produccion ya queda limpio tras el primer pase de mantenimiento de dependencias.
 
