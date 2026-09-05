@@ -161,3 +161,39 @@ No mezclar codigo, docs y artefactos generados sin una relacion deliberada.
 
 - Revisar en el futuro las vulnerabilidades restantes del tooling de desarrollo sin aplicar `npm audit fix` global automaticamente.
 - Revisar el warning de Browserslist desactualizado cuando haya un bloque de tooling con alcance suficiente.
+
+## Seguimiento Futuro: Requisitos Tecnicos De Google Play
+
+Estado: seguimiento preventivo de prioridad media (P2). No bloquea la release
+`1.4.0` ni requiere cambios inmediatos.
+
+- Google Play ha anunciado nuevos umbrales de memoria dinamica, memoria de
+  bitmaps y optimizacion DEX, con aplicacion prevista desde febrero de 2027.
+- Para aplicaciones, el requisito de optimizacion DEX se centra en apps con mas
+  de 10 MB de DEX y exige umbrales minimos de optimizacion, reduccion y
+  ofuscacion. El AAB de `1.4.0` contiene localmente 9.926.412 bytes de DEX sin
+  comprimir (aprox. 9,93 MB decimales), por debajo del umbral conocido; Play
+  Console sigue siendo la referencia final si cambia la clasificacion.
+- Play Console recomienda R8 para esta app, pero la build actual no usa R8/ProGuard
+  y la recomendacion no es un bloqueo de la release.
+- El requisito de restauracion de credenciales sin interaccion esta previsto
+  para abril de 2027 y aplica a apps con inicio de sesion. Notifica no tiene
+  cuentas ni inicio de sesion, por lo que no aplica mientras se mantenga ese
+  alcance.
+- La compatibilidad con paginas de memoria de 16 kB ya fue comprobada en el AAB
+  de `1.4.0`.
+
+Revision recomendada:
+
+- Consultar Android Vitals cuando haya datos suficientes de `1.4.0` y, como
+  maximo, durante el ultimo trimestre de 2026.
+- Repetir la medicion DEX antes de cualquier release Android de 2027 y revisar
+  R8 solo si el DEX supera 10 MB o aparece una exigencia concreta de Play.
+- No abrir una investigacion completa de memoria/R8 ahora: requeriria datos de
+  28 dias, analisis por estado y RAM, posible ajuste de build y nuevas pruebas.
+
+Fuentes oficiales:
+
+- [Requisitos tecnicos de calidad de Play Console](https://support.google.com/googleplay/android-developer/answer/17492799?hl=es)
+- [Anuncio de Android Developers](https://developer.android.com/blog/posts/elevating-app-quality-reducing-memory-usage-and-improving-device-migration)
+- [Compatibilidad con paginas de memoria de 16 kB](https://developer.android.com/guide/practices/page-sizes)
